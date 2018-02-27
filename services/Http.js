@@ -53,6 +53,10 @@ export default class Http {
     }
 
     async get(url, params) {
+        if(typeof url === 'object') {
+            return Http.axios.get(this.url(), {params: url}).then(it => it.data);
+        }
+
         return Http.axios.get(this.url(url), {params}).then(it => it.data);
     }
 
