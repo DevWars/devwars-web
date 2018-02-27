@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8626306c-4a03-40bb-a44f-8e391b9c2de6" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/pages/leaderboards.vue" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/pages/blog/_slug.vue" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/pages/blog/index.vue" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/pages/docs.vue" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/services/Http.js" afterPath="$PROJECT_DIR$/services/Http.js" />
+      <change beforePath="$PROJECT_DIR$/pages/index.vue" afterPath="$PROJECT_DIR$/pages/index.vue" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,13 +17,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="leaderboards.vue" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/pages/leaderboards.vue">
+      <file leaf-file-name="docs.vue" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pages/docs.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1247">
-              <caret line="75" column="23" lean-forward="false" selection-start-line="75" selection-start-column="23" selection-end-line="75" selection-end-column="23" />
+            <state relative-caret-position="1400">
+              <caret line="334" column="44" lean-forward="false" selection-start-line="334" selection-start-column="44" selection-end-line="334" selection-end-column="44" />
               <folding>
-                <element signature="e#2472#2517#0" expanded="true" />
+                <element signature="n#ul#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+                <element signature="n#ul#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+                <element signature="n#li#0;n#ul#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -47,6 +51,8 @@
       <find>game.</find>
       <find>props.</find>
       <find>wrapped.game.</find>
+      <find>manager.post</find>
+      <find>/assets</find>
     </findStrings>
     <replaceStrings>
       <replace>viewing</replace>
@@ -54,6 +60,8 @@
       <replace>props.game.</replace>
       <replace>wrapped.</replace>
       <replace>game.</replace>
+      <replace>post</replace>
+      <replace>~/assets</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -85,10 +93,17 @@
         <option value="$PROJECT_DIR$/components/dashboard/UpcomingGames.vue" />
         <option value="$PROJECT_DIR$/components/game/Applications.vue" />
         <option value="$PROJECT_DIR$/pages/schedule.vue" />
-        <option value="$PROJECT_DIR$/pages/index.vue" />
         <option value="$PROJECT_DIR$/components/game/ScheduleBlock.vue" />
         <option value="$PROJECT_DIR$/services/Http.js" />
         <option value="$PROJECT_DIR$/pages/leaderboards.vue" />
+        <option value="$PROJECT_DIR$/pages/blog.vue" />
+        <option value="$PROJECT_DIR$/pages/blog/index.vue/blog.vue" />
+        <option value="$PROJECT_DIR$/pages/blog/blog.vue" />
+        <option value="$PROJECT_DIR$/pages/blog/index.vue" />
+        <option value="$PROJECT_DIR$/pages/blog/_slug.vue" />
+        <option value="$PROJECT_DIR$/pages/blog/docs.vue" />
+        <option value="$PROJECT_DIR$/pages/index.vue" />
+        <option value="$PROJECT_DIR$/pages/docs.vue" />
       </list>
     </option>
   </component>
@@ -177,6 +192,12 @@
             <path>
               <item name="devwars-nuxt" type="b2602c69:ProjectViewProjectNode" />
               <item name="devwars-nuxt" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="blog" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="devwars-nuxt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="devwars-nuxt" type="462c0819:PsiDirectoryNode" />
               <item name="store" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -196,6 +217,14 @@
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.selected.package.standard" value="$PROJECT_DIR$/node_modules/eslint" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/pages" />
+      <recent name="$PROJECT_DIR$/pages/blog" />
+      <recent name="$PROJECT_DIR$/pages/blog/index.vue" />
+      <recent name="$PROJECT_DIR$/pages/index.vue" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -267,12 +296,12 @@
       <option name="presentableId" value="Default" />
       <updated>1519707071358</updated>
       <workItem from="1519707072750" duration="69000" />
-      <workItem from="1519707154215" duration="23394000" />
+      <workItem from="1519707154215" duration="25023000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23463000" />
+    <option name="totallyTimeSpent" value="25092000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="3840" height="2129" extended-state="4" />
@@ -304,7 +333,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -548,14 +579,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/index.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1400">
-          <caret line="163" column="8" lean-forward="false" selection-start-line="163" selection-start-column="8" selection-end-line="163" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/components/game/ScheduleBlock.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1176">
@@ -574,10 +597,51 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/leaderboards.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1247">
-          <caret line="75" column="23" lean-forward="false" selection-start-line="75" selection-start-column="23" selection-end-line="75" selection-end-column="23" />
+        <state relative-caret-position="56">
+          <caret line="45" column="62" lean-forward="false" selection-start-line="45" selection-start-column="62" selection-end-line="45" selection-end-column="62" />
           <folding>
-            <element signature="e#2472#2517#0" expanded="true" />
+            <element signature="e#2472#2517#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/blog/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="12" column="35" lean-forward="true" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
+          <folding>
+            <element signature="e#940#948#0" expanded="false" />
+            <element signature="e#1154#1199#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/blog/_slug.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="952">
+          <caret line="17" column="51" lean-forward="false" selection-start-line="17" selection-start-column="51" selection-end-line="17" selection-end-column="51" />
+          <folding>
+            <element signature="e#888#933#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1008">
+          <caret line="151" column="7" lean-forward="false" selection-start-line="151" selection-start-column="7" selection-end-line="151" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/docs.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1400">
+          <caret line="334" column="44" lean-forward="false" selection-start-line="334" selection-start-column="44" selection-end-line="334" selection-end-column="44" />
+          <folding>
+            <element signature="n#ul#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#ul#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#li#0;n#ul#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>

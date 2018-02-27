@@ -142,7 +142,7 @@
       <div class="container">
         <div class="home-display__content">
           <h3 class="home-display__title">Get familiar<br>with DevWars<br>knowledge base.</h3>
-          <a ui-sref="docs" class="btn btn-outline-white btn-lg">View Documentation</a>
+          <nuxt-link to="docs" class="btn btn-outline-white btn-lg">View Documentation</nuxt-link>
         </div>
       </div>
     </div>
