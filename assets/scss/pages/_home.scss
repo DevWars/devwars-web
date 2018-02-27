@@ -1,0 +1,331 @@
+/* Name:			Homepage
+
+Contents:
+	01. Main
+	02. Mobile
+	03. Tablet
+	04. Desktop
+
+Variables
+$file__element--property_modifier
+============================================================================ */
+
+$home-hero-height									: 500px;
+$home-card-margin									: $l-space;
+
+/*  ========================================================================
+	01. Main
+	======================================================================== */
+
+.hero {
+	width: 100%;
+	height: $home-hero-height;
+	background-image: url('~/assets/img/hero-bg.jpg');
+	background-size: cover;
+	text-align: center;
+	position: relative;
+
+	&__inner {
+		@extend %absolute-center-y;
+		width: 100%;
+		z-index: 1;
+		margin-top: -($home-card-margin / 2);
+		padding: 0 $global__gutter;
+		left: 0;
+	}
+
+	&__title,
+	&__subtitle {
+		font-weight: 400;
+		text-transform: none;
+	}
+
+	&__title {
+		font-size: 42px;
+		margin-bottom: $xs-space;
+	}
+
+	&__subtitle {
+		font-size: 24px;
+		margin-bottom: $m-space;
+		color: $text-color-secondary;
+	}
+
+	&__btn {
+        margin: 0 $xs-space;
+
+		@include breakpoint(sm) {
+			width: auto;
+			max-width: none;
+		}
+	}
+}
+
+.home-title {
+    text-align: center;
+}
+
+.home-highlights {
+    padding-bottom: $m-space;
+    margin-top: -$home-card-margin;
+    background-color: $bg-color-3;
+}
+
+.card--home {
+	position: relative;
+	z-index: 1;
+
+	&__contents {
+        height: 266px;
+		margin-top: $s-space;
+        position: relative;
+        font-size: 16px;
+        text-align: center;
+		font-family: $alt-font-face;
+
+		@include breakpoint(lg) {
+            height: auto;
+			font-size: 14px;
+		}
+	}
+}
+
+.home-recap {
+
+    &__team,
+    &__score {
+		@extend %align-middle;
+	}
+
+	&__team {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background-size: cover;
+        background-color: $bg-color-2;
+
+		@include breakpoint(md) {
+            width: 60px;
+            height: 60px;
+        }
+
+        &.team-blue {
+             background-image: url('~/assets/img/team-blue.png');
+        }
+
+        &.team-red {
+             background-image: url('~/assets/img/team-red.png');
+        }
+	}
+
+	&__score {
+		display: inline-block;
+		text-transform: uppercase;
+        margin: 0 $m-space;
+        line-height: 1.37;
+		@include breakpoint(md) {
+			margin: 0 $s-space;
+		}
+	}
+
+	&__gamemode,
+	&__points {
+		display: block;
+	}
+
+	&__gamemode {}
+
+	&__points {
+        font-size: 48px;
+        letter-spacing: 5px;
+		@include breakpoint(md) {
+			font-size: 24px;
+		}
+	}
+
+	&__matchup {
+        width: 100%;
+        padding: 0 $grid-gutter-width;
+		display: flex;
+		justify-content: space-between;
+        margin: $s-space auto 0;
+        font-weight: $font-weight-semibold;
+
+		@include breakpoint(sm) {
+			width: 80%;
+		}
+
+		li {
+			margin-top: $xs-space;
+		}
+	}
+
+    &__players,
+    &__pos {
+        @extend %list-unstyled;
+        font-size: $font-size-sm;
+    }
+
+	&__players {
+
+		&--blue {
+		  text-align: left;
+		}
+
+		&--red {
+		  text-align: right;
+		}
+	}
+
+	&__pos {
+		text-align: center;
+	}
+
+	&__btn {
+        margin-top: $m-space;
+    }
+}
+
+.home-blog {
+
+	&__blogs {
+        @extend %list-unstyled;
+	}
+
+	&__blog {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: $sm-space;
+		&:last-of-type { margin-bottom: 0; }
+	}
+
+	&__thumb {
+        width: 135px;
+        height: 76px;
+		overflow: hidden;
+		@include breakpoint(lg) {
+            width: 100px;
+            height: 56px;
+		}
+
+		img {
+			width: 100%;
+			height: auto;
+			vertical-align: top;
+		}
+	}
+
+	&__text {
+        width: calc(100% - 135px - #{$s-space});
+		text-align: left;
+		@include breakpoint(lg) {
+            width: calc(100% - 100px - #{$s-space});
+		}
+	}
+
+	&__title {
+        font-size: 18px;
+	}
+
+	&__meta,
+	&__desc {
+		display: block;
+		font-family: $base-font-face;
+		font-size: 14px;
+	}
+
+	&__meta {
+		color: $text-color-secondary;
+		margin-bottom: $xxs-space;
+	}
+
+	&__desc {
+		font-size: $font-size-xs;
+	}
+
+	&__btn {
+        margin-top: $m-space;
+    }
+}
+
+
+
+.home-submissions {
+
+    &__title {}
+}
+
+.submission-reel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $m-space 0;
+
+    &__entry {
+        width: 80%;
+        margin: 0 $grid-gutter-width;
+
+        &--featured {
+            width: 100%;
+        }
+    }
+
+    &__meta {
+        text-align: center;
+    }
+
+    &__user {
+        display: block;
+    }
+
+    &__stat-box {
+        margin: 0 $xxs-space;
+    }
+
+    &__value,
+    &__icon {
+        vertical-align: middle;
+        display: inline-block;
+        font-size: 13px;
+    }
+
+    &__icon {
+        margin-right: $xxxs-space;
+    }
+
+}
+
+.home-section {
+    padding: $m-space 0;
+    background-color: $bg-color-4;
+    text-align: center;
+
+    &__title {
+        margin-bottom: $m-space;
+        text-transform: uppercase;
+    }
+
+    &__actions {
+        margin-top: $grid-gutter-width;
+    }
+}
+
+.home-display {
+    @extend %clear;
+    padding: $ms-space 0;
+    background-size: cover;
+    background-position: top;
+
+    &__title {
+        max-width: 800px;
+        margin-bottom: $grid-gutter-width;
+        font-weight: $font-weight-bold;
+        font-size: $display4-size;
+        line-height: 1.2;
+    }
+
+    &.reverse &__content {
+        float: right;
+        text-align: right;
+    }
+}

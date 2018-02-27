@@ -1,0 +1,58 @@
+/* Name: Loader
+
+Contents:
+01. Loader
+02. Applications
+
+========================================================================== */
+$spinner-size                                       : 20px;
+
+/* ==========================================================================
+01. Loader
+========================================================================== */
+
+.spinner {
+    @extend %align-middle;
+    width: $spinner-size;
+    height: $spinner-size;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    border-top-color: #333;
+    animation: spinner 0.6s linear infinite;
+}
+
+@keyframes spinner {
+  to {
+      transform: rotateZ(360deg);
+    }
+}
+
+/* ==========================================================================
+01. Applications
+========================================================================== */
+
+.loading.btn,
+button.loading {
+    position: relative;
+
+    &:after {
+        @extend .spinner;
+        content: "";
+        margin-left: $xs-space;
+    }
+
+    &.btn-block:after {
+        position: absolute;
+        right: 0;
+        margin-left: 0;
+        right: $grid-gutter-part;
+    }
+
+    &.payment-methods__card-delete {
+        padding: 0;
+        background-color: transparent;
+
+        &:before { display: none; }
+        &:after { margin-left: 0; }
+    }
+}

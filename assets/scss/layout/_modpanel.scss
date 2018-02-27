@@ -1,0 +1,328 @@
+/* Name: Mod Panel
+
+Contents:
+	01. Panel
+
+Variables
+========================================================================== */
+$sidebar-background                                 : $bg-color-4;
+
+
+/* ==========================================================================
+ 01. Panel
+========================================================================== */
+
+.modpanel {
+    height: calc(100vh - #{$header-height});
+    display: flex;
+    flex: 1;
+
+    @include breakpoint(md) {
+        display: block;
+    }
+
+    &__header {
+        @extend %flex-justify;
+        padding: $grid-gutter-width;
+
+        &-main {}
+
+        &-actions {
+            display: flex;
+
+            & > *:not(:last-child) {
+                margin-right: $grid-gutter-part;
+            }
+        }
+
+        &-title {
+            font-size: $h2-font-size;
+            color: #fff;
+        }
+
+        &-subtitle {
+            margin-top: $xxs-space;
+            font-size: $h5-font-size;
+        }
+
+        .form-control,
+        .btn {
+            @extend %align-middle;
+        }
+
+        &-search {
+            &:before,
+            .form-control {
+                display: inline-block;
+                vertical-align: baseline;
+            }
+
+            &:before {
+                @extend .fa;
+                content: $fa-search;
+                padding-right: $xs-space;
+                color: $text-color-muted;
+            }
+
+            .form-control {
+                width: 300px;
+            }
+        }
+    }
+
+    &__sort {
+        @extend %flex-justify;
+        padding: $xxs-space $grid-gutter-width;
+        background: $bg-color-1;
+
+        &-main {
+            display: flex;
+            align-items: center;
+
+            *:not(:first-child) {
+                margin-left: $grid-gutter-width;
+            }
+        }
+
+        &-actions {}
+
+        &-settings {
+            padding: $xs-space;
+            font-size: $h4-font-size;
+        }
+
+        .select-container {
+            font-family: $alt-font-face;
+        }
+    }
+
+    &__subtitle {
+        margin-bottom: $grid-gutter-width;
+        font-family: $alt-font-face;
+        font-size: $h4-font-size;
+    }
+}
+
+
+.modpanel-sidebar {
+    background-color: $sidebar-background;
+    position: relative;
+
+    &-header {
+        font-size: $xs-space;
+        margin: $m-space $s-space $xs-space;
+        text-transform: uppercase;
+        display: block;
+
+        @include breakpoint(lg) {
+            margin: 0;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s;
+        }
+
+        &:first-of-type {
+            margin-top: $s-space;
+        }
+    }
+
+    &-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        width: $xxl-space;
+        display: block;
+
+        @include breakpoint(lg) {
+            width: 100%;
+            font-size: 0;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s;
+        }
+
+        &-info {
+            @include breakpoint(lg) {
+                display: flex;
+                li { flex: 1; }
+                a { width: 100%; }
+            }
+        }
+    }
+
+    &-list-item {
+        color: $text-color-primary;
+        display: block;
+        padding: $sxs-space $s-space;
+        text-decoration: none;
+        transition: background-color .2s;
+        font-family: $alt-font-face;
+
+        @include breakpoint(lg) {
+            font-size: $sxs-space;
+            padding: $xs-space;
+        }
+
+        &:hover {
+            background-color: rgba(#000, 0.3);
+            color: inherit;
+            text-decoration: none;
+        }
+
+        &.active {
+            background-color: rgba(#000, 0.3);
+        }
+
+        > .fa {
+            width: 20px;
+            margin-right: $s-space;
+            text-align: center;
+        }
+    }
+
+    .progress {
+        background-color: darken($black-color, 10%);
+    }
+
+    &-close {
+        background: transparent;
+        padding: $xs-space;
+        width: 100%;
+        display: none;
+
+        @include breakpoint(lg) {
+            display: block;
+        }
+
+        &:hover {
+            background-color: rgba(#000, 0.3);
+        }
+
+        .fa {
+            transform: rotate(0deg);
+            display: block;
+            padding-bottom: $xxs-space;
+        }
+    }
+
+    &.active {
+        @include breakpoint(lg) {
+            &-header {
+                margin: $s-space $xs-space $xxs-space;
+                max-height: 25px;
+            }
+
+            &-list {
+                max-height: 400px;
+            }
+
+            &-close .fa {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+}
+
+.modpanel-main {
+    width: 100%;
+    background: $bg-color-3;
+    overflow-y: auto;
+}
+
+
+/* ==========================================================================
+ 02. Modpanel Table
+========================================================================== */
+
+.modpanel-table {
+    box-sizing: border-box;
+    padding: 0 $grid-gutter-width;
+    width: 100%;
+    background-color: $bg-color-2;
+
+    tbody {
+        border-top: 1px solid $divider-color;
+    }
+
+    th {
+        cursor: pointer;
+        font-family: $alt-font-face;
+        font-size: $sxs-space;
+        padding: $s-space $s-space $s-space 0;
+        text-transform: uppercase;
+        white-space: nowrap;
+        text-align: left;
+        color: $text-color-secondary;
+
+        &:not(:last-of-type):after {
+            @extend .fa;
+            content: $fa-caret-down;
+            display: inline-block;
+            margin-left: $s-space;
+            vertical-align: middle;
+        }
+    }
+
+    td {
+        border-bottom: 1px solid $divider-color;
+        max-width: $l-space;
+        overflow: hidden;
+        padding: $s-space $s-space $s-space 0;
+        text-align: left;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        &:first-child {
+            font-weight: bold;
+        }
+    }
+
+    &__actions {
+        text-align: right !important;
+        .btn-link { font-weight: $font-weight-regular; }
+    }
+
+    &__item_image {
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: $xs-space;
+        width: $m-space;
+    }
+
+    &__item_name {
+        display: inline-block;
+        line-height: $m-space;
+        vertical-align: top;
+    }
+
+    &__pagination {
+        margin: $s-space auto;
+        text-align: center;
+
+        .btn-link {
+            padding: $btn-padding-y $btn-padding-x;
+            color: $text-color-muted;
+        }
+    }
+}
+
+
+/* ==========================================================================
+ 03. Components
+========================================================================== */
+
+.mod-card {
+    @extend %clear;
+    padding: $grid-gutter-width;
+    background-color: $bg-color-2;
+}
+
+.mod-form {
+    max-width: 500px;
+}
+
+
+/* ==========================================================================
+ 04. Special
+========================================================================== */

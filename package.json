@@ -1,0 +1,37 @@
+{
+  "name": "devwars-nuxt",
+  "version": "1.0.0",
+  "description": "Nuxt.js project",
+  "author": "Terence Bezman <terencebezman@gmail.com>",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "precommit": "npm run lint"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.0.1",
+    "animate.css": "^3.6.1",
+    "jquery": "^3.3.1",
+    "nuxt": "^1.0.0",
+    "nuxt-class-component": "^1.2.0",
+    "vue-js-modal": "^1.3.12",
+    "vue-property-decorator": "^6.0.0",
+    "vue2-animate": "^1.0.4",
+    "vue2-filters": "^0.3.0",
+    "vuex-class": "^0.3.0",
+    "webui-popover": "^1.2.18"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.1",
+    "babel-plugin-transform-remove-strict-mode": "^0.0.2",
+    "babel-preset-stage-0": "^6.24.1",
+    "eslint": "^4.15.0",
+    "eslint-friendly-formatter": "^3.0.0",
+    "eslint-loader": "^1.7.1",
+    "eslint-plugin-vue": "^4.0.0"
+  }
+}

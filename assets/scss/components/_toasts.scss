@@ -1,0 +1,119 @@
+
+/* Name: Toast
+
+Contents:
+	01. Toasts
+
+Variables
+$file__element--property_modifier
+============================================================================ */
+$toast-margin-x                              : $xs-space;
+$toast-margin-y                              : $xs-space;
+
+
+/*  ========================================================================
+01. Toasts
+========================================================================= */
+
+.toast {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: $toast-margin-x;
+    z-index: $zindex-tooltip;
+
+    &__item {
+        @extend %material;
+        display: flex;
+        width: 300px;
+        padding: $xs-space ($s-space + $xxs-space) $xs-space $s-space;
+        margin-right: $toast-margin-x;
+        margin-bottom: $toast-margin-y;
+        border-top-width: $border-size;
+        border-top-style: solid;
+        border-top-color: $brand-primary;
+        background-color: $bg-color-2;
+        color: #fff;
+        position: relative;
+        animation: toast-popup 600ms cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    &__icon {
+        margin-top: 3px;
+        margin-right: $s-space;
+        &:before {
+            @extend .fa;
+            content: $fa-info-circle;
+            font-size: $h4-font-size;
+        }
+
+    }
+
+    &__message {
+        font-size: $font-size-base;
+        color: $text-color-primary;
+    }
+
+    &__close {
+
+        &:before {
+            @extend .fa;
+            content: $fa-times;
+            position: absolute;
+            top: 0; right: 0;
+            padding: $toast-margin-x;
+            color: $text-color-muted;
+        }
+
+        &:hover:before {
+            color: #fff;
+        }
+    }
+
+    @mixin toast-type($name, $color, $icon) {
+        &__item.#{$name} { border-color: $color; }
+        &__item.#{$name} &__icon:before { content: $icon; }
+    }
+
+    @include toast-type(success, $success-color, $fa-check);
+    @include toast-type(error, $danger-color, $fa-times-circle);
+    @include toast-type(warning, $warning-color, $fa-exclamation-triangle);
+}
+
+toast {
+    display: block;
+
+    &.ng-leave {
+        transition: 0.5s linear all;
+        opacity: 1;
+    }
+
+    &.ng-leave.ng-leave-active {
+        opacity: 0 !important;
+    }
+}
+
+
+@keyframes toast-popup {
+    0% {
+        opacity: 0;
+        transform: translate3d(calc(100% + #{$toast-margin-x}), 0, 0);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translate3d(-5%, 0, 0)
+    }
+
+    75% {
+        transform: translate3d(5%, 0, 0)
+    }
+
+    90% {
+        transform: translate3d(2%, 0, 0)
+    }
+
+    to {
+        transform: none;
+    }
+}

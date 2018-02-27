@@ -1,0 +1,115 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+html {
+    font-family: $base-font-face;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    @include breakpoint(sm) { font-size: $font-size-sm; }
+    @include breakpoint(xs) { font-size: $font-size-xs; }
+}
+
+body {
+    margin: 0;
+    height: 100%;
+    color: $base-font-color;
+    background: $body-bg;
+    -webkit-font-smoothing: antialiased;
+    transition: transform 300ms ease-in-out; // mobile-nav
+
+    ::-webkit-scrollbar{
+		width: 5px;
+	}
+
+	::-webkit-scrollbar-track-piece{
+		background-color: $bg-color-3;
+	}
+
+	::-webkit-scrollbar-thumb{
+		background-color: $silver-color;
+		outline: 2px solid $silver-color;
+		outline-offset: -2px;
+		border: .1px solid $silver-color;
+	}
+
+	::-webkit-scrollbar-thumb:hover{
+		background-color: lighten($silver-color, 10%);
+	}
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    border: 0;
+    max-width: 100%;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+pre {
+    overflow: auto;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    margin: 0;
+    color: inherit;
+    font: inherit;
+}
+
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+    cursor: pointer;
+    -webkit-appearance: button;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    padding: 0;
+    box-sizing: border-box;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    height: auto;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}

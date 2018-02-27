@@ -1,0 +1,36 @@
+/* Name:			Ribbons
+
+Contents:
+01. Ribbon
+
+Variables
+$file__element--property_modifier
+============================================================================ */
+
+$ribbon-height										: 300px;
+$ribbon-background 								    : #152735;
+
+/*  ========================================================================
+	01. Ribbon
+	======================================================================== */
+
+.ribbon {
+    width: 100%;
+    height: $ribbon-height;
+    background-color: $ribbon-background;
+
+    &-transparent {
+        background-color: transparent;
+    }
+}
+
+.heading {
+    @extend %flex-justify;
+    margin-bottom: $m-space;
+
+    h1 {
+        font-size: 42px;
+        text-transform: uppercase;
+        font-weight: $font-weight-bold;
+    }
+}

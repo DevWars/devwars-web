@@ -1,0 +1,428 @@
+/* Name: Games Page
+
+Contents:
+	01. Games
+
+Variables
+========================================================================== */
+
+
+
+/* ==========================================================================
+ 01. Games
+========================================================================== */
+
+.games-page {
+
+}
+
+.games-sidebar,
+.games-view {
+    min-height: calc(100vh - #{$header-height});
+    height: calc(100vh - #{$header-height});
+    position: fixed;
+    overflow-y: auto;
+}
+
+.games-sidebar {
+    left: 0;
+    background-color: $bg-color-3;
+
+    .nav-tabs button {
+        border-top: none;
+        border-bottom-style: solid;
+    }
+}
+
+.games-view {
+    padding-bottom: $l-space;
+    background-color: $bg-color-4;
+    right: 0;
+}
+
+.game-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: $grid-gutter-part;
+	border-bottom: 1px solid $divider-color;
+	background-color: $bg-color-3;
+	cursor: pointer;
+
+	&:hover {
+        background-color: $bg-color-2;
+    }
+
+    &.active {
+        background-color: $bg-color-1;
+    }
+
+	&__meta {}
+
+    &__date,
+    &__gamemode {
+        display: inline-block;
+        vertical-align: bottom;
+    }
+
+	&__date {
+		font-size: $font-size-sm;
+		color: lightgray;
+	}
+
+	&__gamemode {
+		padding: $xxxs-space $xxs-space;
+		border: 1px solid $brand-primary;
+		margin-right: $xxs-space;
+		color: $brand-primary;
+		font-size: $font-size-xs;
+	}
+
+	&__theme {
+		display: block;
+		margin-top: $xxs-space;
+		font-size: 20px;
+
+	}
+
+    &__icons {}
+
+	&__youtube {
+        color: $youtube-color;
+        font-size: 24px;
+    }
+
+    // Variations
+    @mixin game-item-variant($gamemode, $color) {
+        &__gamemode.#{$gamemode}  {
+            border-color: $color;
+            color: $color;
+        }
+    }
+
+    @include game-item-variant(classic, $brand-primary);
+    @include game-item-variant(zen, $green-color);
+    @include game-item-variant(coffee, $yellow-color);
+}
+
+.games-roster {
+	position: relative;
+
+	&__positions {
+		@extend %absolute-center;
+		list-style: none;
+        text-align: center;
+        bottom: 0;
+
+		li {
+            height: 50px + ($xs-space * 2) + ($border-size * 2);
+			display: flex;
+			align-items: center;
+			text-align: center;
+			justify-content: center;
+			font-size: 14px;
+			font-weight: bold;
+		}
+
+		.html-color { color: $html-color; }
+		.css-color { color: $css-color; }
+		.js-color { color: $js-color; }
+	}
+}
+
+.games-banner {
+	background-size: cover;
+	padding: $m-space $s-space;
+
+	&__inner {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	&__meta {
+        line-height: 1;
+    }
+
+	&__date {
+        display: block;
+        margin-bottom: $xs-space;
+    }
+
+    &__gamemode,
+    &__versus {
+        @extend %align-middle;
+        line-height: 1;
+    }
+
+	&__gamemode {
+        @extend .display-5;
+
+        &:after {
+            @extend %align-middle;
+            content: "";
+            height: 2.5rem;
+            width: 1px;
+            background-color: $text-color-muted;
+            margin: 0 $xs-space 0 $xxs-space;
+        }
+    }
+
+    &__versus {
+        font-size: $h4-font-size;
+    }
+
+	&__youtube {
+        pointer-events: none;
+        &.active {
+            background-color: $youtube-color;
+            pointer-events: initial;
+        }
+	}
+
+	&.classic { background-image: url('~/assets/img/classic-bg.jpg'); }
+	&.zen-garden { background-image: url('~/assets/img/zen-garden-bg.jpg'); }
+	//&.coffee-run { background-image: url('~/assets/img/coffee-run-bg.jpg'); }
+}
+
+.games-team {
+
+	&__header {
+		border-bottom-width: $border-size;
+		border-bottom-style: solid;
+		text-transform: uppercase;
+	}
+
+	&__header-inner {
+        @extend %flex-justify;
+		padding: 0 $s-space;
+	}
+
+	&__name {
+        font-weight: $font-weight-bold;
+        font-size: 24px;
+	}
+
+	&__score {}
+
+	&__points,
+	&__win {
+		vertical-align: middle;
+	}
+
+	&__points {
+		font-size: 42px;
+        font-weight: bold;
+        text-shadow: 0 0 20px rgba(#fff, 0.6);
+        color: #fff;
+	}
+
+	&__win {
+		padding: 0 $s-space;
+		color: $success-color;
+		font-weight: bold;
+		font-size: 18px;
+    }
+
+    // Variations
+    @mixin games-team-variant($team, $color, $direction) {
+        &.#{$team} &__header {
+            border-color: $color;
+            background: linear-gradient(
+                to left,
+                rgba($color, 0.3),
+                transparent
+            );
+        }
+        &.#{$team} &__name { color: $color; }
+        &.#{$team} .games-player__avatar { border-color: $color; }
+
+        &.mirror.#{$team} &__header {
+            background: linear-gradient(
+                to $direction,
+                rgba($color, 0.3),
+                transparent
+            );
+        }
+        &.mirror.#{$team} .games-player {
+            display: block; // undos flexbox
+            text-align: $direction;
+        }
+    }
+
+    @include games-team-variant(team-blue, $brand-primary, left);
+    @include games-team-variant(team-red, $brand-secondary, right);
+}
+
+.games-players {
+	padding: $xs-space;
+}
+
+.games-player {
+    @extend %flex-justify;
+	padding: $xs-space 0;
+
+	&__avatar,
+	&__name {
+		@extend %align-middle;
+	}
+
+	&__avatar {
+		border: $border-size solid transparent;
+		border-radius: 50%;
+	}
+
+	&__name {
+        padding: 0 $xs-space;
+        font-size: $h4-font-size;
+    }
+
+    &__position {
+
+    }
+}
+
+.games-resources {
+	@extend %flex-justify;
+	padding: $s-space;
+}
+
+
+.sub-score-section {
+    padding: 0 $s-space;
+}
+
+.sub-score-header {
+    @extend %flex-justify;
+    border-top: 1px solid $divider-color;
+    padding: $xs-space;
+    margin: $grid-gutter-width auto $s-space;
+    position: relative;
+
+    &__title {
+        @extend %absolute-center;
+        text-transform: uppercase;
+        font-family: $alt-font-face;
+        font-weight: $font-weight-semibold;
+        color: $text-color-secondary;
+    }
+
+    &__points {
+        font-size: $h1-font-size;
+        font-weight: $font-weight-bold;
+        &.team-blue { color: $brand-primary; }
+        &.team-red { color: $brand-secondary; }
+    }
+}
+
+.obj-list {
+
+	&__item {
+        @extend %flex-justify;
+        width: 100%;
+		padding-bottom: $s-space;
+        text-align: center;
+
+        &.bonus { color: $bonus-color; }
+	}
+
+	&__square {
+        width: 30px;
+        height: 30px;
+        border: 5px solid #23252C;
+
+        &.team-blue.active { background-color: $brand-primary; }
+        &.team-red.active { background-color: $brand-secondary; }
+    }
+
+    &__item.bonus &__square.active {
+        background-color: $bonus-color;
+    }
+}
+
+$voting-bar-height                              : 20px;
+
+.games-voting {
+    @extend %flex-justify;
+    @extend %brand-skew;
+    position: relative;
+
+    &:after {
+        @extend %absolute-center;
+        content: "";
+        display: inline-block;
+        height: $voting-bar-height + 10px;
+        width: 4px;
+        background-color: #fff;
+    }
+
+    &__team {
+        width: 50%;
+    }
+
+    &__progress {
+        width: 80%;
+    }
+
+    &__bar {
+        width: 0%;
+        height: $voting-bar-height;
+        position: relative;
+        opacity: 0.4;
+    }
+
+    &__meta {
+        width: 20%;
+        position: relative;
+        line-height: 1;
+    }
+
+    &__placeholder,
+    &__percent {
+        padding: 0 $xs-space;
+        font-size: $h4-font-size;
+        font-weight: $font-weight-bold;
+        color: $text-color-secondary;
+    }
+
+    &__percent {
+        @extend %absolute-center-y;
+        width: 100%;
+    }
+
+    &__placeholder {
+        &:before { content: "100%"; }
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    &__voters {
+        margin-top: $s-space;
+        text-align: center;
+        color: $text-color-secondary;
+    }
+
+    &__team.win &__bar {
+        opacity: 1;
+    }
+
+    // Variations
+    @mixin games-voting-variant($team, $color, $direction, $offset) {
+        &__team.#{$team} &__meta {
+            float: $offset;
+            text-align: $offset;
+        }
+
+        &__team.#{$team} &__progress {
+            float: $direction;
+        }
+
+        &__team.#{$team} &__bar {
+            background-color: $color;
+            float: $direction;
+        }
+    }
+
+    @include games-voting-variant(team-blue, $brand-primary, right, left);
+    @include games-voting-variant(team-red, $brand-secondary, left, right);
+}

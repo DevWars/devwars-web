@@ -1,0 +1,504 @@
+/* Name: Dashboard
+
+Contents:
+    01. Interfaces
+    02. Components
+    03. Badges
+
+Variables
+============================================================================ */
+$user-avatar-offset                                : 40px;
+
+
+/*  ========================================================================
+01. Interfaces
+========================================================================= */
+
+.dashboard {
+    padding-top: $header-offset + $grid-gutter-width;
+
+    &__aside {
+        @extend .col-md-4;
+
+        .dashboard-card {
+            border-top-color: $brand-primary;
+        }
+    }
+
+    &__main {
+        @extend .col-md-8;
+        margin-top: $user-avatar-offset;
+    }
+}
+
+.activity-history {
+    @extend %list-unstyled;
+    max-height: 250px;
+    padding-top: 0;
+    overflow-y: auto;
+
+    &__item {
+        @extend %clear;
+        padding: $grid-gutter-part;
+        border-bottom: 1px solid $divider-color;
+        font-size: 0;
+    }
+
+    &__date,
+    &__title,
+    &__rewards {
+        @extend .no-gutter;
+        font-size: $font-size-sm;
+    }
+
+    &__date {
+        @extend .col-xs-3;
+        color: $text-color-muted;
+    }
+
+    &__title {
+        @extend .col-xs-6;
+    }
+
+    &__rewards {
+        @extend .col-sm-3;
+        text-align: right;
+    }
+
+    &__reward {
+        display: inline-block;
+        padding: $xxs-space $grid-gutter-part;
+        border-radius: 50px;
+        background-color: darken($bg-color-2, 3%);
+        color: $success-color;
+
+        & + & {
+            margin-top: $xs-space;
+        }
+
+        &:before {
+            content: "+";
+        }
+
+        &.lose {
+            color: $danger-color;
+
+            &:before {
+                content: "-";
+            }
+        }
+    }
+}
+
+.dashboard-badges {
+    padding: $grid-gutter-width;
+    text-align: center;
+    font-size: 0;
+    line-height: 1;
+
+    &__overview {
+        padding-bottom: $xs-space;
+    }
+
+    &__icon,
+    &__total {
+        @extend %align-middle;
+    }
+
+    &__total {
+        line-height: 50px;
+        font-size: 48px;
+        font-weight: 400;
+    }
+
+    &__icon {
+        padding-right: 10px;
+
+        &:before {
+            font-size: 38px;
+        }
+    }
+
+    .progress-header {
+        margin-top: $m-space;
+    }
+}
+
+.user-profile {
+    padding: $grid-gutter-width;
+    margin-top: $user-avatar-offset;
+    background-color: $bg-color-2;
+    text-align: center;
+
+    .user-avatar-wrapper {
+        border: $border-size-lg solid $divider-color;
+        margin: -($user-avatar-offset * 2) auto $grid-gutter-part;
+        border-radius: 50%;
+    }
+
+    &__name {
+        @extend .h4;
+    }
+
+    .user-rank {
+        margin-bottom: $grid-gutter-part;
+    }
+}
+
+.devbit-wallet {
+    overflow: hidden;
+
+    &__inner {
+        @extend %flex-justify;
+        padding: $grid-gutter-part;
+    }
+}
+
+.inventory {
+    @extend %clear;
+    border-top: 1px solid $divider-color;
+    margin-left: -1px;
+    background-color: $bg-color-2;
+
+    &__slot {
+        @include aspect-ratio(1,1);
+        @extend .col-xs-3;
+        @extend .no-gutter;
+        border-bottom: 1px solid $divider-color;
+        border-left: 1px solid $divider-color;
+    }
+
+    &__footer {
+        line-height: 1;
+        padding: $xs-space $grid-gutter-part $grid-gutter-part;
+        text-align: right;
+
+        a {
+            text-transform: uppercase;
+            font-size: $font-size-sm;
+            color: $text-color-muted;
+        }
+    }
+}
+
+.daily-prizes {
+    &__item {
+        @extend %flex-justify;
+        padding: $grid-gutter-part;
+        border-bottom: 1px solid $divider-color;
+    }
+
+    &__main {
+        width: 100%;
+    }
+
+    &__prize,
+    &__title {
+        @extend .no-gutter;
+    }
+
+    &__prize {
+        @extend .col-xs-2;
+    }
+
+    &__title {
+        @extend .col-xs-8;
+    }
+}
+
+.applied-games {
+    &__item {
+        @extend %flex-justify;
+        padding: $grid-gutter-part;
+        border-bottom: 1px solid $divider-color;
+    }
+
+    &__main {
+        width: 100%;
+    }
+
+    &__status,
+    &__title {
+        @extend .no-gutter;
+    }
+
+    &__status {
+        @extend .col-xs-2;
+    }
+
+    &__title {
+        @extend .col-xs-8;
+    }
+
+    &__actions {
+        width: 100px;
+    }
+}
+
+
+/*  ========================================================================
+02. Components
+========================================================================= */
+
+.dashboard-card {
+    @extend .card;
+    background-color: $bg-color-2;
+
+    &__header {
+        background-color: lighten($bg-color-2, 4%);
+        padding: $xs-space $grid-gutter-part;
+        font-size: 0;
+    }
+
+    &__icon,
+    &__title {
+        @extend %align-middle;
+    }
+
+    &__icon {
+        padding-right: $xs-space;
+        &:before { font-size: $p-font-size; }
+    }
+
+    &__title {
+        text-transform: uppercase;
+        font-weight: $font-weight-bold;
+        font-size: $h5-font-size;
+    }
+}
+
+
+/*  ========================================================================
+03. Badges
+========================================================================= */
+
+.badge-card {
+    border-top: $border-size solid $divider-color;
+    padding: $xs-space $grid-gutter-part $grid-gutter-part;
+    margin-bottom: $grid-gutter-width;
+    background-color: $bg-color-3;
+    text-align: center;
+    opacity: 0.5;
+
+    &__img {
+        display: block;
+        height: 100%;
+        width: auto;
+        max-height: 140px;
+        margin: 0 auto;
+    }
+
+    &__name {
+        padding: $s-space 0 $s-space;
+        font-size: $h4-font-size;
+    }
+
+    &__meta {
+        @extend %flex-justify;
+        margin-bottom: $xs-space;
+    }
+
+    &__global {
+        color: $text-color-muted;
+        .fa { padding-right: 5px; }
+    }
+
+    &__tier {
+        border: 1px solid;
+        padding: 0 $xxs-space;
+        font-size: $font-size-xs;
+    }
+
+    .progress {
+        max-width: 80%;
+        margin: 0 auto $xs-space;
+
+        &__bar { background-color: $brand-secondary; }
+    }
+
+    &.complete {
+        background-color: $bg-color-2;
+        opacity: 1;
+    }
+
+    @mixin badge-variant($rank, $color) {
+        &.#{$rank} { border-color: $color; }
+        &.#{$rank} &__tier { color: $color; }
+        //&.#{$rank} .progress__bar { background-color: $color; }
+    }
+
+    @include badge-variant(bronze, $bronze-color);
+    @include badge-variant(silver, $silver-color);
+    @include badge-variant(gold, $gold-color);
+    @include badge-variant(diamond, $diamond-color);
+}
+
+
+/*  ========================================================================
+04. Shop
+========================================================================= */
+
+.shop-card {
+    border-top: $border-size solid $divider-color;
+    margin-bottom: $grid-gutter-width;
+    background-color: $bg-color-3;
+    cursor: pointer;
+
+    &__cover {
+        @include aspect-ratio(16,9);
+        background-color: $bg-color-2;
+    }
+
+    &__img {
+        @extend %absolute-center;
+        width: 60%;
+        max-width: 180px;
+        margin: 0 auto;
+    }
+
+    &__main {
+        min-height: 120px;
+        padding: $xs-space $grid-gutter-part 0;
+    }
+
+    &__type {
+        font-weight: $font-weight-bold;
+        font-size: $font-size-xs;
+        text-transform: uppercase;
+    }
+
+    &__name {
+        margin-bottom: $xxs-space;
+        font-weight: $font-weight-bold;
+        font-size: $h4-font-size;
+        color: #fff;
+    }
+
+    &__desc {
+        line-height: 1.3;
+        font-size: $font-size-sm;
+        color: $text-color-secondary;
+    }
+
+    .devbits {
+        border-top: 1px solid $divider-color;
+        padding: $xs-space 0;
+        margin-top: $xs-space;
+        text-align: center;
+    }
+
+    &:hover .devbits {
+        background-color: $bg-color-2;
+    }
+
+    @mixin shop-variant($type, $color) {
+        &.#{$type} &__type { color: $color; }
+    }
+
+    @include shop-variant(consumable, #ff4282);
+    @include shop-variant(wearable, #febc11);
+    @include shop-variant(cosmetic, #44ff86);
+    @include shop-variant(craftable, #11eafe);
+}
+
+.shop-nav {
+    @extend %flex-justify;
+
+    &__link {
+        text-transform: uppercase;
+        font-weight: $font-weight-bold;
+        font-size: $h4-font-size;
+        color: $text-color-secondary;
+        position: relative;
+
+        &.active {
+            color: $brand-secondary;
+            &:before {
+                content: "";
+                border-bottom: $border-size-lg solid $brand-secondary;
+                position: absolute;
+                bottom: -$xxs-space;
+                width: 100%;
+            }
+        }
+
+        &:not(:last-of-type) {
+            margin-right: $grid-gutter-width;
+        }
+    }
+}
+
+
+/*  ========================================================================
+04. To Be Moved
+========================================================================= */
+
+.devbits {
+
+    &__icon,
+    &__amount {
+        @extend %align-middle;
+        line-height: 1;
+    }
+
+    &__icon {
+        max-width: $h5-font-size;
+        margin-right: $xxs-space;
+    }
+
+    &__amount {
+        font-weight: $font-weight-bold;
+        font-size: $h5-font-size;
+        color: $devbit-color;
+    }
+
+    // Large
+    &-lg &__icon {
+        max-width: $h3-font-size;
+        margin-right: $xs-space;
+    }
+    &-lg &__amount {
+        font-size: $h3-font-size;
+    }
+
+    // Large
+    &-xl &__icon {
+        max-width: $h2-font-size;
+        margin-right: $xs-space;
+    }
+    &-xl &__amount {
+        font-size: $h2-font-size;
+    }
+}
+
+.progress {
+    width: 100%;
+    height: 5px;
+    background-color: $bg-color-4;
+    overflow: hidden;
+
+    &__bar {
+        height: 100%;
+        background-color: #fff;
+        transition: all 0.4s cubic-bezier(0, 0.5, 0.35, 1.4);
+    }
+
+    &-primary &__bar { background-color: $brand-primary; }
+    &-secondary &__bar { background-color: $brand-secondary; }
+    &-yellow &__bar { background-color: $yellow-color; }
+}
+
+.progress-header {
+    @extend %flex-justify;
+    margin-bottom: $xxs-space;
+
+    &__title,
+    &__meta {
+        text-transform: uppercase;
+        font-size: $font-size-sm;
+    }
+
+    &-lg {
+        margin-bottom: $xs-space;
+    }
+}

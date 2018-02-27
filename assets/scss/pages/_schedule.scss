@@ -1,0 +1,52 @@
+/* Name: Schedule
+
+Contents:
+	01. Main
+
+Variables
+========================================================================== */
+
+/* ==========================================================================
+01. Schedule
+========================================================================== */
+
+.schedule-block {
+    @extend %clear;
+    padding-top: $xs-space;
+    padding-bottom: $xs-space;
+    line-height: 1.2;
+    text-align: left;
+
+    &__when {
+        @extend .col-sm-3;
+    }
+
+    &__main {
+        @extend .col-sm-6;
+    }
+
+    &__actions {
+        @extend .col-sm-3;
+        text-align: right;
+    }
+
+    &__date,
+    &__time {
+        font-weight: $font-weight-semibold;
+    }
+
+    &__date {
+        text-transform: uppercase;
+        font-size: $font-size-sm;
+    }
+
+    &__time {
+        font-size: $h4-font-size;
+    }
+
+    &__show {
+        text-transform: uppercase;
+        font-weight: $font-weight-bold;
+        font-size: $font-size-sm;
+    }
+}

@@ -1,0 +1,83 @@
+/* ==========================================================================
+ 01. Main
+========================================================================== */
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+ 02. Components
+========================================================================== */
+.lang-rating {
+    margin-bottom: $grid-gutter-width;
+    background-color: lighten($bg-color-2, 5%);
+
+    &__meter {
+        @extend %list-unstyled;
+        @extend %flex-justify;
+
+        li {
+            height: 6px;
+            background-color: $bg-color-4;
+            flex: 1;
+        }
+
+        li:not(:last-of-type) {
+            border-right: $border-size solid lighten($bg-color-2, 5%);
+        }
+    }
+
+    &__main {
+        padding: $s-space 0;
+        text-align: center;
+    }
+
+    &__reel {
+        @extend %flex-justify;
+    }
+
+    &__position,
+    &__name {
+        font-weight: $font-weight-bold;
+    }
+
+    &__score {
+        font-size: $display4-size;
+        font-weight: $font-weight-heavy;
+    }
+
+    &__arrow {
+        padding: $grid-gutter-width;
+        font-size: $h3-font-size;
+
+        &.disabled {
+            pointer-events: none;
+            color: $text-color-muted;
+        }
+    }
+
+    &__desc {
+        padding: $s-space $grid-gutter-width;
+        background-color: $bg-color-3;
+        line-height: 1.3;
+        font-size: $font-size-base;
+    }
+
+    &--html &__meter li.active { background-color: $html-color; }
+    &--html &__position {
+        color: $html-color;
+    }
+    &--css &__meter li.active { background-color: $css-color; }
+    &--css &__position {
+        color: $css-color;
+    }
+    &--js &__meter li.active { background-color: $js-color; }
+    &--js &__position {
+        color: $js-color;
+    }
+}

@@ -1,0 +1,20 @@
+.header-offset {
+    padding-top: $header-offset;
+    padding-bottom: $xl-space;
+
+    @include breakpoint(md) {
+        padding-top: $header-offset / 2;
+    }
+
+    @include breakpoint(sm) {
+        padding-top: $header-offset / 4;
+    }
+}
+
+.header-onset {
+    padding-top: $header-height;
+}
+
+.footer-offset {
+    padding-bottom: $xl-space;
+}

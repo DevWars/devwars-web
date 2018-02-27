@@ -1,0 +1,36 @@
+/* Name:            Tutorial Listing Pages
+
+Contents:
+	01. List items
+
+Variables
+$file__element--property_modifier
+============================================================================ */
+
+
+
+/*  ========================================================================
+	01. List items
+	======================================================================== */
+
+@include breakpoint(sm-only) {
+
+	.listing {
+
+		.col-sm-12 {
+			
+			.list-item {
+				height: 241px;
+
+				img {
+					display: none;
+				}
+
+				&__title {
+					width: 70%;
+
+				}
+			}
+		}
+	}	
+}

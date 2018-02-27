@@ -1,0 +1,267 @@
+/* Name:            Buttons
+
+Contents:
+01. Buttons
+02. Button Modifiers
+03.1 Alternate Buttons
+03.2 Alternate Fixes
+
+========================================================================== */
+
+
+
+/* ==========================================================================
+01. Button
+========================================================================== */
+
+.btn {
+    @include button-size($btn-padding-y, $btn-padding-x, $font-size-sm, $btn-border-radius);
+    display: inline-block;
+    border: 1px solid transparent;
+    border-radius: $btn-border-radius;
+    background-color: $text-color-muted;
+    vertical-align: middle;
+    font-weight: $btn-font-weight;
+    line-height: $btn-line-height;
+    text-align: center;
+    color: $base-font-color;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    text-transform: uppercase;
+    transition: all 0.2s ease-in-out;
+
+    &,
+    &:active,
+    &.active {
+        background-image: none;
+        outline: 0;
+        &:focus,
+        &.focus {
+            outline: 0;
+        }
+    }
+
+    &:focus,
+    &.focus {
+        text-decoration: none;
+    }
+
+    &.disabled,
+    &:disabled {
+        cursor: $cursor-disabled;
+        opacity: 0.25;
+    }
+}
+
+
+.btn-link {
+    font-weight: $font-weight-bold;
+    color: $link-color;
+    border-radius: 0;
+
+    &,
+    &:active,
+    &.active,
+    &:disabled {
+        background-color: transparent;
+        box-shadow: none;
+    }
+
+    &,
+    &:focus,
+    &:active {
+        border-color: transparent;
+    }
+
+    &:disabled {
+    }
+
+    &:hover {
+
+    }
+}
+
+.btn-link-secondary {
+    color: $silver-color;
+}
+
+
+/* ==========================================================================
+02. Button Modifiers
+========================================================================== */
+
+.btn-sm {
+    @include button-size($btn-padding-y-sm, $btn-padding-x-sm, $font-size-sm, $btn-border-radius-sm);
+    font-weight: $btn-font-weight-sm;
+}
+
+.btn-lg {
+    @include button-size($btn-padding-y-lg, $btn-padding-x-lg, $font-size-lg, $btn-border-radius-lg);
+    font-weight: $btn-font-weight-lg;
+    border-width: 2px;
+}
+
+.btn.disabled,
+fieldset[disabled] .btn {
+    pointer-events: none;
+}
+
+.btn {
+    text-decoration: none;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+// Vertically space out multiple block buttons
+.btn-block + .btn-block {
+    margin-top: $btn-block-spacing-y;
+}
+
+// Specificity overrides
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+    &.btn-block {
+        width: 100%;
+    }
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    &:focus { outline: 0; }
+}
+
+
+.btn-icon {
+    .fa, span,
+    & > img {
+        @extend %align-middle;
+        line-height: 1;
+    }
+
+    .fa,
+    & > img {
+        padding-right: $xxs-space;
+        font-size: 16px;
+    }
+
+    & > img {
+        height: $font-size-lg;
+    }
+}
+
+.btn-icon-reverse {
+    .fa {
+        padding-right: 0;
+        padding-left: $xxs-space;
+    }
+}
+
+
+/* ==========================================================================
+03. Alternate Buttons
+========================================================================== */
+
+.btn-primary {
+  @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+}
+.btn-secondary {
+  @include button-variant($btn-secondary-color, $btn-secondary-bg, $btn-secondary-border);
+}
+.btn-info {
+  @include button-variant($btn-info-color, $btn-info-bg, $btn-info-border);
+}
+.btn-success {
+  @include button-variant($btn-success-color, $btn-success-bg, $btn-success-border);
+}
+.btn-warning {
+  @include button-variant($btn-warning-color, $btn-warning-bg, $btn-warning-border);
+}
+.btn-danger {
+  @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border);
+}
+.btn-white {
+    @include button-variant($btn-white-color, $btn-white-bg, $btn-white-border);
+}
+.btn-black {
+    @include button-variant($btn-black-color, $btn-black-bg, $btn-black-border);
+}
+.btn-gray {
+    @include button-variant($btn-gray-color, $btn-gray-bg, $btn-gray-border);
+}
+
+// Remove all backgrounds
+.btn-outline-primary {
+  @include button-outline-variant($btn-primary-bg);
+}
+.btn-outline-secondary {
+  @include button-outline-variant($btn-secondary-border);
+}
+.btn-outline-info {
+  @include button-outline-variant($btn-info-bg);
+}
+.btn-outline-success {
+  @include button-outline-variant($btn-success-bg);
+}
+.btn-outline-warning {
+  @include button-outline-variant($btn-warning-bg);
+}
+.btn-outline-danger {
+  @include button-outline-variant($btn-danger-bg);
+}
+.btn-outline-white {
+    @include button-outline-variant($btn-white-border);
+}
+.btn-outline-black {
+    @include button-outline-variant($btn-black-border);
+}
+.btn-outline-gray {
+    @include button-outline-variant($btn-gray-border);
+}
+
+
+/* ==========================================================================
+03. Social Buttons
+========================================================================== */
+.btn-twitch {
+    @include button-variant(#fff, $twitch-color, $twitch-color);
+}
+
+.btn-discord {
+    @include button-variant(#fff, $discord-color, $discord-color);
+}
+
+
+
+/* ==========================================================================
+03. Alternate Fixes
+========================================================================== */
+
+.btn-outline-white {
+    &:focus,
+    &:hover {
+        border-color: darken($btn-white-bg, 5%);
+        background-color: darken($btn-white-bg, 5%);
+        color: $black-color;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

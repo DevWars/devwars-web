@@ -1,0 +1,47 @@
+/* Name:			Ranks
+
+Contents:
+	01. Build rank colors
+
+Variables
+$file__element--property_modifier
+============================================================================ */
+
+$rank__bronze--background 							: #a57e12;
+$rank__bronze-accent--background 					: #493808;
+$rank__silver--background 							: #929a9f;
+$rank__silver-accent--background 					: #5f676c;
+$rank__gold--background 							: #f9d369;
+$rank__gold-accent--background 						: #f2b50a;
+$rank__platinum--background 						: #e5e4e2;
+$rank__platinum-accent--background 					: #b5b2ac;
+$rank__diamond--background 							: #69cbf9;
+$rank__diamond-accent--background 					: #0aa8f2;
+
+$ranks: (
+	bronze-rank $rank__bronze--background $rank__bronze-accent--background,
+	silver-rank $rank__silver--background $rank__silver-accent--background,
+	gold-rank $rank__gold--background $rank__gold-accent--background,
+	platinum-rank $rank__platinum--background $rank__platinum-accent--background,
+	diamond-rank $rank__diamond--background $rank__diamond-accent--background
+);
+
+/*  ========================================================================
+	01. Build rank colors
+	========================================================================== */
+
+@each $rank in $ranks {
+
+	.#{nth($rank, 1)} {
+
+		.st1 { fill: #{nth($rank, 2)}; }
+		.st0 { fill: #{nth($rank, 3)}; }
+	}
+}
+
+
+.rank {
+    &-bronze {
+        color: $rank__bronze--background;
+    }
+}

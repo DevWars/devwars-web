@@ -1,0 +1,325 @@
+/* Name:			Stat Box
+
+Contents:
+	01. Stat box
+		01.2 Rank
+		01.3 Team
+		01.4 Accolades / Friends
+		01.5 Scores
+		01.6 Social
+		01.7 Activity log
+
+Variables
+$file__element--property_modifier
+============================================================================ */
+
+
+
+/*  ========================================================================
+	01. Stat box
+	======================================================================== */
+
+.stat-box {
+	display: block;
+	padding: 0 0 20px;
+	font-size: 100px;
+
+	a {
+		text-decoration: none;
+	}
+
+	&__inner {
+		min-height: 234px;
+		padding: (15em / 100);
+		border-top: 3px solid $brand-secondary;
+		background: $bg-color-3;
+	}
+
+	&__title {
+		padding: 0 0 15px;
+		font-size: (18em / 100);
+	}
+
+	&__image {
+		display: block;
+		margin: 0 auto 15px;
+		max-width: 100px;
+	}
+}
+
+@include breakpoint(sm) {
+
+	.stat-box {
+		font-size: 120px;
+
+		&__inner {
+			min-height: 250px;
+		}
+	}
+}
+
+@include breakpoint(md) {
+
+	.stat-box {
+		font-size: 130px;
+
+		&__inner {
+			min-height: 269px;
+		}
+	}
+}
+
+/*  ========================================================================
+	01.2 Rank
+	======================================================================== */
+
+.stat-box {
+
+	&__xp {
+		text-transform: uppercase;
+		text-align: right;
+		font-size: (14em / 100);
+	}
+
+	&__xp-bar {
+		height: 25px;
+		background: $bg-color-1;
+
+		&--total {
+			height: 100%;
+			width: 30%;
+			background: $brand-primary;
+		}
+	}
+}
+
+/*  ========================================================================
+	01.3 Team
+	======================================================================== */
+
+.stat-box {
+
+	&__desc {
+		color: #fff;
+		text-align: center;
+		font-size: (14em / 100);
+	}
+}
+
+/*  ========================================================================
+	01.4 Accolades / Friends
+	======================================================================== */
+
+.stat-box--friends,
+.stat-box--accolades {
+
+	.stat-box__inner {
+		@extend %clear;
+	}
+}
+
+.stat-box {
+
+	&--friends {
+
+		.stat-box__image {
+			border-radius: 100%;
+		}
+	}
+
+	&__item {
+		position: relative;
+		cursor: pointer;
+		float: left;
+		width: 50%;
+
+		&:nth-of-type(n+3) {
+			display: none;
+		}
+	}
+}
+
+@include breakpoint(sm) {
+
+	.stat-box {
+
+		&__item {
+			width: 25%;
+
+			&:nth-of-type(n+3) {
+				display: block;
+			}
+
+			&:hover {
+
+				.tooltip {
+					opacity: 1;
+				}
+			}
+		}
+
+		&--friends {
+
+			.stat-box__item {
+				width: 50%;
+
+				&:nth-of-type(n+3) {
+					display: none;
+				}
+			}
+		}
+	}
+}
+
+@include breakpoint(md) {
+
+	.stat-box,
+	.stat-box--friends {
+
+		.stat-box__item {
+			width: 33.33%;
+
+			&:nth-of-type(n+3) {
+				display: block;
+			}
+
+			&:nth-of-type(n+4) {
+				display: none;
+			}
+		}
+	}
+
+	.stat-box--friends {
+
+		.stat-box__item:hover {
+
+			.stat-box__image {
+				transform: scale(1.1);
+			}
+		}
+
+		.stat-box__image {
+			transform: none;
+			transition: transform 0.3s;
+		}
+	}
+}
+
+/*  ========================================================================
+	01.5 Scores
+	======================================================================== */
+
+.stat-box--score {
+
+	.stat-box__inner {
+		min-height: 0;
+	}
+
+	.stat-box__title {
+		text-align: center;
+	}
+}
+
+/*  ========================================================================
+	01.6 Social
+	======================================================================== */
+
+.stat-box {
+
+	.social-icons {
+		text-align: center;
+
+		li {
+			margin: 0 0 15px;
+			width: 33.33%;
+
+			&:nth-child(n+8) {
+				margin: 0;
+			}
+
+			a {
+				display: block;
+				margin: 0 auto;
+				width: 50px;
+			}
+
+			.icon:before {
+				line-height: 50px;
+				font-size: 32px;
+			}
+		}
+	}
+}
+
+@include breakpoint(sm) {
+
+	.stat-box {
+
+		.social-icons {
+
+			li {
+				margin: 15px 0;
+				width: 20%;
+
+				&:nth-child(n+6) {
+					margin: 0;
+				}
+			}
+		}
+	}
+}
+
+/*  ========================================================================
+	01.7 Activity Log
+	======================================================================== */
+
+.stat-box {
+
+	&--activity-log {
+		display: none;
+	}
+}
+
+@include breakpoint(sm) {
+
+	.stat-box {
+
+		&--activity-log {
+			display: block;
+		}
+
+		&__entry {
+			line-height: 40px;
+			font-size: (14em / 100);
+
+			> span {
+				display: inline-block;
+				vertical-align: middle;
+			}
+
+			&--date {
+				width: 12%;
+			}
+
+			&--desc {
+				width: 58%;
+			}
+
+			&--xp,
+			&--devbits {
+				text-align: right;
+			}
+
+			&--xp {
+				text-transform: uppercase;
+				width: 12%;
+				color: $green-color;
+			}
+
+			&--devbits {
+				width: 18%;
+				color: $devbit-color;
+			}
+		}
+	}
+}
