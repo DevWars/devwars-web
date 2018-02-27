@@ -41,15 +41,19 @@ export const actions = {
         }
     },
 
-    async apply({commit}, game) {
+    async apply({commit, dispatch}, game) {
         await Http.for('game/application').save(game);
 
         commit('apply', game);
+
+        dispatch('toast/add', {type: 'success', message: `Thanks for signing up! See ya soon`}, {root: true});
     },
 
-    async forfeit({commit}, game) {
+    async forfeit({commit, dispatch}, game) {
         await Http.for('game/application').delete(game);
 
         commit('forfeit', game);
+
+        dispatch('toast/add', {type: 'success', message: `Sorry to see ya go :(`}, {root: true});
     }
 };

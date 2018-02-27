@@ -45,7 +45,7 @@ export default class Http {
     }
 
     async post(first, second, third) {
-        if (!second || typeof first === "object") {
+        if (typeof first === "object") {
             return Http.axios.post(this.url(), first, {params: second}).then(it => it.data);
         } else {
             return Http.axios.post(this.url(first), second, {params: third}).then(it => it.data);

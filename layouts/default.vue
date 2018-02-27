@@ -2,6 +2,8 @@
     <div>
         <modals-container></modals-container>
 
+        <Toasts/>
+
         <DevWarsHeader/>
 
         <nuxt/>
@@ -16,9 +18,10 @@
 
     import Header from '~/components/layout/Header';
     import Footer from '~/components/layout/Footer';
+    import Toasts from '~/components/toast/Toasts';
 
     @Component({
-        components: {DevWarsHeader: Header, DevWarsFooter: Footer}
+        components: {DevWarsHeader: Header, DevWarsFooter: Footer, Toasts}
     })
     export default class Default extends Vue {
     }

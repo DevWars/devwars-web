@@ -113,6 +113,7 @@
         }
 
         logout() {
+            this.$store.dispatch('user/logout');
         }
     }
 </script>

@@ -18,7 +18,7 @@ module.exports = {
     /*
     ** Customize the progress bar color
     */
-    loading: {color: '#3B8070'},
+    loading: {color: '#ff007d'},
 
     axios: {
         baseURL: 'http://localhost:3030/',

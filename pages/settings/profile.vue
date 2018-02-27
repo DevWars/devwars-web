@@ -1,0 +1,63 @@
+<template>
+    <form v-async-submit="[save]">
+        <div class="row">
+            <div class="col-sm-8">
+                <h3 class="modpanel__subtitle">Profile</h3>
+                <div class="form-group">
+                    <input v-model="profile.username" type="text" class="form-control">
+                    <label>Username</label>
+                </div>
+                <div class="form-group">
+                    <input v-model="profile.location" type="text" class="form-control">
+                    <label>Location</label>
+                </div>
+                <div class="form-group">
+                    <textarea v-model="profile.about" rows="4" class="form-control"
+                              placeholder="Tell us a little bit about yourself"></textarea>
+                </div>
+                <div class="form-group">
+                    <input v-model="profile.url" type="text" class="form-control">
+                    <label>URL</label>
+                </div>
+
+                <h3 class="modpanel__subtitle">Job</h3>
+                <div class="form-group">
+                    <input v-model="profile.for_hire" type="checkbox" class="form-control">
+                    <label>Available for hire</label>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <h3 class="modpanel__subtitle">Avatar</h3>
+                <div class="form-group">
+                    <Avatar :user="user" class="xl"></Avatar>
+                </div>
+                <button class="btn btn-outline-gray">Upload new avatar</button>
+            </div>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Save">
+    </form>
+</template>
+
+<script>
+    import Component, {State} from 'nuxt-class-component';
+    import Vue from 'vue';
+
+    import Avatar from '~/components/user/Avatar';
+
+    @Component({
+        components: {Avatar}
+    })
+    export default class SettingsProfile extends Vue {
+        profile = {};
+
+        @State(state => state.user.user) user;
+
+        mounted() {
+            this.profile = Object.assign({}, this.user, this.user.information);
+        }
+
+        async save() {
+            await this.$store.dispatch('user/settings', this.profile);
+        }
+    }
+</script>

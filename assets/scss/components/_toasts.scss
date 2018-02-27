@@ -35,7 +35,6 @@ $toast-margin-y                              : $xs-space;
         background-color: $bg-color-2;
         color: #fff;
         position: relative;
-        animation: toast-popup 600ms cubic-bezier(0.215, 0.61, 0.355, 1);
     }
 
     &__icon {
@@ -82,38 +81,4 @@ $toast-margin-y                              : $xs-space;
 
 toast {
     display: block;
-
-    &.ng-leave {
-        transition: 0.5s linear all;
-        opacity: 1;
-    }
-
-    &.ng-leave.ng-leave-active {
-        opacity: 0 !important;
-    }
-}
-
-
-@keyframes toast-popup {
-    0% {
-        opacity: 0;
-        transform: translate3d(calc(100% + #{$toast-margin-x}), 0, 0);
-    }
-
-    60% {
-        opacity: 1;
-        transform: translate3d(-5%, 0, 0)
-    }
-
-    75% {
-        transform: translate3d(5%, 0, 0)
-    }
-
-    90% {
-        transform: translate3d(2%, 0, 0)
-    }
-
-    to {
-        transform: none;
-    }
 }

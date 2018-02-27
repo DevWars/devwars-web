@@ -8,7 +8,7 @@
                     <label>Email</label>
                 </div>
                 <div class="form-group">
-                    <input v-model="password" class="form-control" type="password" required>
+                    <input name="password" v-model="password" class="form-control" type="password" required>
                     <label>Password</label>
                 </div>
                 <div class="auth-form__actions">

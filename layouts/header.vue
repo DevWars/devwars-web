@@ -1,9 +1,12 @@
 <template>
-   <div>
-     <DevWarsHeader/>
+    <div>
+        <modals-container></modals-container>
+        <Toasts/>
 
-     <nuxt/>
-   </div>
+        <DevWarsHeader/>
+
+        <nuxt/>
+    </div>
 </template>
 
 <script>
@@ -12,8 +15,10 @@
 
     import Header from '~/components/layout/Header';
 
+    import Toasts from '~/components/toast/Toasts';
+
     @Component({
-      components: {DevWarsHeader: Header}
+        components: {DevWarsHeader: Header, Toasts}
     })
     export default class HeaderLayout extends Vue {
     }
