@@ -15,7 +15,7 @@
 
         get style() {
            return {
-               backgroundImage: `url(${this.user.avatar_url})`
+               backgroundImage: `url(${this.user.avatar_url || require('~/assets/img/default-avatar.png')})`
            }
         }
     }

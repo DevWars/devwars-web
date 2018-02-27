@@ -45,7 +45,7 @@ module.exports = {
     ],
 
     router: {
-        linkActiveClass: 'active',
+        linkExactActiveClass: 'active',
     },
 
     /*
