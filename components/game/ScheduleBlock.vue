@@ -11,7 +11,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="game in games" :key="game.id">
+                <tr v-for="game in limitBy(games, count)" :key="game.id" v-if="filter ? (filter === game.name) : true">
                     <td>
                         <div class="schedule-block__date">{{ game.timestamp | moment('dddd') }}</div>
                         <div class="schedule-block__time">{{ game.timestamp | moment('MMMM D') }}</div>
@@ -50,8 +50,9 @@
     })
     export default class ScheduleBlock extends Vue {
         @Prop({default: ''}) filter;
-        @Prop() games;
         @Prop() count;
+
+        @State(state => state.game.upcoming) games;
 
         description(game) {
             return game.name === 'Classic' ? 'Classic - 3 VS 3' : 'Zen Garden : 1 VS 1';
