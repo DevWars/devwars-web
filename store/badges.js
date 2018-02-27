@@ -1,7 +1,7 @@
 import Http from "../services/Http";
 
 export const state = () => ({
-    badges: []
+    badges: [],
 });
 
 export const mutations = {

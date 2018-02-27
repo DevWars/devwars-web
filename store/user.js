@@ -1,12 +1,17 @@
 import Http from "../services/Http";
 
 export const state = () => ({
-    user: null
+    user: null,
+    count: 0,
 });
 
 export const mutations = {
     user(state, user) {
         state.user = user;
+    },
+
+    count(state, count) {
+        state.count = count
     }
 };
 
@@ -15,6 +20,12 @@ export const actions = {
         let user = await Http.for('user').get();
 
         commit('user', user);
+    },
+
+    async refreshUserCount({commit}) {
+        let data = await Http.for('leaderboard').get('users');
+
+        commit('count', data.count);
     },
 
     async login({commit, dispatch}, {username, password}) {
