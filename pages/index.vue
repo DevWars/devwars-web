@@ -11,12 +11,12 @@
       </div>
     </div>
 
-    <Highlights/>
+    <Highlights :latest="latest" :posts="posts"/>
 
     <div class="home-shows home-section">
       <div class="container">
         <h2 class="home-section__title">Upcoming Shows</h2>
-        <!--<schedule-block count="2"></schedule-block>-->
+        <ScheduleBlock :games="upcomingGames" count="2"/>
 
         <div class="home-section__actions">
           <a href="/schedule" class="btn btn-outline-white">View Full Schedule</a>
@@ -129,7 +129,7 @@
         </div>
     </div> -->
 
-    <div class="home-display" style="background-image: url('/assets/img/become-contestant-bg.jpg')">
+    <div class="home-display" :style="{backgroundImage: 'url(' + require('~/assets/img/become-contestant-bg.jpg') + ')'}">
       <div class="container">
         <div class="home-display__content">
           <h3 class="home-display__title">Think you<br>got what<br>it takes?</h3>
@@ -138,7 +138,7 @@
       </div>
     </div>
 
-    <div class="home-display reverse" style="background-image: url('/assets/img/devwars-docs-bg.jpg')">
+    <div class="home-display reverse" :style="{backgroundImage: 'url(' + require('~/assets/img/devwars-docs-bg.jpg') + ')'}">
       <div class="container">
         <div class="home-display__content">
           <h3 class="home-display__title">Get familiar<br>with DevWars<br>knowledge base.</h3>
@@ -150,16 +150,25 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
+    import Component, {State} from 'nuxt-class-component';
     import Vue from 'vue';
 
     import Highlights from '~/components/game/Highlights';
+    import ScheduleBlock from '~/components/game/ScheduleBlock';
+    import Http from "../services/Http";
 
     @Component({
-      components: {Highlights}
+      components: {Highlights, ScheduleBlock}
     })
     export default class Index extends Vue {
+        @State(state => state.game.upcoming) upcomingGames;
 
+        async asyncData() {
+            return {
+                latest: await Http.for('game').get('latest'),
+                posts: await Http.for('blog').get('latest', {count: 2})
+            }
+        }
     }
 </script>
 

@@ -75,18 +75,14 @@
     })
     export default class Dashboard extends Vue {
         @State(state => state.user.user) user;
+        @State(state => state.game.applied) appliedGames;
+        @State(state => state.game.upcoming) upcomingGames;
 
         async asyncData() {
             return {
                 mine: await Http.for('badge').get('mine'),
                 activities: await Http.for('activity').get('mine'),
-                upcomingGames: await Http.for('game').get('upcoming'),
-                appliedGames: await Http.for('game/application').get('mine')
             };
-        }
-
-        async fetch({store}) {
-            await store.dispatch('badges/refresh');
         }
     }
 </script>

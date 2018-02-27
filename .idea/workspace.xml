@@ -2,11 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8626306c-4a03-40bb-a44f-8e391b9c2de6" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/components/game/VoteBox.vue" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/components/game/Applications.vue" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/components/game/Recap.vue" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/components/game/ScheduleBlock.vue" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/store/game.js" />
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/components/user/Avatar.vue" afterPath="$PROJECT_DIR$/components/user/Avatar.vue" />
-      <change beforePath="$PROJECT_DIR$/nuxt.config.js" afterPath="$PROJECT_DIR$/nuxt.config.js" />
+      <change beforePath="$PROJECT_DIR$/components/dashboard/UpcomingGames.vue" afterPath="$PROJECT_DIR$/components/dashboard/UpcomingGames.vue" />
+      <change beforePath="$PROJECT_DIR$/components/game/Highlights.vue" afterPath="$PROJECT_DIR$/components/game/Highlights.vue" />
+      <change beforePath="$PROJECT_DIR$/components/layout/Header.vue" afterPath="$PROJECT_DIR$/components/layout/Header.vue" />
+      <change beforePath="$PROJECT_DIR$/pages/dashboard.vue" afterPath="$PROJECT_DIR$/pages/dashboard.vue" />
+      <change beforePath="$PROJECT_DIR$/pages/index.vue" afterPath="$PROJECT_DIR$/pages/index.vue" />
+      <change beforePath="$PROJECT_DIR$/store/index.js" afterPath="$PROJECT_DIR$/store/index.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,13 +24,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="VoteBox.vue" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/components/game/VoteBox.vue">
+      <file leaf-file-name="Applications.vue" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/components/game/Applications.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1456">
-              <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+            <state relative-caret-position="1624">
+              <caret line="47" column="34" lean-forward="true" selection-start-line="47" selection-start-column="34" selection-end-line="47" selection-end-column="34" />
               <folding>
-                <element signature="e#1540#1585#0" expanded="true" />
+                <element signature="e#264#318#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -39,10 +46,23 @@
       <find>$ctrl.pObj</find>
       <find>$ctrl</find>
       <find>box.</find>
+      <find>latest.</find>
+      <find>HTML</find>
+      <find>game/applied</find>
+      <find>devwars-docs</find>
+      <find>/assets/img/ava</find>
+      <find>__team</find>
+      <find>.enter</find>
+      <find>game.</find>
+      <find>props.</find>
+      <find>wrapped.game.</find>
     </findStrings>
     <replaceStrings>
       <replace>viewing</replace>
       <replace>player</replace>
+      <replace>props.game.</replace>
+      <replace>wrapped.</replace>
+      <replace>game.</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -56,9 +76,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/pages/dashboard.vue" />
         <option value="$PROJECT_DIR$/services/Http.js" />
-        <option value="$PROJECT_DIR$/components/dashboard/UpcomingGames.vue" />
         <option value="$PROJECT_DIR$/plugins/filters.js" />
         <option value="$PROJECT_DIR$/components/modal/ConfirmModal.vue" />
         <option value="$PROJECT_DIR$/components/modal/GameRegistration.vue" />
@@ -66,6 +84,18 @@
         <option value="$PROJECT_DIR$/components/user/Avatar.vue" />
         <option value="$PROJECT_DIR$/pages/games.vue" />
         <option value="$PROJECT_DIR$/components/game/VoteBox.vue" />
+        <option value="$PROJECT_DIR$/components/layout/Header.vue" />
+        <option value="$PROJECT_DIR$/components/game/Highlights.vue" />
+        <option value="$PROJECT_DIR$/components/game/Application.vue" />
+        <option value="$PROJECT_DIR$/pages/dashboard.vue" />
+        <option value="$PROJECT_DIR$/store/index.js" />
+        <option value="$PROJECT_DIR$/pages/index.vue" />
+        <option value="$PROJECT_DIR$/components/game/Recap.vue" />
+        <option value="$PROJECT_DIR$/assets/scss/pages/_home.scss" />
+        <option value="$PROJECT_DIR$/store/game.js" />
+        <option value="$PROJECT_DIR$/components/dashboard/UpcomingGames.vue" />
+        <option value="$PROJECT_DIR$/components/game/ScheduleBlock.vue" />
+        <option value="$PROJECT_DIR$/components/game/Applications.vue" />
       </list>
     </option>
   </component>
@@ -96,7 +126,7 @@
         </expanded-state>
         <selected-state>
           <State>
-            <id>CheckEmptyScriptTag</id>
+            <id>HtmlUnknownTag</id>
           </State>
         </selected-state>
       </profile-state>
@@ -132,17 +162,6 @@
             <path>
               <item name="devwars-nuxt" type="b2602c69:ProjectViewProjectNode" />
               <item name="devwars-nuxt" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="devwars-nuxt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="devwars-nuxt" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="devwars-nuxt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="devwars-nuxt" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -161,6 +180,11 @@
               <item name="devwars-nuxt" type="b2602c69:ProjectViewProjectNode" />
               <item name="devwars-nuxt" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="devwars-nuxt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="devwars-nuxt" type="462c0819:PsiDirectoryNode" />
+              <item name="store" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -250,12 +274,12 @@
       <option name="presentableId" value="Default" />
       <updated>1519707071358</updated>
       <workItem from="1519707072750" duration="69000" />
-      <workItem from="1519707154215" duration="13005000" />
+      <workItem from="1519707154215" duration="20277000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13074000" />
+    <option name="totallyTimeSpent" value="20346000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="3840" height="2129" extended-state="4" />
@@ -296,7 +320,7 @@
         <state relative-caret-position="672">
           <caret line="12" column="22" lean-forward="false" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
           <folding>
-            <element signature="e#1213#1267#0" expanded="false" />
+            <element signature="e#1243#1297#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -333,31 +357,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/dashboard.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="952">
-          <caret line="74" column="5" lean-forward="false" selection-start-line="74" selection-start-column="5" selection-end-line="74" selection-end-column="5" />
-          <folding>
-            <element signature="e#2410#2464#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/services/Http.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="952">
           <caret line="46" column="10" lean-forward="false" selection-start-line="46" selection-start-column="10" selection-end-line="46" selection-end-column="10" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/dashboard/UpcomingGames.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="896">
-          <caret line="70" column="14" lean-forward="false" selection-start-line="70" selection-start-column="14" selection-end-line="70" selection-end-column="14" />
-          <folding>
-            <element signature="e#1213#1267#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -413,14 +417,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/scss/avail/_variables.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="165" column="0" lean-forward="true" selection-start-line="165" selection-start-column="0" selection-end-line="165" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/nuxt.config.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="448">
@@ -437,22 +433,142 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/games.vue">
+    <entry file="file://$PROJECT_DIR$/components/game/VoteBox.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1232">
-          <caret line="22" column="21" lean-forward="false" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
+        <state relative-caret-position="1064">
+          <caret line="61" column="0" lean-forward="true" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
           <folding>
-            <element signature="e#7124#7169#0" expanded="true" />
+            <element signature="e#1540#1585#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/game/VoteBox.vue">
+    <entry file="file://$PROJECT_DIR$/components/layout/Header.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1456">
-          <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+        <state relative-caret-position="672">
+          <caret line="86" column="44" lean-forward="false" selection-start-line="86" selection-start-column="44" selection-end-line="86" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/games.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="130" column="0" lean-forward="false" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
           <folding>
-            <element signature="e#1540#1585#0" expanded="true" />
+            <element signature="e#7124#7169#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/game/Highlights.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="10" column="43" lean-forward="false" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/store/badges.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/game/Application.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/store/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="616">
+          <caret line="11" column="35" lean-forward="true" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/game/Recap.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="5" column="55" lean-forward="false" selection-start-line="5" selection-start-column="55" selection-end-line="5" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/scss/avail/_variables.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="677">
+          <caret line="24" column="1" lean-forward="false" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/scss/pages/_home.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="62" column="0" lean-forward="true" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/dashboard.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1400">
+          <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+          <folding>
+            <element signature="e#2410#2464#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/store/game.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1359">
+          <caret line="49" column="30" lean-forward="true" selection-start-line="49" selection-start-column="30" selection-end-line="49" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/dashboard/UpcomingGames.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="7" column="42" lean-forward="false" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1008">
+          <caret line="18" column="46" lean-forward="false" selection-start-line="18" selection-start-column="46" selection-end-line="18" selection-end-column="46" />
+          <folding>
+            <element signature="e#7729#7783#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/game/ScheduleBlock.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1568">
+          <caret line="28" column="27" lean-forward="false" selection-start-line="28" selection-start-column="27" selection-end-line="28" selection-end-column="27" />
+          <folding>
+            <element signature="e#1733#1787#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/game/Applications.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1624">
+          <caret line="47" column="34" lean-forward="true" selection-start-line="47" selection-start-column="34" selection-end-line="47" selection-end-column="34" />
+          <folding>
+            <element signature="e#264#318#0" expanded="true" />
           </folding>
         </state>
       </provider>

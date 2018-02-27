@@ -4,7 +4,7 @@
             <div class="header__inner container-fluid">
                 <div class="header__main">
                     <button class="burger-menu"></button>
-                    <a href="/"
+                    <nuxt-link to="/"
                        class="logo">
                         <img class="logo-full"
                              src="~/assets/img/logo.png"
@@ -12,7 +12,7 @@
                         <img class="logo-icon"
                              src="~/assets/img/logo-icon.png"
                              alt="DevWars">
-                    </a>
+                    </nuxt-link>
                     <ul class="nav nav-main">
                         <li class="nav__item">
                             <nuxt-link to="/" class="nav__link">Home</nuxt-link>
@@ -34,12 +34,12 @@
 
                 <ul class="nav nav-actions" v-if="!user">
                     <li class="nav__item">
-                        <a href="/register"
-                           class="btn btn-primary">Register</a>
+                        <nuxt-link to="/register"
+                           class="btn btn-primary">Register</nuxt-link>
                     </li>
                     <li class="nav__item">
-                        <a href="/login"
-                           class="btn btn-link color-white">Log In</a>
+                        <nuxt-link to="/login"
+                           class="btn btn-link color-white">Log In</nuxt-link>
                     </li>
                 </ul>
 
