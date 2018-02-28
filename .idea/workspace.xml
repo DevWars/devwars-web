@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8626306c-4a03-40bb-a44f-8e391b9c2de6" name="Default" comment="i">
-      <change beforePath="" afterPath="$PROJECT_DIR$/middleware/pending.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/pages/pending.vue" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/pages/game/confirmation.vue" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/nuxt.config.js" afterPath="$PROJECT_DIR$/nuxt.config.js" />
-      <change beforePath="$PROJECT_DIR$/pages/settings/account.vue" afterPath="$PROJECT_DIR$/pages/settings/account.vue" />
-      <change beforePath="$PROJECT_DIR$/store/user.js" afterPath="$PROJECT_DIR$/store/user.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,12 +14,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="pending.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/middleware/pending.js">
+      <file leaf-file-name="confirmation.vue" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pages/game/confirmation.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="56">
-              <caret line="1" column="25" lean-forward="false" selection-start-line="1" selection-start-column="25" selection-end-line="1" selection-end-column="25" />
-              <folding />
+            <state relative-caret-position="1960">
+              <caret line="45" column="5" lean-forward="false" selection-start-line="45" selection-start-column="5" selection-end-line="45" selection-end-column="5" />
+              <folding>
+                <element signature="e#1476#1521#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -122,6 +120,7 @@
         <option value="$PROJECT_DIR$/pages/pending.vue" />
         <option value="$PROJECT_DIR$/nuxt.config.js" />
         <option value="$PROJECT_DIR$/middleware/pending.js" />
+        <option value="$PROJECT_DIR$/pages/game/confirmation.vue" />
       </list>
     </option>
   </component>
@@ -323,12 +322,12 @@
       <option name="presentableId" value="Default" />
       <updated>1519707071358</updated>
       <workItem from="1519707072750" duration="69000" />
-      <workItem from="1519707154215" duration="39635000" />
+      <workItem from="1519707154215" duration="39759000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39704000" />
+    <option name="totallyTimeSpent" value="39828000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="3840" height="2129" extended-state="4" />
@@ -366,14 +365,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/vue-js-modal/dist/ssr.index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1741">
-          <caret line="149" column="32" lean-forward="false" selection-start-line="149" selection-start-column="32" selection-end-line="149" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/vue-js-modal/types/index.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="672">
@@ -809,9 +800,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/middleware/pending.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="1" column="25" lean-forward="false" selection-start-line="1" selection-start-column="25" selection-end-line="1" selection-end-column="25" />
+        <state relative-caret-position="224">
+          <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/game/confirmation.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1960">
+          <caret line="45" column="5" lean-forward="false" selection-start-line="45" selection-start-column="5" selection-end-line="45" selection-end-column="5" />
+          <folding>
+            <element signature="e#1476#1521#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
