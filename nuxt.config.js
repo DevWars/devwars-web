@@ -56,7 +56,7 @@ module.exports = {
     build:
         {
             babel: {
-                plugins: ['transform-decorators-legacy', 'transform-class-properties', 'transform-flow-strip-types', 'transform-remove-strict-mode'],
+                plugins: ['transform-decorators-legacy', 'transform-class-properties', 'transform-flow-strip-types'],
                 presets: ['stage-0']
             },
 
