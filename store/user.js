@@ -76,6 +76,9 @@ export const actions = {
             let user = await Http.for('user/settings').post('email', data);
 
             commit('user', user);
+
+            await dispatch('toast/success', `We've updated your email, please go verify your email.`, {root: true});
+            await dispatch('navigate', '/pending', {root: true});
         } catch (e) {
             dispatch('toast/errors', e, {root: true});
         }

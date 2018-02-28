@@ -46,6 +46,8 @@ module.exports = {
 
     router: {
         linkExactActiveClass: 'active',
+        middleware: ['pending']
+
     },
 
     /*

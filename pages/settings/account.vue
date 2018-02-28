@@ -48,6 +48,7 @@
         currentPassword = '';
         newPassword = '';
         newPasswordConfirmed = '';
+
         emailCurrentPassword = '';
         newEmail = '';
 
@@ -56,8 +57,8 @@
             await this.$store.dispatch('user/email', {email: this.newEmail, password: this.emailCurrentPassword})
         }
 
-        changePassword() {
-
+        async changePassword() {
+            await this.$store.dispatch('user/password', {email: this.currentPassword, password: this.newPassword})
         }
     }
 </script>
