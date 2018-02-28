@@ -82,5 +82,17 @@ export const actions = {
         } catch (e) {
             dispatch('toast/errors', e, {root: true});
         }
+    },
+
+    async forgot({dispatch, commit}, email) {
+        await Http.for('user/reset').save({email});
+
+        dispatch('toast/success', `Check your email for a guide to reset your password.`, {root: true});
+    },
+
+    async resetByKey({dispatch, commit}, data) {
+        await Http.for('user/reset').put({}, data);
+
+        dispatch('toast/success', `We've updated your password, give it a go!`, {root: true});
     }
 };

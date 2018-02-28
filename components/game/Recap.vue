@@ -3,12 +3,12 @@
         <div class="card__inner">
             <h2 class="card__title">Last Game Recap</h2>
             <div class="card--home__contents home-recap">
-                <img class="home-recap__team team-blue" alt="">
+                <div class="home-recap__team team-blue"></div>
                 <div class="home-recap__score">
                     <span class="home-recap__gamemode"> {{ game.name }}</span>
                     <span class="home-recap__points">{{ game.teams.blue.points }}&nbsp;&hyphen;&nbsp;{{ game.teams.red.points }}</span>
                 </div>
-                <img class="home-recap__team team-red" alt="">
+                <div class="home-recap__team team-red"></div>
 
                 <div class="home-recap__matchup">
                     <ul class="home-recap__players home-recap__players--blue">

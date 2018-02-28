@@ -18,7 +18,7 @@
                     <span class="game-item__theme">{{ game.theme }}</span>
                 </div>
                 <div class="game-item__icons">
-                    <i ng-show="game.youtubeURL" class="game-item__youtube fa fa-youtube-play"></i>
+                    <i v-show="game.youtube_url" class="game-item__youtube fa fa-youtube-play"></i>
                     <!-- For some reason no games have youtube URLs? -->
                 </div>
             </div>
@@ -84,9 +84,7 @@
 
 
                 <ul class="games-roster__positions">
-                    <li class="html-color" v-show="player('blue', 'html') || player('red', 'html')">HTML</li>
-                    <li class="css-color" v-show="player('blue', 'css') || player('red', 'css')">CSS</li>
-                    <li class="js-color" v-show="player('blue', 'js') || player('red', 'js')">JS</li>
+                    <li v-for="language in ['html', 'css', 'js']" :key="language" :class="[language + '-color']" v-show="player('blue', language) || player('red', language)">{{ language | uppercase }}</li>
                 </ul>
             </div>
 

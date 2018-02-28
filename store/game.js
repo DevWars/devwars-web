@@ -47,6 +47,8 @@ export const actions = {
         commit('apply', game);
 
         dispatch('toast/add', {type: 'success', message: `Thanks for signing up! See ya soon`}, {root: true});
+
+        dispatch('navigate', '/game/confirmation', {root: true})
     },
 
     async forfeit({commit, dispatch}, game) {
@@ -54,6 +56,6 @@ export const actions = {
 
         commit('forfeit', game);
 
-        dispatch('toast/add', {type: 'success', message: `Sorry to see ya go :(`}, {root: true});
+        dispatch('toast/add', {type: 'success', message: `Sorry to see you go.`}, {root: true});
     }
 };
