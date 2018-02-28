@@ -69,5 +69,15 @@ export const actions = {
         } catch (e) {
             dispatch('toast/errors', e, {root: true});
         }
+    },
+
+    async email({dispatch, commit}, data) {
+        try {
+            let user = await Http.for('user/settings').post('email', data);
+
+            commit('user', user);
+        } catch (e) {
+            dispatch('toast/errors', e, {root: true});
+        }
     }
 };
