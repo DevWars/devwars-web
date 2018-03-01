@@ -73,6 +73,16 @@ export const actions = {
         }
     },
 
+    async password({commit, dispatch}, data) {
+        try {
+            await Http.for('user/reset/change').put(data);
+
+            dispatch('toast/success', `We've updated your password!`, {root: true});
+        } catch (e) {
+            dispatch('toast/errors', e, {root: true});
+        }
+    },
+
     async email({dispatch, commit}, data) {
         try {
             let user = await Http.for('user/settings').post('email', data);

@@ -20,11 +20,11 @@
                 <label>Current password</label>
             </div>
             <div class="form-group">
-                <input model="newPassword" type="password" class="form-control" required>
+                <input v-model="newPassword" type="password" class="form-control" required>
                 <label>New password</label>
             </div>
             <div class="form-group">
-                <input model="newPasswordConfirmed" type="password" class="form-control" required>
+                <input v-model="newPasswordConfirmed" type="password" class="form-control" required>
                 <label>Confirm new password</label>
             </div>
             <div class="form-group">
@@ -58,7 +58,7 @@
         }
 
         async changePassword() {
-            await this.$store.dispatch('user/password', {email: this.currentPassword, password: this.newPassword})
+            await this.$store.dispatch('user/password', {current: this.currentPassword, newPassword: this.newPassword})
         }
     }
 </script>
