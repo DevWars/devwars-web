@@ -37,6 +37,8 @@ export const actions = {
             dispatch('toast/add', {type: 'success', message: 'Welcome back to DevWars!'}, {root: true});
             dispatch('navigate', '/dashboard', {root: true});
         } catch (e) {
+            dispatch('toast/error', e.response.data, {root: true});
+
             commit('user', null)
         }
     },
