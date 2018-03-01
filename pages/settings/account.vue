@@ -58,7 +58,7 @@
         }
 
         async changePassword() {
-            await this.$store.dispatch('user/password', {current: this.currentPassword, newPassword: this.newPassword})
+            await this.$store.dispatch('user/password', {current: this.currentPassword, new_password: this.newPassword})
         }
     }
 </script>

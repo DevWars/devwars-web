@@ -12,7 +12,7 @@ Vue.filter('moment', (input, format) => {
         'longDate': 'MMMM D, YYYY'
     }[format] || format;
 
-    return moment(input).format(format);
+    return moment.utc(input).format(format);
 });
 
 Vue.mixin({

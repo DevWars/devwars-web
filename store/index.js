@@ -20,3 +20,5 @@ export const actions = {
         this.app.router.push(route);
     }
 };
+
+export const strict = false;

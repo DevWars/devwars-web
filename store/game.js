@@ -3,11 +3,25 @@ import Http from "../services/Http";
 export const state = () => ({
     applied: [],
     upcoming: [],
+    all: [],
+    game: {},
 });
 
 export const mutations = {
     applied(state, applied) {
         state.applied = applied;
+    },
+
+    all(state, all) {
+        state.all = all;
+    },
+
+    add(state, game) {
+        state.all.unshift(game);
+    },
+
+    game(state, game) {
+        state.game = game;
     },
 
     apply(state, applied) {
@@ -24,6 +38,24 @@ export const mutations = {
 };
 
 export const actions = {
+    async all({commit}) {
+        let games = await Http.for('game').get();
+
+        commit('all', games);
+    },
+
+    async game({commit}, id) {
+        let game = await Http.for('game').byID(id);
+
+        commit('game', game);
+    },
+
+    async create({dispatch, commit}, data) {
+        let game = await Http.for('game').save(data);
+
+        commit('add', game);
+    },
+
     async applied({commit}) {
         try {
             let applied = await Http.for('game/application').get('mine');
