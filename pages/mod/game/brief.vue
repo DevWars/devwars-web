@@ -13,7 +13,7 @@
                     </div>
                     <div class="games-players">
                         <div class="games-player" :key="player.id" v-for="player in game.teams.blue.players"
-                             ng-click="mod.removePlayer(player)">
+                             @click="removePlayer(player, game.teams.blue)">
                             <div class="user-group">
                                 <div class="games-player__avatar">
                                     <Avatar :user="player.user"/>
@@ -48,7 +48,7 @@
                     </div>
                     <div class="games-players">
                         <div class="games-player" :key="player.id" v-for="player in game.teams.red.players"
-                             ng-click="mod.removePlayer(player)">
+                             @click="removePlayer(player, game.teams.red)">
                             <div class="user-group">
                                 <div class="games-player__avatar">
                                     <Avatar :user="player.user"/>
@@ -108,7 +108,7 @@
                     <td>{{ rating(application.user, 'js')}}</td>
                     <td class="color-devbits">{{ application.user.ranking.bits | number }}</td>
                     <td class="modpanel-table__actions">
-                        <a href="#edit" class="btn-link btn-icon-reverse" ng-click="mod.addPlayer(user)">
+                        <a href="#edit" class="btn-link btn-icon-reverse" @click="addPlayer(application.user)">
                             <span>Add Player</span>
                             <i class="fa fa-caret-down"></i>
                         </a>
@@ -126,6 +126,8 @@
 
     import Avatar from '~/components/user/Avatar';
     import Http from "../../../services/Http";
+    import AddPlayerModal from '~/components/modal/AddPlayerModal';
+    import ConfirmModal from '~/components/modal/ConfirmModal';
 
     @Component({
         components: {Avatar}
@@ -144,8 +146,20 @@
             let applications = await Http.for('game/application').get(`${this.game.id}`);
 
             this.applications = applications;
+        }
 
-            console.log(this.applications);
+        addPlayer(user) {
+            this.$open(AddPlayerModal, {user, game: this.game});
+        }
+
+        async removePlayer(player, team) {
+            let confirmed = await this.$open(ConfirmModal, {text: "Are you sure you would like to remove this player?"});
+
+            if(!confirmed) return;
+
+            await Http.for('player').delete(player);
+
+            team.players.splice(team.players.indexOf(player), 1);
         }
     }
 </script>

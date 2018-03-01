@@ -19,7 +19,7 @@ export const actions = {
     async refresh({commit}) {
         let user = await Http.for('user').get();
 
-        commit('user', user);
+        commit('user', Object.keys(user).length === 0 ? null : user);
     },
 
     async refreshUserCount({commit}) {

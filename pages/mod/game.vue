@@ -16,7 +16,7 @@
 
             <div class="modpanel__header-actions">
                 <a href="/mod/games" class="btn btn-outline-gray">Back</a>
-                <button ng-show="!mod.game.done && !mod.game.active" async-click="mod.activate()"
+                <button v-show="!game.done && !game.active" v-async-click="[activate]"
                         class="btn btn-primary">
                     Activate
                 </button>
@@ -45,9 +45,17 @@
     export default class DashboardGame extends Vue {
         @State(state => state.game.game) game;
 
+        async activate() {
+            this.game.active = true;
+
+            await this.save();
+        }
 
         async save() {
-            let game = await Http.for('game').save(this.game);
+            let cloned = {...this.game};
+            delete cloned.teams;
+
+            let game = await Http.for('game').save(cloned);
 
             this.$store.commit('game/game', game);
         }

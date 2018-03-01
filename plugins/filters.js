@@ -9,7 +9,8 @@ Vue.filter('number', (input) => {
 Vue.filter('moment', (input, format) => {
     format = {
         'mediumDate': 'MMM D, YYYY',
-        'longDate': 'MMMM D, YYYY'
+        'longDate': 'MMMM D, YYYY',
+        'fullDate': 'dddd, MMMM DD, YYYY',
     }[format] || format;
 
     return moment.utc(input).format(format);

@@ -60,7 +60,7 @@ export const actions = {
         try {
             let applied = await Http.for('game/application').get('mine');
 
-            commit('applied', applied);
+            commit('applied', applied || []);
         } catch (e) {
         }
     },

@@ -29,7 +29,7 @@
             <h3 class="modpanel__subtitle">Objectives</h3>
             <div class="form-group" v-for="objective in orderBy(game.objectives, 'number')" :key="objective.id">
                 <input v-model="objective.description" type="text" class="form-control" maxlength="110">
-                <label>Objective #{{ objective.number }} (Bonus)</label>
+                <label>Objective #{{ objective.number + 1 }} (Bonus)</label>
             </div>
 
             <h3 class="modpanel__subtitle">Media</h3>
@@ -78,9 +78,9 @@
             let list = [];
 
             for (let i = 0; i < 5; i++) {
-                let item = this.game.objectives.find(it => it.number === i + 1);
+                let item = this.game.objectives.find(it => it.number === i);
 
-                if (!item) item = {number: i + 1};
+                if (!item) item = {number: i};
 
                 list.push(item);
             }

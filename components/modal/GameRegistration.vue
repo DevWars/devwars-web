@@ -7,7 +7,7 @@
         </p>
         <div class="align-right">
             <button class="btn btn-outline-gray" @click="close(false)">Nevermind</button>
-            <nuxt-link :to="'/competitor/register?game' + game.id " @click="close(false)" class="btn btn-primary">
+            <nuxt-link :to="'/competitor/register?game=' + game.id " @click="close(false)" class="btn btn-primary">
                 Begin Registration
             </nuxt-link>
         </div>
