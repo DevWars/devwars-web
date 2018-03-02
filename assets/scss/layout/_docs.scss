@@ -88,6 +88,10 @@ $ol-bullet-size                                    : 20px;
             section:last-of-type {
                 padding-bottom: 0;
             }
+
+            &.coming-soon {
+                opacity: 0.25;
+            }
         }
 
         h1, h2, h3, h4, h5, h6 {
