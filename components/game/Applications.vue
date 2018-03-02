@@ -30,7 +30,6 @@
 
                 return;
             }
-
             let [entered] = await this.$open(GameRegistration, {game});
 
             if (!entered) return;
@@ -39,7 +38,7 @@
         }
 
         async cancel(game) {
-            let result = await this.$open(ConfirmModal, {
+            let [result] = await this.$open(ConfirmModal, {
                 title: "Confirm",
                 text: "Are you sure you would like to cancel?"
             });
