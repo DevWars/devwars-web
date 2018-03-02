@@ -25,6 +25,12 @@
         @State(state => state.user.user) user;
 
         async enter(game) {
+            if(!this.user) {
+                this.$router.push('/login');
+                
+                return;
+            }
+
             let [entered] = await this.$open(GameRegistration, {game});
 
             if (!entered) return;
