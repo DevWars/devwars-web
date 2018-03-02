@@ -16,7 +16,7 @@
                     <p class="form-group">Confirm your email by clicking the verification link we sent to your inbox.
                         Don't forget to <u>check your spam folder</u>.</p>
                     <div>
-                        <button class="btn btn-outline-gray">Resend Email</button>
+                        <button v-async-click="[resend]" class="btn btn-outline-gray">Resend Email</button>
                     </div>
                 </div>
             </div>
@@ -28,8 +28,15 @@
 <script>
     import Component from 'nuxt-class-component';
     import Vue from 'vue';
+    import Http from "../services/Http";
 
     @Component
     export default class Pending extends Vue {
+
+        async resend() {
+            await Http.for('user/resend');
+
+            this.$store.dispatch('toast/success', `We have sent off another email, please wait patiently.`);
+        }
     }
 </script>
