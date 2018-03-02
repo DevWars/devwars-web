@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="hero">
-      <div class="row">
-        <div class="hero__inner">
-          <h1 class="hero__title">A live <strong>gameshow</strong> for developers</h1>
-          <h2 class="hero__subtitle">Every Saturday @ 5:30 PM (UTC)</h2>
-          <a href="https://twitch.tv/devwars" target="_blank" class="btn btn-primary hero__btn">Watch on Twitch</a>
-          <nuxt-link :to="'/games'" class="btn btn-link color-white hero__btn">View Past Games</nuxt-link>
+        <div class="row">
+            <div class="hero__inner">
+                <h1 class="hero__title">A live <strong>game show</strong> for developers</h1>
+                <h2 class="hero__subtitle">Every other Saturday @ 5:00 PM (UTC)</h2>
+                <a href="https://twitch.tv/devwars" target="_blank" class="btn btn-primary hero__btn">Watch on Twitch</a>
+                <a href="/games" class="btn btn-link color-white hero__btn">View Past Games</a>
+            </div>
         </div>
-      </div>
     </div>
 
     <Highlights :latest="latest" :posts="posts"/>
