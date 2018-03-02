@@ -33,7 +33,7 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
+    import Component, {State} from 'nuxt-class-component';
     import Vue from 'vue';
 
     import {Prop} from 'vue-property-decorator';
@@ -45,10 +45,10 @@
     })
     export default class Highlights extends Vue {
         @Prop() latest;
-        @Prop() posts;
+        @State(state => state.blog.latest) posts;
 
         get altered() {
-            if(process.server) return this.posts;
+            if (process.server) return this.posts;
 
             return this.posts.map(post => {
                 let el = document.createElement('div');
@@ -63,7 +63,8 @@
 
                 return {
                     user: post.user,
-                    text
+                    text,
+                    image_url: post.image_url
                 };
             })
         }
