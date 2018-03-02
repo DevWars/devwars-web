@@ -16,7 +16,7 @@
                     <p class="form-group">Confirm your email by clicking the verification link we sent to your inbox.
                         Don't forget to <u>check your spam folder</u>.</p>
                     <div>
-                        Didn't receive an email? <a href="/contact">Contact us</a>
+                        <button class="btn btn-outline-gray">Resend Email</button>
                     </div>
                 </div>
             </div>
