@@ -55,7 +55,13 @@
             let cloned = {...this.game};
             delete cloned.teams;
 
-            let game = await Http.for('game').save(cloned);
+           let game = await Http.for('game').save(cloned);
+
+            Object.values(this.game.teams).forEach(async team => {
+                let result = await Http.for('game/team').save(team);
+
+                game.teams[result.name] = result;
+            });
 
             this.$store.commit('game/game', game);
         }
