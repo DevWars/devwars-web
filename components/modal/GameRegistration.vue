@@ -7,9 +7,9 @@
         </p>
         <div class="align-right">
             <button class="btn btn-outline-gray" @click="close(false)">Nevermind</button>
-            <nuxt-link :to="'/competitor/register?game=' + game.id " @click="close(false)" class="btn btn-primary">
+            <a :href="'/competitor/register?game=' + game.id " @click="close(false)" class="btn btn-primary">
                 Begin Registration
-            </nuxt-link>
+            </a>
         </div>
     </div>
 
@@ -23,7 +23,7 @@
 
         <p class="font-size-sm">*Entering to compete does not guarantee you will play in a live game. You will be
             notified 24-48 hours before the show if you are selected to play. If you are not selected, you may still be
-            eligible to play if you are available anda selected contestant is unable to play.</p>
+            eligible to play if you are available and a selected contestant is unable to play.</p>
 
         <div class="align-right">
             <button class="btn btn-outline-gray" @click="close(false)">Nevermind</button>

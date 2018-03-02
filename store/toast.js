@@ -33,10 +33,14 @@ export const actions = {
     },
 
     errors({commit, dispatch}, e) {
-        e.response.data.errors.forEach(it => {
-            let field = it.field[0].toUpperCase() + it.field.slice(1);
+        if(e.response.status === 400) {
+            e.response.data.errors.forEach(it => {
+                let field = it.field[0].toUpperCase() + it.field.slice(1);
 
-            dispatch('add', {type: 'error', message: field + ' ' + it.default_message});
-        });
+                dispatch('add', {type: 'error', message: field + ' ' + it.default_message});
+            });
+        } else {
+            dispatch('add', {type: 'error', message: e.response.data});
+        }
     }
 };

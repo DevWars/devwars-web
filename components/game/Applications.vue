@@ -25,7 +25,7 @@
         @State(state => state.user.user) user;
 
         async enter(game) {
-            let entered = await this.$open(GameRegistration, {game});
+            let [entered] = await this.$open(GameRegistration, {game});
 
             if (!entered) return;
 
