@@ -59,7 +59,7 @@
 
                 let cutoff = 100;
 
-                text = text.substring(0, cutoff) + `...`;
+                text = text.substring(0, cutoff) + '...';
 
                 return {
                     user: post.user,
