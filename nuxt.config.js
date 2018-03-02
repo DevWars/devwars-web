@@ -12,7 +12,7 @@ module.exports = {
             {hid: 'description', name: 'description', content: 'DevWars'}
         ],
         link: [
-            {rel: 'icon', type: 'image/x-icon', href: '/assets/img/favicon.ico'}
+            {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
         ]
     },
     /*
