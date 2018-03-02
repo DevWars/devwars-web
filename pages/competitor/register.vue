@@ -135,6 +135,7 @@
     import moment from 'moment';
 
     import * as countryList from 'country-list';
+    import Http from "../../services/Http";
 
     @Component({
         components: {}
@@ -159,10 +160,32 @@
             return this[language.name + 'Tooltips'][language.skill];
         }
 
-        submit() {
-            let date = moment.utc(`${this.month} ${this.day} ${this.year}`, 'MM DD YYYY');
+        async submit() {
+            let date = moment.utc(`${this.month} ${this.day} ${this.year}`, 'MM DD YYYY').startOf('day');
 
-            console.log(this.competitor, date);
+            this.languages.forEach(language => {
+                this.competitor[language + 'Rate'] = language.skill;
+            });
+
+            this.competitor.dob = date.unix() * 1000;
+
+            try {
+                await Http.for('user/competitor').save(this.competitor);
+
+                if(this.game){
+                    await this.$store.dispatch('game/apply', this.game);
+                }
+
+                this.$store.dispatch('toast/success', `Congratulations! You are now a competitor!`);
+            } catch(e) {
+                this.$store.dispatch('toast/errors', e);
+            }
+        }
+
+        async asyncData({query}) {
+            if(!query.game) return {};
+
+           return {game: await Http.for('game').byID(query.game)}
         }
     }
 </script>
