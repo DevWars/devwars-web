@@ -133,7 +133,7 @@
       <div class="container">
         <div class="home-display__content">
           <h3 class="home-display__title">Think you<br>got what<br>it takes?</h3>
-          <button ui-sref="competitorRegistration" class="btn btn-outline-white btn-lg">Become a competitor</button>
+          <nuxt-link to="'/competitor/register'" class="btn btn-outline-white btn-lg">Become a competitor</nuxt-link>
         </div>
       </div>
     </div>

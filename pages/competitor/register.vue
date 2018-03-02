@@ -138,7 +138,8 @@
     import Http from "../../services/Http";
 
     @Component({
-        components: {}
+        components: {},
+        middleware: 'auth'
     })
     export default class CompetitorRegistration extends Vue {
         month = '';

@@ -27,7 +27,7 @@
         async enter(game) {
             if(!this.user) {
                 this.$router.push('/login');
-                
+
                 return;
             }
 

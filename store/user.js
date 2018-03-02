@@ -35,6 +35,7 @@ export const actions = {
             await dispatch('refresh');
 
             dispatch('toast/add', {type: 'success', message: 'Welcome back to DevWars!'}, {root: true});
+
             dispatch('navigate', '/dashboard', {root: true});
         } catch (e) {
             dispatch('toast/error', e.response.data, {root: true});
@@ -49,7 +50,7 @@ export const actions = {
 
             await dispatch('refresh');
 
-            dispatch('navigate', '/dashboard', {root: true});
+            dispatch('navigate', '/pending', {root: true});
         } catch (e) {
             dispatch('toast/errors', e, {root: true});
         }
