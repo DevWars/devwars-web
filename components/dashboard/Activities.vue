@@ -10,7 +10,7 @@
                 <div class="activity-history__date">{{ activity.created_at | moment('mediumDate') }}</div>
                 <div class="activity-history__title">{{ activity.description}}</div>
                 <div class="activity-history__rewards">
-                    <div class="activity-history__reward" v-if="activity.bits" :class="[activity.bits > 0 ? 'win' : '']">{{ (activity.bits) }} DevBits</div>
+                    <div class="activity-history__reward" v-if="activity.bits" :class="[activity.bits > 0 ? 'win' : '']">{{ (activity.bits) }} Devcoins</div>
                     <div class="activity-history__reward" v-if="activity.xp" :class="[activity.xp > 0 ? 'win' : '']">{{ (activity.xp) }} XP
                     </div>
                 </div>

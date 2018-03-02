@@ -306,7 +306,7 @@ $file__element--property_modifier
 			}
 
 			&--xp,
-			&--devbits {
+			&--devcoins {
 				text-align: right;
 			}
 
@@ -316,9 +316,9 @@ $file__element--property_modifier
 				color: $green-color;
 			}
 
-			&--devbits {
+			&--devcoins {
 				width: 18%;
-				color: $devbit-color;
+				color: $devcoin-color;
 			}
 		}
 	}

@@ -25,9 +25,9 @@
                             <div class="progress">
                                 <div class="progress__bar" :style="[style(listing)]"></div>
                             </div>
-                            <div class="devbits">
-                                <img class="devbits__icon" src="~/assets/img/devbit.png" alt="DevBits">
-                                <div class="devbits__amount color-white">{{ listing.badge.bits | number }}</div>
+                            <div class="devcoins">
+                                <Devcoin></Devcoin>
+                                <div class="devcoins__amount color-white">{{ listing.badge.bits | number }}</div>
                             </div>
                         </div>
                     </div>
@@ -43,7 +43,12 @@
     import Vue from 'vue';
     import Http from "../services/Http";
 
-    @Component
+    import Devcoin from '~/components/Devcoin';
+
+    @Component({
+        components: {Devcoin}
+    })
+
     export default class Badges extends Vue {
         @State(state => state.badges.badges) badges;
         @State(state => state.user.count) userCount;

@@ -22,9 +22,9 @@
                     <div class="daily-prizes__item">
                     <div class="daily-prizes__main">
                     <div class="daily-prizes__prize">
-                    <div class="devbits">
-                    <img class="devbits__icon" src="/assets/img/devbit.png" alt="DevBits">
-                    <div class="devbits__amount">500</div>
+                    <div class="devcoins">
+                    <Devcoin></Devcoin>
+                    <div class="devcoins__amount">500</div>
                     </div>
                     </div>
                     <div class="daily-prizes__title">Submit 5 Objectives</div>
@@ -37,9 +37,9 @@
                     <div class="daily-prizes__item">
                     <div class="daily-prizes__main">
                     <div class="daily-prizes__prize">
-                    <div class="devbits">
-                    <img class="devbits__icon" src="/assets/img/devbit.png" alt="DevBits">
-                    <div class="devbits__amount">200</div>
+                    <div class="devcoins">
+                    <Devcoin></Devcoin>
+                    <div class="devcoins__amount">200</div>
                     </div>
                     </div>
                     <div class="daily-prizes__title">Comment on a User Submission</div>

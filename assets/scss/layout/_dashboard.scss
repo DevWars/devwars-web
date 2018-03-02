@@ -145,7 +145,7 @@ $user-avatar-offset                                : 40px;
     }
 }
 
-.devbit-wallet {
+.devcoin-wallet {
     overflow: hidden;
 
     &__inner {
@@ -159,6 +159,8 @@ $user-avatar-offset                                : 40px;
     border-top: 1px solid $divider-color;
     margin-left: -1px;
     background-color: $bg-color-2;
+    cursor: not-allowed; // TEMP
+    position: relative; // TEMP
 
     &__slot {
         @include aspect-ratio(1,1);
@@ -178,6 +180,20 @@ $user-avatar-offset                                : 40px;
             font-size: $font-size-sm;
             color: $text-color-muted;
         }
+    }
+
+    &:before {
+        @extend %absolute-overlay;
+        content: "Coming Soon!";
+        width: 100%;
+        z-index: 2;
+        font-weight: $font-weight-bold;
+        text-align: center;
+        background-color: rgba($bg-color-4, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $text-color-muted;
     }
 }
 
@@ -380,14 +396,14 @@ $user-avatar-offset                                : 40px;
         color: $text-color-secondary;
     }
 
-    .devbits {
+    .devcoins {
         border-top: 1px solid $divider-color;
         padding: $xs-space 0;
         margin-top: $xs-space;
         text-align: center;
     }
 
-    &:hover .devbits {
+    &:hover .devcoins {
         background-color: $bg-color-2;
     }
 
@@ -432,44 +448,6 @@ $user-avatar-offset                                : 40px;
 /*  ========================================================================
 04. To Be Moved
 ========================================================================= */
-
-.devbits {
-
-    &__icon,
-    &__amount {
-        @extend %align-middle;
-        line-height: 1;
-    }
-
-    &__icon {
-        max-width: $h5-font-size;
-        margin-right: $xxs-space;
-    }
-
-    &__amount {
-        font-weight: $font-weight-bold;
-        font-size: $h5-font-size;
-        color: $devbit-color;
-    }
-
-    // Large
-    &-lg &__icon {
-        max-width: $h3-font-size;
-        margin-right: $xs-space;
-    }
-    &-lg &__amount {
-        font-size: $h3-font-size;
-    }
-
-    // Large
-    &-xl &__icon {
-        max-width: $h2-font-size;
-        margin-right: $xs-space;
-    }
-    &-xl &__amount {
-        font-size: $h2-font-size;
-    }
-}
 
 .progress {
     width: 100%;

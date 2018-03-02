@@ -1,0 +1,51 @@
+devcoin,
+#devcoin {
+    @extend %align-middle;
+}
+
+.devcoin {
+    fill: $devcoin-color;
+}
+
+.devcoins {
+
+    &__icon,
+    &__amount {
+        @extend %align-middle;
+        line-height: 1;
+    }
+
+    &__icon {
+        max-width: $h5-font-size;
+        margin-right: $xxs-space;
+    }
+
+    &__amount {
+        font-weight: $font-weight-bold;
+        font-size: $h5-font-size;
+    }
+
+    // Medium
+    #devcoin {
+        width: $h4-font-size;
+        margin-right: $xxs-space + 1px;
+    }
+
+    // Large
+    &-lg #devcoin {
+        width: $h3-font-size;
+        margin-right: $xs-space;
+    }
+    &-lg &__amount {
+        font-size: $h3-font-size;
+    }
+
+    // Extra Large
+    &-xl #devcoin {
+        width: $h2-font-size;
+        margin-right: $xs-space;
+    }
+    &-xl &__amount {
+        font-size: $h2-font-size;
+    }
+}

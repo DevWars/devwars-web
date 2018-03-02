@@ -252,7 +252,7 @@
 
                 <section id="betting">
                     <h2>Betting</h2>
-                    <p>Putting your hard earned Devbits on the line you will be able to bet on the outcome of a match by typing !vote amount team in the chat. However, make your decision quickly as betting is only open for ten minutes after the first five minutes of the match are over.</p>
+                    <p>Putting your hard earned Devcoins on the line you will be able to bet on the outcome of a match by typing !vote amount team in the chat. However, make your decision quickly as betting is only open for ten minutes after the first five minutes of the match are over.</p>
                 </section>
             </article>
 
