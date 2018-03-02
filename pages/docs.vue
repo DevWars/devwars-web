@@ -20,14 +20,17 @@
                         <a href="#themes" class="docs-nav__link">Themes</a>
                     </li>
                     <li class="docs-nav__item">
-                        <a href="#" class="docs-nav__link disabled">Points</a>
+                        <a href="#objectives" class="docs-nav__link">Objectives</a>
+                    </li>
+                    <li class="docs-nav__item">
+                        <a href="#points" class="docs-nav__link">Points</a>
                     </li>
                     <li class="docs-nav__item">
                         <a href="#rules" class="docs-nav__link">Rules</a>
                     </li>
                 </ul>
 
-                <a href="#" class="docs-nav__heading">
+                <a href="#watching" class="docs-nav__heading">
                     <i class="fa fa-eye"></i>
                     <span>Watching</span>
                 </a>
@@ -43,7 +46,7 @@
                     </li>
                 </ul>
 
-                <a href="#" class="docs-nav__heading">
+                <a href="#playing" class="docs-nav__heading">
                     <i class="fa fa-gamepad"></i>
                     <span>Playing</span>
                 </a>
@@ -52,17 +55,11 @@
                         <a href="#requirements" class="docs-nav__link">Requirements</a>
                     </li>
                     <li class="docs-nav__item">
-                        <a href="#" class="docs-nav__link disabled">Editor</a>
-                    </li>
-                    <li class="docs-nav__item">
-                        <a href="#objectives" class="docs-nav__link">Objectives</a>
-                    </li>
-                    <li class="docs-nav__item">
-                        <a href="#how-to-win" class="docs-nav__link">How To Win</a>
+                        <a href="#editor" class="docs-nav__link">Editor</a>
                     </li>
                 </ul>
 
-                <a href="#" class="docs-nav__heading">
+                <a href="#leveling" class="docs-nav__heading">
                     <i class="fa fa-trophy"></i>
                     <span>Leveling</span>
                 </a>
@@ -73,12 +70,15 @@
                     <li class="docs-nav__item">
                         <a href="#" class="docs-nav__link disabled">Ranks</a>
                     </li>
+                    <li class="docs-nav__item">
+                        <a href="#" class="docs-nav__link disabled">Devcoins</a>
+                    </li>
                 </ul>
 
                 <div class="doc-warning">
                     <div class="doc-warning__title">Under Development</div>
                     <p>This documentation is currently under development. More sections will be added over time, please check back frequently for updates.</p>
-                    <em>Last Modified: Feb 24, 2018</em>
+                    <em>Last Modified: Mar 2, 2018</em>
                 </div>
             </div>
         </div>
@@ -182,6 +182,68 @@
                     <p>Every game mode is paired with a theme to keep the websites comparable between both teams.</p>
                 </section>
 
+                <section id="objectives">
+                    <h2>Objectives</h2>
+                    <p>Primary focus in 3v3 matches is to fulfil certain objectives in order to gain the points needed to overtake the opposing team. These do not have to be completed in order and as soon as a team declares an objective fulfilled, the host checks if the requirements have been met. Only if that is the case the team gets a point.</p>
+
+                    <section>
+                        <h3>Completing Objectives</h3>
+                        <p>When an objective is complete, players must request the objective to be removed by the game show host in order to secure the point(s).</p>
+                    </section>
+
+                    <section>
+                        <h3>Bonus Objectives</h3>
+                        <p>Unlike standard objectives, bonus objectives are worth 2 points instead of 1 and are denoted by a <span class="color-bonus">gold color</span>. By default, bonus objectives are locked and cannot be achieved until all 4 standard objectives have been completed.</p>
+                    </section>
+
+                    <section id="strikes">
+                        <h3>Strikes</h3>
+                        <p>If the game show host finds a submitted objective to be incomplete, the team will earn a strike. Once a team reaches 3 strikes, the bonus objective will be eliminated from that team.</p>
+                    </section>
+
+                    <section>
+                        <h3>Dropped Objectives</h3>
+                        <p>After the clock runs out, the game show host will do a final review of all the objectives completed for both teams. Points earned from a completed objective will be lost if found to be incomplete during the final review.</p>
+                    </section>
+                </section>
+
+                <section id="points">
+                    <h3>Points</h3>
+                    <p>The team with the most points wins the game. Below is a chart displaying a list of points you can earn in each Phase:</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Phase</th>
+                                <th>Possible Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Standard Objectives</td>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <td>Bonus Objective</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>Voting (UI)</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>Voting (UX)</td>
+                                <td>2</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td><strong>10</strong></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </section>
+
                 <section id="rules">
                     <h2>Rules</h2>
                     <ol>
@@ -233,26 +295,171 @@
 
                 <section id="voting">
                     <h2>Voting</h2>
-                    <p>In addition to the objectives teams aim to fulfil, our audience awards bonus points in the categories UI and UX. Depending on how many votes a team gets in each category up to two points can be earned if certain thresholds are exceeded. To participate in voting, use either !blue or !red in the chat to express your personal favorite in each category when prompted.</p>
+                    <p>In addition to the objectives, our audience awards additional points in the categories <a href="#vote-ui">UI</a> and <a href="#vote-ux">UX</a>.</p>
+                    <p>To participate in voting, type <code>!blue</code> or <code>!red</code> in the chat to express your personal favorite in each category when prompted.</p>
 
                     <section>
+                        <h3>Point Distribution</h3>
+                        <p>Depending on how many votes a team gets in each category up to two (2) points can be earned if certain thresholds are exceeded. Thresholds are determined by the percentage of total votes per team.</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Thresholds</th>
+                                    <th>Points</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>&lt; 55%</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>&gt;= 55%</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>&gt;= 80%</td>
+                                    <td>2</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <section id="vote-ui">
                         <h3>UI / User Interface</h3>
                         <p>
                             Base your vote on the overall design of the website. The interface should feel coherent with consistent use of elements. The website should be responsive, look good on mobile and follow the game's theme.
                         </p>
                     </section>
 
-                    <section>
+                    <section id="vote-ux">
                         <h3>UX / User Experience</h3>
                         <p>
                             Base your vote on how you feel when interacting with the website. It should be simple to use and easy to navigate. Look for things such as bugs or poor execution of functionality by way of design.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h3>Tie Breaker</h3>
+                        <p>
+                            If the points on both teams are tied, we run a Tie Breaker for the best overall team. Users vote blindly, meaning, the voting bars will not be displayed on the stream. In the unlikely event that there is a tie in the tie breaker, the game host will make the final decision and declare the winner.
                         </p>
                     </section>
                 </section>
 
                 <section id="betting">
                     <h2>Betting</h2>
-                    <p>Putting your hard earned Devcoins on the line you will be able to bet on the outcome of a match by typing !vote amount team in the chat. However, make your decision quickly as betting is only open for ten minutes after the first five minutes of the match are over.</p>
+                    <p>Put your hard earned Devcoins on the line by betting on which team you think will win the game. Betting is only open for ten minutes after the first five minutes of the match.</p>
+                    <p>You can bet with the following command in the Twitch chat:<br><code>!bet [amount] [team] [objectives]</code></p>
+
+                    <section>
+                        <p><code>[amount]</code><br>Enter the amount of Devcoins you want to bet.</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Value</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="keybinding">Integer</span></td>
+                                    <td>A minimum of 50 Devcoins are required to place a bet.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <section>
+                        <p><code>[team]</code><br>Enter the team color you are betting to win.</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Value</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>blue</td>
+                                    <td>Bet on blue team</td>
+                                </tr>
+                                <tr>
+                                    <td>red</td>
+                                    <td>Bet on red team</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <section>
+                        <p><code>[objectives]</code><br>Enter the <u>minimum</u> number of objectives you think the team will secure.</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Value</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1-5</td>
+                                    <td>Number of objectives</td>
+                                </tr>
+                                <tr>
+                                    <td>ace</td>
+                                    <td>Alias to typing (5) indiciating that the team will secure all objectives</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <section>
+                        <h3>Payouts</h3>
+                        <p>Win more Devcoins depending on how specific your bet is. The lower the odds, the greater the payout. Below is a chart of payouts against different odds:</p>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Bet</th>
+                                    <th>Example</th>
+                                    <th>Payout</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Team (Blue/Red)</td>
+                                    <td><code>!bet 100 blue</code></td>
+                                    <td>1:2</td>
+                                </tr>
+                                <tr>
+                                    <td>&gt;=1 Objectives</td>
+                                    <td><code>!bet 100 red 1</code></td>
+                                    <td>3:5</td>
+                                </tr>
+                                <tr>
+                                    <td>&gt;=2 Objectives</td>
+                                    <td><code>!bet 100 red 2</code></td>
+                                    <td>4:5</td>
+                                </tr>
+                                <tr>
+                                    <td>&gt;=3 Objectives</td>
+                                    <td><code>!bet 100 red 3</code></td>
+                                    <td>1:1</td>
+                                </tr>
+                                <tr>
+                                    <td>&gt;=4 Objectives</td>
+                                    <td><code>!bet 100 red 4</code></td>
+                                    <td>7:5</td>
+                                </tr>
+                                <tr>
+                                    <td>==5 Objectives (Ace)</td>
+                                    <td><code>!bet 100 blue ace</code></td>
+                                    <td>2:1</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
                 </section>
             </article>
 
@@ -310,34 +517,64 @@
                     </section>
                 </section>
 
-                <section id="objectives">
-                    <h2>Objectives</h2>
-                    <p>Primary focus in 3v3 matches is to fulfil certain objectives in order to gain the points needed to overtake the opposing team. These do not have to be completed in order and as soon as a team declares an objective fulfilled, the host checks if the requirements have been met. Only if that is the case the team gets a point.</p>
+                <section id="editor">
+                    <h2>Editor</h2>
 
                     <section>
-                        <h3>Completing Objectives</h3>
-                        <p>When an objective is complete, players must request the objective to be removed by the game show host in order to secure the point(s).</p>
+                        <h3>Game View</h3>
+                        <p>Each player has their own view with a full-height editor, a window to display the rendered website and documents to preview other team members.</p>
+                        <p>During the game, players can see the live timer, points, and strikes.</p>
                     </section>
 
                     <section>
-                        <h3>Bonus Objectives</h3>
-                        <p>Unlike standard objectives, bonus objectives are worth 2 points instead of 1 and are denoted by a <span class="color-bonus">gold color</span>. By default, bonus objectives are locked and cannot be achieved until all 4 standard objectives have been completed.</p>
+                        <h3>Supported Keys</h3>
+                        <p>You can use the following keyboard shortcuts in the DevWars editor (currently only displaying Windows keyboard layout):</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Command</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="keybinding">Ctrl+S</span></td>
+                                    <td>Save document</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="keybinding">Ctrl+D</span></td>
+                                    <td>Find next matching selection</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="keybinding">Ctrl+F</span></td>
+                                    <td>Find</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="keybinding">Ctrl+H</span></td>
+                                    <td>Replace</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="keybinding">Ctrl+G</span></td>
+                                    <td>Go to line number</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="keybinding">Ctrl+Space</span></td>
+                                    <td>Trigger auto complete</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </section>
 
                     <section>
-                        <h3>Strikes</h3>
-                        <p>If the game show host finds a submitted objective to be incomplete, the team will earn a strike. Once a team reaches 3 strikes, the bonus objective will be eliminated from that team.</p>
+                        <h3>Saving Changes</h3>
+                        <p>It is important for you to save your document frequently using <span class="keybinding">Ctrl+S</span>. Make sure to only save when your code is complete. The viewers and game host will not be able to render your website until you have saved your changes.</p>
                     </section>
 
                     <section>
-                        <h3>Dropped Objectives</h3>
-                        <p>After the clock runs out, the game show host will do a final review of all the objectives completed for both teams. Points earned from a completed objective will be lost if found to be incomplete during the final review.</p>
+                        <h3>Submitting Objectives</h3>
+                        <p>When you complete an objective, you must submit it for review. To submit an objective, click the checkbox icon on the top left corner of the game view.</p>
+                        <p>Tip: Make sure all team members are ready before marking an objective complete or else your team could potentially <a href="#strikes">receive a Strike</a>.</p>
                     </section>
-                </section>
-
-                <section id="how-to-win">
-                    <h2>How to win</h2>
-                    <p>In order to achieve victory a team has to earn the most points out of the points gained from each objective and the bonus objective as well as the additional points our audience awards as soon as the match is over.</p>
                 </section>
             </article>
         </div>
@@ -349,8 +586,7 @@
     import Vue from 'vue';
 
     @Component({
-        layout: 'header',
-        middleware: 'guest'
+        layout: 'header'
     })
 
     export default class Docs extends Vue {

@@ -146,6 +146,19 @@ $ol-bullet-size                                    : 20px;
             position: absolute;
             left: 0;
         }
+
+        table {
+            margin-top: $grid-gutter-part;
+
+            thead tr {
+                text-align: left;
+            }
+
+            th, td {
+                padding: $xxs-space 0;
+            }
+
+        }
     }
 }
 
@@ -188,7 +201,29 @@ $ol-bullet-size                                    : 20px;
 
 
 /*  ========================================================================
-01. Doc Components
+01.1 Doc Components
+========================================================================= */
+
+code,
+.keybinding {
+    padding: 2px 4px;
+    border-radius: $border-radius;
+    font-family: $code-font-face;
+}
+
+code {
+    background-color: rgba($brand-secondary, 0.10);
+    color: $brand-secondary;
+}
+
+.keybinding {
+    background-color: rgba($brand-primary, 0.10);
+    color: $brand-primary;
+}
+
+
+/*  ========================================================================
+01.2 Doc Components
 ========================================================================= */
 
 .dw-positions {
