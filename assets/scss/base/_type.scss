@@ -239,6 +239,10 @@ abbr {
     color: $devbit-color !important;
 }
 
+.color-bonus {
+    color: $bonus-color !important;
+}
+
 .color-html {
     color: $html-color !important;
 }
@@ -371,10 +375,10 @@ $social--set:  (
 
 @font-face {
   font-family: "DevWars Brand Icons";
-  src:url("~/assets/icon/devwars-icons.eot");
-  src:url("~/assets/icon/devwars-icons.eot?#iefix") format("embedded-opentype"),
-    url("~/assets/icon/devwars-icons.woff") format("woff"),
-    url("~/assets/icon/devwars-icons.ttf") format("truetype");
+  src:url("/assets/icon/devwars-icons.eot");
+  src:url("/assets/icon/devwars-icons.eot?#iefix") format("embedded-opentype"),
+    url("/assets/icon/devwars-icons.woff") format("woff"),
+    url("/assets/icon/devwars-icons.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -496,12 +500,12 @@ $social--set:  (
 
 @font-face {
     font-family: 'FontAwesome';
-    src: url('~/assets/fonts/fontawesome-webfont.eot?v=#{$fa-version}');
-    src: url('~/assets/fonts/fontawesome-webfont.eot?#iefix&v=#{$fa-version}') format('embedded-opentype'),
-        url('~/assets/fonts/fontawesome-webfont.woff2?v=#{$fa-version}') format('woff2'),
-        url('~/assets/fonts/fontawesome-webfont.woff?v=#{$fa-version}') format('woff'),
-        url('~/assets/fonts/fontawesome-webfont.ttf?v=#{$fa-version}') format('truetype'),
-        url('~/assets/fonts/fontawesome-webfont.svg?v=#{$fa-version}#fontawesomeregular') format('svg');
+    src: url('/assets/fonts/fontawesome-webfont.eot?v=#{$fa-version}');
+    src: url('/assets/fonts/fontawesome-webfont.eot?#iefix&v=#{$fa-version}') format('embedded-opentype'),
+        url('/assets/fonts/fontawesome-webfont.woff2?v=#{$fa-version}') format('woff2'),
+        url('/assets/fonts/fontawesome-webfont.woff?v=#{$fa-version}') format('woff'),
+        url('/assets/fonts/fontawesome-webfont.ttf?v=#{$fa-version}') format('truetype'),
+        url('/assets/fonts/fontawesome-webfont.svg?v=#{$fa-version}#fontawesomeregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
