@@ -5,7 +5,7 @@
         <p>
             In order to compete in live DevWars games, you must first complete the <b>competitor registration form</b>.
         </p>
-        <div class="align-right">
+        <div class="modal__actions">
             <button class="btn btn-outline-gray" @click="close(false)">Nevermind</button>
             <nuxt-link :to="'/competitor/register?game=' + game.id " @click="close(false)" class="btn btn-primary">
                 Begin Registration
@@ -25,7 +25,7 @@
             notified 24-48 hours before the show if you are selected to play. If you are not selected, you may still be
             eligible to play if you are available anda selected contestant is unable to play.</p>
 
-        <div class="align-right">
+        <div class="modal__actions">
             <button class="btn btn-outline-gray" @click="close(false)">Nevermind</button>
             <button class="btn btn-primary" v-async-click="[enter]">Enter</button>
         </div>

@@ -18,7 +18,7 @@
                 </select>
             </div>
         </div>
-        <div class="align-right">
+        <div class="modal__actions">
             <button class="btn btn-outline-gray">Cancel</button>
             <button class="btn btn-primary">Save</button>
         </div>

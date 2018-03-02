@@ -1,6 +1,29 @@
-.v--modal-box {
-    background-color: $bg-color-3 !important;
+.v--modal {
+    &-box {
+        height: auto !important;
+        padding: $grid-gutter-width !important;
+        background-color: $bg-color-3 !important;
+        animation-duration: 250ms !important;
+
+    }
+
+    &-overlay {
+        background-color: rgba(#000, 0.8) !important;
+    }
+
+    h1 {
+        margin-bottom: $grid-gutter-part;
+    }
 }
-.popeye-modal-container {
-    background-color: rgba(#000, 0.8) !important;
+
+.modal {
+
+    &__actions {
+        margin-top: $m-space;
+        text-align: right;
+
+        .btn:not(:last-child) {
+            margin-right: $grid-gutter-part;
+        }
+    }
 }
