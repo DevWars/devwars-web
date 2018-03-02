@@ -50,7 +50,7 @@ export const actions = {
 
             await dispatch('refresh');
 
-            dispatch('navigate', '/dashboard', {root: true});
+            dispatch('navigate', '/pending', {root: true});
         } catch (e) {
             dispatch('toast/errors', e, {root: true});
         }
