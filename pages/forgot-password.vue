@@ -39,9 +39,9 @@
         email = '';
 
         async forgot() {
-            await this.$store.dispatch('user/forgot', this.email);
+            let done = await this.$store.dispatch('user/forgot', this.email);
 
-            this.done = true;
+            this.done = done;
         }
     }
 </script>
