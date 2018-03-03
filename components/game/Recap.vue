@@ -45,7 +45,10 @@
         @Prop() game;
 
         player(team, language) {
-            return this.game.teams[team].players.find(player => player.language.toLowerCase() === language) || {user: {}};
+            return this.game.teams[team].players
+                .find(player => {
+                    return player.language && player.language.toLowerCase() === language
+                }) || {user: {}};
         }
 
     }

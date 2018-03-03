@@ -19,6 +19,10 @@
       let el = this.$slots.trigger[0].elm;
       let content = this.$slots.menu[0].elm;
 
+      $(content).click(() => {
+          $(el).webuiPopover('hide');
+      });
+
       $(el).webuiPopover({
         type: 'html',
         content: jQuery(content),
