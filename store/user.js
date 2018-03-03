@@ -98,7 +98,7 @@ export const actions = {
     },
 
     async forgot({dispatch, commit}, email) {
-        await Http.for('user/reset').save({email});
+        await Http.for('user/reset').save({username_or_email: email});
 
         dispatch('toast/success', `Check your email for a guide to reset your password.`, {root: true});
     },
