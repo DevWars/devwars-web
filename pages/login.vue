@@ -5,7 +5,7 @@
                 <h1 class="auth-form__title">Login</h1>
                 <div class="form-group">
                     <input v-model="username" class="form-control" type="text" required>
-                    <label>Email</label>
+                    <label>Email or Username</label>
                 </div>
                 <div class="form-group">
                     <input name="password" v-model="password" class="form-control" type="password" required>
