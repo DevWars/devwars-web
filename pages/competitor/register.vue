@@ -46,10 +46,10 @@
                             <div class="col-sm-3 form-group">
                                 <div class="select-container">
                                     <select v-model="competitor.country" class="form-control" required>
-                                        <option value="">Select country</option>
                                         <option :key="country" v-for="country in countries">{{ country }}</option>
                                     </select>
                                 </div>
+                                <label>Select Country</label>
                             </div>
                         </div>
 
@@ -69,7 +69,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <input v-model="competitor.company" type="text" class="form-control" required>
+                            <input v-model="competitor.company" type="text" class="form-control">
                             <label>Company</label>
                         </div>
 
