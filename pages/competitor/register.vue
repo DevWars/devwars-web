@@ -165,7 +165,7 @@
             let date = moment.utc(`${this.month} ${this.day} ${this.year}`, 'MM DD YYYY').startOf('day');
 
             this.languages.forEach(language => {
-                this.competitor[language + 'Rate'] = language.skill + 1;
+                this.competitor[language.name + '_rate'] = language.skill + 1;
             });
 
             this.competitor.dob = date.unix() * 1000;
