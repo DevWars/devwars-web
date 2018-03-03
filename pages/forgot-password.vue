@@ -9,7 +9,7 @@
                     <form v-async-submit="[forgot]">
                         <div class="form-group">
                             <input v-model="email" name="email" type="text" class="form-control" tabindex="1" required>
-                            <label>Email Address</label>
+                            <label>Email or Username</label>
                         </div>
                         <div class="auth-form__actions">
                             <button type="submit" href="#" class="btn btn-outline-white btn-block" tabindex="2">Reset Password</button>
