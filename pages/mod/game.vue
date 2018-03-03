@@ -58,7 +58,10 @@
            let game = await Http.for('game').save(cloned);
 
             Object.values(this.game.teams).forEach(async team => {
-                let result = await Http.for('game/team').save(team);
+                let cloned = {...team};
+                delete cloned.players;
+
+                let result = await Http.for('game/team').save(cloned);
 
                 game.teams[result.name] = result;
             });
