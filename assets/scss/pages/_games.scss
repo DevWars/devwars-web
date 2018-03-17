@@ -109,10 +109,12 @@ Variables
 	position: relative;
 
 	&__positions {
-		@extend %absolute-center;
+        @extend %absolute-center-x;
+        height: 65px;
+        top: 65px + $xs-space;
 		list-style: none;
         text-align: center;
-        bottom: 0;
+
 
 		li {
             height: 50px + ($xs-space * 2) + ($border-size * 2);
