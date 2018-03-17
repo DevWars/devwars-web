@@ -1,0 +1,120 @@
+/*  ========================================================================
+01. Shop
+========================================================================= */
+
+.shop-card {
+    margin-bottom: $grid-gutter-width;
+    background-color: $bg-color-3;
+    cursor: pointer;
+
+    &__cover {
+        @include aspect-ratio(16,9);
+        background-image: url('/assets/img/starburst.png');
+        background-size: cover;
+        background-position: center;
+        background-color: $bg-color-2;
+    }
+
+    &__img {
+        @extend %absolute-center;
+        width: 60%;
+        max-width: 180px;
+        margin: 0 auto;
+        text-align: center;
+
+        &.fa:before {
+            font-size: $display3-size;
+            color: #fff;
+        }
+    }
+
+    &__main {
+        min-height: 120px;
+        padding: $xs-space $grid-gutter-part 0;
+    }
+
+    &__type {
+        font-weight: $font-weight-bold;
+        font-size: $font-size-xs;
+        text-transform: uppercase;
+    }
+
+    &__name {
+        margin-bottom: $xxs-space;
+        font-weight: $font-weight-bold;
+        font-size: $h4-font-size;
+        color: #fff;
+    }
+
+    &__desc {
+        line-height: 1.3;
+        font-size: $font-size-sm;
+        color: $text-color-secondary;
+    }
+
+    .devcoins {
+        border-top: 1px solid $divider-color;
+        padding: $xs-space 0;
+        margin-top: $xs-space;
+        text-align: center;
+        position: relative;
+
+        &:after {
+            @extend %absolute-overlay;
+            content: "Buy Now";
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: $h4-font-size;
+            font-weight: $font-weight-bold;
+            background-color: $bg-color-2;
+            opacity: 0;
+        }
+    }
+
+    &:hover .devcoins:after {
+        opacity: 1;
+    }
+
+    @mixin shop-variant($type, $color) {
+        &.#{$type} &__cover { background-color: darken($color, 25%); }
+        &.#{$type} &__type { color: $color; }
+    }
+
+    @include shop-variant(consumable, #ff4282);
+    @include shop-variant(wearable, #febc11);
+    @include shop-variant(cosmetic, #44ff86);
+    @include shop-variant(craftable, #11eafe);
+}
+
+.shop-nav {
+    @extend %flex-justify;
+
+    &__link {
+        text-transform: uppercase;
+        font-weight: $font-weight-bold;
+        font-size: $h4-font-size;
+        color: $text-color-secondary;
+        position: relative;
+
+        &.active,
+        &.active:hover {
+            color: $brand-secondary;
+            &:before {
+                content: "";
+                border-bottom: $border-size-lg solid $brand-secondary;
+                position: absolute;
+                bottom: -$xxs-space;
+                width: 100%;
+            }
+        }
+
+        &:not(:last-of-type) {
+            margin-right: $grid-gutter-width;
+        }
+
+        &:hover {
+            color: $text-color-primary;
+        }
+    }
+}
