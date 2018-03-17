@@ -76,6 +76,9 @@ $home-card-margin									: $l-space;
 	z-index: 1;
 
 	&__contents {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
         height: 266px;
 		margin-top: $s-space;
         position: relative;
@@ -84,9 +87,13 @@ $home-card-margin									: $l-space;
 		font-family: $alt-font-face;
 
 		@include breakpoint(lg) {
-            height: auto;
 			font-size: 14px;
-		}
+        }
+
+        .btn {
+            margin-top: $m-space;
+            align-self: flex-end;
+        }
 	}
 }
 
@@ -180,79 +187,43 @@ $home-card-margin									: $l-space;
 	&__pos {
 		text-align: center;
 	}
+}
 
-	&__btn {
-        margin-top: $m-space;
+.countdown {
+    @extend %list-unstyled;
+    width: 100%;
+    margin: 0 auto;
+    font-weight: $font-weight-bold;
+    color: #fff;
+    overflow: hidden;
+
+    &__item {
+        display: inline-block;
+        width: 25%;
+        padding: 0;
+        font-size: $h1-font-size;
+        text-align: center;
+    }
+
+    &__label {
+        font-size: $font-size-sm;
+        color: $text-color-secondary;
+        text-transform: uppercase;
     }
 }
 
-.home-blog {
+.next-showing {
+    width: 100%;
+    padding-top: $grid-gutter-width;
+    margin-top: $s-space;
+    border-top: $border-size solid $divider-color;
+    line-height: 1.4;
 
-	&__blogs {
-        @extend %list-unstyled;
-	}
+    &__date {}
 
-	&__blog {
-		display: flex;
-		justify-content: space-between;
-		margin-bottom: $sm-space;
-		&:last-of-type { margin-bottom: 0; }
-	}
-
-	&__thumb {
-        width: 135px;
-        height: 76px;
-		overflow: hidden;
-		@include breakpoint(lg) {
-            width: 100px;
-            height: 56px;
-		}
-
-		img {
-			width: 100%;
-			height: auto;
-			vertical-align: top;
-		}
-	}
-
-	&__text {
-        width: calc(100% - 135px - #{$s-space});
-		text-align: left;
-		@include breakpoint(lg) {
-            width: calc(100% - 100px - #{$s-space});
-		}
-	}
-
-	&__title {
-        font-size: 18px;
-	}
-
-	&__meta,
-	&__desc {
-		display: block;
-		font-family: $base-font-face;
-		font-size: 14px;
-	}
-
-	&__meta {
-		color: $text-color-secondary;
-		margin-bottom: $xxs-space;
-	}
-
-	&__desc {
-		font-size: $font-size-xs;
-	}
-
-	&__btn {
-        margin-top: $m-space;
+    &__time {
+        font-size: $h3-font-size;
     }
-}
-
-
-
-.home-submissions {
-
-    &__title {}
 }
 
 .submission-reel {

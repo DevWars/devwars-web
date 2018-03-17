@@ -3,29 +3,39 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
-                    <Recap :game="latest"/>
-                </div>
-                <div class="col-lg-6">
                     <div class="card card--home">
                         <div class="card__inner">
-                            <h2 class="card__title">From The Blog</h2>
-                            <div class="card--home__contents home-blog">
-                                <ul class="home-blog__blogs">
-                                    <li class="home-blog__blog" v-for="post in altered" :key="post.id">
-                                        <div class="home-blog__thumb">
-                                            <img :src="post.image_url" :alt="post.title">
-                                        </div>
-                                        <div class="home-blog__text">
-                                            <h3 class="home-blog__title">{{ post.title }}</h3>
-                                            <span class="home-blog__meta">{{ post.created_at | moment('mediumDate') }} by {{ post.user.username }}</span>
-                                            <p class="home-blog__desc"> {{ post.text }}</p>
-                                        </div>
+                            <h2 class="card__title">Next Showing</h2>
+                            <div class="card--home__contents">
+                                <ul class="countdown" id="countdown">
+                                    <li class="countdown__item" id="days">
+                                        <div class="countdown__number">00</div>
+                                        <div class="countdown__label">Days</div>
+                                    </li>
+                                    <li class="countdown__item" id="hours">
+                                        <div class="countdown__number">00</div>
+                                        <div class="countdown__label">Hours</div>
+                                    </li>
+                                    <li class="countdown__item" id="days">
+                                        <div class="countdown__number">00</div>
+                                        <div class="countdown__label">Minutes</div>
+                                    </li>
+                                    <li class="countdown__item" id="seconds">
+                                        <div class="countdown__number">00</div>
+                                        <div class="countdown__label">Seconds</div>
                                     </li>
                                 </ul>
-                                <a href="/blog" class="btn btn-primary home-blog__btn">Read More Blogs</a>
+                                <div class="next-showing">
+                                    <div class="next-showing__date">Saturday, March 31</div>
+                                    <div class="next-showing__time">17:00 (UTC)</div>
+                                </div>
+                                <a href="#" class="btn btn-outline-primary">Register to play</a>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="col-lg-6">
+                    <Recap :game="latest"/>
                 </div>
             </div>
         </div>

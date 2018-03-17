@@ -27,7 +27,7 @@
                         <li>{{ player('red', 'js').user.username }}</li>
                     </ul>
                 </div>
-                <a href="/games" class="btn btn-primary home-recap__btn">View Full Game</a>
+                <a href="/games" class="btn btn-outline-primary">View Full Game</a>
             </div>
         </div>
     </div>
