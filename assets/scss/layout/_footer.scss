@@ -114,7 +114,11 @@ $file__element--property_modifier
             color: $twitch-color;
         }
 
-        &:hover .fa-youtube-play {
+        &:hover .fa-discord {
+            color: $discord-color;
+        }
+
+        &:hover .fa-youtube {
             color: $youtube-color;
         }
 
@@ -125,7 +129,7 @@ $file__element--property_modifier
 }
 
 .footer-legal {
-    padding: $grid-gutter-width 0;
+    padding: $xs-space 0 $grid-gutter-width;
     text-align: center;
 
     &__copy {

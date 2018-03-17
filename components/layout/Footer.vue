@@ -55,32 +55,37 @@
         <ul class="footer-socials">
           <li class="footer-socials__item twitch">
             <a class="footer-socials__link" href="http://www.twitch.tv/devwars" target="_blank">
-              <i class="fa fa-twitch"></i>
+              <i class="fab fa-twitch"></i>
+            </a>
+          </li>
+          <li class="footer-socials__item discord">
+            <a class="footer-socials__link" href="https://www.discord.gg/devwars" target="_blank">
+              <i class="fab fa-discord"></i>
             </a>
           </li>
           <li class="footer-socials__item youtube">
             <a class="footer-socials__link" href="https://www.youtube.com/c/DevWars" target="_blank">
-              <i class="fa fa-youtube-play"></i>
+              <i class="fab fa-youtube"></i>
             </a>
           </li>
           <li class="footer-socials__item reddit">
             <a class="footer-socials__link" href="http://www.reddit.com/r/devwars" target="_blank">
-              <i class="fa fa-reddit"></i>
+              <i class="fab fa-reddit"></i>
             </a>
           </li>
           <li class="footer-socials__item facebook">
             <a class="footer-socials__link" href="https://www.facebook.com/DevWars" target="_blank">
-              <i class="fa fa-facebook"></i>
+              <i class="fab fa-facebook"></i>
             </a>
           </li>
           <li class="footer-socials__item twitter">
             <a class="footer-socials__link" href="https://twitter.com/devwarstv" target="_blank">
-              <i class="fa fa-twitter"></i>
+              <i class="fab fa-twitter"></i>
             </a>
           </li>
           <li class="footer-socials__item google">
             <a class="footer-socials__link" href="https://plus.google.com/112749022510452176816" target="_blank">
-              <i class="fa fa-google-plus"></i>
+              <i class="fab fa-google-plus"></i>
             </a>
           </li>
 
