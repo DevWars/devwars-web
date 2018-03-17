@@ -502,7 +502,7 @@
                                 <p>Microphone</p>
                             </div>
                             <div class="col-sm-3">
-                                <img src="~/assets/img/discord-logo.svg" title="Discord">
+                                <i class="fab fa-discord"></i>
                                 <p>Discord</p>
                             </div>
                             <div class="col-sm-3">
