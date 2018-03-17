@@ -5,31 +5,31 @@
             <ul class="modpanel-sidebar-list">
                 <li>
                     <a href="/mod/dashboard" class="modpanel-sidebar-list-item">
-                        <i class="fa fa-dashboard" aria-hidden="true"></i>Dashboard</a>
+                    <i class="fa fa-tachometer" aria-hidden="true"></i>Dashboard</a>
                 </li>
                 <li>
-                    <a href="/mod/users" class="modpanel-sidebar-list-item active">
-                        <i class="fa fa-user" aria-hidden="true"></i>Users</a>
+                    <a href="/mod/users" class="modpanel-sidebar-list-item disabled">
+                    <i class="fa fa-user" aria-hidden="true"></i>Users</a>
                 </li>
                 <li>
-                    <a href="/mod/teams" class="modpanel-sidebar-list-item">
-                        <i class="fa fa-users" aria-hidden="true"></i>Teams</a>
+                    <a href="/mod/teams" class="modpanel-sidebar-list-item disabled">
+                    <i class="fa fa-users" aria-hidden="true"></i>Teams</a>
                 </li>
                 <li>
                     <a href="/mod/games" class="modpanel-sidebar-list-item">
-                        <i class="fa fa-gamepad" aria-hidden="true"></i>Games</a>
+                    <i class="fa fa-gamepad" aria-hidden="true"></i>Games</a>
                 </li>
                 <li>
-                    <a href="/mod/blogs" class="modpanel-sidebar-list-item">
-                        <i class="fa fa-newspaper-o" aria-hidden="true"></i>Blog</a>
+                    <a href="/mod/blogs" class="modpanel-sidebar-list-item disabled">
+                    <i class="fa fa-newspaper" aria-hidden="true"></i>Blog</a>
                 </li>
             </ul>
 
             <h1 class="modpanel-sidebar-header">More</h1>
             <ul class="modpanel-sidebar-list">
                 <li>
-                    <a href="#" class="modpanel-sidebar-list-item">
-                        <i class="fa fa-file-text-o" aria-hidden="true"></i>Mod Doc</a>
+                    <a href="#" class="modpanel-sidebar-list-item disabled">
+                    <i class="fa fa-file-alt" aria-hidden="true"></i>Mod Doc</a>
                 </li>
             </ul>
 
@@ -39,7 +39,7 @@
                     <a href="#" class="modpanel-sidebar-list-item">
                         <div class="progress-header progress-header-lg">
                             <div class="progress-header__title btn-icon">
-                                <i class="fa fa-server" aria-hidden="true"></i>
+                                <i class="fal fa-server" aria-hidden="true"></i>
                                 <span>Server Usage</span>
                             </div>
                         </div>
@@ -52,7 +52,7 @@
                     <a href="#" class="modpanel-sidebar-list-item">
                         <div class="progress-header progress-header-lg">
                             <div class="progress-header__title btn-icon">
-                                <i class="fa fa-github" aria-hidden="true"></i>
+                                <i class="fab fa-github" aria-hidden="true"></i>
                                 <span>GitHub Issues</span>
                             </div>
                         </div>
@@ -80,9 +80,10 @@
     import Vue from 'vue';
 
     @Component({
-        components: {}
+        layout: 'header'
     })
-    export default class  extends Vue {
+
+    export default class extends Vue {
 
     }
 </script>

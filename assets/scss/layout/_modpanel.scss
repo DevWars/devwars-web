@@ -114,13 +114,6 @@ $sidebar-background                                 : $bg-color-4;
         text-transform: uppercase;
         display: block;
 
-        @include breakpoint(lg) {
-            margin: 0;
-            overflow: hidden;
-            max-height: 0;
-            transition: max-height 0.3s;
-        }
-
         &:first-of-type {
             margin-top: $s-space;
         }
@@ -132,22 +125,6 @@ $sidebar-background                                 : $bg-color-4;
         padding: 0;
         width: $xxl-space;
         display: block;
-
-        @include breakpoint(lg) {
-            width: 100%;
-            font-size: 0;
-            overflow: hidden;
-            max-height: 0;
-            transition: max-height 0.3s;
-        }
-
-        &-info {
-            @include breakpoint(lg) {
-                display: flex;
-                li { flex: 1; }
-                a { width: 100%; }
-            }
-        }
     }
 
     &-list-item {
@@ -171,6 +148,11 @@ $sidebar-background                                 : $bg-color-4;
 
         &.active {
             background-color: rgba(#000, 0.3);
+        }
+
+        &.disabled {
+            pointer-events: none;
+            opacity: 0.3;
         }
 
         > .fa {
@@ -228,6 +210,7 @@ $sidebar-background                                 : $bg-color-4;
     width: 100%;
     background: $bg-color-3;
     overflow-y: auto;
+    position: relative;
 }
 
 

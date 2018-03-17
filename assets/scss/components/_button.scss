@@ -139,15 +139,15 @@ button {
 
 
 .btn-icon {
-    .fa, span,
+    .fa, .fal, .fab, .far, span,
     & > img {
         @extend %align-middle;
         line-height: 1;
     }
 
-    .fa,
+    .fa, .fal, .fab, .far,
     & > img {
-        padding-right: $xxs-space;
+        padding-right: $xs-space;
         font-size: 16px;
     }
 
@@ -157,9 +157,9 @@ button {
 }
 
 .btn-icon-reverse {
-    .fa {
+    .fa, .fal, .fab, .far {
         padding-right: 0;
-        padding-left: $xxs-space;
+        padding-left: $xs-space;
     }
 }
 

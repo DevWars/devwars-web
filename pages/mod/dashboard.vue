@@ -1,5 +1,5 @@
 <template>
-  <h1>Mod</h1>
+  <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">Welcome to the Dashboard</h1>
 </template>
 
 <script>
@@ -9,7 +9,7 @@
     @Component({
         components: {}
     })
-    export default class  extends Vue {
+    export default class extends Vue {
 
     }
 </script>
