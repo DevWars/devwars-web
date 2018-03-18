@@ -276,8 +276,18 @@ $home-card-margin									: $l-space;
         text-transform: uppercase;
     }
 
+    &__desc {
+        margin-bottom: $m-space;
+        margin-top: -$grid-gutter-width;
+        color: $text-color-secondary;
+    }
+
     &__actions {
         margin-top: $grid-gutter-width;
+    }
+
+    & + & {
+        border-top: $border-size solid $divider-color;
     }
 }
 
@@ -298,5 +308,52 @@ $home-card-margin									: $l-space;
     &.reverse &__content {
         float: right;
         text-align: right;
+    }
+}
+
+
+.supporter-logos {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    &__item {
+        padding: $grid-gutter-width;
+    }
+
+    &__logo {
+        max-height: 40px;
+        opacity: 0.3;
+
+        &:hover {
+            opacity: 0.45;
+        }
+    }
+}
+
+
+.home-quotes {
+    display: flex;
+    justify-content: center;
+}
+
+.quote-card {
+    margin-top: $grid-gutter-width;
+
+    &__avatar {
+        width: 73px;
+        height: 73px;
+        border-radius: 50%;
+        margin-top: -(73px / 2);
+    }
+
+    &__desc {
+        margin-top: $grid-gutter-part;
+    }
+
+    &__name {
+        margin-top: $grid-gutter-part;
+        font-size: $h5-font-size;
     }
 }

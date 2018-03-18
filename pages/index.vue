@@ -151,6 +151,62 @@
             </div>
         </div>
 
+        <div class="home-section">
+            <div class="container">
+                <h2 class="home-section__title">Honorable Mentions</h2>
+                <p class="home-section__desc">We are peaking the interests of well-known developers and organizations</p>
+
+                <div class="home-quotes row">
+                    <div class="col-md-4">
+                        <div class="quote-card card">
+                            <div class="card__inner">
+                                <img class="quote-card__avatar" src="~/assets/img/companies/scotchio-square.jpg">
+                                <p class="quote-card__desc">
+                                    Need something to watch on a Saturday? Watch 2 teams of 3 battle it out in DevWars!
+                                </p>
+                                <h6 class="quote-card__name">Scotch.io</h6>
+                                <a href="https://twitter.com/scotch_io/" class="quote-card__username" target="_blank" rel="nofollow">@scotch_io</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="quote-card card">
+                            <div class="card__inner">
+                                <img class="quote-card__avatar" src="~/assets/img/companies/devtips-square.png">
+                                <p class="quote-card__desc">
+                                    Have you guys seen @devwarstv ? Pretty novel stuff happening over there: devwars.tv
+                                </p>
+                                <h6 class="quote-card__name">DevTips</h6>
+                                <a href="https://twitter.com/DevTipsShow/" class="quote-card__username" target="_blank" rel="nofollow">@devtips</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="home-section">
+            <div class="container">
+                <h2 class="home-section__title">Our Supporters</h2>
+                <p class="home-section__desc">A list of our awesome partners, supporters and past sponsors.</p>
+                <div class="supporter-logos">
+                    <a href="https://www.twitch.tv/" class="supporter-logos__item" rel="nofollow" target="_blank">
+                        <img class="supporter-logos__logo" src="~/assets/img/companies/twitch-white.png">
+                    </a>
+                    <a href="https://www.discord.gg/" class="supporter-logos__item" rel="nofollow" target="_blank">
+                        <img class="supporter-logos__logo" src="~/assets/img/companies/discord-white.png">
+                    </a>
+                    <a href="https://www.microsoft.com/" class="supporter-logos__item" rel="nofollow" target="_blank">
+                        <img class="supporter-logos__logo" src="~/assets/img/companies/microsoft-white.png">
+                    </a>
+                    <a href="https://hiringsolved.com/blog/game-recruiting-game-gameshow/" class="supporter-logos__item" rel="nofollow" target="_blank">
+                        <img class="supporter-logos__logo" src="~/assets/img/companies/hiringsolved-white.png">
+                    </a>
+                </div>
+            </div>
+        </div>
+
 
         <div class="home-section">
             <div class="container">

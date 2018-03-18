@@ -29,7 +29,7 @@
                                     <div class="next-showing__date">Saturday, March 31</div>
                                     <div class="next-showing__time">17:00 (UTC)</div>
                                 </div>
-                                <a href="#" class="btn btn-outline-primary">Register to play</a>
+                                <nuxt-link to="/competitor/register" class="btn btn-outline-primary">Register to play</nuxt-link>
                             </div>
                         </div>
                     </div>
