@@ -70,19 +70,23 @@
 
                 let text;
                 let color;
+                let action;
 
                 if (playing) {
                     text = "Playing";
                     color = "color-success";
+                    action = 'Resign';
                 } else if (applied) {
                     text = "Entered";
+                    action = 'Resign';
                     color = "color-warning";
                 } else {
                     text = "Not Entered";
+                    action = 'Enter';
                     color = "color-muted";
                 }
 
-                return {game, applied, playing, text, color, enterOrCancel: this.enterOrCancel};
+                return {game, applied, playing, text, color, enterOrCancel: this.enterOrCancel, action};
             });
         }
     }
