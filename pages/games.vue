@@ -101,7 +101,7 @@
 
             </div>
 
-            <div class="sub-score-section" v-if="viewing.theme.length > 0">
+            <div class="sub-score-section" v-if="viewing.theme">
                 <div class="sub-score-header theme">
                     <h3 class="sub-score-header__title">Theme</h3>
                 </div>
