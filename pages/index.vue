@@ -150,6 +150,50 @@
                 </div>
             </div>
         </div>
+
+
+        <div class="home-section">
+            <div class="container">
+                <h2 class="home-section__title">Latest Blogs</h2>
+                <div class="blog-list">
+                    <div class="col-md-4">
+                        <nuxt-link :to="/blog/" class="blog-list__item">
+                            <div class="blog-list__cover" style="background-image: url();"></div>
+                            <div class="blog-list__main">
+                                <h2 class="blog-list__title">Name Of Blog</h2>
+                                <div class="blog-list__meta">
+                                    By <span class="blog-list__author">Beau August</span> &bullet; Feb 2, 2018
+                                </div>
+                            </div>
+                        </nuxt-link>
+                    </div>
+                    <div class="col-md-4">
+                        <nuxt-link :to="/blog/" class="blog-list__item">
+                            <div class="blog-list__cover" style="background-image: url();"></div>
+                            <div class="blog-list__main">
+                                <h2 class="blog-list__title">Name Of Blog</h2>
+                                <div class="blog-list__meta">
+                                    By <span class="blog-list__author">Beau August</span> &bullet; Feb 2, 2018
+                                </div>
+                            </div>
+                        </nuxt-link>
+                    </div>
+                    <div class="col-md-4">
+                        <nuxt-link :to="/blog/" class="blog-list__item">
+                            <div class="blog-list__cover" style="background-image: url();"></div>
+                            <div class="blog-list__main">
+                                <h2 class="blog-list__title">Name Of Blog</h2>
+                                <div class="blog-list__meta">
+                                    By <span class="blog-list__author">Beau August</span> &bullet; Feb 2, 2018
+                                </div>
+                            </div>
+                        </nuxt-link>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 </template>
 
