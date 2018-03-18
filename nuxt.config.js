@@ -13,8 +13,16 @@ module.exports = {
         ],
         link: [
             {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
-            {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:300,400,500,700'},
-            {rel: 'stylesheet', href: 'https://pro.fontawesome.com/releases/v5.0.8/css/all.css', integrity: 'sha384-OGsxOZf8qnUumoWWSmTqXMPSNI9URpNYN35fXDb5Cv5jT6OR673ah1e5q+9xKTq6', crossorigin: 'anonymous' }
+            {
+                rel: 'stylesheet',
+                href: 'https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:300,400,500,700'
+            },
+            {
+                rel: 'stylesheet',
+                href: 'https://pro.fontawesome.com/releases/v5.0.8/css/all.css',
+                integrity: 'sha384-OGsxOZf8qnUumoWWSmTqXMPSNI9URpNYN35fXDb5Cv5jT6OR673ah1e5q+9xKTq6',
+                crossorigin: 'anonymous'
+            }
         ]
     },
     /*
@@ -32,10 +40,11 @@ module.exports = {
         '~/assets/scss/main.scss',
         'webui-popover/src/jquery.webui-popover.css',
         'vue2-animate/dist/vue2-animate.css',
+        'cropperjs/dist/cropper.css'
     ],
 
     plugins: [
-        {src: '~plugins/ga.js', ssr: false },
+        {src: '~plugins/ga.js', ssr: false},
         {src: '~/plugins/popover', ssr: false},
         '~/plugins/directives',
         '~/plugins/axios',

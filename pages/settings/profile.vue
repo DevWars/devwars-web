@@ -31,7 +31,10 @@
                 <div class="form-group">
                     <Avatar :user="user" class="xl"></Avatar>
                 </div>
-                <button class="btn btn-outline-gray">Upload new avatar</button>
+
+                <FileChooser @change="crop">
+                    <button slot-scope="{update}" @click="update" type="button" class="btn btn-outline-gray">Upload new avatar</button>
+                </FileChooser>
             </div>
         </div>
         <input class="btn btn-primary" type="submit" value="Save">
@@ -43,14 +46,22 @@
     import Vue from 'vue';
 
     import Avatar from '~/components/user/Avatar';
+    import FileChooser from '~/components/FileChooser';
+    import CropperModal from '~/components/modal/CropperModal';
 
     @Component({
-        components: {Avatar}
+        components: {Avatar, FileChooser}
     })
     export default class SettingsProfile extends Vue {
         profile = {};
 
         @State(state => state.user.user) user;
+
+        async crop(result) {
+            let [cropped] = await this.$open(CropperModal, {data: result});
+
+            this.$store.dispatch('user/avatar', cropped);
+        }
 
         mounted() {
             this.profile = Object.assign({}, this.user, this.user.information);

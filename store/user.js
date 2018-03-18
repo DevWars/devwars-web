@@ -115,5 +115,11 @@ export const actions = {
         await Http.for('user/reset').put({}, data);
 
         dispatch('toast/success', `We've updated your password, give it a go!`, {root: true});
+    },
+
+    async avatar({dispatch, commit}, data) {
+        await Http.for('user/avatar').post({data});
+
+        await dispatch('refresh');
     }
 };
