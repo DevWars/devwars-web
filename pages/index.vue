@@ -212,38 +212,8 @@
             <div class="container">
                 <h2 class="home-section__title">Latest Blogs</h2>
                 <div class="blog-list">
-                    <div class="col-md-4">
-                        <nuxt-link :to="/blog/" class="blog-list__item">
-                            <div class="blog-list__cover" style="background-image: url();"></div>
-                            <div class="blog-list__main">
-                                <h2 class="blog-list__title">Name Of Blog</h2>
-                                <div class="blog-list__meta">
-                                    By <span class="blog-list__author">Beau August</span> &bullet; Feb 2, 2018
-                                </div>
-                            </div>
-                        </nuxt-link>
-                    </div>
-                    <div class="col-md-4">
-                        <nuxt-link :to="/blog/" class="blog-list__item">
-                            <div class="blog-list__cover" style="background-image: url();"></div>
-                            <div class="blog-list__main">
-                                <h2 class="blog-list__title">Name Of Blog</h2>
-                                <div class="blog-list__meta">
-                                    By <span class="blog-list__author">Beau August</span> &bullet; Feb 2, 2018
-                                </div>
-                            </div>
-                        </nuxt-link>
-                    </div>
-                    <div class="col-md-4">
-                        <nuxt-link :to="/blog/" class="blog-list__item">
-                            <div class="blog-list__cover" style="background-image: url();"></div>
-                            <div class="blog-list__main">
-                                <h2 class="blog-list__title">Name Of Blog</h2>
-                                <div class="blog-list__meta">
-                                    By <span class="blog-list__author">Beau August</span> &bullet; Feb 2, 2018
-                                </div>
-                            </div>
-                        </nuxt-link>
+                    <div class="col-md-4" v-for="post in posts" :key="post.id">
+                        <BlogCard :post="post"/>
                     </div>
                 </div>
             </div>
@@ -259,12 +229,15 @@
 
     import Highlights from '~/components/game/Highlights';
     import ScheduleBlock from '~/components/game/ScheduleBlock';
+    import BlogCard from '~/components/blog/BlogCard';
     import Http from "../services/Http";
 
     @Component({
-        components: {Highlights, ScheduleBlock}
+        components: {Highlights, ScheduleBlock, BlogCard}
     })
     export default class Index extends Vue {
+        @State(state => state.blog.latest) posts;
+
         async asyncData() {
             return {
                 latest: await Http.for('game').get('latest'),
@@ -272,7 +245,7 @@
         }
 
         async fetch({store}) {
-            store.dispatch('blog/latest', 2);
+            store.dispatch('blog/latest', 3);
         }
     }
 </script>
