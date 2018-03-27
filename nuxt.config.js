@@ -76,7 +76,8 @@ module.exports = {
                 new webpack.ProvidePlugin({
                     '$': 'jquery',
                     'Popper': 'popper.js',
-                })
+                }),
+                new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
             ],
             /*
             ** Run ESLint on save
