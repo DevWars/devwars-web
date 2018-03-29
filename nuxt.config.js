@@ -9,7 +9,8 @@ module.exports = {
         meta: [
             {charset: 'utf-8'},
             {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-            {hid: 'description', name: 'description', content: 'DevWars'}
+            {hid: 'description', name: 'description', content: 'DevWars'},
+            {name: 'google-site-verification', content: 'RLFyk9dzTQTWw10KYT1_-C3uMy4Itz26Har6xRbv_Co'},
         ],
         link: [
             {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
@@ -22,7 +23,7 @@ module.exports = {
                 href: 'https://pro.fontawesome.com/releases/v5.0.8/css/all.css',
                 integrity: 'sha384-OGsxOZf8qnUumoWWSmTqXMPSNI9URpNYN35fXDb5Cv5jT6OR673ah1e5q+9xKTq6',
                 crossorigin: 'anonymous'
-            }
+            },
         ]
     },
     /*
