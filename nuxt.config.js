@@ -9,7 +9,7 @@ module.exports = {
         meta: [
             {charset: 'utf-8'},
             {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-            {hid: 'description', name: 'description', content: 'DevWars'},
+            {hid: 'description', name: 'description', content: 'DevWars is a live game show where developers code to compete against each other within 60 minutes. Join our educational and entertaining platform of experienced and aspiring developers.'},
             {name: 'google-site-verification', content: 'RLFyk9dzTQTWw10KYT1_-C3uMy4Itz26Har6xRbv_Co'},
             {name: "og:title", content: "Esports for Developers - DevWars"},
             {name: "og:image", content: "https://devwars.tv/og/logo.jpeg"},
