@@ -43,8 +43,8 @@
 
         analysisForTeam(team, otherTeam) {
             let points;
-            let teamVotes = team.votes[this.vote].count;
-            let otherVotes = otherTeam.votes[this.vote].count;
+            let teamVotes = team.votes[this.vote] ? team.votes[this.vote].count : 0;
+            let otherVotes = otherTeam.votes[this.vote] ? otherTeam.votes[this.vote].count : 0;
             let total = teamVotes + otherVotes;
 
             if (teamVotes >= total * (2.0 / 3.0)) {
