@@ -94,7 +94,13 @@ $home-card-margin									: $l-space;
             margin-top: $m-space;
             align-self: flex-end;
         }
-	}
+    }
+
+    &__actions {
+        & > div {
+            display: flex;
+        }
+    }
 }
 
 .home-recap {
