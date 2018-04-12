@@ -9,6 +9,7 @@ export const actions = {
             dispatch('user/refresh'),
             dispatch('game/applied'),
             dispatch('game/upcoming'),
+            dispatch('game/active'),
             dispatch('badges/refresh'),
         ]);
     },

@@ -5,6 +5,7 @@ export const state = () => ({
     upcoming: [],
     all: [],
     game: {},
+    active: null,
 });
 
 export const mutations = {
@@ -34,6 +35,10 @@ export const mutations = {
 
     upcoming(state, upcoming) {
         state.upcoming = upcoming;
+    },
+
+    active(state, game) {
+        state.active = game;
     }
 };
 
@@ -64,6 +69,17 @@ export const actions = {
         } catch (e) {
         }
     },
+
+    async active({commit}) {
+        try {
+            let active = await Http.for('game').get('active');
+
+            commit('active', active);
+        } catch (e) {
+            commit('active', null)
+        }
+    },
+
     async upcoming({commit}) {
         try {
             let upcoming = await Http.for('game').get('upcoming');
