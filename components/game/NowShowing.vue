@@ -12,7 +12,7 @@
                     </div>
                 </div>
                 <div class="card--home__actions">
-                    <a href="https://www.twitch.tv/devwars" class="btn btn-twitch" target="_blank" target="_blank">Watch on Twitch</a>
+                    <a href="https://www.twitch.tv/devwars" class="btn btn-twitch" target="_blank">Watch on Twitch</a>
                     <RegistrationButton :game="game" />
                 </div>
             </div>
