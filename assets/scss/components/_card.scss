@@ -31,7 +31,11 @@ $file__element--property_modifier
 	}
 
 	&__inner {
-		padding: 15px 15px 30px;
+        padding: 15px 15px 30px;
+
+        @include breakpoint(xs) {
+            padding-bottom: $s-space;
+        }
 	}
 
 	&__title {

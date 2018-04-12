@@ -18,3 +18,11 @@
 .footer-offset {
     padding-bottom: $xl-space;
 }
+
+.embed-video {
+    @include aspect-ratio(16,9);
+
+    iframe {
+        @extend .aspect;
+    }
+}
