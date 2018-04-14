@@ -18,8 +18,7 @@
                     <span class="game-item__theme">{{ game.theme }}</span>
                 </div>
                 <div class="game-item__icons">
-                    <i v-show="game.youtube_url" class="game-item__youtube fa fa-youtube-play"></i>
-                    <!-- For some reason no games have youtube URLs? -->
+                    <i v-show="game.youtube_url" class="game-item__youtube fab fa-youtube"></i>
                 </div>
             </div>
         </div>
@@ -41,8 +40,8 @@
                         </div>
                     </div>
                     <a v-show="viewing.youtube_url" :href="viewing.youtube_url"
-                       class="games-banner__youtube btn btn-icon btn-youtube" target="_blank">
-                        <i class="icon icon-youtube"></i>
+                       class="btn btn-icon btn-youtube" target="_blank">
+                        <i class="fab fa-youtube"></i>
                         <span>Watch on YouTube</span>
                     </a>
                 </div>

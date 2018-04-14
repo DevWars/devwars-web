@@ -174,14 +174,6 @@ Variables
         font-size: $h4-font-size;
     }
 
-	&__youtube {
-        pointer-events: none;
-        &.active {
-            background-color: $youtube-color;
-            pointer-events: initial;
-        }
-	}
-
 	&.classic { background-image: url('~/assets/img/classic-bg.jpg'); }
 	&.zen-garden { background-image: url('~/assets/img/zen-garden-bg.jpg'); }
 	//&.coffee-run { background-image: url('~/assets/img/coffee-run-bg.jpg'); }

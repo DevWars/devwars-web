@@ -233,6 +233,10 @@ button {
     @include button-variant(#fff, $twitch-color, $twitch-color);
 }
 
+.btn-youtube {
+    @include button-variant(#fff, $youtube-color, $youtube-color);
+}
+
 .btn-discord {
     @include button-variant(#fff, $discord-color, $discord-color);
 }
