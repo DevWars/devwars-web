@@ -23,15 +23,31 @@ $home-card-margin									: $l-space;
 	background-image: url('~/assets/img/hero-bg.jpg');
 	background-size: cover;
 	text-align: center;
-	position: relative;
+    position: relative;
+
+    @include breakpoint(sm) {
+        height: auto;
+    }
 
 	&__inner {
 		@extend %absolute-center-y;
 		width: 100%;
 		z-index: 1;
 		margin-top: -($home-card-margin / 2);
-		padding: 0 $global__gutter;
-		left: 0;
+		padding: 0 $grid-gutter-width;
+        left: 0;
+
+        @include breakpoint(sm) {
+            @include clear-position;
+            padding: $l-space $grid-gutter-width ($l-space + $home-card-margin);
+            transform: none;
+            margin-top: 0;
+        }
+
+        @include breakpoint(xs) {
+            padding-top: $ms-space;
+            padding-bottom: ($ms-space + $home-card-margin);
+        }
 	}
 
 	&__title,
@@ -42,7 +58,11 @@ $home-card-margin									: $l-space;
 
 	&__title {
 		font-size: 42px;
-		margin-bottom: $xs-space;
+        margin-bottom: $xs-space;
+
+        @include breakpoint(sm) {
+            font-size: $h1-font-size;
+        }
 	}
 
 	&__subtitle {
@@ -147,6 +167,10 @@ $home-card-margin									: $l-space;
             height: 60px;
         }
 
+        @include breakpoint(xs) {
+            display: none;
+        }
+
         &.team-blue {
              background-image: url('~/assets/img/team-blue.png');
         }
@@ -178,7 +202,11 @@ $home-card-margin									: $l-space;
         letter-spacing: 5px;
 		@include breakpoint(md) {
 			font-size: 24px;
-		}
+        }
+
+        @include breakpoint(xs) {
+            font-size: $h1-font-size;
+        }
 	}
 
 	&__matchup {
@@ -189,9 +217,9 @@ $home-card-margin									: $l-space;
         margin: $s-space auto 0;
         font-weight: $font-weight-semibold;
 
-		@include breakpoint(sm) {
-			width: 80%;
-		}
+        @include breakpoint(sm) {
+            padding: 0;
+        }
 
 		li {
 			margin-top: $xs-space;
@@ -381,8 +409,20 @@ $home-card-margin									: $l-space;
     align-items: center;
     justify-content: center;
 
+    @include breakpoint(sm) {
+        flex-wrap: wrap;
+    }
+
     &__item {
         padding: $grid-gutter-width;
+
+        @include breakpoint(sm) {
+            width: 50%;
+        }
+
+        @include breakpoint(xs) {
+            padding: $grid-gutter-part;
+        }
     }
 
     &__logo {
@@ -399,6 +439,10 @@ $home-card-margin									: $l-space;
 .home-quotes {
     display: flex;
     justify-content: center;
+
+    @include breakpoint(sm) {
+        display: block;
+    }
 }
 
 .quote-card {

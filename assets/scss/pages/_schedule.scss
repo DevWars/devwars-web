@@ -10,6 +10,49 @@ Variables
 01. Schedule
 ========================================================================== */
 
+.schedule-table {
+    @include breakpoint(sm) {
+        thead {
+            display: none;
+        }
+
+        tbody {
+            tr {
+                display: block;
+                padding: $xs-space $grid-gutter-part;
+                text-align: center;
+                cursor: default;
+
+                &:hover {
+                    background-color: transparent;
+                }
+
+                &:not(:last-of-type) {
+                    border-bottom: 1px solid $divider-color;
+                }
+            }
+
+            td {
+                display: block;
+                padding: 0;
+                border: none;
+
+                &:nth-of-type(1),
+                &:nth-of-type(2) {
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+            }
+        }
+
+        .btn {
+            @include breakpoint(sm) {
+                margin-top: $xxs-space;
+            }
+        }
+    }
+}
+
 .schedule-block {
     @extend %clear;
     padding-top: $xs-space;
@@ -30,23 +73,67 @@ Variables
         text-align: right;
     }
 
+    &__dow,
     &__date,
     &__time {
         font-weight: $font-weight-semibold;
+
+        @include breakpoint(sm) {
+            display: inline-block;
+            vertical-align: middle;
+            font-size: $font-size-base !important;
+            text-transform: uppercase;
+        }
+    }
+
+    &__dow {
+        text-transform: uppercase;
+        font-size: $font-size-sm;
+
+        @include breakpoint(sm) {
+            &:after {
+                content: ",";
+                margin-right: $xxs-space;
+            }
+        }
     }
 
     &__date {
-        text-transform: uppercase;
-        font-size: $font-size-sm;
+        font-size: $h4-font-size;
     }
 
     &__time {
         font-size: $h4-font-size;
+
+        @include breakpoint(sm) {
+            &:before {
+                content: "@";
+                margin: 0 $xxs-space;
+            }
+        }
+    }
+
+
+    &__show,
+    &__title {
+        @include breakpoint(sm) {
+            display: inline-block;
+            vertical-align: middle;
+            font-size: $font-size-base !important;
+            text-transform: uppercase;
+        }
     }
 
     &__show {
         text-transform: uppercase;
         font-weight: $font-weight-bold;
         font-size: $font-size-sm;
+
+        @include breakpoint(sm) {
+            &:after {
+                content: "-";
+                margin: 0 $xxs-space;
+            }
+        }
     }
 }

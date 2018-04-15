@@ -1,7 +1,7 @@
 <template>
     <div class="card card-plain">
         <Applications :games="games">
-            <table class="table" slot-scope="{enterOrCancel, isApplied, cancel, enter}">
+            <table class="schedule-table table" slot-scope="{enterOrCancel, isApplied, cancel, enter}">
                 <thead>
                 <tr>
                     <th width="15%" class="align-left">Date</th>
@@ -13,8 +13,8 @@
                 <tbody>
                 <tr v-for="game in limitBy(games, count)" :key="game.id" v-if="filter ? (filter === game.name) : true">
                     <td>
-                        <div class="schedule-block__date">{{ game.timestamp | moment('dddd') }}</div>
-                        <div class="schedule-block__time">{{ game.timestamp | moment('MMMM D') }}</div>
+                        <div class="schedule-block__dow">{{ game.timestamp | moment('dddd') }}</div>
+                        <div class="schedule-block__date">{{ game.timestamp | moment('MMMM D') }}</div>
                     </td>
                     <td>
                         <div class="schedule-block__time">{{ game.timestamp | moment('H:mm') }} UTC</div>
