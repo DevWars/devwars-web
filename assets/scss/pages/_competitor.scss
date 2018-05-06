@@ -2,7 +2,24 @@
  01. Main
 ========================================================================== */
 
+.competitor-form {
 
+    .modpanel__title {
+        display: inline-block;
+        border-bottom: 1px solid $brand-secondary;
+        margin-top: $m-space;
+        margin-bottom: $grid-gutter-width;
+
+        &:first-of-type {
+            margin-top: 0;
+        }
+    }
+
+    &__actions {
+        text-align: right;
+        margin-top: $m-space;
+    }
+}
 
 
 
@@ -14,7 +31,6 @@
  02. Components
 ========================================================================== */
 .lang-rating {
-    margin-bottom: $grid-gutter-width;
     background-color: lighten($bg-color-2, 5%);
 
     &__meter {

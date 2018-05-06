@@ -23,7 +23,6 @@ $input-label-offset: $input-padding-y * 2;
     display: block;
     width: 100%;
     padding: $input-padding-y $input-padding-x;
-    margin-top: $input-label-offset;
     font-size: $font-size-base;
     line-height: $input-line-height;
     color: $base-font-color;
@@ -39,7 +38,7 @@ $input-label-offset: $input-padding-y * 2;
     }
 
     &:focus ~ label,
-    &:valid ~ label {
+    &:valid:not(:empty) ~ label {
         top: -($input-label-offset / 0.9);
         font-size: $font-size-sm;
     }
@@ -50,10 +49,6 @@ $input-label-offset: $input-padding-y * 2;
 
     &::placeholder {
         color: $text-color-muted;
-    }
-
-    &.labeless {
-        margin-top: 0;
     }
 }
 
@@ -159,6 +154,85 @@ select {
         color: red;
     }
 }
+
+
+$checkbox-size: 25px;
+
+.form-check {
+    .checkbox + label:before {
+        margin-right: $xs-space;
+    }
+
+    label {
+        color: #fff;
+    }
+}
+
+.checkbox {
+    position: absolute;
+    opacity: 0;
+
+    & + label {
+        display: inline-block;
+        position: relative;
+        padding: 0;
+        margin-bottom: 0;
+        pointer-events: initial;
+        cursor: pointer;
+    }
+
+    // Checkbox
+    & + label:before {
+        content: '';
+        display: inline-block;
+        vertical-align: middle;
+        width: $checkbox-size;
+        height: $checkbox-size;
+        background: $bg-color-4;
+        border-radius: $border-radius;
+    }
+
+    &:hover + label:before {
+        background: darken($bg-color-4, 5%);
+    }
+
+    &:checked + label:before {
+        background: #1cbd9c;
+    }
+
+    &:disabled + label {
+        color: #b8b8b8;
+        cursor: auto;
+    }
+
+    &:disabled + label:before {
+        background: #ddd;
+    }
+
+    &:checked + label:after {
+        @extend .far;
+        content: $fa-check;
+        position: absolute;
+        top: 50%; left: $checkbox-size / 2;
+        transform: translate(-50%, -50%);
+        display: block;
+        width: 100%;
+        text-align: center;
+        color: #fff;
+    }
+
+    &--remove:checked + label:before {
+        background-color: $danger-color;
+    }
+
+    &--remove:checked + label:after {
+        content: $fa-times;
+    }
+}
+
+
+
+
 
 
 

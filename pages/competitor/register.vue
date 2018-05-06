@@ -11,9 +11,9 @@
 
         <div class="footer-offset">
             <div class="container">
-                <div class="mod-card">
+                <div class="mod-card competitor-form">
                     <form v-async-submit="[submit]">
-                        <h3 class="modpanel__subtitle">About you</h3>
+                        <h3 class="modpanel__title">About you</h3>
                         <div class="row">
                             <div class="col-sm-6 form-group">
                                 <input v-model="competitor.first_name" type="text" class="form-control" required>
@@ -48,33 +48,38 @@
                                     <select v-model="competitor.country" class="form-control" required>
                                         <option :key="country" v-for="country in countries">{{ country }}</option>
                                     </select>
+                                    <label>Select Country</label>
                                 </div>
-                                <label>Select Country</label>
                             </div>
                         </div>
+
 
                         <div class="row">
-                            <div class="col-sm-4 form-group">
-                                <input v-model="day" type="text" class="form-control" placeholder="DD"
-                                       required>
-                                <label>Date of birth</label>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-4 form-group">
+                                        <label>Date of birth</label>
+                                    </div>
+                                    <div class="col-sm-2 form-group">
+                                        <input v-model="day" type="text" class="form-control" placeholder="DD" required maxlength="2">
+                                    </div>
+                                    <div class="col-sm-2 form-group">
+                                        <input v-model="month" type="text" class="form-control" placeholder="MM" maxlength="2" required>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <input v-model="year" type="text" class="form-control" placeholder="YYYY" maxlength="4" required>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-sm-4 form-group">
-                                <input v-model="month" type="text" class="form-control" placeholder="MM"
-                                       required>
+                            <div class="form-group col-sm-6">
+                                <input v-model="competitor.company" type="text" class="form-control">
+                                <label>Company</label>
                             </div>
-                            <div class="col-sm-4 form-group">
-                                <input v-model="year" type="text" class="form-control" placeholder="YYYY"
-                                       required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input v-model="competitor.company" type="text" class="form-control">
-                            <label>Company</label>
                         </div>
 
 
-                        <h3 class="modpanel__subtitle">Skill Assessment</h3>
+
+                        <h3 class="modpanel__title">Skill Assessment</h3>
                         <div class="row">
                             <div class="col-sm-4" v-for="language in languages" :key="language.name">
                                 <div class="lang-rating" :class="['lang-rating--' +language.name]">
@@ -102,26 +107,31 @@
                             </div>
                         </div>
 
-                        <h3 class="modpanel__subtitle">Requirements</h3>
+                        <h3 class="modpanel__title">Requirements</h3>
 
-                        <!--<div class="form-group">-->
-                        <!--<button class="btn btn-discord btn-icon">-->
-                        <!--<img src="/assets/img/discord-logo.svg">-->
-                        <!--<span>Connect Discord</span>-->
-                        <!--</button>-->
-                        <!--<button class="btn btn-outline-success btn-icon disabled" style="opacity: 1;">-->
-                        <!--<i class="fa fa-check"></i>-->
-                        <!--<span>Discord Connected</span>-->
-                        <!--</button>-->
-                        <!--</div>-->
+                        <!-- <div class="form-group">
+                            <button class="btn btn-discord btn-icon">
+                                <i class="fab fa-discord"></i>
+                                <span>Connect Discord</span>
+                            </button>
+                            <button class="btn btn-outline-success btn-icon disabled" style="opacity: 1;">
+                                <i class="fa fa-check"></i>
+                                <span>Discord Connected</span>
+                            </button>
+                        </div>
+ -->
 
-                        <p>A microphone is required to play in DevWars to communicate with your team during a game.</p>
                         <div class="form-group">
-                            <input type="checkbox" class="form-control" required>
-                            <label>I have a microphone</label>
+                            <p>A microphone is required to play in DevWars to communicate with your team during a game.</p>
+                            <div class="form-check">
+                                <input id="has-microphone" type="checkbox" class="checkbox" required>
+                                <label for="has-microphone">I have a microphone</label>
+                            </div>
                         </div>
 
-                        <button class="btn btn-primary btn-lg">Register to Compete</button>
+                        <div class="competitor-form__actions">
+                            <button class="btn btn-primary btn-lg">Register to Compete</button>
+                        </div>
                     </form>
                 </div>
             </div>
