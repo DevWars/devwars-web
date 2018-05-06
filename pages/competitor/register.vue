@@ -83,7 +83,7 @@
                         <div class="row">
                             <div class="col-sm-4" v-for="language in languages" :key="language.name">
                                 <div class="lang-rating" :class="['lang-rating--' +language.name]">
-                                    <ul class="lang-rating__meter">
+                                    <ul class="lang-ra ting__meter">
                                         <li :class="{active: index <= language.skill}"
                                             v-for="(skill, index) in skillNames" :key="skill"></li>
                                     </ul>
