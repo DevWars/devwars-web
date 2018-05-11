@@ -97,7 +97,9 @@ $sidebar-background                                 : $bg-color-4;
     }
 
     &__subtitle {
+        margin-bottom: $grid-gutter-width;
         font-family: $alt-font-face;
+        font-size: $h4-font-size;
     }
 }
 

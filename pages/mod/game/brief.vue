@@ -76,7 +76,7 @@
         <br><br>
 
         <div class="mod-card">
-            <h4 class="modpanel__subtitle">({{ applications.length }}) Applicants</h4>
+            <h4 class="modpanel__subtitle" style="margin-bottom: 0">({{ applications.length }}) Applicants</h4>
         </div>
         <table class="modpanel-table">
             <thead>
