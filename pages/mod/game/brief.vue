@@ -89,7 +89,7 @@
                     <th>HTML</th>
                     <th>CSS</th>
                     <th>JS</th>
-                    <th>Bits</th>
+                    <th>Devcoins</th>
                     <th>&nbsp;</th>
                 </tr>
             </thead>

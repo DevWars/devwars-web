@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row-lift">
                 <div class="heading">
-                    <h1>Bitshop</h1>
+                    <h1>Shop</h1>
                     <div class="devcoins devcoins-xl">
                         <Devcoin></Devcoin>
                         <div class="devcoins__amount">232</div>

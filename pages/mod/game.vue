@@ -10,7 +10,7 @@
                     &nbsp;&nbsp;/&nbsp;&nbsp;
                     {{ game.name }}
                     &nbsp;&nbsp;/&nbsp;&nbsp;
-                    <strong class="color-warning">{{ game.active ? 'Active' : 'Preparing'}}</strong>
+                    <span class="mod-status preparing">{{ game.active ? 'Active' : 'Preparing'}}</span>
                 </h2>
             </div>
 
