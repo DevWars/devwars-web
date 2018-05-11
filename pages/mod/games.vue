@@ -35,6 +35,7 @@
                 <thead>
                 <tr>
                     <th ng-click="$ctrl.sort('date')">Date</th>
+                    <th ng-click="$ctrl.sort('Status')">Status</th>
                     <th ng-click="$ctrl.sort('theme')">Theme</th>
                     <th ng-click="$ctrl.sort('gameMode')">Gamemode</th>
                     <th>&nbsp;</th>
@@ -43,6 +44,7 @@
                 <tbody>
                 <tr v-for="game in all" :key="game.id">
                     <td data-type="Date">{{ game.timestamp | moment('MM/DD/YYYY') }}</td>
+                    <td data-type="Status">&nbsp;</td>
                     <td data-type="Theme">{{ game.theme }}</td>
                     <td data-type="Game Mode">{{ game.name }}</td>
                     <td class="modpanel-table__actions" data-type="Edit">
