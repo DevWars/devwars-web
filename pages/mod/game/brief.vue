@@ -75,11 +75,11 @@
 
         <br><br>
 
-        <div class="modpanel-table">
-            <br>
-            <h3 class="modpanel__subtitle">({{ applications.length }}) Applicants</h3>
-            <table>
-                <thead>
+        <div class="mod-card">
+            <h4 class="modpanel__subtitle">({{ applications.length }}) Applicants</h4>
+        </div>
+        <table class="modpanel-table">
+            <thead>
                 <tr>
                     <th>Username</th>
                     <th>Rank</th>
@@ -92,11 +92,11 @@
                     <th>Bits</th>
                     <th>&nbsp;</th>
                 </tr>
-                </thead>
-                <tbody>
+            </thead>
+            <tbody>
                 <tr v-for="application in applications" :key="application.user.id">
                     <td>
-                        <img class="modpanel-table__item_image" :src="application.user.avatar_url">
+                        <Avatar :user="application.user"/>
                         <span class="modpanel-table__item_name">{{ application.user.username }}</span>
                     </td>
                     <td>{{ application.user.ranking.rank.rank }}</td>
@@ -114,9 +114,8 @@
                         </a>
                     </td>
                 </tr>
-                </tbody>
-            </table>
-        </div>
+            </tbody>
+        </table>
     </div>
 </template>
 

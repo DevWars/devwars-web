@@ -214,7 +214,7 @@ $mobile-nav-width                                   : 300px;
 ========================================================================= */
 
 .user-avatar-wrapper {
-    display: inline-block;
+    @extend %align-middle;
     width: 50px;
     &.xs { width: 25px; }
     &.sm { width: 38px; }

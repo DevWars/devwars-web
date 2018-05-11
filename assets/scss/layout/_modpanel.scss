@@ -97,9 +97,7 @@ $sidebar-background                                 : $bg-color-4;
     }
 
     &__subtitle {
-        margin-bottom: $grid-gutter-width;
         font-family: $alt-font-face;
-        font-size: $h4-font-size;
     }
 }
 
@@ -219,13 +217,19 @@ $sidebar-background                                 : $bg-color-4;
 ========================================================================== */
 
 .modpanel-table {
-    box-sizing: border-box;
-    padding: 0 $grid-gutter-width;
     width: 100%;
     background-color: $bg-color-2;
 
     tbody {
         border-top: 1px solid $divider-color;
+    }
+
+    tr {
+        &.added {
+            background-color: $bg-color-4;
+            opacity: 0.3;
+            pointer-events: none;
+        }
     }
 
     th {
@@ -251,13 +255,20 @@ $sidebar-background                                 : $bg-color-4;
         border-bottom: 1px solid $divider-color;
         max-width: $l-space;
         overflow: hidden;
-        padding: $s-space $s-space $s-space 0;
+        padding: $s-space 0;
         text-align: left;
         text-overflow: ellipsis;
         white-space: nowrap;
+    }
 
+    th, td {
         &:first-child {
+            padding-left: $grid-gutter-width;
             font-weight: bold;
+        }
+
+        &:last-child {
+            padding-right: $grid-gutter-width;
         }
     }
 
@@ -266,17 +277,8 @@ $sidebar-background                                 : $bg-color-4;
         .btn-link { font-weight: $font-weight-regular; }
     }
 
-    &__item_image {
-        border-radius: 50%;
-        display: inline-block;
-        margin-right: $xs-space;
-        width: $m-space;
-    }
-
     &__item_name {
-        display: inline-block;
-        line-height: $m-space;
-        vertical-align: top;
+        padding-left: $s-space;
     }
 
     &__pagination {
