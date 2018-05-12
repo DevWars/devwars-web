@@ -111,11 +111,14 @@
 @mixin spacing($prop, $property, $dir, $direction) {
     .#{$prop}#{$dir} {
         &-0 { #{$property}-#{$direction}: 0 !important; }
-        &-xs { #{$property}-#{$direction}: $xxs-space !important; }
-        &-sm { #{$property}-#{$direction}: $xs-space !important; }
-        &-md { #{$property}-#{$direction}: $grid-gutter-part !important; }
-        &-lg { #{$property}-#{$direction}: $grid-gutter-width !important; }
-        &-xl { #{$property}-#{$direction}: $ms-space !important; }
+        &-xs { #{$property}-#{$direction}: $xs-space !important; }
+        &-15 { #{$property}-#{$direction}: $grid-gutter-part !important; }
+        &-sm { #{$property}-#{$direction}: $s-space !important; }
+        &-30 { #{$property}-#{$direction}: $grid-gutter-width !important; }
+        &-md { #{$property}-#{$direction}: $m-space !important; }
+        &-60 { #{$property}-#{$direction}: $grid-gutter-width !important; }
+        &-lg { #{$property}-#{$direction}: $l-space !important; }
+        &-xl { #{$property}-#{$direction}: $xl-space !important; }
     }
 }
 
