@@ -304,8 +304,21 @@ Variables
     }
 
     &__points {
+        display: flex;
+        align-items: center;
         font-size: $h1-font-size;
         font-weight: $font-weight-bold;
+
+        &.aced:after {
+            content: 'ACED';
+            border: 1px solid $bonus-color;
+            padding: $xxxs-space $xxs-space;
+            margin: 0 $grid-gutter-part;
+            font-weight: $font-weight-regular;
+            font-size: $font-size-xs;
+            color: $bonus-color;
+        }
+
         &.team-blue { color: $brand-primary; }
         &.team-red { color: $brand-secondary; }
     }
