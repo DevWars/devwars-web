@@ -108,10 +108,30 @@
     }
 
 
+@mixin spacing($prop, $property, $dir, $direction) {
+    .#{$prop}#{$dir} {
+        &-0 { #{$property}-#{$direction}: 0 !important; }
+        &-xs { #{$property}-#{$direction}: $xxs-space !important; }
+        &-sm { #{$property}-#{$direction}: $xs-space !important; }
+        &-md { #{$property}-#{$direction}: $grid-gutter-part !important; }
+        &-lg { #{$property}-#{$direction}: $grid-gutter-width !important; }
+        &-xl { #{$property}-#{$direction}: $ms-space !important; }
+    }
+}
+
+@include spacing(m, 'margin', t, 'top');
+@include spacing(m, 'margin', b, 'bottom');
+@include spacing(m, 'margin', l, 'left');
+@include spacing(m, 'margin', r, 'right');
+@include spacing(p, 'padding', t, 'top');
+@include spacing(p, 'padding', b, 'bottom');
+@include spacing(p, 'padding', l, 'left');
+@include spacing(p, 'padding', r, 'right');
 
 
 
-    @mixin button-variant($color, $background, $border) {
+
+@mixin button-variant($color, $background, $border) {
         $active-background: darken($background, 10%);
         $active-border: darken($border, 12%);
         color: $color;

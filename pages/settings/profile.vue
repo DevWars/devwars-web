@@ -20,10 +20,12 @@
                     <label>URL</label>
                 </div>
 
-                <h3 class="modpanel__subtitle">Job</h3>
+                <h3 class="modpanel__subtitle mb-0">Job</h3>
                 <div class="form-group">
-                    <input v-model="profile.for_hire" type="checkbox" class="form-control">
-                    <label>Available for hire</label>
+                    <div class="form-check">
+                        <input v-model="profile.for_hire" id="for-hire" type="checkbox" class="checkbox">
+                        <label for="for-hire">Available for hire</label>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-4">

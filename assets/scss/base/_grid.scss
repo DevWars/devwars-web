@@ -37,7 +37,7 @@ Contents:
         margin-top: -($global__ribbon / 1.3);
     }
 
-    .form-group > label {
+    [class*="col-"].form-group > label {
         margin-left: $grid-gutter-part;
     }
 }
