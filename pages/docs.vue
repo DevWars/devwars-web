@@ -46,9 +46,9 @@
                     </li>
                 </ul>
 
-                <a href="#playing" class="docs-nav__heading">
+                <a href="#competing" class="docs-nav__heading">
                     <i class="fa fa-gamepad"></i>
-                    <span>Playing</span>
+                    <span>Competing</span>
                 </a>
                 <ul class="docs-nav__list">
                     <li class="docs-nav__item">
@@ -59,26 +59,29 @@
                     </li>
                 </ul>
 
-                <a href="#leveling" class="docs-nav__heading">
+                <a href="#earning" class="docs-nav__heading">
                     <i class="fa fa-trophy"></i>
-                    <span>Leveling</span>
+                    <span>Earning</span>
                 </a>
                 <ul class="docs-nav__list">
                     <li class="docs-nav__item">
-                        <a href="#" class="docs-nav__link disabled">XP</a>
+                        <a href="#xp" class="docs-nav__link disabled">XP</a>
                     </li>
                     <li class="docs-nav__item">
-                        <a href="#" class="docs-nav__link disabled">Ranks</a>
+                        <a href="#ranks" class="docs-nav__link disabled">Ranks</a>
                     </li>
                     <li class="docs-nav__item">
-                        <a href="#" class="docs-nav__link disabled">Devcoins</a>
+                        <a href="#devcoins" class="docs-nav__link">Devcoins</a>
+                    </li>
+                    <li class="docs-nav__item">
+                        <a href="#badges" class="docs-nav__link disabled">Badges</a>
                     </li>
                 </ul>
 
                 <div class="doc-warning">
                     <div class="doc-warning__title">Under Development</div>
                     <p>This documentation is currently under development. More sections will be added over time, please check back frequently for updates.</p>
-                    <em>Last Modified: Mar 2, 2018</em>
+                    <em>Last Modified: May 11, 2018</em>
                 </div>
             </div>
         </div>
@@ -463,9 +466,9 @@
                 </section>
             </article>
 
-            <article id="playing">
+            <article id="competing">
                 <header>
-                    <h1>Playing</h1>
+                    <h1>Competing</h1>
                     <p>Compete in live DevWars games for a unique team-building experience.</p>
                 </header>
 
@@ -577,6 +580,80 @@
                     </section>
                 </section>
             </article>
+
+
+
+
+
+
+            <article id="earning">
+                <header>
+                    <h1>Earning</h1>
+                    <p>Earn XP to level up and collect Devcoins to spend!</p>
+                </header>
+
+                <section id="devcoins">
+                    <h2>Devcoins</h2>
+                    <p>Earn Devcoins to spend on cool items in the Shop.</p>
+
+                    <section>
+                        <h3>How to earn</h3>
+                        <p>Below are all the different ways you can earn more precious Devcoins:</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Method</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Twitch Chat (offline)</strong></td>
+                                    <td>Awarded every 30 minutes</td>
+                                    <td>
+                                        <div class="devcoins">
+                                            <Devcoin></Devcoin>
+                                            <div class="devcoins__amount">2</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Twitch Chat (live)</strong></td>
+                                    <td>Awarded every 30 minutes</td>
+                                    <td>
+                                        <div class="devcoins">
+                                            <Devcoin></Devcoin>
+                                            <div class="devcoins__amount">10</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Betting</strong></td>
+                                    <td>Place <a href="#betting">Bets</a> during a game</td>
+                                    <td>
+                                        <span class="keybinding">Variable</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Badges</strong></td>
+                                    <td>Earn <a href="/badges">Badges</a></td>
+                                    <td>
+                                        <span class="keybinding">Variable</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Competing</strong></td>
+                                    <td><a href="#competing">Compete</a> in a DevWars game</td>
+                                    <td>
+                                        <span class="keybinding">Variable</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                </section>
+            </article>
         </div>
     </div>
 </template>
@@ -585,7 +662,10 @@
     import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
+    import Devcoin from '~/components/Devcoin';
+
     @Component({
+        components: {Devcoin},
         layout: 'header'
     })
 
