@@ -69,6 +69,10 @@ $mobile-nav-width                                   : 300px;
         @extend %align-middle;
         padding: $btn-padding-y 0;
         position: relative;
+
+        &:hover .nav__link {
+            color: #fff;
+        }
     }
 
     &__link {

@@ -16,6 +16,9 @@
 
             <div class="modpanel__header-actions">
                 <a href="/mod/games" class="btn btn-outline-gray">Back</a>
+                <button class="btn btn-danger">
+                    End
+                </button>
                 <button
                     v-show="!game.done && !game.active" v-async-click="[activate]"
                     class="btn btn-primary"
