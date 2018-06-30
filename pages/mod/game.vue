@@ -19,8 +19,10 @@
                 <button class="btn btn-danger">
                     End
                 </button>
-                <button v-show="!game.done && !game.active" v-async-click="[activate]"
-                        class="btn btn-primary">
+                <button
+                    v-show="!game.done && !game.active" v-async-click="[activate]"
+                    class="btn btn-primary"
+                >
                     Activate
                 </button>
                 <button v-async-click="[save]" class="btn btn-primary">Save</button>
@@ -33,12 +35,12 @@
             <nuxt-link :to="'/mod/game/brief?game=' + game.id" class="nav-tabs__item">Brief</nuxt-link>
         </nav>
 
-        <nuxt/>
+        <nuxt />
     </div>
 </template>
 
 <script>
-    import Component, {State} from 'nuxt-class-component';
+    import Component, { State } from 'nuxt-class-component';
     import Vue from 'vue';
     import Http from "../../services/Http";
 
@@ -55,24 +57,33 @@
         }
 
         async save() {
-            let cloned = {...this.game};
+            let cloned = { ...this.game };
+
+            delete cloned.objectives;
             delete cloned.teams;
 
-           let game = await Http.for('game').save(cloned);
+            // Make sure the list doesn't include objectives with games
+            const transformed = this.game.objectives.map(it => ({...it, game: null}));
 
+            // Save the objectives
+            await Http.for(`/game/${this.game.id}/objective`).save(transformed);
+
+            // Go ahead and save each team
             Object.values(this.game.teams).forEach(async team => {
-                let cloned = {...team};
+                let cloned = { ...team };
                 delete cloned.players;
 
-                let result = await Http.for('game/team').save(cloned);
-
-                game.teams[result.name] = result;
+                await Http.for('game/team').save(cloned);
             });
 
+            // Last but not least, save the game
+            let game = await Http.for('game').save(cloned);
+
+            // Can't forget to update our state with the new game
             this.$store.commit('game/game', game);
         }
 
-        async fetch({store, query}) {
+        async fetch({ store, query }) {
             await store.dispatch('game/game', query.game);
         }
     }
