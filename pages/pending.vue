@@ -34,7 +34,7 @@
     export default class Pending extends Vue {
 
         async resend() {
-            await Http.for('user/resend');
+            await Http.for('user/resend').save();
 
             this.$store.dispatch('toast/success', `We have sent off another email, please wait patiently.`);
         }
