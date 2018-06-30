@@ -69,7 +69,7 @@ export default class Http {
     }
 
     async save(model) {
-        if (model.id) {
+        if (model && model.id) {
             return this.update(model);
         } else {
             return this.create(model);

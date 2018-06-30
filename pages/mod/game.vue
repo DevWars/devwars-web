@@ -16,7 +16,7 @@
 
             <div class="modpanel__header-actions">
                 <a href="/mod/games" class="btn btn-outline-gray">Back</a>
-                <button class="btn btn-danger">
+                <button v-async-click="[endGame]" class="btn btn-danger" v-if="game.active && !game.done">
                     End
                 </button>
                 <button
@@ -54,6 +54,10 @@
             this.game.active = true;
 
             await this.save();
+        }
+
+        async endGame() {
+           await Http.for(`/game/${this.game.id}/ended`).save()
         }
 
         async save() {
