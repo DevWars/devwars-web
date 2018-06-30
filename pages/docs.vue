@@ -81,7 +81,7 @@
                 <div class="doc-warning">
                     <div class="doc-warning__title">Under Development</div>
                     <p>This documentation is currently under development. More sections will be added over time, please check back frequently for updates.</p>
-                    <em>Last Modified: May 11, 2018</em>
+                    <em>Last Modified: June 30, 2018</em>
                 </div>
             </div>
         </div>
@@ -255,6 +255,7 @@
                         <li>No copying and pasting of code, however copying code and URLs from teammates is acceptable.</li>
                         <li>After the 60 minute timer has run out, your code can no longer be modified.</li>
                         <li>Inline styling is not allowed. All styling must be performed using CSS.</li>
+                        <li>Player must code in the <a href="#editor">DevWars Editor</a>, coding in any other editor/IDE is strictly prohibitted.</li>
                     </ol>
                 </section>
             </article>
@@ -415,6 +416,10 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </section>
+
+                    <section>
+                        <p><code>!clearbet</code><br>Clears your last placed bet.</p>
                     </section>
 
                     <section>
