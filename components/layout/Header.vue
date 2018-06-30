@@ -3,9 +3,9 @@
         <div class="header">
             <div class="header__inner container-fluid">
                 <div class="header__main">
-                    <button class="burger-menu"></button>
+                    <button @click="toggleMenu" class="burger-menu"></button>
                     <nuxt-link to="/"
-                       class="logo">
+                               class="logo">
                         <img class="logo-full"
                              src="~/assets/img/logo.png"
                              alt="DevWars">
@@ -35,11 +35,13 @@
                 <ul class="nav nav-actions" v-if="!user">
                     <li class="nav__item">
                         <nuxt-link to="/register"
-                           class="btn btn-primary">Register</nuxt-link>
+                                   class="btn btn-primary">Register
+                        </nuxt-link>
                     </li>
                     <li class="nav__item">
                         <nuxt-link to="/login"
-                           class="btn btn-link color-white">Log In</nuxt-link>
+                                   class="btn btn-link color-white">Log In
+                        </nuxt-link>
                     </li>
                 </ul>
 
@@ -66,7 +68,7 @@
         </div>
 
         <!-- Mobile -->
-        <div class="mobile-nav">
+        <div v-click-outside="hideMenu" :class="['mobile-nav', {active: show}]">
             <div class="mobile-nav__header">
                 <a href="/"
                    class="logo">
@@ -75,41 +77,64 @@
                 </a>
             </div>
             <a href="/"
-               class="mobile-nav__link">Home</a>
+               class="mobile-nav__link">Home
+            </a>
             <a href="/games"
-               class="mobile-nav__link">Games</a>
+               class="mobile-nav__link">Games
+            </a>
             <a href="/schedule"
-               class="mobile-nav__link">Schedule</a>
+               class="mobile-nav__link">Schedule
+            </a>
             <a href="/leaderboards"
-               class="mobile-nav__link">Leaders</a>
+               class="mobile-nav__link">Leaders
+            </a>
             <a href="/blog"
-               class="mobile-nav__link">Blog</a>
+               class="mobile-nav__link">Blog
+            </a>
             <div class="mobile-nav__account">
                 <a href="/register"
-                   class="btn btn-primary btn-block">Register</a>
+                   class="btn btn-primary btn-block">Register
+                </a>
                 <a href="/login"
-                   class="btn btn-link btn-block color-white">Log In</a>
+                   class="btn btn-link btn-block color-white">Log In
+                </a>
             </div>
         </div>
-        <div class="mobile-nav__overlay"></div>
+        <div :class="['mobile-nav__overlay', {'active': show}]"></div>
     </div>
 </template>
 
 <script>
-    import Component, {State} from 'nuxt-class-component';
+    import Component, { State } from 'nuxt-class-component';
     import Vue from 'vue';
 
     import Popup from '~/components/Popup';
     import Avatar from '~/components/user/Avatar';
 
+    import ClickOutside from 'vue-click-outside';
+
     @Component({
-        components: {Popup, Avatar},
+        components: { Popup, Avatar },
+        directives: { ClickOutside },
     })
     export default class Header extends Vue {
         @State(state => state.user.user) user;
 
+        show = false;
+
         get isAdmin() {
             return this.user.role === 'ADMIN';
+        }
+
+        toggleMenu() {
+            // Hack to make sure this overrides the outside click
+            setTimeout(() => {
+                this.show = !this.show;
+            }, 0)
+        }
+
+        hideMenu() {
+            this.show = false;
         }
 
         logout() {
