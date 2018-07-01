@@ -32,7 +32,7 @@
 <script>
     import Component from 'nuxt-class-component';
     import Vue from 'vue';
-    import Input from '../components/form/Input';
+    import Input from '~/components/form/Input';
 
     @Component({
         components: { Input }

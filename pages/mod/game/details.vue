@@ -48,7 +48,7 @@
     import {Watch} from 'vue-property-decorator';
 
     import moment from 'moment';
-    import Input from '../../../components/form/Input';
+    import Input from '~/components/form/Input';
 
     @Component({
         components: { Input }

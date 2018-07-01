@@ -156,7 +156,7 @@
 
     import * as countryList from 'country-list';
     import Http from "../../services/Http";
-    import Input from "../../components/form/Input";
+    import Input from "~/components/form/Input";
 
     @Component({
         components: { Input },

@@ -77,6 +77,7 @@
     import Vue from 'vue';
 
     import CreateGameModal from '~/components/modal/CreateGameModal';
+    import Input from '~/components/form/Input';
 
     @Component({
         components: { Input }
