@@ -4,11 +4,11 @@
             <form class="auth-form" v-async-submit="[login]" >
                 <h1 class="auth-form__title">Login</h1>
                 <div class="form-group">
-                    <input v-model="username" class="form-control" type="text" required>
+                    <Input v-model="username" required />
                     <label>Email or Username</label>
                 </div>
                 <div class="form-group">
-                    <input name="password" v-model="password" class="form-control" type="password" required>
+                    <Input v-model="password" name="password" type="password" required />
                     <label>Password</label>
                 </div>
                 <div class="auth-form__actions">
@@ -26,9 +26,11 @@
     import Vue from 'vue';
 
     @Component({
+        components: { Input },
         layout: 'header',
         middleware: 'guest'
     })
+
     export default class Login extends Vue {
 
         username = '';

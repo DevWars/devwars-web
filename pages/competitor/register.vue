@@ -16,31 +16,31 @@
                         <h3 class="modpanel__title">About you</h3>
                         <div class="row">
                             <div class="col-sm-6 form-group">
-                                <input v-model="competitor.first_name" type="text" class="form-control" required>
+                                <Input v-model="competitor.first_name" required />
                                 <label>First name</label>
                             </div>
                             <div class="col-sm-6 form-group">
-                                <input v-model="competitor.last_name" type="text" class="form-control" required>
+                                <Input v-model="competitor.last_name" required />
                                 <label>Last name</label>
                             </div>
                         </div>
 
 
                         <div class="form-group">
-                            <input v-model="competitor.address" type="text" class="form-control" required>
+                            <Input v-model="competitor.address" required />
                             <label>Address</label>
                         </div>
                         <div class="row">
                             <div class="col-sm-4 form-group">
-                                <input v-model="competitor.city" type="text" class="form-control" required>
+                                <Input v-model="competitor.city" required />
                                 <label>City</label>
                             </div>
                             <div class="col-sm-3 form-group">
-                                <input v-model="competitor.state" type="text" class="form-control" required>
+                                <Input v-model="competitor.state" required />
                                 <label>State/Province/Region</label>
                             </div>
                             <div class="col-sm-2 form-group">
-                                <input v-model="competitor.zip" type="text" class="form-control" required>
+                                <Input v-model="competitor.zip" required />
                                 <label>Zip/Postal Code</label>
                             </div>
                             <div class="col-sm-3 form-group">
@@ -61,18 +61,18 @@
                                         <label>Date of birth</label>
                                     </div>
                                     <div class="col-sm-2 form-group">
-                                        <input v-model="day" type="text" class="form-control" placeholder="DD" required maxlength="2">
+                                        <Input v-model="day" placeholder="DD" maxlength="2" required />
                                     </div>
                                     <div class="col-sm-2 form-group">
-                                        <input v-model="month" type="text" class="form-control" placeholder="MM" maxlength="2" required>
+                                        <Input v-model="month" placeholder="MM" maxlength="2" required />
                                     </div>
                                     <div class="col-sm-4 form-group">
-                                        <input v-model="year" type="text" class="form-control" placeholder="YYYY" maxlength="4" required>
+                                        <Input v-model="year" placeholder="YYYY" maxlength="4" required />
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group col-sm-6">
-                                <input v-model="competitor.company" type="text" class="form-control">
+                                <Input v-model="competitor.company" />
                                 <label>Company</label>
                             </div>
                         </div>
@@ -124,7 +124,7 @@
                         <div class="form-group">
                             <p>A microphone is required to play in DevWars to communicate with your team during a game.</p>
                             <div class="form-check">
-                                <input id="has-microphone" type="checkbox" class="checkbox" required>
+                                <input id="has-microphone" type="checkbox" class="checkbox" required />
                                 <label for="has-microphone">I have a microphone</label>
                             </div>
                         </div>
@@ -144,10 +144,6 @@
                         <a href="/" class="btn btn-outline-primary">Back to home</a>
                     </div>
                 </div>
-
-
-
-
             </div>
         </div>
     </div>
@@ -160,9 +156,10 @@
 
     import * as countryList from 'country-list';
     import Http from "../../services/Http";
+    import Input from "../../components/form/Input";
 
     @Component({
-        components: {},
+        components: { Input },
         middleware: 'auth'
     })
     export default class CompetitorRegistration extends Vue {

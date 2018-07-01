@@ -3,11 +3,11 @@
         <div class="col-sm-8">
             <h3 class="modpanel__subtitle">Email</h3>
             <div class="form-group">
-                <input v-model="emailCurrentPassword" type="password" class="form-control" required>
+                <Input v-model="emailCurrentPassword" type="password" required />
                 <label>Current password</label>
             </div>
             <div class="form-group">
-                <input v-model="newEmail" type="text" class="form-control">
+                <Input v-model="newEmail" />
                 <label>New Email</label>
             </div>
             <div class="form-group">
@@ -16,15 +16,15 @@
 
             <h3 class="modpanel__subtitle">Password</h3>
             <div class="form-group">
-                <input v-model="currentPassword" type="password" class="form-control" required>
+                <Input v-model="currentPassword" type="password" required />
                 <label>Current password</label>
             </div>
             <div class="form-group">
-                <input v-model="newPassword" type="password" class="form-control" required>
+                <Input v-model="newPassword" type="password" required />
                 <label>New password</label>
             </div>
             <div class="form-group">
-                <input v-model="newPasswordConfirmed" type="password" class="form-control" required>
+                <Input v-model="newPasswordConfirmed" type="password" required />
                 <label>Confirm new password</label>
             </div>
             <div class="form-group">
@@ -42,8 +42,12 @@
 <script>
     import Component from 'nuxt-class-component';
     import Vue from 'vue';
+    import Input from '../../components/form/Input';
 
-    @Component
+    @Component({
+        components: { Input }
+    })
+
     export default class Accounts extends Vue {
         currentPassword = '';
         newPassword = '';

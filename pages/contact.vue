@@ -14,11 +14,11 @@
                             <div class="card__inner">
                                 <form async-submit="contact.contact()">
                                     <div class="form-group">
-                                        <input ng-model="contact.info.name" class="form-control" type="text" required>
+                                        <Input ng-model="contact.info.name" required />
                                         <label>Name</label>
                                     </div>
                                     <div class="form-group">
-                                        <input ng-model="contact.info.email" class="form-control" type="text" required>
+                                        <Input ng-model="contact.info.email" required />
                                         <label>Email</label>
                                     </div>
                                     <div class="form-group">
@@ -53,8 +53,11 @@
 <script>
     import Component from 'nuxt-class-component';
     import Vue from 'vue';
+    import Input from '../components/form/Input';
 
-    @Component({})
+    @Component({
+        components: { Input }
+    })
 
     export default class Contact extends Vue {
 

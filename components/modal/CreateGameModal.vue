@@ -8,11 +8,11 @@
             </select>
         </div>
         <div class="form-group">
-            <input v-model="date" placeholder="DD/MM/YYYY" type="text" class="form-control">
+            <Input v-model="date" placeholder="DD/MM/YYYY" />
             <label>Date</label>
         </div>
         <div class="form-group">
-            <input v-model="time" placeholder="HH:MM" type="text" class="form-control">
+            <Input v-model="time" placeholder="HH:MM" />
             <label>Time</label>
         </div>
         <div class="align-right">
@@ -29,10 +29,12 @@
     import moment from 'moment';
 
     import {Prop} from 'vue-property-decorator';
+    import Input from '../form/Input';
 
     @Component({
-        components: {}
+        components: { Input }
     })
+
     export default class CreateGameModal extends Vue {
         name = '';
         date = '';

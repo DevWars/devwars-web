@@ -6,19 +6,17 @@
                     <h1 class="auth-form__title">Reset Password</h1>
                     <form>
                         <div class="form-group">
-                            <input type="password"
+                            <Input type="password"
                                    v-model="password"
-                                   class="form-control"
                                    tabindex="1"
-                                   required>
+                                   required />
                             <label>New Password</label>
                         </div>
                         <div class="form-group">
-                            <input type="password"
+                            <Input type="password"
                                    v-model="confirmed"
-                                   class="form-control"
                                    tabindex="2"
-                                   required>
+                                   required />
                             <label>Confirm Password</label>
                         </div>
                         <div class="auth-form__actions">
@@ -47,8 +45,12 @@
 <script>
     import Component from 'nuxt-class-component';
     import Vue from 'vue';
+    import Input from '../components/form/Input';
 
-    @Component
+    @Component({
+        components: { Input }
+    })
+
     export default class ResetPassword extends Vue {
         done = false;
         password = '';

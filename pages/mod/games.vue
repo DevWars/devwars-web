@@ -4,8 +4,7 @@
             <h1 class="modpanel__header-title">Games</h1>
             <div class="modpanel__header-actions">
                 <div class="modpanel__header-search">
-                    <input class="form-control labeless" type="text"
-                           placeholder="Search for Game">
+                    <Input class="labeless" placeholder="Search for Game" />
                 </div>
                 <button @click="createGame" class="btn btn-primary btn-icon btn-sm">
                     <i class="fa fa-plus"></i>
@@ -80,8 +79,9 @@
     import CreateGameModal from '~/components/modal/CreateGameModal';
 
     @Component({
-        components: {}
+        components: { Input }
     })
+
     export default class DashboardGames extends Vue {
         @State(state => state.game.all) all;
 

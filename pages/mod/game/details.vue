@@ -3,11 +3,11 @@
         <form class="mod-form">
             <h3 class="modpanel__subtitle">Main</h3>
             <div class="form-group">
-                <input v-model="date" type="text" class="form-control">
+                <Input v-model="date" />
                 <label>Date</label>
             </div>
             <div class="form-group">
-                <input v-model="time" type="text" class="form-control">
+                <Input v-model="time" />
                 <label>Time</label>
             </div>
             <h3 class="modpanel__subtitle">Game</h3>
@@ -23,18 +23,18 @@
                 </div>
             </div>
             <div class="form-group">
-                <input v-model="game.theme" type="text" class="form-control">
+                <Input v-model="game.theme" />
                 <label>Theme</label>
             </div>
             <h3 class="modpanel__subtitle">Objectives</h3>
             <div class="form-group" v-for="objective in orderBy(game.objectives, 'number')" :key="objective.id">
-                <input v-model="objective.description" type="text" class="form-control" maxlength="110">
+                <Input v-model="objective.description" maxlength="110" />
                 <label>Objective #{{ objective.number + 1 }} (Bonus)</label>
             </div>
 
             <h3 class="modpanel__subtitle">Media</h3>
             <div class="form-group">
-                <input v-model="game.youtube_url" type="text" class="form-control">
+                <Input v-model="game.youtube_url" />
                 <label>Youtube URL</label>
             </div>
         </form>
@@ -48,10 +48,12 @@
     import {Watch} from 'vue-property-decorator';
 
     import moment from 'moment';
+    import Input from '../../../components/form/Input';
 
     @Component({
-        components: {}
+        components: { Input }
     })
+
     export default class DashboardGameDetails extends Vue {
         @State(state => state.game.game) game;
 

@@ -4,16 +4,15 @@
             <form class="auth-form" v-async-submit="[submit]">
                 <h1 class="auth-form__title">Register</h1>
                 <div class="form-group">
-                    <input v-model="email" class="form-control" type="text" required>
+                    <Input v-model="email" required />
                     <label>Email</label>
                 </div>
                 <div class="form-group">
-                    <input minlength="4" maxlength="32" v-model="username" class="form-control" type="text"
-                           required>
+                    <Input minlength="4" maxlength="32" v-model="username" required />
                     <label>Username</label>
                 </div>
                 <div class="form-group">
-                    <input v-model="password" class="form-control" type="password" required>
+                    <Input v-model="password" type="password" required />
                     <label>Password</label>
                 </div>
                 <div class="auth-form__actions">
@@ -28,11 +27,14 @@
 <script>
     import Component from 'nuxt-class-component';
     import Vue from 'vue';
+    import Input from '../components/form/Input';
 
     @Component({
+        components: { Input },
         layout: 'header',
         middleware: 'guest'
     })
+
     export default class Login extends Vue {
         username = '';
         email = '';

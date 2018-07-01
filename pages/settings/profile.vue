@@ -4,11 +4,11 @@
             <div class="col-sm-8">
                 <h3 class="modpanel__subtitle">Profile</h3>
                 <div class="form-group">
-                    <input v-model="profile.username" type="text" class="form-control">
+                    <Input v-model="profile.username" />
                     <label>Username</label>
                 </div>
                 <div class="form-group">
-                    <input v-model="profile.location" type="text" class="form-control">
+                    <Input v-model="profile.location" />
                     <label>Location</label>
                 </div>
                 <div class="form-group">
@@ -16,7 +16,7 @@
                               placeholder="Tell us a little bit about yourself"></textarea>
                 </div>
                 <div class="form-group">
-                    <input v-model="profile.url" type="text" class="form-control">
+                    <Input v-model="profile.url" />
                     <label>URL</label>
                 </div>
 
@@ -50,10 +50,12 @@
     import Avatar from '~/components/user/Avatar';
     import FileChooser from '~/components/FileChooser';
     import CropperModal from '~/components/modal/CropperModal';
+    import Input from '~/components/form/Input';
 
     @Component({
-        components: {Avatar, FileChooser}
+        components: {Avatar, FileChooser, Input}
     })
+
     export default class SettingsProfile extends Vue {
         profile = {};
 

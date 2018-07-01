@@ -8,7 +8,7 @@
 
                     <form v-async-submit="[forgot]">
                         <div class="form-group">
-                            <input v-model="email" name="email" type="text" class="form-control" tabindex="1" required>
+                            <Input v-model="email" name="email" tabindex="1" required />
                             <label>Email or Username</label>
                         </div>
                         <div class="auth-form__actions">
@@ -32,8 +32,12 @@
 <script>
     import Component from 'nuxt-class-component';
     import Vue from 'vue';
+    import Input from '../components/form/Input';
 
-    @Component
+    @Component({
+        components: { Input }
+    })
+
     export default class ResetPassword extends Vue {
         done = false;
         email = '';
