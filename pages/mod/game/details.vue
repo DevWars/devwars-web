@@ -32,6 +32,11 @@
                 <label>Objective #{{ objective.number + 1 }} (Bonus)</label>
             </div>
 
+            <h3 class="modpanel__subtitle">Zen Garden HTML</h3>
+            <div class="form-group">
+                <textarea class="form-control" placeholder="Insert HTML code here..." />
+            </div>
+
             <h3 class="modpanel__subtitle">Media</h3>
             <div class="form-group">
                 <Input v-model="game.youtube_url" />
