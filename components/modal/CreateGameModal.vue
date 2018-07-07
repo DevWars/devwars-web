@@ -8,12 +8,9 @@
             </select>
         </div>
         <div class="form-group">
-            <Input v-model="date" placeholder="DD/MM/YYYY" />
-            <label>Date</label>
-        </div>
-        <div class="form-group">
-            <Input v-model="time" placeholder="HH:MM" />
-            <label>Time</label>
+            <DatePicker v-model="date" />
+
+            <label>When is the game?</label>
         </div>
         <div class="align-right">
             <button class="btn btn-outline-gray">Cancel</button>
@@ -28,24 +25,24 @@
 
     import moment from 'moment';
 
-    import {Prop} from 'vue-property-decorator';
+    import { Prop } from 'vue-property-decorator';
     import Input from '../form/Input';
+    import DatePicker from '../form/DatePicker';
 
     @Component({
-        components: { Input }
+        components: { DatePicker, Input },
     })
 
     export default class CreateGameModal extends Vue {
         name = '';
         date = '';
-        time = '';
 
         @Prop() resolve;
 
         async submit() {
-            let timestamp = moment.utc(`${this.date} ${this.time}`, 'DD/MM/YYYY HH:mm').unix() * 1000;
+            let timestamp = moment.utc(`${this.date}`, 'DD/MM/YYYY HH:mm').unix() * 1000;
 
-            await this.$store.dispatch('game/create', {name: this.name, timestamp});
+            await this.$store.dispatch('game/create', { name: this.name, timestamp });
 
             this.close(true);
         }

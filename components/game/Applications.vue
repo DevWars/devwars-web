@@ -40,7 +40,7 @@
         async cancel(game) {
             let [result] = await this.$open(ConfirmModal, {
                 title: "Confirm",
-                text: "Are you sure you would like to cancel?"
+                description: "Are you sure you would like to cancel?"
             });
 
             if (!result) return;

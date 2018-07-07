@@ -44,7 +44,8 @@ module.exports = {
         '~/assets/scss/main.scss',
         'webui-popover/src/jquery.webui-popover.css',
         'vue2-animate/dist/vue2-animate.css',
-        'cropperjs/dist/cropper.css'
+        'cropperjs/dist/cropper.css',
+        'flatpickr/dist/flatpickr.css'
     ],
 
     plugins: [

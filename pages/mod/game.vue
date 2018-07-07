@@ -26,7 +26,7 @@
                     Activate
                 </button>
                 <button v-async-click="[save]" class="btn btn-primary">Save</button>
-                <button async-click="mod.delete()" class="btn btn-secondary">Delete</button>
+                <button v-async-click="[remove]" class="btn btn-secondary">Delete</button>
             </div>
         </div>
 
@@ -44,6 +44,8 @@
     import Vue from 'vue';
     import Http from "../../services/Http";
 
+    import DeleteModal from '~/components/modal/DeleteModal';
+
     @Component({
         components: {}
     })
@@ -57,7 +59,7 @@
         }
 
         async endGame() {
-           await Http.for(`/game/${this.game.id}/ended`).save()
+            await Http.for(`/game/${this.game.id}/ended`).save()
         }
 
         async save() {
@@ -67,7 +69,7 @@
             delete cloned.teams;
 
             // Make sure the list doesn't include objectives with games
-            const transformed = this.game.objectives.map(it => ({...it, game: null}));
+            const transformed = this.game.objectives.map(it => ({ ...it, game: null }));
 
             // Save the objectives
             await Http.for(`/game/${this.game.id}/objective`).save(transformed);
@@ -85,6 +87,25 @@
 
             // Can't forget to update our state with the new game
             this.$store.commit('game/game', game);
+        }
+
+        async remove() {
+            const [confirmed] = await this.$open(DeleteModal, {
+                title: 'Delete Game?',
+                description: `Are you sure you want to delete this game?`
+            });
+
+            if (!confirmed) return;
+
+            try {
+                await Http.for('game').delete(this.game);
+
+                this.$store.dispatch('toast/success', 'Game deleted.');
+
+                this.$router.push({ path: '/mod/games' });
+            } catch (e) {
+                this.$store.dispatch('toast/error', 'Game could not be deleted.');
+            }
         }
 
         async fetch({ store, query }) {

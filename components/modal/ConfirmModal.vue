@@ -4,7 +4,7 @@
             {{ title }}
         </h1>
         <p>
-            {{ text }}
+            {{ description }}
         </p>
 
         <div class="modal__actions">
@@ -27,7 +27,7 @@
     @Component
     export default class ConfirmModal extends Vue {
         @Prop() title;
-        @Prop() text;
+        @Prop() description;
         @Prop({default: 'Cancel'}) cancelText;
         @Prop({default: 'Okay'}) confirmText;
 

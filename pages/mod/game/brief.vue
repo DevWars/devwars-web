@@ -152,7 +152,7 @@
         }
 
         async removePlayer(player, team) {
-            let confirmed = await this.$open(ConfirmModal, {text: "Are you sure you would like to remove this player?"});
+            let confirmed = await this.$open(ConfirmModal, {description: "Are you sure you would like to remove this player?"});
 
             if(!confirmed) return;
 
