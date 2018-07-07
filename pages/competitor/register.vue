@@ -150,7 +150,7 @@
 
     @Component({
         components: { Input },
-        middleware: 'auth'
+        middleware: ['auth', 'no-competitors']
     })
     export default class CompetitorRegistration extends Vue {
         month = '';
