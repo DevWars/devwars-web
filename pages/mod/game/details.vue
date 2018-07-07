@@ -32,9 +32,13 @@
                 <label>Objective #{{ objective.number + 1 }} (Bonus)</label>
             </div>
 
-            <h3 class="modpanel__subtitle">Zen Garden HTML</h3>
-            <div class="form-group">
-                <textarea class="form-control" placeholder="Insert HTML code here..." />
+            <h3 v-if="game.name === 'Zen Garden'" class="modpanel__subtitle">Zen Garden HTML</h3>
+            <div v-if="game.name === 'Zen Garden'" class="form-group">
+                <textarea
+                    v-model="game.language_templates.html"
+                    class="form-control"
+                    placeholder="Insert HTML code here..."
+                ></textarea>
             </div>
 
             <h3 class="modpanel__subtitle">Media</h3>
@@ -47,10 +51,10 @@
 </template>
 
 <script>
-    import Component, {State} from 'nuxt-class-component';
+    import Component, { State } from 'nuxt-class-component';
     import Vue from 'vue';
 
-    import {Watch} from 'vue-property-decorator';
+    import { Watch } from 'vue-property-decorator';
 
     import moment from 'moment';
     import Input from '~/components/form/Input';
@@ -87,7 +91,7 @@
             for (let i = 0; i < 5; i++) {
                 let item = this.game.objectives.find(it => it.number === i);
 
-                if (!item) item = {number: i};
+                if (!item) item = { number: i };
 
                 list.push(item);
             }
