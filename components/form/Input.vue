@@ -3,7 +3,7 @@
         :type="type"
         :value="value"
         @input="e => $emit('input', e.target.value)"
-        :class="['form-control', {empty: !(value && value.length)}]"
+        :class="['form-control', {empty: !(value && value.length)},  {valid: value && value.length}]"
     />
 </template>
 

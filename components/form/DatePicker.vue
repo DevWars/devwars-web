@@ -1,7 +1,7 @@
 <template>
     <FlatPickr
         v-click-outside="closePicker"
-        :class="['form-control', {empty: !(value && value.length)}]"
+        :class="['form-control', {empty: !value || !value.length}, {valid: value && value.length }]"
         ref="pickr"
         @input="onChange"
         :value="value"
@@ -33,7 +33,7 @@
         };
 
         onChange(e) {
-           this.$emit('input', e);
+            this.$emit('input', e);
         }
 
         closePicker() {
