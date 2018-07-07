@@ -10,7 +10,7 @@
 
                 <div class="row">
                     <div class="col-md-8">
-                        <div class="card card-plain">
+                        <div class="card card-dark card-plain">
                             <div class="card__inner">
                                 <form async-submit="contact.contact()">
                                     <div class="form-group">
@@ -31,10 +31,19 @@
                                 </form>
                             </div>
                         </div>
+                        <div class="card card-dark card-plain">
+                            <div class="card__inner align-center">
+                                <h1>Thank you!</h1>
+                                <div class="mt-xs mb-md">
+                                    <h4>We received your email, you will hear back from us soon.</h4>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-md-4">
-                        <div class="card card-plain">
+                        <div class="card card-dark card-plain">
                             <div class="card__inner">
                                 <div class="contact-sidebar">
                                     <div class="contact-sidebar__address">

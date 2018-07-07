@@ -58,4 +58,8 @@ $file__element--property_modifier
     &-bezeless {
         padding: 0 !important;
     }
+
+    &-dark {
+        background-color: $bg-color-2;
+    }
 }
