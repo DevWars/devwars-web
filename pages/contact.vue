@@ -14,15 +14,20 @@
                             <div class="card__inner">
                                 <form async-submit="contact.contact()">
                                     <div class="form-group">
-                                        <Input ng-model="contact.info.name" required />
+                                        <Input v-model="name" required />
                                         <label>Name</label>
                                     </div>
                                     <div class="form-group">
-                                        <Input ng-model="contact.info.email" required />
+                                        <Input v-model="email" required />
                                         <label>Email</label>
                                     </div>
                                     <div class="form-group">
-                                        <textarea ng-model="contact.info.text" class="form-control" rows="8" placeholder="Message"></textarea>
+                                        <textarea
+                                            v-model="message"
+                                            class="form-control"
+                                            rows="8"
+                                            placeholder="Message"
+                                        ></textarea>
                                     </div>
 
                                     <div class="align-right">
@@ -69,6 +74,8 @@
     })
 
     export default class Contact extends Vue {
-
+        name = '';
+        email = '';
+        message = '';
     }
 </script>
