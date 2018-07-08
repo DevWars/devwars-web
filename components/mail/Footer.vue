@@ -1,4 +1,4 @@
-<template functional>
+<template>
     <mj-wrapper>
         <mj-section padding="0 0 20" background-color="#0B0C11">
             <mj-column>
@@ -30,9 +30,3 @@
         </mj-section>
     </mj-wrapper>
 </template>
-
-<script>
-    export default {
-        functional: true
-    }
-</script>

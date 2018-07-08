@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="ribbon"></div>
+        <div class="ribbon ribbon-competitor"></div>
         <div class="container">
             <div class="row-lift">
                 <div class="heading">

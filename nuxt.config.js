@@ -107,7 +107,6 @@ module.exports = {
             extend(config, { isDev, isClient }) {
                 const vueLoader = config.module.rules.find((rule) => rule.loader === 'vue-loader');
                 vueLoader.options.transformToRequire['mj-image'] = ['src'];
-                vueLoader.options.transformToRequire['mg-include'] = ['path'];
 
                 if (isDev && isClient) {
                     config.module.rules.push({
