@@ -1,4 +1,6 @@
 const webpack = require('webpack');
+const parser = require('body-parser')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     /*
@@ -7,16 +9,23 @@ module.exports = {
     head: {
         title: 'DevWars',
         meta: [
-            {charset: 'utf-8'},
-            {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-            {hid: 'description', name: 'description', content: 'DevWars is a live game show where web developers compete against each other in 60 minute coding challenges. Join our educational and entertaining platform of experienced and aspiring members.'},
-            {name: 'google-site-verification', content: 'RLFyk9dzTQTWw10KYT1_-C3uMy4Itz26Har6xRbv_Co'},
-            {name: "og:title", content: "Esports for Developers - DevWars"},
-            {name: "og:image", content: "https://devwars.tv/og/logo.jpeg"},
-            {name: "og:description", content: "DevWars is a live game show where web developers compete against each other in 60 minute coding challenges. Join our educational and entertaining platform of experienced and aspiring members."}
+            { charset: 'utf-8' },
+            { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+            {
+                hid: 'description',
+                name: 'description',
+                content: 'DevWars is a live game show where web developers compete against each other in 60 minute coding challenges. Join our educational and entertaining platform of experienced and aspiring members.'
+            },
+            { name: 'google-site-verification', content: 'RLFyk9dzTQTWw10KYT1_-C3uMy4Itz26Har6xRbv_Co' },
+            { name: "og:title", content: "Esports for Developers - DevWars" },
+            { name: "og:image", content: "https://devwars.tv/og/logo.jpeg" },
+            {
+                name: "og:description",
+                content: "DevWars is a live game show where web developers compete against each other in 60 minute coding challenges. Join our educational and entertaining platform of experienced and aspiring members."
+            }
         ],
         link: [
-            {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
+            { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
             {
                 rel: 'stylesheet',
                 href: 'https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:300,400,500,700'
@@ -29,10 +38,18 @@ module.exports = {
             },
         ]
     },
+
+
+    serverMiddleware: [
+        { path: '/mail/translate', handler: parser.json({ limit: '5mb' }) },
+        { path: '/mail/translate', handler: '~/mail/index.js' },
+    ],
+
+    debug: true,
     /*
     ** Customize the progress bar color
     */
-    loading: {color: '#ff007d'},
+    loading: { color: '#ff007d' },
 
     axios: {
         baseURL: 'http://localhost:3030/',
@@ -49,8 +66,8 @@ module.exports = {
     ],
 
     plugins: [
-        {src: '~plugins/ga.js', ssr: false},
-        {src: '~/plugins/popover', ssr: false},
+        { src: '~plugins/ga.js', ssr: false },
+        { src: '~/plugins/popover', ssr: false },
         '~/plugins/directives',
         '~/plugins/axios',
         '~/plugins/filters',
@@ -82,19 +99,21 @@ module.exports = {
                     '$': 'jquery',
                     'Popper': 'popper.js',
                 }),
-                new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+                new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
             ],
             /*
             ** Run ESLint on save
             */
-            extend(config, {isDev, isClient}) {
+            extend(config, { isDev, isClient }) {
+                const vueLoader = config.module.rules.find((rule) => rule.loader === 'vue-loader');
+                vueLoader.options.transformToRequire['mj-image'] = ['src'];
+                vueLoader.options.transformToRequire['mg-include'] = ['path'];
+
                 if (isDev && isClient) {
                     config.module.rules.push({
-                        enforce: 'pre',
-                        test: /\.(js|vue)$/,
-                        loader: 'eslint-loader',
-                        exclude: /(node_modules)/
-                    })
+                        test: /\.(mjml)$/,
+                        loader: 'mjml-loader',
+                    });
                 }
             }
         }

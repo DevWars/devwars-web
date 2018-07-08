@@ -40,7 +40,7 @@
         @Prop() resolve;
 
         async submit() {
-            let timestamp = moment.utc(`${this.date}`, 'DD/MM/YYYY HH:mm').unix() * 1000;
+            let timestamp = moment.utc(this.date, 'MM/DD/YYYY HH:mm').unix() * 1000;
 
             await this.$store.dispatch('game/create', { name: this.name, timestamp });
 

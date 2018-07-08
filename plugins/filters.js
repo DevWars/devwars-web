@@ -11,6 +11,7 @@ Vue.filter('moment', (input, format) => {
         'mediumDate': 'MMM D, YYYY',
         'longDate': 'MMMM D, YYYY',
         'fullDate': 'dddd, MMMM DD, YYYY',
+        'fullDateWithTime': 'dddd, MMMM DD, YYYY @ HH:mm (UTC)',
     }[format] || format;
 
     return moment.utc(input).format(format);

@@ -27,7 +27,7 @@
 
         config = {
             dateFormat: 'm/d/Y H:i',
-            altFormat: 'd/m/Y H:i',
+            altFormat: 'm/d/Y H:i',
             enableTime: true,
             wrap: true
         };
