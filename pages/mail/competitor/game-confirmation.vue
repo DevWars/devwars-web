@@ -1,5 +1,5 @@
 <template>
-    <MailMeta subject="DevWars Game Reminder">
+    <MailMeta subject="Confirm Your DevWars Entry">
         <mj-section>
             <mj-column>
                 <mj-text
@@ -8,11 +8,11 @@
                     font-size="24px"
                     color="#fff"
                     font-family="helvetica"
-                >You are entered to compete in DevWars.
+                >
+                    You are entered to compete in DevWars.
                 </mj-text>
                 <mj-text align="center" line-height="1.3" font-size="16px" color="#fff" font-family="helvetica">
-                    This is an email confirmation of your entry to play. Below are the details of your upcoming
-                    game.
+                    This is an email confirmation of your entry to play. Below are the details of your upcoming game.
                 </mj-text>
             </mj-column>
         </mj-section>
@@ -25,10 +25,11 @@
                     font-size="16px"
                     color="#fff"
                     font-family="helvetica"
-                >{{ game.timestamp | moment('fullDateWithTime') }}
+                >
+                    {{ game.timestamp | moment('fullDateWithTime') }}
                 </mj-text>
-                <mj-text align="center" font-size="16px" color="#fff" font-family="helvetica">DevWars
-                    Competition
+                <mj-text align="center" font-size="16px" color="#fff" font-family="helvetica">
+                    DevWars Competition
                 </mj-text>
                 <mj-button
                     background-color="#00c9ff"
@@ -36,7 +37,8 @@
                     font-family="helvetica"
                     font-size="14px"
                     font-weight="bold"
-                >Convert to my timezone
+                >
+                    Convert to my timezone
                 </mj-button>
             </mj-column>
         </mj-section>
@@ -57,8 +59,8 @@
 
         <mj-section>
             <mj-column>
-                <mj-text align="center" font-size="16px" color="#fff" font-family="helvetica">Don't think you
-                    can make it?
+                <mj-text align="center" font-size="16px" color="#fff" font-family="helvetica">
+                    Don't think you can make it?
                 </mj-text>
                 <mj-button
                     background-color="#e74c3c"
@@ -66,7 +68,8 @@
                     font-family="helvetica"
                     font-size="14px"
                     font-weight="bold"
-                >Resign from competition
+                >
+                    Resign from competition
                 </mj-button>
             </mj-column>
         </mj-section>
@@ -77,13 +80,14 @@
     import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
-    import Http from '../../services/Http';
-    import MailMeta from '../../components/mail/MailMeta';
+    import Http from '../../../services/Http';
+    import MailMeta from '../../../components/mail/MailMeta';
 
     @Component({
         components: { MailMeta },
         layout: 'mail'
     })
+
     export default class extends Vue {
         async asyncData({ query }) {
             const game = await Http.for('game').byID(query.game);

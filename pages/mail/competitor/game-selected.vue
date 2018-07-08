@@ -37,8 +37,8 @@
     import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
-    import Http from '../../services/Http';
-    import MailMeta from '../../components/mail/MailMeta';
+    import Http from '../../../services/Http';
+    import MailMeta from '../../../components/mail/MailMeta';
 
     @Component({
         components: { MailMeta },
