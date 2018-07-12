@@ -3,9 +3,9 @@ const cheerio = require('cheerio');
 
 const { mjml2html } = require('mjml');
 
-const NUXT_SELECTOR = '__nuxt';
+const NUXT_SELECTOR = '#__nuxt';
 
-module.exports = async function (req, res) {
+const translate_request_to_mjml = async (req) => {
     const body = req.body;
 
     try {
@@ -21,8 +21,9 @@ module.exports = async function (req, res) {
         const $ = cheerio.load(data);
 
         // Get the meta
-        const meta = $('div[subject]').attributes;
-        const { subject } = meta;
+        const meta = $('div[subject]');
+
+        const attributes = meta.attr();
 
         // Remove the meta element so we don't
         // mess up the email's final output
@@ -35,15 +36,15 @@ module.exports = async function (req, res) {
         const { html } = mjml2html(email_content);
 
         // Write the meta with the content back to the server
-        res.write(JSON.stringify({
+        return {
+            ...attributes,
             html,
-            subject,
-        }), "utf8");
+        };
     } catch (e) {
         console.error(e);
-    } finally {
-        res.end();
     }
 
-    res.end();
+    return null;
 };
+
+module.exports = translate_request_to_mjml;

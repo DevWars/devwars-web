@@ -1,5 +1,5 @@
 <template>
-    <div class="card card--home">
+    <div v-if="game && game.teams" class="card card--home">
         <div class="card__inner">
             <h2 class="card__title">Last Game Recap</h2>
             <div class="card--home__contents home-recap">

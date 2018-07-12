@@ -7,7 +7,7 @@
                     <NowShowing v-if="active"/>
                 </div>
                 <div class="col-lg-6">
-                    <Recap :game="latest" />
+                    <Recap v-if="latest" :game="latest" />
                 </div>
             </div>
         </div>
