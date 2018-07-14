@@ -12,7 +12,8 @@
                     Password Reset
                 </mj-text>
                 <mj-text align="center" line-height="1.3" font-size="16px" color="#fff" font-family="helvetica">
-                    We received a password change request for your DevWars account: <strong>USERNAME_HERE</strong>. To change your password, click the link below:
+                    We received a password change request for your DevWars account: <strong>USERNAME_HERE</strong>. To
+                    change your password, click the link below:
                 </mj-text>
             </mj-column>
         </mj-section>
@@ -20,6 +21,7 @@
         <mj-section padding-top="0">
             <mj-column>
                 <mj-button
+                    :href="url"
                     background-color="#7289da"
                     border-radius="40px"
                     font-family="helvetica"
@@ -37,7 +39,6 @@
     import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
-    import Http from '../../services/Http';
     import MailMeta from '../../components/mail/MailMeta';
 
     @Component({
@@ -46,6 +47,8 @@
     })
 
     export default class extends Vue {
-
+        async asyncData({ query }) {
+            return { url: query.url };
+        }
     }
 </script>

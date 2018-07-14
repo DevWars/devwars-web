@@ -12,7 +12,8 @@
                     Welcome!
                 </mj-text>
                 <mj-text align="center" line-height="1.3" font-size="16px" color="#fff" font-family="helvetica">
-                    Thanks for signing up on DevWars. To start hacking, please verify your email address by clicking the link below.
+                    Thanks for signing up on DevWars. To start hacking, please verify your email address by clicking the
+                    link below.
                 </mj-text>
             </mj-column>
         </mj-section>
@@ -20,6 +21,7 @@
         <mj-section padding-top="0">
             <mj-column>
                 <mj-button
+                    :href="url"
                     background-color="#7289da"
                     border-radius="40px"
                     font-family="helvetica"
@@ -47,5 +49,8 @@
 
     export default class extends Vue {
 
+        async asyncData({ query }) {
+            return { url: query.url };
+        }
     }
 </script>
