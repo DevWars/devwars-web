@@ -38,9 +38,6 @@
           <li class="sitemap__list-item">
             <a class="sitemap__link" href="/blog">Blog</a>
           </li>
-          <li class="sitemap__list-item">
-            <a class="sitemap__link" href="/contact">Contact</a>
-          </li>
         </ul>
         <ul class="sitemap__list">
           <li class="sitemap__list-item">EXTRAS</li>
