@@ -76,7 +76,11 @@
         <br><br>
 
         <div class="mod-card">
-            <h4 class="modpanel__subtitle" style="margin-bottom: 0">({{ applications.length }}) Applicants</h4>
+            <div class="mod-card__header">
+                <h4 class="modpanel__subtitle" style="margin-bottom: 0">({{ applications.length }}) Applicants</h4>
+                <button class="btn btn-outline-primary">Add Registrant</button>
+            </div>
+
         </div>
         <table class="modpanel-table">
             <thead>

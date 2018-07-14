@@ -329,6 +329,10 @@ $sidebar-background                                 : $bg-color-4;
     @extend %clear;
     padding: $grid-gutter-width;
     background-color: $bg-color-2;
+
+    &__header {
+        @extend %flex-justify;
+    }
 }
 
 .mod-form {
