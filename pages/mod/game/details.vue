@@ -38,6 +38,7 @@
                     v-model="game.language_templates.html"
                     class="form-control"
                     placeholder="Insert HTML code here..."
+                    rows="10"
                 ></textarea>
             </div>
 
