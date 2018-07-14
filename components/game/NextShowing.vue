@@ -36,13 +36,14 @@
 </template>
 
 <script>
-    import Component, {State} from 'nuxt-class-component';
+    import Component, { State } from 'nuxt-class-component';
     import Vue from 'vue';
     import moment from 'moment';
+    import { sortBy, first } from 'lodash';
     import RegistrationButton from "./RegistrationButton";
 
     @Component({
-        components: {RegistrationButton}
+        components: { RegistrationButton }
     })
     export default class extends Vue {
         @State(state => state.game.upcoming) upcoming;
@@ -67,7 +68,7 @@
         }
 
         get game() {
-            return this.upcoming[0];
+            return first(sortBy(this.upcoming, game => game.timestamp));
         }
 
     }

@@ -12,7 +12,7 @@
                     Password Reset
                 </mj-text>
                 <mj-text align="center" line-height="1.3" font-size="16px" color="#fff" font-family="helvetica">
-                    We received a password change request for your DevWars account: <strong>USERNAME_HERE</strong>. To
+                    We received a password change request for your DevWars account: <strong>{{ username }}</strong>. To
                     change your password, click the link below:
                 </mj-text>
             </mj-column>
@@ -48,7 +48,7 @@
 
     export default class extends Vue {
         async asyncData({ query }) {
-            return { url: query.url };
+            return { url: query.url, username: query.username };
         }
     }
 </script>

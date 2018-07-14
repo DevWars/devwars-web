@@ -27,8 +27,10 @@
                         <a v-show="!isApplied(game)" @click="enter(game)" class="btn btn-primary">
                             Register for Entry
                         </a>
-                        <a v-show="isApplied(game)" @click="cancel(game)"
-                           class="btn btn-outline-danger">Resign</a>
+                        <a
+                            v-show="isApplied(game)" @click="cancel(game)"
+                            class="btn btn-outline-danger"
+                        >Resign</a>
                     </td>
                 </tr>
                 </tbody>
@@ -38,21 +40,27 @@
 </template>
 
 <script>
-    import Component, {State} from 'nuxt-class-component';
+    import Component, { State } from 'nuxt-class-component';
     import Vue from 'vue';
 
-    import {Prop} from 'vue-property-decorator';
+    import { sortBy } from 'lodash';
+
+    import { Prop } from 'vue-property-decorator';
 
     import Applications from '~/components/game/Applications';
 
     @Component({
-        components: {Applications}
+        components: { Applications }
     })
     export default class ScheduleBlock extends Vue {
-        @Prop({default: ''}) filter;
+        @Prop({ default: '' }) filter;
         @Prop() count;
 
-        @State(state => state.game.upcoming) games;
+        @State(state => state.game.upcoming) _games;
+
+        get games() {
+            return sortBy(this._games, game => game.timestamp);
+        }
 
         description(game) {
             return game.name === 'Classic' ? 'Classic - 3 VS 3' : 'Zen Garden : 1 VS 1';
