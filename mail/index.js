@@ -3,7 +3,7 @@ const cheerio = require('cheerio');
 
 const { mjml2html } = require('mjml');
 
-const NUXT_SELECTOR = '#__nuxt';
+const NUXT_SELECTOR = '#__layout';
 
 const translate_request_to_mjml = async (req) => {
     const body = req.body;
