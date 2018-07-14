@@ -237,6 +237,51 @@ $checkbox-size: 25px;
 }
 
 
+.search-input {
+    position: relative;
+
+    &__list {
+        @extend %material;
+        width: 100%;
+        max-height: 150px;
+        border: 1px solid $divider-color;
+        position: absolute;
+        top: calc(100% - 1px);
+        z-index: $zindex-popover;
+        overflow-y: auto;
+    }
+
+    &__item {
+        padding: $xxs-space $xs-space;
+        background-color: #fff;
+        cursor: pointer;
+        &:hover {
+            background-color: $link-color;
+            color: #fff;
+        }
+    }
+
+    &__img,
+    &__txt {
+        @extend %align-middle;
+    }
+
+    &__img {
+        width: 30px;
+        height: 30px;
+        background-color: $bg-color-4;
+        background-size: cover;
+        border-radius: 50%;
+        margin-right: $xs-space;
+    }
+
+    &__txt {
+        @extend .p;
+        color: inherit;
+    }
+}
+
+
 
 
 
