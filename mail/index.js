@@ -11,9 +11,9 @@ const translate_request_to_mjml = async (req) => {
     try {
         // Get the HTML content from a SSR app
         const { data } = await axios({
-            method: "POST",
+            method: "GET",
             url: `mail${req.url.toString()}`,
-            data: body,
+            params: body,
             baseURL: "http://localhost:3000"
         });
 
