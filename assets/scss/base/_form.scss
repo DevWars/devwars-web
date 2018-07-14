@@ -260,25 +260,6 @@ $checkbox-size: 25px;
             color: #fff;
         }
     }
-
-    &__img,
-    &__txt {
-        @extend %align-middle;
-    }
-
-    &__img {
-        width: 30px;
-        height: 30px;
-        background-color: $bg-color-4;
-        background-size: cover;
-        border-radius: 50%;
-        margin-right: $xs-space;
-    }
-
-    &__txt {
-        @extend .p;
-        color: inherit;
-    }
 }
 
 
