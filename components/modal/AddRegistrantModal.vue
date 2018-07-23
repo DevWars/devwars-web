@@ -1,14 +1,8 @@
 <template>
-    <form v-async-submit="[save]">
+    <form v-async-submit="[addRegistrant]">
         <div class="form-group">
             <div class="search-input">
-                <Input autocomplete="off" />
-                <ul class="search-input__list" >
-                    <li class="search-input__item user-group">
-                        <Avatar class="sm" />
-                        <div class="user-group__name">Username</div>
-                    </li>
-                </ul>
+                <Input placeholder="Username" v-model="username" />
             </div>
         </div>
         <div class="modal__actions">
@@ -32,7 +26,12 @@
     })
 
     export default class AddRegistrantModal extends Vue {
+        @Prop() game;
 
+        username = '';
 
+        async addRegistrant() {
+            await this.$axios.$post(`/user/${this.username}/game-application/${this.game.id}`);
+        }
     }
 </script>

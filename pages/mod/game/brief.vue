@@ -12,11 +12,13 @@
                         </div>
                     </div>
                     <div class="games-players">
-                        <div class="games-player" :key="player.id" v-for="player in game.teams.blue.players"
-                             @click="removePlayer(player, game.teams.blue)">
+                        <div
+                            class="games-player" :key="player.id" v-for="player in game.teams.blue.players"
+                            @click="removePlayer(player, game.teams.blue)"
+                        >
                             <div class="user-group">
                                 <div class="games-player__avatar">
-                                    <Avatar :user="player.user"/>
+                                    <Avatar :user="player.user" />
                                 </div>
                                 <div class="games-player__name user-group__name">
                                     {{ player.user.username }}
@@ -47,11 +49,13 @@
                         </div>
                     </div>
                     <div class="games-players">
-                        <div class="games-player" :key="player.id" v-for="player in game.teams.red.players"
-                             @click="removePlayer(player, game.teams.red)">
+                        <div
+                            class="games-player" :key="player.id" v-for="player in game.teams.red.players"
+                            @click="removePlayer(player, game.teams.red)"
+                        >
                             <div class="user-group">
                                 <div class="games-player__avatar">
-                                    <Avatar :user="player.user"/>
+                                    <Avatar :user="player.user" />
                                 </div>
                                 <div class="games-player__name user-group__name">
                                     {{ player.user.username }}
@@ -78,7 +82,7 @@
         <div class="mod-card">
             <div class="mod-card__header">
                 <h4 class="modpanel__subtitle" style="margin-bottom: 0">({{ applications.length }}) Applicants</h4>
-                <button class="btn btn-outline-primary">Add Registrant</button>
+                <button @click="addRegistrant" class="btn btn-outline-primary">Add Registrant</button>
             </div>
 
         </div>
@@ -100,7 +104,7 @@
             <tbody>
                 <tr v-for="application in applications" :key="application.user.id">
                     <td>
-                        <Avatar :user="application.user"/>
+                        <Avatar :user="application.user" />
                         <span class="modpanel-table__item_name">{{ application.user.username }}</span>
                     </td>
                     <td>{{ application.user.ranking.rank.rank }}</td>
@@ -124,23 +128,24 @@
 </template>
 
 <script>
-    import Component, {State} from 'nuxt-class-component';
+    import Component, { State } from 'nuxt-class-component';
     import Vue from 'vue';
 
     import Avatar from '~/components/user/Avatar';
     import Http from "../../../services/Http";
     import AddPlayerModal from '~/components/modal/AddPlayerModal';
     import ConfirmModal from '~/components/modal/ConfirmModal';
+    import AddRegistrantModal from '~/components/modal/AddRegistrantModal';
 
     @Component({
-        components: {Avatar}
+        components: { Avatar }
     })
     export default class  extends Vue {
         @State(state => state.game.game) game;
         applications = [];
 
         rating(user, lang) {
-            if(!user.competitor) return 0;
+            if (!user.competitor) return 0;
 
             return user.competitor[lang + '_rate'];
         }
@@ -152,13 +157,19 @@
         }
 
         addPlayer(user) {
-            this.$open(AddPlayerModal, {user, game: this.game});
+            this.$open(AddPlayerModal, { user, game: this.game });
+        }
+
+        async addRegistrant() {
+            await this.$open(AddRegistrantModal, { game: this.game });
+
+            this.applications = await Http.for('game/application').get(`${this.game.id}`);
         }
 
         async removePlayer(player, team) {
-            let confirmed = await this.$open(ConfirmModal, {description: "Are you sure you would like to remove this player?"});
+            let confirmed = await this.$open(ConfirmModal, { description: "Are you sure you would like to remove this player?" });
 
-            if(!confirmed) return;
+            if (!confirmed) return;
 
             await Http.for('player').delete(player);
 
