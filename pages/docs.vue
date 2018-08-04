@@ -80,7 +80,8 @@
 
                 <div class="doc-warning">
                     <div class="doc-warning__title">Under Development</div>
-                    <p>This documentation is currently under development. More sections will be added over time, please check back frequently for updates.</p>
+                    <p>This documentation is currently under development. More sections will be added over time, please
+                        check back frequently for updates.</p>
                     <em>Last Modified: June 30, 2018</em>
                 </div>
             </div>
@@ -93,11 +94,15 @@
                 </header>
                 <section id="about">
                     <h2>About</h2>
-                    <p>People of all levels are invited to participate in an exhilarating battle to create the best website they can within 60 minutes. Teams are formed of 3 people, with the team's members each controlling a single language - HTML, CSS and JavaScript.</p>
+                    <p>People of all levels are invited to participate in an exhilarating battle to create the best
+                        website they can within 60 minutes. Teams are formed of 3 people, with the team's members each
+                        controlling a single language - HTML, CSS and JavaScript.</p>
                 </section>
                 <section id="positions">
                     <h2>Positions</h2>
-                    <p>Each player can only code in the language they are assigned to. This requires teams to communicate in order to complete their website in unison. There are currently only 3 positions available to play in DevWars: HTML, CSS and JavaScript.</p>
+                    <p>Each player can only code in the language they are assigned to. This requires teams to
+                        communicate in order to complete their website in unison. There are currently only 3 positions
+                        available to play in DevWars: HTML, CSS and JavaScript.</p>
                     <ul class="dw-positions doc-section">
                         <li class="dw-positions__item">
                             <div class="dw-positions__circle dw-positions__circle--html">
@@ -113,12 +118,12 @@
                         </li>
                         <li class="dw-positions__item">
                             <div class="dw-positions__circle dw-positions__circle--css">
-                            <div class="dw-positions__items">
-                                <span class="bracket">{</span>
-                                <span class="symbol">;</span>
-                                <span class="lang">css</span>
-                                <span class="bracket">}</span>
-                            </div>
+                                <div class="dw-positions__items">
+                                    <span class="bracket">{</span>
+                                    <span class="symbol">;</span>
+                                    <span class="lang">css</span>
+                                    <span class="bracket">}</span>
+                                </div>
                             </div>
                             <div class="dw-positions__title color-css">CSS</div>
                             <div class="dw-positions__role">Styling</div>
@@ -137,12 +142,14 @@
                         </li>
                     </ul>
                     <p>
-                        Each position plays a critical role for the team. HTML is in charge of templating the DOM, CSS handles the design for the website and JavaScript brings functionality into the website.
+                        Each position plays a critical role for the team. HTML is in charge of templating the DOM, CSS
+                        handles the design for the website and JavaScript brings functionality into the website.
                     </p>
                 </section>
                 <section id="game-modes">
                     <h2>Game Modes</h2>
-                    <p>In DevWars, each game mode offers unique playing experience with its own set of rules and conditions.</p>
+                    <p>In DevWars, each game mode offers unique playing experience with its own set of rules and
+                        conditions.</p>
 
                     <section>
                         <h3>Classic</h3>
@@ -154,7 +161,8 @@
                             Time: 60:00
                         </p>
                         <p>
-                            This action-packed game mode is the only one that features all 3 supported languages. Two teams of three, face off against each other with a theme and a set of objectives.
+                            This action-packed game mode is the only one that features all 3 supported languages. Two
+                            teams of three, face off against each other with a theme and a set of objectives.
                         </p>
                     </section>
 
@@ -166,7 +174,8 @@
                             Time: 60:00
                         </p>
                         <p>
-                            This 1 vs 1 game mode provides both teams the same pre-made HTML document. Both teams can only use CSS to style their website. Objectives are not available in Zen Garden games.
+                            This 1 vs 1 game mode provides both teams the same pre-made HTML document. Both teams can
+                            only use CSS to style their website. Objectives are not available in Zen Garden games.
                         </p>
                     </section>
 
@@ -187,32 +196,43 @@
 
                 <section id="objectives">
                     <h2>Objectives</h2>
-                    <p>Primary focus in 3v3 matches is to fulfil certain objectives in order to gain the points needed to overtake the opposing team. These do not have to be completed in order and as soon as a team declares an objective fulfilled, the host checks if the requirements have been met. Only if that is the case the team gets a point.</p>
+                    <p>Primary focus in 3v3 matches is to fulfil certain objectives in order to gain the points needed
+                        to overtake the opposing team. These do not have to be completed in order and as soon as a team
+                        declares an objective fulfilled, the host checks if the requirements have been met. Only if that
+                        is the case the team gets a point.</p>
 
                     <section>
                         <h3>Completing Objectives</h3>
-                        <p>When an objective is complete, players must request the objective to be removed by the game show host in order to secure the point(s).</p>
+                        <p>When an objective is complete, players must request the objective to be removed by the game
+                            show host in order to secure the point(s).</p>
                     </section>
 
                     <section>
                         <h3>Bonus Objectives</h3>
-                        <p>Unlike standard objectives, bonus objectives are worth 2 points instead of 1 and are denoted by a <span class="color-bonus">gold color</span>. By default, bonus objectives are locked and cannot be achieved until all 4 standard objectives have been completed.</p>
+                        <p>Unlike standard objectives, bonus objectives are worth 2 points instead of 1 and are denoted
+                            by a <span class="color-bonus">gold color</span>. By default, bonus objectives are locked
+                            and cannot be achieved until all 4 standard objectives have been completed.</p>
                     </section>
 
                     <section id="strikes">
                         <h3>Strikes</h3>
-                        <p>If the game show host finds a submitted objective to be incomplete, the team will earn a strike. Once a team reaches 3 strikes, the bonus objective will be eliminated from that team.</p>
+                        <p>If the game show host finds a submitted objective to be incomplete, the team will earn a
+                            strike. Once a team reaches 3 strikes, the bonus objective will be eliminated from that
+                            team.</p>
                     </section>
 
                     <section>
                         <h3>Dropped Objectives</h3>
-                        <p>After the clock runs out, the game show host will do a final review of all the objectives completed for both teams. Points earned from a completed objective will be lost if found to be incomplete during the final review.</p>
+                        <p>After the clock runs out, the game show host will do a final review of all the objectives
+                            completed for both teams. Points earned from a completed objective will be lost if found to
+                            be incomplete during the final review.</p>
                     </section>
                 </section>
 
                 <section id="points">
                     <h3>Points</h3>
-                    <p>The team with the most points wins the game. Below is a chart displaying a list of points you can earn in each Phase:</p>
+                    <p>The team with the most points wins the game. Below is a chart displaying a list of points you can
+                        earn in each Phase:</p>
                     <table>
                         <thead>
                             <tr>
@@ -252,10 +272,14 @@
                     <ol>
                         <li>No Frameworks of any kind are to be used.</li>
                         <li>The DevWars Twitch channel must not be open whilst competing.</li>
-                        <li>No copying and pasting of code, however copying code and URLs from teammates is acceptable.</li>
+                        <li>No copying and pasting of code, however copying code and URLs from teammates is
+                            acceptable.
+                        </li>
                         <li>After the 60 minute timer has run out, your code can no longer be modified.</li>
                         <li>Inline styling is not allowed. All styling must be performed using CSS.</li>
-                        <li>Player must code in the <a href="#editor">DevWars Editor</a>, coding in any other editor/IDE is strictly prohibitted.</li>
+                        <li>Player must code in the <a href="#editor">DevWars Editor</a>, coding in any other editor/IDE
+                            is strictly prohibitted.
+                        </li>
                     </ol>
                 </section>
             </article>
@@ -268,7 +292,8 @@
 
                 <section id="tools">
                     <h2>Tools</h2>
-                    <p>Below are products and resources that will help improve your viewing experience during a live game.</p>
+                    <p>Below are products and resources that will help improve your viewing experience during a live
+                        game.</p>
                     <div class="doc-section doc-tools__section">
                         <ul class="doc-tools">
                             <li class="doc-tools__item">
@@ -278,7 +303,8 @@
                                     </div>
                                     <div class="doc-tools__main">
                                         <h3 class="doc-tools__title">Live Code</h3>
-                                        <p class="doc-tools__desc">Watch players code in real-time and preview their websites.</p>
+                                        <p class="doc-tools__desc">Watch players code in real-time and preview their
+                                            websites.</p>
                                     </div>
                                 </a>
                             </li>
@@ -289,7 +315,8 @@
                                     </div>
                                     <div class="doc-tools__main">
                                         <h3 class="doc-tools__title">Eavesdrop</h3>
-                                        <p class="doc-tools__desc">Listen in on what the teams are saying during a live game.</p>
+                                        <p class="doc-tools__desc">Listen in on what the teams are saying during a live
+                                            game.</p>
                                     </div>
                                 </a>
                             </li>
@@ -299,12 +326,17 @@
 
                 <section id="voting">
                     <h2>Voting</h2>
-                    <p>In addition to the objectives, our audience awards additional points in the categories <a href="#vote-ui">UI</a> and <a href="#vote-ux">UX</a>.</p>
-                    <p>To participate in voting, type <code>!blue</code> or <code>!red</code> in the chat to express your personal favorite in each category when prompted.</p>
+                    <p>In addition to the objectives, our audience awards additional points in the categories <a
+                        href="#vote-ui"
+                    >UI</a> and <a href="#vote-ux">UX</a>.</p>
+                    <p>To participate in voting, type <code>!blue</code> or <code>!red</code> in the chat to express
+                        your personal favorite in each category when prompted.</p>
 
                     <section>
                         <h3>Point Distribution</h3>
-                        <p>Depending on how many votes a team gets in each category up to two (2) points can be earned if certain thresholds are exceeded. Thresholds are determined by the percentage of total votes per team.</p>
+                        <p>Depending on how many votes a team gets in each category up to two (2) points can be earned
+                            if certain thresholds are exceeded. Thresholds are determined by the percentage of total
+                            votes per team.</p>
                         <table>
                             <thead>
                                 <tr>
@@ -332,29 +364,38 @@
                     <section id="vote-ui">
                         <h3>UI / User Interface</h3>
                         <p>
-                            Base your vote on the overall design of the website. The interface should feel coherent with consistent use of elements. The website should be responsive, look good on mobile and follow the game's theme.
+                            Base your vote on the overall design of the website. The interface should feel coherent with
+                            consistent use of elements. The website should be responsive, look good on mobile and follow
+                            the game's theme.
                         </p>
                     </section>
 
                     <section id="vote-ux">
                         <h3>UX / User Experience</h3>
                         <p>
-                            Base your vote on how you feel when interacting with the website. It should be simple to use and easy to navigate. Look for things such as bugs or poor execution of functionality by way of design.
+                            Base your vote on how you feel when interacting with the website. It should be simple to use
+                            and easy to navigate. Look for things such as bugs or poor execution of functionality by way
+                            of design.
                         </p>
                     </section>
 
                     <section>
                         <h3>Tie Breaker</h3>
                         <p>
-                            If the points on both teams are tied, we run a Tie Breaker for the best overall team. Users vote blindly, meaning, the voting bars will not be displayed on the stream. In the unlikely event that there is a tie in the tie breaker, the game host will make the final decision and declare the winner.
+                            If the points on both teams are tied, we run a Tie Breaker for the best overall team. Users
+                            vote blindly, meaning, the voting bars will not be displayed on the stream. In the unlikely
+                            event that there is a tie in the tie breaker, the game host will make the final decision and
+                            declare the winner.
                         </p>
                     </section>
                 </section>
 
                 <section id="betting">
                     <h2>Betting</h2>
-                    <p>Put your hard earned Devcoins on the line by betting on which team you think will win the game. Betting is only open for ten minutes after the first five minutes of the match.</p>
-                    <p>You can bet with the following command in the Twitch chat:<br><code>!bet [amount] [team] [objectives]</code></p>
+                    <p>Put your hard earned Devcoins on the line by betting on which team you think will win the game.
+                        Betting is only open for ten minutes after the first five minutes of the match.</p>
+                    <p>You can bet with the following command in the Twitch chat:<br><code>!bet [amount] [team]
+                        [objectives]</code></p>
 
                     <section>
                         <p><code>[amount]</code><br>Enter the amount of Devcoins you want to bet.</p>
@@ -397,7 +438,8 @@
                     </section>
 
                     <section>
-                        <p><code>[objectives]</code><br>Enter the <u>minimum</u> number of objectives you think the team will secure.</p>
+                        <p><code>[objectives]</code><br>Enter the <u>minimum</u> number of objectives you think the team
+                            will secure.</p>
                         <table>
                             <thead>
                                 <tr>
@@ -424,7 +466,8 @@
 
                     <section>
                         <h3>Payouts</h3>
-                        <p>Win more Devcoins depending on how specific your bet is. The lower the odds, the greater the payout. Below is a chart of payouts against different odds:</p>
+                        <p>Win more Devcoins depending on how specific your bet is. The lower the odds, the greater the
+                            payout. Below is a chart of payouts against different odds:</p>
 
                         <table>
                             <thead>
@@ -518,10 +561,13 @@
                                 <p>English</p>
                             </div>
                         </div>
-                        <p>It is required that you have a microphone so that you can speak with your teammates during a live game. Contestants must be able to read, write and speak English.</p>
+                        <p>It is required that you have a microphone so that you can speak with your teammates during a
+                            live game. Contestants must be able to read, write and speak English.</p>
                         <div class="doc-disclaimer">Communication is not required on Zen Garden games.</div>
 
-                        <p>All voice communications are hosting on our <a href="https://www.discord.gg/devwars" target="_blank">Official Discord</a>.</p>
+                        <p>All voice communications are hosting on our <a
+                            href="https://www.discord.gg/devwars" target="_blank"
+                        >Official Discord</a>.</p>
                     </section>
                 </section>
 
@@ -530,13 +576,15 @@
 
                     <section>
                         <h3>Game View</h3>
-                        <p>Each player has their own view with a full-height editor, a window to display the rendered website and documents to preview other team members.</p>
+                        <p>Each player has their own view with a full-height editor, a window to display the rendered
+                            website and documents to preview other team members.</p>
                         <p>During the game, players can see the live timer, points, and strikes.</p>
                     </section>
 
                     <section>
                         <h3>Supported Keys</h3>
-                        <p>You can use the following keyboard shortcuts in the DevWars editor (currently only displaying Windows keyboard layout):</p>
+                        <p>You can use the following keyboard shortcuts in the DevWars editor (currently only displaying
+                            Windows keyboard layout):</p>
                         <table>
                             <thead>
                                 <tr>
@@ -575,20 +623,20 @@
 
                     <section>
                         <h3>Saving Changes</h3>
-                        <p>It is important for you to save your document frequently using <span class="keybinding">Ctrl+S</span>. Make sure to only save when your code is complete. The viewers and game host will not be able to render your website until you have saved your changes.</p>
+                        <p>It is important for you to save your document frequently using <span class="keybinding">Ctrl+S</span>.
+                            Make sure to only save when your code is complete. The viewers and game host will not be
+                            able to render your website until you have saved your changes.</p>
                     </section>
 
                     <section>
                         <h3>Submitting Objectives</h3>
-                        <p>When you complete an objective, you must submit it for review. To submit an objective, click the checkbox icon on the top left corner of the game view.</p>
-                        <p>Tip: Make sure all team members are ready before marking an objective complete or else your team could potentially <a href="#strikes">receive a Strike</a>.</p>
+                        <p>When you complete an objective, you must submit it for review. To submit an objective, click
+                            the checkbox icon on the top left corner of the game view.</p>
+                        <p>Tip: Make sure all team members are ready before marking an objective complete or else your
+                            team could potentially <a href="#strikes">receive a Strike</a>.</p>
                     </section>
                 </section>
             </article>
-
-
-
-
 
 
             <article id="earning">
@@ -670,13 +718,17 @@
     import Devcoin from '~/components/Devcoin';
 
     @Component({
-        components: {Devcoin},
+        components: { Devcoin },
         layout: 'header'
     })
 
     export default class Docs extends Vue {
 
         mounted() {
+            const anchored = document.querySelector(this.$route.hash);
+
+            if (anchored) anchored.scrollIntoView();
+
             let scrollable = document.querySelector('.docs__main');
 
             scrollable.addEventListener('scroll', event => {
@@ -689,8 +741,8 @@
                     let keyA = a.getBoundingClientRect().y;
                     let keyB = b.getBoundingClientRect().y;
 
-                    if(keyA < keyB) return -1;
-                    if(keyA > keyB) return 1;
+                    if (keyA < keyB) return -1;
+                    if (keyA > keyB) return 1;
                     return 0;
                 })[0];
 
