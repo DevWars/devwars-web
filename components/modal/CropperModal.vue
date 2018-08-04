@@ -28,7 +28,7 @@
 
         options() {
             return {
-                aspectRatio: 16 / 9,
+                aspectRatio: 1,
                 viewMode: 2
             }
         }
