@@ -89,6 +89,8 @@
                 const response = await this.$axios.$post('/contact', { name, email, message });
 
                 this.toastSuccess(response);
+
+                this.submitted = true;
             } catch (e) {
                 this.toastErrors(e);
             }
