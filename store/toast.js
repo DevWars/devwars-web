@@ -40,7 +40,7 @@ export const actions = {
                 dispatch('add', {type: 'error', message: field + ' ' + it.default_message});
             });
         } else {
-            dispatch('add', {type: 'error', message: e.response.data});
+            dispatch('add', {type: 'error', message: e.response.status + ' : ' + e.response.statusText});
         }
     }
 };

@@ -1,3 +1,5 @@
+*.iml
+
 # dependencies
 node_modules
 

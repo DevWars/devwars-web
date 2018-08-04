@@ -58,6 +58,10 @@ module.exports = {
         credentials: true
     },
 
+    render: {
+        gzip: false
+    },
+
     css: [
         '~/assets/scss/main.scss',
         'webui-popover/src/jquery.webui-popover.css',

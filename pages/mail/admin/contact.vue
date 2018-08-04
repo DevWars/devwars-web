@@ -1,5 +1,5 @@
 <template>
-    <MailMeta subject="New Contact - NAME_OF_PERSON">
+    <MailMeta :subject="'New Contact' + name">
         <mj-section>
             <mj-column>
                 <mj-text
@@ -19,23 +19,21 @@
                 <mj-table>
                     <tr style="border-bottom: 1px solid #ccc; text-align:left; padding:15px 0;">
                         <th style="padding: 0 15px 0 0;">Field</th>
-                        <th style="padding: 0 15px;">Reponse</th>
+                        <th style="padding: 0 15px;">Response</th>
                     </tr>
                     <tr>
                         <td style="padding: 0 15px 0 0;">Name</td>
-                        <td style="padding: 0 15px;">NAMEOFPERSON</td>
+                        <td style="padding: 0 15px;">{{ name }}</td>
                     </tr>
                     <tr>
                         <td style="padding: 0 15px 0 0;">Email</td>
-                        <td style="padding: 0 15px;">PERSONSEMAIL</td>
+                        <td style="padding: 0 15px;">{{ email }}</td>
                     </tr>
                 </mj-table>
                 <mj-text align="left" font-weight="bold" font-size="16px" color="#fff" font-family="helvetica">
                     Contact Message:
                 </mj-text>
-                <mj-text align="left" line-height="1.3" font-size="13px" color="#fff" font-family="helvetica">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque magni quibusdam numquam in nesciunt enim vero rerum nisi excepturi id maxime error cupiditate ullam quis provident perspiciatis, facere aspernatur dolore?
-                </mj-text>
+                <mj-text align="left" line-height="1.3" font-size="13px" color="#fff" font-family="helvetica">{{ message }}</mj-text>
             </mj-column>
         </mj-section>
     </MailMeta>
@@ -45,7 +43,6 @@
     import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
-    import Http from '../../../services/Http';
     import MailMeta from '../../../components/mail/MailMeta';
 
     @Component({
@@ -55,9 +52,9 @@
 
     export default class extends Vue {
         async asyncData({ query }) {
-            const game = await Http.for('game').byID(query.game);
+            const { name, email, message } = query;
 
-            return { game };
+            return { name, email, message };
         }
     }
 </script>

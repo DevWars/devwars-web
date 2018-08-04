@@ -10,9 +10,9 @@
 
                 <div class="row">
                     <div class="col-md-8">
-                        <div class="card card-dark card-plain">
+                        <div class="card card-dark card-plain" v-show="!submitted">
                             <div class="card__inner">
-                                <form async-submit="contact.contact()">
+                                <form v-async-submit="[sendEmail]">
                                     <div class="form-group">
                                         <Input v-model="name" required />
                                         <label>Name</label>
@@ -36,7 +36,7 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="card card-dark card-plain">
+                        <div class="card card-dark card-plain" v-show="submitted">
                             <div class="card__inner align-center">
                                 <h1>Thank you!</h1>
                                 <div class="mt-xs mb-md">
@@ -65,17 +65,33 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
+    import Component, {Action} from 'nuxt-class-component';
     import Vue from 'vue';
     import Input from '~/components/form/Input';
 
     @Component({
         components: { Input }
     })
-
     export default class Contact extends Vue {
+        @Action('toast/errors') toastErrors;
+        @Action('toast/success') toastSuccess;
+
+        submitted = false;
+
         name = '';
         email = '';
         message = '';
+
+        async sendEmail() {
+            try {
+                const { name, email, message } = this;
+
+                const response = await this.$axios.$post('/contact', { name, email, message });
+
+                this.toastSuccess(response);
+            } catch (e) {
+                this.toastErrors(e);
+            }
+        }
     }
 </script>
