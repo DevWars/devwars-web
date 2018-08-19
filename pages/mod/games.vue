@@ -44,7 +44,7 @@
                 <tr v-for="game in all" :key="game.id">
                     <td data-type="Date">{{ game.timestamp | moment('MM/DD/YYYY') }}</td>
                     <td data-type="Status">
-                        <span class="mod-status preparing">&nbsp;</span>
+                        <span :class="['mod-status', game.status.toLowerCase()]">{{ game.status }}</span>
                     </td>
                     <td data-type="Theme">{{ game.theme }}</td>
                     <td data-type="Game Mode">{{ game.name }}</td>

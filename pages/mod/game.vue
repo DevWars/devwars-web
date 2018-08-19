@@ -10,7 +10,7 @@
                     &nbsp;&nbsp;/&nbsp;&nbsp;
                     {{ game.name }}
                     &nbsp;&nbsp;/&nbsp;&nbsp;
-                    <span class="mod-status preparing">{{ game.active ? 'Active' : 'Preparing'}}</span>
+                    <span :class="['mod-status' , game.status.toLowerCase()]">{{ game.status }}</span>
                 </h2>
             </div>
 
