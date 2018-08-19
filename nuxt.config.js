@@ -92,34 +92,40 @@ module.exports = {
     /*
     ** Build configuration
     */
-    build:
-        {
-            babel: {
-                plugins: ['transform-decorators-legacy', 'transform-class-properties', 'transform-flow-strip-types'],
-                presets: ['stage-0']
-            },
+    build: {
+        babel: {
+            plugins: ['transform-decorators-legacy', 'transform-class-properties', 'transform-flow-strip-types'],
+            presets: ['stage-0']
+        },
 
-            plugins: [
-                new webpack.ProvidePlugin({
-                    '$': 'jquery',
-                    'Popper': 'popper.js',
-                }),
-                new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-            ],
-            /*
-            ** Run ESLint on save
-            */
-            extend(config, { isDev, isClient }) {
-                const vueLoader = config.module.rules.find((rule) => rule.loader === 'vue-loader');
-                vueLoader.options.transformToRequire['mj-image'] = ['src'];
+        plugins: [
+            new webpack.ProvidePlugin({
+                '$': 'jquery',
+                'Popper': 'popper.js',
+            }),
+            new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+        ],
+        /*
+        ** Run ESLint on save
+        */
+        extend(config, { isDev, isClient }) {
+            const vueLoader = config.module.rules.find((rule) => rule.loader === 'vue-loader');
+            vueLoader.options.transformToRequire['mj-image'] = ['src'];
 
-                if (isDev && isClient) {
-                    config.module.rules.push({
-                        test: /\.(mjml)$/,
-                        loader: 'mjml-loader',
-                    });
-                }
+            if (isDev && isClient) {
+                config.module.rules.push({
+                    test: /\.(mjml)$/,
+                    loader: 'mjml-loader',
+                });
             }
         }
+    },
+    watchers: {
+        webpack: {
+            aggregateTimeout: 300,
+            poll: 1000
+        },
+        ignored: /node_modules/
+    }
 }
 ;
