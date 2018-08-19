@@ -27,9 +27,13 @@
                 <label>Theme</label>
             </div>
             <h3 class="modpanel__subtitle">Objectives</h3>
-            <div class="form-group" v-for="objective in orderBy(game.objectives, 'number')" :key="objective.id">
-                <Input v-model="objective.description" maxlength="110" />
-                <label>Objective #{{ objective.number + 1 }} (Bonus)</label>
+            <div class="mod-objectives form-group" v-for="objective in orderBy(game.objectives, 'number')" :key="objective.id">
+                <div class="mod-objectives__input">
+                    <Input v-model="objective.description" maxlength="110" />
+                    <label>Objective #{{ objective.number + 1 }} (Bonus)</label>
+                </div>
+                <div class="obj-list__square team-blue"></div>
+                <div class="obj-list__square team-red"></div>
             </div>
 
             <h3 v-if="game.name === 'Zen Garden'" class="modpanel__subtitle">Zen Garden HTML</h3>
@@ -46,6 +50,40 @@
             <div class="form-group">
                 <Input v-model="game.youtube_url" />
                 <label>Youtube URL</label>
+            </div>
+
+            <h3 class="modpanel__subtitle">Votes</h3>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <Input />
+                    <label>UI - Blue Votes</label>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <Input />
+                    <label>UI - Red Votes</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <Input />
+                    <label>UX - Blue Votes</label>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <Input />
+                    <label>UX - Red Votes</label>
+                </div>
+            </div>
+
+            <h3 class="modpanel__subtitle">Files</h3>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <Input type="file" id="force-valid" />
+                    <label>Blue Files</label>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <Input type="file" id="force-valid" />
+                    <label>Red Files</label>
+                </div>
             </div>
         </form>
     </div>
