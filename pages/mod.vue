@@ -20,6 +20,10 @@
                     <i class="fa fa-gamepad" aria-hidden="true"></i>Games</a>
                 </li>
                 <li>
+                    <a href="/mod/tournaments" class="modpanel-sidebar-list-item">
+                    <i class="fa fa-trophy" aria-hidden="true"></i>Tournaments</a>
+                </li>
+                <li>
                     <a href="/mod/blogs" class="modpanel-sidebar-list-item disabled">
                     <i class="fa fa-newspaper" aria-hidden="true"></i>Blog</a>
                 </li>
