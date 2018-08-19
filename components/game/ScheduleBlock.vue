@@ -6,18 +6,22 @@
                 <tr>
                     <th width="15%" class="align-left">Date</th>
                     <th width="15%" class="align-left">Time</th>
+                    <th width="5%" class="align-left">Duration</th>
                     <th width="50%" class="align-left">Showing</th>
                     <th width="20%" class="align-left"></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="game in limitBy(games, count)" :key="game.id" v-if="filter ? (filter === game.name) : true">
+                <tr class="schedule-block" v-for="game in limitBy(games, count)" :key="game.id" v-if="filter ? (filter === game.name) : true">
                     <td>
                         <div class="schedule-block__dow">{{ game.timestamp | moment('dddd') }}</div>
                         <div class="schedule-block__date">{{ game.timestamp | moment('MMMM D') }}</div>
                     </td>
                     <td>
                         <div class="schedule-block__time">{{ game.timestamp | moment('H:mm') }} UTC</div>
+                    </td>
+                    <td>
+                        <div class="schedule-block__duration">30</div>
                     </td>
                     <td>
                         <div class="schedule-block__show">DevWars Live</div>

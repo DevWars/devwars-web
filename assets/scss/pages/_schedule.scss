@@ -11,6 +11,12 @@ Variables
 ========================================================================== */
 
 .schedule-table {
+    tbody td {
+        &:last-of-type {
+            text-align: right;
+        }
+    }
+
     @include breakpoint(sm) {
         thead {
             display: none;
@@ -54,25 +60,6 @@ Variables
 }
 
 .schedule-block {
-    @extend %clear;
-    padding-top: $xs-space;
-    padding-bottom: $xs-space;
-    line-height: 1.2;
-    text-align: left;
-
-    &__when {
-        @extend .col-sm-3;
-    }
-
-    &__main {
-        @extend .col-sm-6;
-    }
-
-    &__actions {
-        @extend .col-sm-3;
-        text-align: right;
-    }
-
     &__dow,
     &__date,
     &__time {
@@ -113,6 +100,15 @@ Variables
         }
     }
 
+    &__duration {
+        font-size: $h4-font-size;
+
+        &:after {
+            content: " min";
+            font-size: $font-size-xs;
+        }
+    }
+
 
     &__show,
     &__title {
@@ -134,6 +130,16 @@ Variables
                 content: "-";
                 margin: 0 $xxs-space;
             }
+        }
+    }
+
+    &.tournament &__show {
+        color: $bonus-color;
+
+        &:before {
+            @extend .far;
+            content: $fa-trophy;
+            margin-right: $xs-space;
         }
     }
 }
