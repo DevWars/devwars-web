@@ -54,13 +54,13 @@
                             </div>
                         </div>
                         <div slot="menu">
-                            <a v-if="isAdmin" href="/mod/dashboard" class="btn-link">Modpanel</a>
+                            <nuxt-link v-if="isAdmin" to="/mod/dashboard" class="btn-link">Modpanel</nuxt-link>
                             <div v-if="isAdmin" class="menu-divider"></div>
-                            <a href="/dashboard" class="btn-link">Dashboard</a>
-                            <a href="/badges" class="btn-link">Badges</a>
-                            <a href="/settings/profile" class="btn-link">Settings</a>
+                            <nuxt-link to="/dashboard" class="btn-link">Dashboard</nuxt-link>
+                            <nuxt-link to="/badges" class="btn-link">Badges</nuxt-link>
+                            <nuxt-link to="/settings/profile" class="btn-link">Settings</nuxt-link>
                             <div class="menu-divider"></div>
-                            <a @click="logout" href="#" class="btn-link">Logout</a>
+                            <a @click="logout" class="btn-link">Logout</a>
                         </div>
                     </Popup>
                 </div>
@@ -70,34 +70,34 @@
         <!-- Mobile -->
         <div v-click-outside="hideMenu" :class="['mobile-nav', {active: show}]">
             <div class="mobile-nav__header">
-                <a href="/"
+                <nuxt-link to="/"
                    class="logo">
                     <img src="~/assets/img/logo.png"
                          alt="DevWars">
-                </a>
+                </nuxt-link>
             </div>
-            <a href="/"
+            <nuxt-link to="/"
                class="mobile-nav__link">Home
-            </a>
-            <a href="/games"
+            </nuxt-link>
+            <nuxt-link to="/games"
                class="mobile-nav__link">Games
-            </a>
-            <a href="/schedule"
+            </nuxt-link>
+            <nuxt-link to="/schedule"
                class="mobile-nav__link">Schedule
-            </a>
-            <a href="/leaderboards"
+            </nuxt-link>
+            <nuxt-link to="/leaderboards"
                class="mobile-nav__link">Leaders
-            </a>
-            <a href="/blog"
+            </nuxt-link>
+            <nuxt-link to="/blog"
                class="mobile-nav__link">Blog
-            </a>
+            </nuxt-link>
             <div class="mobile-nav__account">
-                <a href="/register"
+                <nuxt-link to="/register"
                    class="btn btn-primary btn-block">Register
-                </a>
-                <a href="/login"
+                </nuxt-link>
+                <nuxt-link to="/login"
                    class="btn btn-link btn-block color-white">Log In
-                </a>
+                </nuxt-link>
             </div>
         </div>
         <div :class="['mobile-nav__overlay', {'active': show}]"></div>

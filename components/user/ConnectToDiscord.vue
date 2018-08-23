@@ -1,5 +1,5 @@
 <template>
-    <a v-if="!hasDiscord" class="btn btn-primary" :href="discordUrl">Discord</a>
+    <a v-if="!hasDiscord" class="btn btn-primary" :href="discordUrl">Connect your Discord</a>
     <a v-else class="btn btn-secondary" v-async-click="[removeProvider, 'DISCORD']">Disconnect your discord</a>
 </template>
 
