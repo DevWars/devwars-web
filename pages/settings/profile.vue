@@ -12,8 +12,10 @@
                     <label>Location</label>
                 </div>
                 <div class="form-group">
-                    <textarea v-model="profile.about" rows="4" class="form-control"
-                              placeholder="Tell us a little bit about yourself"></textarea>
+                    <textarea
+                        v-model="profile.about" rows="4" class="form-control"
+                        placeholder="Tell us a little bit about yourself"
+                    ></textarea>
                 </div>
                 <div class="form-group">
                     <Input v-model="profile.url" />
@@ -35,25 +37,33 @@
                 </div>
 
                 <FileChooser @change="crop">
-                    <button slot-scope="{update}" @click="update" type="button" class="btn btn-outline-gray">Upload new avatar</button>
+                    <button slot-scope="{update}" @click="update" type="button" class="btn btn-outline-gray">Upload new
+                        avatar
+                    </button>
                 </FileChooser>
             </div>
         </div>
+
+        <div class="form-group">
+            <ConnectToDiscord />
+        </div>
+
         <button class="btn btn-primary" type="submit">Save</button>
     </form>
 </template>
 
 <script>
-    import Component, {State} from 'nuxt-class-component';
+    import Component, { State } from 'nuxt-class-component';
     import Vue from 'vue';
 
     import Avatar from '~/components/user/Avatar';
     import FileChooser from '~/components/FileChooser';
     import CropperModal from '~/components/modal/CropperModal';
     import Input from '~/components/form/Input';
+    import ConnectToDiscord from '../../components/user/ConnectToDiscord';
 
     @Component({
-        components: {Avatar, FileChooser, Input}
+        components: { ConnectToDiscord, Avatar, FileChooser, Input }
     })
 
     export default class SettingsProfile extends Vue {
@@ -62,7 +72,7 @@
         @State(state => state.user.user) user;
 
         async crop(result) {
-            let [cropped] = await this.$open(CropperModal, {data: result});
+            let [cropped] = await this.$open(CropperModal, { data: result });
 
             this.$store.dispatch('user/avatar', cropped);
         }

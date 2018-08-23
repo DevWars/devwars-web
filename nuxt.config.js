@@ -73,6 +73,7 @@ module.exports = {
     plugins: [
         { src: '~plugins/ga.js', ssr: false },
         { src: '~/plugins/popover', ssr: false },
+        { src: '~/plugins/send-back', ssr: false },
         '~/plugins/directives',
         '~/plugins/axios',
         '~/plugins/filters',
@@ -85,7 +86,7 @@ module.exports = {
 
     router: {
         linkExactActiveClass: 'active',
-        middleware: ['pending']
+        middleware: ['pending', 'update-latest-route']
 
     },
 
