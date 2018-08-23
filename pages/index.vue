@@ -24,111 +24,6 @@
             </div>
         </div>
 
-        <!-- <div class="home-submissions">
-            <div class="container">
-                <div class="row">
-                    <h2 class="home-submissions__title home-title">User Submissions</h2>
-                    <div class="submission-reel">
-                        <div class="submission-reel__entry">
-                            <a href="#">
-                                <img
-                                    src="http://media.digitalcameraworld.com/wp-content/uploads/sites/123/2015/06/What_is_aspect_ratio_16-9.jpg">
-                            </a>
-                            <div class="submission-reel__meta">
-                                <span class="submission-reel__user">
-                                    <a href="#">SYNTAG</a>
-                                </span>
-                                <span class="submission-reel__stat-box">
-                                    <i class="submission-reel__icon icon icon-comment"></i>
-                                    <span class="submission-reel__value">42</span>
-                                </span>
-                                <span class="submission-reel__stat-box">
-                                    <i class="submission-reel__icon icon icon-user"></i>
-                                    <span class="submission-reel__value">42</span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="submission-reel__entry">
-                            <a href="#">
-                                <img
-                                    src="http://media.digitalcameraworld.com/wp-content/uploads/sites/123/2015/06/What_is_aspect_ratio_16-9.jpg">
-                            </a>
-                            <div class="submission-reel__meta">
-                                <span class="submission-reel__user">
-                                    <a href="#">SYNTAG</a>
-                                </span>
-                                <span class="submission-reel__stat-box">
-                                    <i class="submission-reel__icon icon icon-comment"></i>
-                                    <span class="submission-reel__value">42</span>
-                                </span>
-                                <span class="submission-reel__stat-box">
-                                    <i class="submission-reel__icon icon icon-user"></i>
-                                    <span class="submission-reel__value">42</span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="submission-reel__entry submission-reel__entry--featured">
-                            <a href="#">
-                                <img
-                                    src="http://media.digitalcameraworld.com/wp-content/uploads/sites/123/2015/06/What_is_aspect_ratio_16-9.jpg">
-                            </a>
-                            <div class="submission-reel__meta">
-                                <span class="submission-reel__user">
-                                    <a href="#">SYNTAG</a>
-                                </span>
-                                <span class="submission-reel__stat-box">
-                                    <i class="submission-reel__icon icon icon-comment"></i>
-                                    <span class="submission-reel__value">42</span>
-                                </span>
-                                <span class="submission-reel__stat-box">
-                                    <i class="submission-reel__icon icon icon-user"></i>
-                                    <span class="submission-reel__value">42</span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="submission-reel__entry">
-                            <a href="#">
-                                <img
-                                    src="http://media.digitalcameraworld.com/wp-content/uploads/sites/123/2015/06/What_is_aspect_ratio_16-9.jpg">
-                            </a>
-                            <div class="submission-reel__meta">
-                                <span class="submission-reel__user">
-                                    <a href="#">SYNTAG</a>
-                                </span>
-                                <span class="submission-reel__stat-box">
-                                    <i class="submission-reel__icon icon icon-comment"></i>
-                                    <span class="submission-reel__value">42</span>
-                                </span>
-                                <span class="submission-reel__stat-box">
-                                    <i class="submission-reel__icon icon icon-user"></i>
-                                    <span class="submission-reel__value">42</span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="submission-reel__entry">
-                            <a href="#">
-                                <img
-                                    src="http://media.digitalcameraworld.com/wp-content/uploads/sites/123/2015/06/What_is_aspect_ratio_16-9.jpg">
-                            </a>
-                            <div class="submission-reel__meta">
-                                <span class="submission-reel__user">
-                                    <a href="#">SYNTAG</a>
-                                </span>
-                                <span class="submission-reel__stat-box">
-                                    <i class="submission-reel__icon icon icon-comment"></i>
-                                    <span class="submission-reel__value">42</span>
-                                </span>
-                                <span class="submission-reel__stat-box">
-                                    <i class="submission-reel__icon icon icon-user"></i>
-                                    <span class="submission-reel__value">42</span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
         <div class="home-display"
              :style="{backgroundImage: 'url(' + require('~/assets/img/become-contestant-bg.jpg') + ')'}">
             <div class="container">
@@ -217,35 +112,111 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 </template>
 
 <script>
-    import Component, {State} from 'nuxt-class-component';
-    import Vue from 'vue';
+import Component, {State} from 'nuxt-class-component';
+import Vue from 'vue';
 
-    import Highlights from '~/components/game/Highlights';
-    import ScheduleBlock from '~/components/game/ScheduleBlock';
-    import BlogCard from '~/components/blog/BlogCard';
-    import Http from "../services/Http";
+import Highlights from '~/components/game/Highlights';
+import ScheduleBlock from '~/components/game/ScheduleBlock';
+import BlogCard from '~/components/blog/BlogCard';
+import Http from "../services/Http";
 
-    @Component({
-        components: {Highlights, ScheduleBlock, BlogCard}
-    })
-    export default class Index extends Vue {
-        @State(state => state.blog.latest) posts;
+@Component({
+  components: {
+    Highlights,
+    ScheduleBlock,
+    BlogCard,
+  }
+})
 
-        async asyncData() {
-            return {
-                latest: await Http.for('game').get('latest'),
-            }
-        }
+export default class Index extends Vue {
+  @State(state => state.blog.latest) posts;
 
-        async fetch({store}) {
-            store.dispatch('blog/latest', 3);
-        }
-    }
+  async asyncData() {
+      return {
+          latest: await Http.for('game').get('latest'),
+      }
+  }
+
+  async fetch({store}) {
+      store.dispatch('blog/latest', 3);
+  }
+}
 </script>
 
+<style lang="scss" scoped>
+@import '../assets/styles/utils';
+$home-card-margin: $l-space;
+
+.hero {
+	height: 500px;
+	background-image: url('~/assets/img/hero-bg.jpg');
+	background-size: cover;
+	text-align: center;
+    position: relative;
+
+    @include breakpoint(sm) {
+        height: auto;
+    }
+
+	&__inner {
+		@extend %absolute-center-y;
+		width: 100%;
+		z-index: 1;
+		margin-top: -($home-card-margin / 2);
+		padding: 0 $grid-gutter-width;
+        left: 0;
+
+        @include breakpoint(sm) {
+            @include clear-position;
+            padding: $l-space $grid-gutter-width ($l-space + $home-card-margin);
+            transform: none;
+            margin-top: 0;
+        }
+
+        @include breakpoint(xs) {
+            padding-top: $ms-space;
+            padding-bottom: ($ms-space + $home-card-margin);
+        }
+	}
+
+	&__title,
+	&__subtitle {
+		font-weight: 400;
+		text-transform: none;
+	}
+
+	&__title {
+		font-size: 42px;
+        margin-bottom: $xs-space;
+
+        @include breakpoint(sm) {
+            font-size: $h1-font-size;
+        }
+	}
+
+	&__subtitle {
+		font-size: 24px;
+		margin-bottom: $m-space;
+		color: $text-color-secondary;
+	}
+
+	&__btn {
+        margin: 0 $xs-space;
+
+		@include breakpoint(sm) {
+			width: auto;
+			max-width: none;
+		}
+	}
+}
+
+.home-highlights {
+    padding-bottom: $m-space;
+    margin-top: -$home-card-margin;
+    background-color: $bg-color-3;
+}
+</style>
