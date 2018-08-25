@@ -19,7 +19,7 @@
         @Prop() value;
 
         get valid() {
-            return !!this.value;
+            return !(this.value == null || typeof this.value === "undefined")
         }
     }
 </script>
