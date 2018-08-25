@@ -3,7 +3,7 @@
         :type="type"
         :value="value"
         @input="e => $emit('input', e.target.value)"
-        :class="['form-control', {empty: !(value && value.length)},  {valid: value && value.length}]"
+        :class="['form-control', {empty: !valid},  {valid}]"
     />
 </template>
 
@@ -17,6 +17,10 @@
     export default class extends Vue {
         @Prop() type;
         @Prop() value;
+
+        get valid() {
+            return !!this.value;
+        }
     }
 </script>
 
