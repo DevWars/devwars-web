@@ -1,6 +1,12 @@
 <template>
-    <a v-if="!hasDiscord" class="btn btn-primary" target="_blank" :href="discordUrl">Connect your Discord</a>
-    <a v-else class="btn btn-secondary" v-async-click="[removeProvider, 'DISCORD']">Disconnect your discord</a>
+    <a v-if="!hasDiscord" :href="discordUrl" class="btn btn-discord btn-icon" target="_blank">
+        <i class="fab fa-discord"></i>
+        <span>Connect Discord</span>
+    </a>
+    <a v-else class="btn btn-outline-success btn-icon disabled" v-async-click="[removeProvider, 'DISCORD']">
+        <i class="fa fa-check"></i>
+        <span>Discord Connected</span>
+    </a>
 </template>
 
 <script>
