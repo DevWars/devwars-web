@@ -114,17 +114,9 @@
 
                         <h3 class="modpanel__title">Requirements</h3>
 
-                        <!-- <div class="form-group">
-                            <button class="btn btn-discord btn-icon">
-                                <i class="fab fa-discord"></i>
-                                <span>Connect Discord</span>
-                            </button>
-                            <button class="btn btn-outline-success btn-icon disabled" style="opacity: 1;">
-                                <i class="fa fa-check"></i>
-                                <span>Discord Connected</span>
-                            </button>
+                        <div class="form-group">
+                            <ConnectToDiscord />
                         </div>
- -->
 
                         <div class="form-group">
                             <p>A microphone is required to play in DevWars to communicate with your team during a
@@ -153,9 +145,10 @@
     import * as countryList from 'country-list';
     import Http from "../../services/Http";
     import Input from "~/components/form/Input";
+    import ConnectToDiscord from "~/components/user/ConnectToDiscord";
 
     @Component({
-        components: { Input },
+        components: { Input, ConnectToDiscord },
         middleware: ['auth', 'no-competitors']
     })
     export default class CompetitorRegistration extends Vue {
