@@ -3,7 +3,7 @@
         <i class="fab fa-discord"></i>
         <span>Connect Discord</span>
     </a>
-    <a v-else class="btn btn-outline-success btn-icon disabled" v-async-click="[removeProvider, 'DISCORD']">
+    <a v-else class="btn btn-outline-success btn-icon" v-async-click="[removeProvider, 'DISCORD']">
         <i class="fa fa-check"></i>
         <span>Discord Connected</span>
     </a>
