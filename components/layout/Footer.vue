@@ -38,6 +38,9 @@
           <li class="sitemap__list-item">
             <nuxt-link class="sitemap__link" to="/blog">Blog</nuxt-link>
           </li>
+          <li class="sitemap__list-item">
+            <nuxt-link class="sitemap__link" to="/contact">Contact</nuxt-link>
+          </li>
         </ul>
         <ul class="sitemap__list">
           <li class="sitemap__list-item">EXTRAS</li>
