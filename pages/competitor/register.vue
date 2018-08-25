@@ -78,25 +78,30 @@
                         </div>
 
 
-
                         <h3 class="modpanel__title">Skill Assessment</h3>
                         <div class="row">
                             <div class="col-sm-4" v-for="language in languages" :key="language.name">
                                 <div class="lang-rating" :class="['lang-rating--' +language.name]">
                                     <ul class="lang-rating__meter">
-                                        <li :class="{active: index <= language.skill}"
-                                            v-for="(skill, index) in skillNames" :key="skill"></li>
+                                        <li
+                                            :class="{active: index <= language.skill}"
+                                            v-for="(skill, index) in skillNames" :key="skill"
+                                        ></li>
                                     </ul>
                                     <div class="lang-rating__main">
                                         <div class="lang-rating__position">{{ language.name | uppercase }}</div>
                                         <div class="lang-rating__reel">
-                                            <button type="button" class="lang-rating__arrow fa fa-chevron-left"
-                                                    :class="{disabled: language.skill < 1}"
-                                                    @click="language.skill--"></button>
+                                            <button
+                                                type="button" class="lang-rating__arrow fa fa-chevron-left"
+                                                :class="{disabled: language.skill < 1}"
+                                                @click="language.skill--"
+                                            ></button>
                                             <div class="lang-rating__score">{{ language.skill + 1}}</div>
-                                            <button type="button" class="lang-rating__arrow fa fa-chevron-right"
-                                                    :class="{disabled: language.skill > 3}"
-                                                    @click="language.skill++"></button>
+                                            <button
+                                                type="button" class="lang-rating__arrow fa fa-chevron-right"
+                                                :class="{disabled: language.skill > 3}"
+                                                @click="language.skill++"
+                                            ></button>
                                         </div>
                                         <div class="lang-rating__name">{{ skillNames[language.skill] }}</div>
                                     </div>
@@ -122,7 +127,8 @@
  -->
 
                         <div class="form-group">
-                            <p>A microphone is required to play in DevWars to communicate with your team during a game.</p>
+                            <p>A microphone is required to play in DevWars to communicate with your team during a
+                                game.</p>
                             <div class="form-check">
                                 <input id="has-microphone" type="checkbox" class="checkbox" required />
                                 <label for="has-microphone">I have a microphone</label>
@@ -157,7 +163,7 @@
         day = '';
         year = '';
 
-        languages = [{name: 'html', skill: 0}, {name: 'css', skill: 0}, {name: 'js', skill: 0}];
+        languages = [{ name: 'html', skill: 0 }, { name: 'css', skill: 0 }, { name: 'js', skill: 0 }];
         competitor = {};
 
         countries = Object.keys(countryList().getNameList()).map(it => it[0].toUpperCase() + it.slice(1));
@@ -184,20 +190,20 @@
             try {
                 await Http.for('user/competitor').save(this.competitor);
 
-                if(this.game){
+                if (this.game) {
                     await this.$store.dispatch('game/apply', this.game);
                 }
 
                 this.$store.dispatch('toast/success', `Congratulations! You are now a competitor!`);
-            } catch(e) {
+            } catch (e) {
                 this.$store.dispatch('toast/errors', e);
             }
         }
 
-        async asyncData({query}) {
-            if(!query.game) return {};
+        async asyncData({ query }) {
+            if (!query.game) return {};
 
-           return {game: await Http.for('game').byID(query.game)}
+            return { game: await Http.for('game').byID(query.game) }
         }
     }
 </script>

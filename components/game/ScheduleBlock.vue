@@ -67,7 +67,13 @@
         }
 
         description(game) {
-            return game.name === 'Classic' ? 'Classic - 3 VS 3' : 'Zen Garden : 1 VS 1';
+            const descriptions = {
+                'Classic': 'Classic - 3 VS 3',
+                'Zen Garden': 'Zen Garden : 1 VS 1',
+                'Blitz': 'Blitz - 1 VS 1',
+            };
+
+            return descriptions[game.name] || '';
         }
     }
 </script>

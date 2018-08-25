@@ -17,6 +17,7 @@
                         <option value=""></option>
                         <option>Classic</option>
                         <option>Zen Garden</option>
+                        <option>Blitz</option>
                         <option>Coffee Run</option>
                     </select>
                     <label>Gamemode</label>
@@ -27,7 +28,10 @@
                 <label>Theme</label>
             </div>
             <h3 class="modpanel__subtitle">Objectives</h3>
-            <div class="mod-objectives form-group" v-for="objective in orderBy(game.objectives, 'number')" :key="objective.id">
+            <div
+                class="mod-objectives form-group" v-for="objective in orderBy(game.objectives, 'number')"
+                :key="objective.id"
+            >
                 <div class="mod-objectives__input">
                     <Input v-model="objective.description" maxlength="110" />
                     <label>Objective #{{ objective.number + 1 }} (Bonus)</label>
@@ -53,24 +57,10 @@
             </div>
 
             <h3 class="modpanel__subtitle">Votes</h3>
-            <div class="row">
-                <div class="col-sm-6 form-group">
-                    <Input />
-                    <label>UI - Blue Votes</label>
-                </div>
-                <div class="col-sm-6 form-group">
-                    <Input />
-                    <label>UI - Red Votes</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6 form-group">
-                    <Input />
-                    <label>UX - Blue Votes</label>
-                </div>
-                <div class="col-sm-6 form-group">
-                    <Input />
-                    <label>UX - Red Votes</label>
+            <div v-for="vote in ['UI', 'UX']" :key="vote" class="row">
+                <div v-for="team in game.teams" :key="team.id" class="col-sm-6 form-group">
+                    <VoteBoxInput @change="updated => team.votes[vote] = updated" :team="team" :vote="vote" />
+                    <label>{{ vote }} - {{ team.name | capitalize }} Votes</label>
                 </div>
             </div>
 
@@ -97,9 +87,10 @@
 
     import moment from 'moment';
     import Input from '~/components/form/Input';
+    import VoteBoxInput from '../../../components/game/VoteBoxInput';
 
     @Component({
-        components: { Input }
+        components: { VoteBoxInput, Input }
     })
 
     export default class DashboardGameDetails extends Vue {

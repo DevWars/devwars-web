@@ -9,6 +9,7 @@
                         <option value="" selected="selected">Filter by</option>
                         <option>Classic</option>
                         <option>Zen Garden</option>
+                        <option>Blitz</option>
                     </select>
                 </div>
             </div>

@@ -5,6 +5,7 @@
                 <option value="">Select Game Type</option>
                 <option>Classic</option>
                 <option>Zen Garden</option>
+                <option>Blitz</option>
             </select>
         </div>
         <div class="form-group">
