@@ -138,7 +138,7 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
+    import Component, {State, Action} from 'nuxt-class-component';
     import Vue from 'vue';
     import moment from 'moment';
 
@@ -146,12 +146,16 @@
     import Http from "../../services/Http";
     import Input from "~/components/form/Input";
     import ConnectToDiscord from "~/components/user/ConnectToDiscord";
+    import { user_has_provider } from '../../utils/linked-accounts';
 
     @Component({
         components: { Input, ConnectToDiscord },
         middleware: ['auth', 'no-competitors']
     })
     export default class CompetitorRegistration extends Vue {
+        @State(state => state.user.user) user;
+        @Action('toast/error') error;
+
         month = '';
         day = '';
         year = '';
@@ -172,6 +176,12 @@
         }
 
         async submit() {
+            const hasDiscord = user_has_provider(this.user, 'DISCORD');
+
+            if(!hasDiscord) {
+                return this.error('You must connect your discord before moving forward with your registration.');
+            }
+
             let date = moment.utc(`${this.month} ${this.day} ${this.year}`, 'MM DD YYYY').startOf('day');
 
             this.languages.forEach(language => {

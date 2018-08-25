@@ -12,6 +12,7 @@
 <script>
     import Component, {State, Action} from 'nuxt-class-component';
     import Vue from 'vue';
+    import { user_has_provider } from '../../utils/linked-accounts';
 
     @Component({})
     export default class extends Vue {
@@ -22,7 +23,7 @@
         discordUrl = `https://discordapp.com/api/oauth2/authorize?client_id=465280450420670484&redirect_uri=https%3A%2F%2Fapi.devwars.tv/oauth/discord&response_type=code&scope=identify`;
 
         get hasDiscord() {
-            return this.user && this.user.linked_accounts && this.user.linked_accounts.some(it => it.provider === 'DISCORD');
+            return user_has_provider(this.user, 'DISCORD');
         }
     }
 </script>
