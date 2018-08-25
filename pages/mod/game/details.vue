@@ -36,8 +36,13 @@
                     <Input v-model="objective.description" maxlength="110" />
                     <label>Objective #{{ objective.number + 1 }} (Bonus)</label>
                 </div>
-                <div class="obj-list__square team-blue"></div>
-                <div class="obj-list__square team-red"></div>
+                <SquareToggle
+                    @change="toggleObjective(game.teams.red, objective)"
+                    :active="teamCompletedObjective(game.teams.red, objective)" color="red"
+                />
+                <SquareToggle
+                    @change="toggleObjective(game.teams.blue, objective)"
+                    :active="teamCompletedObjective(game.teams.blue, objective)" color="blue" />
             </div>
 
             <h3 v-if="game.name === 'Zen Garden'" class="modpanel__subtitle">Zen Garden HTML</h3>
@@ -88,9 +93,12 @@
     import moment from 'moment';
     import Input from '~/components/form/Input';
     import VoteBoxInput from '../../../components/game/VoteBoxInput';
+    import SquareToggle from '../../../components/SquareToggle';
+
+    import { team_completed_objective } from '../../../utils/objectives';
 
     @Component({
-        components: { VoteBoxInput, Input }
+        components: { SquareToggle, VoteBoxInput, Input }
     })
 
     export default class DashboardGameDetails extends Vue {
@@ -99,11 +107,23 @@
         date = '';
         time = '';
 
+        teamCompletedObjective = team_completed_objective;
+
         mounted() {
             this.gameChanged();
 
             this.date = moment.utc(this.game.timestamp).format('DD/MM/YYYY');
             this.time = moment.utc(this.game.timestamp).format('HH:mm');
+        }
+
+        toggleObjective(team, objective) {
+            const has = team_completed_objective(team, objective);
+
+            if(has) {
+                team.completed_objectives = team.completed_objectives.filter(it => it.id !== objective.id);
+            } else {
+                team.completed_objectives.push(objective);
+            }
         }
 
         @Watch('time')

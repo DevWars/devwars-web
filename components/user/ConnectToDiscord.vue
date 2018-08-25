@@ -13,7 +13,7 @@
 
         @Action('user/disconnectLinkedAccount') removeProvider;
 
-        discordUrl = `https://discordapp.com/api/oauth2/authorize?client_id=465280450420670484&redirect_uri=http%3A%2F%2Fapi.devwars.test/oauth/discord&response_type=code&scope=identify`;
+        discordUrl = `https://discordapp.com/api/oauth2/authorize?client_id=465280450420670484&redirect_uri=http%3A%2F%2Fapi.devwars.tv/oauth/discord&response_type=code&scope=identify`;
 
         get hasDiscord() {
             return this.user && this.user.linked_accounts && this.user.linked_accounts.some(it => it.provider === 'DISCORD');
