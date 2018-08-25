@@ -21,7 +21,7 @@
                         <div class="schedule-block__time">{{ game.timestamp | moment('H:mm') }} UTC</div>
                     </td>
                     <td>
-                        <div class="schedule-block__duration">30</div>
+                        <div class="schedule-block__duration">{{ durations[game.name] || '30' }}</div>
                     </td>
                     <td>
                         <div class="schedule-block__show">DevWars Live</div>
@@ -52,6 +52,7 @@
     import { Prop } from 'vue-property-decorator';
 
     import Applications from '~/components/game/Applications';
+    import GameDurations from '../../utils/game-durations';
 
     @Component({
         components: { Applications }
@@ -59,6 +60,8 @@
     export default class ScheduleBlock extends Vue {
         @Prop({ default: '' }) filter;
         @Prop() count;
+
+        durations = GameDurations;
 
         @State(state => state.game.upcoming) _games;
 
