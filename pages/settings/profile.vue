@@ -44,10 +44,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <ConnectToDiscord />
-        </div>
-
         <button class="btn btn-primary" type="submit">Save</button>
     </form>
 </template>
@@ -60,10 +56,9 @@
     import FileChooser from '~/components/FileChooser';
     import CropperModal from '~/components/modal/CropperModal';
     import Input from '~/components/form/Input';
-    import ConnectToDiscord from '../../components/user/ConnectToDiscord';
 
     @Component({
-        components: { ConnectToDiscord, Avatar, FileChooser, Input }
+        components: { Avatar, FileChooser, Input }
     })
 
     export default class SettingsProfile extends Vue {
