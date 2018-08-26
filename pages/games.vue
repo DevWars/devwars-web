@@ -153,7 +153,7 @@
         }
 
         didTeamComplete(team, objective) {
-            return this.viewing.teams[team].completed_objectives.some(completed => completed === objective.id);
+            return this.viewing.teams[team].completed_objectives.some(completed => completed.id === objective.id);
         }
 
         view(game) {

@@ -12,6 +12,10 @@ export const mutations = {
 
     count(state, count) {
         state.count = count
+    },
+
+    removeLinkedAccount(state, provider) {
+        state.user.linked_accounts = state.user.linked_accounts.filter(it => it.provider !== provider);
     }
 };
 
