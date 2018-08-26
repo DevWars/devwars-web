@@ -1,7 +1,5 @@
 <template>
-  <HomeCard v-if="game">
-    <h2 slot="heading">Next Showing</h2>
-
+  <HomeCard v-if="game" title="Next Showing">
     <ul class="countdown" id="countdown">
       <li class="countdown__item" id="days">
         <div class="countdown__number">{{ timeDifference.days}}</div>

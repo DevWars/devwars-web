@@ -255,6 +255,54 @@ $user-avatar-offset                                : 40px;
 /*  ========================================================================
 02. Components
 ========================================================================= */
+/*  ========================================================================
+01. Card Temp
+======================================================================== */
+
+.card {
+    @extend %material;
+    display: block;
+    margin-bottom: 20px;
+    border-top: $border-size-sm solid $brand-secondary;
+    background-color: $bg-color-1;
+
+    a {
+        text-decoration: none;
+    }
+
+    &__inner {
+        padding: 15px 15px 30px;
+
+        @include breakpoint(xs) {
+            padding-bottom: $s-space;
+        }
+    }
+
+    &__title {
+        padding: 0 0 15px;
+        font-size: $h4-font-size;
+        text-transform: uppercase;
+        font-weight: $font-weight-bold;
+    }
+
+    &__image {
+        display: block;
+        margin: 0 auto 15px;
+        max-width: 100px;
+    }
+
+    &-plain {
+        border-top: none;
+    }
+
+    &-bezeless {
+        padding: 0 !important;
+    }
+
+    &-dark {
+        background-color: $bg-color-2;
+    }
+}
 
 .dashboard-card {
     @extend .card;

@@ -1,7 +1,7 @@
 <template>
-  <HomeCard>
+  <HomeCard title="Live Now">
     <div class="live-now" slot="heading">
-      <h2 class="live-now__title card__title">Live Now</h2>
+      <h2 class="live-now__title">Live Now</h2>
     </div>
 
     <div class="now-showing">
@@ -36,34 +36,33 @@
 @import '../../assets/styles/utils';
 
 .now-showing {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
 }
 
 .embed-video {
-  width: 100%;
-  max-width: 350px;
-  margin: 0 auto;
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
 
-  @include breakpoint(xs) {
-    max-width: none;
-  }
+    @include breakpoint(xs) {
+        max-width: none;
+    }
 }
 
-.live-now {
-  &__title {
+/deep/ .card__title {
     display: flex;
     align-items: center;
 
     &:before {
-      @extend .far;
-      content: $fa-circle;
-      margin-right: $xs-space;
-      font-size: $h5-font-size;
-      color: red;
+        content: '';
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        margin-right: $xs-space;
+        background-color: red;
     }
-  }
 }
 </style>

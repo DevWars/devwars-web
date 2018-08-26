@@ -1,6 +1,5 @@
 <template>
-  <Card class="card">
-    <slot name="heading"></slot>
+  <Card class="card" v-bind:title="title">
 
     <div class="content">
       <slot></slot>
@@ -16,7 +15,8 @@
 import Card from "./Card";
 
 export default {
-  components: { Card }
+  components: { Card },
+  props: [ 'title' ]
 }
 </script>
 
@@ -26,6 +26,13 @@ export default {
 .card {
 	position: relative;
   z-index: 1;
+
+  &__title {
+          padding: 0 0 15px;
+    font-size: $h4-font-size;
+    text-transform: uppercase;
+    font-weight: $font-weight-bold;
+  }
 }
 
 .content {

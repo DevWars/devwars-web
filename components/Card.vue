@@ -1,10 +1,17 @@
 <template>
-  <div class="card">
-    <div class="inner">
-      <slot></slot>
+    <div class="card">
+        <div class="inner">
+            <h2 class="card__title">{{ title }}</h2>
+            <slot></slot>
+        </div>
     </div>
-  </div>
 </template>
+
+<script>
+export default {
+  props: [ 'title' ]
+}
+</script>
 
 <style lang="scss" scoped>
 @import '../assets/styles/utils';
