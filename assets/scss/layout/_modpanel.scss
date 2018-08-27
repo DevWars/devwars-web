@@ -162,10 +162,6 @@ $sidebar-background                                 : $bg-color-4;
         }
     }
 
-    .progress {
-        background-color: darken($black-color, 10%);
-    }
-
     &-close {
         background: transparent;
         padding: $xs-space;

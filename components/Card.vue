@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <div class="inner">
-            <h2 class="card__title">{{ title }}</h2>
+            <h2 class="card__title" v-if="title">{{ title }}</h2>
             <slot></slot>
         </div>
     </div>

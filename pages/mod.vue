@@ -41,28 +41,20 @@
             <ul class="modpanel-sidebar-list modpanel-sidebar-list-info">
                 <li>
                     <a href="#" class="modpanel-sidebar-list-item">
-                        <div class="progress-header progress-header-lg">
-                            <div class="progress-header__title btn-icon">
-                                <i class="fal fa-server" aria-hidden="true"></i>
-                                <span>Server Usage</span>
-                            </div>
-                        </div>
-                        <div class="progress progress-primary">
-                            <div class="progress__bar" style="width: 30%;"></div>
-                        </div>
+                        <Progress
+                            title="Server Usage"
+                            :progress="30 + '%'"
+                            color="primary"
+                        />
                     </a>
                 </li>
                 <li>
                     <a href="#" class="modpanel-sidebar-list-item">
-                        <div class="progress-header progress-header-lg">
-                            <div class="progress-header__title btn-icon">
-                                <i class="fab fa-github" aria-hidden="true"></i>
-                                <span>GitHub Issues</span>
-                            </div>
-                        </div>
-                        <div class="progress progress-yellow">
-                            <div class="progress__bar" style="width: 30%;"></div>
-                        </div>
+                        <Progress
+                            title="GitHub Issues"
+                            :progress="30 + '%'"
+                            color="yellow"
+                        />
                     </a>
                 </li>
             </ul>
@@ -80,14 +72,17 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
-    import Vue from 'vue';
+import Component from 'nuxt-class-component';
+import Vue from 'vue';
 
-    @Component({
-        layout: 'header'
-    })
+import Progress from '~/components/form/Progress';
 
-    export default class extends Vue {
+@Component({
+    layout: 'header',
+    components: { Progress }
+})
 
-    }
+export default class Mod extends Vue {
+
+}
 </script>

@@ -1,36 +1,73 @@
 <template>
-    <div class="dashboard-card">
-        <div class="dashboard-card__header">
-            <i class="dashboard-card__icon fa fa-shield"></i>
-            <h4 class="dashboard-card__title">Badges</h4>
-        </div>
-
+    <DashboardCard title="Badges" icon="fa fa-shield">
         <div class="dashboard-badges">
-            <div class="dashboard-badges__overview">
-                <i class="dashboard-badges__icon fa fa-shield"></i>
-                <p class="dashboard-badges__total">{{owned.length }}</p>
+            <div class="overview">
+                <i class="icon fa fa-shield"></i>
+                <p class="total">{{owned.length }}</p>
             </div>
 
             <nuxt-link to="/badges" class="btn btn-outline-white btn-sm">View Badges</nuxt-link>
 
-            <div class="progress-header">
-                <span class="progress-header__title">Badges</span>
-                <span class="progress-header__meta">{{ owned.length }}/{{ badges.length }}</span>
-            </div>
-            <div class="progress">
-                <div class="progress__bar"
-                     :style="{width:  (owned.length / badges.length * 100)  + '%'}"></div>
-            </div>
+            <Progress
+                title="Badges"
+                :meta="(owned.length + '/' + badges.length)"
+                :progress="(owned.length / badges.length * 100)  + '%'"
+            />
         </div>
-    </div>
+    </DashboardCard>
 </template>
 
 <script>
     import Component, {State} from 'nuxt-class-component';
     import Vue from 'vue';
 
-    @Component({props: ['owned']})
+    import DashboardCard from '~/components/DashboardCard';
+    import Progress from '~/components/form/Progress';
+
+    @Component({
+        props: ['owned'],
+        components: { DashboardCard, Progress }
+    })
+
     export default class Badges extends Vue {
         @State(state => state.badges.badges) badges;
     }
 </script>
+
+<style lang="scss" scoped>
+@import '../../assets/styles/utils';
+
+.dashboard-badges {
+    padding: $grid-gutter-width;
+    text-align: center;
+    font-size: 0;
+    line-height: 1;
+}
+
+.overview {
+    padding-bottom: $xs-space;
+}
+
+.icon,
+.total {
+    @extend %align-middle;
+}
+
+.total {
+    line-height: 50px;
+    font-size: 48px;
+    font-weight: 400;
+}
+
+.icon {
+    padding-right: 10px;
+
+    &:before {
+        font-size: 38px;
+    }
+}
+
+.btn {
+    margin-bottom: $m-space;
+}
+</style>

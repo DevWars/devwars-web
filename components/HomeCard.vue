@@ -24,11 +24,11 @@ export default {
 @import '../assets/styles/utils';
 
 .card {
-	position: relative;
-  z-index: 1;
+    position: relative;
+    z-index: 1;
 
   &__title {
-          padding: 0 0 15px;
+    padding: 0 0 15px;
     font-size: $h4-font-size;
     text-transform: uppercase;
     font-weight: $font-weight-bold;

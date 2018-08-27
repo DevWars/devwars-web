@@ -2,57 +2,21 @@
     <div class="dashboard header-offset">
         <div class="container">
             <div class="row">
-                <div class="dashboard__aside">
-                    <ProfileCard :user="user"/>
+                <div class="aside col-md-4">
+                    <ProfileCard :user="user" />
 
-                    <Wallet :user="user"/>
+                    <Wallet :user="user" />
 
-                    <Badges :owned="mine"/>
+                    <Badges :owned="mine" />
                 </div>
 
 
-                <div class="dashboard__main">
+                <div class="main col-md-8">
+                    <!-- <DailyPrizes /> -->
 
-                    <!-- <div class="dashboard-card">
-                    <div class="dashboard-card__header">
-                    <i class="dashboard-card__icon fa fa-gift"></i>
-                    <h4 class="dashboard-card__title">Daily Tasks</h4>
-                    </div>
-                    <div class="daily-prizes">
-                    <div class="daily-prizes__item">
-                    <div class="daily-prizes__main">
-                    <div class="daily-prizes__prize">
-                    <div class="devcoins">
-                    <Devcoin></Devcoin>
-                    <div class="devcoins__amount">500</div>
-                    </div>
-                    </div>
-                    <div class="daily-prizes__title">Submit 5 Objectives</div>
-                    </div>
-                    <div class="daily-prizes__actions">
-                    <a href="#" class="btn btn-outline-white btn-sm">Claim</a>
-                    </div>
-                    </div>
+                    <UpcomingGames :upcoming="upcomingGames" :applied="appliedGames" />
 
-                    <div class="daily-prizes__item">
-                    <div class="daily-prizes__main">
-                    <div class="daily-prizes__prize">
-                    <div class="devcoins">
-                    <Devcoin></Devcoin>
-                    <div class="devcoins__amount">200</div>
-                    </div>
-                    </div>
-                    <div class="daily-prizes__title">Comment on a User Submission</div>
-                    </div>
-                    <div class="daily-prizes__actions">
-                    <a href="#" class="btn btn-outline-white btn-sm disabled">Claim</a>
-                    </div>
-                    </div>
-                    </div>
-                    </div> -->
-                    <UpcomingGames :upcoming="upcomingGames" :applied="appliedGames"/>
-
-                    <Activities :paged="activities"/>
+                    <Activities :paged="activities" />
                 </div>
             </div>
         </div>
@@ -71,7 +35,13 @@
     import UpcomingGames from '~/components/dashboard/UpcomingGames';
 
     @Component({
-        components: {ProfileCard, Wallet, Badges, Activities, UpcomingGames}
+        components: {
+            ProfileCard,
+            Wallet,
+            Badges,
+            Activities,
+            UpcomingGames,
+        }
     })
     export default class Dashboard extends Vue {
         @State(state => state.user.user) user;
@@ -87,3 +57,20 @@
     }
 </script>
 
+<style lang="scss" scoped>
+@import '../assets/styles/utils';
+
+.dashboard {
+    padding-top: $header-offset + $grid-gutter-width;
+}
+
+.aside {
+    /deep/ .card {
+        border-top-color: $brand-primary;
+    }
+}
+
+.main {
+    margin-top: $user-avatar-offset;
+}
+</style>
