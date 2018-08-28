@@ -37,7 +37,6 @@
 // ==================================
 @import "layout/header";
 @import "layout/footer";
-@import "layout/auth";
 @import "layout/docs";
 @import "layout/dashboard";
 @import "layout/modpanel";
@@ -46,7 +45,6 @@
 
 // Pages
 // ==================================
-@import "pages/home";
 @import "pages/blog";
 @import "pages/contact";
 @import "pages/games";
@@ -55,16 +53,3 @@
 @import "pages/schedule";
 @import "pages/competitor";
 @import "pages/shop";
-
-
-// Vendors
-// ==================================
-
-
-
-
-// Misc
-// ==================================
-.ng-hide.ng-hide-animate {
-    display: none !important;
-}

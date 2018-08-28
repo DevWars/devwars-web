@@ -1,29 +1,30 @@
 <template>
-    <div class="pg-auth header-offset">
+    <div class="ForgotPassword header-offset">
         <div class="container">
-            <div class="auth-form">
-                <div v-show="!done">
-                    <h1 class="auth-form__title">Forgot Password</h1>
-                    <p class="auth-form__desc">Enter the email address below and we will send you some instructions.</p>
-
-                    <form v-async-submit="[forgot]">
-                        <div class="form-group">
-                            <Input v-model="email" name="email" tabindex="1" required />
-                            <label>Email or Username</label>
-                        </div>
-                        <div class="auth-form__actions">
-                            <button type="submit" href="#" class="btn btn-outline-white btn-block" tabindex="2">Reset Password</button>
-                        </div>
-                    </form>
-                </div>
-
-                <div v-show="done">
-                    <h1 class="auth-form__title">Password Reset</h1>
-                    <p class="auth-form__desc">Please check your email for instructions on how to reset your password.</p>
-                    <div class="auth-form__actions">
-                        <a href="/forgot-password" class="auth-form__forgot">Need to try again?</a>
+            <form v-show="!done" v-async-submit="[forgot]">
+                <DevwarsCard
+                    title="Forgot Password"
+                    desc="Enter the email address below and we will send you some instructions."
+                >
+                    <div class="form-group">
+                        <Input v-model="email" name="email" tabindex="1" required />
+                        <label>Email or Username</label>
                     </div>
-                </div>
+                    <div slot="actions">
+                        <button type="submit" href="#" class="btn btn-outline-white btn-block" tabindex="2">Reset Password</button>
+                    </div>
+                </DevwarsCard>
+            </form>
+
+            <div v-show="done">
+                <DevwarsCard
+                    title="Password Reset"
+                    desc="Please check your email for instructions on how to reset your password."
+                >
+                    <div slot="actions">
+                        <a href="/forgot-password" class="btn btn-outline-gray btn-block">Need to try again?</a>
+                    </div>
+                </DevwarsCard>
             </div>
         </div>
     </div>
@@ -32,10 +33,11 @@
 <script>
     import Component from 'nuxt-class-component';
     import Vue from 'vue';
+    import DevwarsCard from '~/components/DevwarsCard';
     import Input from '~/components/form/Input';
 
     @Component({
-        components: { Input }
+        components: { DevwarsCard, Input }
     })
 
     export default class ResetPassword extends Vue {
@@ -49,3 +51,11 @@
         }
     }
 </script>
+
+<style lang="scss" scoped>
+@import '../assets/styles/utils';
+
+.ForgotPassword {
+    padding-top: $l-space;
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="footer" ng-hide="hide">
+  <div class="footer">
     <div class="newsletter-box">
       <div class="container">
         <h2 class="newsletter-box__title">Receive our weekly challenge, and other DevWars updates!</h2>

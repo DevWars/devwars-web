@@ -219,4 +219,113 @@ $home-card-margin: $l-space;
     margin-top: -$home-card-margin;
     background-color: $bg-color-3;
 }
+
+.home-section {
+    padding: $m-space 0;
+    background-color: $bg-color-4;
+    text-align: center;
+
+    &__title {
+        margin-bottom: $m-space;
+        text-transform: uppercase;
+    }
+
+    &__desc {
+        margin-bottom: $m-space;
+        margin-top: -$grid-gutter-width;
+        color: $text-color-secondary;
+    }
+
+    &__actions {
+        margin-top: $grid-gutter-width;
+    }
+
+    & + & {
+        border-top: $border-size solid $divider-color;
+    }
+}
+
+.home-display {
+    @extend %clear;
+    padding: $ms-space 0;
+    background-size: cover;
+    background-position: top;
+
+    &__title {
+        max-width: 800px;
+        margin-bottom: $grid-gutter-width;
+        font-weight: $font-weight-bold;
+        font-size: $display4-size;
+        line-height: 1.2;
+    }
+
+    &.reverse &__content {
+        float: right;
+        text-align: right;
+    }
+}
+
+
+.supporter-logos {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    @include breakpoint(sm) {
+        flex-wrap: wrap;
+    }
+
+    &__item {
+        padding: $grid-gutter-width;
+
+        @include breakpoint(sm) {
+            width: 50%;
+        }
+
+        @include breakpoint(xs) {
+            padding: $grid-gutter-part;
+        }
+    }
+
+    &__logo {
+        max-height: 40px;
+        opacity: 0.3;
+
+        &:hover {
+            opacity: 0.45;
+        }
+    }
+}
+
+
+.home-quotes {
+    display: flex;
+    justify-content: center;
+
+    @include breakpoint(sm) {
+        display: block;
+    }
+}
+
+.quote-card {
+    margin-top: $grid-gutter-width;
+
+    &__avatar {
+        width: 73px;
+        height: 73px;
+        border-radius: 50%;
+        margin-top: -(73px / 2);
+    }
+
+    &__desc {
+        margin-top: $grid-gutter-part;
+    }
+
+    &__name {
+        margin-top: $grid-gutter-part;
+        font-size: $h5-font-size;
+    }
+}
+
 </style>
