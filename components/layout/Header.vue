@@ -27,21 +27,17 @@
                             <nuxt-link to="/leaderboards" class="nav__link">Leaders</nuxt-link>
                         </li>
                         <li class="nav__item">
-                            <nuxt-link to="/blog" class="nav__link">Blog</nuxt-link>
+                            <nuxt-link to="/docs" class="nav__link">About</nuxt-link>
                         </li>
                     </ul>
                 </div>
 
                 <ul class="nav nav-actions" v-if="!user">
                     <li class="nav__item">
-                        <nuxt-link to="/register"
-                                   class="btn btn-primary">Register
-                        </nuxt-link>
+                        <nuxt-link to="/register" class="btn btn-primary">Register</nuxt-link>
                     </li>
                     <li class="nav__item">
-                        <nuxt-link to="/login"
-                                   class="btn btn-link color-white">Log In
-                        </nuxt-link>
+                        <nuxt-link to="/login" class="btn btn-link color-white">Log In</nuxt-link>
                     </li>
                 </ul>
 

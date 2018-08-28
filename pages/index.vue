@@ -100,18 +100,6 @@
                 </div>
             </div>
         </div>
-
-
-        <div class="home-section">
-            <div class="container">
-                <h2 class="home-section__title">Latest Blogs</h2>
-                <div class="blog-list">
-                    <div class="col-md-4" v-for="post in posts" :key="post.id">
-                        <BlogCard :post="post"/>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </template>
 
@@ -121,28 +109,20 @@ import Vue from 'vue';
 
 import Highlights from '~/components/game/Highlights';
 import ScheduleBlock from '~/components/game/ScheduleBlock';
-import BlogCard from '~/components/blog/BlogCard';
 import Http from "../services/Http";
 
 @Component({
   components: {
     Highlights,
     ScheduleBlock,
-    BlogCard,
   }
 })
 
 export default class Index extends Vue {
-  @State(state => state.blog.latest) posts;
-
   async asyncData() {
       return {
           latest: await Http.for('game').get('latest'),
       }
-  }
-
-  async fetch({store}) {
-      store.dispatch('blog/latest', 3);
   }
 }
 </script>
