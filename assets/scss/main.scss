@@ -19,12 +19,8 @@
 // Components
 // ==================================
 @import "components/button";
-@import "components/nav";
-@import "components/list-item";
-@import "components/rank";
+@import "components/nav"; // tabs (Games, Game, Tournament, Settings)
 @import "components/ribbon";
-@import "components/stat-box";
-@import "components/tooltip";
 @import "components/toasts";
 @import "components/menu";
 @import "components/modals";
@@ -49,7 +45,6 @@
 @import "pages/contact";
 @import "pages/games";
 @import "pages/leaderboards";
-@import "pages/tutorial";
 @import "pages/schedule";
 @import "pages/competitor";
 @import "pages/shop";
