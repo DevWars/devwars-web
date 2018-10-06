@@ -140,6 +140,7 @@
 
     import Avatar from '~/components/user/Avatar';
     import VoteBox from '~/components/game/VoteBox';
+    import { team_completed_objective } from '../utils/objectives';
 
     @Component({
         components: {Avatar, VoteBox}
@@ -153,7 +154,7 @@
         }
 
         didTeamComplete(team, objective) {
-            return this.viewing.teams[team].completed_objectives.some(completed => completed.id === objective.id);
+            return team_completed_objective(this.viewing.teams[team], objective);
         }
 
         view(game) {

@@ -80,7 +80,14 @@
                 delete cloned.players;
 
                 await Http.for('game/team').save(cloned);
+
+                for (const category of ["UI", "UX"]) {
+                    const votes = team.votes[category].count;
+
+                    await Http.for(`/game/team/${team.id}/votes`).post({}, { amount: votes, category });
+                }
             }
+
 
             // Last but not least, save the game
             let game = await Http.for('game').save(cloned);
