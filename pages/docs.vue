@@ -725,6 +725,8 @@
     export default class Docs extends Vue {
 
         mounted() {
+            if (!this.$route.hash) return;
+
             const anchored = document.querySelector(this.$route.hash);
 
             if (anchored) anchored.scrollIntoView();
