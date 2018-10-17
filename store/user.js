@@ -21,9 +21,13 @@ export const mutations = {
 
 export const actions = {
     async refresh({ commit }) {
-        let user = await Http.for('user').get();
+        try {
+            let user = await Http.for('auth/user').get();
 
-        commit('user', Object.keys(user).length === 0 ? null : user);
+            commit('user', user);
+        } catch (e) {
+            commit('user', null);
+        }
     },
 
     async refreshUserCount({ commit }) {
@@ -34,7 +38,7 @@ export const actions = {
 
     async login({ commit, dispatch }, { username, password }) {
         try {
-            await Http.for('user').post('login', { username, password });
+            await Http.for('auth').post('login', { identifier: username, password });
 
             await dispatch('refresh');
 
@@ -50,7 +54,7 @@ export const actions = {
 
     async register({ commit, dispatch }, registration) {
         try {
-            await Http.for('user').post('register', registration);
+            await Http.for('auth').post('register', registration);
 
             await dispatch('refresh');
 
@@ -61,7 +65,7 @@ export const actions = {
     },
 
     async logout({ commit, dispatch }) {
-        await Http.for('user').post('logout');
+        await Http.for('auth').post('logout');
 
         await dispatch('navigate', '/', { root: true });
 
@@ -80,7 +84,7 @@ export const actions = {
 
     async password({ commit, dispatch }, data) {
         try {
-            await Http.for('user/reset/change').put(data);
+            await Http.for('auth/reset/change').put(data);
 
             dispatch('toast/success', `We've updated your password!`, { root: true });
         } catch (e) {
@@ -103,7 +107,7 @@ export const actions = {
 
     async forgot({ dispatch, commit }, email) {
         try {
-            await Http.for('user/reset').save({ username_or_email: email });
+            await Http.for('auth/reset').save({ username_or_email: email });
 
             dispatch('toast/success', `Check your email for a guide to reset your password.`, { root: true });
 
@@ -116,7 +120,7 @@ export const actions = {
     },
 
     async resetByKey({ dispatch, commit }, data) {
-        await Http.for('user/reset').put({}, data);
+        await Http.for('auth/reset').put({}, data);
 
         dispatch('toast/success', `We've updated your password, give it a go!`, { root: true });
     },

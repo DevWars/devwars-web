@@ -12,7 +12,7 @@ export const mutations = {
 
 export const actions = {
     async refresh({commit}) {
-        let badges = await Http.for('badge').get('all');
+        let badges = await Http.for('badge').get();
 
         commit('badges', badges);
     },

@@ -3,6 +3,7 @@ const parser = require('body-parser')
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
+    mode: 'spa',
     /*
     ** Headers of the page
     */
@@ -26,7 +27,6 @@ module.exports = {
         ],
         script: [
             { src: 'https://rawgit.com/jsog/jsog/master/lib/JSOG.js', type: 'text/javascript', body: true },
-            { innerHTML: '__NUXT__ = JSOG.decode(__NUXT__)', type: 'text/javascript', body: true }
         ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -63,6 +63,7 @@ module.exports = {
     },
 
     render: {
+        ssr: false,
         gzip: false
     },
 

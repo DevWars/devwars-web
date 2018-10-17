@@ -3,7 +3,7 @@ export const state = () => ({});
 export const mutations = {};
 
 export const actions = {
-    async nuxtServerInit({commit, dispatch}) {
+    async nuxtClientInit({commit, dispatch}) {
         await Promise.all([
             dispatch('user/refreshUserCount'),
             dispatch('user/refresh'),
