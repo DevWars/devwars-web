@@ -82,7 +82,8 @@
                 await Http.for('game/team').save(cloned);
 
                 for (const category of ["UI", "UX"]) {
-                    const votes = team.votes[category].count;
+                    const vote = team.votes[category];
+                    const votes = vote ? vote.count: 0;
 
                     await Http.for(`/game/team/${team.id}/votes`).post({}, { amount: votes, category });
                 }
