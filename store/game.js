@@ -50,7 +50,7 @@ export const actions = {
     },
 
     async game({commit}, id) {
-        let game = await Http.for('game').byID(id);
+        let game = await Http.for(`game/${id}`).get();
 
         commit('game', game);
     },
@@ -72,7 +72,7 @@ export const actions = {
 
     async active({commit}) {
         try {
-            let active = await Http.for('game').get('active');
+            let active = await Http.for('game/status/active').get();
 
             commit('active', active);
         } catch (e) {
@@ -82,8 +82,7 @@ export const actions = {
 
     async upcoming({commit}) {
         try {
-            let upcoming = await Http.for('game').get('upcoming');
-
+            let upcoming = await Http.for('game/status/scheduling').get();
             commit('upcoming', upcoming);
         } catch (e) {
         }

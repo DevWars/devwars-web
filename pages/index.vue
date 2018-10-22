@@ -121,7 +121,7 @@ import Http from "../services/Http";
 export default class Index extends Vue {
   async asyncData() {
       return {
-          latest: await Http.for('game').get('latest'),
+          latest: await Http.for('game/status/ended').get(),
       }
   }
 }
