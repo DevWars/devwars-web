@@ -166,7 +166,7 @@
         }
 
         async asyncData() {
-            let past = await Http.for('game').get('past');
+            let past = await Http.for('game/status/ended').get();
 
             let viewing = Object.values(past).reverse().find(it => it.length)[0];
 

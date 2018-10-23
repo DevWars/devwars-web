@@ -206,7 +206,7 @@
         async asyncData({ query }) {
             if (!query.game) return {};
 
-            return { game: await Http.for('game').byID(query.game) }
+            return { game: await Http.for(`game/${query.game}`).get() }
         }
     }
 </script>

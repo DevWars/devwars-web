@@ -90,7 +90,7 @@
 
     export default class extends Vue {
         async asyncData({ query }) {
-            const game = await Http.for('game').byID(query.game);
+            const game = await Http.for(`game/${query.game}`).get();
 
             return { game };
         }
