@@ -34,6 +34,7 @@
     import Vue from 'vue';
 
     import {Prop} from 'vue-property-decorator';
+    import { team_for_game } from '../../utils/objectives';
 
     @Component
     export default class VoteBox extends Vue {
@@ -63,8 +64,8 @@
         get analysis() {
             let analysis = {};
 
-            analysis.red = this.analysisForTeam(this.game.teams.red, this.game.teams.blue);
-            analysis.blue = this.analysisForTeam(this.game.teams.blue, this.game.teams.red);
+            analysis.red = this.analysisForTeam(team_for_game("red", this.game), team_for_game("blue", this.game));
+            analysis.blue = this.analysisForTeam(team_for_game("blue", this.game), team_for_game("red", this.game));
 
             return analysis;
         }

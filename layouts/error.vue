@@ -21,7 +21,9 @@
                     <div class="col-sm-8">
                         <h1 class="error-pg__code">500</h1>
                         <h2 class="error-pg__title">It's not you, It's us.</h2>
-                        <p class="error-pg__desc">This page is experiencing internal server issues <span class="font-size-sm">(blame Terence)</span></p>
+                        <p class="error-pg__desc">This page is experiencing internal server issues <span
+                            class="font-size-sm"
+                        >(blame Terence)</span></p>
                         <nuxt-link to="/" class="btn btn-outline-primary btn-lg">Go to home</nuxt-link>
                     </div>
                 </div>
@@ -42,8 +44,12 @@
 </template>
 
 <script>
-export default {
-  props: ['error'],
-  layout: 'header'
-}
+    export default {
+        props: ['error'],
+        layout: 'header',
+
+        mounted() {
+            console.log(this.error);
+        }
+    }
 </script>

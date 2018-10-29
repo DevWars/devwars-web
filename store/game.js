@@ -63,7 +63,7 @@ export const actions = {
 
     async applied({commit}) {
         try {
-            let applied = await Http.for('game/application').get('mine');
+            let applied = await Http.for('game/applications').get('mine');
 
             commit('applied', applied || []);
         } catch (e) {
