@@ -3,7 +3,7 @@ const parser = require('body-parser')
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-    mode: 'ssr',
+    mode: 'universal',
     /*
     ** Headers of the page
     */

@@ -3,10 +3,7 @@ import JSOG from 'jsog';
 
 export default async function (ctx) {
     const $axios = ctx.app.$axios;
-
     Http.axios = $axios;
-
-    await ctx.store.dispatch('nuxtClientInit', ctx);
 
     $axios.onResponse(response => {
         if (process.browser) {
