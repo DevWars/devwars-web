@@ -34,7 +34,7 @@
     import Vue from 'vue';
 
     import {Prop} from 'vue-property-decorator';
-    import { team_for_game } from '../../utils/objectives';
+    import { team_for_game, vote_analysis_for_team } from '../../utils/objectives';
 
     @Component
     export default class VoteBox extends Vue {
@@ -43,22 +43,7 @@
         @Prop() label;
 
         analysisForTeam(team, otherTeam) {
-            let points;
-            let teamVotes = team.votes[this.vote] ? team.votes[this.vote].count : 0;
-            let otherVotes = otherTeam.votes[this.vote] ? otherTeam.votes[this.vote].count : 0;
-            let total = teamVotes + otherVotes;
-
-            if (teamVotes >= total * (2.0 / 3.0)) {
-                points = 2;
-            } else if (teamVotes >= total * (1.0 / 3.0)) {
-                points = 1;
-            } else {
-                points = 0;
-            }
-
-            let percent = (teamVotes / total * 100).toFixed(0) + '%';
-            let win = teamVotes > otherVotes;
-            return {points, win, percent, votes: teamVotes};
+            return vote_analysis_for_team(team, otherTeam);
         }
 
         get analysis() {

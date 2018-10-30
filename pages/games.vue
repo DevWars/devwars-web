@@ -52,25 +52,21 @@
 
         viewing = null;
 
-        @Watch('$route', { immediate: true })
-        async routeChange(newRoute, oldRoute) {
-            const season = this.$route.query.season ? parseInt(this.$route.query.season) : 3;
-            const gameId = this.$route.query.game;
+        @Watch('$route.query.season', { immediate: true })
+        async seasonChange(newSeason) {
+            const season = parseInt(newSeason || "3");
 
-            this.season = season;
+            this.games = await Http.for('game/season').get(season);
 
-            const seasonChanged = !oldRoute || newRoute.query.season.toString() !== oldRoute.query.season.toString();
-
-            if (seasonChanged) {
-                this.games = await Http.for('game/season').get(season);
+            if(!this.$route.query.game) {
+                await this.view(this.games[0]);
             }
+        }
 
-            if (gameId) {
-                this.viewing = await Http.for('game').get(gameId);
-            }
-
-            if (!this.viewing || seasonChanged) {
-                this.viewing = await Http.for('game').get(this.games[0].id);
+        @Watch('$route.query.game', { immediate: true })
+        async gameChange(newGame) {
+            if(newGame) {
+                this.viewing = await Http.for('game').get(newGame);
             }
         }
 

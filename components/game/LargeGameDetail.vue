@@ -103,11 +103,11 @@
             <div class="sub-score-header">
                     <span
                         class="sub-score-header__points team-blue"
-                    >{{ team_for_game("blue", game).completed_objectives.length }}</span>
+                    >{{ team_for_game("blue", game).completedObjectives.length }}</span>
                 <h3 class="sub-score-header__title">Objectives</h3>
                 <span
                     class="sub-score-header__points team-red"
-                >{{ game.teams.red.completed_objectives.length }}</span>
+                >{{ team_for_game("red", game).completedObjectives.length }}</span>
             </div>
             <ul class="obj-list">
                 <li
@@ -142,7 +142,7 @@
     import Avatar from '~/components/user/Avatar';
     import VoteBox from '~/components/game/VoteBox';
 
-    import { team_for_game } from '../../utils/objectives';
+    import { team_completed_objective, team_for_game } from '../../utils/objectives';
 
     @Component({
         components: {Avatar, VoteBox},
@@ -157,8 +157,7 @@
         }
 
        didTeamComplete(team, objective) {
-            return true;
-            // return team_completed_objective(this.viewing.teams[team], objective);
+            return team_completed_objective(team_for_game(team, this.game), objective);
         }
 
         get blue() {

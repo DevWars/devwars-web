@@ -120,9 +120,9 @@
             const has = team_completed_objective(team, objective);
 
             if(has) {
-                team.completed_objectives = team.completed_objectives.filter(it => it.id !== objective.id);
+                team.completedObjectives = team.completedObjectives.filter(it => it.id !== objective.id);
             } else {
-                team.completed_objectives.push(objective);
+                team.completedObjectives.push(objective);
             }
         }
 
