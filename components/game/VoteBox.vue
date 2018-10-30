@@ -43,7 +43,7 @@
         @Prop() label;
 
         analysisForTeam(team, otherTeam) {
-            return vote_analysis_for_team(team, otherTeam);
+            return vote_analysis_for_team(team, otherTeam, this.label);
         }
 
         get analysis() {

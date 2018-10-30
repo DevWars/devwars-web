@@ -54,12 +54,12 @@
 
         @Watch('$route.query.season', { immediate: true })
         async seasonChange(newSeason) {
-            const season = parseInt(newSeason || "3");
+            this.season = parseInt(newSeason || "3");
 
-            this.games = await Http.for('game/season').get(season);
+            this.games = await Http.for('game/season').get(this.season);
 
             if(!this.$route.query.game) {
-                await this.view(this.games[0]);
+                this.viewing = await Http.for('game').get(this.games[0].id);
             }
         }
 
@@ -71,7 +71,7 @@
         }
 
         async view(game) {
-            this.$router.push({ path: '/games', query: { game: game.id, season: this.season } })
+            this.$router.push({ path: '/games', query: { game: game.id, season: game.season } })
         }
     }
 </script>

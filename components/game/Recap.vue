@@ -3,7 +3,9 @@
         <div class="team team-blue"></div>
         <div class="score">
             <span class="gamemode">{{ game.name }}</span>
-            <span class="points">{{ team_for_game("blue", game).points }}&nbsp;&hyphen;&nbsp;{{ team_for_game("red", game).points }}</span>
+            <span class="points">
+                {{ points_for_team(team_for_game("blue", game), game) }}&nbsp;&hyphen;&nbsp;{{ points_for_team(team_for_game("red", game), game) }}
+            </span>
         </div>
         <div class="team team-red"></div>
 
@@ -38,7 +40,7 @@
         Prop
     } from 'vue-property-decorator';
     import HomeCard from "@/components/HomeCard";
-    import { team_for_game } from '../../utils/objectives';
+    import { team_for_game, points_for_team } from '../../utils/objectives';
 
     @Component({
         components: {
@@ -49,6 +51,7 @@
     export default class Recap extends Vue {
         @Prop() game;
 
+        points_for_team = points_for_team;
         team_for_game = team_for_game;
 
         player(team, language) {
@@ -56,8 +59,8 @@
                 .find(player => {
                     return player.language && player.language.toLowerCase() === language
                 }) || {
-                    user: {}
-                };
+                user: {}
+            };
         }
     }
 
@@ -149,6 +152,7 @@
         &--blue {
             text-align: left;
         }
+
         &--red {
             text-align: right;
         }

@@ -34,12 +34,12 @@
                         <div class="games-team__score">
                                 <span
                                     class="games-team__win"
-                                    v-if="team_for_game(team, game).winner && index === 0"
+                                    v-if="index === 0 && winner_for_game(game) === team_for_game(team, game)"
                                 >Win</span>
-                            <span class="games-team__points">{{ team_for_game(team, game).points }}</span>
+                            <span class="games-team__points">{{ points_for_team(team_for_game(team, game), game)}}</span>
                             <span
                                 class="games-team__win"
-                                v-if="team_for_game(team, game).winner && index === 1"
+                                v-if="index === 1 && winner_for_game(game) === team_for_game(team, game)"
                             >Win</span>
                         </div>
                         <h3 v-if="index === 1" class="games-team__name">{{ team_for_game(team, game).name }}</h3>
@@ -127,8 +127,8 @@
             </ul>
         </div>
 
-        <VoteBox :game="game" vote="Design" label="UI" />
-        <VoteBox :game="game" vote="Functionality" label="UX" />
+        <VoteBox :game="game" vote="Design" label="ui" />
+        <VoteBox :game="game" vote="Functionality" label="ux" />
     </div>
 </template>
 
@@ -142,15 +142,14 @@
     import Avatar from '~/components/user/Avatar';
     import VoteBox from '~/components/game/VoteBox';
 
-    import { team_completed_objective, team_for_game } from '../../utils/objectives';
+    import { team_completed_objective, team_for_game, points_for_team, winner_for_game } from '../../utils/objectives';
 
     @Component({
         components: {Avatar, VoteBox},
+        methods: {team_for_game, points_for_team, winner_for_game}
     })
     export default class extends Vue {
         @Prop() game;
-
-        team_for_game = team_for_game;
 
         player(team, language) {
             return team_for_game(team, this.game).players.find(player => player.language.toLowerCase() === language);
