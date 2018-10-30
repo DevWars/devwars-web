@@ -34,12 +34,12 @@
                         <div class="games-team__score">
                                 <span
                                     class="games-team__win"
-                                    v-if="index === 0 && winner_for_game(game) === team_for_game(team, game)"
+                                    v-show="index === 0 && winner_for_game(game) === team_for_game(team, game)"
                                 >Win</span>
                             <span class="games-team__points">{{ points_for_team(team_for_game(team, game), game)}}</span>
                             <span
                                 class="games-team__win"
-                                v-if="index === 1 && winner_for_game(game) === team_for_game(team, game)"
+                                v-show="index === 1 && winner_for_game(game) === team_for_game(team, game)"
                             >Win</span>
                         </div>
                         <h3 v-if="index === 1" class="games-team__name">{{ team_for_game(team, game).name }}</h3>
