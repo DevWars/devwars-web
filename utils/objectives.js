@@ -20,7 +20,7 @@ export const points_for_team = ((team, game) => {
     const otherTeam = game.teams.find(it => it !== team);
 
     for (const vote in team.votes) {
-        if (game.season < 3) {
+        if (game.season === 1 || game.season === 2) {
             points += vote_analysis_for_team_old(team, otherTeam, vote).points;
         } else {
             points += vote_analysis_for_team(team, otherTeam, vote).points;
@@ -35,18 +35,13 @@ export const winner_for_game = (game) => {
 };
 
 export const vote_analysis_for_team = (team, otherTeam, label) => {
-    let points;
+    let points = 0;
     let teamVotes = team.votes[label] || 0;
     let otherVotes = otherTeam.votes[label] || 0;
     let total = teamVotes + otherVotes;
 
-    if (teamVotes >= total * (2.0 / 3.0)) {
-        points = 2;
-    } else if (teamVotes >= total * (1.0 / 3.0)) {
-        points = 1;
-    } else {
-        points = 0;
-    }
+    if (teamVotes/total > 0.55) { points++; }
+    if (teamVotes/total > 0.80) { points++; }
 
     let percent = (teamVotes / total * 100).toFixed(0) + '%';
     let win = teamVotes > otherVotes;
@@ -54,7 +49,7 @@ export const vote_analysis_for_team = (team, otherTeam, label) => {
 };
 
 export const vote_analysis_for_team_old = (team, otherTeam, label) => {
-    let points;
+    let points = 0;
     let teamVotes = team.votes[label] || 0;
     let otherVotes = otherTeam.votes[label] || 0;
     let total = teamVotes + otherVotes;
@@ -63,8 +58,6 @@ export const vote_analysis_for_team_old = (team, otherTeam, label) => {
         points = 2;
     } else if (teamVotes >= total * (1.0 / 3.0)) {
         points = 1;
-    } else {
-        points = 0;
     }
 
     let percent = (teamVotes / total * 100).toFixed(0) + '%';
