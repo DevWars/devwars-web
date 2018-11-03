@@ -1,0 +1,66 @@
+<template>
+    <div class="user-menu" v-if="user">
+        <Popup>
+            <div class="user-group" slot="trigger">
+                <Avatar :user="user" class="sm"/>
+                <div class="user-group__name">
+                    {{ user.username }}
+                </div>
+            </div>
+            <div slot="menu">
+                <slot></slot>
+            </div>
+        </Popup>
+    </div>
+</template>
+
+<script>
+    import Component from 'nuxt-class-component';
+    import { Prop } from 'vue-property-decorator';
+    import Vue from 'vue';
+    import Popup from '~/components/Popup';
+    import Avatar from '~/components/user/Avatar';
+
+    @Component({
+        props: ['user'],
+        components: { Popup, Avatar },
+    })
+
+    export default class UserMenu extends Vue {
+
+    }
+</script>
+
+<style lang="scss" scoped>
+@import '../../assets/styles/utils';
+
+.user-menu {
+    cursor: pointer;
+    user-select: none;
+
+    @include breakpoint(sm) {
+        display: block;
+    }
+}
+
+.user-group {
+    .user-avatar,
+    &__name {
+        @extend %align-middle;
+    }
+
+    &__name {
+        margin-left: $xs-space;
+        margin-right: $xs-space;
+        font-weight: $font-weight-bold;
+        line-height: 1;
+    }
+
+    &__meta {
+        display: block;
+        margin-top: $xxxs-space;
+        font-size: $h6-font-size;
+        color: $p-color;
+    }
+}
+</style>

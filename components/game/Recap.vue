@@ -36,9 +36,7 @@
 <script>
     import Component from 'nuxt-class-component';
     import Vue from 'vue';
-    import {
-        Prop
-    } from 'vue-property-decorator';
+    import { Prop } from 'vue-property-decorator';
     import HomeCard from "@/components/HomeCard";
     import { team_for_game, points_for_team } from '../../utils/objectives';
 

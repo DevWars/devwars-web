@@ -13,30 +13,20 @@
             <nuxt-link to="/leaderboards" class="link btn-icon">Leaders</nuxt-link>
             <nuxt-link to="/blog" class="link btn-icon">Blog</nuxt-link>
 
-            <div class="actions">
+            <div v-if="!user" class="actions">
                 <nuxt-link to="/register" class="btn btn-primary btn-block">Register</nuxt-link>
                 <nuxt-link to="/login" class="btn btn-link btn-block color-white">Log In</nuxt-link>
             </div>
 
-            <div class="user-menu" v-if="user">
-                <Popup>
-                    <div class="user-group" slot="trigger">
-                        <Avatar :user="user" class="sm"/>
-                        <div class="user-group__name">
-                            {{ user.username }}
-                        </div>
-                    </div>
-                    <div slot="menu">
-                        <nuxt-link v-if="isAdmin" to="/mod/dashboard" class="btn-link">Modpanel</nuxt-link>
-                        <div v-if="isAdmin" class="menu-divider"></div>
-                        <nuxt-link to="/dashboard" class="btn-link">Dashboard</nuxt-link>
-                        <nuxt-link to="/badges" class="btn-link">Badges</nuxt-link>
-                        <nuxt-link to="/settings/profile" class="btn-link">Settings</nuxt-link>
-                        <div class="menu-divider"></div>
-                        <a @click="logout" class="btn-link">Logout</a>
-                    </div>
-                </Popup>
-            </div>
+            <UserMenu v-if="user" :user="user">
+                <nuxt-link v-if="isAdmin" to="/mod/dashboard" class="btn-link">Modpanel</nuxt-link>
+                <div v-if="isAdmin" class="menu-divider"></div>
+                <nuxt-link to="/dashboard" class="btn-link">Dashboard</nuxt-link>
+                <nuxt-link to="/badges" class="btn-link">Badges</nuxt-link>
+                <nuxt-link to="/settings/profile" class="btn-link">Settings</nuxt-link>
+                <div class="menu-divider"></div>
+                <a @click="logout" class="btn-link">Logout</a>
+            </UserMenu>
         </div>
 
         <div v-if="isVisible" class="overlay" />
@@ -47,15 +37,13 @@
 import Component, { State } from 'nuxt-class-component';
 import { Prop } from 'vue-property-decorator';
 import Vue from 'vue';
-
-import Popup from '~/components/Popup';
-import Avatar from '~/components/user/Avatar';
+import UserMenu from '~/components/user/UserMenu';
 
 import ClickOutside from 'vue-click-outside';
 
 @Component({
     data: () => ({ isVisible: false }),
-    components: { Popup, Avatar },
+    components: { UserMenu },
     directives: { ClickOutside },
 })
 export default class HeaderMobile extends Vue {

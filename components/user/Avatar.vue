@@ -20,3 +20,31 @@
         }
     }
 </script>
+
+<style lang="scss" scoped>
+@import '../../assets/styles/utils';
+
+.user-avatar-wrapper {
+    @extend %align-middle;
+    width: 50px;
+    &.xs { width: 25px; }
+    &.sm { width: 38px; }
+    &.md { width: 50px; }
+    &.lg { width: 70px; }
+    &.xl { width: 140px; }
+}
+
+.user-avatar {
+    @include aspect-ratio(1,1);
+    width: 100%;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-color: $bg-color-4;
+    background-image: url('~/assets/img/default-avatar.png');
+    position: relative;
+    overflow: hidden;
+    font-size: $font-size-base;
+    cursor: pointer;
+}
+</style>

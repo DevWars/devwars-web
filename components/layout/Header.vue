@@ -31,7 +31,7 @@
                     </ul>
                 </div>
 
-                <ul class="nav nav-actions" v-if="!user">
+                <ul v-if="!user" class="nav nav-actions">
                     <li class="nav__item">
                         <nuxt-link to="/register" class="btn btn-primary">Register</nuxt-link>
                     </li>
@@ -40,25 +40,15 @@
                     </li>
                 </ul>
 
-                <div class="user-menu" v-if="user">
-                    <Popup>
-                        <div class="user-group" slot="trigger">
-                            <Avatar :user="user" class="sm"/>
-                            <div class="user-group__name">
-                                {{ user.username }}
-                            </div>
-                        </div>
-                        <div slot="menu">
-                            <nuxt-link v-if="isAdmin" to="/mod/dashboard" class="btn-link">Modpanel</nuxt-link>
-                            <div v-if="isAdmin" class="menu-divider"></div>
-                            <nuxt-link to="/dashboard" class="btn-link">Dashboard</nuxt-link>
-                            <nuxt-link to="/badges" class="btn-link">Badges</nuxt-link>
-                            <nuxt-link to="/settings/profile" class="btn-link">Settings</nuxt-link>
-                            <div class="menu-divider"></div>
-                            <a @click="logout" class="btn-link">Logout</a>
-                        </div>
-                    </Popup>
-                </div>
+                <UserMenu v-if="user" :user="user">
+                    <nuxt-link v-if="isAdmin" to="/mod/dashboard" class="btn-link">Modpanel</nuxt-link>
+                    <div v-if="isAdmin" class="menu-divider"></div>
+                    <nuxt-link to="/dashboard" class="btn-link">Dashboard</nuxt-link>
+                    <nuxt-link to="/badges" class="btn-link">Badges</nuxt-link>
+                    <nuxt-link to="/settings/profile" class="btn-link">Settings</nuxt-link>
+                    <div class="menu-divider"></div>
+                    <a @click="logout" class="btn-link">Logout</a>
+                </UserMenu>
             </div>
         </div>
 
@@ -70,13 +60,12 @@
 <script>
 import Component, { State } from 'nuxt-class-component';
 import Vue from 'vue';
-import Popup from '~/components/Popup';
-import Avatar from '~/components/user/Avatar';
+import UserMenu from '~/components/user/UserMenu';
 import HeaderMobile from './HeaderMobile';
 
 @Component({
     data: () => ({ isMobile: false }),
-    components: { HeaderMobile, Popup, Avatar },
+    components: { HeaderMobile, UserMenu },
 })
 export default class Header extends Vue {
     @State(state => state.user.user) user;
