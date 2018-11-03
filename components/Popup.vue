@@ -32,3 +32,34 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+@import '../../assets/styles/utils';
+
+.webui-popover {
+    padding: 0 !important;
+    border: none !important;
+}
+
+.webui-arrow:after {
+    border-bottom-color: $bg-color-1 !important;
+}
+
+.webui-popover-content {
+    padding-right: $m-space !important;
+    background-color: $bg-color-1;
+
+     a,
+     button {
+        display: block;
+        margin: $xxs-space 0;
+        text-transform: uppercase;
+        font-size: $h6-font-size;
+        color: $text-color-secondary;
+
+        &:hover {
+            color: $text-color-primary;
+        }
+    }
+}
+</style>

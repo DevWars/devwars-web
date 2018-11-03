@@ -7,7 +7,7 @@
                     {{ user.username }}
                 </div>
             </div>
-            <div slot="menu">
+            <div class="menu" slot="menu">
                 <slot></slot>
             </div>
         </Popup>
@@ -62,5 +62,10 @@
         font-size: $h6-font-size;
         color: $p-color;
     }
+}
+
+.menu /deep/ > .divider {
+    border-top: 1px solid $divider-color;
+    margin: $xxs-space 0;
 }
 </style>
