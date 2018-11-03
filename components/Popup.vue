@@ -34,7 +34,7 @@
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/styles/utils';
+@import '../assets/styles/utils';
 
 .webui-popover {
     padding: 0 !important;
