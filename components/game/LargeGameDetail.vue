@@ -1,5 +1,5 @@
 <template>
-    <div class="games-view col-sm-9" v-if="game">
+    <div v-if="game">
         <div class="games-banner row" :class="[game.name.split(' ').join('-').toLowerCase()]">
             <div class="games-banner__inner">
                 <div class="games-banner__meta">
@@ -168,3 +168,9 @@
         }
     }
 </script>
+
+<style lang="scss" scoped>
+@import '../../assets/styles/utils';
+
+
+</style>
