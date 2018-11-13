@@ -1,11 +1,10 @@
 <template>
-    <div class="sub-score-section" v-show="total > 0">
-        <div class="sub-score-header">
-            <span class="sub-score-header__points team-blue">{{ analysis.blue.points }}</span>
-            <h3 class="sub-score-header__title">{{ label }}</h3>
-            <span class="sub-score-header__points team-red">{{ analysis.red.points }}</span>
-        </div>
-
+    <SubScore
+        :title="label"
+        :blueScore="analysis.blue.points"
+        :redScore="analysis.red.points"
+        v-show="total > 0"
+    >
         <div class="voting">
             <div class="team team-blue" :class="{win: analysis.blue.win}">
                 <div class="meta">
@@ -28,7 +27,7 @@
         </div>
 
         <div class="voters">{{ total }} votes</div>
-    </div>
+    </SubScore>
 </template>
 
 <script>
@@ -36,9 +35,12 @@
     import Vue from 'vue';
 
     import {Prop} from 'vue-property-decorator';
+    import SubScore from '~/components/game/SubScore';
     import { team_for_game, vote_analysis_for_team } from '../../utils/objectives';
 
-    @Component
+    @Component({
+        components: { SubScore },
+    })
     export default class VoteBox extends Vue {
         @Prop() game;
         @Prop() vote;
