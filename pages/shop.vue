@@ -1,30 +1,28 @@
 <template>
     <div>
-        <div class="ribbon"></div>
-        <div class="container">
-            <div class="row-lift">
-                <div class="heading">
-                    <h1>Shop</h1>
-                    <div class="devcoins devcoins-xl">
-                        <Devcoin></Devcoin>
-                        <div class="devcoins__amount">232</div>
-                    </div>
-                </div>
+        <PageBanner title="Shop">
+            <div class="devcoins devcoins-xl">
+                <Devcoin></Devcoin>
+                <div class="devcoins__amount">232</div>
             </div>
-            <div class="heading">
+
+            <div slot="nav">
                 <div class="shop-nav">
                     <button class="shop-nav__link active">All</button>
                     <button class="shop-nav__link">Consumable</button>
                     <button class="shop-nav__link">Wearable</button>
                     <button class="shop-nav__link">Cosmetic</button>
                 </div>
+            </div>
+
+            <div slot="sub-actions">
                 <select class="select--clear">
                     <option selected="selected">Sort by</option>
                     <option>Latest</option>
                     <option>Price</option>
                 </select>
             </div>
-        </div>
+        </PageBanner>
 
         <div class="footer-offset">
             <div class="container">
@@ -151,12 +149,12 @@
     import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
+    import PageBanner from '~/components/layout/PageBanner';
     import Devcoin from '~/components/Devcoin';
 
     @Component({
-        components: {Devcoin},
+        components: { PageBanner, Devcoin },
     })
-
     export default class Shop extends Vue {
 
     }

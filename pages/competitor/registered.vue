@@ -1,13 +1,6 @@
 <template>
     <div>
-        <div class="ribbon"></div>
-        <div class="container">
-            <div class="row-lift">
-                <div class="heading">
-                    <h1>Compete in DevWars</h1>
-                </div>
-            </div>
-        </div>
+        <PageBanner title="Compete in DevWars" type="competitor" />
 
         <div class="footer-offset">
             <div class="container">
@@ -31,10 +24,11 @@
 
     import * as countryList from 'country-list';
     import Http from "../../services/Http";
+    import PageBanner from '~/components/layout/PageBanner';
     import Input from "~/components/form/Input";
 
     @Component({
-        components: { Input },
+        components: { PageBanner, Input },
         middleware: 'auth'
     })
     export default class CompetitorRegistration extends Vue {

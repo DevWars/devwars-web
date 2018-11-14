@@ -1,13 +1,6 @@
 <template>
     <div>
-        <div class="ribbon"></div>
-        <div class="container">
-            <div class="row-lift">
-                <div class="heading">
-                    <h1>Settings</h1>
-                </div>
-            </div>
-        </div>
+        <PageBanner title="Settings" />
 
         <div class="footer-offset">
             <div class="container">
@@ -31,7 +24,11 @@
     import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
-    @Component
+    import PageBanner from '~/components/layout/PageBanner';
+
+    @Component({
+        components: { PageBanner }
+    })
     export default class Settings extends Vue {
     }
 </script>

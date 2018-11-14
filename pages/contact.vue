@@ -1,54 +1,48 @@
 <template>
     <div>
-        <div class="ribbon"></div>
+        <PageBanner title="Contact" />
 
         <div class="footer-offset container">
-            <div class="row-lift">
-                <div class="heading">
-                    <h1>Contact</h1>
+            <div class="row">
+                <div class="col-md-8">
+                    <Card class="dark plain" v-show="!submitted">
+                        <form v-async-submit="[sendEmail]">
+                            <div class="form-group">
+                                <Input v-model="name" required />
+                                <label>Name</label>
+                            </div>
+                            <div class="form-group">
+                                <Input v-model="email" required />
+                                <label>Email</label>
+                            </div>
+                            <div class="form-group">
+                                <textarea
+                                    v-model="message"
+                                    class="form-control"
+                                    rows="8"
+                                    placeholder="Message"
+                                ></textarea>
+                            </div>
+
+                            <div class="align-right">
+                                <button type="submit" class="btn btn-primary">Send Email</button>
+                            </div>
+                        </form>
+                    </Card>
+                    <Card class="dark plain" v-show="submitted">
+                        <div class="align-center">
+                            <h1>Thank you!</h1>
+                            <div class="mt-xs mb-md">
+                                <h4>We received your email, you will hear back from us soon.</h4>
+                            </div>
+                        </div>
+                    </Card>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-8">
-                        <Card class="dark plain" v-show="!submitted">
-                            <form v-async-submit="[sendEmail]">
-                                <div class="form-group">
-                                    <Input v-model="name" required />
-                                    <label>Name</label>
-                                </div>
-                                <div class="form-group">
-                                    <Input v-model="email" required />
-                                    <label>Email</label>
-                                </div>
-                                <div class="form-group">
-                                    <textarea
-                                        v-model="message"
-                                        class="form-control"
-                                        rows="8"
-                                        placeholder="Message"
-                                    ></textarea>
-                                </div>
-
-                                <div class="align-right">
-                                    <button type="submit" class="btn btn-primary">Send Email</button>
-                                </div>
-                            </form>
-                        </Card>
-                        <Card class="dark plain" v-show="submitted">
-                            <div class="align-center">
-                                <h1>Thank you!</h1>
-                                <div class="mt-xs mb-md">
-                                    <h4>We received your email, you will hear back from us soon.</h4>
-                                </div>
-                            </div>
-                        </Card>
-                    </div>
-
-                    <div class="col-md-4">
-                        <Card class="dark plain">
-                            contact@devwars.tv
-                        </Card>
-                    </div>
+                <div class="col-md-4">
+                    <Card class="dark plain">
+                        contact@devwars.tv
+                    </Card>
                 </div>
             </div>
         </div>
@@ -58,11 +52,12 @@
 <script>
     import Component, {Action} from 'nuxt-class-component';
     import Vue from 'vue';
+    import PageBanner from '~/components/layout/PageBanner';
     import Card from '~/components/Card';
     import Input from '~/components/form/Input';
 
     @Component({
-        components: { Card, Input }
+        components: { PageBanner, Card, Input }
     })
     export default class Contact extends Vue {
         @Action('toast/errors') toastErrors;

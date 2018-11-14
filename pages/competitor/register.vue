@@ -1,13 +1,6 @@
 <template>
     <div>
-        <div class="ribbon ribbon-competitor"></div>
-        <div class="container">
-            <div class="row-lift">
-                <div class="heading">
-                    <h1>Compete in DevWars</h1>
-                </div>
-            </div>
-        </div>
+        <PageBanner title="Compete in DevWars" type="competitor" />
 
         <div class="footer-offset">
             <div class="container">
@@ -144,12 +137,13 @@
 
     import * as countryList from 'country-list';
     import Http from "../../services/Http";
+    import PageBanner from '~/components/layout/PageBanner';
     import Input from "~/components/form/Input";
     import ConnectToDiscord from "~/components/user/ConnectToDiscord";
     import { user_has_provider } from '../../utils/linked-accounts';
 
     @Component({
-        components: { Input, ConnectToDiscord },
+        components: { PageBanner, Input, ConnectToDiscord },
         middleware: ['auth', 'no-competitors']
     })
     export default class CompetitorRegistration extends Vue {

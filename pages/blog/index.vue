@@ -1,13 +1,6 @@
 <template>
     <div>
-        <div class="ribbon"></div>
-        <div class="container">
-            <div class="row-lift">
-                <div class="heading">
-                    <h1>Blog</h1>
-                </div>
-            </div>
-        </div>
+        <PageBanner title="Banner" />
 
         <div class="container">
             <div class="blog-list">
@@ -24,10 +17,11 @@
     import Vue from 'vue';
     import Http from "../../services/Http";
 
+    import PageBanner from '~/components/layout/PageBanner';
     import BlogCard from '~/components/blog/BlogCard';
 
     @Component({
-        components: {BlogCard}
+        components: { PageBanner, BlogCard }
     })
     export default class Blog extends Vue {
         async asyncData() {

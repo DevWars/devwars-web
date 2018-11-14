@@ -1,13 +1,6 @@
 <template>
     <div>
-        <div class="ribbon"></div>
-        <div class="container">
-            <div class="row-lift align-center">
-                <div class="heading">
-                    <h1>Welcome to DevWars!</h1>
-                </div>
-            </div>
-        </div>
+        <PageBanner title="Welcome to DevWars!" />
 
         <div class="footer-offset align-center">
             <div class="container">
@@ -29,8 +22,11 @@
     import Component from 'nuxt-class-component';
     import Vue from 'vue';
     import Http from "../services/Http";
+    import PageBanner from '~/components/layout/PageBanner';
 
-    @Component
+    @Component({
+        components: { PageBanner }
+    })
     export default class Pending extends Vue {
 
         async resend() {

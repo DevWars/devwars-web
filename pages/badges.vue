@@ -1,13 +1,6 @@
 <template>
     <div>
-        <div class="ribbon"></div>
-        <div class="container">
-            <div class="row-lift">
-                <div class="heading">
-                    <h1>Badges</h1>
-                </div>
-            </div>
-        </div>
+        <PageBanner title="Badges" />
 
         <div class="footer-offset">
             <div class="container">
@@ -43,12 +36,12 @@
     import Vue from 'vue';
     import Http from "../services/Http";
 
+    import PageBanner from '~/components/layout/PageBanner';
     import Devcoin from '~/components/Devcoin';
 
     @Component({
-        components: {Devcoin}
+        components: { PageBanner, Devcoin }
     })
-
     export default class Badges extends Vue {
         @State(state => state.badges.badges) badges;
         @State(state => state.user.count) userCount;
