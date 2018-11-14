@@ -1,4 +1,4 @@
-/* Name:			Variables
+/* Name: Variables
 
 Contents:
     01. Colors
@@ -16,67 +16,64 @@ Contents:
 /*  ========================================================================
 01.1 DevWars Colors
 ======================================================================== */
+$brand-primary                                      : #00c9ff;
+$brand-secondary                                    : #ff007d;
+$brand-tertiary                                     : mix($brand-primary, $brand-secondary, 50%);
 
-$brand-primary        								: #00c9ff;
-$brand-secondary    								: #ff007d;
-$brand-tertiary        								: mix($brand-primary, $brand-secondary, 50%);
-
-$bg-color-1                    						: #393b44;
-$bg-color-2                							: #1e202c;
-$bg-color-3                    						: #14161f;
-$bg-color-4                							: #0b0c11;
+$bg-color-1                                         : #393b44;
+$bg-color-2                                         : #1e202c;
+$bg-color-3                                         : #14161f;
+$bg-color-4                                         : #0b0c11;
 
 $text-color-primary                                 : #cdd3e9;
 $text-color-secondary                               : #a2a2a9;
 $text-color-muted                                   : #484b5b;
 $text-color-disabled                                : rgba($text-color-primary, 0.22);
-$divider-color										: rgba($text-color-primary, 0.12);
+$divider-color                                      : rgba($text-color-primary, 0.12);
 
-$devcoin-color										: #f8bf3f;
+$devcoin-color                                      : #f8bf3f;
 $bonus-color                                        : #ffb04a;
 
 /*  ========================================================================
 01.2 Standard Colors
 ======================================================================== */
-
-$red-color 										    : #e74c3c;
-$yellow-color										: #f1c40f;
-$purple-color										: #8e44ad;
-$green-color 										: #2ecc71;
-$blue-color 										: #3498db;
-$orange-color										: #e67e22;
+$red-color                                          : #e74c3c;
+$yellow-color                                       : #f1c40f;
+$purple-color                                       : #8e44ad;
+$green-color                                        : #2ecc71;
+$blue-color                                         : #3498db;
+$orange-color                                       : #e67e22;
 
 $black-color                                        : #0A0B10;
 
-$success-color 								    	: $green-color;
-$warning-color 									    : $yellow-color;
-$danger-color 									    : $red-color;
+$success-color                                      : $green-color;
+$warning-color                                      : $yellow-color;
+$danger-color                                       : $red-color;
 $info-color                                         : $blue-color;
 
-$base-font-color 									: rgba(#fff, 0.9);
-$body-bg 									        : $bg-color-4;
+$base-font-color                                    : rgba(#fff, 0.9);
+$body-bg                                            : $bg-color-4;
 
 
 /*  ========================================================================
 01.3 Technology Colors
 ======================================================================== */
-
 $angular-color                                      : #e03237;
-$bower-color 										: #ef5734;
-$css-color  										: #0ebeff;
-$grunt-color 										: #e48632;
-$gulp-color 										: #cf4646;
-$html-color 										: #ff7200;
-$java-color 										: #bf8520;
+$bower-color                                        : #ef5734;
+$css-color                                          : #0ebeff;
+$grunt-color                                        : #e48632;
+$gulp-color                                         : #cf4646;
+$html-color                                         : #ff7200;
+$java-color                                         : #bf8520;
 $js-color                                           : #F8DC3D;
-$jquery-color 										: #0769ad;
-$node-color 										: #8CC84b;
-$php-color 										    : #6172a6;
-$react-color 										: #00d8ff;
-$ruby-color 										: #85211c;
-$ruby-on-rails-color 								: #c00;
-$sublime-color 								    	: #ff8100;
-$typescript-color 									: #35879b;
+$jquery-color                                       : #0769ad;
+$node-color                                         : #8CC84b;
+$php-color                                          : #6172a6;
+$react-color                                        : #00d8ff;
+$ruby-color                                         : #85211c;
+$ruby-on-rails-color                                : #c00;
+$sublime-color                                      : #ff8100;
+$typescript-color                                   : #35879b;
 
 
 /*  ========================================================================
@@ -101,27 +98,25 @@ $diamond-bg                                         : desaturate(darken($diamond
 /*  ========================================================================
 01.4 Brand Colors
 ======================================================================== */
-
-$facebook-color									    : #0b5998;
-$twitter-color										: #4099ff;
-$google-color										: #da4835;
-$youtube-color										: #e52d27;
-$reddit-color										: #ff4500;
-$twitch-color										: #6441a5;
-$discord-color										: #7289DA;
-$slack-color										: #e9a820;
-$cloud9-color										: #1aa6da;
-$github-color										: #4183c4;
-$linkedin-color									    : #0077b5;
-$codepen-color										: #fff;
-$website-color										: #fff;
-$email-color										: #fff;
+$facebook-color                                     : #0b5998;
+$twitter-color                                      : #4099ff;
+$google-color                                       : #da4835;
+$youtube-color                                      : #e52d27;
+$reddit-color                                       : #ff4500;
+$twitch-color                                       : #6441a5;
+$discord-color                                      : #7289DA;
+$slack-color                                        : #e9a820;
+$cloud9-color                                       : #1aa6da;
+$github-color                                       : #4183c4;
+$linkedin-color                                     : #0077b5;
+$codepen-color                                      : #fff;
+$website-color                                      : #fff;
+$email-color                                        : #fff;
 
 
 /*  ========================================================================
 02. Grid
 ======================================================================== */
-
 $grid-breakpoints: (
     xs: 0,
     sm: 544px,
@@ -145,22 +140,21 @@ $grid-gutter-part                                   : $grid-gutter-width / 2;
 /* ========================================================================
 03. Spacing
 ======================================================================== */
+$base-space                                         : 40px;
 
-$base-space											: 40px;
+$xxxs-space                                         : $base-space / 16;
+$xxs-space                                          : $base-space / 8;
+$xs-space                                           : $base-space / 4;
+$s-space                                            : $base-space / 2;
+$m-space                                            : $base-space;
+$l-space                                            : $base-space * 2;
+$xl-space                                           : $base-space * 4;
+$xxl-space                                          : $base-space * 8;
+$xxxl-space                                         : $base-space * 16;
 
-$xxxs-space											: $base-space / 16;
-$xxs-space											: $base-space / 8;
-$xs-space											: $base-space / 4;
-$s-space											: $base-space / 2;
-$m-space											: $base-space;
-$l-space											: $base-space * 2;
-$xl-space											: $base-space * 4;
-$xxl-space											: $base-space * 8;
-$xxxl-space											: $base-space * 16;
-
-$sm-space											: $base-space - $xs-space;
-$ms-space											: $base-space + $s-space;
-$ml-space											: $base-space + $l-space;
+$sm-space                                           : $base-space - $xs-space;
+$ms-space                                           : $base-space + $s-space;
+$ml-space                                           : $base-space + $l-space;
 $sxs-space                                          : $s-space - $xxs-space;
 
 
@@ -168,8 +162,8 @@ $sxs-space                                          : $s-space - $xxs-space;
 04. Type
 ======================================================================== */
 
-$base-font-face									    : 'Roboto', sans-serif;
-$alt-font-face										: 'Montserrat', sans-serif;
+$base-font-face                                     : 'Roboto', sans-serif;
+$alt-font-face                                      : 'Montserrat', sans-serif;
 $code-font-face                                     : monospace;
 $font-awesome                                       : 'FontAwesome';
 
@@ -210,8 +204,8 @@ $p-font-size                                        : 16px;
 
 $p-lead-font-size                                   : 20px;
 
-$link-color 										: $brand-primary;
-$link-color-hover 									: lighten($brand-primary, 10%);
+$link-color                                         : $brand-primary;
+$link-color-hover                                     : lighten($brand-primary, 10%);
 
 $display1-size                                      : 6rem;
 $display2-size                                      : 5.5rem;
@@ -239,13 +233,13 @@ $border-radius-lg                                   : 5px;
 $header-height                                      : 70px;
 $header-offset                                      : 40px;
 
-$global__ribbon										: 300px;
+$global__ribbon                                     : 300px;
 
 $border-size                                        : 2px;
 $border-size-sm                                     : 1px;
 $border-size-lg                                     : 3px;
 
-$user-avatar-offset: 40px;
+$user-avatar-offset                                 : 40px;
 
 /* ==========================================================================
 05. Buttons
@@ -264,9 +258,9 @@ $btn-secondary-color                                : #fff;
 $btn-secondary-bg                                   : $brand-secondary;
 $btn-secondary-border                               : $btn-secondary-bg;
 
-$btn-tertiary-color                                : #fff;
-$btn-tertiary-bg                                   : $brand-tertiary;
-$btn-tertiary-border                               : $btn-tertiary-bg;
+$btn-tertiary-color                                 : #fff;
+$btn-tertiary-bg                                    : $brand-tertiary;
+$btn-tertiary-border                                : $btn-tertiary-bg;
 
 $btn-info-color                                     : #fff;
 $btn-info-bg                                        : $info-color;
@@ -317,7 +311,6 @@ $btn-border-radius-lg                               : 0px;
 /* ==========================================================================
 06. Typography
 ========================================================================== */
-
 $font-size-base                                     : 14px;
 $font-size-xl                                       : $font-size-base * 1.4;
 $font-size-lg                                       : $font-size-base * 1.25;
