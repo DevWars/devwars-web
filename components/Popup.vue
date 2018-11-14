@@ -33,7 +33,7 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../assets/styles/utils';
 
 .webui-popover {
