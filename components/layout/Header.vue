@@ -1,11 +1,10 @@
 <template>
     <div>
         <div class="header">
-            <div class="header__inner container-fluid">
-                <div class="header__main">
-                    <button @click="toggleMenu" class="burger-menu"></button>
-                    <nuxt-link to="/"
-                               class="logo">
+            <div class="inner container-fluid">
+                <div>
+                    <button @click="toggleMobileMenu" class="burger-menu"></button>
+                    <nuxt-link to="/" class="logo">
                         <img class="logo-full"
                              src="~/assets/img/logo.png"
                              alt="DevWars">
@@ -32,7 +31,7 @@
                     </ul>
                 </div>
 
-                <ul class="nav nav-actions" v-if="!user">
+                <ul v-if="!user" class="nav nav-actions">
                     <li class="nav__item">
                         <nuxt-link to="/register" class="btn btn-primary">Register</nuxt-link>
                     </li>
@@ -41,100 +40,158 @@
                     </li>
                 </ul>
 
-                <div class="user-menu" v-if="user">
-                    <Popup>
-                        <div class="user-group" slot="trigger">
-                            <Avatar :user="user" class="sm"/>
-                            <div class="user-group__name">
-                                {{ user.username }}
-                            </div>
-                        </div>
-                        <div slot="menu">
-                            <nuxt-link v-if="isAdmin" to="/mod/dashboard" class="btn-link">Modpanel</nuxt-link>
-                            <div v-if="isAdmin" class="menu-divider"></div>
-                            <nuxt-link to="/dashboard" class="btn-link">Dashboard</nuxt-link>
-                            <nuxt-link to="/badges" class="btn-link">Badges</nuxt-link>
-                            <nuxt-link to="/settings/profile" class="btn-link">Settings</nuxt-link>
-                            <div class="menu-divider"></div>
-                            <a @click="logout" class="btn-link">Logout</a>
-                        </div>
-                    </Popup>
-                </div>
+                <UserMenu v-if="user" :user="user">
+                    <nuxt-link v-if="isAdmin" to="/mod/dashboard" class="btn-link">Modpanel</nuxt-link>
+                    <div v-if="isAdmin" class="divider"></div>
+                    <nuxt-link to="/dashboard" class="btn-link">Dashboard</nuxt-link>
+                    <nuxt-link to="/badges" class="btn-link">Badges</nuxt-link>
+                    <nuxt-link to="/settings/profile" class="btn-link">Settings</nuxt-link>
+                    <div class="divider"></div>
+                    <a @click="logout" class="btn-link">Logout</a>
+                </UserMenu>
             </div>
         </div>
 
         <!-- Mobile -->
-        <div v-click-outside="hideMenu" :class="['mobile-nav', {active: show}]">
-            <div class="mobile-nav__header">
-                <nuxt-link to="/"
-                   class="logo">
-                    <img src="~/assets/img/logo.png"
-                         alt="DevWars">
-                </nuxt-link>
-            </div>
-            <nuxt-link to="/"
-               class="mobile-nav__link">Home
-            </nuxt-link>
-            <nuxt-link to="/games"
-               class="mobile-nav__link">Games
-            </nuxt-link>
-            <nuxt-link to="/schedule"
-               class="mobile-nav__link">Schedule
-            </nuxt-link>
-            <nuxt-link to="/leaderboards"
-               class="mobile-nav__link">Leaders
-            </nuxt-link>
-            <nuxt-link to="/blog"
-               class="mobile-nav__link">Blog
-            </nuxt-link>
-            <div class="mobile-nav__account">
-                <nuxt-link to="/register"
-                   class="btn btn-primary btn-block">Register
-                </nuxt-link>
-                <nuxt-link to="/login"
-                   class="btn btn-link btn-block color-white">Log In
-                </nuxt-link>
-            </div>
-        </div>
-        <div :class="['mobile-nav__overlay', {'active': show}]"></div>
+        <HeaderMobile ref="mobileHeader" />
     </div>
 </template>
 
 <script>
-    import Component, { State } from 'nuxt-class-component';
-    import Vue from 'vue';
+import Component, { State } from 'nuxt-class-component';
+import Vue from 'vue';
+import UserMenu from '~/components/user/UserMenu';
+import HeaderMobile from './HeaderMobile';
 
-    import Popup from '~/components/Popup';
-    import Avatar from '~/components/user/Avatar';
+@Component({
+    data: () => ({ isMobile: false }),
+    components: { HeaderMobile, UserMenu },
+})
+export default class Header extends Vue {
+    @State(state => state.user.user) user;
 
-    import ClickOutside from 'vue-click-outside';
+    get isAdmin() {
+        return this.user.role === 'ADMIN';
+    }
 
-    @Component({
-        components: { Popup, Avatar },
-        directives: { ClickOutside },
-    })
-    export default class Header extends Vue {
-        @State(state => state.user.user) user;
+    logout() {
+        this.$store.dispatch('user/logout');
+    }
 
-        show = false;
+    toggleMobileMenu() {
+        this.$refs.mobileHeader.toggleMenu();
+    }
+}
+</script>
 
-        get isAdmin() {
-            return this.user.role === 'ADMIN';
-        }
+<style lang="scss" scoped>
+@import '../../assets/styles/utils';
 
-        toggleMenu() {
-            // Hack to make sure this overrides the outside click
-            setTimeout(() => {
-                this.show = !this.show;
-            }, 0)
-        }
+.header {
+    height: $header-height;
+    background: #000;
+    transition: all 0.6s;
+}
 
-        hideMenu() {
-            this.show = false;
-        }
+.inner {
+    @extend %flex-justify;
+    height: 100%;
+}
 
-        logout() {
-            this.$store.dispatch('user/logout');
+.logo,
+.burger-menu {
+    vertical-align: middle;
+}
+
+.logo {
+    display: inline-block;
+    margin-right: $s-space;
+
+    img {
+        max-height: 40px;
+    }
+
+    &-full {
+        @include breakpoint(sm) {
+            display: none;
         }
     }
-</script>
+
+    &-icon {
+        display: none;
+
+        @include breakpoint(sm) {
+            display: inline-block;
+        }
+    }
+}
+
+.burger-menu {
+    display: none;
+    padding: $xs-space $xs-space $xs-space 0;
+    margin-right: $xs-space;
+
+    @include breakpoint(md) {
+        display: inline-block;
+    }
+
+    &:before {
+        @extend .fa;
+        content: $fa-bars;
+        font-size: $h3-font-size;
+    }
+
+    &:hover,
+    &:focus {
+        color: $brand-primary;
+    }
+}
+
+.nav {
+    @extend %list-unstyled;
+    @extend %align-middle;
+
+    &__item {
+        @extend %align-middle;
+        padding: $btn-padding-y 0;
+        position: relative;
+
+        &:hover .nav__link {
+            color: #fff;
+        }
+    }
+
+    &__link {
+        display: inline-block;
+        padding: $btn-padding-y ($btn-padding-x / 2);
+        margin: $xxs-space 0;
+        line-height: $btn-line-height;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: $font-size-base;
+        color: $text-color-secondary;
+        font-family: $alt-font-face;
+
+        &.active {
+            color: $base-font-color;
+
+            &:before {
+                content: "";
+                display: block;
+                width: 100%;
+                height: 2px;
+                position: absolute;
+                background-color: $brand-primary;
+                bottom: 0;
+                left: 0; right: 0;
+            }
+        }
+    }
+
+    &-main {
+        @include breakpoint(md) {
+            display: none;
+        }
+    }
+}
+</style>

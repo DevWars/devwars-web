@@ -22,7 +22,6 @@
 @import "components/nav"; // tabs (Games, Game, Tournament, Settings)
 @import "components/ribbon";
 @import "components/toasts";
-@import "components/menu";
 @import "components/modals";
 @import "components/loader";
 @import "components/labels";
@@ -31,19 +30,12 @@
 
 // Layout
 // ==================================
-@import "layout/header";
-@import "layout/footer";
-@import "layout/docs";
 @import "layout/dashboard";
 @import "layout/modpanel";
-@import "layout/error";
-
 
 // Pages
 // ==================================
 @import "pages/blog";
-@import "pages/contact";
-@import "pages/games";
 @import "pages/leaderboards";
 @import "pages/schedule";
 @import "pages/competitor";
