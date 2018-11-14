@@ -30,13 +30,15 @@
 
 // Layout
 // ==================================
-@import "layout/dashboard";
 @import "layout/modpanel";
+
+@import "layout/dashboard";
+
 
 // Pages
 // ==================================
+@import "pages/shop";
 @import "pages/blog";
 @import "pages/leaderboards";
-@import "pages/schedule";
+
 @import "pages/competitor";
-@import "pages/shop";
