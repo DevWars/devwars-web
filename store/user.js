@@ -125,8 +125,16 @@ export const actions = {
         dispatch('toast/success', `We've updated your password, give it a go!`, { root: true });
     },
 
-    async avatar({ dispatch, commit }, data) {
-        await Http.for('user/avatar').post({ data });
+    async avatar({ dispatch, commit, state }, data) {
+        const formData = new FormData();
+        formData.append("avatar", data, "avatar.jpg");
+
+        await Http.axios({
+            url: `/user/${state.user.id}/avatar`,
+            method: 'POST',
+            data: formData,
+            noTransform: true,
+        });
 
         await dispatch('refresh');
     },

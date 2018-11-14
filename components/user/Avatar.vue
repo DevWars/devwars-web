@@ -1,5 +1,5 @@
 <template>
-    <div class="user-avatar-wrapper">
+    <div class="user-avatar-wrapper" :key="user && user.avatarUrl">
         <div class="user-avatar" :style="style"></div>
     </div>
 </template>
