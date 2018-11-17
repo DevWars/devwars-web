@@ -18,14 +18,14 @@
                     ></textarea>
                 </div>
                 <div class="form-group">
-                    <Input v-model="profile.url" />
+                    <Input v-model="profile.websiteUrl" />
                     <label>URL</label>
                 </div>
 
                 <h3 class="modpanel__subtitle mb-0">Job</h3>
                 <div class="form-group">
                     <div class="form-check">
-                        <input v-model="profile.for_hire" id="for-hire" type="checkbox" class="checkbox">
+                        <input v-model="profile.forHire" id="for-hire" type="checkbox" class="checkbox">
                         <label for="for-hire">Available for hire</label>
                     </div>
                 </div>
@@ -62,8 +62,6 @@
     })
 
     export default class SettingsProfile extends Vue {
-        profile = {};
-
         @State(state => state.user.user) user;
 
         async crop(result) {
@@ -72,8 +70,8 @@
             this.$store.dispatch('user/avatar', cropped);
         }
 
-        mounted() {
-            this.profile = Object.assign({}, this.user, this.user.information);
+        get profile() {
+            return this.user ? {...this.user, ...this.user.profile} : {};
         }
 
         async save() {

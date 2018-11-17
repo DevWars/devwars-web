@@ -72,9 +72,9 @@ export const actions = {
         commit('user', null);
     },
 
-    async settings({ commit, dispatch }, data) {
+    async settings({ commit, dispatch, state }, data) {
         try {
-            let user = await Http.for('user/settings').post(data);
+            let user = await Http.for(`user/${state.user.id}/settings`).post(data);
 
             commit('user', user);
         } catch (e) {
