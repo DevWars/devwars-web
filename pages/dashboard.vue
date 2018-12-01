@@ -48,9 +48,9 @@
         @State(state => state.game.applied) appliedGames;
         @State(state => state.game.upcoming) upcomingGames;
 
-        async asyncData() {
+        async asyncData({store}) {
             return {
-                mine: await Http.for('badge').get('mine'),
+                mine: await Http.for(`user/${store.state.user.user.id}`).get('badges'),
                 activities: await Http.for('activity').get('mine'),
             };
         }
