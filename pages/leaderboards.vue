@@ -32,7 +32,7 @@
                                 <span class="user-group__name leaderboard__user">{{ ranking.user.username }}</span>
                             </div>
                         </td>
-                        <td>{{ ranking.user.ranking.rank.rank }}</td>
+                        <td>{{ ranking.user.statistics.rank.rank }}</td>
                         <td>{{ ranking.won }}</td>
                         <td>{{ ranking.score }}</td>
                     </tr>

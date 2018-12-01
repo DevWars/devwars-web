@@ -107,14 +107,14 @@
                         <Avatar :user="application.user" />
                         <span class="modpanel-table__item_name">{{ application.user.username }}</span>
                     </td>
-                    <td>{{ application.user.ranking.rank.rank }}</td>
+                    <td>{{ application.user.statistics.rank.rank }}</td>
                     <td>{{ application.wins + application.losses }}</td>
                     <td>{{ application.wins }}</td>
                     <td>{{ application.losses }}</td>
                     <td>{{ rating(application.user, 'html')}}</td>
                     <td>{{ rating(application.user, 'css')}}</td>
                     <td>{{ rating(application.user, 'js')}}</td>
-                    <td class="color-devcoins">{{ application.user.ranking.bits | number }}</td>
+                    <td class="color-devcoins">{{ application.user.statistics.coins | number }}</td>
                     <td class="modpanel-table__actions">
                         <a href="#edit" class="btn-link btn-icon-reverse" @click="addPlayer(application.user)">
                             <span>Add Player</span>

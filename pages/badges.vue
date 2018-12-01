@@ -5,22 +5,22 @@
         <div class="footer-offset">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-3 col-md-4 col-sm-6" v-for="listing in badges" :key="listing.badge.id">
-                        <div class="badge-card bronze" :class="{complete: completed(listing.badge)}"
-                             :title="listing.badge.description">
+                    <div class="col-lg-3 col-md-4 col-sm-6" v-for="badge in badges" :key="badge.id">
+                        <div class="badge-card bronze" :class="{complete: completed(badge)}"
+                             :title="badge.description">
                             <div class="badge-card__meta">
                                 <span class="badge-card__global"><i
                                     class="fa fa-group"></i></span>
                                 <!--<span class="badge-card__tier">Bronze</span>-->
                             </div>
-                            <img class="badge-card__img" :src="image(listing.badge)">
-                            <h2 class="badge-card__name">{{ listing.badge.name }}</h2>
+                            <img class="badge-card__img" :src="image(badge)">
+                            <h2 class="badge-card__name">{{ badge.name }}</h2>
                             <div class="progress">
-                                <div class="progress__bar" :style="[style(listing)]"></div>
+                                <div class="progress__bar" :style="[style(badge)]"></div>
                             </div>
                             <div class="devcoins">
                                 <Devcoin></Devcoin>
-                                <div class="devcoins__amount color-white">{{ listing.badge.bits | number }}</div>
+                                <div class="devcoins__amount color-white">{{ badge.coins | number }}</div>
                             </div>
                         </div>
                     </div>
@@ -50,9 +50,9 @@
             return this.mine.some(it => it.id === badge.id);
         }
 
-        style(listing) {
+        style(badge) {
             return {
-                width: (listing.user_count / this.userCount * 100) + '%'
+                width: (badge.userCount / this.userCount * 100) + '%'
             }
         }
 
@@ -64,9 +64,9 @@
             }
         }
 
-        async asyncData() {
+        async asyncData({store}) {
             return {
-                mine: await Http.for('badge').get('mine')
+                mine: await Http.for(`user/${store.state.user.user.id}`).get('badges')
             }
         }
     }

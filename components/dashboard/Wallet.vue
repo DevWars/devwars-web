@@ -4,7 +4,7 @@
             <div>
                 <div class="devcoins devcoins-lg">
                     <Devcoin></Devcoin>
-                    <div class="devcoins__amount">{{ user.ranking.bits | number }}</div>
+                    <div class="devcoins__amount">{{ user.statistics.coins | number }}</div>
                 </div>
             </div>
             <div class="devcoins-wallet__actions">

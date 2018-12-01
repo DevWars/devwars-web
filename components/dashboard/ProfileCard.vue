@@ -2,12 +2,12 @@
     <DashboardCard class="profile">
         <Avatar :user="user" class="xl" />
         <h4>{{ user.username }}</h4>
-        <div class="user-rank rank" :class="['rank-' + user.ranking.rank.level_name]">
-            <span>{{ user.ranking.rank.rank }}</span>
+        <div class="user-rank rank" :class="['rank-' + user.statistics.rank.levelName]">
+            <span>{{ user.statistics.rank.rank }}</span>
         </div>
 
         <Progress
-            :title="'Level' + user.ranking.rank.rank_level"
+            :title="'Level' + user.statistics.rank.rankLevel"
             :meta="progress"
             :progress="progress"
         />
@@ -29,8 +29,8 @@ import Progress from '~/components/form/Progress';
 
 export default class ProfileCard extends Vue {
     get progress() {
-        let past = this.user.ranking.xp - this.user.ranking.rank.xp_required;
-        let difference = this.user.ranking.next_rank.xp_required - this.user.ranking.rank.xp_required;
+        let past = this.user.statistics.xp - this.user.statistics.rank.xpRequired;
+        let difference = this.user.statistics.nextRank.xpRequired - this.user.statistics.rank.xpRequired;
 
         return (past / difference * 100) + '%';
     }
