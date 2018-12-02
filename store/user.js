@@ -92,15 +92,16 @@ export const actions = {
         }
     },
 
-    async email({ dispatch, commit }, data) {
+    async email({ dispatch, commit, state }, data) {
         try {
-            let user = await Http.for('user/settings').post('email', data);
+            let user = await Http.for(`user/${state.user.id}/reset`).post('email', data);
 
             commit('user', user);
 
             await dispatch('toast/success', `We've updated your email, please go verify your email.`, { root: true });
             await dispatch('navigate', '/pending', { root: true });
         } catch (e) {
+            console.error(e);
             dispatch('toast/errors', e, { root: true });
         }
     },
