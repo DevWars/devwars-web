@@ -219,7 +219,6 @@
                     <h2>Rules</h2>
                     <ol>
                         <li>No Frameworks of any kind are to be used.</li>
-                        <li>The DevWars Twitch channel must not be open whilst competing.</li>
                         <li>No copying and pasting of code, however copying code and URLs from teammates is acceptable.
                         </li>
                         <li>After the 60 minute timer has run out, your code can no longer be modified.</li>
