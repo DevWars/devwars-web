@@ -82,9 +82,9 @@ export const actions = {
         }
     },
 
-    async password({ commit, dispatch }, data) {
+    async password({ commit, dispatch, state }, data) {
         try {
-            await Http.for('auth/reset/change').put(data);
+            await Http.for(`user/${state.user.id}/reset/password`).put(data);
 
             dispatch('toast/success', `We've updated your password!`, { root: true });
         } catch (e) {

@@ -48,6 +48,7 @@
 
     export default class extends Vue {
         async asyncData({ query }) {
+            console.log(query);
             return { url: query.url, username: query.username };
         }
     }

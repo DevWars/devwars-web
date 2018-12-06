@@ -30,7 +30,7 @@
     export default class Pending extends Vue {
 
         async resend() {
-            await Http.for('user/resend').save();
+            await Http.for('auth/re-verify').save();
 
             this.$store.dispatch('toast/success', `We have sent off another email, please wait patiently.`);
         }
