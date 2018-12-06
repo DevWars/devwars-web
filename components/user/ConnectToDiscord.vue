@@ -17,13 +17,14 @@
     @Component({})
     export default class extends Vue {
         @State(state => state.user.user) user;
+        @State(state => state.user.linkedAccounts) links;
 
         @Action('user/disconnectLinkedAccount') removeProvider;
 
         discordUrl = `https://discordapp.com/api/oauth2/authorize?client_id=465280450420670484&redirect_uri=https%3A%2F%2Fapi.devwars.tv/oauth/discord&response_type=code&scope=identify`;
 
         get hasDiscord() {
-            return user_has_provider(this.user, 'DISCORD');
+            return user_has_provider(this.links, 'DISCORD');
         }
     }
 </script>

@@ -3,6 +3,7 @@ import Http from "../services/Http";
 export const state = () => ({
     user: null,
     count: 0,
+    linkedAccounts: []
 });
 
 export const mutations = {
@@ -14,17 +15,23 @@ export const mutations = {
         state.count = count
     },
 
+    linkedAccounts(state, accounts) {
+        state.linkedAccounts = accounts;
+    },
+
     removeLinkedAccount(state, provider) {
-        state.user.linked_accounts = state.user.linked_accounts.filter(it => it.provider !== provider);
+        state.linkedAccounts = state.linkedAccounts.filter(it => it.provider !== provider);
     }
 };
 
 export const actions = {
-    async refresh({ commit }) {
+    async refresh({ commit, dispatch }) {
         try {
             let user = await Http.for('auth/user').get();
 
             commit('user', user);
+
+            await dispatch('linkedAccounts');
         } catch (e) {
             commit('user', null);
         }
@@ -140,10 +147,16 @@ export const actions = {
         await dispatch('refresh');
     },
 
-    async disconnectLinkedAccount({ dispatch, commit }, provider) {
-        commit('removeLinkedAccount', provider);
+    async linkedAccounts({ dispatch, commit, state }) {
+        const accounts = await Http.for(`user/${state.user.id}`).get('linked-accounts');
 
-        await Http.for('user/linked-account').delete({ id: 'DISCORD' });
+        commit('linkedAccounts', accounts);
+    },
+
+    async disconnectLinkedAccount({ dispatch, commit, state }, provider) {
+        await Http.for(`user/${state.user.id}/linked-accounts/${provider}`).delete();
+
+        commit('removeLinkedAccount', provider);
 
         await dispatch('refresh');
     }

@@ -40,8 +40,12 @@ export default class Http {
         return Http.axios.put(this.urlFor(model), model).then(it => it.data);
     }
 
-    async delete(model) {
-        return Http.axios.delete(this.urlFor(model), model).then(it => it.data);
+    async delete(first) {
+        if (typeof first === "object") {
+            return Http.axios.delete(this.urlFor(model), model).then(it => it.data);
+        } else {
+            return Http.axios.delete(this.url(first)).then(it => it.data);
+        }
     }
 
     async post(first, second, third) {
