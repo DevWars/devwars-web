@@ -2,6 +2,7 @@ import Http from "../services/Http";
 
 export const state = () => ({
     applied: [],
+    entered: [],
     upcoming: [],
     all: [],
     game: {},
@@ -11,6 +12,10 @@ export const state = () => ({
 export const mutations = {
     applied(state, applied) {
         state.applied = applied;
+    },
+
+    entered(state, entered) {
+        state.entered = entered;
     },
 
     all(state, all) {
@@ -67,6 +72,17 @@ export const actions = {
 
             commit('applied', applied || []);
         } catch (e) {
+            console.log("Couldn't load applied games", e);
+        }
+    },
+
+    async entered({commit}) {
+        try {
+            let entered = await Http.for('game/entered').get('mine');
+
+            commit('entered', entered || []);
+        } catch (e) {
+            console.log("Couldn't load entered games", e);
         }
     },
 
@@ -89,7 +105,7 @@ export const actions = {
     },
 
     async apply({commit, dispatch}, game) {
-        await Http.for('game/application').save(game);
+        await Http.for(`game/${game.id}/applications`).save();
 
         commit('apply', game);
 

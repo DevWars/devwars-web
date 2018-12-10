@@ -9,36 +9,36 @@
                         <h3 class="modpanel__title">About you</h3>
                         <div class="row">
                             <div class="col-sm-6 form-group">
-                                <Input v-model="competitor.first_name" required />
+                                <Input v-model="competitor.name.firstName" required />
                                 <label>First name</label>
                             </div>
                             <div class="col-sm-6 form-group">
-                                <Input v-model="competitor.last_name" required />
+                                <Input v-model="competitor.name.lastName" required />
                                 <label>Last name</label>
                             </div>
                         </div>
 
 
                         <div class="form-group">
-                            <Input v-model="competitor.address" required />
+                            <Input v-model="competitor.address.addressOne" required />
                             <label>Address</label>
                         </div>
                         <div class="row">
                             <div class="col-sm-4 form-group">
-                                <Input v-model="competitor.city" required />
+                                <Input v-model="competitor.address.city" required />
                                 <label>City</label>
                             </div>
                             <div class="col-sm-3 form-group">
-                                <Input v-model="competitor.state" required />
+                                <Input v-model="competitor.address.state" required />
                                 <label>State/Province/Region</label>
                             </div>
                             <div class="col-sm-2 form-group">
-                                <Input v-model="competitor.zip" required />
+                                <Input v-model="competitor.address.zip" required />
                                 <label>Zip/Postal Code</label>
                             </div>
                             <div class="col-sm-3 form-group">
                                 <div class="select-container">
-                                    <select v-model="competitor.country" class="form-control" required>
+                                    <select v-model="competitor.address.country" class="form-control" required>
                                         <option :key="country" v-for="country in countries">{{ country }}</option>
                                     </select>
                                     <label>Select Country</label>
@@ -131,7 +131,7 @@
 </template>
 
 <script>
-    import Component, {State, Action} from 'nuxt-class-component';
+    import Component, { State, Action } from 'nuxt-class-component';
     import Vue from 'vue';
     import moment from 'moment';
 
@@ -148,6 +148,7 @@
     })
     export default class CompetitorRegistration extends Vue {
         @State(state => state.user.user) user;
+        @State(state => state.user.linkedAccounts) links;
         @Action('toast/error') error;
 
         month = '';
@@ -155,7 +156,11 @@
         year = '';
 
         languages = [{ name: 'html', skill: 0 }, { name: 'css', skill: 0 }, { name: 'js', skill: 0 }];
-        competitor = {};
+        competitor = {
+            name: {},
+            address: {},
+            ratings: {},
+        };
 
         countries = Object.keys(countryList().getNameList()).map(it => it[0].toUpperCase() + it.slice(1));
 
@@ -170,22 +175,22 @@
         }
 
         async submit() {
-            const hasDiscord = user_has_provider(this.user, 'DISCORD');
+            const hasDiscord = user_has_provider(this.links, 'DISCORD');
 
-            if(!hasDiscord) {
+            if (!hasDiscord) {
                 return this.error('You must connect your discord before moving forward with your registration.');
             }
 
             let date = moment.utc(`${this.month} ${this.day} ${this.year}`, 'MM DD YYYY').startOf('day');
 
             this.languages.forEach(language => {
-                this.competitor[language.name + '_rate'] = language.skill + 1;
+                this.competitor.ratings[language] = language.skill + 1;
             });
 
             this.competitor.dob = date.unix() * 1000;
 
             try {
-                await Http.for('user/competitor').save(this.competitor);
+                await Http.for(`user/${this.user.id}/competitor`).save(this.competitor);
 
                 if (this.game) {
                     await this.$store.dispatch('game/apply', this.game);

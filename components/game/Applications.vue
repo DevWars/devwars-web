@@ -22,6 +22,7 @@
         @Prop() games;
 
         @State(state => state.game.applied) applied;
+        @State(state => state.game.entered) entered;
         @State(state => state.user.user) user;
 
         async enter(game) {
@@ -62,11 +63,7 @@
         get altered() {
             return this.games.map(game => {
                 let applied = this.applied.some(it => it.id === game.id || it === game.id);
-                let playing = this.applied.some(it => {
-                    return it.id === game.id && Object.values(it.teams).some(team => {
-                        return team.players.some(player => player.user.id === this.user.id);
-                    });
-                });
+                let playing = this.entered.some(it => it.id === game.id || it === game.id);
 
                 let text;
                 let color;

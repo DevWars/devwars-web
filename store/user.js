@@ -2,6 +2,7 @@ import Http from "../services/Http";
 
 export const state = () => ({
     user: null,
+    competitor: null,
     count: 0,
     linkedAccounts: []
 });
@@ -9,6 +10,10 @@ export const state = () => ({
 export const mutations = {
     user(state, user) {
         state.user = user;
+    },
+
+    competitor(state, competitor) {
+        state.competitor = competitor;
     },
 
     count(state, count) {
@@ -31,7 +36,18 @@ export const actions = {
 
             commit('user', user);
 
+            await dispatch('competitor');
             await dispatch('linkedAccounts');
+        } catch (e) {
+            commit('user', null);
+        }
+    },
+
+    async competitor({commit, state}) {
+        try {
+            let competitor = await Http.for(`/user/${state.user.id}/competitor`).get();
+
+            commit('competitor', competitor);
         } catch (e) {
             commit('user', null);
         }

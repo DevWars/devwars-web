@@ -8,6 +8,7 @@ export const actions = {
             dispatch('user/refreshUserCount'),
             dispatch('user/refresh'),
             dispatch('game/applied'),
+            dispatch('game/entered'),
             dispatch('game/upcoming'),
             dispatch('game/active'),
             dispatch('badges/refresh'),

@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!user.competitor">
+    <div v-if="!competitor">
         <!-- NOT PRE-REGISTERED -->
         <h1>Become a competitor</h1>
         <p>
@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    <div v-else-if="user.competitor">
+    <div v-else-if="competitor">
         <!-- REGISTERED -->
         <h1>Entry confirmation</h1>
         <p>
@@ -33,7 +33,7 @@
 </template>
 
 <script>
-    import Component, {State} from 'nuxt-class-component';
+    import Component, {State, Action} from 'nuxt-class-component';
     import Vue from 'vue';
 
     import {Prop} from 'vue-property-decorator';
@@ -44,10 +44,12 @@
         @Prop() resolve;
         @Prop() game;
 
-        @State(state => state.user.user) user;
+        @State(state => state.user.competitor) competitor;
+
+        @Action('game/apply') apply;
 
         async enter() {
-            await Http.for('game/application').save(this.game);
+            await this.apply(this.game);
 
             this.close(true);
         }
