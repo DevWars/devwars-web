@@ -44,7 +44,7 @@
                 <tr v-for="game in all" :key="game.id">
                     <td data-type="Date">{{ game.timestamp | moment('MM/DD/YYYY') }}</td>
                     <td data-type="Status">
-                        <span :class="['mod-status', game.status.toLowerCase()]">{{ game.status }}</span>
+                        <span :class="['mod-status', name_from_status(game.status).toLowerCase()]">{{ name_from_status(game.status) }}</span>
                     </td>
                     <td data-type="Theme">{{ game.theme }}</td>
                     <td data-type="Game Mode">{{ game.name }}</td>
@@ -79,8 +79,11 @@
     import CreateGameModal from '~/components/modal/CreateGameModal';
     import Input from '~/components/form/Input';
 
+    import {name_from_status} from '../../utils/game-status';
+
     @Component({
-        components: { Input }
+        components: { Input },
+        methods: {name_from_status},
     })
 
     export default class DashboardGames extends Vue {
