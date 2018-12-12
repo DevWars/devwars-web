@@ -37,12 +37,9 @@
                                 <label>Zip/Postal Code</label>
                             </div>
                             <div class="col-sm-3 form-group">
-                                <div class="select-container">
-                                    <select v-model="competitor.address.country" class="form-control" required>
-                                        <option :key="country" v-for="country in countries">{{ country }}</option>
-                                    </select>
-                                    <label>Select Country</label>
-                                </div>
+                                <Select label="Select Country" v-model="competitor.address.country" required>
+                                    <option :key="country" v-for="country in countries">{{ country }}</option>
+                                </Select>
                             </div>
                         </div>
 
@@ -139,11 +136,12 @@
     import Http from "../../services/Http";
     import PageBanner from '~/components/layout/PageBanner';
     import Input from "~/components/form/Input";
+    import Select from "~/components/form/Select";
     import ConnectToDiscord from "~/components/user/ConnectToDiscord";
     import { user_has_provider } from '../../utils/linked-accounts';
 
     @Component({
-        components: { PageBanner, Input, ConnectToDiscord },
+        components: { PageBanner, Input, ConnectToDiscord, Select },
         middleware: ['auth', 'no-competitors']
     })
     export default class CompetitorRegistration extends Vue {
