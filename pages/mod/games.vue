@@ -1,26 +1,21 @@
 <template>
     <div>
-        <div class="modpanel__header">
-            <h1 class="modpanel__header-title">Games</h1>
-            <div class="modpanel__header-actions">
-                <div class="modpanel__header-search">
-                    <Input class="labeless" placeholder="Search for Game" />
-                </div>
-                <button @click="createGame" class="btn btn-primary btn-icon btn-sm">
-                    <i class="fa fa-plus"></i>
-                    <span>Add Game</span>
-                </button>
+        <PanelHeader title="Games">
+            <div class="modpanel__header-search">
+                <Input class="labeless" placeholder="Search for Game" />
             </div>
-        </div>
+            <button @click="createGame" class="btn btn-primary btn-icon btn-sm">
+                <i class="fa fa-plus"></i>
+                <span>Add Game</span>
+            </button>
+        </PanelHeader>
 
         <div class="modpanel__sort">
             <div class="modpanel__sort-main">
                 <span>Showing All</span>
-                <div class="select-container">
-                    <select class="form-control">
-                        <option value="Infinity">Show All</option>
-                    </select>
-                </div>
+                <Select>
+                    <option value="Infinity" selected>Show All</option>
+                </Select>
             </div>
             <div class="modpanel__sort-actions">
                 <button class="modpanel__sort-settings">
@@ -77,12 +72,14 @@
     import Vue from 'vue';
 
     import CreateGameModal from '~/components/modal/CreateGameModal';
+    import PanelHeader from '~/components/mod/PanelHeader';
+    import Select from '~/components/form/Select';
     import Input from '~/components/form/Input';
 
     import {name_from_status} from '../../utils/game-status';
 
     @Component({
-        components: { Input },
+        components: { PanelHeader, Select, Input },
         methods: {name_from_status},
     })
 

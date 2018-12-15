@@ -8,7 +8,7 @@
         >
             <slot></slot>
         </select>
-        <label>{{ label }}</label>
+        <label v-if="label">{{ label }}</label>
     </div>
 </template>
 

@@ -21,52 +21,23 @@ $sidebar-background                                 : $bg-color-4;
         display: block;
     }
 
-    &__header {
-        @extend %flex-justify;
-        padding: $grid-gutter-width;
 
-        &-main {}
-
-        &-actions {
-            display: flex;
-
-            & > *:not(:last-child) {
-                margin-right: $grid-gutter-part;
-            }
+    .modpanel__header-search {
+        &:before,
+        .form-control {
+            display: inline-block;
+            vertical-align: baseline;
         }
 
-        &-title {
-            font-size: $h2-font-size;
-            color: #fff;
+        &:before {
+            @extend .fa;
+            content: $fa-search;
+            padding-right: $xs-space;
+            color: $text-color-muted;
         }
 
-        &-subtitle {
-            margin-top: $xxs-space;
-            font-size: $h5-font-size;
-        }
-
-        .form-control,
-        .btn {
-            @extend %align-middle;
-        }
-
-        &-search {
-            &:before,
-            .form-control {
-                display: inline-block;
-                vertical-align: baseline;
-            }
-
-            &:before {
-                @extend .fa;
-                content: $fa-search;
-                padding-right: $xs-space;
-                color: $text-color-muted;
-            }
-
-            .form-control {
-                width: 300px;
-            }
+        .form-control {
+            width: 300px;
         }
     }
 
