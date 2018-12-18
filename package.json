@@ -1,9 +1,9 @@
 {
-  "name": "devwars-nuxt",
+  "name": "devwars.tv",
   "version": "1.0.0",
-  "description": "Nuxt.js project",
-  "author": "Terence Bezman <terencebezman@gmail.com>",
-  "private": true,
+  "description": "Front-end website for DevWars",
+  "author": "DevWars, LLC",
+  "license": "GPLv3",
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
