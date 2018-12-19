@@ -53,16 +53,7 @@
                 </tbody>
             </table>
 
-            <div class="modpanel-table__pagination">
-                <a href="#" class="btn-link btn-icon">
-                    <i class="fa fa-caret-left"></i>
-                    <span>Prev</span>
-                </a>
-                <a href="#" class="btn-link btn-icon btn-icon-reverse">
-                    <span>Next</span>
-                    <i class="fa fa-caret-right"></i>
-                </a>
-            </div>
+            <Pagination />
         </div>
     </div>
 </template>
@@ -75,11 +66,12 @@
     import PanelHeader from '~/components/mod/PanelHeader';
     import Select from '~/components/form/Select';
     import Input from '~/components/form/Input';
+    import Pagination from '~/components/Pagination';
 
     import {name_from_status} from '../../utils/game-status';
 
     @Component({
-        components: { PanelHeader, Select, Input },
+        components: { PanelHeader, Select, Input, Pagination },
         methods: {name_from_status},
     })
 
