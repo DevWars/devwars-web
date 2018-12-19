@@ -12,37 +12,29 @@
 
         <ListingFilters />
 
-        <div class="modpanel-table">
-            <table>
-                <thead>
-                <tr>
-                    <th ng-click="$ctrl.sort('date')">Date</th>
-                    <th ng-click="$ctrl.sort('Status')">Status</th>
-                    <th ng-click="$ctrl.sort('theme')">Theme</th>
-                    <th ng-click="$ctrl.sort('gameMode')">Gamemode</th>
-                    <th>&nbsp;</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="game in all" :key="game.id">
-                    <td data-type="Date">{{ game.timestamp | moment('MM/DD/YYYY') }}</td>
-                    <td data-type="Status">
-                        <span :class="['mod-status', name_from_status(game.status).toLowerCase()]">{{ name_from_status(game.status) }}</span>
-                    </td>
-                    <td data-type="Theme">{{ game.theme }}</td>
-                    <td data-type="Game Mode">{{ game.name }}</td>
-                    <td class="modpanel-table__actions" data-type="Edit">
-                        <nuxt-link :to="'/mod/game/brief?game=' + game.id" class="btn-link btn-icon-reverse">
-                            <span>Edit</span>
-                            <i class="fa fa-caret-down"></i>
-                        </nuxt-link>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+        <Table>
+            <tr slot="head">
+                <th>Date</th>
+                <th>Status</th>
+                <th>Theme</th>
+                <th>Gamemode</th>
+                <th>&nbsp;</th>
+            </tr>
 
-            <Pagination />
-        </div>
+            <tr v-for="game in all" :key="game.id">
+                <td>{{ game.timestamp | moment('MM/DD/YYYY') }}</td>
+                <td>
+                    <span :class="['mod-status', name_from_status(game.status).toLowerCase()]">{{ name_from_status(game.status) }}</span>
+                </td>
+                <td>{{ game.theme }}</td>
+                <td>{{ game.name }}</td>
+                <td>
+                    <nuxt-link :to="'/mod/game/brief?game=' + game.id" class="btn-link">Edit</nuxt-link>
+                </td>
+            </tr>
+        </Table>
+
+        <Pagination />
     </div>
 </template>
 
@@ -53,13 +45,14 @@
     import CreateGameModal from '~/components/modal/CreateGameModal';
     import PanelHeader from '~/components/mod/PanelHeader';
     import ListingFilters from '~/components/mod/ListingFilters';
+    import Table from '~/components/Table';
     import Input from '~/components/form/Input';
     import Pagination from '~/components/Pagination';
 
     import {name_from_status} from '../../utils/game-status';
 
     @Component({
-        components: { PanelHeader, ListingFilters, Input, Pagination },
+        components: { PanelHeader, ListingFilters, Table, Input, Pagination },
         methods: {name_from_status},
     })
 
@@ -75,3 +68,34 @@
         }
     }
 </script>
+
+
+<style lang="scss" scoped>
+@import '../../assets/styles/utils';
+
+
+.mod-status {
+    font-weight: $font-weight-bold;
+
+    &.scheduled {
+        color: $info-color;
+    }
+
+    &.preparing {
+        color: $warning-color;
+    }
+
+    &.live {
+        color: $danger-color;
+    }
+
+    &.active,
+    &.complete {
+        color: $success-color;
+    }
+
+    &.ended {
+        color: $text-color-muted;
+    }
+}
+</style>
