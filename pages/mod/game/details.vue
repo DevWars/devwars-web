@@ -37,12 +37,13 @@
                     <label>Objective #{{ objective.number + 1 }} (Bonus)</label>
                 </div>
                 <SquareToggle
-                    @change="toggleObjective(game.teams.red, objective)"
-                    :active="teamCompletedObjective(game.teams.red, objective)" color="red"
+                    @change="toggleObjective(team_for_game('red', game), objective)"
+                    :active="team_completed_objective(team_for_game('red', game), objective)" color="red"
                 />
                 <SquareToggle
-                    @change="toggleObjective(game.teams.blue, objective)"
-                    :active="teamCompletedObjective(game.teams.blue, objective)" color="blue" />
+                    @change="toggleObjective(team_for_game('blue', game), objective)"
+                    :active="team_completed_objective(team_for_game('blue', game), objective)" color="blue"
+                />
             </div>
 
             <h3 v-if="game.name === 'Zen Garden'" class="modpanel__subtitle">Zen Garden HTML</h3>
@@ -96,9 +97,11 @@
     import SquareToggle from '../../../components/SquareToggle';
 
     import { team_completed_objective } from '../../../utils/objectives';
+    import { team_for_game } from '../../../utils/objectives';
 
     @Component({
-        components: { SquareToggle, VoteBoxInput, Input }
+        components: { SquareToggle, VoteBoxInput, Input },
+        methods: { team_for_game, team_completed_objective },
     })
 
     export default class DashboardGameDetails extends Vue {
@@ -106,8 +109,6 @@
 
         date = '';
         time = '';
-
-        teamCompletedObjective = team_completed_objective;
 
         mounted() {
             this.gameChanged();
@@ -119,7 +120,7 @@
         toggleObjective(team, objective) {
             const has = team_completed_objective(team, objective);
 
-            if(has) {
+            if (has) {
                 team.completedObjectives = team.completedObjectives.filter(it => it.id !== objective.id);
             } else {
                 team.completedObjectives.push(objective);
