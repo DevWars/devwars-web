@@ -105,7 +105,7 @@
                 <tr v-for="application in applications" :key="application.user.id">
                     <td>
                         <Avatar :user="application.user" />
-                        <span class="modpanel-table__item_name">{{ application.user.username }}</span>
+                        <span>{{ application.user.username }}</span>
                     </td>
                     <td>{{ application.user.statistics.rank.rank }}</td>
                     <td>{{ application.wins + application.losses }}</td>

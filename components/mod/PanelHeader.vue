@@ -6,16 +6,29 @@
         </div>
 
         <div class="actions">
+            <div class="search">
+                <Input class="labeless" :placeholder="'Search for ' + title" />
+            </div>
             <slot></slot>
         </div>
     </div>
 </template>
 
 <script>
-export default {
-  props: [ 'title', 'subtitle' ]
+import Component, {State} from 'nuxt-class-component';
+import Vue from 'vue';
+
+import Input from '~/components/form/Input';
+
+@Component({
+    components: { Input },
+    props: [ 'title', 'subtitle' ],
+})
+export default class PanelHeader extends Vue {
+
 }
 </script>
+
 
 <style lang="scss" scoped>
 @import '../../assets/styles/utils';
@@ -39,6 +52,22 @@ export default {
 
         & > *:not(:last-child) {
             margin-right: 15px;
+        }
+    }
+
+    .search {
+        display: flex;
+        align-items: center;
+
+        &:before {
+            @extend .fa;
+            content: $fa-search;
+            padding-right: 10px;
+            color: $text-color-muted;
+        }
+
+        Input {
+            width: 300px;
         }
     }
 }

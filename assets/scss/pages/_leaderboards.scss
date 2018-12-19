@@ -78,30 +78,3 @@ $file__element--property_modifier
 
     &__user {}
 }
-
-.ranking-pagination {
-    padding: $grid-gutter-part 0;
-    text-align: center;
-
-    &__btn,
-    &__page {
-        @extend %align-middle;
-    }
-
-    &__btn {
-        @extend .btn;
-        @extend .btn-gray;
-        padding-top: $xxs-space;
-        padding-bottom: $xxs-space;
-
-        &.disabled {
-            background-color: transparent;
-        }
-    }
-
-    &__page {
-        padding: 0 $grid-gutter-width;
-        text-transform: uppercase;
-        font-weight: $font-weight-bold;
-    }
-}
