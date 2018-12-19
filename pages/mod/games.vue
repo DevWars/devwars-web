@@ -73,7 +73,6 @@
 <style lang="scss" scoped>
 @import '../../assets/styles/utils';
 
-
 .mod-status {
     font-weight: $font-weight-bold;
 
