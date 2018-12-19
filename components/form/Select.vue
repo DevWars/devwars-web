@@ -12,6 +12,7 @@
     </div>
 </template>
 
+
 <script>
     import Component from 'nuxt-class-component';
     import Vue from 'vue';
@@ -29,4 +30,13 @@
         }
     }
 </script>
+
+
+<style lang="scss" scoped>
+@import '../../assets/styles/utils';
+
+.select-container {
+    font-family: $alt-font-face;
+}
+</style>
 

@@ -41,32 +41,6 @@ $sidebar-background                                 : $bg-color-4;
         }
     }
 
-    &__sort {
-        @extend %flex-justify;
-        padding: $xxs-space $grid-gutter-width;
-        background: $bg-color-1;
-
-        &-main {
-            display: flex;
-            align-items: center;
-
-            *:not(:first-child) {
-                margin-left: $grid-gutter-width;
-            }
-        }
-
-        &-actions {}
-
-        &-settings {
-            padding: $xs-space;
-            font-size: $h4-font-size;
-        }
-
-        .select-container {
-            font-family: $alt-font-face;
-        }
-    }
-
     &__subtitle {
         margin-bottom: $grid-gutter-width;
         font-family: $alt-font-face;

@@ -10,19 +10,7 @@
             </button>
         </PanelHeader>
 
-        <div class="modpanel__sort">
-            <div class="modpanel__sort-main">
-                <span>Showing All</span>
-                <Select>
-                    <option value="Infinity" selected>Show All</option>
-                </Select>
-            </div>
-            <div class="modpanel__sort-actions">
-                <button class="modpanel__sort-settings">
-                    <i class="fa fa-gear" aria-hidden="true"></i>
-                </button>
-            </div>
-        </div>
+        <ListingFilters />
 
         <div class="modpanel-table">
             <table>
@@ -64,14 +52,14 @@
 
     import CreateGameModal from '~/components/modal/CreateGameModal';
     import PanelHeader from '~/components/mod/PanelHeader';
-    import Select from '~/components/form/Select';
+    import ListingFilters from '~/components/mod/ListingFilters';
     import Input from '~/components/form/Input';
     import Pagination from '~/components/Pagination';
 
     import {name_from_status} from '../../utils/game-status';
 
     @Component({
-        components: { PanelHeader, Select, Input, Pagination },
+        components: { PanelHeader, ListingFilters, Input, Pagination },
         methods: {name_from_status},
     })
 
