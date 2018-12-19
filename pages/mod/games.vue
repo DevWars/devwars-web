@@ -1,9 +1,6 @@
 <template>
     <div>
         <PanelHeader title="Games">
-            <div class="modpanel__header-search">
-                <Input class="labeless" placeholder="Search for Game" />
-            </div>
             <button @click="createGame" class="btn btn-primary btn-icon btn-sm">
                 <i class="fa fa-plus"></i>
                 <span>Add Game</span>

@@ -1,5 +1,5 @@
 <template>
-    <div class="modpanel">
+    <div class="ModPanel">
         <div class="modpanel-sidebar">
             <h1 class="modpanel-sidebar-header">Main</h1>
             <ul class="modpanel-sidebar-list">
@@ -86,3 +86,18 @@ export default class Mod extends Vue {
 
 }
 </script>
+
+<style lang="scss" scoped>
+@import '../assets/styles/utils';
+
+.ModPanel {
+    height: calc(100vh - #{$header-height});
+    display: flex;
+    flex: 1;
+
+    @include breakpoint(md) {
+        display: block;
+    }
+}
+</style>
+

@@ -1,9 +1,6 @@
 <template>
     <div>
         <PanelHeader title="Tournament">
-            <div class="modpanel__header-search">
-                <Input class="labeless" placeholder="Search for Tournament" />
-            </div>
             <button @click="createTournament" class="btn btn-primary btn-icon btn-sm">
                 <i class="fa fa-plus"></i>
                 <span>Add Tournament</span>

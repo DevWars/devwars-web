@@ -12,42 +12,6 @@ $sidebar-background                                 : $bg-color-4;
  01. Panel
 ========================================================================== */
 
-.modpanel {
-    height: calc(100vh - #{$header-height});
-    display: flex;
-    flex: 1;
-
-    @include breakpoint(md) {
-        display: block;
-    }
-
-
-    .modpanel__header-search {
-        &:before,
-        .form-control {
-            display: inline-block;
-            vertical-align: baseline;
-        }
-
-        &:before {
-            @extend .fa;
-            content: $fa-search;
-            padding-right: $xs-space;
-            color: $text-color-muted;
-        }
-
-        .form-control {
-            width: 300px;
-        }
-    }
-
-    &__subtitle {
-        margin-bottom: $grid-gutter-width;
-        font-family: $alt-font-face;
-        font-size: $h4-font-size;
-    }
-}
-
 
 .modpanel-sidebar {
     background-color: $sidebar-background;
