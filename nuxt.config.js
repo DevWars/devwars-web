@@ -25,9 +25,6 @@ module.exports = {
                 content: "DevWars is a live game show where web developers compete against each other in 60 minute coding challenges. Join our educational and entertaining platform of experienced and aspiring members."
             }
         ],
-        script: [
-            { src: 'https://rawgit.com/jsog/jsog/master/lib/JSOG.js', type: 'text/javascript', body: true },
-        ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
             {

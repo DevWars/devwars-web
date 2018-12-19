@@ -34,7 +34,7 @@
             >
                 <div class="mod-objectives__input">
                     <Input v-model="objective.description" maxlength="110" />
-                    <label>Objective #{{ objective.number + 1 }} (Bonus)</label>
+                    <label>Objective #{{ objective.number }} (Bonus)</label>
                 </div>
                 <SquareToggle
                     @change="toggleObjective(team_for_game('red', game), objective)"
@@ -49,7 +49,7 @@
             <h3 v-if="game.name === 'Zen Garden'" class="modpanel__subtitle">Zen Garden HTML</h3>
             <div v-if="game.name === 'Zen Garden'" class="form-group">
                 <textarea
-                    v-model="game.language_templates.html"
+                    v-model="game.languageTemplates.html"
                     class="form-control"
                     placeholder="Insert HTML code here..."
                     rows="10"
@@ -139,7 +139,7 @@
         gameChanged() {
             let list = [];
 
-            for (let i = 0; i < 5; i++) {
+            for (let i = 1; i <= 5; i++) {
                 let item = this.game.objectives.find(it => it.number === i);
 
                 if (!item) item = { number: i };

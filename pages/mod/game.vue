@@ -71,10 +71,9 @@
             delete cloned.teams;
 
             // Make sure the list doesn't include objectives with games
-            const transformed = this.game.objectives.map(it => ({ ...it, game: null }));
+            const transformed = this.game.objectives.map(it => ({ ...it, game: null })).filter(it => it.description);
 
-            // Save the objectives
-            await Http.for(`/game/${this.game.id}/objective`).save(transformed);
+            await Http.for(`/game/${this.game.id}/objectives`).post(transformed);
 
             // Go ahead and save each team
             for (const team of Object.values(this.game.teams)) {
@@ -90,7 +89,6 @@
                     await Http.for(`/game/team/${team.id}/votes`).post({}, { amount: votes, category });
                 }
             }
-
 
             // Last but not least, save the game
             let game = await Http.for('game').save(cloned);
