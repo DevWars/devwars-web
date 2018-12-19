@@ -10,7 +10,11 @@ Vue.directive('asyncClick', {
             el.disabled = true;
 
 
-            await func(...args);
+            try {
+                await func(...args);
+            } catch (e) {
+                console.error(e);
+            }
 
             el.classList.remove('loading');
             el.disabled = false;
@@ -36,7 +40,11 @@ Vue.directive('asyncSubmit', {
                 button.disabled = true;
             });
 
-            await func(...args);
+            try {
+                await func(...args);
+            } catch (e) {
+                console.error(e);
+            }
 
             buttons.forEach(button => {
                 button.classList.remove('loading');
