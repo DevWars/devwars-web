@@ -13,8 +13,8 @@
                     </div>
                     <div class="games-players">
                         <div
-                            class="games-player" :key="player.id" v-for="player in game.teams.blue.players"
-                            @click="removePlayer(player, game.teams.blue)"
+                            class="games-player" :key="player.id" v-for="player in team_for_game('blue', game).players"
+                            @click="removePlayer(player, team_for_game('blue', game))"
                         >
                             <div class="user-group">
                                 <div class="games-player__avatar">
@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="select-container">
-                    <select v-model="game.teams.blue.status" class="form-control">
+                    <select v-model="team_for_game('blue', game).status" class="form-control">
                         <option>Waiting for players...</option>
                         <option>Setting up Discord</option>
                         <option>Setting up game</option>
@@ -50,8 +50,8 @@
                     </div>
                     <div class="games-players">
                         <div
-                            class="games-player" :key="player.id" v-for="player in game.teams.red.players"
-                            @click="removePlayer(player, game.teams.red)"
+                            class="games-player" :key="player.id" v-for="player in team_for_game('red', game).players"
+                            @click="removePlayer(player, team_for_game('red', game))"
                         >
                             <div class="user-group">
                                 <div class="games-player__avatar">
@@ -66,7 +66,7 @@
                     </div>
                 </div>
                 <div class="select-container">
-                    <select v-model="game.teams.red.status" class="form-control">
+                    <select v-model="team_for_game('red', game).status" class="form-control">
                         <option>Waiting for players...</option>
                         <option>Setting up Discord</option>
                         <option>Setting up game</option>
@@ -137,11 +137,15 @@
     import ConfirmModal from '~/components/modal/ConfirmModal';
     import AddRegistrantModal from '~/components/modal/AddRegistrantModal';
 
+    import { team_for_game } from '../../../utils/objectives';
+
     @Component({
-        components: { Avatar }
+        components: { Avatar },
+        methods: { team_for_game },
     })
     export default class  extends Vue {
         @State(state => state.game.game) game;
+
         applications = [];
 
         rating(user, lang) {

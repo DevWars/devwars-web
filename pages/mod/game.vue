@@ -10,7 +10,7 @@
                     &nbsp;&nbsp;/&nbsp;&nbsp;
                     {{ game.name }}
                     &nbsp;&nbsp;/&nbsp;&nbsp;
-                    <span :class="['mod-status' , game.status.toLowerCase()]">{{ game.status }}</span>
+                    <span :class="['mod-status' , name_from_status(game.status).toLowerCase()]">{{ game.status }}</span>
                 </h2>
             </div>
 
@@ -46,8 +46,10 @@
 
     import DeleteModal from '~/components/modal/DeleteModal';
 
+    import {name_from_status} from '../../utils/game-status';
+
     @Component({
-        components: {}
+        methods: {name_from_status}
     })
     export default class DashboardGame extends Vue {
         @State(state => state.game.game) game;
