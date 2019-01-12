@@ -50,6 +50,8 @@
 
 <script>
     import Component, { State } from 'nuxt-class-component';
+    import { Watch } from 'vue-property-decorator';
+
     import Vue from 'vue';
 
     import Avatar from '~/components/user/Avatar';
@@ -64,14 +66,19 @@
     export default class SettingsProfile extends Vue {
         @State(state => state.user.user) user;
 
+        profile = {};
+
+        @Watch("user", { immediate: true })
+        updateProfileFromUser() {
+            Object.assign(this.profile, this.user.profile);
+
+            this.profile.username = this.user.username;
+        }
+
         async crop(result) {
             let [cropped] = await this.$open(CropperModal, { data: result });
 
             this.$store.dispatch('user/avatar', cropped);
-        }
-
-        get profile() {
-            return this.user ? {...this.user, ...this.user.profile} : {};
         }
 
         async save() {
