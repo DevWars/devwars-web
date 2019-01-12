@@ -58,7 +58,7 @@
 
             <h3 class="modpanel__subtitle">Media</h3>
             <div class="form-group">
-                <Input v-model="game.youtube_url" />
+                <Input v-model="game.videoUrl" />
                 <label>Youtube URL</label>
             </div>
 
