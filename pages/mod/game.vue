@@ -45,11 +45,12 @@
     import Http from "../../services/Http";
 
     import DeleteModal from '~/components/modal/DeleteModal';
+    import EndGameModal from '~/components/modal/EndGameModal';
 
-    import {name_from_status} from '../../utils/game-status';
+    import { name_from_status } from '../../utils/game-status';
 
     @Component({
-        methods: {name_from_status}
+        methods: { name_from_status }
     })
     export default class DashboardGame extends Vue {
         @State(state => state.game.game) game;
@@ -61,7 +62,7 @@
         }
 
         async endGame() {
-            await Http.for(`/game/${this.game.id}/ended`).save()
+            await this.$open(EndGameModal, { game: this.game });
         }
 
         async save() {

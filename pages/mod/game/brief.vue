@@ -102,21 +102,21 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="application in applications" :key="application.user.id">
+                <tr v-for="user in applications" :key="user.id">
                     <td>
-                        <Avatar :user="application.user" />
-                        <span>{{ application.user.username }}</span>
+                        <Avatar :user="user" />
+                        <span>{{ user.username }}</span>
                     </td>
-                    <td>{{ application.user.statistics.rank.rank }}</td>
-                    <td>{{ application.wins + application.losses }}</td>
-                    <td>{{ application.wins }}</td>
-                    <td>{{ application.losses }}</td>
-                    <td>{{ rating(application.user, 'html')}}</td>
-                    <td>{{ rating(application.user, 'css')}}</td>
-                    <td>{{ rating(application.user, 'js')}}</td>
-                    <td class="color-devcoins">{{ application.user.statistics.coins | number }}</td>
+                    <td>{{ user.statistics.rank.rank }}</td>
+                    <td>{{ user.statistics.wins + user.statistics.losses }}</td>
+                    <td>{{ user.statistics.wins }}</td>
+                    <td>{{ user.statistics.losses }}</td>
+                    <td>{{ rating(user, 'html')}}</td>
+                    <td>{{ rating(user, 'css')}}</td>
+                    <td>{{ rating(user, 'js')}}</td>
+                    <td class="color-devcoins">{{ user.statistics.coins | number }}</td>
                     <td class="modpanel-table__actions">
-                        <a href="#edit" class="btn-link btn-icon-reverse" @click="addPlayer(application.user)">
+                        <a href="#edit" class="btn-link btn-icon-reverse" @click="addPlayer(user)">
                             <span>Add Player</span>
                             <i class="fa fa-caret-down"></i>
                         </a>
@@ -155,9 +155,7 @@
         }
 
         async mounted() {
-            let applications = await Http.for('game/application').get(`${this.game.id}`);
-
-            this.applications = applications;
+            this.applications = await Http.for(`game/${this.game.id}`).get('applications');
         }
 
         addPlayer(user) {

@@ -88,7 +88,7 @@ export const actions = {
 
     async active({commit}) {
         try {
-            let active = await Http.for('game/status/active').get();
+            let [active] = await Http.for('game/status/active').get();
 
             commit('active', active);
         } catch (e) {
