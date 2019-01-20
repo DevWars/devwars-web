@@ -18,23 +18,23 @@
                         <th width="50%">User Name</th>
                         <th width="15%">Level</th>
                         <th width="15%">Won</th>
-                        <th width="15%">Score</th>
+                        <th width="15%">XP</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(ranking, index) in leaderboards" :key="ranking.user.id">
+                    <tr v-for="(user, index) in leaderboards.users" :key="user.id">
                         <td scope="row" class="leaderboard__rank">
                             {{ (page * 10) + index + 1 }}
                         </td>
                         <td>
                             <div class="user-group">
-                                <Avatar :user="ranking.user"/>
-                                <span class="user-group__name leaderboard__user">{{ ranking.user.username }}</span>
+                                <Avatar :user="user"/>
+                                <span class="user-group__name leaderboard__user">{{ user.username }}</span>
                             </div>
                         </td>
-                        <td>{{ ranking.user.statistics.rank.rank }}</td>
-                        <td>{{ ranking.won }}</td>
-                        <td>{{ ranking.score }}</td>
+                        <td>{{ user.statistics.rank.rank }}</td>
+                        <td>{{ user.statistics.wins }}</td>
+                        <td>{{ user.statistics.xp }}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -64,17 +64,17 @@
 
         async previous() {
             this.page--;
-            this.leaderboards = await Http.for('leaderboard').get({page: this.page});
+            this.leaderboards = await Http.for('leaderboard/users').get({page: this.page});
         }
 
         async next() {
             console.log(this.page);
             this.page++;
-            this.leaderboards = await Http.for('leaderboard').get({page: this.page});
+            this.leaderboards = await Http.for('leaderboard/users').get({page: this.page});
         }
 
         async asyncData() {
-            return {leaderboards: await Http.for('leaderboard').get()}
+            return {leaderboards: await Http.for('leaderboard/users').get()}
         }
     }
 </script>
