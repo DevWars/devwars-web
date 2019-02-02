@@ -1,12 +1,6 @@
 <template>
     <div class="Player">
-        <div class="user">
-            <div class="avatar" :class="team.toLowerCase()">
-                <Avatar :user="user" />
-            </div>
-
-            <div class="name">{{ user.username }}</div>
-        </div>
+        <User :user="user" :class="team.toLowerCase()" />
 
         <strong v-if="lang" class="language" :class="lang.toLowerCase()">{{ lang }}</strong>
     </div>
@@ -16,10 +10,10 @@
     import Component from 'nuxt-class-component';
     import Vue from 'vue';
     import { Prop } from 'vue-property-decorator';
-    import Avatar from '~/components/user/Avatar';
+    import User from '~/components/user/User';
 
     @Component({
-        components: { Avatar },
+        components: { User },
         props: {
             user: Object,
             team: String,
@@ -43,17 +37,13 @@
         cursor: pointer;
     }
 
-    .user {
-        display: flex;
-        align-items: center;
-    }
-
-    .avatar {
-        border: $border-size solid transparent;
-        border-radius: 50%;
-
-        &.blue { border-color: $brand-primary; }
-        &.red { border-color: $brand-secondary; }
+    .User {
+        /deep/ .Avatar {
+            border: $border-size solid transparent;
+            border-radius: 50%;
+        }
+        &.blue /deep/ .Avatar { border-color: $brand-primary; }
+        &.red /deep/ .Avatar { border-color: $brand-secondary; }
     }
 
     .name {
