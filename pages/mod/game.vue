@@ -1,34 +1,22 @@
 <template>
     <div>
-        <div class="modpanel__header">
-            <div class="modpanel__header-main">
-                <h1 class="modpanel__header-title">{{ game.timestamp | moment('mediumDate')}}</h1>
-                <h2 class="modpanel__header-subtitle">
-                    #{{ game.id }}
-                    &nbsp;&nbsp;/&nbsp;&nbsp;
-                    S{{ game.season}}
-                    &nbsp;&nbsp;/&nbsp;&nbsp;
-                    {{ game.name }}
-                    &nbsp;&nbsp;/&nbsp;&nbsp;
-                    <span :class="['mod-status' , name_from_status(game.status).toLowerCase()]">{{ game.status }}</span>
-                </h2>
-            </div>
-
-            <div class="modpanel__header-actions">
-                <a href="/mod/games" class="btn btn-outline-gray">Back</a>
-                <button v-async-click="[endGame]" class="btn btn-danger" v-if="game.active && !game.done">
-                    End
-                </button>
-                <button
-                    v-show="!game.done && !game.active" v-async-click="[activate]"
-                    class="btn btn-primary"
-                >
-                    Activate
-                </button>
-                <button v-async-click="[save]" class="btn btn-primary">Save</button>
-                <button v-async-click="[remove]" class="btn btn-secondary">Delete</button>
-            </div>
-        </div>
+        <PanelHeader
+            :title="game.timestamp | moment('mediumDate')"
+            :subtitle="`${game.id} / ${game.season} / ${game.name}`"
+        >
+            <a href="/mod/games" class="btn btn-outline-gray">Back</a>
+            <button v-async-click="[endGame]" class="btn btn-danger" v-if="game.active && !game.done">
+                End
+            </button>
+            <button
+                v-show="!game.done && !game.active" v-async-click="[activate]"
+                class="btn btn-primary"
+            >
+                Activate
+            </button>
+            <button v-async-click="[save]" class="btn btn-primary">Save</button>
+            <button v-async-click="[remove]" class="btn btn-secondary">Delete</button>
+        </PanelHeader>
 
         <nav class="nav-tabs">
             <nuxt-link :to="'/mod/game/details?game=' + game.id" class="nav-tabs__item">Details</nuxt-link>
@@ -44,12 +32,14 @@
     import Vue from 'vue';
     import Http from "../../services/Http";
 
+    import PanelHeader from '~/components/mod/PanelHeader';
     import DeleteModal from '~/components/modal/DeleteModal';
     import EndGameModal from '~/components/modal/EndGameModal';
 
     import { name_from_status } from '../../utils/game-status';
 
     @Component({
+        components: { PanelHeader },
         methods: { name_from_status }
     })
     export default class DashboardGame extends Vue {

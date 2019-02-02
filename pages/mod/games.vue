@@ -1,6 +1,6 @@
 <template>
     <div>
-        <PanelHeader title="Games">
+        <PanelHeader title="Games" showSearch>
             <button @click="createGame" class="btn btn-primary btn-icon btn-sm">
                 <i class="fa fa-plus"></i>
                 <span>Add Game</span>
