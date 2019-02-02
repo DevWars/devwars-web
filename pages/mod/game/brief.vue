@@ -2,76 +2,44 @@
     <div>
         <div class="games-roster mod-card card-bezeless">
             <div class="col-sm-6">
-                <div class="games-team team-blue">
-                    <div class="games-team__header row">
-                        <div class="games-team__header-inner">
-                            <h3 class="games-team__name">Blue</h3>
-                            <div class="games-team__score">
-                                <span class="games-team__points" style="opacity: 0;">0</span>
-                            </div>
-                        </div>
+                <GameTeam team="blue">
+                    <div
+                        :key="player.id"
+                        v-for="player in team_for_game('blue', game).players"
+                        @click="removePlayer(player, team_for_game('blue', game))"
+                    >
+                        <Player :user="player.user" :lang="player.language" team="blue" />
                     </div>
-                    <div class="games-players">
-                        <div
-                            class="games-player" :key="player.id" v-for="player in team_for_game('blue', game).players"
-                            @click="removePlayer(player, team_for_game('blue', game))"
-                        >
-                            <div class="user-group">
-                                <div class="games-player__avatar">
-                                    <Avatar :user="player.user" />
-                                </div>
-                                <div class="games-player__name user-group__name">
-                                    {{ player.user.username }}
-                                </div>
-                            </div>
-                            <span class="games-player__position color-js">{{ player.language }}</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="select-container">
-                    <select v-model="team_for_game('blue', game).status" class="form-control">
-                        <option>Waiting for players...</option>
+                </GameTeam>
+
+                <div class="status">
+                    <Select v-model="team_for_game('blue', game).status">
+                        <option :selected="true">Waiting for players...</option>
                         <option>Setting up Discord</option>
                         <option>Setting up game</option>
                         <option>Ready to play!</option>
-                    </select>
+                    </Select>
                 </div>
             </div>
 
             <div class="col-sm-6">
-                <div class="games-team team-red">
-                    <div class="games-team__header row">
-                        <div class="games-team__header-inner">
-                            <h3 class="games-team__name">Red</h3>
-                            <div class="games-team__score">
-                                <span class="games-team__points" style="opacity: 0;">0</span>
-                            </div>
-                        </div>
+                <GameTeam team="red">
+                    <div
+                        :key="player.id"
+                        v-for="player in team_for_game('red', game).players"
+                        @click="removePlayer(player, team_for_game('red', game))"
+                    >
+                        <Player :user="player.user" :lang="player.language" team="red" />
                     </div>
-                    <div class="games-players">
-                        <div
-                            class="games-player" :key="player.id" v-for="player in team_for_game('red', game).players"
-                            @click="removePlayer(player, team_for_game('red', game))"
-                        >
-                            <div class="user-group">
-                                <div class="games-player__avatar">
-                                    <Avatar :user="player.user" />
-                                </div>
-                                <div class="games-player__name user-group__name">
-                                    {{ player.user.username }}
-                                </div>
-                            </div>
-                            <span class="games-player__position color-js">{{ player.language }}</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="select-container">
-                    <select v-model="team_for_game('red', game).status" class="form-control">
-                        <option>Waiting for players...</option>
+                </GameTeam>
+
+                <div class="status">
+                    <Select v-model="team_for_game('red', game).status">
+                        <option :selected="true">Waiting for players...</option>
                         <option>Setting up Discord</option>
                         <option>Setting up game</option>
                         <option>Ready to play!</option>
-                    </select>
+                    </Select>
                 </div>
             </div>
 
@@ -133,6 +101,9 @@
 
     import Avatar from '~/components/user/Avatar';
     import Http from "../../../services/Http";
+    import GameTeam from '~/components/game/GameTeam';
+    import Player from '~/components/game/Player';
+    import Select from '~/components/form/Select';
     import AddPlayerModal from '~/components/modal/AddPlayerModal';
     import ConfirmModal from '~/components/modal/ConfirmModal';
     import AddRegistrantModal from '~/components/modal/AddRegistrantModal';
@@ -140,7 +111,7 @@
     import { team_for_game } from '../../../utils/objectives';
 
     @Component({
-        components: { Avatar },
+        components: { Avatar, GameTeam, Player, Select },
         methods: { team_for_game },
     })
     export default class  extends Vue {
@@ -179,3 +150,9 @@
         }
     }
 </script>
+
+<style lang="scss" scoped>
+.status {
+    margin: 10px 0 20px;
+}
+</style>
