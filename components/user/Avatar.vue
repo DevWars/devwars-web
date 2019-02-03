@@ -1,6 +1,6 @@
 <template>
-    <div class="user-avatar-wrapper" :key="user && user.avatarUrl">
-        <div class="user-avatar" :style="style"></div>
+    <div class="Avatar" :key="user && user.avatarUrl">
+        <div class="img" :style="style"></div>
     </div>
 </template>
 
@@ -24,7 +24,7 @@
 <style lang="scss" scoped>
 @import '../../assets/styles/utils';
 
-.user-avatar-wrapper {
+.Avatar {
     @extend %align-middle;
     width: 50px;
     &.xs { width: 25px; }
@@ -34,7 +34,7 @@
     &.xl { width: 140px; }
 }
 
-.user-avatar {
+.img {
     @include aspect-ratio(1,1);
     width: 100%;
     border-radius: 50%;

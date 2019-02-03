@@ -6,7 +6,7 @@
         </div>
 
         <div class="actions">
-            <div class="search">
+            <div v-if="showSearch" class="search">
                 <Input class="labeless" :placeholder="'Search for ' + title" />
             </div>
             <slot></slot>
@@ -22,7 +22,11 @@ import Input from '~/components/form/Input';
 
 @Component({
     components: { Input },
-    props: [ 'title', 'subtitle' ],
+    props: {
+        title: String,
+        subtitle: String,
+        showSearch: Boolean,
+    }
 })
 export default class PanelHeader extends Vue {
 
