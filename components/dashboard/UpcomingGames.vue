@@ -5,7 +5,7 @@
                 <div class="main">
                     <div class="col-xs-2 no-gutter" :class="[props.color]">{{ props.text }}</div>
                     <div class="col-xs-8 no-gutter">
-                        {{ props.game.timestamp | moment('longDate') }} @ {{ props.game.timestamp | moment('HH:mm') }} (UTC)
+                        {{ props.game.startTime | moment('longDate') }} @ {{ props.game.startTime | moment('HH:mm') }} (UTC)
                     </div>
                 </div>
                 <div class="actions">

@@ -14,11 +14,11 @@
                 <tbody>
                     <tr v-for="game in limitBy(games, count)" :key="game.id" v-if="filter ? (filter === game.name) : true">
                         <td>
-                            <div class="dow">{{ game.timestamp | moment('dddd') }}</div>
-                            <h4 class="date">{{ game.timestamp | moment('MMMM D') }}</h4>
+                            <div class="dow">{{ game.startTime | moment('dddd') }}</div>
+                            <h4 class="date">{{ game.startTime | moment('MMMM D') }}</h4>
                         </td>
                         <td>
-                            <h4 class="time">{{ game.timestamp | moment('H:mm') }} UTC</h4>
+                            <h4 class="time">{{ game.startTime | moment('H:mm') }} UTC</h4>
                         </td>
                         <td>
                             <h4 class="duration">{{ durations[game.name] || '30' }}</h4>
@@ -66,7 +66,7 @@
         @State(state => state.game.upcoming) _games;
 
         get games() {
-            return sortBy(this._games, game => game.timestamp);
+            return sortBy(this._games, game => game.startTime);
         }
 
         description(game) {

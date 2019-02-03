@@ -2,7 +2,7 @@
     <div>
         <div class="modpanel__header">
             <div class="modpanel__header-main">
-                <h1 class="modpanel__header-title">{{ game.timestamp | moment('mediumDate')}}</h1>
+                <h1 class="modpanel__header-title">{{ game.startTime | moment('mediumDate')}}</h1>
                 <h2 class="modpanel__header-subtitle">
                     #{{ game.id }}
                     &nbsp;&nbsp;/&nbsp;&nbsp;

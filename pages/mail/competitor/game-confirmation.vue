@@ -26,7 +26,7 @@
                     color="#fff"
                     font-family="helvetica"
                 >
-                    {{ game.timestamp | moment('fullDateWithTime') }}
+                    {{ game.startTime | moment('fullDateWithTime') }}
                 </mj-text>
                 <mj-text align="center" font-size="16px" color="#fff" font-family="helvetica">
                     DevWars Competition

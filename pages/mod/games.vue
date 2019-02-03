@@ -19,7 +19,7 @@
             </tr>
 
             <tr v-for="game in all" :key="game.id">
-                <td>{{ game.timestamp | moment('MM/DD/YYYY') }}</td>
+                <td>{{ game.startTime | moment('MM/DD/YYYY') }}</td>
                 <td>
                     <span :class="['mod-status', name_from_status(game.status).toLowerCase()]">{{ name_from_status(game.status) }}</span>
                 </td>

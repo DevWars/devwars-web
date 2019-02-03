@@ -4,7 +4,7 @@
             <div class="banner__inner">
                 <div class="banner__meta">
                     <span class="banner__date">
-                        {{ game.timestamp | moment('MMM') }} {{ game.timestamp | moment('DD') }}, {{ game.timestamp | moment('YYYY') }}
+                        {{ game.startTime | moment('MMM') }} {{ game.startTime | moment('DD') }}, {{ game.startTime | moment('YYYY') }}
                     </span>
                     <h2 class="banner__gamemode">
                         {{ game.name }}

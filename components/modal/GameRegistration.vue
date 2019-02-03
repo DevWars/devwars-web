@@ -17,7 +17,7 @@
         <!-- REGISTERED -->
         <h1>Entry confirmation</h1>
         <p>
-            You are entering to play on <b>{{ game.timestamp | moment('fullDate') }}</b> at <b>{{ game.timestamp |
+            You are entering to play on <b>{{ game.startTime | moment('fullDate') }}</b> at <b>{{ game.startTime |
             moment('HH:mm')}} (UTC)</b>. Are you sure?
         </p>
 

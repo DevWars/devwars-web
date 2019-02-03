@@ -113,8 +113,8 @@
         mounted() {
             this.gameChanged();
 
-            this.date = moment.utc(this.game.timestamp).format('DD/MM/YYYY');
-            this.time = moment.utc(this.game.timestamp).format('HH:mm');
+            this.date = moment.utc(this.game.startTime).format('DD/MM/YYYY');
+            this.time = moment.utc(this.game.startTime).format('HH:mm');
         }
 
         toggleObjective(team, objective) {
@@ -132,7 +132,7 @@
         timestampChanged() {
             let timestamp = moment.utc(`${this.date} ${this.time}`, 'DD/MM/YYYY HH:mm').unix() * 1000;
 
-            this.game.timestamp = timestamp;
+            this.game.startTime = timestamp;
         }
 
         @Watch('game')

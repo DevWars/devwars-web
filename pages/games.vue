@@ -18,7 +18,7 @@
                 <div class="game__meta">
                     <span class="game__mode" :class="[game.name.toLowerCase()]">{{ game.name }}</span>
                     <span class="game__date">
-                        {{ game.timestamp | moment('MMM') }} {{ game.timestamp | moment('DD') }}, {{ game.timestamp | moment('YYYY') }}
+                        {{ game.startTime | moment('MMM') }} {{ game.startTime | moment('DD') }}, {{ game.startTime | moment('YYYY') }}
                     </span>
                     <span class="game__theme">{{ game.theme }}</span>
                 </div>

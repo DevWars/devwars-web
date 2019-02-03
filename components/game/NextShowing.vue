@@ -19,8 +19,8 @@
       </li>
     </ul>
     <div class="next-showing">
-      <div class="next-showing__date">{{ game.timestamp | moment('dddd, MMMM DD') }}</div>
-      <div class="next-showing__time">{{ game.timestamp | moment('H:mm')}} (UTC)</div>
+      <div class="next-showing__date">{{ game.startTime | moment('dddd, MMMM DD') }}</div>
+      <div class="next-showing__time">{{ game.startTime | moment('H:mm')}} (UTC)</div>
     </div>
 
     <div slot="actions">
@@ -47,7 +47,7 @@ export default class extends Vue {
   timeDifference = {};
 
   updateTime() {
-    let diff = moment.utc(this.game.timestamp).diff(moment());
+    let diff = moment.utc(this.game.startTime).diff(moment());
     let units = ['days', 'hours', 'minutes', 'seconds'];
 
     let updated = {};
@@ -64,7 +64,7 @@ export default class extends Vue {
   }
 
   get game() {
-    return first(sortBy(this.upcoming, game => game.timestamp));
+    return first(sortBy(this.upcoming, game => game.startTime));
   }
 }
 </script>
