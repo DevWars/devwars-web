@@ -56,7 +56,7 @@
         @State(state => state.game.game) game;
 
         async activate() {
-            this.game.active = true;
+            this.game.status = 2;
 
             await this.save();
         }
@@ -85,10 +85,10 @@
             }
 
             // Last but not least, save the game
-            let game = await Http.for('game').save(cloned);
+            await Http.for('game').save(cloned);
 
             // Can't forget to update our state with the new game
-            this.$store.commit('game/game', game);
+            await this.$store.dispatch('game/game', this.game.id);
         }
 
         async remove() {

@@ -127,7 +127,7 @@
             }
         }
 
-        @Watch('time')
+       @Watch('time')
         @Watch('date')
         timestampChanged() {
             let timestamp = moment.utc(`${this.date} ${this.time}`, 'DD/MM/YYYY HH:mm').unix() * 1000;

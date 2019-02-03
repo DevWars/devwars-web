@@ -3,7 +3,6 @@ import {sortBy} from "lodash";
 export const team_completed_objective = (team, objective) => team.completedObjectives.some(it => it.id === objective.id);
 
 export const team_for_game = (name, game) => {
-    console.log(game.teams);
     return game.teams.find(team => team.name === name);
 };
 

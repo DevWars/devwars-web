@@ -45,8 +45,7 @@
         @Prop() resolve;
 
         async save() {
-            let player = await Http.for('player').post({}, {
-                team: this.team,
+            let player = await Http.for(`game/team/${this.team.id}/players`).post({}, {
                 user: this.user.id,
                 language: this.language
             });
