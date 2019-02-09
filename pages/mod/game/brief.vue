@@ -143,7 +143,7 @@
 
             if (!confirmed) return;
 
-            await Http.for('player').delete(player);
+            await Http.for(`/game/players/${player.id}`).delete();
 
             team.players.splice(team.players.indexOf(player), 1);
         }
