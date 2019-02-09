@@ -42,7 +42,7 @@ export default class Http {
 
     async delete(first) {
         if (typeof first === "object") {
-            return Http.axios.delete(this.urlFor(model), model).then(it => it.data);
+            return Http.axios.delete(this.urlFor(first), first).then(it => it.data);
         } else {
             return Http.axios.delete(this.url(first)).then(it => it.data);
         }

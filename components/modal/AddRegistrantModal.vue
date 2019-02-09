@@ -6,7 +6,7 @@
             </div>
         </div>
         <div class="modal__actions">
-            <button class="btn btn-outline-gray">Cancel</button>
+            <button @click="close(false)" class="btn btn-outline-gray">Cancel</button>
             <button class="btn btn-primary">Add</button>
         </div>
     </form>
@@ -28,10 +28,19 @@
     export default class AddRegistrantModal extends Vue {
         @Prop() game;
 
+        @Prop() resolve;
+        @Prop() reject;
+
         username = '';
 
         async addRegistrant() {
-            await this.$axios.$post(`/user/${this.username}/game-application/${this.game.id}`);
+            try {
+                await this.$axios.$post(`/game/${this.game.id}/applications/${this.username}`);
+            } catch (e) {
+                console.error(e);
+            }
+
+            this.close(true);
         }
     }
 </script>

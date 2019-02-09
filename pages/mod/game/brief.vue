@@ -121,6 +121,10 @@
         }
 
         async mounted() {
+            await this.refresh();
+        }
+
+        async refresh() {
             this.applications = await Http.for(`game/${this.game.id}`).get('applications');
         }
 
@@ -131,7 +135,7 @@
         async addRegistrant() {
             await this.$open(AddRegistrantModal, { game: this.game });
 
-            this.applications = await Http.for('game/application').get(`${this.game.id}`);
+            await this.refresh();
         }
 
         async removePlayer(player, team) {
