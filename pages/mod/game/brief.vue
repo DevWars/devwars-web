@@ -14,7 +14,7 @@
 
                 <div class="status">
                     <Select v-model="team_for_game('blue', game).status">
-                        <option :selected="true">Waiting for players...</option>
+                        <option>Waiting for players...</option>
                         <option>Setting up Discord</option>
                         <option>Setting up game</option>
                         <option>Ready to play!</option>
@@ -35,7 +35,7 @@
 
                 <div class="status">
                     <Select v-model="team_for_game('red', game).status">
-                        <option :selected="true">Waiting for players...</option>
+                        <option>Waiting for players...</option>
                         <option>Setting up Discord</option>
                         <option>Setting up game</option>
                         <option>Ready to play!</option>
