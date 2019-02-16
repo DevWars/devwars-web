@@ -65,7 +65,7 @@
 }
 
 .aside {
-    /deep/ .card {
+    /deep/ .Card {
         border-top-color: $brand-primary;
     }
 }

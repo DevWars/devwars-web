@@ -7,7 +7,7 @@
         </div>
 
         <Progress
-            :title="'Level' + user.statistics.rank.rankLevel"
+            :title="'Level ' + user.statistics.rank.rankLevel"
             :meta="progress"
             :progress="progress"
         />
@@ -31,8 +31,10 @@ export default class ProfileCard extends Vue {
     get progress() {
         let past = this.user.statistics.xp - this.user.statistics.rank.xpRequired;
         let difference = this.user.statistics.nextRank.xpRequired - this.user.statistics.rank.xpRequired;
+        const percentage = Math.round(past / difference * 100);
+        const formattedPercentage = `${percentage}%`
 
-        return (past / difference * 100) + '%';
+        return formattedPercentage;
     }
 }
 </script>
@@ -48,6 +50,10 @@ export default class ProfileCard extends Vue {
     /deep/ .content {
         padding: $grid-gutter-width;
     }
+}
+
+.Avatar {
+    margin-bottom: 20px;
 }
 
 .user-rank {

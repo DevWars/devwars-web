@@ -1,5 +1,5 @@
 <template>
-  <Card class="card" v-bind:title="title">
+  <Card v-bind:title="title">
 
     <div class="content">
       <slot></slot>
@@ -23,16 +23,9 @@ export default {
 <style lang="scss" scoped>
 @import '../assets/styles/utils';
 
-.card {
+.Card {
     position: relative;
     z-index: 1;
-
-  &__title {
-    padding: 0 0 15px;
-    font-size: $h4-font-size;
-    text-transform: uppercase;
-    font-weight: $font-weight-bold;
-  }
 }
 
 .content {

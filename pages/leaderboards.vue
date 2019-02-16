@@ -10,40 +10,27 @@
         </PageBanner>
 
         <div class="footer-offset container">
-            <div class="card card-plain">
-                <table class="table leaderboard">
-                    <thead>
-                    <tr>
-                        <th width="10%">Rank</th>
-                        <th width="50%">User Name</th>
-                        <th width="15%">Level</th>
-                        <th width="15%">Won</th>
-                        <th width="15%">XP</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="(user, index) in leaderboards.users" :key="user.id">
-                        <td scope="row" class="leaderboard__rank">
-                            {{ (page * 10) + index + 1 }}
-                        </td>
-                        <td>
-                            <div class="user-group">
-                                <Avatar :user="user"/>
-                                <span class="user-group__name leaderboard__user">{{ user.username }}</span>
-                            </div>
-                        </td>
-                        <td>{{ user.statistics.rank.rank }}</td>
-                        <td>{{ user.statistics.wins }}</td>
-                        <td>{{ user.statistics.xp }}</td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div class="ranking-pagination">
-                    <button @click="previous" class="ranking-pagination__btn" :class="{disabled: page < 1}">Prev</button>
-                    <span class="ranking-pagination__page">Page {{ page + 1}}</span>
-                    <button @click="next" class="ranking-pagination__btn">Next</button>
-                </div>
-            </div>
+            <Table>
+                <tr slot="head">
+                    <th width="10%">Rank</th>
+                    <th width="50%">User Name</th>
+                    <th width="15%">Level</th>
+                    <th width="15%">Won</th>
+                    <th width="15%">XP</th>
+                </tr>
+
+                <tr v-for="(user, index) in leaderboards.users" :key="user.id">
+                    <td scope="row" class="leaderboard__rank">
+                        {{ (page * 10) + index + 1 }}
+                    </td>
+                    <td><User :user="user"/></td>
+                    <td>{{ user.statistics.rank.rank }}</td>
+                    <td>{{ user.statistics.wins }}</td>
+                    <td>{{ user.statistics.xp }}</td>
+                </tr>
+            </Table>
+
+            <Pagination/>
         </div>
     </div>
 </template>
@@ -54,10 +41,12 @@
     import Http from "../services/Http";
 
     import PageBanner from '~/components/layout/PageBanner';
-    import Avatar from '~/components/user/Avatar';
+    import Table from '~/components/Table';
+    import Pagination from '~/components/Pagination';
+    import User from '~/components/user/User';
 
     @Component({
-        components: { PageBanner, Avatar }
+        components: { PageBanner, Table, Pagination, User }
     })
     export default class Leaderboards extends Vue {
         page = 0;

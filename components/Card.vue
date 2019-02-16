@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div class="Card">
         <div class="inner">
             <h2 class="card__title" v-if="title">{{ title }}</h2>
             <slot></slot>
@@ -16,7 +16,7 @@ export default {
 <style lang="scss" scoped>
 @import '../assets/styles/utils';
 
-.card {
+.Card {
   @extend %material;
   display: block;
   margin-bottom: 20px;
@@ -44,7 +44,7 @@ export default {
     border-top: none;
   }
 
-  &.bezeless {
+  &.bezeless .inner {
     padding: 0 !important;
   }
 
