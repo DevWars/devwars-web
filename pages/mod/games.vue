@@ -36,7 +36,7 @@
 </template>
 
 <script>
-    import Component, {State} from 'nuxt-class-component';
+    import Component, { State } from 'nuxt-class-component';
     import Vue from 'vue';
 
     import CreateGameModal from '~/components/modal/CreateGameModal';
@@ -46,21 +46,25 @@
     import Input from '~/components/form/Input';
     import Pagination from '~/components/Pagination';
 
-    import {name_from_status} from '../../utils/game-status';
+    import { name_from_status } from '../../utils/game-status';
 
     @Component({
         components: { PanelHeader, ListingFilters, Table, Input, Pagination },
-        methods: {name_from_status},
+        methods: { name_from_status },
     })
 
     export default class DashboardGames extends Vue {
         @State(state => state.game.all) all;
 
-        createGame() {
-            this.$open(CreateGameModal, {});
+        async createGame() {
+            const [game] = await this.$open(CreateGameModal, {});
+
+            if (!game) return;
+
+            this.$router.push({ path: `/mod/game/details`, params: { game: game.id } })
         }
 
-        async fetch({store}) {
+        async fetch({ store }) {
             await store.dispatch('game/all');
         }
     }
@@ -68,30 +72,30 @@
 
 
 <style lang="scss" scoped>
-@import '../../assets/styles/utils';
+    @import '../../assets/styles/utils';
 
-.mod-status {
-    font-weight: $font-weight-bold;
+    .mod-status {
+        font-weight: $font-weight-bold;
 
-    &.scheduled {
-        color: $info-color;
+        &.scheduled {
+            color: $info-color;
+        }
+
+        &.preparing {
+            color: $warning-color;
+        }
+
+        &.live {
+            color: $danger-color;
+        }
+
+        &.active,
+        &.complete {
+            color: $success-color;
+        }
+
+        &.ended {
+            color: $text-color-muted;
+        }
     }
-
-    &.preparing {
-        color: $warning-color;
-    }
-
-    &.live {
-        color: $danger-color;
-    }
-
-    &.active,
-    &.complete {
-        color: $success-color;
-    }
-
-    &.ended {
-        color: $text-color-muted;
-    }
-}
 </style>

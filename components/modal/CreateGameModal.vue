@@ -14,7 +14,7 @@
             <label>When is the game?</label>
         </div>
         <div class="align-right">
-            <button class="btn btn-outline-gray">Cancel</button>
+            <button type="button" @click="close(false)" class="btn btn-outline-gray">Cancel</button>
             <button class="btn btn-primary">Save</button>
         </div>
     </form>

@@ -43,7 +43,7 @@ export const actions = {
         }
     },
 
-    async competitor({commit, state}) {
+    async competitor({ commit, state }) {
         try {
             let competitor = await Http.for(`/user/${state.user.id}/competitor`).get();
 
@@ -66,6 +66,8 @@ export const actions = {
             await dispatch('refresh');
 
             dispatch('toast/add', { type: 'success', message: 'Welcome back to DevWars!' }, { root: true });
+
+            await dispatch('nuxtServerInit', null, { root: true });
 
             dispatch('navigate', '/dashboard', { root: true });
         } catch (e) {

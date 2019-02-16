@@ -47,7 +47,6 @@
     @Component({
         components: { Input }
     })
-
     export default class Accounts extends Vue {
         currentPassword = '';
         newPassword = '';

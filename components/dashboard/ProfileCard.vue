@@ -1,5 +1,5 @@
 <template>
-    <DashboardCard class="profile">
+    <DashboardCard v-if="user" class="profile">
         <Avatar :user="user" class="xl" />
         <h4>{{ user.username }}</h4>
         <div class="user-rank rank" :class="['rank-' + user.statistics.rank.levelName]">
