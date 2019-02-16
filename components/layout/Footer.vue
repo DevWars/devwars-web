@@ -30,7 +30,7 @@
                         <nuxt-link to="/docs">Documentation</nuxt-link>
                     </li>
                     <li>
-                        <nuxt-link to="https://www.discord.gg/devwars" target="_blank">Join Discord</nuxt-link>
+                        <a href="https://www.discord.gg/devwars" target="_blank">Join Discord</a>
                     </li>
                 </ul>
                 <ul>
@@ -42,7 +42,7 @@
                 <ul>
                     <li>EXTRAS</li>
                     <li>
-                        <nuxt-link to="https://www.twitchalerts.com/donate/devwars" target="_blank">Donate</nuxt-link>
+                        <a href="https://www.twitchalerts.com/donate/devwars" target="_blank">Donate</a>
                     </li>
                 </ul>
             </div>
@@ -50,34 +50,34 @@
             <div class="bottom">
                 <ul class="socials">
                     <li>
-                        <nuxt-link to="http://www.twitch.tv/devwars" target="_blank">
+                        <a href="http://www.twitch.tv/devwars" target="_blank">
                             <i class="fab fa-twitch"></i>
-                        </nuxt-link>
+                        </a>
                     </li>
                     <li>
-                        <nuxt-link to="https://www.discord.gg/devwars" target="_blank">
+                        <a href="https://www.discord.gg/devwars" target="_blank">
                             <i class="fab fa-discord"></i>
-                        </nuxt-link>
+                        </a>
                     </li>
                     <li>
-                        <nuxt-link to="https://www.youtube.com/c/DevWars" target="_blank">
+                        <a href="https://www.youtube.com/c/DevWars" target="_blank">
                             <i class="fab fa-youtube"></i>
-                        </nuxt-link>
+                        </a>
                     </li>
                     <li>
-                        <nuxt-link to="http://www.reddit.com/r/devwars" target="_blank">
+                        <a href="http://www.reddit.com/r/devwars" target="_blank">
                             <i class="fab fa-reddit"></i>
-                        </nuxt-link>
+                        </a>
                     </li>
                     <li>
-                        <nuxt-link to="https://www.facebook.com/DevWars" target="_blank">
+                        <a href="https://www.facebook.com/DevWars" target="_blank">
                             <i class="fab fa-facebook"></i>
-                        </nuxt-link>
+                        </a>
                     </li>
                     <li>
-                        <nuxt-link to="https://twitter.com/devwarstv" target="_blank">
+                        <a href="https://twitter.com/devwarstv" target="_blank">
                             <i class="fab fa-twitter"></i>
-                        </nuxt-link>
+                        </a>
                     </li>
                 </ul>
 
