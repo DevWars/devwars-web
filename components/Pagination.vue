@@ -1,20 +1,33 @@
 <template>
     <div class="Pagination">
-        <button class="btn btn-gray btn-sm" :class="{disabled: page <= 1}">Prev</button>
-        <strong class="page">PAGE {{ page }}</strong>
-        <button class="btn btn-gray btn-sm">Next</button>
+        <button @click="$emit('previous')" class="btn btn-gray btn-sm" :class="{disabled: !canGoPrevious}">Prev</button>
+        <strong class="page">PAGE {{ page + 1 }}</strong>
+        <button @click="$emit('next')" class="btn btn-gray btn-sm" :class="{disabled: !canGoNext}">Next</button>
     </div>
 </template>
 
 <script>
-export default {
-  props: {
-      page: {
-          type: Number,
-          default: 1
-      }
-  }
-}
+    import Component from 'nuxt-class-component';
+    import Vue from 'vue';
+
+    import {Prop} from 'vue-property-decorator';
+
+    @Component({})
+    export default class extends Vue {
+        @Prop() page;
+        @Prop() perPage;
+        @Prop() count;
+
+        get canGoPrevious() {
+            return this.page > 0;
+        }
+
+        get canGoNext() {
+            const totalPages = Math.ceil(this.count / this.perPage);
+
+            return this.page < totalPages - 1;
+        }
+    }
 </script>
 
 <style lang="scss" scoped>

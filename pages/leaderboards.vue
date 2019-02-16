@@ -30,7 +30,7 @@
                 </tr>
             </Table>
 
-            <Pagination/>
+            <Pagination :page="page" :perPage="10" :count="leaderboards.count" @previous="previous" @next="next"/>
         </div>
     </div>
 </template>
@@ -57,7 +57,6 @@
         }
 
         async next() {
-            console.log(this.page);
             this.page++;
             this.leaderboards = await Http.for('leaderboard/users').get({page: this.page});
         }
