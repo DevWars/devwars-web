@@ -1,6 +1,6 @@
 <template>
-    <Card class="card bezeless">
-        <div class="card-header" v-if="title">
+    <Card class="bezeless dark">
+        <div class="header" v-if="title">
             <i v-bind:class="icon"></i>
             <h5>{{ title }}</h5>
         </div>
@@ -23,15 +23,7 @@ export default {
 <style lang="scss" scoped>
 @import '../assets/styles/utils';
 
-.card {
-    background-color: $bg-color-2;
-
-    /deep/ .inner {
-        padding: 0;
-    }
-}
-
-.card-header {
+.header {
     background-color: lighten($bg-color-2, 4%);
     padding: $xs-space $grid-gutter-part;
     font-size: 0;
