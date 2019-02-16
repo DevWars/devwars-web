@@ -75,7 +75,7 @@
             </ul>
         </div>
 
-        <div class="resources">
+        <!-- <div class="resources">
             <a
                 target="_blank"
                 :href="'https://s3.amazonaws.com/devwars-cdn/sitestorage/' + game.id + '/blue'"
@@ -96,8 +96,7 @@
             >
                 View Red Website
             </a>
-
-        </div>
+        </div> -->
 
         <SubScore
             title="New Theme"
