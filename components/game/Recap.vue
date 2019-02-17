@@ -89,11 +89,11 @@
         }
 
         &.team-blue {
-            background-image: url('~/assets/img/team-blue.png');
+            background-image: url('~assets/img/team-blue.png');
         }
 
         &.team-red {
-            background-image: url('~/assets/img/team-red.png');
+            background-image: url('~assets/img/team-red.png');
         }
     }
 

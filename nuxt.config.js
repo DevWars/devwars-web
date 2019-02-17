@@ -40,7 +40,6 @@ module.exports = {
         ]
     },
 
-
     serverMiddleware: [
         { path: '/mail/translate', handler: parser.json({ limit: '5mb' }) },
         { path: '/mail/translate', handler: '~/mail/translate' },
@@ -64,11 +63,12 @@ module.exports = {
     },
 
     css: [
-        '~/assets/scss/main.scss',
+        '~assets/scss/main.scss',
         'webui-popover/src/jquery.webui-popover.css',
         'vue2-animate/dist/vue2-animate.css',
         'cropperjs/dist/cropper.css',
-        'flatpickr/dist/flatpickr.css'
+        'flatpickr/dist/flatpickr.css',
+        'vue-js-modal/dist/styles.css',
     ],
 
     plugins: [
@@ -88,7 +88,6 @@ module.exports = {
     router: {
         linkExactActiveClass: 'active',
         middleware: ['pending', 'update-latest-route']
-
     },
 
     /*
@@ -96,10 +95,11 @@ module.exports = {
     */
     build: {
         babel: {
-            plugins: ['transform-decorators-legacy', 'transform-class-properties', 'transform-flow-strip-types'],
-            presets: ['stage-0']
+            plugins: [
+                ["@babel/plugin-proposal-decorators", { "legacy": true }],
+                ["@babel/plugin-proposal-class-properties", { "loose": true }],
+            ],
         },
-
         plugins: [
             new webpack.ProvidePlugin({
                 '$': 'jquery',
@@ -112,7 +112,7 @@ module.exports = {
         */
         extend(config, { isDev, isClient }) {
             const vueLoader = config.module.rules.find((rule) => rule.loader === 'vue-loader');
-            vueLoader.options.transformToRequire['mj-image'] = ['src'];
+            vueLoader.options.transformAssetUrls['mj-image'] = ['src'];
 
             if (isDev && isClient) {
                 config.module.rules.push({

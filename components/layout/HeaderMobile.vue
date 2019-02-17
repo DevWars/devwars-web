@@ -3,7 +3,7 @@
         <div v-if="isVisible" class="header" v-click-outside="toggleMenu">
             <div class="head">
                 <nuxt-link to="/" class="logo">
-                    <img src="~/assets/img/logo.png" alt="DevWars">
+                    <img src="~assets/img/logo.png" alt="DevWars">
                 </nuxt-link>
             </div>
 

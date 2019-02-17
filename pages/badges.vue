@@ -60,7 +60,7 @@
             try {
                 return require(`~/assets/img/badges/${badge.name.split(' ').join('-').toLowerCase()}.png`);
             } catch(e) {
-                return require('~/assets/img/badges/mystery.png');
+                console.error(`Couldn't load image for badge ${badge.name}`)
             }
         }
 

@@ -6,10 +6,10 @@
                     <button @click="toggleMobileMenu" class="burger-menu"></button>
                     <nuxt-link to="/" class="logo">
                         <img class="logo-full"
-                             src="~/assets/img/logo.png"
+                             src="~assets/img/logo.png"
                              alt="DevWars">
                         <img class="logo-icon"
-                             src="~/assets/img/logo-icon.png"
+                             src="~assets/img/logo-icon.png"
                              alt="DevWars">
                     </nuxt-link>
                     <ul class="nav nav-main">

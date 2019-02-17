@@ -241,9 +241,9 @@
         font-size: $h4-font-size;
     }
 
-    &.classic { background-image: url('~/assets/img/classic-bg.jpg'); }
-    &.zen-garden { background-image: url('~/assets/img/zen-garden-bg.jpg'); }
-    //&.coffee-run { background-image: url('~/assets/img/coffee-run-bg.jpg'); }
+    &.classic { background-image: url('~assets/img/classic-bg.jpg'); }
+    &.zen-garden { background-image: url('~assets/img/zen-garden-bg.jpg'); }
+    //&.coffee-run { background-image: url('~assets/img/coffee-run-bg.jpg'); }
 }
 
 

@@ -60,7 +60,7 @@
                     <div class="col-md-4">
                         <div class="quote-card card">
                             <div class="card__inner">
-                                <img class="quote-card__avatar" src="~/assets/img/companies/scotchio-square.jpg">
+                                <img class="quote-card__avatar" src="~assets/img/companies/scotchio-square.jpg">
                                 <p class="quote-card__desc">
                                     Need something to watch on a Saturday? Watch 2 teams of 3 battle it out in DevWars!
                                 </p>
@@ -75,7 +75,7 @@
                     <div class="col-md-4">
                         <div class="quote-card card">
                             <div class="card__inner">
-                                <img class="quote-card__avatar" src="~/assets/img/companies/devtips-square.png">
+                                <img class="quote-card__avatar" src="~assets/img/companies/devtips-square.png">
                                 <p class="quote-card__desc">
                                     Have you guys seen @devwarstv ? Pretty novel stuff happening over there: devwars.tv
                                 </p>
@@ -98,19 +98,19 @@
                 <p class="home-section__desc">A list of our awesome partners, supporters and past sponsors.</p>
                 <div class="supporter-logos">
                     <a href="https://www.twitch.tv/" class="supporter-logos__item" rel="nofollow" target="_blank">
-                        <img class="supporter-logos__logo" src="~/assets/img/companies/twitch-white.png">
+                        <img class="supporter-logos__logo" src="~assets/img/companies/twitch-white.png">
                     </a>
                     <a href="https://www.discord.gg/" class="supporter-logos__item" rel="nofollow" target="_blank">
-                        <img class="supporter-logos__logo" src="~/assets/img/companies/discord-white.png">
+                        <img class="supporter-logos__logo" src="~assets/img/companies/discord-white.png">
                     </a>
                     <a href="https://www.microsoft.com/" class="supporter-logos__item" rel="nofollow" target="_blank">
-                        <img class="supporter-logos__logo" src="~/assets/img/companies/microsoft-white.png">
+                        <img class="supporter-logos__logo" src="~assets/img/companies/microsoft-white.png">
                     </a>
                     <a
                         href="https://hiringsolved.com/blog/game-recruiting-game-gameshow/"
                         class="supporter-logos__item" rel="nofollow" target="_blank"
                     >
-                        <img class="supporter-logos__logo" src="~/assets/img/companies/hiringsolved-white.png">
+                        <img class="supporter-logos__logo" src="~assets/img/companies/hiringsolved-white.png">
                     </a>
                 </div>
             </div>
@@ -149,7 +149,7 @@
 
     .hero {
         height: 500px;
-        background-image: url('~/assets/img/hero-bg.jpg');
+        background-image: url('~assets/img/hero-bg.jpg');
         background-size: cover;
         text-align: center;
         position: relative;

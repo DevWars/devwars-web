@@ -4,7 +4,7 @@
             <div class="row">
                 <div v-if="error.statusCode === 404">
                     <div class="col-sm-4">
-                        <img src="~/assets/img/error-sad.png" alt="Error">
+                        <img src="~assets/img/error-sad.png" alt="Error">
                     </div>
                     <div class="col-sm-8">
                         <h1>404</h1>
@@ -16,7 +16,7 @@
 
                 <div v-else-if="error.statusCode === 500">
                     <div class="col-sm-4">
-                        <img src="~/assets/img/error-sad.png" alt="Error">
+                        <img src="~assets/img/error-sad.png" alt="Error">
                     </div>
                     <div class="col-sm-8">
                         <h1>500</h1>
@@ -30,7 +30,7 @@
 
                 <div v-else>
                     <div class="col-sm-4">
-                        <img src="~/assets/img/error-sad.png" alt="Error">
+                        <img src="~assets/img/error-sad.png" alt="Error">
                     </div>
                     <div class="col-sm-8">
                         <h2>Oops!</h2>

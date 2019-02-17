@@ -41,7 +41,7 @@
     background-size: cover;
     background-position: center;
     background-color: $bg-color-4;
-    background-image: url('~/assets/img/default-avatar.png');
+    background-image: url('~assets/img/default-avatar.png');
     position: relative;
     overflow: hidden;
     font-size: $font-size-base;

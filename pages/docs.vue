@@ -453,19 +453,19 @@
                         <h3>Browsers</h3>
                         <div class="row row-normaled align-center section">
                             <div class="col-sm-3">
-                                <img src="~/assets/img/browsers/chrome_48x48.png" title="Chrome">
+                                <img src="~assets/img/browsers/chrome_48x48.png" title="Chrome">
                                 <p>v.61 +</p>
                             </div>
                             <div class="col-sm-3">
-                                <img src="~/assets/img/browsers/firefox_48x48.png" title="Firefox">
+                                <img src="~assets/img/browsers/firefox_48x48.png" title="Firefox">
                                 <p>v.56 +</p>
                             </div>
                             <div class="col-sm-3">
-                                <img src="~/assets/img/browsers/edge_48x48.png" title="Edge">
+                                <img src="~assets/img/browsers/edge_48x48.png" title="Edge">
                                 <p>v.16 +</p>
                             </div>
                             <div class="col-sm-3">
-                                <img src="~/assets/img/browsers/safari_48x48.png" title="Safari">
+                                <img src="~assets/img/browsers/safari_48x48.png" title="Safari">
                                 <p>v.11 +</p>
                             </div>
                         </div>
@@ -483,7 +483,7 @@
                                 <p>Discord</p>
                             </div>
                             <div class="col-sm-3">
-                                <img src="~/assets/img/docs/en-lang.png" title="Speak English">
+                                <img src="~assets/img/docs/en-lang.png" title="Speak English">
                                 <p>English</p>
                             </div>
                         </div>
