@@ -9,7 +9,9 @@ npm-debug.log
 # Nuxt build
 .nuxt
 
+# Editor folders
 .idea/
+.vscode/
 
 # Nuxt generate
 dist
