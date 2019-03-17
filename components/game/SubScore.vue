@@ -14,7 +14,8 @@
 
 <script>
 export default {
-  props: [ 'title', 'blueScore', 'redScore' ]
+    name: "SubScore",
+    props: [ 'title', 'blueScore', 'redScore' ]
 }
 </script>
 

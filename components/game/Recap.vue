@@ -34,31 +34,32 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
-    import { Prop } from 'vue-property-decorator';
+    
     import HomeCard from "@/components/HomeCard";
     import { team_for_game, points_for_team } from '../../utils/objectives';
 
-    @Component({
-        components: {
-            HomeCard
-        }
-    })
-
-    export default class Recap extends Vue {
-        @Prop() game;
-
-        points_for_team = points_for_team;
-        team_for_game = team_for_game;
-
-        player(team, language) {
-            return team_for_game(team, this.game).players
-                .find(player => {
-                    return player.language && player.language.toLowerCase() === language
-                }) || {
-                user: {}
-            };
+    export default {
+        name: "Recap",
+        components: { HomeCard },
+        props: [
+            "game"
+        ],
+        data: () => {
+            return {
+                points_for_team,
+                team_for_game
+            }
+        },
+        methods: {
+            player(team, language) {
+                return team_for_game(team, this.game).players
+                    .find(player => {
+                        return player.language && player.language.toLowerCase() === language
+                    }) || {
+                    user: {}
+                };
+            }
         }
     }
 

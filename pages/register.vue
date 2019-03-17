@@ -26,24 +26,26 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
     import DevwarsCard from '~/components/DevwarsCard';
     import Input from '~/components/form/Input';
 
-    @Component({
+    export default {
+        name: "Register",
         components: { DevwarsCard, Input },
         layout: 'header',
-        middleware: 'guest'
-    })
-
-    export default class Login extends Vue {
-        username = '';
-        email = '';
-        password = '';
-
-        async submit() {
-            await this.$store.dispatch('user/register', {username: this.username, email: this.email, password: this.password});
+        middleware: 'guest',
+        data: () => {
+            return {
+                username: '',
+                email: '',
+                password: '',
+            }
+        },
+        methods: {
+            async submit() {
+                return await this.$store.dispatch('user/register', {username: this.username, email: this.email, password: this.password});
+            }
         }
     }
 </script>

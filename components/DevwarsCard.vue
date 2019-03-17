@@ -15,7 +15,8 @@
 
 <script>
 export default {
-  props: [ 'title', 'desc' ]
+    name: "DevwarsCard",
+    props: [ 'title', 'desc' ]
 }
 </script>
 

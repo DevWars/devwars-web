@@ -61,16 +61,13 @@
 </template>
 
 <script>
-import Component, {State} from 'nuxt-class-component';
 import Vue from 'vue';
 
 import Progress from '~/components/form/Progress';
 
-@Component({
+export default {
+    name: "ModSidebar",
     components: { Progress }
-})
-export default class ModSidebar extends Vue {
-
 }
 </script>
 

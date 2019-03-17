@@ -43,30 +43,31 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
     import DevwarsCard from '~/components/DevwarsCard';
     import Input from '~/components/form/Input';
 
-    @Component({
-        components: { DevwarsCard, Input }
-    })
-
-    export default class ResetPassword extends Vue {
-        done = false;
-        password = '';
-        confirmed = '';
-
-        reset() {
-            let key = this.$route.query.key;
-
-            this.$store.dispatch('user/resetByKey', {key, password: this.password});
-
-            this.done = true;
-        }
-
+    export default {
+        name: "ResetPassword",
+        components: { DevwarsCard, Input },
+        data: () => {
+            return { 
+                done: false,
+                password: '',
+                confirmed: '',
+            }
+        },
         async asyncData({params}) {
             return {key: params.key};
+        },
+        methods: {
+            reset() {
+                let key = this.$route.query.key;
+
+                this.$store.dispatch('user/resetByKey', {key, password: this.password});
+
+                this.done = true;
+            }
         }
     }
 </script>

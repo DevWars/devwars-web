@@ -13,7 +13,7 @@
 <script>
 export default {
     name: "Progress",
-  props: [ 'progress', 'title', 'meta', 'color' ]
+    props: [ 'progress', 'title', 'meta', 'color' ]
 }
 </script>
 

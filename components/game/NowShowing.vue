@@ -18,17 +18,18 @@
 </template>
 
 <script>
-  import Component, {State} from 'nuxt-class-component';
   import Vue from 'vue';
   import HomeCard from "@/components/HomeCard";
   import RegistrationButton from "./RegistrationButton";
 
-  @Component({
-    components: { HomeCard, RegistrationButton }
-  })
-
-  export default class extends Vue {
-    @State(state => state.game.active) game;
+  export default {
+    name: "NowShowing",
+    components: { HomeCard, RegistrationButton },
+    computed: {
+      game() {
+        return this.$store.state.game.active
+      }
+    }
   }
 </script>
 

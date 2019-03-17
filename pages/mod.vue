@@ -9,16 +9,14 @@
 </template>
 
 <script>
-import Component from 'nuxt-class-component';
 import Vue from 'vue';
 
 import ModSidebar from '~/components/mod/ModSidebar';
 
-@Component({
+export default {
+    name: "Mod",
     layout: 'header',
     components: { ModSidebar }
-})
-export default class Mod extends Vue {
 
 }
 </script>

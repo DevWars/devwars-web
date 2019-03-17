@@ -21,14 +21,12 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
     import PageBanner from '~/components/layout/PageBanner';
 
-    @Component({
+    export default {
+        name: "Settings",
         components: { PageBanner }
-    })
-    export default class Settings extends Vue {
     }
 </script>

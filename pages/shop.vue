@@ -146,16 +146,13 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
     import PageBanner from '~/components/layout/PageBanner';
     import Devcoin from '~/components/Devcoin';
 
-    @Component({
+    export default {
+        name: "Shop",
         components: { PageBanner, Devcoin },
-    })
-    export default class Shop extends Vue {
-
     }
 </script>

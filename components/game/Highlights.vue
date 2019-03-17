@@ -15,49 +15,54 @@
 </template>
 
 <script>
-    import Component, {State} from 'nuxt-class-component';
     import Vue from 'vue';
     import moment from 'moment';
 
     import RegistrationButton from '~/components/game/RegistrationButton';
 
-    import {Prop} from 'vue-property-decorator';
-
     import Recap from '~/components/game/Recap';
     import NowShowing from "./NowShowing";
     import NextShowing from "./NextShowing";
 
-    @Component({
-        components: {NextShowing, NowShowing, Recap, RegistrationButton}
-    })
-    export default class Highlights extends Vue {
-        @Prop() latest;
-        @State(state => state.blog.latest) posts;
-        @State(state => state.game.upcoming) upcoming;
-        @State(state => state.game.active) active;
+    export default {
+        name: "Highlights",
+        components: {NextShowing, NowShowing, Recap, RegistrationButton},
+        props: [
+            "latest"
+        ],
+        computed: {
+            altered() {
+                if (process.server) return this.posts;
 
+                return this.posts.map(post => {
+                    let el = document.createElement('div');
+                    el.innerHTML = post.text;
+                    let text = el.innerText;
+                    el.innerHTML = text;
+                    text = el.innerText;
 
-        get altered() {
-            if (process.server) return this.posts;
+                    let cutoff = 100;
 
-            return this.posts.map(post => {
-                let el = document.createElement('div');
-                el.innerHTML = post.text;
-                let text = el.innerText;
-                el.innerHTML = text;
-                text = el.innerText;
+                    text = text.substring(0, cutoff) + '...';
 
-                let cutoff = 100;
-
-                text = text.substring(0, cutoff) + '...';
-
-                return {
-                    user: post.user,
-                    text,
-                    image_url: post.image_url
-                };
-            })
+                    return {
+                        user: post.user,
+                        text,
+                        image_url: post.image_url
+                    };
+                })
+            },
+            posts() {
+                return this.$store.state.blog.lastest
+            },
+            upcoming() {
+                return this.$store.state.game.upcoming
+            },
+            active() {
+                return this.$store.state.game.active
+            }
         }
+
     }
 </script>
 

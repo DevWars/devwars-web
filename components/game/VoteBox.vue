@@ -31,36 +31,36 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
-    import {Prop} from 'vue-property-decorator';
     import SubScore from '~/components/game/SubScore';
     import { team_for_game, vote_analysis_for_team } from '../../utils/objectives';
 
-    @Component({
+    export default {
+        name: "VoteBox",
         components: { SubScore },
-    })
-    export default class VoteBox extends Vue {
-        @Prop() game;
-        @Prop() vote;
-        @Prop() label;
+        props: [
+            "game",
+            "vote",
+            "label"
+        ],
+        methods: {
+            analysisForTeam(team, otherTeam) {
+                return vote_analysis_for_team(team, otherTeam, this.label);
+            }
+        },
+        computed: {
+            analysis() {
+                let analysis = {};
 
-        analysisForTeam(team, otherTeam) {
-            return vote_analysis_for_team(team, otherTeam, this.label);
-        }
+                analysis.red = this.analysisForTeam(team_for_game("red", this.game), team_for_game("blue", this.game));
+                analysis.blue = this.analysisForTeam(team_for_game("blue", this.game), team_for_game("red", this.game));
 
-        get analysis() {
-            let analysis = {};
-
-            analysis.red = this.analysisForTeam(team_for_game("red", this.game), team_for_game("blue", this.game));
-            analysis.blue = this.analysisForTeam(team_for_game("blue", this.game), team_for_game("red", this.game));
-
-            return analysis;
-        }
-
-        get total() {
-            return this.analysis.blue.votes + this.analysis.red.votes;
+                return analysis;
+            },
+            total() {
+                return this.analysis.blue.votes + this.analysis.red.votes;
+            }
         }
     }
 </script>

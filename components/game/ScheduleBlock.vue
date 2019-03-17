@@ -40,40 +40,47 @@
 </template>
 
 <script>
-    import Component, { State } from 'nuxt-class-component';
     import Vue from 'vue';
 
     import { sortBy } from 'lodash';
-
-    import { Prop } from 'vue-property-decorator';
 
     import Table from '~/components/Table';
     import Applications from '~/components/game/Applications';
     import GameDurations from '../../utils/game-durations';
 
-    @Component({
-        components: { Table, Applications }
-    })
-    export default class ScheduleBlock extends Vue {
-        @Prop({ default: '' }) filter;
-        @Prop() count;
+    export default {
+        name: "ScheduleBlock",
+        components: { Table, Applications },
+        props: {
+            filter: {
+                type: String,
+                default: ''
+            },
+            count: 0
+        },
+        data: () => {
+            return {
+                durations: GameDurations
+            }
+        },
+        computed: {
+            games() {
+                return sortBy(this._games, game => game.startTime);
+            },
+            _games() {
+                return this.$store.state.game.upcoming
+            }
+        },
+        methods: {
+            description(game) {
+                const descriptions = {
+                    'Classic': 'Classic - 3 VS 3',
+                    'Zen Garden': 'Zen Garden : 1 VS 1',
+                    'Blitz': 'Blitz - 1 VS 1',
+                };
 
-        durations = GameDurations;
-
-        @State(state => state.game.upcoming) _games;
-
-        get games() {
-            return sortBy(this._games, game => game.startTime);
-        }
-
-        description(game) {
-            const descriptions = {
-                'Classic': 'Classic - 3 VS 3',
-                'Zen Garden': 'Zen Garden : 1 VS 1',
-                'Blitz': 'Blitz - 1 VS 1',
-            };
-
-            return descriptions[game.name] || '';
+                return descriptions[game.name] || '';
+            }
         }
     }
 </script>

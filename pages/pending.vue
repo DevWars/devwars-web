@@ -19,20 +19,18 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
     import Http from "../services/Http";
     import PageBanner from '~/components/layout/PageBanner';
 
-    @Component({
-        components: { PageBanner }
-    })
-    export default class Pending extends Vue {
-
-        async resend() {
-            await Http.for('auth/re-verify').save();
-
-            this.$store.dispatch('toast/success', `We have sent off another email, please wait patiently.`);
+    export default {
+        nam: "Pending",
+        components: { PageBanner },
+        methods: {
+            async resend() {
+                await Http.for('auth/re-verify').save();
+                return this.$store.dispatch('toast/success', `We have sent off another email, please wait patiently.`);
+            }
         }
     }
 </script>

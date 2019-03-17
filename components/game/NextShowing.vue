@@ -30,41 +30,44 @@
 </template>
 
 <script>
-import Component, { State } from 'nuxt-class-component';
 import Vue from 'vue';
 import moment from 'moment';
 import { sortBy, first } from 'lodash';
 import HomeCard from "@/components/HomeCard";
 import RegistrationButton from "@/components/game/RegistrationButton";
 
-@Component({
-  components: { HomeCard, RegistrationButton }
-})
+export default {
+  name: "NextShowing",
+  components: { HomeCard, RegistrationButton },
+  data: () => {
+    return {
+      timeDifference: {}
+    }
+  },
+  computed: {
+    upcoming() {
+      return this.$store.state.game.upcoming
+    },
+    game() {
+      return first(sortBy(this.upcoming, game => game.startTime));
+    }
+  },
+  methods: {
+    updateTime() {
+      let diff = moment.utc(this.game.startTime).diff(moment());
+      let units = ['days', 'hours', 'minutes', 'seconds'];
 
-export default class extends Vue {
-  @State(state => state.game.upcoming) upcoming;
+      let updated = {};
 
-  timeDifference = {};
+      units.forEach(unit => updated[unit] = moment.duration(diff)[unit]().toFixed(0));
 
-  updateTime() {
-    let diff = moment.utc(this.game.startTime).diff(moment());
-    let units = ['days', 'hours', 'minutes', 'seconds'];
-
-    let updated = {};
-
-    units.forEach(unit => updated[unit] = moment.duration(diff)[unit]().toFixed(0));
-
-    this.timeDifference = updated;
-  }
-
+      this.timeDifference = updated;
+    }
+  },
   mounted() {
     this.updateTime();
 
     setInterval(this.updateTime.bind(this), 1000);
-  }
-
-  get game() {
-    return first(sortBy(this.upcoming, game => game.startTime));
   }
 }
 </script>

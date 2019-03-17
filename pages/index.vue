@@ -119,21 +119,18 @@
 </template>
 
 <script>
-    import Component, { State } from 'nuxt-class-component';
     import Vue from 'vue';
 
     import Highlights from '~/components/game/Highlights';
     import ScheduleBlock from '~/components/game/ScheduleBlock';
     import Http from "../services/Http";
 
-    @Component({
+    export default {
+        name: "Index",
         components: {
             Highlights,
             ScheduleBlock,
-        }
-    })
-
-    export default class Index extends Vue {
+        },
         async asyncData() {
             return {
                 latest: await Http.for('game').get('latest'),

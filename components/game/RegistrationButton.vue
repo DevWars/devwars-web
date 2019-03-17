@@ -11,17 +11,15 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
-
-    import {Prop} from 'vue-property-decorator';
 
     import Applications from '~/components/game/Applications';
 
-    @Component({
-        components: {Applications}
-    })
-    export default class RegistrationButton extends Vue {
-        @Prop() game;
+    export default {
+        name: "RegistrationButton",
+        components: {Applications},
+        props: [
+            "game"
+        ],
     }
 </script>

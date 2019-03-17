@@ -6,15 +6,16 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
     import Avatar from '~/components/user/Avatar';
 
-    @Component({
+    export default {
+        name: "User",
         components: { Avatar },
-        props: ['user']
-    })
-    export default class User extends Vue {}
+        props: [
+            'user'
+        ]        
+    }
 </script>
 
 <style lang="scss" scoped>

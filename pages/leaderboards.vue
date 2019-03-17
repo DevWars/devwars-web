@@ -36,7 +36,6 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
     import Http from "../services/Http";
 
@@ -45,24 +44,27 @@
     import Pagination from '~/components/Pagination';
     import User from '~/components/user/User';
 
-    @Component({
-        components: { PageBanner, Table, Pagination, User }
-    })
-    export default class Leaderboards extends Vue {
-        page = 0;
-
-        async previous() {
-            this.page--;
-            this.leaderboards = await Http.for('leaderboard/users').get({page: this.page});
-        }
-
-        async next() {
-            this.page++;
-            this.leaderboards = await Http.for('leaderboard/users').get({page: this.page});
-        }
-
+    export default {
+        name: "Leaderboards",
+        components: { PageBanner, Table, Pagination, User },
+        data: () => {
+            return {
+                page: 0
+            }
+        },
+        methods: {
+            async previous() {
+                this.page--;
+                this.leaderboards = await Http.for('leaderboard/users').get({page: this.page});
+            },
+            async next() {
+                this.page++;
+                this.leaderboards = await Http.for('leaderboard/users').get({page: this.page});
+            }
+        },
         async asyncData() {
             return {leaderboards: await Http.for('leaderboard/users').get()}
         }
+
     }
 </script>

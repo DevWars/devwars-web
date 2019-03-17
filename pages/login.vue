@@ -23,23 +23,25 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
     import DevwarsCard from '~/components/DevwarsCard';
     import Input from '~/components/form/Input';
 
-    @Component({
+    export default {
+        name: "Login",
         components: { DevwarsCard, Input },
         layout: 'header',
-        middleware: 'guest'
-    })
-
-    export default class Login extends Vue {
-        username = '';
-        password = '';
-
-        async login() {
-            await this.$store.dispatch('user/login', {username: this.username, password: this.password});
+        middleware: 'guest',
+        data: () => {
+            return {
+                username: '',
+                password: ''
+            }
+        },
+        methods: {
+            async login() {
+                return await this.$store.dispatch('user/login', {username: this.username, password: this.password});
+            }
         }
     }
 </script>
