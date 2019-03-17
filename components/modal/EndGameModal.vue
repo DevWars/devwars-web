@@ -10,24 +10,22 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
-    import { Prop } from 'vue-property-decorator';
     import Http from '../../services/Http';
 
-    @Component({
-        components: {}
-    })
-    export default class EndGameModal extends Vue {
-        @Prop() game;
+    export default {
+        name: "EndGameModal",
+        props: [
+            "game",
+            "resolve"
+        ],
+        methods: {
+            async end(team) {
+                await Http.for(`game/${this.game.id}/ended`).post({ winner: team.id });
 
-        @Prop() resolve;
-
-        async end(team) {
-            await Http.for(`game/${this.game.id}/ended`).post({ winner: team.id });
-
-            this.close(team);
+                this.close(team);
+            } 
         }
     }
 </script>

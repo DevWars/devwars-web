@@ -91,11 +91,11 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
-    @Component
-    export default class Footer extends Vue {}
+    export default {
+        name: "ComponentFooter"
+    }
 </script>
 
 <style lang="scss" scoped>

@@ -12,19 +12,17 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
-    import { Prop } from 'vue-property-decorator';
     import Player from '~/components/game/Player';
 
-    @Component({
+    export default {
+        name: "GameTeam",
         components: { Player },
         props: {
             team: String,
             points: Number,
-        },
-    })
-    export default class GameTeam extends Vue {}
+        }
+    }
 </script>
 
 <style lang="scss" scoped>

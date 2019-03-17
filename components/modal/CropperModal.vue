@@ -15,38 +15,36 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
     import Cropper from 'cropperjs';
 
-    import { Prop } from 'vue-property-decorator';
-
     import 'cropperjs/dist/cropper.css'
 
-    @Component({})
-    export default class extends Vue {
-        @Prop() data;
-        @Prop() resolve;
+    export default {
+        name: "CropperModal",
+        props: [
+            "data",
+            "resolve"
+        ],
+        methods: {
+           options() {
+                return {
+                    aspectRatio: 1,
+                    viewMode: 2
+                }
+            },
+            imageLoad(e) {
+                this.cropper = new Cropper(e.target, this.options());
+            },
+            async submit() {
+                let data = await new Promise((resolve) => {
+                    this.cropper.getCroppedCanvas().toBlob((res) => {
+                        resolve(res);
+                    }, "image/jpeg");
+                });
 
-        options() {
-            return {
-                aspectRatio: 1,
-                viewMode: 2
-            }
-        }
-
-        imageLoad(e) {
-            this.cropper = new Cropper(e.target, this.options());
-        }
-
-        async submit() {
-            let data = await new Promise((resolve) => {
-                this.cropper.getCroppedCanvas().toBlob((res) => {
-                    resolve(res);
-                }, "image/jpeg");
-            });
-
-            this.close(data);
+                this.close(data);
+            } 
         }
     }
 </script>

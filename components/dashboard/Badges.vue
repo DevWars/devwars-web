@@ -18,19 +18,20 @@
 </template>
 
 <script>
-    import Component, {State} from 'nuxt-class-component';
     import Vue from 'vue';
 
     import DashboardCard from '~/components/DashboardCard';
     import Progress from '~/components/form/Progress';
 
-    @Component({
+    export default {
+        name: "DashboardBadges",
         props: ['owned'],
-        components: { DashboardCard, Progress }
-    })
-
-    export default class Badges extends Vue {
-        @State(state => state.badges.badges) badges;
+        components: { DashboardCard, Progress },
+        computed: {
+            badges() {
+                return this.$store.state.badges.badges
+            }
+        }
     }
 </script>
 

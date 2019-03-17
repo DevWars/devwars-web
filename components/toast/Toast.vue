@@ -9,13 +9,12 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
-    import {Prop} from 'vue-property-decorator';
-
-    @Component({})
-    export default class Toast extends Vue {
-        @Prop() toast;
+    export default {
+        name: "Toast",
+        props: [
+            "toast"
+        ]
     }
 </script>

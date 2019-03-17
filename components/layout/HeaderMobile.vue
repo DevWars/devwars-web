@@ -34,31 +34,35 @@
 </template>
 
 <script>
-import Component, { State } from 'nuxt-class-component';
-import { Prop } from 'vue-property-decorator';
 import Vue from 'vue';
-import UserMenu from '~/components/user/UserMenu';
 
+import UserMenu from '~/components/user/UserMenu';
 import ClickOutside from 'vue-click-outside';
 
-@Component({
-    data: () => ({ isVisible: false }),
+export default {
+    name: "HeaderMobile",
+    data: () => { 
+        return {
+            isVisible: false 
+        }
+    },
     components: { UserMenu },
     directives: { ClickOutside },
-})
-export default class HeaderMobile extends Vue {
-    @State(state => state.user.user) user;
-
-    get isAdmin() {
-        return this.user.role === 'ADMIN';
-    }
-
-    toggleMenu() {
-        this.isVisible = !this.isVisible;
-    }
-
-    logout() {
-        this.$store.dispatch('user/logout');
+    computed: {
+        user() {
+            return this.$store.state.user.user
+        },
+        isAdmin() {
+            return this.user.role === 'ADMIN';
+        },
+    },
+    methods: {
+        toggleMenu() {
+            this.isVisible = !this.isVisible;
+        },
+        logout() {
+            this.$store.dispatch('user/logout');
+        }
     }
 }
 </script>

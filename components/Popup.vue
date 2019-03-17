@@ -8,13 +8,12 @@
 </template>
 
 <script>
-  import Component from 'nuxt-class-component';
   import Vue from 'vue';
 
   import jQuery from 'jquery';
 
-  @Component
-  export default class Popup extends Vue {
+  export default {
+    name: "Popup",
     mounted() {
       let el = this.$slots.trigger[0].elm;
       let content = this.$slots.menu[0].elm;

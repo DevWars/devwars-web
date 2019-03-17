@@ -40,28 +40,28 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
     import Input from '~/components/form/Input';
 
-    @Component({
-        components: { Input }
-    })
-    export default class Accounts extends Vue {
-        currentPassword = '';
-        newPassword = '';
-        newPasswordConfirmed = '';
-
-        emailCurrentPassword = '';
-        newEmail = '';
-
-
-        async changeEmail() {
-            await this.$store.dispatch('user/email', {email: this.newEmail, password: this.emailCurrentPassword})
-        }
-
-        async changePassword() {
-            await this.$store.dispatch('user/password', {oldPassword: this.currentPassword, newPassword: this.newPassword})
+    export default {
+        name: "Accounts",
+        components: { Input },
+        data: () => {
+            return {
+                currentPassword: '',
+                newPassword: '',
+                newPasswordConfirmed: '',
+                emailCurrentPassword: '',
+                newEmail: '',
+            }
+        },
+        methods: {
+            async changeEmail() {
+                await this.$store.dispatch('user/email', {email: this.newEmail, password: this.emailCurrentPassword})
+            },
+            async changePassword() {
+                await this.$store.dispatch('user/password', {oldPassword: this.currentPassword, newPassword: this.newPassword})
+            }
         }
     }
 </script>

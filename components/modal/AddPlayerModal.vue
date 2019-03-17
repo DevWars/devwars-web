@@ -26,33 +26,34 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
-    import {Prop} from 'vue-property-decorator';
     import Http from "../../services/Http";
 
-    @Component({
-        components: {}
-    })
-    export default class AddPlayerModal extends Vue {
-        team = 0;
-        language = '';
+    export default {
+        name: "AddPlayerModal",
+        props: [
+            "game",
+            "user",
+            "resolve"
+        ],
+        data: () => {
+            return {
+                team: 0,
+                language: ''
+            }
+        },
+        methods: {
+            async save() {
+                let player = await Http.for(`game/team/${this.team}/players`).post({}, {
+                    user: this.user.id,
+                    language: this.language
+                });
 
-        @Prop() game;
-        @Prop() user;
+                Object.values(this.game.teams).find(it => it.id === this.team).players.push(player);
 
-        @Prop() resolve;
-
-        async save() {
-            let player = await Http.for(`game/team/${this.team}/players`).post({}, {
-                user: this.user.id,
-                language: this.language
-            });
-
-            Object.values(this.game.teams).find(it => it.id === this.team).players.push(player);
-
-            this.close(true);
+                this.close(true);
+            }
         }
     }
 </script>

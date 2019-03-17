@@ -13,16 +13,15 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
     import Header from '~/components/layout/Header';
     import Footer from '~/components/layout/Footer';
     import Toasts from '~/components/toast/Toasts';
 
-    @Component({
+    export default {
+        name: "Default",
         components: {DevWarsHeader: Header, DevWarsFooter: Footer, Toasts}
-    })
-    export default class Default extends Vue {
+
     }
 </script>

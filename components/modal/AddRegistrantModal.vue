@@ -13,34 +13,34 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
-    import {Prop} from 'vue-property-decorator';
     import Http from "../../services/Http";
     import Input from "../form/Input";
     import Avatar from "../user/Avatar";
 
-    @Component({
-        components: { Input, Avatar }
-    })
+    export default {
+        name: "AddRegistrantModal",
+        components: { Input, Avatar },
+        props: [
+            "game",
+            "resolve",
+            "reject"
+        ],
+        data: () => {
+            username: ''
+        },
+        methods: {
+            async addRegistrant() {
+                try {
+                    await this.$axios.$post(`/game/${this.game.id}/applications/${this.username}`);
+                } catch (e) {
+                    console.error(e);
+                }
 
-    export default class AddRegistrantModal extends Vue {
-        @Prop() game;
-
-        @Prop() resolve;
-        @Prop() reject;
-
-        username = '';
-
-        async addRegistrant() {
-            try {
-                await this.$axios.$post(`/game/${this.game.id}/applications/${this.username}`);
-            } catch (e) {
-                console.error(e);
+                this.close(true);
             }
-
-            this.close(true);
         }
+        
     }
 </script>

@@ -41,14 +41,10 @@
 
     export default {
         name: "GameRegistration",
-        props: {
-            resolve: {
-                default: () => {}
-            },
-            game: {
-                default: ""
-            }
-        },
+        props: [
+            "resolve",
+            "game"
+        ],
         computed: {
             competitor() {
                 return this.$store.state.user.competitor

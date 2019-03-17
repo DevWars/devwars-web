@@ -5,15 +5,17 @@
 </template>
 
 <script>
-    import Component, {State} from 'nuxt-class-component';
     import Vue from 'vue';
 
     import Toast from '~/components/toast/Toast';
 
-    @Component({
-        components: {Toast}
-    })
-    export default class Toasts extends Vue {
-        @State(state => state.toast.toasts) toasts;
+    export default {
+        name: "Toasts",
+        components: {Toast},
+        computed: {
+            toasts() {
+                return this.$store.state.toast.toasts;
+            }
+        }
     }
 </script>

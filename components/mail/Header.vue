@@ -5,3 +5,10 @@
         </mj-column>
     </mj-section>
 </template>
+
+
+<script>
+export default {
+    name: "MailHeader"
+}
+</script>

@@ -7,20 +7,18 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
-    import { Prop } from 'vue-property-decorator';
     import User from '~/components/user/User';
 
-    @Component({
+    export default {
+        name: "Player",
         components: { User },
         props: {
             user: Object,
             team: String,
             lang: String,
         },
-    })
-    export default class Player extends Vue {}
+    }
 </script>
 
 <style lang="scss" scoped>

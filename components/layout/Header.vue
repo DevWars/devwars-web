@@ -58,28 +58,34 @@
 </template>
 
 <script>
-import Component, { State } from 'nuxt-class-component';
 import Vue from 'vue';
+
 import UserMenu from '~/components/user/UserMenu';
 import HeaderMobile from './HeaderMobile';
 
-@Component({
-    data: () => ({ isMobile: false }),
+export default {
+    name: "ComponentHeader",
+    data: () => { 
+        return {
+            isMobile: false 
+        }
+    },
     components: { HeaderMobile, UserMenu },
-})
-export default class Header extends Vue {
-    @State(state => state.user.user) user;
-
-    get isAdmin() {
-        return this.user.role === 'ADMIN';
-    }
-
-    logout() {
-        this.$store.dispatch('user/logout');
-    }
-
-    toggleMobileMenu() {
-        this.$refs.mobileHeader.toggleMenu();
+    methods:{
+        logout() {
+            this.$store.dispatch('user/logout');
+        },
+        toggleMobileMenu() {
+            this.$refs.mobileHeader.toggleMenu();
+        }
+    },
+    computed: {
+        user() {
+            this.$store.state.user.user
+        },
+        isAdmin() {
+            return this.user.role === 'ADMIN';
+        }
     }
 }
 </script>

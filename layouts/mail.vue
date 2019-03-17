@@ -13,16 +13,13 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
     import Header from '../components/mail/Header';
     import Footer from '../components/mail/Footer';
 
-    @Component({
+    export default {
+        name: "Mail",
         components: { Footer, Header }
-    })
-    export default class extends Vue {
-
     }
 </script>

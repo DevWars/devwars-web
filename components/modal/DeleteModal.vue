@@ -11,19 +11,23 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
-    import {Prop} from 'vue-property-decorator';
-
-    @Component({})
-    export default class extends Vue {
-        @Prop({default: "Warning!"}) title;
-        @Prop() description;
-        @Prop({default: "Cancel"}) cancel;
-        @Prop({default: "Delete"}) confirm;
-
-        @Prop() resolve;
-        @Prop() reject;
+    export default {
+        name: "DeleteModal",
+        props: {
+            title: {
+                default: "Warning"
+            },
+            cancel: {
+                default: "Cancel"
+            },
+            confirm: {
+                default: "Delete"
+            },
+            description: {},
+            resolve: {},
+            reject: {}
+        }
     }
 </script>

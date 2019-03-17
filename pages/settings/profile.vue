@@ -49,9 +49,6 @@
 </template>
 
 <script>
-    import Component, { State } from 'nuxt-class-component';
-    import { Watch } from 'vue-property-decorator';
-
     import Vue from 'vue';
 
     import Avatar from '~/components/user/Avatar';
@@ -59,30 +56,38 @@
     import CropperModal from '~/components/modal/CropperModal';
     import Input from '~/components/form/Input';
 
-    @Component({
-        components: { Avatar, FileChooser, Input }
-    })
+    export default {
+        name: "Profile",
+        components: { Avatar, FileChooser, Input },
+        data: () => {
+            return {
+                profile: {}
+            }
+        },
+        watch: {
+            updateProfileFromUser: {
+                immediate: true,
+                handler() {
+                    Object.assign(this.profile, this.user.profile);
 
-    export default class SettingsProfile extends Vue {
-        @State(state => state.user.user) user;
+                    this.profile.username = this.user.username;
+                }
+            }
+        },
+        methods: {
+            async crop(result) {
+                let [cropped] = await this.$open(CropperModal, { data: result });
 
-        profile = {};
-
-        @Watch("user", { immediate: true })
-        updateProfileFromUser() {
-            Object.assign(this.profile, this.user.profile);
-
-            this.profile.username = this.user.username;
-        }
-
-        async crop(result) {
-            let [cropped] = await this.$open(CropperModal, { data: result });
-
-            this.$store.dispatch('user/avatar', cropped);
-        }
-
-        async save() {
-            await this.$store.dispatch('user/settings', this.profile);
+                this.$store.dispatch('user/avatar', cropped);
+            },
+            async save() {
+                await this.$store.dispatch('user/settings', this.profile);
+            }
+        },
+        computed: {
+            user() {
+                return this.$store.state.user.user;
+            }
         }
     }
 </script>

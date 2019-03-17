@@ -15,19 +15,16 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
-    import { Prop } from 'vue-property-decorator';
+
     import Vue from 'vue';
+
     import Popup from '~/components/Popup';
     import Avatar from '~/components/user/Avatar';
 
-    @Component({
+    export default {
+        name: "UserMenu",
         props: ['user'],
-        components: { Popup, Avatar },
-    })
-
-    export default class UserMenu extends Vue {
-
+        components: { Popup, Avatar }
     }
 </script>
 

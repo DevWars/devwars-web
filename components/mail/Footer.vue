@@ -30,3 +30,10 @@
         </mj-section>
     </mj-wrapper>
 </template>
+
+<script>
+export default {
+    name: "MailFooter"
+}
+</script>
+
