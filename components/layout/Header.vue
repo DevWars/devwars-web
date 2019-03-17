@@ -40,7 +40,7 @@
                     </li>
                 </ul>
 
-                <UserMenu v-if="user" :user="user">
+                <UserMenu v-else :user="user">
                     <nuxt-link v-if="isAdmin" to="/mod/dashboard" class="btn-link">Modpanel</nuxt-link>
                     <div v-if="isAdmin" class="divider"></div>
                     <nuxt-link to="/dashboard" class="btn-link">Dashboard</nuxt-link>
@@ -81,7 +81,7 @@ export default {
     },
     computed: {
         user() {
-            this.$store.state.user.user
+            return this.$store.state.user.user
         },
         isAdmin() {
             return this.user.role === 'ADMIN';
