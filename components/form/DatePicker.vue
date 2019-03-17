@@ -10,34 +10,35 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
-
-    import { Prop } from 'vue-property-decorator';
 
     import FlatPickr from 'vue-flatpickr-component';
     import ClickOutside from 'vue-click-outside';
 
-    @Component({
+    export default {
+        name: "DatePicker",
         components: { FlatPickr },
-        directives: { ClickOutside }
-    })
-    export default class extends Vue {
-        @Prop() value;
-
-        config = {
-            dateFormat: 'm/d/Y H:i',
-            altFormat: 'm/d/Y H:i',
-            enableTime: true,
-            wrap: true
-        };
-
-        onChange(e) {
-            this.$emit('input', e);
-        }
-
-        closePicker() {
-            this.$refs.pickr.fp.close();
+        directives: { ClickOutside },
+        props: [
+            "value"
+        ],
+        data: () => {
+            return {
+                config: {
+                    dateFormat: 'm/d/Y H:i',
+                    altFormat: 'm/d/Y H:i',
+                    enableTime: true,
+                    wrap: true
+                }
+            }
+        },
+        methods: {
+            onChange(e) {
+                this.$emit('input', e);
+            },
+            closePicker() {
+                this.$refs.pickr.fp.close();
+            }
         }
     }
 </script>

@@ -128,7 +128,6 @@
 </template>
 
 <script>
-    import Component, { State, Action } from 'nuxt-class-component';
     import Vue from 'vue';
     import moment from 'moment';
 
@@ -140,70 +139,78 @@
     import ConnectToDiscord from "~/components/user/ConnectToDiscord";
     import { user_has_provider } from '../../utils/linked-accounts';
 
-    @Component({
+    import { mapActions } from "vuex";
+    
+    export default {
+        name: "CompetitorRegistration",
         components: { PageBanner, Input, ConnectToDiscord, Select },
-        middleware: ['auth', 'no-competitors']
-    })
-    export default class CompetitorRegistration extends Vue {
-        @State(state => state.user.user) user;
-        @State(state => state.user.linkedAccounts) links;
-        @Action('toast/error') error;
-
-        month = '';
-        day = '';
-        year = '';
-
-        languages = [{ name: 'html', skill: 0 }, { name: 'css', skill: 0 }, { name: 'js', skill: 0 }];
-        competitor = {
-            name: {},
-            address: {},
-            ratings: {},
-        };
-
-        countries = Object.keys(countryList().getNameList()).map(it => it[0].toUpperCase() + it.slice(1));
-
-        skillNames = ["Novice", "Beginner", "Intermediate", "Advanced", "Expert"];
-
-        htmlTooltips = ["You have a basic understanding of HTML, and can use essential tags.", "You have a working knowledge of HTML. You understand the basic syntax and methodology of ordering and adding elements to the DOM (Document Object Model).", "You have a strong understanding of HTML, and ability to structure a webpage. You have a knowledge of a variety of attributes, and know how to use them correctly. You have a strong understanding of semantics and structural meaning (parameter usage) .", "You have worked on larger scale projects, and collaborated with other people. You have strong experience working on various development projects. You have worked with SEO tools.", "You use HTML at a production level. You can create websites from scratch with no use of frameworks, and have worked as a front-end developer. You have used Shadow DOM in the past."];
-        cssTooltips = ["You have basic knowledge of CSS. You understand the basic syntax and methodology of cascading stylesheets", "You have a working knowledge of CSS. You have style elements, and know about different frameworks. You have used Bootstrap. You have heard of pre-processors. ", "You have extensive CSS knowledge. You have experience working with responsive design, and understand the mobile-first ideology. You understand the issues that can occur with different browsers. You have used a CMS in the past, and can style elements on them ", "You have worked on larger scale projects, and collaborated with other people. You have strong experience working on various development projects. You understand BEM practices, and implement them ", "You use CSS at a production level. You can style websites from scratch with no use of frameworks, and have worked as a front-end developer"];
-        jsTooltips = ["You have a basic knowledge of JavaScript.", "You have working knowledge of JavaScript. You understand the basic syntax and methodology of OOP", "You have used Javascript with a popular library or framework, and used it for DOM manipulation.", "You have worked on larger scale projects, and collaborated with other people. You have strong experience working on various development projects. You have knowledge of MVC and it's use in creating web application.", "You use JavaScript at a production level. You make full use of MVC and MV Frameworks, have and incredible understaning of OOP, and have worked as a professional front-end developer"];
-
-        tooltip(language) {
-            return this[language.name + 'Tooltips'][language.skill];
-        }
-
-        async submit() {
-            const hasDiscord = user_has_provider(this.links, 'DISCORD');
-
-            if (!hasDiscord) {
-                return this.error('You must connect your discord before moving forward with your registration.');
+        middleware: ['auth', 'no-competitors'],
+        data: () => {
+            return {
+                month: '',
+                day: '',
+                year: '',
+                languages: [{ name: 'html', skill: 0 }, { name: 'css', skill: 0 }, { name: 'js', skill: 0 }],
+                competitor: {
+                    name: {},
+                    address: {},
+                    ratings: {},
+                },
+                countries: Object.keys(countryList().getNameList()).map(it => it[0].toUpperCase() + it.slice(1)),
+                skillNames: ["Novice", "Beginner", "Intermediate", "Advanced", "Expert"],
+                htmlTooltips: ["You have a basic understanding of HTML, and can use essential tags.", "You have a working knowledge of HTML. You understand the basic syntax and methodology of ordering and adding elements to the DOM (Document Object Model).", "You have a strong understanding of HTML, and ability to structure a webpage. You have a knowledge of a variety of attributes, and know how to use them correctly. You have a strong understanding of semantics and structural meaning (parameter usage) .", "You have worked on larger scale projects, and collaborated with other people. You have strong experience working on various development projects. You have worked with SEO tools.", "You use HTML at a production level. You can create websites from scratch with no use of frameworks, and have worked as a front-end developer. You have used Shadow DOM in the past."],
+                cssTooltips: ["You have basic knowledge of CSS. You understand the basic syntax and methodology of cascading stylesheets", "You have a working knowledge of CSS. You have style elements, and know about different frameworks. You have used Bootstrap. You have heard of pre-processors. ", "You have extensive CSS knowledge. You have experience working with responsive design, and understand the mobile-first ideology. You understand the issues that can occur with different browsers. You have used a CMS in the past, and can style elements on them ", "You have worked on larger scale projects, and collaborated with other people. You have strong experience working on various development projects. You understand BEM practices, and implement them ", "You use CSS at a production level. You can style websites from scratch with no use of frameworks, and have worked as a front-end developer"],
+                jsTooltips: ["You have a basic knowledge of JavaScript.", "You have working knowledge of JavaScript. You understand the basic syntax and methodology of OOP", "You have used Javascript with a popular library or framework, and used it for DOM manipulation.", "You have worked on larger scale projects, and collaborated with other people. You have strong experience working on various development projects. You have knowledge of MVC and it's use in creating web application.", "You use JavaScript at a production level. You make full use of MVC and MV Frameworks, have and incredible understaning of OOP, and have worked as a professional front-end developer"],
             }
+        },
+        methods: {
+            tooltip(language) {
+                return this[language.name + 'Tooltips'][language.skill];
+            },
+            async submit() {
+                const hasDiscord = user_has_provider(this.links, 'DISCORD');
 
-            let date = moment.utc(`${this.month} ${this.day} ${this.year}`, 'MM DD YYYY').startOf('day');
-
-            this.languages.forEach(language => {
-                this.competitor.ratings[language] = language.skill + 1;
-            });
-
-            this.competitor.dob = date.unix() * 1000;
-
-            try {
-                await Http.for(`user/${this.user.id}/competitor`).save(this.competitor);
-
-                if (this.game) {
-                    await this.$store.dispatch('game/apply', this.game);
+                if (!hasDiscord) {
+                    return this.error('You must connect your discord before moving forward with your registration.');
                 }
 
-                this.$store.dispatch('toast/success', `Congratulations! You are now a competitor!`);
-            } catch (e) {
-                this.$store.dispatch('toast/errors', e);
-            }
-        }
+                let date = moment.utc(`${this.month} ${this.day} ${this.year}`, 'MM DD YYYY').startOf('day');
 
+                this.languages.forEach(language => {
+                    this.competitor.ratings[language] = language.skill + 1;
+                });
+
+                this.competitor.dob = date.unix() * 1000;
+
+                try {
+                    await Http.for(`user/${this.user.id}/competitor`).save(this.competitor);
+
+                    if (this.game) {
+                        await this.$store.dispatch('game/apply', this.game);
+                    }
+
+                    this.$store.dispatch('toast/success', `Congratulations! You are now a competitor!`);
+                } catch (e) {
+                    this.$store.dispatch('toast/errors', e);
+                }
+            }
+        },
         async asyncData({ query }) {
             if (!query.game) return {};
 
             return { game: await Http.for(`game/${query.game}`).get() }
+        },
+        computed: {
+            user() {
+                return this.$store.state.user.user;
+            },
+            links() {
+                return this.$store.state.user.linkedAccounts
+            },
+            ...mapActions({
+                error: 'toast/error'
+            })
         }
+        
     }
 </script>

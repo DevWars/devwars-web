@@ -32,19 +32,15 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
     import Http from '../../../services/Http';
     import MailMeta from '../../../components/mail/MailMeta';
 
-    @Component({
+    export default {
+        name: "gameReminder",
         components: { MailMeta },
         layout: 'mail'
-    })
-
-    export default class extends Vue {
-
     }
 </script>
 

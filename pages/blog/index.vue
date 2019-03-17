@@ -13,17 +13,15 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
     import Http from "../../services/Http";
 
     import PageBanner from '~/components/layout/PageBanner';
     import BlogCard from '~/components/blog/BlogCard';
-
-    @Component({
-        components: { PageBanner, BlogCard }
-    })
-    export default class Blog extends Vue {
+    
+    export default {
+        name: "Blog",
+        components: { PageBanner, BlogCard },
         async asyncData() {
             return {posts: await Http.for('blog').get('all')}
         }

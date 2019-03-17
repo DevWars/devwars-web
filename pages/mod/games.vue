@@ -36,7 +36,6 @@
 </template>
 
 <script>
-    import Component, { State } from 'nuxt-class-component';
     import Vue from 'vue';
 
     import CreateGameModal from '~/components/modal/CreateGameModal';
@@ -48,25 +47,28 @@
 
     import { name_from_status } from '../../utils/game-status';
 
-    @Component({
+    export default {
+        name: "modGames",
         components: { PanelHeader, ListingFilters, Table, Input, Pagination },
-        methods: { name_from_status },
-    })
+        methods: { 
+            name_from_status,
+            async createGame() {
+                const [game] = await this.$open(CreateGameModal, {});
 
-    export default class DashboardGames extends Vue {
-        @State(state => state.game.all) all;
+                if (!game) return;
 
-        async createGame() {
-            const [game] = await this.$open(CreateGameModal, {});
-
-            if (!game) return;
-
-            this.$router.push({ path: `/mod/game/details`, params: { game: game.id } })
-        }
-
+                this.$router.push({ path: `/mod/game/details`, params: { game: game.id } })
+            }
+        },
+        computed: {
+            all() {
+                return this.$store.state.game.all;
+            }
+        },
         async fetch({ store }) {
             await store.dispatch('game/all');
         }
+        
     }
 </script>
 

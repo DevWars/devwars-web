@@ -15,21 +15,18 @@
 </template>
 
 <script>
-import Component, {State} from 'nuxt-class-component';
 import Vue from 'vue';
 
 import Input from '~/components/form/Input';
 
-@Component({
+export default {
+    name: "PanelHeader",
     components: { Input },
     props: {
         title: String,
         subtitle: String,
         showSearch: Boolean,
     }
-})
-export default class PanelHeader extends Vue {
-
 }
 </script>
 

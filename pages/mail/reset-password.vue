@@ -36,17 +36,14 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
     import MailMeta from '../../components/mail/MailMeta';
 
-    @Component({
+    export default {
+        name: "ResetPassword",
         components: { MailMeta },
-        layout: 'mail'
-    })
-
-    export default class extends Vue {
+        layout: 'mail',
         async asyncData({ query }) {
             console.log(query);
             return { url: query.url, username: query.username };

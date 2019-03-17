@@ -21,7 +21,6 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
     import moment from 'moment';
@@ -30,22 +29,27 @@
     import Input from '../form/Input';
     import DatePicker from '../form/DatePicker';
 
-    @Component({
+    export default {
+        name: "CreateGameModal",
         components: { DatePicker, Input },
-    })
+        props: [
+            "resolve"
+        ],
+        data: () => {
+            return {
+                name: '',
+                date: ''
+            }
+        },
+        methods: {
+            async submit() {
+                let timestamp = moment.utc(this.date, 'MM/DD/YYYY HH:mm').unix() * 1000;
 
-    export default class CreateGameModal extends Vue {
-        name = '';
-        date = '';
+                await this.$store.dispatch('game/create', { name: this.name, timestamp });
 
-        @Prop() resolve;
-
-        async submit() {
-            let timestamp = moment.utc(this.date, 'MM/DD/YYYY HH:mm').unix() * 1000;
-
-            await this.$store.dispatch('game/create', { name: this.name, timestamp });
-
-            this.close(true);
+                this.close(true);
+            }
         }
+
     }
 </script>

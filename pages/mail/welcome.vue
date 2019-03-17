@@ -36,19 +36,15 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
     import Http from '../../services/Http';
     import MailMeta from '../../components/mail/MailMeta';
 
-    @Component({
+    export default {
+        name: "Welcome",
         components: { MailMeta },
-        layout: 'mail'
-    })
-
-    export default class extends Vue {
-
+        layout: 'mail',
         async asyncData({ query }) {
             return { url: query.url };
         }

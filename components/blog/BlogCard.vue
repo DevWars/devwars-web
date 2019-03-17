@@ -12,13 +12,12 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
-    import {Prop} from 'vue-property-decorator';
-
-    @Component({})
-    export default class extends Vue {
-        @Prop() post;
+    export default {
+        name: "BlogCard",
+        props: [
+            "post"
+        ]
     }
 </script>

@@ -2,6 +2,12 @@
   <h1>Welcome to the Dashboard</h1>
 </template>
 
+<script>
+export default {
+  name: "modDashboard",
+}
+</script>
+
 
 <style lang="scss" scoped>
 h1 {

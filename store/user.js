@@ -175,6 +175,7 @@ export const actions = {
         const accounts = await Http.for(`user/${state.user.id}`).get('linked-accounts');
 
         commit('linkedAccounts', accounts);
+        return accounts;
     },
 
     async disconnectLinkedAccount({ dispatch, commit, state }, provider) {

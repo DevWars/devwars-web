@@ -30,7 +30,6 @@
 </template>
 
 <script>
-    import Component, {State} from 'nuxt-class-component';
     import Vue from 'vue';
 
     import PanelHeader from '~/components/mod/PanelHeader';
@@ -39,12 +38,14 @@
     import Input from '~/components/form/Input';
     import Pagination from '~/components/Pagination';
 
-    @Component({
+    export default {
+        name: "modTournaments",
         components: { PanelHeader, ListingFilters, Table, Input, Pagination },
-    })
-
-    export default class DashboardTournaments extends Vue {
-
+        methods: {
+            createTournament() {
+                
+            }
+        }
     }
 </script>
 

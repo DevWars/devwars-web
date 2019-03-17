@@ -14,16 +14,13 @@
 </template>
 
 <script>
-    import Component, {State} from 'nuxt-class-component';
     import Vue from 'vue';
 
     import Select from '~/components/form/Select';
 
-    @Component({
+    export default {
+        name: "ListingFilters",
         components: { Select },
-    })
-    export default class ListingFilters extends Vue {
-
     }
 </script>
 

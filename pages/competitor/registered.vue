@@ -18,7 +18,6 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
     import moment from 'moment';
 
@@ -27,11 +26,9 @@
     import PageBanner from '~/components/layout/PageBanner';
     import Input from "~/components/form/Input";
 
-    @Component({
+    export default {
+        name: "CompetitorRegistration",
         components: { PageBanner, Input },
         middleware: 'auth'
-    })
-    export default class CompetitorRegistration extends Vue {
-
     }
 </script>

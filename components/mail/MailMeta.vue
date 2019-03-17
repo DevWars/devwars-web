@@ -8,15 +8,12 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
-    import { Prop } from 'vue-property-decorator';
-
-    @Component({
-        props: ['subject']
-    })
-    export default class extends Vue {
-        @Prop() subject;
+    export default {
+        name: "MailMeta",
+        props: [
+            "subject"
+        ]
     }
 </script>
