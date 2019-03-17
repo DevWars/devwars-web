@@ -632,19 +632,14 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
-
     import Devcoin from '~/components/Devcoin';
 
-    @Component({
+    export default {
+        name: "Docs",
         components: { Devcoin },
-        layout: 'header'
-    })
-
-    export default class Docs extends Vue {
-
-        mounted() {
+        layout: 'header',
+         mounted() {
             if (!this.$route.hash) return;
 
             const anchored = document.querySelector(this.$route.hash);
@@ -676,6 +671,8 @@
         }
     }
 </script>
+
+
 
 <style lang="scss" scoped>
 @import '../assets/styles/utils';

@@ -19,19 +19,29 @@
 </template>
 
 <script>
-    import Component, {State} from 'nuxt-class-component';
     import Vue from 'vue';
 
-    import {Prop} from 'vue-property-decorator';
-
-    @Component
-    export default class ConfirmModal extends Vue {
-        @Prop() title;
-        @Prop() description;
-        @Prop({default: 'Cancel'}) cancelText;
-        @Prop({default: 'Okay'}) confirmText;
-
-        @Prop() resolve;
-        @Prop() reject;
+    export default {
+        name: "ConfirmModal",
+        props: {
+            resolve: {
+                default: () => {}
+            },
+            reject: {
+                default: () => {}
+            },
+            title: {
+                default: ""
+            },
+            description: {
+                description: ""
+            },
+            cancelText: {
+                default: 'Cancel'
+            },
+            confirmText: {
+                default: 'Okay'
+            }
+        }
     }
 </script>

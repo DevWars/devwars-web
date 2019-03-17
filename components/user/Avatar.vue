@@ -5,18 +5,17 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
-    @Component({
-        props: ['user']
-    })
-    export default class Avatar extends Vue {
-
-        get style() {
-           return {
-               backgroundImage: `url(${this.user.avatarUrl || require('~/assets/img/default-avatar.png')})`
-           }
+    export default {
+        name: "Avatar",
+        props: ['user'],
+        computed: {
+            style() {
+                return {
+                    backgroundImage: `url(${this.user.avatarUrl || require('~/assets/img/default-avatar.png')})`
+                }
+            }
         }
     }
 </script>

@@ -7,25 +7,43 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
+    // import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
-    import {Prop} from 'vue-property-decorator';
+    // import {Prop} from 'vue-property-decorator';
 
-    @Component({})
-    export default class extends Vue {
-        @Prop() page;
-        @Prop() perPage;
-        @Prop() count;
+    // @Component({})
+    // export default class extends Vue {
+    //     @Prop() page;
+    //     @Prop() perPage;
+    //     @Prop() count;
 
-        get canGoPrevious() {
-            return this.page > 0;
-        }
+    //     get canGoPrevious() {
+    //         return this.page > 0;
+    //     }
 
-        get canGoNext() {
-            const totalPages = Math.ceil(this.count / this.perPage);
+    //     get canGoNext() {
+    //         const totalPages = Math.ceil(this.count / this.perPage);
 
-            return this.page < totalPages - 1;
+    //         return this.page < totalPages - 1;
+    //     }
+    // }
+
+    export default {
+        name: "Pagination",
+        props: [
+            "page",
+            "perPage",
+            "count"
+        ],
+        computed: {
+            canGoPrevious() {
+                return this.page > 0
+            },
+            canGoNext() {
+                const totalPages = Math.ceil(this.count / this.perPage);
+                return this.page < totalPages - 1;
+            }
         }
     }
 </script>

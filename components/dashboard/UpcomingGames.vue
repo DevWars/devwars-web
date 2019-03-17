@@ -21,7 +21,6 @@
 </template>
 
 <script>
-    import Component, {State} from 'nuxt-class-component';
     import Vue from 'vue';
 
     import Applications from '~/components/game/Applications';
@@ -29,13 +28,17 @@
 
     import Http from "../../services/Http";
 
-    @Component({
-        props: ['upcoming', 'applied'],
-        components: { Applications, DashboardCard }
-    })
+    import {mapState} from "vuex";
 
-    export default class UpcomingGames extends Vue {
-        @State(state => state.user.user) user;
+    export default {
+        name: "UpcomingGames",
+         props: ['upcoming', 'applied'],
+        components: { Applications, DashboardCard },
+        computed: {
+            ...mapState({
+                user: 'user'
+            })
+        }
     }
 </script>
 

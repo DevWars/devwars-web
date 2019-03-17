@@ -7,6 +7,12 @@ export const state = () => ({
     linkedAccounts: []
 });
 
+export const getters = {
+    userCount(state) {
+        return state.count
+    }
+}
+
 export const mutations = {
     user(state, user) {
         state.user = user;

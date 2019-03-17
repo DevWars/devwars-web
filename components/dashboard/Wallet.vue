@@ -29,18 +29,15 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
     import DashboardCard from '~/components/DashboardCard';
     import Devcoin from '~/components/Devcoin';
 
-    @Component({
+    export default {
+        name: "Wallet",
         components: { DashboardCard, Devcoin },
         props: ['user']
-    })
-
-    export default class Wallet extends Vue {
     }
 </script>
 

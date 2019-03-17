@@ -4,6 +4,12 @@ export const state = () => ({
     badges: [],
 });
 
+export const getters = {
+    badges(state) {
+        return state.badges
+    }
+}
+
 export const mutations = {
     badges(state, badges) {
         state.badges = badges;

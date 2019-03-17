@@ -19,7 +19,9 @@
             <div class="main">
                 <div class="col-xs-2 no-gutter">
                     <div class="devcoins">
-                        <Devcoin></Devcoin>
+                        <no-ssr>
+                            <Devcoin></Devcoin>
+                        </no-ssr>
                         <div class="devcoins__amount">200</div>
                     </div>
                 </div>
@@ -33,16 +35,14 @@
 </template>
 
 <script>
-    import Component, {State} from 'nuxt-class-component';
     import Vue from 'vue';
 
     import DashboardCard from '~/components/DashboardCard';
+    import Devcoin from '~/components/Devcoin'
 
-    @Component({
-        components: { DashboardCard }
-    })
-
-    export default class DailyPrizes extends Vue {
+    export default {
+        name: "DailyPrizes",
+        components: { DashboardCard,Devcoin }
     }
 </script>
 
