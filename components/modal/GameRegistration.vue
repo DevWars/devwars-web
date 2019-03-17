@@ -33,25 +33,38 @@
 </template>
 
 <script>
-    import Component, {State, Action} from 'nuxt-class-component';
     import Vue from 'vue';
 
-    import {Prop} from 'vue-property-decorator';
     import Http from "../../services/Http";
 
-    @Component
-    export default class GameRegistration extends Vue {
-        @Prop() resolve;
-        @Prop() game;
+    import { mapActions } from "vuex";
 
-        @State(state => state.user.competitor) competitor;
+    export default {
+        name: "GameRegistration",
+        props: {
+            resolve: {
+                default: () => {}
+            },
+            game: {
+                default: ""
+            }
+        },
+        computed: {
+            competitor() {
+                return this.$store.state.user.competitor
+            },
+            ...mapActions({
+                apply: 'game/apply'
+            })
+        },
+        methods: {
+            async enter() {
+                await this.apply(this.game);
 
-        @Action('game/apply') apply;
-
-        async enter() {
-            await this.apply(this.game);
-
-            this.close(true);
+                this.close(true);
+            }
         }
     }
+
+    
 </script>

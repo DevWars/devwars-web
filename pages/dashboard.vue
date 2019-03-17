@@ -3,16 +3,16 @@
         <div class="container">
             <div class="row">
                 <div class="aside col-md-4">
-                    <ProfileCard :user="user" />
+                    <ProfileCard :user="user.user" />
 
-                    <Wallet :user="user" />
+                    <Wallet :user="user.user" />
 
                     <Badges :owned="mine" />
                 </div>
 
 
                 <div class="main col-md-8">
-                    <!-- <DailyPrizes /> -->
+                    <DailyPrizes />
 
                     <UpcomingGames :upcoming="upcomingGames" :applied="appliedGames" />
 
@@ -24,7 +24,6 @@
 </template>
 
 <script>
-    import Component, {State} from 'nuxt-class-component';
     import Vue from 'vue';
     import Http from "../services/Http";
 
@@ -33,26 +32,36 @@
     import Badges from '~/components/dashboard/Badges';
     import Activities from '~/components/dashboard/Activities';
     import UpcomingGames from '~/components/dashboard/UpcomingGames';
+    import DailyPrizes from '~/components/dashboard/DailyPrizes';
 
-    @Component({
+    import {mapState} from "vuex";
+
+    export default {
+        name: "Dashboard",
         components: {
             ProfileCard,
             Wallet,
             Badges,
             Activities,
             UpcomingGames,
-        }
-    })
-    export default class Dashboard extends Vue {
-        @State(state => state.user.user) user;
-        @State(state => state.game.applied) appliedGames;
-        @State(state => state.game.upcoming) upcomingGames;
-
+            DailyPrizes
+        },
         async asyncData({store}) {
             return {
                 mine: await Http.for(`user/${store.state.user.user.id}`).get('badges'),
                 activities: await Http.for('activity').get('mine'),
             };
+        },
+        computed:{ 
+            user() {
+                return this.$store.state.user
+            },
+            appliedGames() {
+                return this.$store.state.game.applied
+            },
+            upcomingGames() {
+                return this.$store.state.game.upcoming
+            }
         }
     }
 </script>

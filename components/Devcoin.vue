@@ -7,8 +7,9 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
-    export default class Devcoin extends Vue {}
+    export default {
+        name: "Devcoin"
+    }
 </script>

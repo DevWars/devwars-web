@@ -15,26 +15,25 @@
 </template>
 
 <script>
-import Component from 'nuxt-class-component';
 import Vue from 'vue';
 
 import DashboardCard from '~/components/DashboardCard';
 import Avatar from '~/components/user/Avatar';
 import Progress from '~/components/form/Progress';
 
-@Component({
+export default {
+    name: "ProfileCard",
     components: { DashboardCard, Avatar, Progress },
-    props: ['user']
-})
+    props: ['user'],
+    computed: {
+        progress() {
+            let past = this.user.statistics.xp - this.user.statistics.rank.xpRequired;
+            let difference = this.user.statistics.nextRank.xpRequired - this.user.statistics.rank.xpRequired;
+            const percentage = Math.round(past / difference * 100);
+            const formattedPercentage = `${percentage}%`
 
-export default class ProfileCard extends Vue {
-    get progress() {
-        let past = this.user.statistics.xp - this.user.statistics.rank.xpRequired;
-        let difference = this.user.statistics.nextRank.xpRequired - this.user.statistics.rank.xpRequired;
-        const percentage = Math.round(past / difference * 100);
-        const formattedPercentage = `${percentage}%`
-
-        return formattedPercentage;
+            return formattedPercentage;
+        }
     }
 }
 </script>

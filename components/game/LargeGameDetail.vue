@@ -135,37 +135,37 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
-    import {Prop} from 'vue-property-decorator';
-
     import Avatar from '~/components/user/Avatar';
     import VoteBox from '~/components/game/VoteBox';
     import SubScore from '~/components/game/SubScore';
 
     import { team_completed_objective, team_for_game, points_for_team, winner_for_game } from '../../utils/objectives';
 
-    @Component({
+export default {
+        name: "LargeGameDetail",
         components: {Avatar, SubScore, VoteBox},
-        methods: {team_for_game, points_for_team, winner_for_game}
-    })
-    export default class extends Vue {
-        @Prop() game;
-
-        player(team, language) {
-            return team_for_game(team, this.game).players.find(player => player.language.toLowerCase() === language);
-        }
-
-       didTeamComplete(team, objective) {
-            return team_completed_objective(team_for_game(team, this.game), objective);
-        }
-
-        get blue() {
-            return team_for_game("blue", this.game);
-        }
-
-        get red() {
-            return team_for_game("red", this.game);
+        props: {
+            game: {default: {}}
+        },
+        methods: {
+            team_for_game, 
+            points_for_team, 
+            winner_for_game,
+            player(team, language) {
+                return team_for_game(team, this.game).players.find(player => player.language.toLowerCase() === language);
+            },
+            didTeamComplete(team, objective) {
+                return team_completed_objective(team_for_game(team, this.game), objective);
+            }   
+        },
+        computed: {
+            blue() {
+                return team_for_game("blue", this.game);
+            },
+            red() {
+                return team_for_game("red", this.game);
+            }
         }
     }
 </script>

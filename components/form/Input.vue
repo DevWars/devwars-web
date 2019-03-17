@@ -8,18 +8,18 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
 
-    import { Prop } from 'vue-property-decorator';
-
-    @Component({})
-    export default class extends Vue {
-        @Prop() type;
-        @Prop() value;
-
-        get valid() {
-            return !(this.value == null || typeof this.value === "undefined")
+    export default {
+        name: "Input",
+        props: [
+            'type',
+            'value'
+        ],
+        computed: {
+            valid() {
+                return !(this.value == null || typeof this.value === "undefined")
+            }
         }
     }
 </script>

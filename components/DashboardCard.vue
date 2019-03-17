@@ -15,8 +15,9 @@
 import Card from "./Card";
 
 export default {
-  components: { Card },
-  props: [ 'title', 'icon' ]
+    name: "DashboardCard",
+    components: { Card },
+    props: [ 'title', 'icon' ]
 }
 </script>
 

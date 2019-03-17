@@ -26,7 +26,8 @@
 
 <script>
 export default {
-  props: [ 'title', 'type' ]
+    name: "PageBanner",
+    props: [ 'title', 'type' ]
 }
 </script>
 

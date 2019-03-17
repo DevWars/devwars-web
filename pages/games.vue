@@ -37,44 +37,49 @@
 <script>
     import Vue from 'vue';
 
-    import Component from 'nuxt-class-component';
-    import { Watch } from 'vue-property-decorator';
-
     import Http from '../services/Http';
     import LargeGameDetail from '../components/game/LargeGameDetail';
 
-    @Component({
-        components: { LargeGameDetail }
-    })
-    export default class Games extends Vue {
-        seasons = [3, 2, 1];
-        season = 3;
+    export default {
+        name: "Games",
+        components: { LargeGameDetail },
+        data() {
+            return {
+                seasons: [3, 2, 1],
+                season: 3,
+                games: [],
+                viewing: null
+            }
+        },
+        watch: {
+            '$route.query.season': {
+                immediate: true,
+                async handler(newSeason) {
+                    this.season = parseInt(newSeason || "3");
 
-        games = [];
+                    this.games = await Http.for('game/season').get(this.season);
 
-        viewing = null;
+                    if(!this.$route.query.game) {
+                        this.viewing = await Http.for('game').get(this.games[0].id);
+                    }
+                },
+            },
+            '$route.query.game': {
+                immediate: true,
+                async handler(newGame) {
+                    if(newGame) {
+                        this.viewing = await Http.for('game').get(newGame);
+                    }
+                }
+            }
 
-        @Watch('$route.query.season', { immediate: true })
-        async seasonChange(newSeason) {
-            this.season = parseInt(newSeason || "3");
-
-            this.games = await Http.for('game/season').get(this.season);
-
-            if(!this.$route.query.game) {
-                this.viewing = await Http.for('game').get(this.games[0].id);
+        },
+        methods: {
+            async view(game) {
+                this.$router.push({ path: '/games', query: { game: game.id, season: game.season } })
             }
         }
 
-        @Watch('$route.query.game', { immediate: true })
-        async gameChange(newGame) {
-            if(newGame) {
-                this.viewing = await Http.for('game').get(newGame);
-            }
-        }
-
-        async view(game) {
-            this.$router.push({ path: '/games', query: { game: game.id, season: game.season } })
-        }
     }
 </script>
 

@@ -1,7 +1,6 @@
 <template>
     <div>
         <PageBanner title="Badges" />
-
         <div class="footer-offset">
             <div class="container">
                 <div class="row">
@@ -32,41 +31,48 @@
 </template>
 
 <script>
-    import Component, {State} from 'nuxt-class-component';
     import Vue from 'vue';
     import Http from "../services/Http";
 
     import PageBanner from '~/components/layout/PageBanner';
     import Devcoin from '~/components/Devcoin';
 
-    @Component({
-        components: { PageBanner, Devcoin }
-    })
-    export default class Badges extends Vue {
-        @State(state => state.badges.badges) badges;
-        @State(state => state.user.count) userCount;
+    import {mapGetters} from 'vuex';
 
-        completed(badge) {
-            return this.mine.some(it => it.id === badge.id);
-        }
-
-        style(badge) {
-            return {
-                width: (badge.userCount / this.userCount * 100) + '%'
+    export default {
+        name: 'Badges',
+        components: {
+            PageBanner,
+            Devcoin
+        },
+        computed: {
+            ...mapGetters({
+                badges: 'badges/badges',
+                userCount: 'user/userCount'
+            }),
+        },
+        methods: {
+            completed(badge) {
+                return this.mine.some(it => it.id === badge.id);
+            },
+            style(badge) {
+                return {
+                    width: (badge.userCount / this.userCount * 100) + '%'
+                }
+            },
+            image(badge) {
+                try {
+                    return require(`~/assets/img/badges/${badge.name.split(' ').join('-').toLowerCase()}.png`);
+                } catch(e) {
+                    console.error(`Couldn't load image for badge ${badge.name}`)
+                }
             }
-        }
-
-        image(badge) {
-            try {
-                return require(`~/assets/img/badges/${badge.name.split(' ').join('-').toLowerCase()}.png`);
-            } catch(e) {
-                console.error(`Couldn't load image for badge ${badge.name}`)
-            }
-        }
-
+        },
         async asyncData({store}) {
+            let mine = await Http.for(`user/${store.state.user.user.id}`).get('badges')
+
             return {
-                mine: await Http.for(`user/${store.state.user.user.id}`).get('badges')
+                mine: mine
             }
         }
     }

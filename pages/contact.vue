@@ -50,37 +50,46 @@
 </template>
 
 <script>
-    import Component, {Action} from 'nuxt-class-component';
     import Vue from 'vue';
     import PageBanner from '~/components/layout/PageBanner';
     import Card from '~/components/Card';
     import Input from '~/components/form/Input';
 
-    @Component({
-        components: { PageBanner, Card, Input }
-    })
-    export default class Contact extends Vue {
-        @Action('toast/errors') toastErrors;
-        @Action('toast/success') toastSuccess;
+    import {mapActions} from "vuex";
 
-        submitted = false;
-
-        name = '';
-        email = '';
-        message = '';
-
-        async sendEmail() {
-            try {
-                const { name, email, message } = this;
-
-                const response = await this.$axios.$post('/contact', { name, email, message });
-
-                this.toastSuccess(response);
-
-                this.submitted = true;
-            } catch (e) {
-                this.toastErrors(e);
+    export default {
+        name: "Contact",
+        components: {
+            PageBanner,
+            Card,
+            Input
+        },
+        data: () => {
+            return {
+                name: '',
+                email: '',
+                message: '',
+                submitted: false
             }
+        },
+        methods: {
+            async sendEmail() {
+                try {
+                    const { name, email, message } = this;
+
+                    const response = await this.$axios.$post('/contact', { name, email, message });
+
+                    this.toastSuccess(response);
+
+                    this.submitted = true;
+                } catch (e) {
+                    this.toastErrors(e);
+                }
+            },
+            ...mapActions({
+                toastErrors: 'toast/errors',
+                toastSuccess: 'toast/success'
+            })
         }
     }
 </script>

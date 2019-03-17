@@ -15,17 +15,13 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
     import DashboardCard from '~/components/DashboardCard';
 
-    @Component({
+    export default {
+        name: "Activities",
         props: ['paged'],
         components: { DashboardCard }
-    })
-
-    export default class Activities extends Vue {
-
     }
 </script>
 

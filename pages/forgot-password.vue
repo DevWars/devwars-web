@@ -31,24 +31,27 @@
 </template>
 
 <script>
-    import Component from 'nuxt-class-component';
     import Vue from 'vue';
     import DevwarsCard from '~/components/DevwarsCard';
     import Input from '~/components/form/Input';
 
-    @Component({
-        components: { DevwarsCard, Input }
-    })
+    export default {
+        components: { DevwarsCard, Input },
+        name: "ResetPassword",
+        data() {
+            return {
+                done: false,
+                email: ''
+            }
+        },
+        methods: {
+            async forgot() {
+                let done = await this.$store.dispatch('user/forgot', this.email);
 
-    export default class ResetPassword extends Vue {
-        done = false;
-        email = '';
-
-        async forgot() {
-            let done = await this.$store.dispatch('user/forgot', this.email);
-
-            this.done = done;
+                this.done = done;
+            }
         }
+
     }
 </script>
 
