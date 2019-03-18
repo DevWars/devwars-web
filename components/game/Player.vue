@@ -1,25 +1,26 @@
 <template>
     <div class="Player">
-        <User :user="user" :class="team.toLowerCase()" />
+        <User :user="user" :class="team.toLowerCase()"/>
 
         <strong v-if="lang" class="language" :class="lang.toLowerCase()">{{ lang }}</strong>
     </div>
 </template>
 
-<script>
-    import Vue from 'vue';
-    import User from '~/components/user/User';
 
-    export default {
-        name: "Player",
-        components: { User },
-        props: {
-            user: Object,
-            team: String,
-            lang: String,
-        },
-    }
+<script>
+import User from '~/components/user/User';
+
+export default {
+    name: 'Player',
+    components: { User },
+    props: {
+        user: Object,
+        team: String,
+        lang: String,
+    },
+};
 </script>
+
 
 <style lang="scss" scoped>
 @import '../../assets/styles/utils';
@@ -40,8 +41,12 @@
             border: $border-size solid transparent;
             border-radius: 50%;
         }
-        &.blue /deep/ .Avatar { border-color: $brand-primary; }
-        &.red /deep/ .Avatar { border-color: $brand-secondary; }
+        &.blue /deep/ .Avatar {
+            border-color: $brand-primary;
+        }
+        &.red /deep/ .Avatar {
+            border-color: $brand-secondary;
+        }
     }
 
     .name {
@@ -52,9 +57,16 @@
     .language {
         text-transform: uppercase;
 
-        &.html { color: $html-color; }
-        &.css { color: $css-color; }
-        &.js, &.javascript { color: $js-color; }
+        &.html {
+            color: $html-color;
+        }
+        &.css {
+            color: $css-color;
+        }
+        &.js,
+        &.javascript {
+            color: $js-color;
+        }
     }
 }
 </style>

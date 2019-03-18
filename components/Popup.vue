@@ -1,36 +1,36 @@
 <template>
-  <div>
-    <slot name="trigger"/>
-    <div class="webui-popover-content">
-      <slot name="menu"/>
+    <div>
+        <slot name="trigger"/>
+        <div class="webui-popover-content">
+            <slot name="menu"/>
+        </div>
     </div>
-  </div>
 </template>
 
+
 <script>
-  import Vue from 'vue';
+import jQuery from 'jquery';
 
-  import jQuery from 'jquery';
-
-  export default {
-    name: "Popup",
+export default {
+    name: 'Popup',
     mounted() {
-      let el = this.$slots.trigger[0].elm;
-      let content = this.$slots.menu[0].elm;
+        let el = this.$slots.trigger[0].elm;
+        let content = this.$slots.menu[0].elm;
 
-      $(content).click(() => {
-          $(el).webuiPopover('hide');
-      });
+        $(content).click(() => {
+            $(el).webuiPopover('hide');
+        });
 
-      $(el).webuiPopover({
-        type: 'html',
-        content: jQuery(content),
-        placement: 'bottom',
-        animation: 'pop'
-      });
-    }
-  }
+        $(el).webuiPopover({
+            type: 'html',
+            content: jQuery(content),
+            placement: 'bottom',
+            animation: 'pop',
+        });
+    },
+};
 </script>
+
 
 <style lang="scss">
 @import '../assets/styles/utils';
@@ -48,8 +48,8 @@
     padding-right: $m-space !important;
     background-color: $bg-color-1;
 
-     a,
-     button {
+    a,
+    button {
         display: block;
         margin: $xxs-space 0;
         text-transform: uppercase;

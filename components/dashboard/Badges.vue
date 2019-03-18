@@ -17,23 +17,23 @@
     </DashboardCard>
 </template>
 
+
 <script>
-    import Vue from 'vue';
+import DashboardCard from '~/components/DashboardCard';
+import Progress from '~/components/form/Progress';
 
-    import DashboardCard from '~/components/DashboardCard';
-    import Progress from '~/components/form/Progress';
-
-    export default {
-        name: "DashboardBadges",
-        props: ['owned'],
-        components: { DashboardCard, Progress },
-        computed: {
-            badges() {
-                return this.$store.state.badges.badges
-            }
-        }
-    }
+export default {
+    name: 'DashboardBadges',
+    props: ['owned'],
+    components: { DashboardCard, Progress },
+    computed: {
+        badges() {
+            return this.$store.state.badges.badges;
+        },
+    },
+};
 </script>
+
 
 <style lang="scss" scoped>
 @import '../../assets/styles/utils';

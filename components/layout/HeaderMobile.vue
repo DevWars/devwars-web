@@ -29,28 +29,27 @@
             </UserMenu>
         </div>
 
-        <div v-if="isVisible" class="overlay" />
+        <div v-if="isVisible" class="overlay"/>
     </div>
 </template>
 
-<script>
-import Vue from 'vue';
 
-import UserMenu from '~/components/user/UserMenu';
+<script>
 import ClickOutside from 'vue-click-outside';
+import UserMenu from '~/components/user/UserMenu';
 
 export default {
-    name: "HeaderMobile",
-    data: () => { 
+    name: 'HeaderMobile',
+    data: () => {
         return {
-            isVisible: false 
-        }
+            isVisible: false,
+        };
     },
     components: { UserMenu },
     directives: { ClickOutside },
     computed: {
         user() {
-            return this.$store.state.user.user
+            return this.$store.state.user.user;
         },
         isAdmin() {
             return this.user.role === 'ADMIN';
@@ -62,10 +61,11 @@ export default {
         },
         logout() {
             this.$store.dispatch('user/logout');
-        }
-    }
-}
+        },
+    },
+};
 </script>
+
 
 <style lang="scss" scoped>
 @import '../../assets/styles/utils';
@@ -77,7 +77,8 @@ $mobile-nav-width: 300px;
     padding: $grid-gutter-width 0;
     background-color: $bg-color-3;
     position: fixed;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     z-index: $zindex-navbar-fixed;
 
     @include breakpoint(md) {

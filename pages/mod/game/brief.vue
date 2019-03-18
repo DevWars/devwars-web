@@ -8,7 +8,7 @@
                         v-for="player in team_for_game('blue', game).players"
                         @click="removePlayer(player, team_for_game('blue', game))"
                     >
-                        <Player :user="player.user" :lang="player.language" team="blue" />
+                        <Player :user="player.user" :lang="player.language" team="blue"/>
                     </div>
                 </GameTeam>
 
@@ -29,7 +29,7 @@
                         v-for="player in team_for_game('red', game).players"
                         @click="removePlayer(player, team_for_game('red', game))"
                     >
-                        <Player :user="player.user" :lang="player.language" team="red" />
+                        <Player :user="player.user" :lang="player.language" team="red"/>
                     </div>
                 </GameTeam>
 
@@ -42,14 +42,17 @@
                     </Select>
                 </div>
             </div>
-
         </div>
 
-        <br><br>
+        <br>
+        <br>
 
         <div class="mod-card">
             <div class="mod-card__header">
-                <h4 class="modpanel__subtitle" style="margin-bottom: 0">({{ applications.length }}) Applicants</h4>
+                <h4
+                    class="modpanel__subtitle"
+                    style="margin-bottom: 0"
+                >({{ applications.length }}) Applicants</h4>
                 <button @click="addRegistrant" class="btn btn-outline-primary">Add Registrant</button>
             </div>
         </div>
@@ -69,7 +72,9 @@
             </tr>
 
             <tr v-for="user in applications" :key="user.id">
-                <td><User :user="user" /></td>
+                <td>
+                    <User :user="user"/>
+                </td>
                 <td>{{ user.statistics.rank.rank }}</td>
                 <td>{{ user.statistics.wins + user.statistics.losses }}</td>
                 <td>{{ user.statistics.wins }}</td>
@@ -89,66 +94,70 @@
     </div>
 </template>
 
+
 <script>
-    import Component, { State } from 'nuxt-class-component';
-    import Vue from 'vue';
+import Component, { State } from 'nuxt-class-component';
+import User from '~/components/user/User';
+import Table from '~/components/Table';
+import Http from '../../../services/Http';
+import GameTeam from '~/components/game/GameTeam';
+import Player from '~/components/game/Player';
+import Select from '~/components/form/Select';
+import AddPlayerModal from '~/components/modal/AddPlayerModal';
+import ConfirmModal from '~/components/modal/ConfirmModal';
+import AddRegistrantModal from '~/components/modal/AddRegistrantModal';
 
-    import User from '~/components/user/User';
-    import Table from '~/components/Table';
-    import Http from "../../../services/Http";
-    import GameTeam from '~/components/game/GameTeam';
-    import Player from '~/components/game/Player';
-    import Select from '~/components/form/Select';
-    import AddPlayerModal from '~/components/modal/AddPlayerModal';
-    import ConfirmModal from '~/components/modal/ConfirmModal';
-    import AddRegistrantModal from '~/components/modal/AddRegistrantModal';
+import { team_for_game } from '../../../utils/objectives';
 
-    import { team_for_game } from '../../../utils/objectives';
+@Component({
+    components: { User, Table, GameTeam, Player, Select },
+    methods: { team_for_game },
+})
+export default class extends Vue {
+    @State((state) => state.game.game) game;
 
-    @Component({
-        components: { User, Table, GameTeam, Player, Select },
-        methods: { team_for_game },
-    })
-    export default class  extends Vue {
-        @State(state => state.game.game) game;
+    applications = [];
 
-        applications = [];
+    rating(user, lang) {
+        if (!user.competitor) return 0;
 
-        rating(user, lang) {
-            if (!user.competitor) return 0;
-
-            return user.competitor[lang + '_rate'];
-        }
-
-        async mounted() {
-            await this.refresh();
-        }
-
-        async refresh() {
-            this.applications = await Http.for(`game/${this.game.id}`).get('applications');
-        }
-
-        addPlayer(user) {
-            this.$open(AddPlayerModal, { user, game: this.game });
-        }
-
-        async addRegistrant() {
-            await this.$open(AddRegistrantModal, { game: this.game });
-
-            await this.refresh();
-        }
-
-        async removePlayer(player, team) {
-            let confirmed = await this.$open(ConfirmModal, { description: "Are you sure you would like to remove this player?" });
-
-            if (!confirmed) return;
-
-            await Http.for(`/game/players/${player.id}`).delete();
-
-            team.players.splice(team.players.indexOf(player), 1);
-        }
+        return user.competitor[lang + '_rate'];
     }
+
+    async mounted() {
+        await this.refresh();
+    }
+
+    async refresh() {
+        this.applications = await Http.for(`game/${this.game.id}`).get(
+            'applications'
+        );
+    }
+
+    addPlayer(user) {
+        this.$open(AddPlayerModal, { user, game: this.game });
+    }
+
+    async addRegistrant() {
+        await this.$open(AddRegistrantModal, { game: this.game });
+
+        await this.refresh();
+    }
+
+    async removePlayer(player, team) {
+        let confirmed = await this.$open(ConfirmModal, {
+            description: 'Are you sure you would like to remove this player?',
+        });
+
+        if (!confirmed) return;
+
+        await Http.for(`/game/players/${player.id}`).delete();
+
+        team.players.splice(team.players.indexOf(player), 1);
+    }
+}
 </script>
+
 
 <style lang="scss" scoped>
 .status {

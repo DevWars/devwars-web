@@ -34,17 +34,17 @@
     </DashboardCard>
 </template>
 
+
 <script>
-    import Vue from 'vue';
+import DashboardCard from '~/components/DashboardCard';
+import Devcoin from '~/components/Devcoin';
 
-    import DashboardCard from '~/components/DashboardCard';
-    import Devcoin from '~/components/Devcoin'
-
-    export default {
-        name: "DailyPrizes",
-        components: { DashboardCard,Devcoin }
-    }
+export default {
+    name: 'DailyPrizes',
+    components: { DashboardCard, Devcoin },
+};
 </script>
+
 
 <style lang="scss" scoped>
 @import '../../assets/styles/utils';

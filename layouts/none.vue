@@ -8,14 +8,12 @@
     </div>
 </template>
 
+
 <script>
-    import Vue from 'vue';
+import Toasts from '~/components/toast/Toasts';
 
-    import Toasts from '~/components/toast/Toasts';
-
-    export default {
-        name: "None",
-        components: {Toasts}
-    }
+export default {
+    name: 'None',
+    components: { Toasts },
+};
 </script>
-

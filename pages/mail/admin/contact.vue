@@ -8,9 +8,7 @@
                     font-size="24px"
                     color="#fff"
                     font-family="helvetica"
-                >
-                    New Contact Enquiry
-                </mj-text>
+                >New Contact Enquiry</mj-text>
             </mj-column>
         </mj-section>
 
@@ -30,29 +28,37 @@
                         <td style="padding: 0 15px;">{{ email }}</td>
                     </tr>
                 </mj-table>
-                <mj-text align="left" font-weight="bold" font-size="16px" color="#fff" font-family="helvetica">
-                    Contact Message:
-                </mj-text>
-                <mj-text align="left" line-height="1.3" font-size="13px" color="#fff" font-family="helvetica">{{ message }}</mj-text>
+                <mj-text
+                    align="left"
+                    font-weight="bold"
+                    font-size="16px"
+                    color="#fff"
+                    font-family="helvetica"
+                >Contact Message:</mj-text>
+                <mj-text
+                    align="left"
+                    line-height="1.3"
+                    font-size="13px"
+                    color="#fff"
+                    font-family="helvetica"
+                >{{ message }}</mj-text>
             </mj-column>
         </mj-section>
     </MailMeta>
 </template>
 
+
 <script>
-    import Vue from 'vue';
+import MailMeta from '../../../components/mail/MailMeta';
 
-    import MailMeta from '../../../components/mail/MailMeta';
+export default {
+    name: 'Contact',
+    components: { MailMeta },
+    layout: 'mail',
+    async asyncData({ query }) {
+        const { name, email, message } = query;
 
-    export default {
-        name: "Contact",
-        components: { MailMeta },
-        layout: 'mail',
-        async asyncData({ query }) {
-            const { name, email, message } = query;
-
-            return { name, email, message };
-        }
-    }
+        return { name, email, message };
+    },
+};
 </script>
-

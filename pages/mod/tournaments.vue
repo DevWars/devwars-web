@@ -1,13 +1,13 @@
 <template>
     <div>
         <PanelHeader title="Tournament">
-            <button @click="createTournament" class="btn btn-primary btn-icon btn-sm">
+            <button class="btn btn-primary btn-icon btn-sm">
                 <i class="fa fa-plus"></i>
                 <span>Add Tournament</span>
             </button>
         </PanelHeader>
 
-        <ListingFilters />
+        <ListingFilters/>
 
         <Table>
             <tr slot="head">
@@ -19,34 +19,32 @@
 
             <tr>
                 <td data-type="Date">11/04/2018</td>
-                <td><strong class="mod-status preparing">PREPARING</strong></td>
+                <td>
+                    <strong class="mod-status preparing">PREPARING</strong>
+                </td>
                 <td>DigitalOcean Tournament</td>
-                <td><nuxt-link to="" class="btn-link">Edit</nuxt-link></td>
+                <td>
+                    <nuxt-link to class="btn-link">Edit</nuxt-link>
+                </td>
             </tr>
         </Table>
 
-        <Pagination />
+        <Pagination/>
     </div>
 </template>
 
+
 <script>
-    import Vue from 'vue';
+import PanelHeader from '~/components/mod/PanelHeader';
+import ListingFilters from '~/components/mod/ListingFilters';
+import Table from '~/components/Table';
+import Input from '~/components/form/Input';
+import Pagination from '~/components/Pagination';
 
-    import PanelHeader from '~/components/mod/PanelHeader';
-    import ListingFilters from '~/components/mod/ListingFilters';
-    import Table from '~/components/Table';
-    import Input from '~/components/form/Input';
-    import Pagination from '~/components/Pagination';
-
-    export default {
-        name: "modTournaments",
-        components: { PanelHeader, ListingFilters, Table, Input, Pagination },
-        methods: {
-            createTournament() {
-                
-            }
-        }
-    }
+export default {
+    name: 'modTournaments',
+    components: { PanelHeader, ListingFilters, Table, Input, Pagination },
+};
 </script>
 
 

@@ -3,9 +3,9 @@
         <div class="team team-blue"></div>
         <div class="score">
             <span class="gamemode">{{ game.name }}</span>
-            <span class="points">
-                {{ points_for_team(team_for_game("blue", game), game) }}&nbsp;&hyphen;&nbsp;{{ points_for_team(team_for_game("red", game), game) }}
-            </span>
+            <span
+                class="points"
+            >{{ points_for_team(team_for_game("blue", game), game) }}&nbsp;&hyphen;&nbsp;{{ points_for_team(team_for_game("red", game), game) }}</span>
         </div>
         <div class="team team-red"></div>
 
@@ -33,132 +33,132 @@
     </HomeCard>
 </template>
 
+
 <script>
-    import Vue from 'vue';
-    
-    import HomeCard from "@/components/HomeCard";
-    import { team_for_game, points_for_team } from '../../utils/objectives';
+import HomeCard from '@/components/HomeCard';
+import { team_for_game, points_for_team } from '../../utils/objectives';
 
-    export default {
-        name: "Recap",
-        components: { HomeCard },
-        props: [
-            "game"
-        ],
-        data: () => {
-            return {
-                points_for_team,
-                team_for_game
-            }
+export default {
+    name: 'Recap',
+    components: { HomeCard },
+    props: ['game'],
+    data: () => {
+        return {
+            points_for_team,
+            team_for_game,
+        };
+    },
+    methods: {
+        player(team, language) {
+            return (
+                team_for_game(team, this.game).players.find((player) => {
+                    return (
+                        player.language &&
+                        player.language.toLowerCase() === language
+                    );
+                }) || {
+                    user: {},
+                }
+            );
         },
-        methods: {
-            player(team, language) {
-                return team_for_game(team, this.game).players
-                    .find(player => {
-                        return player.language && player.language.toLowerCase() === language
-                    }) || {
-                    user: {}
-                };
-            }
-        }
-    }
-
+    },
+};
 </script>
 
+
 <style lang="scss" scoped>
-    @import '../../assets/styles/utils';
+@import '../../assets/styles/utils';
 
-    .team,
-    .score {
-        @extend %align-middle;
+.team,
+.score {
+    @extend %align-middle;
+}
+
+.team {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-size: cover;
+    background-color: $bg-color-2;
+
+    @include breakpoint(md) {
+        width: 60px;
+        height: 60px;
     }
 
-    .team {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        background-size: cover;
-        background-color: $bg-color-2;
-
-        @include breakpoint(md) {
-            width: 60px;
-            height: 60px;
-        }
-
-        @include breakpoint(xs) {
-            display: none;
-        }
-
-        &.team-blue {
-            background-image: url('~assets/img/team-blue.png');
-        }
-
-        &.team-red {
-            background-image: url('~assets/img/team-red.png');
-        }
+    @include breakpoint(xs) {
+        display: none;
     }
 
-    .score {
-        display: inline-block;
-        text-transform: uppercase;
-        margin: 0 $m-space;
-        line-height: 1.37;
-        @include breakpoint(md) {
-            margin: 0 $s-space;
-        }
+    &.team-blue {
+        background-image: url('~assets/img/team-blue.png');
     }
 
-    .gamemode,
-    .points {
-        display: block;
+    &.team-red {
+        background-image: url('~assets/img/team-red.png');
+    }
+}
+
+.score {
+    display: inline-block;
+    text-transform: uppercase;
+    margin: 0 $m-space;
+    line-height: 1.37;
+    @include breakpoint(md) {
+        margin: 0 $s-space;
+    }
+}
+
+.gamemode,
+.points {
+    display: block;
+}
+
+.points {
+    font-size: 48px;
+    letter-spacing: 5px;
+    @include breakpoint(md) {
+        font-size: 24px;
+    }
+    @include breakpoint(xs) {
+        font-size: $h1-font-size;
+    }
+}
+
+.matchup {
+    width: 100%;
+    padding: 0 $grid-gutter-width;
+    display: flex;
+    justify-content: space-between;
+    margin: $s-space auto 0;
+    font-weight: $font-weight-semibold;
+
+    @include breakpoint(sm) {
+        padding: 0;
     }
 
-    .points {
-        font-size: 48px;
-        letter-spacing: 5px;
-        @include breakpoint(md) {
-            font-size: 24px;
-        }
-        @include breakpoint(xs) {
-            font-size: $h1-font-size;
-        }
+    li {
+        margin-top: $xs-space;
+    }
+}
+
+.players,
+.pos {
+    @extend %list-unstyled;
+    font-size: $font-size-sm;
+}
+
+.players {
+    &--blue {
+        text-align: left;
     }
 
-    .matchup {
-        width: 100%;
-        padding: 0 $grid-gutter-width;
-        display: flex;
-        justify-content: space-between;
-        margin: $s-space auto 0;
-        font-weight: $font-weight-semibold;
-
-        @include breakpoint(sm) {
-            padding: 0;
-        }
-
-        li {
-            margin-top: $xs-space;
-        }
+    &--red {
+        text-align: right;
     }
+}
 
-    .players,
-    .pos {
-        @extend %list-unstyled;
-        font-size: $font-size-sm;
-    }
-
-    .players {
-        &--blue {
-            text-align: left;
-        }
-
-        &--red {
-            text-align: right;
-        }
-    }
-
-    .pos {
-        text-align: center;
-    }
-
+.pos {
+    text-align: center;
+}
 </style>

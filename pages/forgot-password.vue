@@ -7,11 +7,16 @@
                     desc="Enter the email address below and we will send you some instructions."
                 >
                     <div class="form-group">
-                        <Input v-model="email" name="email" tabindex="1" required />
+                        <Input v-model="email" name="email" tabindex="1" required/>
                         <label>Email or Username</label>
                     </div>
                     <div slot="actions">
-                        <button type="submit" href="#" class="btn btn-outline-white btn-block" tabindex="2">Reset Password</button>
+                        <button
+                            type="submit"
+                            href="#"
+                            class="btn btn-outline-white btn-block"
+                            tabindex="2"
+                        >Reset Password</button>
                     </div>
                 </DevwarsCard>
             </form>
@@ -22,7 +27,10 @@
                     desc="Please check your email for instructions on how to reset your password."
                 >
                     <div slot="actions">
-                        <a href="/forgot-password" class="btn btn-outline-gray btn-block">Need to try again?</a>
+                        <a
+                            href="/forgot-password"
+                            class="btn btn-outline-gray btn-block"
+                        >Need to try again?</a>
                     </div>
                 </DevwarsCard>
             </div>
@@ -30,30 +38,30 @@
     </div>
 </template>
 
+
 <script>
-    import Vue from 'vue';
-    import DevwarsCard from '~/components/DevwarsCard';
-    import Input from '~/components/form/Input';
+import DevwarsCard from '~/components/DevwarsCard';
+import Input from '~/components/form/Input';
 
-    export default {
-        components: { DevwarsCard, Input },
-        name: "ResetPassword",
-        data() {
-            return {
-                done: false,
-                email: ''
-            }
+export default {
+    components: { DevwarsCard, Input },
+    name: 'ResetPassword',
+    data() {
+        return {
+            done: false,
+            email: '',
+        };
+    },
+    methods: {
+        async forgot() {
+            let done = await this.$store.dispatch('user/forgot', this.email);
+
+            this.done = done;
         },
-        methods: {
-            async forgot() {
-                let done = await this.$store.dispatch('user/forgot', this.email);
-
-                this.done = done;
-            }
-        }
-
-    }
+    },
+};
 </script>
+
 
 <style lang="scss" scoped>
 @import '../assets/styles/utils';

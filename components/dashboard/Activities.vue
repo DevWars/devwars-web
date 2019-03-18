@@ -2,28 +2,38 @@
     <DashboardCard title="Activity Log" icon="fa fa-bar-chart">
         <ul class="activity-history">
             <li class="item" :key="activity.id" v-for="activity in paged.data">
-                <div class="date col-xs-3 no-gutter">{{ activity.created_at | moment('mediumDate') }}</div>
+                <div
+                    class="date col-xs-3 no-gutter"
+                >{{ activity.created_at | moment('mediumDate') }}</div>
                 <div class="title col-xs-6 no-gutter">{{ activity.description}}</div>
                 <div class="rewards col-sm-3 no-gutter">
-                    <div class="reward" v-if="activity.bits" :class="[activity.bits > 0 ? 'win' : '']">{{ (activity.bits) }} Devcoins</div>
-                    <div class="reward" v-if="activity.xp" :class="[activity.xp > 0 ? 'win' : '']">{{ (activity.xp) }} XP
-                    </div>
+                    <div
+                        class="reward"
+                        v-if="activity.bits"
+                        :class="[activity.bits > 0 ? 'win' : '']"
+                    >{{ (activity.bits) }} Devcoins</div>
+                    <div
+                        class="reward"
+                        v-if="activity.xp"
+                        :class="[activity.xp > 0 ? 'win' : '']"
+                    >{{ (activity.xp) }} XP</div>
                 </div>
             </li>
         </ul>
     </DashboardCard>
 </template>
 
-<script>
-    import Vue from 'vue';
-    import DashboardCard from '~/components/DashboardCard';
 
-    export default {
-        name: "Activities",
-        props: ['paged'],
-        components: { DashboardCard }
-    }
+<script>
+import DashboardCard from '~/components/DashboardCard';
+
+export default {
+    name: 'Activities',
+    props: ['paged'],
+    components: { DashboardCard },
+};
 </script>
+
 
 <style lang="scss" scoped>
 @import '../../assets/styles/utils';
@@ -68,16 +78,15 @@
     }
 
     &:before {
-        content: "+";
+        content: '+';
     }
 
     &.lose {
         color: $danger-color;
 
         &:before {
-            content: "-";
+            content: '-';
         }
     }
 }
 </style>
-

@@ -90,13 +90,13 @@
     </div>
 </template>
 
-<script>
-    import Vue from 'vue';
 
-    export default {
-        name: "ComponentFooter"
-    }
+<script>
+export default {
+    name: 'ComponentFooter',
+};
 </script>
+
 
 <style lang="scss" scoped>
 @import '../../assets/styles/utils';

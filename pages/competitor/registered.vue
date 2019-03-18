@@ -1,6 +1,6 @@
 <template>
     <div>
-        <PageBanner title="Compete in DevWars" type="competitor" />
+        <PageBanner title="Compete in DevWars" type="competitor"/>
 
         <div class="footer-offset">
             <div class="container">
@@ -17,18 +17,17 @@
     </div>
 </template>
 
+
 <script>
-    import Vue from 'vue';
-    import moment from 'moment';
+import moment from 'moment';
+import * as countryList from 'country-list';
+import Http from '../../services/Http';
+import PageBanner from '~/components/layout/PageBanner';
+import Input from '~/components/form/Input';
 
-    import * as countryList from 'country-list';
-    import Http from "../../services/Http";
-    import PageBanner from '~/components/layout/PageBanner';
-    import Input from "~/components/form/Input";
-
-    export default {
-        name: "CompetitorRegistration",
-        components: { PageBanner, Input },
-        middleware: 'auth'
-    }
+export default {
+    name: 'CompetitorRegistration',
+    components: { PageBanner, Input },
+    middleware: 'auth',
+};
 </script>

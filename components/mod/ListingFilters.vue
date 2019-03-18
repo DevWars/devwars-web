@@ -13,15 +13,14 @@
     </div>
 </template>
 
+
 <script>
-    import Vue from 'vue';
+import Select from '~/components/form/Select';
 
-    import Select from '~/components/form/Select';
-
-    export default {
-        name: "ListingFilters",
-        components: { Select },
-    }
+export default {
+    name: 'ListingFilters',
+    components: { Select },
+};
 </script>
 
 

@@ -4,21 +4,22 @@
     </div>
 </template>
 
-<script>
-    import Vue from 'vue';
 
-    export default {
-        name: "Avatar",
-        props: ['user'],
-        computed: {
-            style() {
-                return {
-                    backgroundImage: `url(${this.user.avatarUrl || require('~/assets/img/default-avatar.png')})`
-                }
-            }
-        }
-    }
+<script>
+export default {
+    name: 'Avatar',
+    props: ['user'],
+    computed: {
+        style() {
+            return {
+                backgroundImage: `url(${this.user.avatarUrl ||
+                    require('~/assets/img/default-avatar.png')})`,
+            };
+        },
+    },
+};
 </script>
+
 
 <style lang="scss" scoped>
 @import '../../assets/styles/utils';
@@ -26,15 +27,25 @@
 .Avatar {
     @extend %align-middle;
     width: 50px;
-    &.xs { width: 25px; }
-    &.sm { width: 38px; }
-    &.md { width: 50px; }
-    &.lg { width: 70px; }
-    &.xl { width: 140px; }
+    &.xs {
+        width: 25px;
+    }
+    &.sm {
+        width: 38px;
+    }
+    &.md {
+        width: 50px;
+    }
+    &.lg {
+        width: 70px;
+    }
+    &.xl {
+        width: 140px;
+    }
 }
 
 .img {
-    @include aspect-ratio(1,1);
+    @include aspect-ratio(1, 1);
     width: 100%;
     border-radius: 50%;
     background-size: cover;

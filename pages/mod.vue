@@ -1,6 +1,6 @@
 <template>
     <div class="ModPanel">
-        <ModSidebar />
+        <ModSidebar/>
 
         <div class="main">
             <nuxt/>
@@ -8,18 +8,17 @@
     </div>
 </template>
 
-<script>
-import Vue from 'vue';
 
+<script>
 import ModSidebar from '~/components/mod/ModSidebar';
 
 export default {
-    name: "Mod",
+    name: 'Mod',
     layout: 'header',
-    components: { ModSidebar }
-
-}
+    components: { ModSidebar },
+};
 </script>
+
 
 <style lang="scss" scoped>
 @import '../assets/styles/utils';
@@ -41,4 +40,3 @@ export default {
     }
 }
 </style>
-

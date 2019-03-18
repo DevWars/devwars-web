@@ -4,22 +4,25 @@
             <nav class="nav-tabs nav-tabs-fluid">
                 <nuxt-link
                     :to="'/games?season=' + current"
-                    class="nav-tabs__item" v-for="current in seasons" :key="current"
+                    class="nav-tabs__item"
+                    v-for="current in seasons"
+                    :key="current"
                     :class="{active: season === current}"
-                >
-                    Season {{ current }}
-                </nuxt-link>
+                >Season {{ current }}</nuxt-link>
             </nav>
 
             <div
-                class="game" @click="view(game)" :key="game.id" v-for="game in games"
+                class="game"
+                @click="view(game)"
+                :key="game.id"
+                v-for="game in games"
                 :class="{active: viewing && viewing.id === game.id}"
             >
                 <div class="game__meta">
                     <span class="game__mode" :class="[game.name.toLowerCase()]">{{ game.name }}</span>
-                    <span class="game__date">
-                        {{ game.startTime | moment('MMM') }} {{ game.startTime | moment('DD') }}, {{ game.startTime | moment('YYYY') }}
-                    </span>
+                    <span
+                        class="game__date"
+                    >{{ game.startTime | moment('MMM') }} {{ game.startTime | moment('DD') }}, {{ game.startTime | moment('YYYY') }}</span>
                     <span class="game__theme">{{ game.theme }}</span>
                 </div>
                 <div class="game__icons">
@@ -28,60 +31,61 @@
             </div>
         </div>
 
-        <div class="view col-sm-9" >
-            <LargeGameDetail :game="viewing" />
+        <div class="view col-sm-9">
+            <LargeGameDetail :game="viewing"/>
         </div>
     </div>
 </template>
 
+
 <script>
-    import Vue from 'vue';
+import Http from '../services/Http';
+import LargeGameDetail from '../components/game/LargeGameDetail';
 
-    import Http from '../services/Http';
-    import LargeGameDetail from '../components/game/LargeGameDetail';
+export default {
+    name: 'Games',
+    components: { LargeGameDetail },
+    data() {
+        return {
+            seasons: [3, 2, 1],
+            season: 3,
+            games: [],
+            viewing: null,
+        };
+    },
+    watch: {
+        '$route.query.season': {
+            immediate: true,
+            async handler(newSeason) {
+                this.season = parseInt(newSeason || '3');
 
-    export default {
-        name: "Games",
-        components: { LargeGameDetail },
-        data() {
-            return {
-                seasons: [3, 2, 1],
-                season: 3,
-                games: [],
-                viewing: null
-            }
-        },
-        watch: {
-            '$route.query.season': {
-                immediate: true,
-                async handler(newSeason) {
-                    this.season = parseInt(newSeason || "3");
+                this.games = await Http.for('game/season').get(this.season);
 
-                    this.games = await Http.for('game/season').get(this.season);
-
-                    if(!this.$route.query.game) {
-                        this.viewing = await Http.for('game').get(this.games[0].id);
-                    }
-                },
-            },
-            '$route.query.game': {
-                immediate: true,
-                async handler(newGame) {
-                    if(newGame) {
-                        this.viewing = await Http.for('game').get(newGame);
-                    }
+                if (!this.$route.query.game) {
+                    this.viewing = await Http.for('game').get(this.games[0].id);
                 }
-            }
-
+            },
         },
-        methods: {
-            async view(game) {
-                this.$router.push({ path: '/games', query: { game: game.id, season: game.season } })
-            }
-        }
-
-    }
+        '$route.query.game': {
+            immediate: true,
+            async handler(newGame) {
+                if (newGame) {
+                    this.viewing = await Http.for('game').get(newGame);
+                }
+            },
+        },
+    },
+    methods: {
+        async view(game) {
+            this.$router.push({
+                path: '/games',
+                query: { game: game.id, season: game.season },
+            });
+        },
+    },
+};
 </script>
+
 
 <style lang="scss" scoped>
 @import '../assets/styles/utils';
@@ -150,7 +154,6 @@
         display: block;
         margin-top: $xxs-space;
         font-size: 20px;
-
     }
 
     &__youtube {
@@ -160,7 +163,7 @@
 
     // Variationss
     @mixin game-item-variant($mode, $color) {
-        &__mode.#{$mode}  {
+        &__mode.#{$mode} {
             border-color: $color;
             color: $color;
         }

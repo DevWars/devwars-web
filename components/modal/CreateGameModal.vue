@@ -2,14 +2,14 @@
     <form v-async-submit="[submit]">
         <div class="form-group">
             <select v-model="name" class="form-control">
-                <option value="">Select Game Type</option>
+                <option value>Select Game Type</option>
                 <option>Classic</option>
                 <option>Zen Garden</option>
                 <option>Blitz</option>
             </select>
         </div>
         <div class="form-group">
-            <DatePicker v-model="date" />
+            <DatePicker v-model="date"/>
 
             <label>When is the game?</label>
         </div>
@@ -20,36 +20,34 @@
     </form>
 </template>
 
+
 <script>
-    import Vue from 'vue';
+import moment from 'moment';
+import Input from '../form/Input';
+import DatePicker from '../form/DatePicker';
 
-    import moment from 'moment';
+export default {
+    name: 'CreateGameModal',
+    components: { DatePicker, Input },
+    props: ['resolve'],
+    data: () => {
+        return {
+            name: '',
+            date: '',
+        };
+    },
+    methods: {
+        async submit() {
+            let timestamp =
+                moment.utc(this.date, 'MM/DD/YYYY HH:mm').unix() * 1000;
 
-    import { Prop } from 'vue-property-decorator';
-    import Input from '../form/Input';
-    import DatePicker from '../form/DatePicker';
+            await this.$store.dispatch('game/create', {
+                name: this.name,
+                timestamp,
+            });
 
-    export default {
-        name: "CreateGameModal",
-        components: { DatePicker, Input },
-        props: [
-            "resolve"
-        ],
-        data: () => {
-            return {
-                name: '',
-                date: ''
-            }
+            this.close(true);
         },
-        methods: {
-            async submit() {
-                let timestamp = moment.utc(this.date, 'MM/DD/YYYY HH:mm').unix() * 1000;
-
-                await this.$store.dispatch('game/create', { name: this.name, timestamp });
-
-                this.close(true);
-            }
-        }
-
-    }
+    },
+};
 </script>

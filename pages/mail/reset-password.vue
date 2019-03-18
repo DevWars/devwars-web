@@ -8,11 +8,16 @@
                     font-size="24px"
                     color="#fff"
                     font-family="helvetica"
+                >Password Reset</mj-text>
+                <mj-text
+                    align="center"
+                    line-height="1.3"
+                    font-size="16px"
+                    color="#fff"
+                    font-family="helvetica"
                 >
-                    Password Reset
-                </mj-text>
-                <mj-text align="center" line-height="1.3" font-size="16px" color="#fff" font-family="helvetica">
-                    We received a password change request for your DevWars account: <strong>{{ username }}</strong>. To
+                    We received a password change request for your DevWars account:
+                    <strong>{{ username }}</strong>. To
                     change your password, click the link below:
                 </mj-text>
             </mj-column>
@@ -27,26 +32,23 @@
                     font-family="helvetica"
                     font-size="18px"
                     font-weight="bold"
-                >
-                    RESET PASSWORD
-                </mj-button>
+                >RESET PASSWORD</mj-button>
             </mj-column>
         </mj-section>
     </MailMeta>
 </template>
 
+
 <script>
-    import Vue from 'vue';
+import MailMeta from '../../components/mail/MailMeta';
 
-    import MailMeta from '../../components/mail/MailMeta';
-
-    export default {
-        name: "ResetPassword",
-        components: { MailMeta },
-        layout: 'mail',
-        async asyncData({ query }) {
-            console.log(query);
-            return { url: query.url, username: query.username };
-        }
-    }
+export default {
+    name: 'ResetPassword',
+    components: { MailMeta },
+    layout: 'mail',
+    async asyncData({ query }) {
+        console.log(query);
+        return { url: query.url, username: query.username };
+    },
+};
 </script>

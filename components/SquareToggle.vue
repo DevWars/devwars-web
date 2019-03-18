@@ -8,30 +8,29 @@
     ></div>
 </template>
 
-<script>
-    import Vue from 'vue';
 
-    export default {
-        name: "SquareToggle",
-        props: {
-            color: {},
-            active: {
-                default: false
-            }
+<script>
+export default {
+    name: 'SquareToggle',
+    props: {
+        color: {},
+        active: {
+            default: false,
         },
-        data: () => {
-            return {
-                colors: {
-                    'blue': '#00c9ff',
-                    'red': '#ff007d'
-                },
-                hovered: false
-            }
+    },
+    data: () => {
+        return {
+            colors: {
+                blue: '#00c9ff',
+                red: '#ff007d',
+            },
+            hovered: false,
+        };
+    },
+    computed: {
+        highlighted() {
+            return this.hovered || this.active;
         },
-        computed: {
-            highlighted() {
-                return this.hovered || this.active;
-            }
-        }
-    }
+    },
+};
 </script>

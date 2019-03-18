@@ -7,13 +7,27 @@
                     <span>DevWars</span>
                 </a>
                 <ul>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#positions">Positions</a></li>
-                    <li><a href="#game-modes">Game Modes</a></li>
-                    <li><a href="#themes">Themes</a></li>
-                    <li><a href="#objectives">Objectives</a></li>
-                    <li><a href="#points">Points</a></li>
-                    <li><a href="#rules">Rules</a></li>
+                    <li>
+                        <a href="#about">About</a>
+                    </li>
+                    <li>
+                        <a href="#positions">Positions</a>
+                    </li>
+                    <li>
+                        <a href="#game-modes">Game Modes</a>
+                    </li>
+                    <li>
+                        <a href="#themes">Themes</a>
+                    </li>
+                    <li>
+                        <a href="#objectives">Objectives</a>
+                    </li>
+                    <li>
+                        <a href="#points">Points</a>
+                    </li>
+                    <li>
+                        <a href="#rules">Rules</a>
+                    </li>
                 </ul>
 
                 <a href="#watching" class="btn-icon">
@@ -21,9 +35,15 @@
                     <span>Watching</span>
                 </a>
                 <ul>
-                    <li><a href="#tools">Tools</a></li>
-                    <li><a href="#voting">Voting</a></li>
-                    <li><a href="#betting">Betting</a></li>
+                    <li>
+                        <a href="#tools">Tools</a>
+                    </li>
+                    <li>
+                        <a href="#voting">Voting</a>
+                    </li>
+                    <li>
+                        <a href="#betting">Betting</a>
+                    </li>
                 </ul>
 
                 <a href="#competing" class="btn-icon">
@@ -31,8 +51,12 @@
                     <span>Competing</span>
                 </a>
                 <ul>
-                    <li><a href="#requirements">Requirements</a></li>
-                    <li><a href="#editor">Editor</a></li>
+                    <li>
+                        <a href="#requirements">Requirements</a>
+                    </li>
+                    <li>
+                        <a href="#editor">Editor</a>
+                    </li>
                 </ul>
 
                 <a href="#earning" class="btn-icon">
@@ -40,10 +64,18 @@
                     <span>Earning</span>
                 </a>
                 <ul>
-                    <li><a href="#xp" class="disabled">XP</a></li>
-                    <li><a href="#ranks" class="disabled">Ranks</a></li>
-                    <li><a href="#devcoins">Devcoins</a></li>
-                    <li><a href="#badges" class="disabled">Badges</a></li>
+                    <li>
+                        <a href="#xp" class="disabled">XP</a>
+                    </li>
+                    <li>
+                        <a href="#ranks" class="disabled">Ranks</a>
+                    </li>
+                    <li>
+                        <a href="#devcoins">Devcoins</a>
+                    </li>
+                    <li>
+                        <a href="#badges" class="disabled">Badges</a>
+                    </li>
                 </ul>
 
                 <div class="warning">
@@ -105,9 +137,7 @@
                             <div class="role">Functionality</div>
                         </li>
                     </ul>
-                    <p>
-                        Each position plays a critical role for the team. HTML is in charge of templating the DOM, CSS handles the design for the website and JavaScript brings functionality into the website.
-                    </p>
+                    <p>Each position plays a critical role for the team. HTML is in charge of templating the DOM, CSS handles the design for the website and JavaScript brings functionality into the website.</p>
                 </section>
                 <section id="game-modes">
                     <h2>Game Modes</h2>
@@ -119,24 +149,16 @@
                         <span class="label label-outline-html label-sm">HTML</span>
                         <span class="label label-outline-css label-sm">CSS</span>
                         <span class="label label-outline-js label-sm">JAVASCRIPT</span>
-                        <p>
-                            Time: 60:00
-                        </p>
-                        <p>
-                            This action-packed game mode is the only one that features all 3 supported languages. Two teams of three, face off against each other with a theme and a set of objectives.
-                        </p>
+                        <p>Time: 60:00</p>
+                        <p>This action-packed game mode is the only one that features all 3 supported languages. Two teams of three, face off against each other with a theme and a set of objectives.</p>
                     </section>
 
                     <section>
                         <h3>Zen Garden</h3>
                         <span class="label label-outline-white label-sm">1 VS 1</span>
                         <span class="label label-outline-css label-sm">CSS</span>
-                        <p>
-                            Time: 60:00
-                        </p>
-                        <p>
-                            This 1 vs 1 game mode provides both teams the same pre-made HTML document. Both teams can only use CSS to style their website. Objectives are not available in Zen Garden games.
-                        </p>
+                        <p>Time: 60:00</p>
+                        <p>This 1 vs 1 game mode provides both teams the same pre-made HTML document. Both teams can only use CSS to style their website. Objectives are not available in Zen Garden games.</p>
                     </section>
 
                     <section class="coming-soon">
@@ -158,13 +180,20 @@
 
                     <section>
                         <h3>Completing Objectives</h3>
-                        <p>When an objective is complete, players must request the objective to be removed by the game
-                            show host in order to secure the point(s).</p>
+                        <p>
+                            When an objective is complete, players must request the objective to be removed by the game
+                            show host in order to secure the point(s).
+                        </p>
                     </section>
 
                     <section>
                         <h3>Bonus Objectives</h3>
-                        <p>Unlike standard objectives, bonus objectives are worth 2 points instead of 1 and are denoted by a <span class="color-bonus">gold color</span>. By default, bonus objectives are locked and cannot be achieved until all 4 standard objectives have been completed.</p>
+                        <p>
+                            Unlike standard objectives, bonus objectives are worth 2 points instead of 1 and are denoted by a
+                            <span
+                                class="color-bonus"
+                            >gold color</span>. By default, bonus objectives are locked and cannot be achieved until all 4 standard objectives have been completed.
+                        </p>
                     </section>
 
                     <section id="strikes">
@@ -209,7 +238,9 @@
                         <tfoot>
                             <tr>
                                 <td>&nbsp;</td>
-                                <td><strong>10</strong></td>
+                                <td>
+                                    <strong>10</strong>
+                                </td>
                             </tr>
                         </tfoot>
                     </table>
@@ -219,11 +250,12 @@
                     <h2>Rules</h2>
                     <ol>
                         <li>No Frameworks of any kind are to be used.</li>
-                        <li>No copying and pasting of code, however copying code and URLs from teammates is acceptable.
-                        </li>
+                        <li>No copying and pasting of code, however copying code and URLs from teammates is acceptable.</li>
                         <li>After the 60 minute timer has run out, your code can no longer be modified.</li>
                         <li>Inline styling is not allowed. All styling must be performed using CSS.</li>
-                        <li>Player must code in the <a href="#editor">DevWars Editor</a>, coding in any other editor/IDE is strictly prohibitted.
+                        <li>
+                            Player must code in the
+                            <a href="#editor">DevWars Editor</a>, coding in any other editor/IDE is strictly prohibitted.
                         </li>
                     </ol>
                 </section>
@@ -268,8 +300,18 @@
 
                 <section id="voting">
                     <h2>Voting</h2>
-                    <p>In addition to the objectives, our audience awards additional points in the categories <a href="#vote-ui">UI</a> and <a href="#vote-ux">UX</a>.</p>
-                    <p>To participate in voting, type <code>!blue</code> or <code>!red</code> in the chat to express your personal favorite in each category when prompted.</p>
+                    <p>
+                        In addition to the objectives, our audience awards additional points in the categories
+                        <a
+                            href="#vote-ui"
+                        >UI</a> and
+                        <a href="#vote-ux">UX</a>.
+                    </p>
+                    <p>
+                        To participate in voting, type
+                        <code>!blue</code> or
+                        <code>!red</code> in the chat to express your personal favorite in each category when prompted.
+                    </p>
 
                     <section>
                         <h3>Point Distribution</h3>
@@ -300,33 +342,33 @@
 
                     <section id="vote-ui">
                         <h3>UI / User Interface</h3>
-                        <p>
-                            Base your vote on the overall design of the website. The interface should feel coherent with consistent use of elements. The website should be responsive, look good on mobile and follow the game's theme.
-                        </p>
+                        <p>Base your vote on the overall design of the website. The interface should feel coherent with consistent use of elements. The website should be responsive, look good on mobile and follow the game's theme.</p>
                     </section>
 
                     <section id="vote-ux">
                         <h3>UX / User Experience</h3>
-                        <p>
-                            Base your vote on how you feel when interacting with the website. It should be simple to use and easy to navigate. Look for things such as bugs or poor execution of functionality by way of design.
-                        </p>
+                        <p>Base your vote on how you feel when interacting with the website. It should be simple to use and easy to navigate. Look for things such as bugs or poor execution of functionality by way of design.</p>
                     </section>
 
                     <section>
                         <h3>Tie Breaker</h3>
-                        <p>
-                            If the points on both teams are tied, we run a Tie Breaker for the best overall team. Users vote blindly, meaning, the voting bars will not be displayed on the stream. In the unlikely event that there is a tie in the tie breaker, the game host will make the final decision and declare the winner.
-                        </p>
+                        <p>If the points on both teams are tied, we run a Tie Breaker for the best overall team. Users vote blindly, meaning, the voting bars will not be displayed on the stream. In the unlikely event that there is a tie in the tie breaker, the game host will make the final decision and declare the winner.</p>
                     </section>
                 </section>
 
                 <section id="betting">
                     <h2>Betting</h2>
                     <p>Put your hard earned Devcoins on the line by betting on which team you think will win the game. Betting is only open for ten minutes after the first five minutes of the match.</p>
-                    <p>You can bet with the following command in the Twitch chat:<br><code>!bet [amount] [team] [objectives]</code></p>
+                    <p>You can bet with the following command in the Twitch chat:
+                        <br>
+                        <code>!bet [amount] [team] [objectives]</code>
+                    </p>
 
                     <section>
-                        <p><code>[amount]</code><br>Enter the amount of Devcoins you want to bet.</p>
+                        <p>
+                            <code>[amount]</code>
+                            <br>Enter the amount of Devcoins you want to bet.
+                        </p>
                         <table>
                             <thead>
                                 <tr>
@@ -336,7 +378,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><span class="keybinding">Integer</span></td>
+                                    <td>
+                                        <span class="keybinding">Integer</span>
+                                    </td>
                                     <td>A minimum of 50 Devcoins are required to place a bet.</td>
                                 </tr>
                             </tbody>
@@ -344,7 +388,10 @@
                     </section>
 
                     <section>
-                        <p><code>[team]</code><br>Enter the team color you are betting to win.</p>
+                        <p>
+                            <code>[team]</code>
+                            <br>Enter the team color you are betting to win.
+                        </p>
                         <table>
                             <thead>
                                 <tr>
@@ -366,7 +413,11 @@
                     </section>
 
                     <section>
-                        <p><code>[objectives]</code><br>Enter the <u>minimum</u> number of objectives you think the team will secure.</p>
+                        <p>
+                            <code>[objectives]</code>
+                            <br>Enter the
+                            <u>minimum</u> number of objectives you think the team will secure.
+                        </p>
                         <table>
                             <thead>
                                 <tr>
@@ -388,7 +439,10 @@
                     </section>
 
                     <section>
-                        <p><code>!clearbet</code><br>Clears your last placed bet.</p>
+                        <p>
+                            <code>!clearbet</code>
+                            <br>Clears your last placed bet.
+                        </p>
                     </section>
 
                     <section>
@@ -406,32 +460,44 @@
                             <tbody>
                                 <tr>
                                     <td>Team (Blue/Red)</td>
-                                    <td><code>!bet 100 blue</code></td>
+                                    <td>
+                                        <code>!bet 100 blue</code>
+                                    </td>
                                     <td>1:2</td>
                                 </tr>
                                 <tr>
                                     <td>&gt;=1 Objectives</td>
-                                    <td><code>!bet 100 red 1</code></td>
+                                    <td>
+                                        <code>!bet 100 red 1</code>
+                                    </td>
                                     <td>3:5</td>
                                 </tr>
                                 <tr>
                                     <td>&gt;=2 Objectives</td>
-                                    <td><code>!bet 100 red 2</code></td>
+                                    <td>
+                                        <code>!bet 100 red 2</code>
+                                    </td>
                                     <td>4:5</td>
                                 </tr>
                                 <tr>
                                     <td>&gt;=3 Objectives</td>
-                                    <td><code>!bet 100 red 3</code></td>
+                                    <td>
+                                        <code>!bet 100 red 3</code>
+                                    </td>
                                     <td>1:1</td>
                                 </tr>
                                 <tr>
                                     <td>&gt;=4 Objectives</td>
-                                    <td><code>!bet 100 red 4</code></td>
+                                    <td>
+                                        <code>!bet 100 red 4</code>
+                                    </td>
                                     <td>7:5</td>
                                 </tr>
                                 <tr>
                                     <td>==5 Objectives (Ace)</td>
-                                    <td><code>!bet 100 blue ace</code></td>
+                                    <td>
+                                        <code>!bet 100 blue ace</code>
+                                    </td>
                                     <td>2:1</td>
                                 </tr>
                             </tbody>
@@ -491,8 +557,13 @@
                         <p>It is required that you have a microphone so that you can speak with your teammates during a live game. Contestants must be able to read, write and speak English.</p>
                         <div class="disclaimer">Communication is not required on Zen Garden games.</div>
 
-                        <p>All voice communications are hosting on our <a href="https://www.discord.gg/devwars" target="_blank"
-                        >Official Discord</a>.</p>
+                        <p>
+                            All voice communications are hosting on our
+                            <a
+                                href="https://www.discord.gg/devwars"
+                                target="_blank"
+                            >Official Discord</a>.
+                        </p>
                     </section>
                 </section>
 
@@ -507,8 +578,10 @@
 
                     <section>
                         <h3>Supported Keys</h3>
-                        <p>You can use the following keyboard shortcuts in the DevWars editor (currently only displaying
-                            Windows keyboard layout):</p>
+                        <p>
+                            You can use the following keyboard shortcuts in the DevWars editor (currently only displaying
+                            Windows keyboard layout):
+                        </p>
                         <table>
                             <thead>
                                 <tr>
@@ -518,27 +591,39 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><span class="keybinding">Ctrl+S</span></td>
+                                    <td>
+                                        <span class="keybinding">Ctrl+S</span>
+                                    </td>
                                     <td>Save document</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="keybinding">Ctrl+D</span></td>
+                                    <td>
+                                        <span class="keybinding">Ctrl+D</span>
+                                    </td>
                                     <td>Find next matching selection</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="keybinding">Ctrl+F</span></td>
+                                    <td>
+                                        <span class="keybinding">Ctrl+F</span>
+                                    </td>
                                     <td>Find</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="keybinding">Ctrl+H</span></td>
+                                    <td>
+                                        <span class="keybinding">Ctrl+H</span>
+                                    </td>
                                     <td>Replace</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="keybinding">Ctrl+G</span></td>
+                                    <td>
+                                        <span class="keybinding">Ctrl+G</span>
+                                    </td>
                                     <td>Go to line number</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="keybinding">Ctrl+Space</span></td>
+                                    <td>
+                                        <span class="keybinding">Ctrl+Space</span>
+                                    </td>
                                     <td>Trigger auto complete</td>
                                 </tr>
                             </tbody>
@@ -547,17 +632,26 @@
 
                     <section>
                         <h3>Saving Changes</h3>
-                        <p>It is important for you to save your document frequently using <span class="keybinding">Ctrl+S</span>. Make sure to only save when your code is complete. The viewers and game host will not be able to render your website until you have saved your changes.</p>
+                        <p>
+                            It is important for you to save your document frequently using
+                            <span
+                                class="keybinding"
+                            >Ctrl+S</span>. Make sure to only save when your code is complete. The viewers and game host will not be able to render your website until you have saved your changes.
+                        </p>
                     </section>
 
                     <section>
                         <h3>Submitting Objectives</h3>
                         <p>When you complete an objective, you must submit it for review. To submit an objective, click the checkbox icon on the top left corner of the game view.</p>
-                        <p>Tip: Make sure all team members are ready before marking an objective complete or else your team could potentially <a href="#strikes">receive a Strike</a>.</p>
+                        <p>
+                            Tip: Make sure all team members are ready before marking an objective complete or else your team could potentially
+                            <a
+                                href="#strikes"
+                            >receive a Strike</a>.
+                        </p>
                     </section>
                 </section>
             </article>
-
 
             <article id="earning">
                 <header>
@@ -582,7 +676,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><strong>Twitch Chat (offline)</strong></td>
+                                    <td>
+                                        <strong>Twitch Chat (offline)</strong>
+                                    </td>
                                     <td>Awarded every 30 minutes</td>
                                     <td>
                                         <div class="devcoins">
@@ -592,7 +688,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Twitch Chat (live)</strong></td>
+                                    <td>
+                                        <strong>Twitch Chat (live)</strong>
+                                    </td>
                                     <td>Awarded every 30 minutes</td>
                                     <td>
                                         <div class="devcoins">
@@ -602,22 +700,36 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Betting</strong></td>
-                                    <td>Place <a href="#betting">Bets</a> during a game</td>
+                                    <td>
+                                        <strong>Betting</strong>
+                                    </td>
+                                    <td>
+                                        Place
+                                        <a href="#betting">Bets</a> during a game
+                                    </td>
                                     <td>
                                         <span class="keybinding">Variable</span>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Badges</strong></td>
-                                    <td>Earn <a href="/badges">Badges</a></td>
+                                    <td>
+                                        <strong>Badges</strong>
+                                    </td>
+                                    <td>
+                                        Earn
+                                        <a href="/badges">Badges</a>
+                                    </td>
                                     <td>
                                         <span class="keybinding">Variable</span>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Competing</strong></td>
-                                    <td><a href="#competing">Compete</a> in a DevWars game</td>
+                                    <td>
+                                        <strong>Competing</strong>
+                                    </td>
+                                    <td>
+                                        <a href="#competing">Compete</a> in a DevWars game
+                                    </td>
                                     <td>
                                         <span class="keybinding">Variable</span>
                                     </td>
@@ -631,30 +743,36 @@
     </div>
 </template>
 
+
 <script>
-    import Vue from 'vue';
-    import Devcoin from '~/components/Devcoin';
+import Devcoin from '~/components/Devcoin';
 
-    export default {
-        name: "Docs",
-        components: { Devcoin },
-        layout: 'header',
-         mounted() {
-            if (!this.$route.hash) return;
+export default {
+    name: 'Docs',
+    components: { Devcoin },
+    layout: 'header',
+    mounted() {
+        if (!this.$route.hash) return;
 
-            const anchored = document.querySelector(this.$route.hash);
+        const anchored = document.querySelector(this.$route.hash);
 
-            if (anchored) anchored.scrollIntoView();
+        if (anchored) anchored.scrollIntoView();
 
-            let scrollable = document.querySelector('.docs__main');
+        let scrollable = document.querySelector('.docs__main');
 
-            scrollable.addEventListener('scroll', event => {
-                let sections = Array.prototype.slice.apply(document.querySelectorAll('section'));
-                let links = Array.prototype.slice.apply(document.querySelectorAll('.nav__link'));
+        scrollable.addEventListener('scroll', (event) => {
+            let sections = Array.prototype.slice.apply(
+                document.querySelectorAll('section')
+            );
+            let links = Array.prototype.slice.apply(
+                document.querySelectorAll('.nav__link')
+            );
 
-                links.forEach(it => it.classList.remove('active'));
+            links.forEach((it) => it.classList.remove('active'));
 
-                let active = sections.filter(it => it.getBoundingClientRect().y > 0).sort((a, b) => {
+            let active = sections
+                .filter((it) => it.getBoundingClientRect().y > 0)
+                .sort((a, b) => {
                     let keyA = a.getBoundingClientRect().y;
                     let keyB = b.getBoundingClientRect().y;
 
@@ -663,15 +781,15 @@
                     return 0;
                 })[0];
 
-                let link = document.querySelector(`.nav__link[href='#${active.id}']`)
+            let link = document.querySelector(
+                `.nav__link[href='#${active.id}']`
+            );
 
-                if (link)
-                    link.classList.add('active');
-            });
-        }
-    }
+            if (link) link.classList.add('active');
+        });
+    },
+};
 </script>
-
 
 
 <style lang="scss" scoped>
@@ -775,7 +893,12 @@ article {
         }
     }
 
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
         text-transform: initial;
     }
 
@@ -794,7 +917,9 @@ article {
         color: $text-color-primary;
     }
 
-    p, ul, ol {
+    p,
+    ul,
+    ol {
         padding: $grid-gutter-part 0 0;
         color: rgba(#fff, 0.85);
     }
@@ -812,7 +937,7 @@ article {
     }
 
     ol > li:before {
-        @include aspect-ratio(1,1);
+        @include aspect-ratio(1, 1);
         width: $ol-bullet-size;
         counter-increment: a;
         content: counter(a);
@@ -835,13 +960,12 @@ article {
             text-align: left;
         }
 
-        th, td {
+        th,
+        td {
             padding: $xxs-space 0;
         }
-
     }
 }
-
 
 /*  ========================================================================
 01.1 Doc Components
@@ -854,12 +978,12 @@ code,
 }
 
 code {
-    background-color: rgba($brand-secondary, 0.10);
+    background-color: rgba($brand-secondary, 0.1);
     color: $brand-secondary;
 }
 
 .keybinding {
-    background-color: rgba($brand-primary, 0.10);
+    background-color: rgba($brand-primary, 0.1);
     color: $brand-primary;
 }
 
@@ -869,7 +993,7 @@ code {
     font-style: italic;
 
     &:before {
-        content: "* ";
+        content: '* ';
     }
 }
 
@@ -887,7 +1011,6 @@ code {
     }
 }
 
-
 /*  ========================================================================
 01.2 Doc Components
 ========================================================================= */
@@ -896,7 +1019,7 @@ code {
     text-align: center;
 
     .circle {
-        @include aspect-ratio(1,1);
+        @include aspect-ratio(1, 1);
         max-width: 85px;
         border-width: $border-size;
         border-style: solid;
@@ -928,8 +1051,12 @@ code {
     }
 
     li:hover {
-        .lang { display: inline-block; }
-        .symbol { display: none; }
+        .lang {
+            display: inline-block;
+        }
+        .symbol {
+            display: none;
+        }
     }
 
     @mixin position($lang, $color) {
@@ -951,11 +1078,18 @@ code {
 }
 
 .communications {
-    .fa, .fab, .far, .fal, img {
+    .fa,
+    .fab,
+    .far,
+    .fal,
+    img {
         opacity: 0.88;
     }
 
-    .fa, .fab, .far, .fal {
+    .fa,
+    .fab,
+    .far,
+    .fal {
         font-size: 48px;
     }
 
@@ -989,11 +1123,13 @@ code {
         height: 100px;
         padding: 0 $xs-space;
         background-color: lighten($bg-color-2, 3%);
-        box-shadow: 0 1px 5px 0 rgba($bg-color-4, 0.47), 0 7px 17px 0 rgba($bg-color-4, 0.41);
+        box-shadow: 0 1px 5px 0 rgba($bg-color-4, 0.47),
+            0 7px 17px 0 rgba($bg-color-4, 0.41);
         transition: box-shadow 0.2s ease-in-out;
 
         &:hover {
-            box-shadow: 0 1px 5px 0 rgba($bg-color-4, 0.57), 0 7px 17px 0 rgba($bg-color-4, 0.71);
+            box-shadow: 0 1px 5px 0 rgba($bg-color-4, 0.57),
+                0 7px 17px 0 rgba($bg-color-4, 0.71);
         }
     }
 

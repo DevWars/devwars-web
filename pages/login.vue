@@ -1,14 +1,14 @@
 <template>
     <div class="Login header-offset">
         <div class="container">
-            <form v-async-submit="[login]" >
+            <form v-async-submit="[login]">
                 <DevwarsCard title="Login">
                     <div class="form-group">
-                        <Input v-model="username" required />
+                        <Input v-model="username" required/>
                         <label>Email or Username</label>
                     </div>
                     <div class="form-group">
-                        <Input v-model="password" name="password" type="password" required />
+                        <Input v-model="password" name="password" type="password" required/>
                         <label>Password</label>
                     </div>
                     <div slot="actions">
@@ -22,29 +22,33 @@
     </div>
 </template>
 
-<script>
-    import Vue from 'vue';
-    import DevwarsCard from '~/components/DevwarsCard';
-    import Input from '~/components/form/Input';
 
-    export default {
-        name: "Login",
-        components: { DevwarsCard, Input },
-        layout: 'header',
-        middleware: 'guest',
-        data: () => {
-            return {
-                username: '',
-                password: ''
-            }
+<script>
+import DevwarsCard from '~/components/DevwarsCard';
+import Input from '~/components/form/Input';
+
+export default {
+    name: 'Login',
+    components: { DevwarsCard, Input },
+    layout: 'header',
+    middleware: 'guest',
+    data: () => {
+        return {
+            username: '',
+            password: '',
+        };
+    },
+    methods: {
+        async login() {
+            return await this.$store.dispatch('user/login', {
+                username: this.username,
+                password: this.password,
+            });
         },
-        methods: {
-            async login() {
-                return await this.$store.dispatch('user/login', {username: this.username, password: this.password});
-            }
-        }
-    }
+    },
+};
 </script>
+
 
 <style lang="scss" scoped>
 @import '../assets/styles/utils';

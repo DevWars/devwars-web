@@ -3,9 +3,7 @@
         <Popup>
             <div class="user-group" slot="trigger">
                 <Avatar :user="user" class="sm"/>
-                <div class="user-group__name">
-                    {{ user.username }}
-                </div>
+                <div class="user-group__name">{{ user.username }}</div>
             </div>
             <div class="menu" slot="menu">
                 <slot></slot>
@@ -14,19 +12,18 @@
     </div>
 </template>
 
+
 <script>
+import Popup from '~/components/Popup';
+import Avatar from '~/components/user/Avatar';
 
-    import Vue from 'vue';
-
-    import Popup from '~/components/Popup';
-    import Avatar from '~/components/user/Avatar';
-
-    export default {
-        name: "UserMenu",
-        props: ['user'],
-        components: { Popup, Avatar }
-    }
+export default {
+    name: 'UserMenu',
+    props: ['user'],
+    components: { Popup, Avatar },
+};
 </script>
+
 
 <style lang="scss" scoped>
 @import '../../assets/styles/utils';

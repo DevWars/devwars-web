@@ -1,15 +1,19 @@
 <template>
     <div>
-        <PageBanner title="Badges" />
+        <PageBanner title="Badges"/>
         <div class="footer-offset">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3 col-md-4 col-sm-6" v-for="badge in badges" :key="badge.id">
-                        <div class="badge-card bronze" :class="{complete: completed(badge)}"
-                             :title="badge.description">
+                        <div
+                            class="badge-card bronze"
+                            :class="{complete: completed(badge)}"
+                            :title="badge.description"
+                        >
                             <div class="badge-card__meta">
-                                <span class="badge-card__global"><i
-                                    class="fa fa-group"></i></span>
+                                <span class="badge-card__global">
+                                    <i class="fa fa-group"></i>
+                                </span>
                                 <!--<span class="badge-card__tier">Bronze</span>-->
                             </div>
                             <img class="badge-card__img" :src="image(badge)">
@@ -26,56 +30,56 @@
                 </div>
             </div>
         </div>
-
     </div>
 </template>
 
+
 <script>
-    import Vue from 'vue';
-    import Http from "../services/Http";
+import { mapGetters } from 'vuex';
+import Http from '../services/Http';
+import PageBanner from '~/components/layout/PageBanner';
+import Devcoin from '~/components/Devcoin';
 
-    import PageBanner from '~/components/layout/PageBanner';
-    import Devcoin from '~/components/Devcoin';
-
-    import {mapGetters} from 'vuex';
-
-    export default {
-        name: 'Badges',
-        components: {
-            PageBanner,
-            Devcoin
+export default {
+    name: 'Badges',
+    components: {
+        PageBanner,
+        Devcoin,
+    },
+    computed: {
+        ...mapGetters({
+            badges: 'badges/badges',
+            userCount: 'user/userCount',
+        }),
+    },
+    methods: {
+        completed(badge) {
+            return this.mine.some((it) => it.id === badge.id);
         },
-        computed: {
-            ...mapGetters({
-                badges: 'badges/badges',
-                userCount: 'user/userCount'
-            }),
-        },
-        methods: {
-            completed(badge) {
-                return this.mine.some(it => it.id === badge.id);
-            },
-            style(badge) {
-                return {
-                    width: (badge.userCount / this.userCount * 100) + '%'
-                }
-            },
-            image(badge) {
-                try {
-                    return require(`~/assets/img/badges/${badge.name.split(' ').join('-').toLowerCase()}.png`);
-                } catch(e) {
-                    console.error(`Couldn't load image for badge ${badge.name}`)
-                }
-            }
-        },
-        async asyncData({store}) {
-            let mine = await Http.for(`user/${store.state.user.user.id}`).get('badges')
-
+        style(badge) {
             return {
-                mine: mine
+                width: (badge.userCount / this.userCount) * 100 + '%',
+            };
+        },
+        image(badge) {
+            try {
+                return require(`~/assets/img/badges/${badge.name
+                    .split(' ')
+                    .join('-')
+                    .toLowerCase()}.png`);
+            } catch (e) {
+                console.error(`Couldn't load image for badge ${badge.name}`);
             }
-        }
-    }
+        },
+    },
+    async asyncData({ store }) {
+        let mine = await Http.for(`user/${store.state.user.user.id}`).get(
+            'badges'
+        );
+
+        return {
+            mine: mine,
+        };
+    },
+};
 </script>
-
-

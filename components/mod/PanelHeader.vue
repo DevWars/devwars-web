@@ -7,27 +7,26 @@
 
         <div class="actions">
             <div v-if="showSearch" class="search">
-                <Input class="labeless" :placeholder="'Search for ' + title" />
+                <Input class="labeless" :placeholder="'Search for ' + title"/>
             </div>
             <slot></slot>
         </div>
     </div>
 </template>
 
-<script>
-import Vue from 'vue';
 
+<script>
 import Input from '~/components/form/Input';
 
 export default {
-    name: "PanelHeader",
+    name: 'PanelHeader',
     components: { Input },
     props: {
         title: String,
         subtitle: String,
         showSearch: Boolean,
-    }
-}
+    },
+};
 </script>
 
 
@@ -67,7 +66,7 @@ export default {
             color: $text-color-muted;
         }
 
-        Input {
+        input {
             width: 300px;
         }
     }

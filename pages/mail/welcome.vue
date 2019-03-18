@@ -8,10 +8,14 @@
                     font-size="24px"
                     color="#fff"
                     font-family="helvetica"
+                >Welcome!</mj-text>
+                <mj-text
+                    align="center"
+                    line-height="1.3"
+                    font-size="16px"
+                    color="#fff"
+                    font-family="helvetica"
                 >
-                    Welcome!
-                </mj-text>
-                <mj-text align="center" line-height="1.3" font-size="16px" color="#fff" font-family="helvetica">
                     Thanks for signing up on DevWars. To start hacking, please verify your email address by clicking the
                     link below.
                 </mj-text>
@@ -27,26 +31,23 @@
                     font-family="helvetica"
                     font-size="18px"
                     font-weight="bold"
-                >
-                    CONFIRM EMAIL
-                </mj-button>
+                >CONFIRM EMAIL</mj-button>
             </mj-column>
         </mj-section>
     </MailMeta>
 </template>
 
+
 <script>
-    import Vue from 'vue';
+import Http from '../../services/Http';
+import MailMeta from '../../components/mail/MailMeta';
 
-    import Http from '../../services/Http';
-    import MailMeta from '../../components/mail/MailMeta';
-
-    export default {
-        name: "Welcome",
-        components: { MailMeta },
-        layout: 'mail',
-        async asyncData({ query }) {
-            return { url: query.url };
-        }
-    }
+export default {
+    name: 'Welcome',
+    components: { MailMeta },
+    layout: 'mail',
+    async asyncData({ query }) {
+        return { url: query.url };
+    },
+};
 </script>

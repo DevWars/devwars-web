@@ -1,6 +1,6 @@
 <template>
     <div>
-        <PageBanner title="Settings" />
+        <PageBanner title="Settings"/>
 
         <div class="footer-offset">
             <div class="container">
@@ -20,13 +20,12 @@
     </div>
 </template>
 
+
 <script>
-    import Vue from 'vue';
+import PageBanner from '~/components/layout/PageBanner';
 
-    import PageBanner from '~/components/layout/PageBanner';
-
-    export default {
-        name: "Settings",
-        components: { PageBanner }
-    }
+export default {
+    name: 'Settings',
+    components: { PageBanner },
+};
 </script>

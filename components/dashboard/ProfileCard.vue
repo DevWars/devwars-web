@@ -1,6 +1,6 @@
 <template>
     <DashboardCard v-if="user" class="profile">
-        <Avatar :user="user" class="xl" />
+        <Avatar :user="user" class="xl"/>
         <h4>{{ user.username }}</h4>
         <div class="user-rank rank" :class="['rank-' + user.statistics.rank.levelName]">
             <span>{{ user.statistics.rank.rank }}</span>
@@ -14,29 +14,32 @@
     </DashboardCard>
 </template>
 
-<script>
-import Vue from 'vue';
 
+<script>
 import DashboardCard from '~/components/DashboardCard';
 import Avatar from '~/components/user/Avatar';
 import Progress from '~/components/form/Progress';
 
 export default {
-    name: "ProfileCard",
+    name: 'ProfileCard',
     components: { DashboardCard, Avatar, Progress },
     props: ['user'],
     computed: {
         progress() {
-            let past = this.user.statistics.xp - this.user.statistics.rank.xpRequired;
-            let difference = this.user.statistics.nextRank.xpRequired - this.user.statistics.rank.xpRequired;
-            const percentage = Math.round(past / difference * 100);
-            const formattedPercentage = `${percentage}%`
+            let past =
+                this.user.statistics.xp - this.user.statistics.rank.xpRequired;
+            let difference =
+                this.user.statistics.nextRank.xpRequired -
+                this.user.statistics.rank.xpRequired;
+            const percentage = Math.round((past / difference) * 100);
+            const formattedPercentage = `${percentage}%`;
 
             return formattedPercentage;
-        }
-    }
-}
+        },
+    },
+};
 </script>
+
 
 <style lang="scss" scoped>
 @import '../../assets/styles/utils';

@@ -11,17 +11,9 @@
         "prettier/vue"
     ],
     "plugins": ["vue", "prettier"],
-    "settings": {
-        "import/resolver": {
-            "node": {
-                "extensions": [".vue", ".js", ".json"]
-            }
-        }
-    },
     "rules": {
         "import/no-extraneous-dependencies": "off",
         "vue/attribute-hyphenation": "off",
-        "vue/html-indent": ["error", 4],
         "vue/max-attributes-per-line": "off",
         "vue/multiline-html-element-content-newline": "off",
         "vue/singleline-html-element-content-newline": "off",
@@ -43,6 +35,15 @@
                 }
             }
         ],
-        "prettier/prettier": "off"
+        "max-len": [
+            "error",
+            120,
+            {
+                "ignoreTemplateLiterals": true,
+                "ignoreStrings": true
+            }
+        ],
+        "vetur.format.defaultFormatter.html": "none",
+        "prettier/prettier": 0
     }
 }

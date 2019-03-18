@@ -11,25 +11,25 @@
     </div>
 </template>
 
-<script>
-    import Vue from 'vue';
-    import Player from '~/components/game/Player';
 
-    export default {
-        name: "GameTeam",
-        components: { Player },
-        props: {
-            team: String,
-            points: Number,
-        }
-    }
+<script>
+import Player from '~/components/game/Player';
+
+export default {
+    name: 'GameTeam',
+    components: { Player },
+    props: {
+        team: String,
+        points: Number,
+    },
+};
 </script>
+
 
 <style lang="scss" scoped>
 @import '../../assets/styles/utils.scss';
 
 .GameTeam {
-
     .Player {
         padding-left: 20px;
         padding-right: 20px;

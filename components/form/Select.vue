@@ -14,21 +14,15 @@
 
 
 <script>
-    import Vue from 'vue';
-
-    export default {
-        name: "Select",
-        props: [
-            "type",
-            "value",
-            "label"
-        ],
-        computed: {
-            valid() {
-                return !(this.value == null || typeof this.value === "undefined")
-            }
-        }
-    }
+export default {
+    name: 'Select',
+    props: ['type', 'value', 'label'],
+    computed: {
+        valid() {
+            return !(this.value == null || typeof this.value === 'undefined');
+        },
+    },
+};
 </script>
 
 

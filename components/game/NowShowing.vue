@@ -1,37 +1,50 @@
 <template>
-  <HomeCard title="Live Now">
-    <div class="live-now" slot="heading">
-      <h2 class="live-now__title">Live Now</h2>
-    </div>
+    <HomeCard title="Live Now">
+        <div class="live-now" slot="heading">
+            <h2 class="live-now__title">Live Now</h2>
+        </div>
 
-    <div class="now-showing">
-      <div class="embed-video">
-        <iframe src="https://player.twitch.tv/?channel=devwars" frameborder="0" allowfullscreen="true" scrolling="no" theme="dark" autoplay="true" muted="true"></iframe>
-      </div>
-    </div>
+        <div class="now-showing">
+            <div class="embed-video">
+                <iframe
+                    src="https://player.twitch.tv/?channel=devwars"
+                    frameborder="0"
+                    allowfullscreen="true"
+                    scrolling="no"
+                    theme="dark"
+                    autoplay="true"
+                    muted="true"
+                ></iframe>
+            </div>
+        </div>
 
-    <div slot="actions">
-      <a href="https://www.twitch.tv/devwars" class="btn btn-twitch" target="_blank">Watch on Twitch</a>
-      <RegistrationButton :game="game" />
-    </div>
-  </HomeCard>
+        <div slot="actions">
+            <a
+                href="https://www.twitch.tv/devwars"
+                class="btn btn-twitch"
+                target="_blank"
+            >Watch on Twitch</a>
+            <RegistrationButton :game="game"/>
+        </div>
+    </HomeCard>
 </template>
 
-<script>
-  import Vue from 'vue';
-  import HomeCard from "@/components/HomeCard";
-  import RegistrationButton from "./RegistrationButton";
 
-  export default {
-    name: "NowShowing",
+<script>
+import HomeCard from '@/components/HomeCard';
+import RegistrationButton from './RegistrationButton';
+
+export default {
+    name: 'NowShowing',
     components: { HomeCard, RegistrationButton },
     computed: {
-      game() {
-        return this.$store.state.game.active
-      }
-    }
-  }
+        game() {
+            return this.$store.state.game.active;
+        },
+    },
+};
 </script>
+
 
 <style lang="scss" scoped>
 @import '../../assets/styles/utils';

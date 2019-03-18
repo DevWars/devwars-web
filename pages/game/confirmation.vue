@@ -1,6 +1,6 @@
 <template>
     <div>
-        <PageBanner title="You've been entered!" type="competitor" />
+        <PageBanner title="You've been entered!" type="competitor"/>
 
         <div class="footer-offset">
             <div class="container">
@@ -13,13 +13,16 @@
 
                         <div class="form-group">
                             <h2>How to prepare</h2>
-                            <p class="form-group">
-                                There are a lot of things you should probably catch up on before game day. Below is our DevWars Documentation covering everything you need to know.
-                            </p>
+                            <p
+                                class="form-group"
+                            >There are a lot of things you should probably catch up on before game day. Below is our DevWars Documentation covering everything you need to know.</p>
                             <a href="/docs" class="btn btn-primary">View Documentation</a>
                         </div>
 
-                        <p>Have any questions? <a href="/contact">Contact Us</a></p>
+                        <p>
+                            Have any questions?
+                            <a href="/contact">Contact Us</a>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -27,13 +30,12 @@
     </div>
 </template>
 
+
 <script>
-    import Vue from 'vue';
+import PageBanner from '~/components/layout/PageBanner';
 
-    import PageBanner from '~/components/layout/PageBanner';
-
-    export default {
-        name: "GameConfirmation",
-        components: { PageBanner }
-    }
+export default {
+    name: 'GameConfirmation',
+    components: { PageBanner },
+};
 </script>

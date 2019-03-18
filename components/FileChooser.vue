@@ -5,28 +5,26 @@
     </div>
 </template>
 
+
 <script>
-    import Vue from 'vue';
+export default {
+    name: 'FileChooser',
+    methods: {
+        slotClicked() {
+            this.$refs.chooser.click();
+        },
+        change() {
+            let reader = new FileReader();
+            let file = this.$refs.chooser.files[0];
 
-    export default {
-        name: "FileChooser",
-        methods: {
-            slotClicked() {
-                this.$refs.chooser.click();
-            },
-            change() {
-                let reader = new FileReader;
-                let file = this.$refs.chooser.files[0];
+            reader.addEventListener('load', (event) => {
+                if (reader.result) {
+                    this.$emit('change', reader.result);
+                }
+            });
 
-                reader.addEventListener('load', event => {
-                    if (reader.result) {
-                        this.$emit('change', reader.result);
-                    }
-                });
-
-                reader.readAsDataURL(file);
-            }
-        }
-
-    }
+            reader.readAsDataURL(file);
+        },
+    },
+};
 </script>

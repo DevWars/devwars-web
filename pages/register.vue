@@ -4,19 +4,23 @@
             <form v-async-submit="[submit]">
                 <DevwarsCard title="Register">
                     <div class="form-group">
-                        <Input v-model="email" required />
+                        <Input v-model="email" required/>
                         <label>Email</label>
                     </div>
                     <div class="form-group">
-                        <Input minlength="4" maxlength="32" v-model="username" required />
+                        <Input minlength="4" maxlength="32" v-model="username" required/>
                         <label>Username</label>
                     </div>
                     <div class="form-group">
-                        <Input v-model="password" type="password" required />
+                        <Input v-model="password" type="password" required/>
                         <label>Password</label>
                     </div>
                     <div slot="actions">
-                        <button type="submit" href="#" class="btn btn-outline-white btn-block">REGISTER</button>
+                        <button
+                            type="submit"
+                            href="#"
+                            class="btn btn-outline-white btn-block"
+                        >REGISTER</button>
                         <a href="/login" class="forgot">Already have an account?</a>
                     </div>
                 </DevwarsCard>
@@ -25,30 +29,35 @@
     </div>
 </template>
 
-<script>
-    import Vue from 'vue';
-    import DevwarsCard from '~/components/DevwarsCard';
-    import Input from '~/components/form/Input';
 
-    export default {
-        name: "Register",
-        components: { DevwarsCard, Input },
-        layout: 'header',
-        middleware: 'guest',
-        data: () => {
-            return {
-                username: '',
-                email: '',
-                password: '',
-            }
+<script>
+import DevwarsCard from '~/components/DevwarsCard';
+import Input from '~/components/form/Input';
+
+export default {
+    name: 'Register',
+    components: { DevwarsCard, Input },
+    layout: 'header',
+    middleware: 'guest',
+    data: () => {
+        return {
+            username: '',
+            email: '',
+            password: '',
+        };
+    },
+    methods: {
+        async submit() {
+            return await this.$store.dispatch('user/register', {
+                username: this.username,
+                email: this.email,
+                password: this.password,
+            });
         },
-        methods: {
-            async submit() {
-                return await this.$store.dispatch('user/register', {username: this.username, email: this.email, password: this.password});
-            }
-        }
-    }
+    },
+};
 </script>
+
 
 <style lang="scss" scoped>
 @import '../assets/styles/utils';

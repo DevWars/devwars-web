@@ -35,7 +35,9 @@
                             <div class="shop-card__main">
                                 <span class="shop-card__type">Consumable</span>
                                 <h2 class="shop-card__name">Quiz Call</h2>
-                                <p class="shop-card__desc">Activate a quiz round during a live game show.</p>
+                                <p
+                                    class="shop-card__desc"
+                                >Activate a quiz round during a live game show.</p>
                             </div>
                             <div class="devcoins devcoins-lg">
                                 <Devcoin></Devcoin>
@@ -83,7 +85,9 @@
                             <div class="shop-card__main">
                                 <span class="shop-card__type">Consumable</span>
                                 <h2 class="shop-card__name">Safety Shield</h2>
-                                <p class="shop-card__desc">Protects 5%-30% of your gambled assets on your next bet.</p>
+                                <p
+                                    class="shop-card__desc"
+                                >Protects 5%-30% of your gambled assets on your next bet.</p>
                             </div>
                             <div class="devcoins devcoins-lg">
                                 <Devcoin></Devcoin>
@@ -115,7 +119,9 @@
                             <div class="shop-card__main">
                                 <span class="shop-card__type">Consumable</span>
                                 <h2 class="shop-card__name">Jukebox</h2>
-                                <p class="shop-card__desc">Place a song request to play on the live stream.</p>
+                                <p
+                                    class="shop-card__desc"
+                                >Place a song request to play on the live stream.</p>
                             </div>
                             <div class="devcoins devcoins-lg">
                                 <Devcoin></Devcoin>
@@ -131,7 +137,9 @@
                             <div class="shop-card__main">
                                 <span class="shop-card__type">Consumable</span>
                                 <h2 class="shop-card__name">Lottery Ticket</h2>
-                                <p class="shop-card__desc">Enter for a chance to win the weekly DevWars Jackpot.</p>
+                                <p
+                                    class="shop-card__desc"
+                                >Enter for a chance to win the weekly DevWars Jackpot.</p>
                             </div>
                             <div class="devcoins devcoins-lg">
                                 <Devcoin></Devcoin>
@@ -145,14 +153,13 @@
     </div>
 </template>
 
+
 <script>
-    import Vue from 'vue';
+import PageBanner from '~/components/layout/PageBanner';
+import Devcoin from '~/components/Devcoin';
 
-    import PageBanner from '~/components/layout/PageBanner';
-    import Devcoin from '~/components/Devcoin';
-
-    export default {
-        name: "Shop",
-        components: { PageBanner, Devcoin },
-    }
+export default {
+    name: 'Shop',
+    components: { PageBanner, Devcoin },
+};
 </script>

@@ -4,18 +4,17 @@
     </transition-group>
 </template>
 
+
 <script>
-    import Vue from 'vue';
+import Toast from '~/components/toast/Toast';
 
-    import Toast from '~/components/toast/Toast';
-
-    export default {
-        name: "Toasts",
-        components: {Toast},
-        computed: {
-            toasts() {
-                return this.$store.state.toast.toasts;
-            }
-        }
-    }
+export default {
+    name: 'Toasts',
+    components: { Toast },
+    computed: {
+        toasts() {
+            return this.$store.state.toast.toasts;
+        },
+    },
+};
 </script>

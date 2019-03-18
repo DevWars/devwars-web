@@ -30,40 +30,42 @@
     </SubScore>
 </template>
 
+
 <script>
-    import Vue from 'vue';
+import SubScore from '~/components/game/SubScore';
+import { team_for_game, vote_analysis_for_team } from '../../utils/objectives';
 
-    import SubScore from '~/components/game/SubScore';
-    import { team_for_game, vote_analysis_for_team } from '../../utils/objectives';
-
-    export default {
-        name: "VoteBox",
-        components: { SubScore },
-        props: [
-            "game",
-            "vote",
-            "label"
-        ],
-        methods: {
-            analysisForTeam(team, otherTeam) {
-                return vote_analysis_for_team(team, otherTeam, this.label);
-            }
+export default {
+    name: 'VoteBox',
+    components: { SubScore },
+    props: ['game', 'vote', 'label'],
+    methods: {
+        analysisForTeam(team, otherTeam) {
+            return vote_analysis_for_team(team, otherTeam, this.label);
         },
-        computed: {
-            analysis() {
-                let analysis = {};
+    },
+    computed: {
+        analysis() {
+            let analysis = {};
 
-                analysis.red = this.analysisForTeam(team_for_game("red", this.game), team_for_game("blue", this.game));
-                analysis.blue = this.analysisForTeam(team_for_game("blue", this.game), team_for_game("red", this.game));
+            analysis.red = this.analysisForTeam(
+                team_for_game('red', this.game),
+                team_for_game('blue', this.game)
+            );
+            analysis.blue = this.analysisForTeam(
+                team_for_game('blue', this.game),
+                team_for_game('red', this.game)
+            );
 
-                return analysis;
-            },
-            total() {
-                return this.analysis.blue.votes + this.analysis.red.votes;
-            }
-        }
-    }
+            return analysis;
+        },
+        total() {
+            return this.analysis.blue.votes + this.analysis.red.votes;
+        },
+    },
+};
 </script>
+
 
 <style lang="scss" scoped>
 @import '../../assets/styles/utils';
@@ -76,7 +78,7 @@ $voting-bar-height: 20px;
 
     &:after {
         @extend %absolute-center;
-        content: "";
+        content: '';
         display: inline-block;
         height: $voting-bar-height + 10px;
         width: 4px;
@@ -139,7 +141,9 @@ $voting-bar-height: 20px;
 }
 
 .placeholder {
-    &:before { content: "100%"; }
+    &:before {
+        content: '100%';
+    }
     opacity: 0;
     visibility: hidden;
 }

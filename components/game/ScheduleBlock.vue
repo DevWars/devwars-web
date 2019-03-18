@@ -8,7 +8,11 @@
                 <th width="40%" class="align-left">Showing</th>
                 <th width="30%" class="align-left"></th>
             </tr>
-            <tr v-for="game in limitBy(games, count)" :key="game.id" v-if="filter ? (filter === game.name) : true">
+            <tr
+                v-for="game in limitBy(games, count)"
+                :key="game.id"
+                v-if="filter ? (filter === game.name) : true"
+            >
                 <td>
                     <div class="dow">{{ game.startTime | moment('dddd') }}</div>
                     <h4 class="date">{{ game.startTime | moment('MMMM D') }}</h4>
@@ -25,13 +29,16 @@
                 </td>
                 <td>
                     <div>
-                        <a v-show="!isApplied(game)" @click="enter(game)" class="btn btn-primary">
-                            Register for Entry
-                        </a>
-                        <a v-show="isApplied(game)" @click="cancel(game)" class="btn btn-outline-danger"
-                        >
-                            Resign
-                        </a>
+                        <a
+                            v-show="!isApplied(game)"
+                            @click="enter(game)"
+                            class="btn btn-primary"
+                        >Register for Entry</a>
+                        <a
+                            v-show="isApplied(game)"
+                            @click="cancel(game)"
+                            class="btn btn-outline-danger"
+                        >Resign</a>
                     </div>
                 </td>
             </tr>
@@ -39,51 +46,50 @@
     </Applications>
 </template>
 
+
 <script>
-    import Vue from 'vue';
+import { sortBy } from 'lodash';
+import Table from '~/components/Table';
+import Applications from '~/components/game/Applications';
+import GameDurations from '../../utils/game-durations';
 
-    import { sortBy } from 'lodash';
-
-    import Table from '~/components/Table';
-    import Applications from '~/components/game/Applications';
-    import GameDurations from '../../utils/game-durations';
-
-    export default {
-        name: "ScheduleBlock",
-        components: { Table, Applications },
-        props: {
-            filter: {
-                type: String,
-                default: ''
-            },
-            count: 0
+export default {
+    name: 'ScheduleBlock',
+    components: { Table, Applications },
+    props: {
+        filter: {
+            type: String,
+            default: '',
         },
-        data: () => {
-            return {
-                durations: GameDurations
-            }
+        count: 0,
+    },
+    data: () => {
+        return {
+            durations: GameDurations,
+        };
+    },
+    computed: {
+        games() {
+            return sortBy(this._games, (game) => game.startTime);
         },
-        computed: {
-            games() {
-                return sortBy(this._games, game => game.startTime);
-            },
-            _games() {
-                return this.$store.state.game.upcoming
-            }
+        _games() {
+            return this.$store.state.game.upcoming;
         },
-        methods: {
-            description(game) {
-                const descriptions = {
-                    'Classic': 'Classic - 3 VS 3',
-                    'Zen Garden': 'Zen Garden : 1 VS 1',
-                    'Blitz': 'Blitz - 1 VS 1',
-                };
+    },
+    methods: {
+        description(game) {
+            const descriptions = {
+                Classic: 'Classic - 3 VS 3',
+                'Zen Garden': 'Zen Garden : 1 VS 1',
+                Blitz: 'Blitz - 1 VS 1',
+            };
 
-                return descriptions[game.name] || '';
-            }
-        }
-    }
+            return descriptions[game.name] || '';
+        },
+    },
+};
 </script>
+
 
 <style lang="scss" scoped>
 @import '../../assets/styles/utils';
@@ -104,7 +110,7 @@
 }
 
 .duration:after {
-    content: " min";
+    content: ' min';
     font-size: $font-size-xs;
 }
 

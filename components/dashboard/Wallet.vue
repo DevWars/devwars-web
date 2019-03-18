@@ -28,18 +28,18 @@
     </DashboardCard>
 </template>
 
+
 <script>
-    import Vue from 'vue';
+import DashboardCard from '~/components/DashboardCard';
+import Devcoin from '~/components/Devcoin';
 
-    import DashboardCard from '~/components/DashboardCard';
-    import Devcoin from '~/components/Devcoin';
-
-    export default {
-        name: "Wallet",
-        components: { DashboardCard, Devcoin },
-        props: ['user']
-    }
+export default {
+    name: 'Wallet',
+    components: { DashboardCard, Devcoin },
+    props: ['user'],
+};
 </script>
+
 
 <style lang="scss" scoped>
 @import '../../assets/styles/utils';
@@ -62,7 +62,7 @@
     cursor: not-allowed;
 
     &__slot {
-        @include aspect-ratio(1,1);
+        @include aspect-ratio(1, 1);
         border-bottom: 1px solid $divider-color;
         border-left: 1px solid $divider-color;
     }
@@ -81,7 +81,7 @@
 
     &:before {
         @extend %absolute-overlay;
-        content: "Coming Soon!";
+        content: 'Coming Soon!';
         width: 100%;
         z-index: 2;
         font-weight: $font-weight-bold;

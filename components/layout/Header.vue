@@ -5,12 +5,8 @@
                 <div>
                     <button @click="toggleMobileMenu" class="burger-menu"></button>
                     <nuxt-link to="/" class="logo">
-                        <img class="logo-full"
-                             src="~assets/img/logo.png"
-                             alt="DevWars">
-                        <img class="logo-icon"
-                             src="~assets/img/logo-icon.png"
-                             alt="DevWars">
+                        <img class="logo-full" src="~assets/img/logo.png" alt="DevWars">
+                        <img class="logo-icon" src="~assets/img/logo-icon.png" alt="DevWars">
                     </nuxt-link>
                     <ul class="nav nav-main">
                         <li class="nav__item">
@@ -53,42 +49,42 @@
         </div>
 
         <!-- Mobile -->
-        <HeaderMobile ref="mobileHeader" />
+        <HeaderMobile ref="mobileHeader"/>
     </div>
 </template>
 
-<script>
-import Vue from 'vue';
 
+<script>
 import UserMenu from '~/components/user/UserMenu';
 import HeaderMobile from './HeaderMobile';
 
 export default {
-    name: "ComponentHeader",
-    data: () => { 
+    name: 'ComponentHeader',
+    data: () => {
         return {
-            isMobile: false 
-        }
+            isMobile: false,
+        };
     },
     components: { HeaderMobile, UserMenu },
-    methods:{
+    methods: {
         logout() {
             this.$store.dispatch('user/logout');
         },
         toggleMobileMenu() {
             this.$refs.mobileHeader.toggleMenu();
-        }
+        },
     },
     computed: {
         user() {
-            return this.$store.state.user.user
+            return this.$store.state.user.user;
         },
         isAdmin() {
             return this.user.role === 'ADMIN';
-        }
-    }
-}
+        },
+    },
+};
 </script>
+
 
 <style lang="scss" scoped>
 @import '../../assets/styles/utils';
@@ -182,14 +178,15 @@ export default {
             color: $base-font-color;
 
             &:before {
-                content: "";
+                content: '';
                 display: block;
                 width: 100%;
                 height: 2px;
                 position: absolute;
                 background-color: $brand-primary;
                 bottom: 0;
-                left: 0; right: 0;
+                left: 0;
+                right: 0;
             }
         }
     }

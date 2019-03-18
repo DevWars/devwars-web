@@ -1,22 +1,21 @@
 <template>
     <div class="User">
-        <Avatar :user="user" />
+        <Avatar :user="user"/>
         <strong class="username">{{ user.username }}</strong>
     </div>
 </template>
 
-<script>
-    import Vue from 'vue';
-    import Avatar from '~/components/user/Avatar';
 
-    export default {
-        name: "User",
-        components: { Avatar },
-        props: [
-            'user'
-        ]        
-    }
+<script>
+import Avatar from '~/components/user/Avatar';
+
+export default {
+    name: 'User',
+    components: { Avatar },
+    props: ['user'],
+};
 </script>
+
 
 <style lang="scss" scoped>
 @import '../../assets/styles/utils';
