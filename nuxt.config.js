@@ -1,43 +1,52 @@
 const webpack = require('webpack');
-const parser = require('body-parser')
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const parser = require('body-parser');
 
 module.exports = {
     mode: 'universal',
     /*
-    ** Headers of the page
-    */
+     ** Headers of the page
+     */
     head: {
         title: 'DevWars',
         meta: [
             { charset: 'utf-8' },
-            { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+            {
+                name: 'viewport',
+                content: 'width=device-width, initial-scale=1',
+            },
             {
                 hid: 'description',
                 name: 'description',
-                content: 'DevWars is a live game show where web developers compete against each other in 60 minute coding challenges. Join our educational and entertaining platform of experienced and aspiring members.'
+                content:
+                    'DevWars is a live game show where web developers compete against each other in 60 minute coding challenges. Join our educational and entertaining platform of experienced and aspiring members.',
             },
-            { name: 'google-site-verification', content: 'RLFyk9dzTQTWw10KYT1_-C3uMy4Itz26Har6xRbv_Co' },
-            { name: "og:title", content: "Esports for Developers - DevWars" },
-            { name: "og:image", content: "https://devwars.tv/og/logo.jpeg" },
             {
-                name: "og:description",
-                content: "DevWars is a live game show where web developers compete against each other in 60 minute coding challenges. Join our educational and entertaining platform of experienced and aspiring members."
-            }
+                name: 'google-site-verification',
+                content: 'RLFyk9dzTQTWw10KYT1_-C3uMy4Itz26Har6xRbv_Co',
+            },
+            { name: 'og:title', content: 'Esports for Developers - DevWars' },
+            { name: 'og:image', content: 'https://devwars.tv/og/logo.jpeg' },
+            {
+                name: 'og:description',
+                content:
+                    'DevWars is a live game show where web developers compete against each other in 60 minute coding challenges. Join our educational and entertaining platform of experienced and aspiring members.',
+            },
         ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
             {
                 rel: 'stylesheet',
-                href: 'https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:300,400,500,700'
+                href:
+                    'https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:300,400,500,700',
             },
             {
                 rel: 'stylesheet',
                 href: 'https://pro.fontawesome.com/releases/v5.0.8/css/all.css',
-                integrity: 'sha384-OGsxOZf8qnUumoWWSmTqXMPSNI9URpNYN35fXDb5Cv5jT6OR673ah1e5q+9xKTq6',
-                crossorigin: 'anonymous'
+                integrity:
+                    'sha384-OGsxOZf8qnUumoWWSmTqXMPSNI9URpNYN35fXDb5Cv5jT6OR673ah1e5q+9xKTq6',
+                crossorigin: 'anonymous',
             },
-        ]
+        ],
     },
 
     serverMiddleware: [
@@ -48,18 +57,18 @@ module.exports = {
 
     debug: true,
     /*
-    ** Customize the progress bar color
-    */
+     ** Customize the progress bar color
+     */
     loading: { color: '#ff007d' },
 
     axios: {
         baseURL: 'http://localhost:3030/',
         browserBaseURL: 'http://localhost:3030/',
-        credentials: true
+        credentials: true,
     },
 
     render: {
-        gzip: false
+        gzip: false,
     },
 
     css: [
@@ -78,56 +87,53 @@ module.exports = {
         '~/plugins/directives',
         '~/plugins/axios',
         '~/plugins/filters',
-        '~/plugins/modal'
+        '~/plugins/modal',
     ],
 
-    modules: [
-        '@nuxtjs/axios'
-    ],
+    modules: ['@nuxtjs/axios'],
 
     router: {
         linkExactActiveClass: 'active',
-        middleware: ['pending', 'update-latest-route']
+        middleware: ['pending', 'update-latest-route'],
     },
 
     /*
-    ** Build configuration
-    */
+     ** Build configuration
+     */
     build: {
         babel: {
             plugins: [
-                ["@babel/plugin-proposal-decorators", { "legacy": true }],
-                ["@babel/plugin-proposal-class-properties", { "loose": true }],
+                ['@babel/plugin-proposal-decorators', { legacy: true }],
+                ['@babel/plugin-proposal-class-properties', { loose: true }],
             ],
         },
         plugins: [
             new webpack.ProvidePlugin({
-                '$': 'jquery',
-                'Popper': 'popper.js',
+                $: 'jquery',
+                Popper: 'popper.js',
             }),
             new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         ],
         /*
-        ** Run ESLint on save
-        */
-        extend(config, { isDev, isClient }) {
-            const vueLoader = config.module.rules.find((rule) => rule.loader === 'vue-loader');
-            vueLoader.options.transformAssetUrls['mj-image'] = ['src'];
+         ** Run ESLint on save
+         */
 
-            if (isDev && isClient) {
+        extend(config, ctx) {
+            if (ctx.isDev && ctx.isClient) {
                 config.module.rules.push({
-                    test: /\.(mjml)$/,
-                    loader: 'mjml-loader',
+                    enforce: 'pre',
+                    test: /\.(js|vue)$/,
+                    loader: 'eslint-loader',
+                    exclude: /(node_modules)/,
                 });
             }
-        }
+        },
     },
     watchers: {
         webpack: {
             aggregateTimeout: 300,
-            poll: 1000
+            poll: 1000,
         },
-        ignored: /node_modules/
-    }
-}
-;
+        ignored: /node_modules/,
+    },
+};

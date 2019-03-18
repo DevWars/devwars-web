@@ -1,0 +1,48 @@
+{
+    "root": true,
+    "parserOptions": {
+        "parser": "babel-eslint"
+    },
+    "extends": [
+        "airbnb-base",
+        "plugin:vue/recommended",
+        "plugin:prettier/recommended",
+        "prettier",
+        "prettier/vue"
+    ],
+    "plugins": ["vue", "prettier"],
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [".vue", ".js", ".json"]
+            }
+        }
+    },
+    "rules": {
+        "import/no-extraneous-dependencies": "off",
+        "vue/attribute-hyphenation": "off",
+        "vue/html-indent": ["error", 4],
+        "vue/max-attributes-per-line": "off",
+        "vue/multiline-html-element-content-newline": "off",
+        "vue/singleline-html-element-content-newline": "off",
+        "vue/html-closing-bracket-spacing": [
+            "error",
+            {
+                "startTag": "never",
+                "endTag": "never",
+                "selfClosingTag": "never"
+            }
+        ],
+        "vue/html-self-closing": [
+            "error",
+            {
+                "html": {
+                    "void": "never",
+                    "normal": "never",
+                    "component": "always"
+                }
+            }
+        ],
+        "prettier/prettier": "off"
+    }
+}
