@@ -30,19 +30,19 @@
         "webui-popover": "^1.2.18"
     },
     "devDependencies": {
-        "babel-eslint": "^8.2.1",
+        "babel-eslint": "^10.0.1",
         "cheerio": "^1.0.0-rc.2",
-        "eslint": "^4.15.0",
+        "eslint": "^5.15.3",
         "eslint-config-airbnb-base": "^13.1.0",
         "eslint-config-prettier": "^4.1.0",
-        "eslint-loader": "^1.7.1",
+        "eslint-loader": "^2.1.2",
         "eslint-plugin-import": "^2.16.0",
         "eslint-plugin-nuxt": "^0.4.3",
         "eslint-plugin-prettier": "^3.0.1",
-        "eslint-plugin-vue": "^4.0.0",
+        "eslint-plugin-vue": "^5.2.2",
         "mjml-loader": "^1.0.1",
-        "node-sass": "^4.7.2",
+        "node-sass": "^4.11.0",
         "prettier": "^1.16.4",
-        "sass-loader": "^6.0.6"
+        "sass-loader": "^7.1.0"
     }
 }
