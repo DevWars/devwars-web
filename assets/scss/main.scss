@@ -1,43 +1,38 @@
 // Avails / Utilities
 // ==================================
-@import "avail/variables";
-@import "avail/mixins";
-@import "avail/placeholders";
-@import "avail/animate";
-
+@import 'avail/variables';
+@import 'avail/mixins';
+@import 'avail/placeholders';
 
 // Base
 // ==================================
-@import "base/normalize";
-@import "base/reset";
-@import "base/global";
-@import "base/grid";
-@import "base/type";
-@import "base/form";
-
+@import 'base/normalize';
+@import 'base/reset';
+@import 'base/global';
+@import 'base/grid';
+@import 'base/type';
+@import 'base/form';
 
 // Components
 // ==================================
-@import "components/button";
-@import "components/nav"; // tabs (Games, Game, Tournament, Settings)
-@import "components/toasts";
-@import "components/modals";
-@import "components/loader";
-@import "components/labels";
-@import "components/devcoins";
-
+@import 'components/button';
+@import 'components/nav'; // tabs (Games, Game, Tournament, Settings)
+@import 'components/toasts';
+@import 'components/modals';
+@import 'components/loader';
+@import 'components/labels';
+@import 'components/devcoins';
 
 // Layout
 // ==================================
-@import "layout/modpanel";
+@import 'layout/modpanel';
 
-@import "layout/dashboard";
-
+@import 'layout/dashboard';
 
 // Pages
 // ==================================
-@import "pages/shop";
-@import "pages/blog";
-@import "pages/leaderboards";
+@import 'pages/shop';
+@import 'pages/blog';
+@import 'pages/leaderboards';
 
-@import "pages/competitor";
+@import 'pages/competitor';
