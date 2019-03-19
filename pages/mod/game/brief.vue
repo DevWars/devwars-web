@@ -112,8 +112,8 @@ export default {
     components: { User, Table, GameTeam, Player, Select },
     data() {
         return {
-            applications = [],
-        }
+            applications: [],
+        };
     },
     computed: {
         game() {
@@ -123,7 +123,7 @@ export default {
             if (!user.competitor) return 0;
 
             return user.competitor[lang + '_rate'];
-        }
+        },
     },
     mounted() {
         this.refresh();
@@ -144,7 +144,8 @@ export default {
         },
         async removePlayer(player, team) {
             let confirmed = await this.$open(ConfirmModal, {
-                description: 'Are you sure you would like to remove this player?',
+                description:
+                    'Are you sure you would like to remove this player?',
             });
 
             if (!confirmed) return;
@@ -154,7 +155,7 @@ export default {
             team.players.splice(team.players.indexOf(player), 1);
         },
     },
-}
+};
 </script>
 
 
