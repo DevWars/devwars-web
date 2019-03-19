@@ -23,20 +23,17 @@
 
 
 <script>
-import Component from 'nuxt-class-component';
 import Http from '../../services/Http';
 import Avatar from '~/components/user/Avatar';
 
-@Component({
+export default {
+    name: 'Slug',
     components: { Avatar },
-})
-export default class Slug extends Vue {
     async asyncData({ params }) {
         let split = params.slug.split('-');
-
         let id = split[split.length - 1];
 
         return { post: await Http.for('blog').byID(id) };
-    }
-}
+    },
+};
 </script>

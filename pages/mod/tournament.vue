@@ -46,83 +46,80 @@
 
 
 <script>
-import Component, { State } from 'nuxt-class-component';
 import Http from '../../services/Http';
-
 import DeleteModal from '~/components/modal/DeleteModal';
 
-@Component({
-    components: {},
-})
-export default class DashboardTournament extends Vue {
-    @State((state) => state.tournament.tournament) tournament;
+export default {
+    name: 'DashboardTournament',
+    computed: {
+        tournament() {
+            return this.$store.state.tournament.tournament;
+        },
+    },
+    methods: {
+        async activate() {
+            this.tournament.active = true;
 
-    async activate() {
-        this.tournament.active = true;
+            await this.save();
+        },
+        async endGame() {
+            await Http.for(`/tournament/${this.tournament.id}/ended`).save();
+        },
+        async save() {
+            let cloned = { ...this.tournament };
 
-        await this.save();
-    }
+            delete cloned.objectives;
+            delete cloned.teams;
 
-    async endGame() {
-        await Http.for(`/tournament/${this.tournament.id}/ended`).save();
-    }
+            // Make sure the list doesn't include objectives with games
+            const transformed = this.tournament.objectives.map((it) => ({
+                ...it,
+                tournament: null,
+            }));
 
-    async save() {
-        let cloned = { ...this.tournament };
-
-        delete cloned.objectives;
-        delete cloned.teams;
-
-        // Make sure the list doesn't include objectives with games
-        const transformed = this.tournament.objectives.map((it) => ({
-            ...it,
-            tournament: null,
-        }));
-
-        // Save the objectives
-        await Http.for(`/game/${this.tournament.id}/objective`).save(
-            transformed
-        );
-
-        // Go ahead and save each team
-        Object.values(this.tournament.teams).forEach(async (team) => {
-            let cloned = { ...team };
-            delete cloned.players;
-
-            await Http.for('tournament/team').save(cloned);
-        });
-
-        // Last but not least, save the game
-        let game = await Http.for('tournament').save(cloned);
-
-        // Can't forget to update our state with the new game
-        this.$store.commit('tournament/tournament', tournament);
-    }
-
-    async remove() {
-        const [confirmed] = await this.$open(DeleteModal, {
-            title: 'Delete Tournament?',
-            description: `Are you sure you want to delete this tournament?`,
-        });
-
-        if (!confirmed) return;
-
-        try {
-            await Http.for('tournament').delete(this.tournament);
-
-            this.$store.dispatch('toast/success', 'Tournament deleted.');
-
-            this.$router.push({ path: '/mod/tournaments' });
-        } catch (e) {
-            this.$store.dispatch(
-                'toast/error',
-                'Tournament could not be deleted.'
+            // Save the objectives
+            await Http.for(`/game/${this.tournament.id}/objective`).save(
+                transformed
             );
-        }
-    }
 
+            // Go ahead and save each team
+            Object.values(this.tournament.teams).forEach(async (team) => {
+                let cloned = { ...team };
+                delete cloned.players;
+
+                await Http.for('tournament/team').save(cloned);
+            });
+
+            // Last but not least, save the game
+            let game = await Http.for('tournament').save(cloned);
+
+            // Can't forget to update our state with the new game
+            this.$store.commit('tournament/tournament', tournament);
+        },
+        async remove() {
+            const [confirmed] = await this.$open(DeleteModal, {
+                title: 'Delete Tournament?',
+                description: `Are you sure you want to delete this tournament?`,
+            });
+
+            if (!confirmed) return;
+
+            try {
+                await Http.for('tournament').delete(this.tournament);
+
+                this.$store.dispatch('toast/success', 'Tournament deleted.');
+
+                this.$router.push({ path: '/mod/tournaments' });
+            } catch (e) {
+                this.$store.dispatch(
+                    'toast/error',
+                    'Tournament could not be deleted.'
+                );
+            }
+        },
+    },
     async fetch({ store, query }) {
         await store.dispatch('tournament/tournament', query.tournament);
-    }
-}
+    },
+};
 </script>

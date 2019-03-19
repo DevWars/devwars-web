@@ -94,9 +94,6 @@
 
 
 <script>
-import Component, { State } from 'nuxt-class-component';
-import { Watch } from 'vue-property-decorator';
-
 import moment from 'moment';
 import Input from '~/components/form/Input';
 import VoteBoxInput from '../../../components/game/VoteBoxInput';
@@ -105,58 +102,65 @@ import SquareToggle from '../../../components/SquareToggle';
 import { team_completed_objective } from '../../../utils/objectives';
 import { team_for_game } from '../../../utils/objectives';
 
-@Component({
+export default {
+    name: 'DashboardGameDetails',
     components: { SquareToggle, VoteBoxInput, Input },
-    methods: { team_for_game, team_completed_objective },
-})
-export default class DashboardGameDetails extends Vue {
-    @State((state) => state.game.game) game;
-
-    date = '';
-    time = '';
-
+    data: () => ({
+        date: '',
+        time: '',
+    }),
+    computed: {
+        game() {
+            return this.$store.state.game.game;
+        },
+    },
+    watch: {
+        date() {
+            this.timestampChanged();
+        },
+        time() {
+            this.timestampChanged();
+        },
+        game() {
+            this.gameChanged();
+        },
+    },
     mounted() {
         this.gameChanged();
 
         this.date = moment.utc(this.game.startTime).format('DD/MM/YYYY');
         this.time = moment.utc(this.game.startTime).format('HH:mm');
-    }
+    },
+    methods: {
+        timestampChanged() {
+            let timestamp =
+                moment
+                    .utc(`${this.date} ${this.time}`, 'DD/MM/YYYY HH:mm')
+                    .unix() * 1000;
 
-    toggleObjective(team, objective) {
-        const has = team_completed_objective(team, objective);
+            this.game.startTime = timestamp;
+        },
+        gameChanged() {
+            let list = [];
 
-        if (has) {
+            for (let i = 1; i <= 5; i++) {
+                let item = this.game.objectives.find((it) => it.number === i);
+
+                if (!item) item = { number: i };
+
+                list.push(item);
+            }
+
+            this.game.objectives = list;
+        },
+        toggleObjective(team, objective) {
+            const hasCompleted = team_completed_objective(team, objective);
+            if (!hasCompleted) return team.completedObjectives.push(objective);
+
             team.completedObjectives = team.completedObjectives.filter(
                 (it) => it.id !== objective.id
             );
-        } else {
-            team.completedObjectives.push(objective);
-        }
-    }
-
-    @Watch('time')
-    @Watch('date')
-    timestampChanged() {
-        let timestamp =
-            moment.utc(`${this.date} ${this.time}`, 'DD/MM/YYYY HH:mm').unix() *
-            1000;
-
-        this.game.startTime = timestamp;
-    }
-
-    @Watch('game')
-    gameChanged() {
-        let list = [];
-
-        for (let i = 1; i <= 5; i++) {
-            let item = this.game.objectives.find((it) => it.number === i);
-
-            if (!item) item = { number: i };
-
-            list.push(item);
-        }
-
-        this.game.objectives = list;
-    }
-}
+        },
+    },
+};
 </script>

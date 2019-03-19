@@ -26,51 +26,62 @@
 
 
 <script>
-import Component, { State } from 'nuxt-class-component';
-import { Watch } from 'vue-property-decorator';
-
 import moment from 'moment';
 import Input from '~/components/form/Input';
 
-@Component({
+export default {
+    name: 'DashboardTournamentDetails',
     components: { Input },
-})
-export default class DashboardTournamentDetails extends Vue {
-    @State((state) => state.tournament.tournament) tournament;
+    data: () => ({
+        date: '',
+        time: '',
+    }),
+    computed: {
+        tournament() {
+            return this.$store.state.tournament.tournament;
+        },
+    },
+    watch: {
+        date() {
+            this.timestampChanged();
+        },
+        time() {
+            this.timestampChanged();
+        },
+        tournament() {
+            this.tournamentChanged();
+        },
+    },
+    methods: {
+        timestampChanged() {
+            let timestamp =
+                moment
+                    .utc(`${this.date} ${this.time}`, 'DD/MM/YYYY HH:mm')
+                    .unix() * 1000;
 
-    date = '';
-    time = '';
+            this.tournament.timestamp = timestamp;
+        },
+        tournamentChanged() {
+            let list = [];
 
+            for (let i = 0; i < 5; i++) {
+                let item = this.tournament.objectives.find(
+                    (it) => it.number === i
+                );
+
+                if (!item) item = { number: i };
+
+                list.push(item);
+            }
+
+            this.tournament.objectives = list;
+        },
+    },
     mounted() {
         this.tournamentChanged();
 
         this.date = moment.utc(this.tournament.timestamp).format('DD/MM/YYYY');
         this.time = moment.utc(this.tournament.timestamp).format('HH:mm');
-    }
-
-    @Watch('time')
-    @Watch('date')
-    timestampChanged() {
-        let timestamp =
-            moment.utc(`${this.date} ${this.time}`, 'DD/MM/YYYY HH:mm').unix() *
-            1000;
-
-        this.tournament.timestamp = timestamp;
-    }
-
-    @Watch('tournament')
-    tournamentChanged() {
-        let list = [];
-
-        for (let i = 0; i < 5; i++) {
-            let item = this.tournament.objectives.find((it) => it.number === i);
-
-            if (!item) item = { number: i };
-
-            list.push(item);
-        }
-
-        this.tournament.objectives = list;
-    }
-}
+    },
+};
 </script>

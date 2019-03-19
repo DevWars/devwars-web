@@ -96,7 +96,6 @@
 
 
 <script>
-import Component, { State } from 'nuxt-class-component';
 import User from '~/components/user/User';
 import Table from '~/components/Table';
 import Http from '../../../services/Http';
@@ -106,55 +105,55 @@ import Select from '~/components/form/Select';
 import AddPlayerModal from '~/components/modal/AddPlayerModal';
 import ConfirmModal from '~/components/modal/ConfirmModal';
 import AddRegistrantModal from '~/components/modal/AddRegistrantModal';
-
 import { team_for_game } from '../../../utils/objectives';
 
-@Component({
+export default {
+    name: 'GameBrief',
     components: { User, Table, GameTeam, Player, Select },
-    methods: { team_for_game },
-})
-export default class extends Vue {
-    @State((state) => state.game.game) game;
+    data() {
+        return {
+            applications = [],
+        }
+    },
+    computed: {
+        game() {
+            return this.$store.state.game.game;
+        },
+        rating(user, lang) {
+            if (!user.competitor) return 0;
 
-    applications = [];
+            return user.competitor[lang + '_rate'];
+        }
+    },
+    mounted() {
+        this.refresh();
+    },
+    methods: {
+        addPlayer(user) {
+            this.$open(AddPlayerModal, { user, game: this.game });
+        },
+        async refresh() {
+            this.applications = await Http.for(`game/${this.game.id}`).get(
+                'applications'
+            );
+        },
+        async addRegistrant() {
+            await this.$open(AddRegistrantModal, { game: this.game });
 
-    rating(user, lang) {
-        if (!user.competitor) return 0;
+            await this.refresh();
+        },
+        async removePlayer(player, team) {
+            let confirmed = await this.$open(ConfirmModal, {
+                description: 'Are you sure you would like to remove this player?',
+            });
 
-        return user.competitor[lang + '_rate'];
-    }
+            if (!confirmed) return;
 
-    async mounted() {
-        await this.refresh();
-    }
+            await Http.for(`/game/players/${player.id}`).delete();
 
-    async refresh() {
-        this.applications = await Http.for(`game/${this.game.id}`).get(
-            'applications'
-        );
-    }
-
-    addPlayer(user) {
-        this.$open(AddPlayerModal, { user, game: this.game });
-    }
-
-    async addRegistrant() {
-        await this.$open(AddRegistrantModal, { game: this.game });
-
-        await this.refresh();
-    }
-
-    async removePlayer(player, team) {
-        let confirmed = await this.$open(ConfirmModal, {
-            description: 'Are you sure you would like to remove this player?',
-        });
-
-        if (!confirmed) return;
-
-        await Http.for(`/game/players/${player.id}`).delete();
-
-        team.players.splice(team.players.indexOf(player), 1);
-    }
+            team.players.splice(team.players.indexOf(player), 1);
+        },
+    },
 }
 </script>
 

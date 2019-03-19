@@ -30,81 +30,81 @@
 
 
 <script>
-import Component, { State } from 'nuxt-class-component';
 import Http from '../../services/Http';
-
 import PanelHeader from '~/components/mod/PanelHeader';
 import DeleteModal from '~/components/modal/DeleteModal';
 import EndGameModal from '~/components/modal/EndGameModal';
 
-import { name_from_status } from '../../utils/game-status';
-
-@Component({
+export default {
+    name: 'DashboardGame',
     components: { PanelHeader },
-    methods: { name_from_status },
-})
-export default class DashboardGame extends Vue {
-    @State((state) => state.game.game) game;
+    computed: {
+        game() {
+            return this.$store.state.game.game;
+        },
+    },
+    methods: {
+        async activate() {
+            this.game.status = 2;
 
-    async activate() {
-        this.game.status = 2;
+            await this.save();
+        },
+        async endGame() {
+            await this.$open(EndGameModal, { game: this.game });
+        },
+        async save() {
+            let cloned = { ...this.game };
 
-        await this.save();
-    }
+            delete cloned.objectives;
+            delete cloned.teams;
 
-    async endGame() {
-        await this.$open(EndGameModal, { game: this.game });
-    }
+            // Make sure the list doesn't include objectives with games
+            const transformed = this.game.objectives
+                .map((it) => ({ ...it, game: null }))
+                .filter((it) => it.description);
 
-    async save() {
-        let cloned = { ...this.game };
+            await Http.for(`/game/${this.game.id}/objectives`).post(
+                transformed
+            );
 
-        delete cloned.objectives;
-        delete cloned.teams;
+            // Go ahead and save each team
+            for (const team of Object.values(this.game.teams)) {
+                let cloned = { ...team };
+                delete cloned.players;
 
-        // Make sure the list doesn't include objectives with games
-        const transformed = this.game.objectives
-            .map((it) => ({ ...it, game: null }))
-            .filter((it) => it.description);
+                await Http.for('game/team').save(cloned);
+            }
 
-        await Http.for(`/game/${this.game.id}/objectives`).post(transformed);
+            // Last but not least, save the game
+            await Http.for('game').save(cloned);
 
-        // Go ahead and save each team
-        for (const team of Object.values(this.game.teams)) {
-            let cloned = { ...team };
-            delete cloned.players;
+            // Can't forget to update our state with the new game
+            await this.$store.dispatch('game/game', this.game.id);
+        },
+        async remove() {
+            const [confirmed] = await this.$open(DeleteModal, {
+                title: 'Delete Game?',
+                description: `Are you sure you want to delete this game?`,
+            });
 
-            await Http.for('game/team').save(cloned);
-        }
+            if (!confirmed) return;
 
-        // Last but not least, save the game
-        await Http.for('game').save(cloned);
+            try {
+                await Http.for('game').delete(this.game);
 
-        // Can't forget to update our state with the new game
-        await this.$store.dispatch('game/game', this.game.id);
-    }
+                this.$store.dispatch('toast/success', 'Game deleted.');
 
-    async remove() {
-        const [confirmed] = await this.$open(DeleteModal, {
-            title: 'Delete Game?',
-            description: `Are you sure you want to delete this game?`,
-        });
-
-        if (!confirmed) return;
-
-        try {
-            await Http.for('game').delete(this.game);
-
-            this.$store.dispatch('toast/success', 'Game deleted.');
-
-            this.$router.push({ path: '/mod/games' });
-        } catch (e) {
-            this.$store.dispatch('toast/error', 'Game could not be deleted.');
-        }
-    }
-
+                this.$router.push({ path: '/mod/games' });
+            } catch (e) {
+                this.$store.dispatch(
+                    'toast/error',
+                    'Game could not be deleted.'
+                );
+            }
+        },
+    },
     async fetch({ store, query }) {
         await store.dispatch('game/game', query.game);
-    }
-}
+    },
+};
 </script>
