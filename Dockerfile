@@ -6,16 +6,15 @@ ARG API_URL_BROWSER
 WORKDIR /usr/src/app
 
 ADD package.json .
-ADD yarn.lock .
+ADD package-lock.json .
 
-RUN yarn
+RUN npm install
 
 ADD . .
 
 ENV HOST 0.0.0.0
 EXPOSE 3000
 
-RUN API_URL=${API_URL} API_URL_BROWSER=${API_URL_BROWSER} $(yarn bin)/nuxt build
+RUN API_URL=${API_URL} API_URL_BROWSER=${API_URL_BROWSER} npm run build
 
-CMD $(yarn bin)/nuxt start
-
+RUN npm start
