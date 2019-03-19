@@ -43,14 +43,6 @@ export default {
         UpcomingGames,
         DailyPrizes,
     },
-    async asyncData({ store }) {
-        return {
-            mine: await Http.for(`user/${store.state.user.user.id}`).get(
-                'badges'
-            ),
-            activities: await Http.for('activity').get('mine'),
-        };
-    },
     computed: {
         user() {
             return this.$store.state.user;
@@ -61,6 +53,14 @@ export default {
         upcomingGames() {
             return this.$store.state.game.upcoming;
         },
+    },
+    async asyncData({ store }) {
+        return {
+            mine: await Http.for(`user/${store.state.user.user.id}`).get(
+                'badges'
+            ),
+            activities: await Http.for('activity').get('mine'),
+        };
     },
 };
 </script>

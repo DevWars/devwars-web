@@ -268,11 +268,6 @@ export default {
             }
         },
     },
-    async asyncData({ query }) {
-        if (!query.game) return {};
-
-        return { game: await Http.for(`game/${query.game}`).get() };
-    },
     computed: {
         user() {
             return this.$store.state.user.user;
@@ -283,6 +278,11 @@ export default {
         ...mapActions({
             error: 'toast/error',
         }),
+    },
+    async asyncData({ query }) {
+        if (!query.game) return {};
+
+        return { game: await Http.for(`game/${query.game}`).get() };
     },
 };
 </script>

@@ -49,9 +49,6 @@ export default {
             confirmed: '',
         };
     },
-    async asyncData({ params }) {
-        return { key: params.key };
-    },
     methods: {
         reset() {
             let key = this.$route.query.key;
@@ -63,6 +60,9 @@ export default {
 
             this.done = true;
         },
+    },
+    async asyncData({ params }) {
+        return { key: params.key };
     },
 };
 </script>
