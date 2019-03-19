@@ -101,12 +101,6 @@ module.exports = {
      ** Build configuration
      */
     build: {
-        babel: {
-            plugins: [
-                ['@babel/plugin-proposal-decorators', { legacy: true }],
-                ['@babel/plugin-proposal-class-properties', { loose: true }],
-            ],
-        },
         plugins: [
             new webpack.ProvidePlugin({
                 $: 'jquery',
@@ -114,11 +108,8 @@ module.exports = {
             }),
             new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         ],
-        /*
-         ** Run ESLint on save
-         */
-
         extend(config, ctx) {
+            // Run ESLint on save
             if (ctx.isDev && ctx.isClient) {
                 config.module.rules.push({
                     enforce: 'pre',
