@@ -42,7 +42,7 @@ import Input from '~/components/form/Input';
 import Pagination from '~/components/Pagination';
 
 export default {
-    name: 'modTournaments',
+    name: 'ModTournaments',
     components: { PanelHeader, ListingFilters, Table, Input, Pagination },
 };
 </script>

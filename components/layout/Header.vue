@@ -3,7 +3,7 @@
         <div class="header">
             <div class="inner container-fluid">
                 <div>
-                    <button @click="toggleMobileMenu" class="burger-menu"></button>
+                    <button class="burger-menu" @click="toggleMobileMenu"></button>
                     <nuxt-link to="/" class="logo">
                         <img class="logo-full" src="~assets/img/logo.png" alt="DevWars">
                         <img class="logo-icon" src="~assets/img/logo-icon.png" alt="DevWars">
@@ -43,7 +43,7 @@
                     <nuxt-link to="/badges" class="btn-link">Badges</nuxt-link>
                     <nuxt-link to="/settings/profile" class="btn-link">Settings</nuxt-link>
                     <div class="divider"></div>
-                    <a @click="logout" class="btn-link">Logout</a>
+                    <a class="btn-link" @click="logout">Logout</a>
                 </UserMenu>
             </div>
         </div>
@@ -60,19 +60,11 @@ import HeaderMobile from './HeaderMobile';
 
 export default {
     name: 'ComponentHeader',
+    components: { HeaderMobile, UserMenu },
     data: () => {
         return {
             isMobile: false,
         };
-    },
-    components: { HeaderMobile, UserMenu },
-    methods: {
-        logout() {
-            this.$store.dispatch('user/logout');
-        },
-        toggleMobileMenu() {
-            this.$refs.mobileHeader.toggleMenu();
-        },
     },
     computed: {
         user() {
@@ -80,6 +72,14 @@ export default {
         },
         isAdmin() {
             return this.user.role === 'ADMIN';
+        },
+    },
+    methods: {
+        logout() {
+            this.$store.dispatch('user/logout');
+        },
+        toggleMobileMenu() {
+            this.$refs.mobileHeader.toggleMenu();
         },
     },
 };

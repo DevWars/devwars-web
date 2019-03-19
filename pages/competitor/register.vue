@@ -37,13 +37,13 @@
                             </div>
                             <div class="col-sm-3 form-group">
                                 <Select
-                                    label="Select Country"
                                     v-model="competitor.address.country"
+                                    label="Select Country"
                                     required
                                 >
                                     <option
-                                        :key="country"
                                         v-for="country in countries"
+                                        :key="country"
                                     >{{ country }}</option>
                                 </Select>
                             </div>
@@ -90,16 +90,16 @@
                         <h3 class="modpanel__title">Skill Assessment</h3>
                         <div class="row">
                             <div
-                                class="col-sm-4"
                                 v-for="language in languages"
                                 :key="language.name"
+                                class="col-sm-4"
                             >
                                 <div class="lang-rating" :class="['lang-rating--' +language.name]">
                                     <ul class="lang-rating__meter">
                                         <li
-                                            :class="{active: index <= language.skill}"
                                             v-for="(skill, index) in skillNames"
                                             :key="skill"
+                                            :class="{active: index <= language.skill}"
                                         ></li>
                                     </ul>
                                     <div class="lang-rating__main">
@@ -173,7 +173,7 @@ import PageBanner from '~/components/layout/PageBanner';
 import Input from '~/components/form/Input';
 import Select from '~/components/form/Select';
 import ConnectToDiscord from '~/components/user/ConnectToDiscord';
-import { user_has_provider } from '../../utils/linked-accounts';
+import { userHasProvider } from '../../utils/linkedAccounts';
 
 export default {
     name: 'CompetitorRegistration',
@@ -229,10 +229,10 @@ export default {
     },
     methods: {
         tooltip(language) {
-            return this[language.name + 'Tooltips'][language.skill];
+            return this[`${language.name}Tooltips`][language.skill];
         },
         async submit() {
-            const hasDiscord = user_has_provider(this.links, 'DISCORD');
+            const hasDiscord = userHasProvider(this.links, 'DISCORD');
 
             if (!hasDiscord) {
                 return this.error(
@@ -240,7 +240,7 @@ export default {
                 );
             }
 
-            let date = moment
+            const date = moment
                 .utc(`${this.month} ${this.day} ${this.year}`, 'MM DD YYYY')
                 .startOf('day');
 

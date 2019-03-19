@@ -6,7 +6,7 @@ const { mjml2html } = require('mjml');
 const NUXT_SELECTOR = '#__layout';
 
 const translate_request_to_mjml = async (req) => {
-    const body = req.body;
+    const {body} = req;
 
     try {
         // Get the HTML content from a SSR app
@@ -14,7 +14,7 @@ const translate_request_to_mjml = async (req) => {
             method: "GET",
             url: `mail${req.url.toString()}`,
             params: body,
-            baseURL: "http://localhost:3000"
+            baseURL: "http://localhost:3000",
         });
 
         // Load up the HTML Content for parsing

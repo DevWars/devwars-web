@@ -94,7 +94,7 @@ import Http from '../../../services/Http';
 import MailMeta from '../../../components/mail/MailMeta';
 
 export default {
-    name: 'gameSelected',
+    name: 'GameSelected',
     components: { MailMeta },
     layout: 'mail',
 };

@@ -1,9 +1,9 @@
 <template>
     <div>
-        <slot name="default" :isApplied="isApplied" :cancel="cancel" :enter="enter"/>
+        <slot name="default" :isApplied="isApplied" :cancel="cancel" :enter="enter"></slot>
 
         <div v-for="game in altered" :key="game.game.id">
-            <slot name="game" v-bind="game"/>
+            <slot name="game" v-bind="game"></slot>
         </div>
     </div>
 </template>
@@ -24,14 +24,14 @@ export default {
 
                 return;
             }
-            let [entered] = await this.$open(GameRegistration, { game });
+            const [entered] = await this.$open(GameRegistration, { game });
 
             if (!entered) return;
 
             await this.$store.dispatch('game/apply', game);
         },
         async cancel(game) {
-            let [result] = await this.$open(ConfirmModal, {
+            const [result] = await this.$open(ConfirmModal, {
                 title: 'Confirm',
                 description: 'Are you sure you would like to cancel?',
             });
@@ -63,10 +63,10 @@ export default {
         },
         altered() {
             return this.games.map((game) => {
-                let applied = this.applied.some(
+                const applied = this.applied.some(
                     (it) => it.id === game.id || it === game.id
                 );
-                let playing = this.entered.some(
+                const playing = this.entered.some(
                     (it) => it.id === game.id || it === game.id
                 );
 

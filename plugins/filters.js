@@ -30,11 +30,11 @@ Vue.mixin({
                 props.resolve = resolve;
 
                 this.$modal.show(component, props, {
-                    transition: 'zoom'
+                    transition: 'zoom',
                 });
             });
-        }
-    }
+        },
+    },
 });
 
 Vue.use(Vue2Filters);

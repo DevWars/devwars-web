@@ -5,7 +5,7 @@
         <div class="footer-offset container">
             <div class="row">
                 <div class="col-md-8">
-                    <Card class="dark plain" v-show="!submitted">
+                    <Card v-show="!submitted" class="dark plain">
                         <form v-async-submit="[sendEmail]">
                             <div class="form-group">
                                 <Input v-model="name" required/>
@@ -29,7 +29,7 @@
                             </div>
                         </form>
                     </Card>
-                    <Card class="dark plain" v-show="submitted">
+                    <Card v-show="submitted" class="dark plain">
                         <div class="align-center">
                             <h1>Thank you!</h1>
                             <div class="mt-xs mb-md">

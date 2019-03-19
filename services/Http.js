@@ -6,7 +6,7 @@ export default class Http {
     }
 
     static for(item, subs) {
-        let service = Http.services[item];
+        const service = Http.services[item];
 
         if (service) {
             return new Http.services[item](subs);
@@ -43,25 +43,25 @@ export default class Http {
     async delete(first) {
         if (typeof first === "object") {
             return Http.axios.delete(this.urlFor(first), first).then(it => it.data);
-        } else {
-            return Http.axios.delete(this.url(first)).then(it => it.data);
-        }
+        } 
+        return Http.axios.delete(this.url(first)).then(it => it.data);
+        
     }
 
     async post(first, second, third) {
         if (typeof first === "object") {
             return Http.axios.post(this.url(), first, {params: second}).then(it => it.data);
-        } else {
-            return Http.axios.post(this.url(first), second, {params: third}).then(it => it.data);
-        }
+        } 
+        return Http.axios.post(this.url(first), second, {params: third}).then(it => it.data);
+        
     }
 
     async put(first, second, third) {
         if (typeof first === "object") {
             return Http.axios.put(this.url(), first, {params: second}).then(it => it.data);
-        } else {
-            return Http.axios.put(this.url(first), second, {params: third}).then(it => it.data);
-        }
+        } 
+        return Http.axios.put(this.url(first), second, {params: third}).then(it => it.data);
+        
     }
 
     async get(url, params) {
@@ -75,19 +75,19 @@ export default class Http {
     async save(model) {
         if (model && model.id) {
             return this.update(model);
-        } else {
-            return this.create(model);
-        }
+        } 
+        return this.create(model);
+        
     }
 
     urlFor(model, rest = '') {
-        return this.url(model.id + '/' + rest);
+        return this.url(`${model.id  }/${  rest}`);
     }
 
     subsUrl() {
         let it = "";
-        for (let key in this.subs) {
-            let sub = this.subs[key];
+        for (const key in this.subs) {
+            const sub = this.subs[key];
 
             it += `${key}/${isNaN(sub) ? sub.id : sub}`;
         }

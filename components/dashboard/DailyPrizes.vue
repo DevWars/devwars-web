@@ -4,7 +4,7 @@
             <div class="main">
                 <div class="col-xs-2 no-gutter">
                     <div class="devcoins">
-                        <Devcoin></Devcoin>
+                        <Devcoin/>
                         <div class="devcoins__amount">500</div>
                     </div>
                 </div>
@@ -20,7 +20,7 @@
                 <div class="col-xs-2 no-gutter">
                     <div class="devcoins">
                         <no-ssr>
-                            <Devcoin></Devcoin>
+                            <Devcoin/>
                         </no-ssr>
                         <div class="devcoins__amount">200</div>
                     </div>

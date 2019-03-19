@@ -1,7 +1,7 @@
 <template>
     <div class="DevwarsCard">
-        <h1 class="title" v-if="title">{{ title }}</h1>
-        <p class="desc" v-if="desc">{{ desc }}</p>
+        <h1 v-if="title" class="title">{{ title }}</h1>
+        <p v-if="desc" class="desc">{{ desc }}</p>
 
         <div class="main">
             <slot></slot>
@@ -16,7 +16,7 @@
 <script>
 export default {
     name: "DevwarsCard",
-    props: [ 'title', 'desc' ]
+    props: [ 'title', 'desc' ],
 }
 </script>
 

@@ -1,5 +1,5 @@
 export default function({store, redirect, route}) {
-    let user = store.state.user.user;
+    const {user} = store.state.user;
 
     if(user && user.role === "PENDING" && route.path !== '/pending') {
         redirect('/pending');

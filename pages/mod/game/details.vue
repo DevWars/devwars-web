@@ -29,23 +29,23 @@
             </div>
             <h3 class="modpanel__subtitle">Objectives</h3>
             <div
-                class="mod-objectives form-group"
                 v-for="objective in orderBy(game.objectives, 'number')"
                 :key="objective.id"
+                class="mod-objectives form-group"
             >
                 <div class="mod-objectives__input">
                     <Input v-model="objective.description" maxlength="110"/>
                     <label>Objective #{{ objective.number }} (Bonus)</label>
                 </div>
                 <SquareToggle
-                    @change="toggleObjective(team_for_game('red', game), objective)"
                     :active="team_completed_objective(team_for_game('red', game), objective)"
                     color="red"
+                    @change="toggleObjective(team_for_game('red', game), objective)"
                 />
                 <SquareToggle
-                    @change="toggleObjective(team_for_game('blue', game), objective)"
                     :active="team_completed_objective(team_for_game('blue', game), objective)"
                     color="blue"
+                    @change="toggleObjective(team_for_game('blue', game), objective)"
                 />
             </div>
 
@@ -69,9 +69,9 @@
             <div v-for="vote in ['UI', 'UX']" :key="vote" class="row">
                 <div v-for="team in game.teams" :key="team.id" class="col-sm-6 form-group">
                     <VoteBoxInput
-                        @change="updated => team.votes[vote] = updated"
                         :team="team"
                         :vote="vote"
+                        @change="updated => team.votes[vote] = updated"
                     />
                     <label>{{ vote }} - {{ team.name | capitalize }} Votes</label>
                 </div>
@@ -80,11 +80,11 @@
             <h3 class="modpanel__subtitle">Files</h3>
             <div class="row">
                 <div class="col-sm-6 form-group">
-                    <Input type="file" id="force-valid"/>
+                    <Input id="force-valid" type="file"/>
                     <label>Blue Files</label>
                 </div>
                 <div class="col-sm-6 form-group">
-                    <Input type="file" id="force-valid"/>
+                    <Input id="force-valid" type="file"/>
                     <label>Red Files</label>
                 </div>
             </div>
@@ -133,7 +133,7 @@ export default {
     },
     methods: {
         timestampChanged() {
-            let timestamp =
+            const timestamp =
                 moment
                     .utc(`${this.date} ${this.time}`, 'DD/MM/YYYY HH:mm')
                     .unix() * 1000;
@@ -141,7 +141,7 @@ export default {
             this.game.startTime = timestamp;
         },
         gameChanged() {
-            let list = [];
+            const list = [];
 
             for (let i = 1; i <= 5; i++) {
                 let item = this.game.objectives.find((it) => it.number === i);

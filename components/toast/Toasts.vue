@@ -1,6 +1,6 @@
 <template>
     <transition-group tag="div" class="toast" name="bounceRight">
-        <Toast :toast="toast" v-for="toast in toasts" :key="toast.id"></Toast>
+        <Toast v-for="toast in toasts" :key="toast.id" :toast="toast"/>
     </transition-group>
 </template>
 

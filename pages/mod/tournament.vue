@@ -19,9 +19,9 @@
             <div class="modpanel__header-actions">
                 <a href="/mod/tournaments" class="btn btn-outline-gray">Back</a>
                 <button
+                    v-if="tournament.active && !tournament.done"
                     v-async-click="[endTournament]"
                     class="btn btn-danger"
-                    v-if="tournament.active && !tournament.done"
                 >End</button>
                 <button
                     v-show="!tournament.done && !tournament.active"
@@ -56,6 +56,9 @@ export default {
             return this.$store.state.tournament.tournament;
         },
     },
+    async fetch({ store, query }) {
+        await store.dispatch('tournament/tournament', query.tournament);
+    },
     methods: {
         async activate() {
             this.tournament.active = true;
@@ -66,7 +69,7 @@ export default {
             await Http.for(`/tournament/${this.tournament.id}/ended`).save();
         },
         async save() {
-            let cloned = { ...this.tournament };
+            const cloned = { ...this.tournament };
 
             delete cloned.objectives;
             delete cloned.teams;
@@ -84,14 +87,14 @@ export default {
 
             // Go ahead and save each team
             Object.values(this.tournament.teams).forEach(async (team) => {
-                let cloned = { ...team };
+                const cloned = { ...team };
                 delete cloned.players;
 
                 await Http.for('tournament/team').save(cloned);
             });
 
             // Last but not least, save the game
-            let game = await Http.for('tournament').save(cloned);
+            const game = await Http.for('tournament').save(cloned);
 
             // Can't forget to update our state with the new game
             this.$store.commit('tournament/tournament', tournament);
@@ -117,9 +120,6 @@ export default {
                 );
             }
         },
-    },
-    async fetch({ store, query }) {
-        await store.dispatch('tournament/tournament', query.tournament);
     },
 };
 </script>

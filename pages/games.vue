@@ -3,20 +3,20 @@
         <div class="sidebar no-gutter col-sm-3">
             <nav class="nav-tabs nav-tabs-fluid">
                 <nuxt-link
-                    :to="'/games?season=' + current"
-                    class="nav-tabs__item"
                     v-for="current in seasons"
                     :key="current"
+                    :to="'/games?season=' + current"
+                    class="nav-tabs__item"
                     :class="{active: season === current}"
                 >Season {{ current }}</nuxt-link>
             </nav>
 
             <div
-                class="game"
-                @click="view(game)"
-                :key="game.id"
                 v-for="game in games"
+                :key="game.id"
+                class="game"
                 :class="{active: viewing && viewing.id === game.id}"
+                @click="view(game)"
             >
                 <div class="game__meta">
                     <span class="game__mode" :class="[game.name.toLowerCase()]">{{ game.name }}</span>

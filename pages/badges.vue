@@ -4,7 +4,7 @@
         <div class="footer-offset">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-3 col-md-4 col-sm-6" v-for="badge in badges" :key="badge.id">
+                    <div v-for="badge in badges" :key="badge.id" class="col-lg-3 col-md-4 col-sm-6">
                         <div
                             class="badge-card bronze"
                             :class="{complete: completed(badge)}"
@@ -22,7 +22,7 @@
                                 <div class="progress__bar" :style="[style(badge)]"></div>
                             </div>
                             <div class="devcoins">
-                                <Devcoin></Devcoin>
+                                <Devcoin/>
                                 <div class="devcoins__amount color-white">{{ badge.coins | number }}</div>
                             </div>
                         </div>
@@ -52,13 +52,22 @@ export default {
             userCount: 'user/userCount',
         }),
     },
+    async asyncData({ store }) {
+        const mine = await Http.for(`user/${store.state.user.user.id}`).get(
+            'badges'
+        );
+
+        return {
+            mine,
+        };
+    },
     methods: {
         completed(badge) {
             return this.mine.some((it) => it.id === badge.id);
         },
         style(badge) {
             return {
-                width: (badge.userCount / this.userCount) * 100 + '%',
+                width: `${(badge.userCount / this.userCount) * 100  }%`,
             };
         },
         image(badge) {
@@ -71,15 +80,6 @@ export default {
                 console.error(`Couldn't load image for badge ${badge.name}`);
             }
         },
-    },
-    async asyncData({ store }) {
-        let mine = await Http.for(`user/${store.state.user.user.id}`).get(
-            'badges'
-        );
-
-        return {
-            mine: mine,
-        };
     },
 };
 </script>

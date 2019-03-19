@@ -3,7 +3,7 @@
         <i class="fab fa-discord"></i>
         <span>Connect Discord</span>
     </a>
-    <a v-else class="btn btn-outline-success btn-icon" v-async-click="[removeProvider, 'DISCORD']">
+    <a v-else v-async-click="[removeProvider, 'DISCORD']" class="btn btn-outline-success btn-icon">
         <i class="fa fa-check"></i>
         <span>Discord Connected</span>
     </a>
@@ -12,7 +12,7 @@
 
 <script>
 import { mapActions } from 'vuex';
-import { user_has_provider } from '../../utils/linked-accounts';
+import { userHasProvider } from '../../utils/linkedAccounts';
 
 export default {
     name: 'ConnectToDiscord',
@@ -50,7 +50,7 @@ export default {
             return this.$store.state.user.linkedAccounts;
         },
         hasDiscord() {
-            return user_has_provider(this.links, 'DISCORD');
+            return userHasProvider(this.links, 'DISCORD');
         },
     },
 };

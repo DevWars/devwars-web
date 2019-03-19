@@ -10,8 +10,8 @@
             <button class="btn btn-outline-gray" @click="close(false)">Nevermind</button>
             <a
                 :href="'/competitor/register?game=' + game.id "
-                @click="close(false)"
                 class="btn btn-primary"
+                @click="close(false)"
             >Begin Registration</a>
         </div>
     </div>
@@ -36,7 +36,7 @@
 
         <div class="modal__actions">
             <button class="btn btn-outline-gray" @click="close(false)">Nevermind</button>
-            <button class="btn btn-primary" v-async-click="[enter]">Enter</button>
+            <button v-async-click="[enter]" class="btn btn-primary">Enter</button>
         </div>
     </div>
 </template>

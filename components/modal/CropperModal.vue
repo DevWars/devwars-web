@@ -1,11 +1,11 @@
 <template>
     <div>
         <div style="height: 400px;">
-            <img ref="cropper" @load="imageLoad" :src="data">
+            <img ref="cropper" :src="data" @load="imageLoad">
         </div>
 
         <div class="modal-dialog__actions">
-            <button @click="submit" class="btn btn-black">Crop Image</button>
+            <button class="btn btn-black" @click="submit">Crop Image</button>
         </div>
     </div>
 </template>
@@ -29,7 +29,7 @@ export default {
             this.cropper = new Cropper(e.target, this.options());
         },
         async submit() {
-            let data = await new Promise((resolve) => {
+            const data = await new Promise((resolve) => {
                 this.cropper.getCroppedCanvas().toBlob((res) => {
                     resolve(res);
                 }, 'image/jpeg');

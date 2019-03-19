@@ -7,14 +7,14 @@ export const state = () => ({
 export const mutations = {
     latest(state, latest) {
         state.latest = latest;
-    }
+    },
 };
 
 
 export const actions = {
     async latest({commit}, count) {
-        let posts = await Http.for('blog').get('latest', {count});
+        const posts = await Http.for('blog').get('latest', {count});
 
         commit('latest', posts);
-    }
+    },
 };

@@ -1,6 +1,6 @@
 <template>
     <HomeCard title="Live Now">
-        <div class="live-now" slot="heading">
+        <div slot="heading" class="live-now">
             <h2 class="live-now__title">Live Now</h2>
         </div>
 

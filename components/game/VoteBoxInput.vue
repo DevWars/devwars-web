@@ -10,11 +10,6 @@ export default {
     name: 'VoteBoxInput',
     components: { Input },
     props: ['vote', 'team'],
-    methods: {
-        change(count) {
-            this.$emit('change', { count, name: this.vote });
-        },
-    },
     computed: {
         found() {
             const notFound = { count: 0 };
@@ -26,6 +21,11 @@ export default {
             );
 
             return vote || notFound;
+        },
+    },
+    methods: {
+        change(count) {
+            this.$emit('change', { count, name: this.vote });
         },
     },
 };

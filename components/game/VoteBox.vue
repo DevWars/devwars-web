@@ -1,9 +1,9 @@
 <template>
     <SubScore
+        v-show="total > 0"
         :title="label"
         :blueScore="analysis.blue.points"
         :redScore="analysis.red.points"
-        v-show="total > 0"
     >
         <div class="voting">
             <div class="team team-blue" :class="{win: analysis.blue.win}">
@@ -39,14 +39,9 @@ export default {
     name: 'VoteBox',
     components: { SubScore },
     props: ['game', 'vote', 'label'],
-    methods: {
-        analysisForTeam(team, otherTeam) {
-            return vote_analysis_for_team(team, otherTeam, this.label);
-        },
-    },
     computed: {
         analysis() {
-            let analysis = {};
+            const analysis = {};
 
             analysis.red = this.analysisForTeam(
                 team_for_game('red', this.game),
@@ -61,6 +56,11 @@ export default {
         },
         total() {
             return this.analysis.blue.votes + this.analysis.red.votes;
+        },
+    },
+    methods: {
+        analysisForTeam(team, otherTeam) {
+            return vote_analysis_for_team(team, otherTeam, this.label);
         },
     },
 };

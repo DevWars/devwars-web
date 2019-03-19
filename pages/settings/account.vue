@@ -29,8 +29,8 @@
             </div>
             <div class="form-group">
                 <button
-                    class="btn btn-primary"
                     v-async-click="[changePassword]"
+                    class="btn btn-primary"
                     :disabled="!(currentPassword && newPassword && newPassword === newPasswordConfirmed)"
                 >Change Password</button>
             </div>

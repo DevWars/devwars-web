@@ -3,10 +3,10 @@
         <div slot-scope="{isApplied, enter, cancel}">
             <a
                 v-show="!isApplied(game)"
-                @click="enter(game)"
                 class="btn btn-primary"
+                @click="enter(game)"
             >Register for Entry</a>
-            <a v-show="isApplied(game)" @click="cancel(game)" class="btn btn-outline-danger">Resign</a>
+            <a v-show="isApplied(game)" class="btn btn-outline-danger" @click="cancel(game)">Resign</a>
         </div>
     </Applications>
 </template>

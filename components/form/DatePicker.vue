@@ -1,11 +1,11 @@
 <template>
     <FlatPickr
+        ref="pickr"
         v-click-outside="closePicker"
         :class="['form-control', {empty: !value || !value.length}, {valid: value && value.length }]"
-        ref="pickr"
-        @input="onChange"
         :value="value"
         :config="config"
+        @input="onChange"
     />
 </template>
 

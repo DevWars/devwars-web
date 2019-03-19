@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="isVisible" class="header" v-click-outside="toggleMenu">
+        <div v-if="isVisible" v-click-outside="toggleMenu" class="header">
             <div class="head">
                 <nuxt-link to="/" class="logo">
                     <img src="~assets/img/logo.png" alt="DevWars">
@@ -25,11 +25,11 @@
                 <nuxt-link to="/badges" class="btn-link">Badges</nuxt-link>
                 <nuxt-link to="/settings/profile" class="btn-link">Settings</nuxt-link>
                 <div class="menu-divider"></div>
-                <a @click="logout" class="btn-link">Logout</a>
+                <a class="btn-link" @click="logout">Logout</a>
             </UserMenu>
         </div>
 
-        <div v-if="isVisible" class="overlay"/>
+        <div v-if="isVisible" class="overlay"></div>
     </div>
 </template>
 
@@ -40,13 +40,13 @@ import UserMenu from '~/components/user/UserMenu';
 
 export default {
     name: 'HeaderMobile',
+    components: { UserMenu },
+    directives: { ClickOutside },
     data: () => {
         return {
             isVisible: false,
         };
     },
-    components: { UserMenu },
-    directives: { ClickOutside },
     computed: {
         user() {
             return this.$store.state.user.user;

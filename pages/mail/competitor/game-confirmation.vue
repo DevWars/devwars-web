@@ -96,7 +96,7 @@ import Http from '../../../services/Http';
 import MailMeta from '../../../components/mail/MailMeta';
 
 export default {
-    name: 'gameConfirmation',
+    name: 'GameConfirmation',
     components: { MailMeta },
     layout: 'mail',
     async asyncData({ query }) {

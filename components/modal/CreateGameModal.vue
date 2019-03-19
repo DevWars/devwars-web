@@ -14,7 +14,7 @@
             <label>When is the game?</label>
         </div>
         <div class="align-right">
-            <button type="button" @click="close(false)" class="btn btn-outline-gray">Cancel</button>
+            <button type="button" class="btn btn-outline-gray" @click="close(false)">Cancel</button>
             <button class="btn btn-primary">Save</button>
         </div>
     </form>
@@ -38,7 +38,7 @@ export default {
     },
     methods: {
         async submit() {
-            let timestamp =
+            const timestamp =
                 moment.utc(this.date, 'MM/DD/YYYY HH:mm').unix() * 1000;
 
             await this.$store.dispatch('game/create', {

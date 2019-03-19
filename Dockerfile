@@ -17,4 +17,4 @@ EXPOSE 3000
 
 RUN API_URL=${API_URL} API_URL_BROWSER=${API_URL_BROWSER} npm run build
 
-RUN npm start
+CMD ["npm", "start"]

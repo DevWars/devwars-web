@@ -4,18 +4,18 @@
             <form v-show="!done">
                 <DevwarsCard title="Reset Password">
                     <div class="form-group">
-                        <Input type="password" v-model="password" tabindex="1" required/>
+                        <Input v-model="password" type="password" tabindex="1" required/>
                         <label>New Password</label>
                     </div>
                     <div class="form-group">
-                        <Input type="password" v-model="confirmed" tabindex="2" required/>
+                        <Input v-model="confirmed" type="password" tabindex="2" required/>
                         <label>Confirm Password</label>
                     </div>
                     <div slot="actions">
                         <button
+                            v-async-click="[reset]"
                             type="button"
                             :disabled="confirmed !== password"
-                            v-async-click="[reset]"
                             class="btn btn-outline-white btn-block"
                             tabindex="3"
                         >Reset Password</button>
@@ -49,9 +49,12 @@ export default {
             confirmed: '',
         };
     },
+    async asyncData({ params }) {
+        return { key: params.key };
+    },
     methods: {
         reset() {
-            let key = this.$route.query.key;
+            const {key} = this.$route.query;
 
             this.$store.dispatch('user/resetByKey', {
                 key,
@@ -60,9 +63,6 @@ export default {
 
             this.done = true;
         },
-    },
-    async asyncData({ params }) {
-        return { key: params.key };
     },
 };
 </script>

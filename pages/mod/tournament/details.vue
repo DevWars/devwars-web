@@ -52,9 +52,15 @@ export default {
             this.tournamentChanged();
         },
     },
+    mounted() {
+        this.tournamentChanged();
+
+        this.date = moment.utc(this.tournament.timestamp).format('DD/MM/YYYY');
+        this.time = moment.utc(this.tournament.timestamp).format('HH:mm');
+    },
     methods: {
         timestampChanged() {
-            let timestamp =
+            const timestamp =
                 moment
                     .utc(`${this.date} ${this.time}`, 'DD/MM/YYYY HH:mm')
                     .unix() * 1000;
@@ -62,7 +68,7 @@ export default {
             this.tournament.timestamp = timestamp;
         },
         tournamentChanged() {
-            let list = [];
+            const list = [];
 
             for (let i = 0; i < 5; i++) {
                 let item = this.tournament.objectives.find(
@@ -76,12 +82,6 @@ export default {
 
             this.tournament.objectives = list;
         },
-    },
-    mounted() {
-        this.tournamentChanged();
-
-        this.date = moment.utc(this.tournament.timestamp).format('DD/MM/YYYY');
-        this.time = moment.utc(this.tournament.timestamp).format('HH:mm');
     },
 };
 </script>

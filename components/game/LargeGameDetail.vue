@@ -38,15 +38,15 @@
                         >{{ team_for_game(team, game).name }}</h3>
                         <div class="team__score">
                             <span
-                                class="team__win"
                                 v-show="index === 0 && winner_for_game(game) === team_for_game(team, game)"
+                                class="team__win"
                             >Win</span>
                             <span
                                 class="team__points"
                             >{{ points_for_team(team_for_game(team, game), game)}}</span>
                             <span
-                                class="team__win"
                                 v-show="index === 1 && winner_for_game(game) === team_for_game(team, game)"
+                                class="team__win"
                             >Win</span>
                         </div>
                         <h3
@@ -57,10 +57,10 @@
                 </div>
                 <div class="players">
                     <div
-                        class="player"
                         v-for="language in ['html', 'css', 'js']"
-                        :key="language"
                         v-if="player(team, language)"
+                        :key="language"
+                        class="player"
                     >
                         <div class="user-group">
                             <div v-if="index === 0" class="player__avatar">
@@ -80,9 +80,9 @@
             <ul class="roster__positions">
                 <li
                     v-for="language in ['html', 'css', 'js']"
+                    v-show="player('blue', language) || player('red', language)"
                     :key="language"
                     :class="[language + '-color']"
-                    v-show="player('blue', language) || player('red', language)"
                 >{{ language | uppercase }}</li>
             </ul>
         </div>
@@ -109,22 +109,22 @@
                 View Red Website
             </a>
         </div>-->
-        <SubScore title="New Theme" v-if="game.theme">
+        <SubScore v-if="game.theme" title="New Theme">
             <h3>{{ game.theme }}</h3>
         </SubScore>
 
         <SubScore
+            v-if="game.objectives.length > 0"
             title="Objectives"
             :blueScore="team_for_game('blue', game).completedObjectives.length"
             :redScore="team_for_game('red', game).completedObjectives.length"
-            v-if="game.objectives.length > 0"
         >
             <ul class="objectives">
                 <li
-                    class="objectives__item"
-                    :class="{bonus: index === game.objectives.length - 1 }"
                     v-for="(objective, index) in game.objectives"
                     :key="objective.id"
+                    class="objectives__item"
+                    :class="{bonus: index === game.objectives.length - 1 }"
                 >
                     <div
                         class="objectives__square team-blue"
@@ -163,6 +163,14 @@ export default {
     props: {
         game: { default: {} },
     },
+    computed: {
+        blue() {
+            return team_for_game('blue', this.game);
+        },
+        red() {
+            return team_for_game('red', this.game);
+        },
+    },
     methods: {
         team_for_game,
         points_for_team,
@@ -177,14 +185,6 @@ export default {
                 team_for_game(team, this.game),
                 objective
             );
-        },
-    },
-    computed: {
-        blue() {
-            return team_for_game('blue', this.game);
-        },
-        red() {
-            return team_for_game('red', this.game);
         },
     },
 };

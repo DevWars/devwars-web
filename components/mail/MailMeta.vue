@@ -1,9 +1,9 @@
 <template>
     <mj-wrapper>
         <mj-raw>
-            <div v-bind="$props"/>
+            <div v-bind="$props"></div>
         </mj-raw>
-        <slot name="default"/>
+        <slot name="default"></slot>
     </mj-wrapper>
 </template>
 

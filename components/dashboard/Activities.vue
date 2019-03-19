@@ -1,20 +1,20 @@
 <template>
     <DashboardCard title="Activity Log" icon="fa fa-bar-chart">
         <ul class="activity-history">
-            <li class="item" :key="activity.id" v-for="activity in paged.data">
+            <li v-for="activity in paged.data" :key="activity.id" class="item">
                 <div
                     class="date col-xs-3 no-gutter"
                 >{{ activity.created_at | moment('mediumDate') }}</div>
                 <div class="title col-xs-6 no-gutter">{{ activity.description}}</div>
                 <div class="rewards col-sm-3 no-gutter">
                     <div
-                        class="reward"
                         v-if="activity.bits"
+                        class="reward"
                         :class="[activity.bits > 0 ? 'win' : '']"
                     >{{ (activity.bits) }} Devcoins</div>
                     <div
-                        class="reward"
                         v-if="activity.xp"
+                        class="reward"
                         :class="[activity.xp > 0 ? 'win' : '']"
                     >{{ (activity.xp) }} XP</div>
                 </div>
@@ -29,8 +29,8 @@ import DashboardCard from '~/components/DashboardCard';
 
 export default {
     name: 'Activities',
-    props: ['paged'],
     components: { DashboardCard },
+    props: ['paged'],
 };
 </script>
 

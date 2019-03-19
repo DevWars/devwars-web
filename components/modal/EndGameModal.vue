@@ -1,8 +1,8 @@
 <template>
     <div class="modal__actions">
         <button
-            v-async-click="[end, team]"
             v-for="team in game.teams"
+            v-async-click="[end, team]"
             class="btn btn-link"
         >{{ team.name | capitalize }}</button>
     </div>

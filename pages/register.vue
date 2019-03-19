@@ -8,7 +8,7 @@
                         <label>Email</label>
                     </div>
                     <div class="form-group">
-                        <Input minlength="4" maxlength="32" v-model="username" required/>
+                        <Input v-model="username" minlength="4" maxlength="32" required/>
                         <label>Username</label>
                     </div>
                     <div class="form-group">

@@ -1,9 +1,9 @@
 <template>
     <div class="section">
         <div class="header" :class="{ noScore: !blueScore && !redScore }">
-            <span class="points team-blue" v-if="blueScore >= 0">{{ blueScore }}</span>
+            <span v-if="blueScore >= 0" class="points team-blue">{{ blueScore }}</span>
             <h3 v-if="title">{{ title }}</h3>
-            <span class="points team-red" v-if="redScore >= 0">{{ redScore }}</span>
+            <span v-if="redScore >= 0" class="points team-red">{{ redScore }}</span>
         </div>
 
         <div class="main">
@@ -15,7 +15,7 @@
 <script>
 export default {
     name: "SubScore",
-    props: [ 'title', 'blueScore', 'redScore' ]
+    props: [ 'title', 'blueScore', 'redScore' ],
 }
 </script>
 

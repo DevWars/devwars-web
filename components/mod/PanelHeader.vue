@@ -1,8 +1,8 @@
 <template>
     <div class="PanelHeader">
         <div class="main">
-            <h1 class="title" v-if="title">{{ title }}</h1>
-            <h2 class="subtitle" v-if="subtitle">{{ subtitle }}</h2>
+            <h1 v-if="title" class="title">{{ title }}</h1>
+            <h2 v-if="subtitle" class="subtitle">{{ subtitle }}</h2>
         </div>
 
         <div class="actions">

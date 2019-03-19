@@ -11,9 +11,9 @@
                 <div class="actions">
                     <button
                         v-show="!props.playing"
-                        @click="props.enterOrCancel(props)"
                         class="btn btn-sm btn-block"
                         :class="['btn-outline-' + (props.applied ? 'danger': 'white')]"
+                        @click="props.enterOrCancel(props)"
                     >{{ props.applied ? 'Cancel' : 'Enter'}}</button>
                 </div>
             </div>
@@ -30,8 +30,8 @@ import DashboardCard from '~/components/DashboardCard';
 
 export default {
     name: 'UpcomingGames',
-    props: ['upcoming', 'applied'],
     components: { Applications, DashboardCard },
+    props: ['upcoming', 'applied'],
     computed: {
         ...mapState({
             user: 'user',

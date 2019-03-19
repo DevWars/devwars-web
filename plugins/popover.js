@@ -1,2 +1,3 @@
-window.$ = require('jquery');
 import 'webui-popover';
+
+window.$ = require('jquery');

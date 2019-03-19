@@ -1,7 +1,7 @@
 <template>
     <Card class="bezeless dark">
-        <div class="header" v-if="title">
-            <i v-bind:class="icon"></i>
+        <div v-if="title" class="header">
+            <i :class="icon"></i>
             <h5>{{ title }}</h5>
         </div>
 
@@ -12,13 +12,13 @@
 </template>
 
 <script>
-import Card from "./Card";
+import Card from './Card';
 
 export default {
-    name: "DashboardCard",
+    name: 'DashboardCard',
     components: { Card },
-    props: [ 'title', 'icon' ]
-}
+    props: ['title', 'icon'],
+};
 </script>
 
 <style lang="scss" scoped>
@@ -29,7 +29,8 @@ export default {
     padding: $xs-space $grid-gutter-part;
     font-size: 0;
 
-    i, h5 {
+    i,
+    h5 {
         @extend %align-middle;
     }
 

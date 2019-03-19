@@ -13,3 +13,6 @@ npm-debug.log
 
 # Nuxt generate
 dist
+
+# temp
+yarn.lock

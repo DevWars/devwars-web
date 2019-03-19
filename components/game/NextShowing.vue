@@ -1,19 +1,19 @@
 <template>
     <HomeCard v-if="game" title="Next Showing">
-        <ul class="countdown" id="countdown">
-            <li class="countdown__item" id="days">
+        <ul id="countdown" class="countdown">
+            <li id="days" class="countdown__item">
                 <div class="countdown__number">{{ timeDifference.days}}</div>
                 <div class="countdown__label">Days</div>
             </li>
-            <li class="countdown__item" id="hours">
+            <li id="hours" class="countdown__item">
                 <div class="countdown__number">{{ timeDifference.hours}}</div>
                 <div class="countdown__label">Hours</div>
             </li>
-            <li class="countdown__item" id="minutes">
+            <li id="minutes" class="countdown__item">
                 <div class="countdown__number">{{ timeDifference.minutes}}</div>
                 <div class="countdown__label">Minutes</div>
             </li>
-            <li class="countdown__item" id="seconds">
+            <li id="seconds" class="countdown__item">
                 <div class="countdown__number">{{ timeDifference.seconds}}</div>
                 <div class="countdown__label">Seconds</div>
             </li>
@@ -52,12 +52,17 @@ export default {
             return first(sortBy(this.upcoming, (game) => game.startTime));
         },
     },
+    mounted() {
+        this.updateTime();
+
+        setInterval(this.updateTime.bind(this), 1000);
+    },
     methods: {
         updateTime() {
-            let diff = moment.utc(this.game.startTime).diff(moment());
-            let units = ['days', 'hours', 'minutes', 'seconds'];
+            const diff = moment.utc(this.game.startTime).diff(moment());
+            const units = ['days', 'hours', 'minutes', 'seconds'];
 
-            let updated = {};
+            const updated = {};
 
             units.forEach(
                 (unit) =>
@@ -69,11 +74,6 @@ export default {
 
             this.timeDifference = updated;
         },
-    },
-    mounted() {
-        this.updateTime();
-
-        setInterval(this.updateTime.bind(this), 1000);
     },
 };
 </script>

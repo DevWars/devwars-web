@@ -1,8 +1,8 @@
 <template>
     <div>
-        <slot name="trigger"/>
+        <slot name="trigger"></slot>
         <div class="webui-popover-content">
-            <slot name="menu"/>
+            <slot name="menu"></slot>
         </div>
     </div>
 </template>
@@ -14,8 +14,8 @@ import jQuery from 'jquery';
 export default {
     name: 'Popup',
     mounted() {
-        let el = this.$slots.trigger[0].elm;
-        let content = this.$slots.menu[0].elm;
+        const el = this.$slots.trigger[0].elm;
+        const content = this.$slots.menu[0].elm;
 
         $(content).click(() => {
             $(el).webuiPopover('hide');

@@ -26,9 +26,9 @@ export default {
     props: ['user'],
     computed: {
         progress() {
-            let past =
+            const past =
                 this.user.statistics.xp - this.user.statistics.rank.xpRequired;
-            let difference =
+            const difference =
                 this.user.statistics.nextRank.xpRequired -
                 this.user.statistics.rank.xpRequired;
             const percentage = Math.round((past / difference) * 100);

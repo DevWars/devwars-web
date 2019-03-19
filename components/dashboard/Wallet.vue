@@ -3,7 +3,7 @@
         <div class="wallet__inner">
             <div>
                 <div class="devcoins devcoins-lg">
-                    <Devcoin></Devcoin>
+                    <Devcoin/>
                     <div class="devcoins__amount">{{ user.statistics.coins | number }}</div>
                 </div>
             </div>

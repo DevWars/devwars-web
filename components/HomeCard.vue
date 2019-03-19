@@ -1,5 +1,5 @@
 <template>
-  <Card v-bind:title="title">
+  <Card :title="title">
 
     <div class="content">
       <slot></slot>
@@ -15,9 +15,9 @@
 import Card from "./Card";
 
 export default {
-  name: "HomeCard",
-  components: { Card },
-  props: [ 'title' ]
+    name: "HomeCard",
+    components: { Card },
+    props: [ 'title' ],
 }
 </script>
 

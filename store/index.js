@@ -17,7 +17,7 @@ export const actions = {
 
     async navigate({commit}, route) {
         this.app.router.push(route);
-    }
+    },
 };
 
 export const strict = false;

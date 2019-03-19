@@ -2,8 +2,8 @@ import Vue from 'vue';
 
 Vue.directive('asyncClick', {
     bind(el, binding, node) {
-        let func = binding.value[0];
-        let args = binding.value.slice(1);
+        const func = binding.value[0];
+        const args = binding.value.slice(1);
 
         el.addEventListener('click', async event => {
             el.classList.add('loading');
@@ -20,18 +20,18 @@ Vue.directive('asyncClick', {
             el.disabled = false;
         });
 
-    }
+    },
 });
 
 Vue.directive('asyncSubmit', {
     bind(el, binding, node) {
-        let func = binding.value[0];
-        let args = binding.value.slice(1);
+        const func = binding.value[0];
+        const args = binding.value.slice(1);
 
         el.addEventListener('submit', async event => {
             event.preventDefault();
 
-            let buttons = el.querySelectorAll('button:not([type="button"])');
+            const buttons = el.querySelectorAll('button:not([type="button"])');
 
             if (buttons.length < 1) return;
 
@@ -52,5 +52,5 @@ Vue.directive('asyncSubmit', {
             });
         });
 
-    }
+    },
 });

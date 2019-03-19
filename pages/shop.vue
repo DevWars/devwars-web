@@ -2,7 +2,7 @@
     <div>
         <PageBanner title="Shop">
             <div class="devcoins devcoins-xl">
-                <Devcoin></Devcoin>
+                <Devcoin/>
                 <div class="devcoins__amount">232</div>
             </div>
 
@@ -40,7 +40,7 @@
                                 >Activate a quiz round during a live game show.</p>
                             </div>
                             <div class="devcoins devcoins-lg">
-                                <Devcoin></Devcoin>
+                                <Devcoin/>
                                 <div class="devcoins__amount">232</div>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                                 <p class="shop-card__desc">+5 DevBit Earnings</p>
                             </div>
                             <div class="devcoins devcoins-lg">
-                                <Devcoin></Devcoin>
+                                <Devcoin/>
                                 <div class="devcoins__amount">232</div>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
                                 <p class="shop-card__desc">Allows upload of a custom avatar.</p>
                             </div>
                             <div class="devcoins devcoins-lg">
-                                <Devcoin></Devcoin>
+                                <Devcoin/>
                                 <div class="devcoins__amount">232</div>
                             </div>
                         </div>
@@ -90,7 +90,7 @@
                                 >Protects 5%-30% of your gambled assets on your next bet.</p>
                             </div>
                             <div class="devcoins devcoins-lg">
-                                <Devcoin></Devcoin>
+                                <Devcoin/>
                                 <div class="devcoins__amount">232</div>
                             </div>
                         </div>
@@ -106,7 +106,7 @@
                                 <p class="shop-card__desc">Allows for 1 username change.</p>
                             </div>
                             <div class="devcoins devcoins-lg">
-                                <Devcoin></Devcoin>
+                                <Devcoin/>
                                 <div class="devcoins__amount">232</div>
                             </div>
                         </div>
@@ -124,7 +124,7 @@
                                 >Place a song request to play on the live stream.</p>
                             </div>
                             <div class="devcoins devcoins-lg">
-                                <Devcoin></Devcoin>
+                                <Devcoin/>
                                 <div class="devcoins__amount">232</div>
                             </div>
                         </div>
@@ -142,7 +142,7 @@
                                 >Enter for a chance to win the weekly DevWars Jackpot.</p>
                             </div>
                             <div class="devcoins devcoins-lg">
-                                <Devcoin></Devcoin>
+                                <Devcoin/>
                                 <div class="devcoins__amount">232</div>
                             </div>
                         </div>

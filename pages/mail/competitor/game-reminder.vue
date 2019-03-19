@@ -89,7 +89,7 @@ import Http from '../../../services/Http';
 import MailMeta from '../../../components/mail/MailMeta';
 
 export default {
-    name: 'gameReminder',
+    name: 'GameReminder',
     components: { MailMeta },
     layout: 'mail',
 };

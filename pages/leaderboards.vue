@@ -57,6 +57,9 @@ export default {
             page: 0,
         };
     },
+    async asyncData() {
+        return { leaderboards: await Http.for('leaderboard/users').get() };
+    },
     methods: {
         async previous() {
             this.page--;
@@ -70,9 +73,6 @@ export default {
                 page: this.page,
             });
         },
-    },
-    async asyncData() {
-        return { leaderboards: await Http.for('leaderboard/users').get() };
     },
 };
 </script>

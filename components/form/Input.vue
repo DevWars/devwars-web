@@ -2,8 +2,8 @@
     <input
         :type="type"
         :value="value"
-        @input="e => $emit('input', e.target.value)"
         :class="['form-control', {empty: !valid},  {valid}]"
+        @input="e => $emit('input', e.target.value)"
     >
 </template>
 

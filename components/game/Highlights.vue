@@ -31,15 +31,15 @@ export default {
             if (process.server) return this.posts;
 
             return this.posts.map((post) => {
-                let el = document.createElement('div');
+                const el = document.createElement('div');
                 el.innerHTML = post.text;
                 let text = el.innerText;
                 el.innerHTML = text;
                 text = el.innerText;
 
-                let cutoff = 100;
+                const cutoff = 100;
 
-                text = text.substring(0, cutoff) + '...';
+                text = `${text.substring(0, cutoff)  }...`;
 
                 return {
                     user: post.user,

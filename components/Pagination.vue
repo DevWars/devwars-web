@@ -1,15 +1,15 @@
 <template>
     <div class="Pagination">
         <button
-            @click="$emit('previous')"
             class="btn btn-gray btn-sm"
             :class="{disabled: !canGoPrevious}"
+            @click="$emit('previous')"
         >Prev</button>
         <strong class="page">PAGE {{ page + 1 }}</strong>
         <button
-            @click="$emit('next')"
             class="btn btn-gray btn-sm"
             :class="{disabled: !canGoNext}"
+            @click="$emit('next')"
         >Next</button>
     </div>
 </template>

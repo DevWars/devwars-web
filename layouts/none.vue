@@ -1,6 +1,6 @@
 <template>
     <div>
-        <modals-container></modals-container>
+        <modals-container/>
 
         <Toasts/>
 

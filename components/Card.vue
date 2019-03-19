@@ -1,7 +1,7 @@
 <template>
     <div class="Card">
         <div class="inner">
-            <h2 class="card__title" v-if="title">{{ title }}</h2>
+            <h2 v-if="title" class="card__title">{{ title }}</h2>
             <slot></slot>
         </div>
     </div>
@@ -9,8 +9,8 @@
 
 <script>
 export default {
-  name: "Card",
-  props: [ 'title' ]
+    name: "Card",
+    props: [ 'title' ],
 }
 </script>
 

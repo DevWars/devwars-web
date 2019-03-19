@@ -44,8 +44,8 @@ import DevwarsCard from '~/components/DevwarsCard';
 import Input from '~/components/form/Input';
 
 export default {
-    components: { DevwarsCard, Input },
     name: 'ResetPassword',
+    components: { DevwarsCard, Input },
     data() {
         return {
             done: false,
@@ -54,7 +54,7 @@ export default {
     },
     methods: {
         async forgot() {
-            let done = await this.$store.dispatch('user/forgot', this.email);
+            const done = await this.$store.dispatch('user/forgot', this.email);
 
             this.done = done;
         },

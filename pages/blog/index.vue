@@ -4,7 +4,7 @@
 
         <div class="container">
             <div class="blog-list">
-                <div class="col-md-4" v-for="post in posts" :key="post.id">
+                <div v-for="post in posts" :key="post.id" class="col-md-4">
                     <BlogCard :post="post"/>
                 </div>
             </div>

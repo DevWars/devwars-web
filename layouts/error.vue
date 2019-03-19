@@ -44,14 +44,14 @@
 </template>
 
 <script>
-    export default {
-        name: "Error",
-        props: ['error'],
-        layout: 'header',
-        mounted() {
-            console.log(this.error);
-        }
-    }
+export default {
+    name: "Error",
+    props: ['error'],
+    layout: 'header',
+    mounted() {
+        console.log(this.error);
+    },
+}
 </script>
 
 <style lang="scss" scoped>

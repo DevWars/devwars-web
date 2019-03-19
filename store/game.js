@@ -44,24 +44,24 @@ export const mutations = {
 
     active(state, game) {
         state.active = game;
-    }
+    },
 };
 
 export const actions = {
     async all({ commit }) {
-        let games = await Http.for('game').get();
+        const games = await Http.for('game').get();
 
         commit('all', games);
     },
 
     async game({ commit }, id) {
-        let game = await Http.for(`game/${id}`).get();
+        const game = await Http.for(`game/${id}`).get();
 
         commit('game', game);
     },
 
     async create({ commit, dispatch }, data) {
-        let game = await Http.for('game').save(data);
+        const game = await Http.for('game').save(data);
         //
         commit('add', game);
 
@@ -70,7 +70,7 @@ export const actions = {
 
     async applied({ commit }) {
         try {
-            let applied = await Http.for('game/applications').get('mine');
+            const applied = await Http.for('game/applications').get('mine');
 
             commit('applied', applied || []);
         } catch (e) {
@@ -80,7 +80,7 @@ export const actions = {
 
     async entered({ commit }) {
         try {
-            let entered = await Http.for('game/entered').get('mine');
+            const entered = await Http.for('game/entered').get('mine');
 
             commit('entered', entered || []);
         } catch (e) {
@@ -90,7 +90,7 @@ export const actions = {
 
     async active({ commit }) {
         try {
-            let [active] = await Http.for('game/status/active').get();
+            const [active] = await Http.for('game/status/active').get();
 
             commit('active', active);
         } catch (e) {
@@ -100,7 +100,7 @@ export const actions = {
 
     async upcoming({ commit }) {
         try {
-            let upcoming = await Http.for('game/status/scheduling').get();
+            const upcoming = await Http.for('game/status/scheduling').get();
             commit('upcoming', upcoming);
         } catch (e) {
         }
@@ -122,5 +122,5 @@ export const actions = {
         commit('forfeit', game);
 
         dispatch('toast/add', { type: 'success', message: `Sorry to see you go.` }, { root: true });
-    }
+    },
 };

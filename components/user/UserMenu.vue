@@ -1,11 +1,11 @@
 <template>
-    <div class="user-menu" v-if="user">
+    <div v-if="user" class="user-menu">
         <Popup>
-            <div class="user-group" slot="trigger">
+            <div slot="trigger" class="user-group">
                 <Avatar :user="user" class="sm"/>
                 <div class="user-group__name">{{ user.username }}</div>
             </div>
-            <div class="menu" slot="menu">
+            <div slot="menu" class="menu">
                 <slot></slot>
             </div>
         </Popup>
@@ -19,8 +19,8 @@ import Avatar from '~/components/user/Avatar';
 
 export default {
     name: 'UserMenu',
-    props: ['user'],
     components: { Popup, Avatar },
+    props: ['user'],
 };
 </script>
 

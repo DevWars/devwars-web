@@ -1,7 +1,7 @@
 <template>
     <div>
         <PanelHeader title="Games" showSearch>
-            <button @click="createGame" class="btn btn-primary btn-icon btn-sm">
+            <button class="btn btn-primary btn-icon btn-sm" @click="createGame">
                 <i class="fa fa-plus"></i>
                 <span>Add Game</span>
             </button>
@@ -22,8 +22,8 @@
                 <td>{{ game.startTime | moment('MM/DD/YYYY') }}</td>
                 <td>
                     <span
-                        :class="['mod-status', name_from_status(game.status).toLowerCase()]"
-                    >{{ name_from_status(game.status) }}</span>
+                        :class="['mod-status', nameFromStatus(game.status).toLowerCase()]"
+                    >{{ nameFromStatus(game.status) }}</span>
                 </td>
                 <td>{{ game.theme }}</td>
                 <td>{{ game.name }}</td>
@@ -46,13 +46,21 @@ import Table from '~/components/Table';
 import Input from '~/components/form/Input';
 import Pagination from '~/components/Pagination';
 
-import { name_from_status } from '../../utils/game-status';
+import { nameFromStatus } from '../../utils/gameStatus';
 
 export default {
-    name: 'modGames',
+    name: 'ModGames',
     components: { PanelHeader, ListingFilters, Table, Input, Pagination },
+    computed: {
+        all() {
+            return this.$store.state.game.all;
+        },
+    },
+    async fetch({ store }) {
+        await store.dispatch('game/all');
+    },
     methods: {
-        name_from_status,
+        nameFromStatus,
         async createGame() {
             const [game] = await this.$open(CreateGameModal, {});
 
@@ -63,14 +71,6 @@ export default {
                 params: { game: game.id },
             });
         },
-    },
-    computed: {
-        all() {
-            return this.$store.state.game.all;
-        },
-    },
-    async fetch({ store }) {
-        await store.dispatch('game/all');
     },
 };
 </script>

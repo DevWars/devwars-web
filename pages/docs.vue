@@ -682,7 +682,7 @@
                                     <td>Awarded every 30 minutes</td>
                                     <td>
                                         <div class="devcoins">
-                                            <Devcoin></Devcoin>
+                                            <Devcoin/>
                                             <div class="devcoins__amount">2</div>
                                         </div>
                                     </td>
@@ -694,7 +694,7 @@
                                     <td>Awarded every 30 minutes</td>
                                     <td>
                                         <div class="devcoins">
-                                            <Devcoin></Devcoin>
+                                            <Devcoin/>
                                             <div class="devcoins__amount">10</div>
                                         </div>
                                     </td>
@@ -758,30 +758,30 @@ export default {
 
         if (anchored) anchored.scrollIntoView();
 
-        let scrollable = document.querySelector('.docs__main');
+        const scrollable = document.querySelector('.docs__main');
 
         scrollable.addEventListener('scroll', (event) => {
-            let sections = Array.prototype.slice.apply(
+            const sections = Array.prototype.slice.apply(
                 document.querySelectorAll('section')
             );
-            let links = Array.prototype.slice.apply(
+            const links = Array.prototype.slice.apply(
                 document.querySelectorAll('.nav__link')
             );
 
             links.forEach((it) => it.classList.remove('active'));
 
-            let active = sections
+            const active = sections
                 .filter((it) => it.getBoundingClientRect().y > 0)
                 .sort((a, b) => {
-                    let keyA = a.getBoundingClientRect().y;
-                    let keyB = b.getBoundingClientRect().y;
+                    const keyA = a.getBoundingClientRect().y;
+                    const keyB = b.getBoundingClientRect().y;
 
                     if (keyA < keyB) return -1;
                     if (keyA > keyB) return 1;
                     return 0;
                 })[0];
 
-            let link = document.querySelector(
+            const link = document.querySelector(
                 `.nav__link[href='#${active.id}']`
             );
 

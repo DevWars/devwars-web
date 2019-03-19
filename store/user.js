@@ -1,17 +1,17 @@
-import Http from "../services/Http";
+import Http from '../services/Http';
 
 export const state = () => ({
     user: null,
     competitor: null,
     count: 0,
-    linkedAccounts: []
+    linkedAccounts: [],
 });
 
 export const getters = {
     userCount(state) {
-        return state.count
-    }
-}
+        return state.count;
+    },
+};
 
 export const mutations = {
     user(state, user) {
@@ -23,7 +23,7 @@ export const mutations = {
     },
 
     count(state, count) {
-        state.count = count
+        state.count = count;
     },
 
     linkedAccounts(state, accounts) {
@@ -31,14 +31,16 @@ export const mutations = {
     },
 
     removeLinkedAccount(state, provider) {
-        state.linkedAccounts = state.linkedAccounts.filter(it => it.provider !== provider);
-    }
+        state.linkedAccounts = state.linkedAccounts.filter(
+            (it) => it.provider !== provider
+        );
+    },
 };
 
 export const actions = {
     async refresh({ commit, dispatch }) {
         try {
-            let user = await Http.for('auth/user').get();
+            const user = await Http.for('auth/user').get();
 
             commit('user', user);
 
@@ -51,7 +53,9 @@ export const actions = {
 
     async competitor({ commit, state }) {
         try {
-            let competitor = await Http.for(`/user/${state.user.id}/competitor`).get();
+            const competitor = await Http.for(
+                `/user/${state.user.id}/competitor`
+            ).get();
 
             commit('competitor', competitor);
         } catch (e) {
@@ -60,18 +64,25 @@ export const actions = {
     },
 
     async refreshUserCount({ commit }) {
-        let data = await Http.for('leaderboard').get('users');
+        const data = await Http.for('leaderboard').get('users');
 
         commit('count', data.count);
     },
 
     async login({ commit, dispatch }, { username, password }) {
         try {
-            await Http.for('auth').post('login', { identifier: username, password });
+            await Http.for('auth').post('login', {
+                identifier: username,
+                password,
+            });
 
             await dispatch('refresh');
 
-            dispatch('toast/add', { type: 'success', message: 'Welcome back to DevWars!' }, { root: true });
+            dispatch(
+                'toast/add',
+                { type: 'success', message: 'Welcome back to DevWars!' },
+                { root: true }
+            );
 
             await dispatch('nuxtServerInit', null, { root: true });
 
@@ -79,7 +90,7 @@ export const actions = {
         } catch (e) {
             dispatch('toast/error', e.response.data, { root: true });
 
-            commit('user', null)
+            commit('user', null);
         }
     },
 
@@ -105,7 +116,9 @@ export const actions = {
 
     async settings({ commit, dispatch, state }, data) {
         try {
-            let user = await Http.for(`user/${state.user.id}/settings`).post(data);
+            const user = await Http.for(`user/${state.user.id}/settings`).post(
+                data
+            );
 
             commit('user', user);
         } catch (e) {
@@ -117,7 +130,9 @@ export const actions = {
         try {
             await Http.for(`user/${state.user.id}/reset/password`).put(data);
 
-            dispatch('toast/success', `We've updated your password!`, { root: true });
+            dispatch('toast/success', `We've updated your password!`, {
+                root: true,
+            });
         } catch (e) {
             dispatch('toast/errors', e, { root: true });
         }
@@ -125,11 +140,18 @@ export const actions = {
 
     async email({ dispatch, commit, state }, data) {
         try {
-            let user = await Http.for(`user/${state.user.id}/reset`).post('email', data);
+            const user = await Http.for(`user/${state.user.id}/reset`).post(
+                'email',
+                data
+            );
 
             commit('user', user);
 
-            await dispatch('toast/success', `We've updated your email, please go verify your email.`, { root: true });
+            await dispatch(
+                'toast/success',
+                `We've updated your email, please go verify your email.`,
+                { root: true }
+            );
             await dispatch('navigate', '/pending', { root: true });
         } catch (e) {
             console.error(e);
@@ -141,7 +163,11 @@ export const actions = {
         try {
             await Http.for('auth/reset').save({ username_or_email: email });
 
-            dispatch('toast/success', `Check your email for a guide to reset your password.`, { root: true });
+            dispatch(
+                'toast/success',
+                `Check your email for a guide to reset your password.`,
+                { root: true }
+            );
 
             return true;
         } catch (e) {
@@ -154,12 +180,16 @@ export const actions = {
     async resetByKey({ dispatch, commit }, data) {
         await Http.for('auth/reset').put({}, data);
 
-        dispatch('toast/success', `We've updated your password, give it a go!`, { root: true });
+        dispatch(
+            'toast/success',
+            `We've updated your password, give it a go!`,
+            { root: true }
+        );
     },
 
     async avatar({ dispatch, commit, state }, data) {
         const formData = new FormData();
-        formData.append("avatar", data, "avatar.jpg");
+        formData.append('avatar', data, 'avatar.jpg');
 
         await Http.axios({
             url: `/user/${state.user.id}/avatar`,
@@ -172,17 +202,21 @@ export const actions = {
     },
 
     async linkedAccounts({ dispatch, commit, state }) {
-        const accounts = await Http.for(`user/${state.user.id}`).get('linked-accounts');
+        const accounts = await Http.for(`user/${state.user.id}`).get(
+            'linked-accounts'
+        );
 
         commit('linkedAccounts', accounts);
         return accounts;
     },
 
     async disconnectLinkedAccount({ dispatch, commit, state }, provider) {
-        await Http.for(`user/${state.user.id}/linked-accounts/${provider}`).delete();
+        await Http.for(
+            `user/${state.user.id}/linked-accounts/${provider}`
+        ).delete();
 
         commit('removeLinkedAccount', provider);
 
         await dispatch('refresh');
-    }
+    },
 };

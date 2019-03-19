@@ -2,11 +2,11 @@
     <form v-async-submit="[addRegistrant]">
         <div class="form-group">
             <div class="search-input">
-                <Input placeholder="Username" v-model="username"/>
+                <Input v-model="username" placeholder="Username"/>
             </div>
         </div>
         <div class="modal__actions">
-            <button @click="close(false)" class="btn btn-outline-gray">Cancel</button>
+            <button class="btn btn-outline-gray" @click="close(false)">Cancel</button>
             <button class="btn btn-primary">Add</button>
         </div>
     </form>
@@ -23,7 +23,7 @@ export default {
     components: { Input, Avatar },
     props: ['game', 'resolve', 'reject'],
     data: () => {
-        username: '';
+        '';
     },
     methods: {
         async addRegistrant() {

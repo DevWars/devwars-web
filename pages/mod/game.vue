@@ -6,9 +6,9 @@
         >
             <a href="/mod/games" class="btn btn-outline-gray">Back</a>
             <button
+                v-if="game.active && !game.done"
                 v-async-click="[endGame]"
                 class="btn btn-danger"
-                v-if="game.active && !game.done"
             >End</button>
             <button
                 v-show="!game.done && !game.active"
@@ -43,6 +43,9 @@ export default {
             return this.$store.state.game.game;
         },
     },
+    async fetch({ store, query }) {
+        await store.dispatch('game/game', query.game);
+    },
     methods: {
         async activate() {
             this.game.status = 2;
@@ -53,7 +56,7 @@ export default {
             await this.$open(EndGameModal, { game: this.game });
         },
         async save() {
-            let cloned = { ...this.game };
+            const cloned = { ...this.game };
 
             delete cloned.objectives;
             delete cloned.teams;
@@ -69,7 +72,7 @@ export default {
 
             // Go ahead and save each team
             for (const team of Object.values(this.game.teams)) {
-                let cloned = { ...team };
+                const cloned = { ...team };
                 delete cloned.players;
 
                 await Http.for('game/team').save(cloned);
@@ -102,9 +105,6 @@ export default {
                 );
             }
         },
-    },
-    async fetch({ store, query }) {
-        await store.dispatch('game/game', query.game);
     },
 };
 </script>

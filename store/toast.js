@@ -1,6 +1,6 @@
 export const state = () => ({
     id: 0,
-    toasts: []
+    toasts: [],
 });
 
 export const mutations = {
@@ -12,7 +12,7 @@ export const mutations = {
 
     remove(state, toast) {
         state.toasts.splice(state.toasts.indexOf(toast), 1);
-    }
+    },
 };
 
 export const actions = {
@@ -38,7 +38,7 @@ export const actions = {
                 dispatch('add', {type: 'error', message: it.message});
             });
         } else {
-            dispatch('add', {type: 'error', message: e.response.status + ' : ' + e.response.statusText});
+            dispatch('add', {type: 'error', message: `${e.response.status  } : ${  e.response.statusText}`});
         }
-    }
+    },
 };

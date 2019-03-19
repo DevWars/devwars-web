@@ -10,8 +10,8 @@
             </tr>
             <tr
                 v-for="game in limitBy(games, count)"
-                :key="game.id"
                 v-if="filter ? (filter === game.name) : true"
+                :key="game.id"
             >
                 <td>
                     <div class="dow">{{ game.startTime | moment('dddd') }}</div>
@@ -31,13 +31,13 @@
                     <div>
                         <a
                             v-show="!isApplied(game)"
-                            @click="enter(game)"
                             class="btn btn-primary"
+                            @click="enter(game)"
                         >Register for Entry</a>
                         <a
                             v-show="isApplied(game)"
-                            @click="cancel(game)"
                             class="btn btn-outline-danger"
+                            @click="cancel(game)"
                         >Resign</a>
                     </div>
                 </td>
@@ -51,7 +51,7 @@
 import { sortBy } from 'lodash';
 import Table from '~/components/Table';
 import Applications from '~/components/game/Applications';
-import GameDurations from '../../utils/game-durations';
+import GameDurations from '../../utils/gameDurations';
 
 export default {
     name: 'ScheduleBlock',

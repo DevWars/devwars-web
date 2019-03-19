@@ -30,8 +30,8 @@ export default {
     name: 'Slug',
     components: { Avatar },
     async asyncData({ params }) {
-        let split = params.slug.split('-');
-        let id = split[split.length - 1];
+        const split = params.slug.split('-');
+        const id = split[split.length - 1];
 
         return { post: await Http.for('blog').byID(id) };
     },

@@ -1,11 +1,11 @@
 <template>
     <div>
-        <div class="progress-header" v-if="title">
+        <div v-if="title" class="progress-header">
             <span class="progress-header__title">{{ title }}</span>
             <span class="progress-header__meta">{{ meta }}</span>
         </div>
         <div class="progress">
-            <div class="bar" :style="{width: progress }" v-bind:class="color"></div>
+            <div class="bar" :style="{width: progress }" :class="color"></div>
         </div>
     </div>
 </template>
@@ -13,7 +13,7 @@
 <script>
 export default {
     name: "Progress",
-    props: [ 'progress', 'title', 'meta', 'color' ]
+    props: [ 'progress', 'title', 'meta', 'color' ],
 }
 </script>
 

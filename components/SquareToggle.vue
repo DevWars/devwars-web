@@ -1,10 +1,10 @@
 <template>
     <div
         class="obj-list__square"
+        :style="{backgroundColor: highlighted ? colors[color] : ''}"
         @click="$emit('change', !active)"
         @mouseover="hovered = true"
         @mouseleave="hovered = false"
-        :style="{backgroundColor: highlighted ? colors[color] : ''}"
     ></div>
 </template>
 

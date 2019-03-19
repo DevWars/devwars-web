@@ -28,8 +28,8 @@
                 <div class="form-group">
                     <div class="form-check">
                         <input
-                            v-model="profile.forHire"
                             id="for-hire"
+                            v-model="profile.forHire"
                             type="checkbox"
                             class="checkbox"
                         >
@@ -40,15 +40,15 @@
             <div class="col-sm-4">
                 <h3 class="modpanel__subtitle">Avatar</h3>
                 <div class="form-group">
-                    <Avatar :user="user" class="xl"></Avatar>
+                    <Avatar :user="user" class="xl"/>
                 </div>
 
                 <FileChooser @change="crop">
                     <button
                         slot-scope="{update}"
-                        @click="update"
                         type="button"
                         class="btn btn-outline-gray"
+                        @click="update"
                     >
                         Upload new
                         avatar
@@ -76,6 +76,11 @@ export default {
             profile: {},
         };
     },
+    computed: {
+        user() {
+            return this.$store.state.user.user;
+        },
+    },
     watch: {
         updateProfileFromUser: {
             immediate: true,
@@ -88,17 +93,12 @@ export default {
     },
     methods: {
         async crop(result) {
-            let [cropped] = await this.$open(CropperModal, { data: result });
+            const [cropped] = await this.$open(CropperModal, { data: result });
 
             this.$store.dispatch('user/avatar', cropped);
         },
         async save() {
             await this.$store.dispatch('user/settings', this.profile);
-        },
-    },
-    computed: {
-        user() {
-            return this.$store.state.user.user;
         },
     },
 };

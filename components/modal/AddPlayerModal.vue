@@ -5,9 +5,9 @@
                 <select v-model="team" class="form-control" required>
                     <option value>Select Team</option>
                     <option
-                        :value="team.id"
                         v-for="team in game.teams"
                         :key="team.id"
+                        :value="team.id"
                     >{{ team.name }}</option>
                 </select>
             </div>
@@ -44,7 +44,7 @@ export default {
     },
     methods: {
         async save() {
-            let player = await Http.for(`game/team/${this.team}/players`).post(
+            const player = await Http.for(`game/team/${this.team}/players`).post(
                 {},
                 {
                     user: this.user.id,

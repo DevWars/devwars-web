@@ -1,7 +1,7 @@
 <template>
     <div class="modal">
         <h1 class="modal__title">{{ title }}</h1>
-        <p class="modal__desc" v-if="description">{{ description }}</p>
+        <p v-if="description" class="modal__desc">{{ description }}</p>
 
         <div class="modal__actions">
             <button class="btn btn-link" @click="$emit('close')">{{ cancel }}</button>

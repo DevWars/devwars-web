@@ -1,7 +1,7 @@
 <template>
     <mj-section>
         <mj-column>
-            <mj-image width="162" src="~assets/img/logo.png"></mj-image>
+            <mj-image width="162" src="~assets/img/logo.png"/>
         </mj-column>
     </mj-section>
 </template>
@@ -9,6 +9,6 @@
 
 <script>
 export default {
-    name: "MailHeader"
+    name: "MailHeader",
 }
 </script>

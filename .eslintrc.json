@@ -1,7 +1,11 @@
 {
     "root": true,
     "parserOptions": {
+        "ecmaVersion": 2018,
         "parser": "babel-eslint"
+    },
+    "env": {
+        "commonjs": true
     },
     "extends": [
         "airbnb-base",
@@ -12,6 +16,18 @@
     ],
     "plugins": ["vue", "prettier"],
     "rules": {
+        "indent": ["error", 4],
+        "max-len": ["error", 120],
+        "comma-dangle": ["error", "always-multiline"],
+        "consistent-return": "off",
+        "prefer-destructuring": "off",
+        "no-console": "off",
+        "no-continue": "off",
+        "no-param-reassign": "off",
+        "no-shadow": "off",
+        "no-underscore-dangle": "off",
+        "no-restricted-syntax": "off",
+        "no-multiple-empty-lines": "off",
         "import/no-extraneous-dependencies": "off",
         "vue/attribute-hyphenation": "off",
         "vue/max-attributes-per-line": "off",

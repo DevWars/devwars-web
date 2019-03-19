@@ -4,8 +4,8 @@
             <div class="col-sm-6">
                 <GameTeam team="blue">
                     <div
-                        :key="player.id"
                         v-for="player in team_for_game('blue', game).players"
+                        :key="player.id"
                         @click="removePlayer(player, team_for_game('blue', game))"
                     >
                         <Player :user="player.user" :lang="player.language" team="blue"/>
@@ -25,8 +25,8 @@
             <div class="col-sm-6">
                 <GameTeam team="red">
                     <div
-                        :key="player.id"
                         v-for="player in team_for_game('red', game).players"
+                        :key="player.id"
                         @click="removePlayer(player, team_for_game('red', game))"
                     >
                         <Player :user="player.user" :lang="player.language" team="red"/>
@@ -53,7 +53,7 @@
                     class="modpanel__subtitle"
                     style="margin-bottom: 0"
                 >({{ applications.length }}) Applicants</h4>
-                <button @click="addRegistrant" class="btn btn-outline-primary">Add Registrant</button>
+                <button class="btn btn-outline-primary" @click="addRegistrant">Add Registrant</button>
             </div>
         </div>
 
@@ -122,7 +122,7 @@ export default {
         rating(user, lang) {
             if (!user.competitor) return 0;
 
-            return user.competitor[lang + '_rate'];
+            return user.competitor[`${lang  }_rate`];
         },
     },
     mounted() {
@@ -143,7 +143,7 @@ export default {
             await this.refresh();
         },
         async removePlayer(player, team) {
-            let confirmed = await this.$open(ConfirmModal, {
+            const confirmed = await this.$open(ConfirmModal, {
                 description:
                     'Are you sure you would like to remove this player?',
             });
