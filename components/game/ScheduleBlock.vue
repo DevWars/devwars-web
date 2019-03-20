@@ -2,11 +2,11 @@
     <Applications :games="games">
         <Table slot-scope="{enterOrCancel, isApplied, cancel, enter}">
             <tr slot="head">
-                <th width="15%" class="align-left">Date</th>
-                <th width="15%" class="align-left">Time</th>
-                <th width="5%" class="align-left">Duration</th>
-                <th width="40%" class="align-left">Showing</th>
-                <th width="30%" class="align-left"></th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Duration</th>
+                <th>Showing</th>
+                <th></th>
             </tr>
             <tr
                 v-for="game in limitBy"
@@ -102,12 +102,6 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/styles/utils';
 
-.Table {
-    td:last-of-type {
-        text-align: right;
-    }
-}
-
 .dow {
     text-transform: uppercase;
     font-size: $font-size-sm;
@@ -129,6 +123,31 @@ export default {
         @extend .far;
         content: $fa-trophy;
         margin-right: $xs-space;
+    }
+}
+
+.Table /deep/ {
+    thead,
+    tr {
+        display: table;
+        width: 100%;
+    }
+
+    tbody {
+        display: block;
+        width: 100%;
+        height: 300px;
+        overflow-y: auto;
+    }
+
+    th,
+    td {
+        text-align: left;
+        width: 20%;
+    }
+
+    td:last-of-type {
+        text-align: right;
     }
 }
 </style>
