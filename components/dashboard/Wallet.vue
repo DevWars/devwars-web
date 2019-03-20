@@ -4,7 +4,7 @@
             <div>
                 <div class="devcoins devcoins-lg">
                     <Devcoin/>
-                    <div class="devcoins__amount">{{ user.statistics.coins | number }}</div>
+                    <div class="devcoins__amount">{{ stats.coins | number }}</div>
                 </div>
             </div>
             <div class="devcoins-wallet__actions">
@@ -37,7 +37,7 @@ export default {
     name: 'Wallet',
     components: { DashboardCard, Devcoin },
     props: {
-        'user': {
+        stats: {
             type: Object,
             required: true,
         },

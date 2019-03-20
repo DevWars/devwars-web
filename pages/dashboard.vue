@@ -5,9 +5,9 @@
                 <div class="aside col-md-4">
                     <ProfileCard :user="user.user"/>
 
-                    <Wallet :user="user.user"/>
+                    <Wallet :stats="user.stats"/>
 
-                    <Badges :owned="mine"/>
+                    <!-- <Badges :owned="mine"/> -->
                 </div>
 
                 <div class="main col-md-8">
@@ -27,7 +27,6 @@
 import Http from '../services/Http';
 import ProfileCard from '~/components/dashboard/ProfileCard';
 import Wallet from '~/components/dashboard/Wallet';
-import Badges from '~/components/dashboard/Badges';
 import Activities from '~/components/dashboard/Activities';
 import UpcomingGames from '~/components/dashboard/UpcomingGames';
 import DailyPrizes from '~/components/dashboard/DailyPrizes';
@@ -37,7 +36,6 @@ export default {
     components: {
         ProfileCard,
         Wallet,
-        Badges,
         Activities,
         UpcomingGames,
         DailyPrizes,
@@ -46,6 +44,9 @@ export default {
         user() {
             return this.$store.state.user;
         },
+        stats() {
+            return this.$store.state.stats;
+        },
         appliedGames() {
             return this.$store.state.game.applied;
         },
@@ -53,12 +54,9 @@ export default {
             return this.$store.state.game.upcoming;
         },
     },
-    async asyncData({ store }) {
+    async asyncData() {
         return {
-            mine: await Http.for(`user/${store.state.user.user.id}`).get(
-                'badges'
-            ),
-            activities: await Http.for('activity').get('mine'),
+            activities: await Http.for('activities').get('mine'),
         };
     },
 };

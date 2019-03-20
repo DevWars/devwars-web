@@ -1,4 +1,4 @@
-import Http from "../services/Http";
+import Http from '../services/Http';
 
 export const state = () => ({
     applied: [],
@@ -35,7 +35,9 @@ export const mutations = {
     },
 
     forfeit(state, game) {
-        state.applied = state.applied.filter(it => it.id !== game.id && it !== game.id)
+        state.applied = state.applied.filter(
+            (it) => it.id !== game.id && it !== game.id
+        );
     },
 
     upcoming(state, upcoming) {
@@ -49,26 +51,25 @@ export const mutations = {
 
 export const actions = {
     async all({ commit }) {
-        const games = await Http.for('game').get();
+        const games = await Http.for('games').get();
 
         commit('all', games);
     },
 
     async game({ commit }, id) {
-        const game = await Http.for(`game/${id}`).get();
+        const game = await Http.for(`games/${id}`).get();
 
         commit('game', game);
     },
 
     async create({ commit }, data) {
-        const game = await Http.for('game').save(data);
+        const game = await Http.for('games').save(data);
         commit('add', game);
     },
 
     async applied({ commit }) {
         try {
-            const applied = await Http.for('game/applications').get('mine');
-
+            const applied = await Http.for('applications').get('mine');
             commit('applied', applied || []);
         } catch (e) {
             console.log("Couldn't load applied games", e);
@@ -77,8 +78,7 @@ export const actions = {
 
     async entered({ commit }) {
         try {
-            const entered = await Http.for('game/entered').get('mine');
-
+            const entered = await Http.for('applications/entered').get('mine');
             commit('entered', entered || []);
         } catch (e) {
             console.log("Couldn't load entered games", e);
@@ -87,17 +87,16 @@ export const actions = {
 
     async active({ commit }) {
         try {
-            const [active] = await Http.for('game/status/active').get();
-
+            const [active] = await Http.for('schedules/status/active').get();
             commit('active', active);
         } catch (e) {
-            commit('active', null)
+            commit('active', null);
         }
     },
 
     async upcoming({ commit }) {
         try {
-            const upcoming = await Http.for('game/status/scheduling').get();
+            const upcoming = await Http.for('schedules/status/scheduled').get();
             commit('upcoming', upcoming);
         } catch (e) {
             console.log(e);
@@ -105,18 +104,26 @@ export const actions = {
     },
 
     async apply({ commit, dispatch }, game) {
-        await Http.for(`game/${game.id}/applications`).save();
+        await Http.for(`applications/${game.id}`).save();
         commit('apply', game);
 
-        dispatch('toast/add', { type: 'success', message: `Thanks for signing up! See ya soon` }, { root: true });
-        dispatch('navigate', '/game/confirmation', { root: true })
+        dispatch(
+            'toast/add',
+            { type: 'success', message: `Thanks for signing up! See ya soon` },
+            { root: true }
+        );
+        dispatch('navigate', '/game/confirmation', { root: true });
     },
 
     async forfeit({ commit, dispatch }, game) {
-        await Http.for('game/application').delete(game);
+        await Http.for('applications').delete(game);
 
         commit('forfeit', game);
 
-        dispatch('toast/add', { type: 'success', message: `Sorry to see you go.` }, { root: true });
+        dispatch(
+            'toast/add',
+            { type: 'success', message: `Sorry to see you go.` },
+            { root: true }
+        );
     },
 };

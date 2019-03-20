@@ -95,10 +95,10 @@ export default {
         async crop(result) {
             const [cropped] = await this.$open(CropperModal, { data: result });
 
-            this.$store.dispatch('user/avatar', cropped);
+            this.$store.dispatch('users/avatar', cropped);
         },
         async save() {
-            await this.$store.dispatch('user/settings', this.profile);
+            await this.$store.dispatch('users/settings', this.profile);
         },
     },
 };

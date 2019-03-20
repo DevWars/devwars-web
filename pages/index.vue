@@ -3,7 +3,8 @@
         <div class="hero">
             <div class="row">
                 <div class="hero__inner">
-                    <h1 class="hero__title">A live
+                    <h1 class="hero__title">
+                        A live
                         <strong>game show</strong> for developers
                     </h1>
                     <h2 class="hero__subtitle">Every other Saturday @ 5:00 PM (UTC)</h2>
@@ -190,7 +191,7 @@ export default {
     },
     async asyncData() {
         return {
-            latest: await Http.for('game').get('latest'),
+            latest: await Http.for('schedules').get('latest'),
         };
     },
 };

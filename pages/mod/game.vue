@@ -79,7 +79,7 @@ export default {
             }
 
             // Last but not least, save the game
-            await Http.for('game').save(cloned);
+            await Http.for('games').save(cloned);
 
             // Can't forget to update our state with the new game
             await this.$store.dispatch('game/game', this.game.id);
@@ -93,7 +93,7 @@ export default {
             if (!confirmed) return;
 
             try {
-                await Http.for('game').delete(this.game);
+                await Http.for('games').delete(this.game);
 
                 this.$store.dispatch('toast/success', 'Game deleted.');
 

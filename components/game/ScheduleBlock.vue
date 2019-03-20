@@ -21,7 +21,7 @@
                     <h4 class="time">{{ game.startTime | moment('H:mm') }} UTC</h4>
                 </td>
                 <td>
-                    <h4 class="duration">{{ durations[game.name] || '30' }}</h4>
+                    <h4 class="duration">{{ durations[game.setup.mode] || '30' }}</h4>
                 </td>
                 <td>
                     <div class="show">DevWars Live</div>
@@ -80,7 +80,7 @@ export default {
         },
         limitBy() {
             // limitBy was called here with a count but it didnt exist
-            return this.games
+            return this.games;
             // (games, count)
         },
     },
@@ -92,7 +92,7 @@ export default {
                 Blitz: 'Blitz - 1 VS 1',
             };
 
-            return descriptions[game.name] || '';
+            return descriptions[game.setup.mode] || '';
         },
     },
 };

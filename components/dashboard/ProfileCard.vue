@@ -2,15 +2,11 @@
     <DashboardCard v-if="user" class="profile">
         <Avatar :user="user" class="xl"/>
         <h4>{{ user.username }}</h4>
-        <div class="user-rank rank" :class="['rank-' + user.statistics.rank.levelName]">
-            <span>{{ user.statistics.rank.rank }}</span>
+        <div class="user-rank rank">
+            <span>RANK</span>
         </div>
 
-        <Progress
-            :title="'Level ' + user.statistics.rank.rankLevel"
-            :meta="progress"
-            :progress="progress"
-        />
+        <Progress title="Level 1" :meta="progress" :progress="progress"/>
     </DashboardCard>
 </template>
 
@@ -24,22 +20,26 @@ export default {
     name: 'ProfileCard',
     components: { DashboardCard, Avatar, Progress },
     props: {
-        'user': {
+        user: {
             type: Object,
             required: true,
         },
     },
     computed: {
+        stats() {
+            console.log('-----------------', this.$store.state.stats.stats);
+            return this.$store.state.stats;
+        },
         progress() {
-            const past =
-                this.user.statistics.xp - this.user.statistics.rank.xpRequired;
-            const difference =
-                this.user.statistics.nextRank.xpRequired -
-                this.user.statistics.rank.xpRequired;
-            const percentage = Math.round((past / difference) * 100);
-            const formattedPercentage = `${percentage}%`;
+            // const past =
+            //     this.user.statistics.xp - this.user.statistics.rank.xpRequired;
+            // const difference =
+            //     this.user.statistics.nextRank.xpRequired -
+            //     this.user.statistics.rank.xpRequired;
+            // const percentage = Math.round((past / difference) * 100);
+            // const formattedPercentage = `${percentage}%`;
 
-            return formattedPercentage;
+            return '50%';
         },
     },
 };

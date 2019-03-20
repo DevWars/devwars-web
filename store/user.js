@@ -2,7 +2,8 @@ import Http from '../services/Http';
 
 export const state = () => ({
     user: null,
-    competitor: null,
+    profile: null,
+    stats: null,
     count: 0,
     linkedAccounts: [],
 });
@@ -18,8 +19,12 @@ export const mutations = {
         state.user = user;
     },
 
-    competitor(state, competitor) {
-        state.competitor = competitor;
+    profile(state, profile) {
+        state.profile = profile;
+    },
+
+    stats(state, stats) {
+        state.stats = stats;
     },
 
     count(state, count) {
@@ -44,27 +49,39 @@ export const actions = {
 
             commit('user', user);
 
-            await dispatch('competitor');
+            await dispatch('profile');
+            await dispatch('stats');
             await dispatch('linkedAccounts');
         } catch (e) {
             commit('user', null);
         }
     },
 
-    async competitor({ commit, state }) {
+    async profile({ commit, state }) {
         try {
-            const competitor = await Http.for(
-                `/user/${state.user.id}/competitor`
+            const profile = await Http.for(
+                `/users/${state.user.id}/profile`
             ).get();
 
-            commit('competitor', competitor);
+            commit('profile', profile);
+        } catch (e) {
+            commit('user', null);
+        }
+    },
+
+    async stats({ commit, state }) {
+        try {
+            const stats = await Http.for(`/users/${state.user.id}/stats`).get();
+            console.log('-------STATS', stats);
+
+            commit('stats', stats);
         } catch (e) {
             commit('user', null);
         }
     },
 
     async refreshUserCount({ commit }) {
-        const data = await Http.for('leaderboard').get('users');
+        const data = await Http.for('leaderboards').get('users');
 
         commit('count', data.count);
     },
@@ -94,7 +111,7 @@ export const actions = {
         }
     },
 
-    async register({dispatch }, registration) {
+    async register({ dispatch }, registration) {
         try {
             await Http.for('auth').post('register', registration);
 
@@ -116,7 +133,7 @@ export const actions = {
 
     async settings({ commit, dispatch, state }, data) {
         try {
-            const user = await Http.for(`user/${state.user.id}/settings`).post(
+            const user = await Http.for(`users/${state.user.id}/settings`).post(
                 data
             );
 
@@ -126,9 +143,9 @@ export const actions = {
         }
     },
 
-    async password({dispatch, state }, data) {
+    async password({ dispatch, state }, data) {
         try {
-            await Http.for(`user/${state.user.id}/reset/password`).put(data);
+            await Http.for(`users/${state.user.id}/reset/password`).put(data);
 
             dispatch('toast/success', `We've updated your password!`, {
                 root: true,
@@ -140,7 +157,7 @@ export const actions = {
 
     async email({ dispatch, commit, state }, data) {
         try {
-            const user = await Http.for(`user/${state.user.id}/reset`).post(
+            const user = await Http.for(`users/${state.user.id}/reset`).post(
                 'email',
                 data
             );
@@ -192,7 +209,7 @@ export const actions = {
         formData.append('avatar', data, 'avatar.jpg');
 
         await Http.axios({
-            url: `/user/${state.user.id}/avatar`,
+            url: `/users/${state.user.id}/avatar`,
             method: 'POST',
             data: formData,
             noTransform: true,
@@ -202,7 +219,7 @@ export const actions = {
     },
 
     async linkedAccounts({ commit, state }) {
-        const accounts = await Http.for(`user/${state.user.id}`).get(
+        const accounts = await Http.for(`users/${state.user.id}`).get(
             'linked-accounts'
         );
 
@@ -212,7 +229,7 @@ export const actions = {
 
     async disconnectLinkedAccount({ dispatch, commit, state }, provider) {
         await Http.for(
-            `user/${state.user.id}/linked-accounts/${provider}`
+            `users/${state.user.id}/linked-accounts/${provider}`
         ).delete();
 
         commit('removeLinkedAccount', provider);
