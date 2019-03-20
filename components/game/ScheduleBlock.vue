@@ -9,7 +9,7 @@
                 <th width="30%" class="align-left"></th>
             </tr>
             <tr
-                v-for="game in limitBy(games, count)"
+                v-for="game in limitBy"
                 v-if="filter ? (filter === game.name) : true"
                 :key="game.id"
             >
@@ -61,7 +61,10 @@ export default {
             type: String,
             default: '',
         },
-        count: 0,
+        count: {
+            type: Number,
+            default: 0,
+        },
     },
     data: () => {
         return {
@@ -74,6 +77,11 @@ export default {
         },
         _games() {
             return this.$store.state.game.upcoming;
+        },
+        limitBy() {
+            // limitBy was called here with a count but it didnt exist
+            return this.games
+            // (games, count)
         },
     },
     methods: {

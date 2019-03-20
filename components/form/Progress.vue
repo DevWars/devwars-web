@@ -13,7 +13,24 @@
 <script>
 export default {
     name: "Progress",
-    props: [ 'progress', 'title', 'meta', 'color' ],
+    props: {
+        'progress': {
+            type: String,
+            required: true,
+        }, 
+        'title': {
+            type: String,
+            required: true,
+        },
+        'meta': {
+            type: String,
+            required: true,
+        }, 
+        'color': {
+            type: String,
+            required: true,
+        }, 
+    },
 }
 </script>
 

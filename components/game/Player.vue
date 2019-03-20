@@ -14,9 +14,18 @@ export default {
     name: 'Player',
     components: { User },
     props: {
-        user: Object,
-        team: String,
-        lang: String,
+        user: {
+            type: Object,
+            required: true,
+        },
+        team: {
+            type: String,
+            required: true,
+        },
+        lang: {
+            type: String,
+            required: true,
+        }, 
     },
 };
 </script>

@@ -16,21 +16,27 @@ export default {
     name: 'ConfirmModal',
     props: {
         resolve: {
-            default: () => {},
+            type: Function,
+            required: true,
         },
         reject: {
-            default: () => {},
+            type: Function,
+            required: true,
         },
         title: {
+            type: String,
             default: '',
         },
         description: {
-            description: '',
+            type: String,
+            default: '',
         },
         cancelText: {
+            type: String,
             default: 'Cancel',
         },
         confirmText: {
+            type: String,
             default: 'Okay',
         },
     },

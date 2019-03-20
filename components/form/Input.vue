@@ -11,7 +11,16 @@
 <script>
 export default {
     name: 'Input',
-    props: ['type', 'value'],
+    props: {
+        'type': {
+            type: String,
+            required: true,
+        }, 
+        'value': {
+            type: String,
+            required: true,
+        },
+    },
     computed: {
         valid() {
             return !(this.value == null || typeof this.value === 'undefined');

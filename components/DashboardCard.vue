@@ -17,7 +17,16 @@ import Card from './Card';
 export default {
     name: 'DashboardCard',
     components: { Card },
-    props: ['title', 'icon'],
+    props: {
+        'title': {
+            type: String,
+            default: '',
+        }, 
+        'icon': {
+            type: String,
+            required: true,
+        },
+    },
 };
 </script>
 

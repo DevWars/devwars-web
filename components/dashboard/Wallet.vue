@@ -36,7 +36,12 @@ import Devcoin from '~/components/Devcoin';
 export default {
     name: 'Wallet',
     components: { DashboardCard, Devcoin },
-    props: ['user'],
+    props: {
+        'user': {
+            type: Object,
+            required: true,
+        },
+    },
 };
 </script>
 

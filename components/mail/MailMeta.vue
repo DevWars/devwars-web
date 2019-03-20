@@ -11,6 +11,11 @@
 <script>
 export default {
     name: 'MailMeta',
-    props: ['subject'],
+    props: {
+        'subject': {
+            type: String,
+            default: '',
+        },
+    },
 };
 </script>

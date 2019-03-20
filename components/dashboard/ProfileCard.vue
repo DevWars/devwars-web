@@ -23,7 +23,12 @@ import Progress from '~/components/form/Progress';
 export default {
     name: 'ProfileCard',
     components: { DashboardCard, Avatar, Progress },
-    props: ['user'],
+    props: {
+        'user': {
+            type: Object,
+            required: true,
+        },
+    },
     computed: {
         progress() {
             const past =

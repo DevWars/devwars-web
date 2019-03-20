@@ -12,7 +12,7 @@
 
 <script>
 import { mapActions } from 'vuex';
-import { userHasProvider } from '../../utils/linkedAccounts';
+import userHasProvider from '../../utils/linkedAccounts';
 
 export default {
     name: 'ConnectToDiscord',
@@ -20,6 +20,20 @@ export default {
         return {
             discordUrl: `https://discordapp.com/api/oauth2/authorize?client_id=465280450420670484&redirect_uri=http%3A%2F%2Fapi.devwars.test/oauth/discord&response_type=code&scope=identify`,
         };
+    },
+    computed: {
+        ...mapActions('user', {
+            removeProvider: 'disconnectLinkedAccount',
+        }),
+        user() {
+            return this.$store.state.user.user;
+        },
+        links() {
+            return this.$store.state.user.linkedAccounts;
+        },
+        hasDiscord() {
+            return userHasProvider(this.links, 'DISCORD');
+        },
     },
     mounted() {
         this.check();
@@ -38,20 +52,6 @@ export default {
         ...mapActions('user', {
             refreshLinks: 'linkedAccounts',
         }),
-    },
-    computed: {
-        ...mapActions('user', {
-            removeProvider: 'disconnectLinkedAccount',
-        }),
-        user() {
-            return this.$store.state.user.user;
-        },
-        links() {
-            return this.$store.state.user.linkedAccounts;
-        },
-        hasDiscord() {
-            return userHasProvider(this.links, 'DISCORD');
-        },
     },
 };
 </script>

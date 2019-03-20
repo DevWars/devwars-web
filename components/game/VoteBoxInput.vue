@@ -9,7 +9,16 @@ import Input from '../form/Input';
 export default {
     name: 'VoteBoxInput',
     components: { Input },
-    props: ['vote', 'team'],
+    props: {
+        'vote': {
+            type: String,
+            required: true,
+        }, 
+        'team': {
+            type: Object,
+            required: true,
+        },
+    },
     computed: {
         found() {
             const notFound = { count: 0 };

@@ -15,6 +15,7 @@
                     </div>
                 </div>
 
+                <!-- eslint-disable-next-line-->
                 <div class="blog-read__main" v-html="post.text"></div>
             </div>
         </div>

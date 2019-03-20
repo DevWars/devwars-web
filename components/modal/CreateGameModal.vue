@@ -23,13 +23,17 @@
 
 <script>
 import moment from 'moment';
-import Input from '../form/Input';
 import DatePicker from '../form/DatePicker';
 
 export default {
     name: 'CreateGameModal',
-    components: { DatePicker, Input },
-    props: ['resolve'],
+    components: { DatePicker },
+    props: {
+        'resolve': {
+            type: Function,
+            required: true,
+        },
+    },
     data: () => {
         return {
             name: '',

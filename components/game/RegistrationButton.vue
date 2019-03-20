@@ -18,6 +18,11 @@ import Applications from '~/components/game/Applications';
 export default {
     name: 'RegistrationButton',
     components: { Applications },
-    props: ['game'],
+    props: {
+        'game': {
+            type: Object,
+            required: true,
+        },
+    },
 };
 </script>

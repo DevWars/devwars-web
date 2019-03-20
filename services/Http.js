@@ -87,9 +87,10 @@ export default class Http {
     subsUrl() {
         let it = "";
         for (const key in this.subs) {
-            const sub = this.subs[key];
-
-            it += `${key}/${isNaN(sub) ? sub.id : sub}`;
+            if (this.subs[key]) {
+                const sub = this.subs[key];
+                it += `${key}/${isNaN(sub) ? sub.id : sub}`;
+            }
         }
 
         return it;

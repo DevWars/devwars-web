@@ -19,15 +19,11 @@
 
 
 <script>
-import moment from 'moment';
-import * as countryList from 'country-list';
-import Http from '../../services/Http';
 import PageBanner from '~/components/layout/PageBanner';
-import Input from '~/components/form/Input';
 
 export default {
     name: 'CompetitorRegistration',
-    components: { PageBanner, Input },
+    components: { PageBanner },
     middleware: 'auth',
 };
 </script>

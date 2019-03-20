@@ -15,7 +15,20 @@
 <script>
 export default {
     name: "SubScore",
-    props: [ 'title', 'blueScore', 'redScore' ],
+    props: {
+        'title': {
+            type: String,
+            default: '',
+        }, 
+        'blueScore': {
+            type: Number,
+            required: true,
+        }, 
+        'redScore': {
+            type: Number,
+            required: true,
+        },
+    },
 }
 </script>
 

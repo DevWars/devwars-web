@@ -16,17 +16,29 @@ export default {
     name: 'DeleteModal',
     props: {
         title: {
+            type: String,
             default: 'Warning',
         },
         cancel: {
+            type: String,
             default: 'Cancel',
         },
         confirm: {
+            type: String,
             default: 'Delete',
         },
-        description: {},
-        resolve: {},
-        reject: {},
+        description: {
+            type: String,
+            default: '',
+        },
+        resolve: {
+            type: Function,
+            required: true,
+        },
+        reject: {
+            type: Function,
+            required: true,
+        },
     },
 };
 </script>

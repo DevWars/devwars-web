@@ -1,11 +1,11 @@
 import Vue from 'vue';
 
 Vue.directive('asyncClick', {
-    bind(el, binding, node) {
+    bind(el, binding) {
         const func = binding.value[0];
         const args = binding.value.slice(1);
 
-        el.addEventListener('click', async event => {
+        el.addEventListener('click', async () => {
             el.classList.add('loading');
             el.disabled = true;
 
@@ -24,7 +24,7 @@ Vue.directive('asyncClick', {
 });
 
 Vue.directive('asyncSubmit', {
-    bind(el, binding, node) {
+    bind(el, binding) {
         const func = binding.value[0];
         const args = binding.value.slice(1);
 

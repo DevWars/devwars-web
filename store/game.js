@@ -60,12 +60,9 @@ export const actions = {
         commit('game', game);
     },
 
-    async create({ commit, dispatch }, data) {
+    async create({ commit }, data) {
         const game = await Http.for('game').save(data);
-        //
         commit('add', game);
-
-
     },
 
     async applied({ commit }) {
@@ -103,16 +100,15 @@ export const actions = {
             const upcoming = await Http.for('game/status/scheduling').get();
             commit('upcoming', upcoming);
         } catch (e) {
+            console.log(e);
         }
     },
 
     async apply({ commit, dispatch }, game) {
         await Http.for(`game/${game.id}/applications`).save();
-
         commit('apply', game);
 
         dispatch('toast/add', { type: 'success', message: `Thanks for signing up! See ya soon` }, { root: true });
-
         dispatch('navigate', '/game/confirmation', { root: true })
     },
 

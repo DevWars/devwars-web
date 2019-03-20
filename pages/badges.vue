@@ -71,11 +71,10 @@ export default {
             };
         },
         image(badge) {
+            /* eslint-disable */
+            const url = `~/assets/img/badges/${badge.name.split(' ').join('-').toLowerCase()}.png`;
             try {
-                return require(`~/assets/img/badges/${badge.name
-                    .split(' ')
-                    .join('-')
-                    .toLowerCase()}.png`);
+                return require(url);
             } catch (e) {
                 console.error(`Couldn't load image for badge ${badge.name}`);
             }

@@ -17,14 +17,15 @@
     "plugins": ["vue", "prettier"],
     "rules": {
         "indent": ["error", 4],
-        "max-len": ["error", 120],
         "comma-dangle": ["error", "always-multiline"],
         "consistent-return": "off",
         "prefer-destructuring": "off",
         "no-console": "off",
         "no-continue": "off",
+        "no-plusplus": "off",
         "no-param-reassign": "off",
         "no-shadow": "off",
+        "import/no-unresolved": "off",
         "no-underscore-dangle": "off",
         "no-restricted-syntax": "off",
         "no-multiple-empty-lines": "off",
@@ -33,6 +34,11 @@
         "vue/max-attributes-per-line": "off",
         "vue/multiline-html-element-content-newline": "off",
         "vue/singleline-html-element-content-newline": "off",
+        "class-methods-use-this": "off",
+        "no-restricted-globals": "off",
+        "vue/no-use-v-if-with-v-for": "warn",
+        "camelcase": "off",
+        "global-require": "off",
         "vue/html-closing-bracket-spacing": [
             "error",
             {
@@ -51,14 +57,7 @@
                 }
             }
         ],
-        "max-len": [
-            "error",
-            120,
-            {
-                "ignoreTemplateLiterals": true,
-                "ignoreStrings": true
-            }
-        ],
+        "max-len": "off",
         "vetur.format.defaultFormatter.html": "none",
         "prettier/prettier": 0
     }

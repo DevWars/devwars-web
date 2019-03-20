@@ -173,7 +173,7 @@ import PageBanner from '~/components/layout/PageBanner';
 import Input from '~/components/form/Input';
 import Select from '~/components/form/Select';
 import ConnectToDiscord from '~/components/user/ConnectToDiscord';
-import { userHasProvider } from '../../utils/linkedAccounts';
+import userHasProvider from '../../utils/linkedAccounts';
 
 export default {
     name: 'CompetitorRegistration',
@@ -227,6 +227,22 @@ export default {
             ],
         };
     },
+    computed: {
+        user() {
+            return this.$store.state.user.user;
+        },
+        links() {
+            return this.$store.state.user.linkedAccounts;
+        },
+        ...mapActions({
+            error: 'toast/error',
+        }),
+    },
+    async asyncData({ query }) {
+        if (!query.game) return {};
+
+        return { game: await Http.for(`game/${query.game}`).get() };
+    },
     methods: {
         tooltip(language) {
             return this[`${language.name}Tooltips`][language.skill];
@@ -267,22 +283,6 @@ export default {
                 this.$store.dispatch('toast/errors', e);
             }
         },
-    },
-    computed: {
-        user() {
-            return this.$store.state.user.user;
-        },
-        links() {
-            return this.$store.state.user.linkedAccounts;
-        },
-        ...mapActions({
-            error: 'toast/error',
-        }),
-    },
-    async asyncData({ query }) {
-        if (!query.game) return {};
-
-        return { game: await Http.for(`game/${query.game}`).get() };
     },
 };
 </script>

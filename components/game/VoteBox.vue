@@ -38,7 +38,19 @@ import { team_for_game, vote_analysis_for_team } from '../../utils/objectives';
 export default {
     name: 'VoteBox',
     components: { SubScore },
-    props: ['game', 'vote', 'label'],
+    props: {
+        'game': {
+            type: Object,
+            required: true,
+        }, 
+        'vote': {
+            type: String,
+            required: true,
+        }, 'label': {
+            type: String,
+            required: true,
+        },
+    },
     computed: {
         analysis() {
             const analysis = {};

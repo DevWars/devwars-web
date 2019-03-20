@@ -22,9 +22,18 @@ export default {
     name: 'PanelHeader',
     components: { Input },
     props: {
-        title: String,
-        subtitle: String,
-        showSearch: Boolean,
+        title: {
+            type: String,
+            default: '',
+        },
+        subtitle: {
+            type: String,
+            default: '',
+        },
+        showSearch: {
+            type: Boolean,
+            default: false,
+        },
     },
 };
 </script>

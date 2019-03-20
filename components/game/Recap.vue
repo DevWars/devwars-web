@@ -41,7 +41,12 @@ import { team_for_game, points_for_team } from '../../utils/objectives';
 export default {
     name: 'Recap',
     components: { HomeCard },
-    props: ['game'],
+    props: {
+        'game': {
+            type: Object,
+            required: true,
+        },
+    },
     data: () => {
         return {
             points_for_team,

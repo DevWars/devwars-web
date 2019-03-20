@@ -90,7 +90,6 @@
 
 
 <script>
-import Http from '../../../services/Http';
 import MailMeta from '../../../components/mail/MailMeta';
 
 export default {

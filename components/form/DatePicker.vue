@@ -18,7 +18,12 @@ export default {
     name: 'DatePicker',
     components: { FlatPickr },
     directives: { ClickOutside },
-    props: ['value'],
+    props: {
+        'value': {
+            type: String,
+            required: true,
+        },
+    },
     data: () => {
         return {
             config: {

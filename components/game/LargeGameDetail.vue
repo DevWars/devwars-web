@@ -55,10 +55,9 @@
                         >{{ team_for_game(team, game).name }}</h3>
                     </div>
                 </div>
-                <div class="players">
+                <div v-if="player(team, language)" class="players">
                     <div
                         v-for="language in ['html', 'css', 'js']"
-                        v-if="player(team, language)"
                         :key="language"
                         class="player"
                     >
@@ -161,7 +160,10 @@ export default {
     name: 'LargeGameDetail',
     components: { Avatar, SubScore, VoteBox },
     props: {
-        game: { default: {} },
+        game: { 
+            type: Object,
+            required: true,
+        },
     },
     computed: {
         blue() {

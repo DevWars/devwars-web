@@ -16,7 +16,7 @@ export const mutations = {
 };
 
 export const actions = {
-    add({commit, dispatch}, toast) {
+    add({commit}, toast) {
         commit('push', toast);
 
         setTimeout(() => {
@@ -25,14 +25,14 @@ export const actions = {
     },
 
     async error({dispatch}, message) {
-        return await dispatch('add', {type: 'error', message});
+        await dispatch('add', {type: 'error', message});
     },
 
     async success({dispatch}, message) {
-        return await dispatch('add', {type: 'success', message});
+        await dispatch('add', {type: 'success', message});
     },
 
-    errors({commit, dispatch}, e) {
+    errors({dispatch}, e) {
         if(e.response.status === 400) {
             e.response.data.forEach(it => {
                 dispatch('add', {type: 'error', message: it.message});

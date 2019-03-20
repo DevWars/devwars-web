@@ -17,7 +17,16 @@ import 'cropperjs/dist/cropper.css';
 
 export default {
     name: 'CropperModal',
-    props: ['data', 'resolve'],
+    props: {
+        'data': {
+            type: Object,
+            required: true,
+        }, 
+        'resolve': {
+            type: Function,
+            required: true,
+        },
+    },
     methods: {
         options() {
             return {

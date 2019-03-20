@@ -13,8 +13,12 @@
 export default {
     name: 'SquareToggle',
     props: {
-        color: {},
+        color: {
+            type: Object,
+            required: true,
+        },
         active: {
+            type: Boolean,
             default: false,
         },
     },

@@ -8,7 +8,12 @@
 <script>
 export default {
     name: 'Avatar',
-    props: ['user'],
+    props: {
+        'user': {
+            type: Object,
+            required: true,
+        },
+    },
     computed: {
         style() {
             return {

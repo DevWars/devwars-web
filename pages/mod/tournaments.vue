@@ -38,12 +38,11 @@
 import PanelHeader from '~/components/mod/PanelHeader';
 import ListingFilters from '~/components/mod/ListingFilters';
 import Table from '~/components/Table';
-import Input from '~/components/form/Input';
 import Pagination from '~/components/Pagination';
 
 export default {
     name: 'ModTournaments',
-    components: { PanelHeader, ListingFilters, Table, Input, Pagination },
+    components: { PanelHeader, ListingFilters, Table, Pagination },
 };
 </script>
 

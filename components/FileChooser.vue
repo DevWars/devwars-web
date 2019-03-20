@@ -17,7 +17,7 @@ export default {
             const reader = new FileReader();
             const file = this.$refs.chooser.files[0];
 
-            reader.addEventListener('load', (event) => {
+            reader.addEventListener('load', () => {
                 if (reader.result) {
                     this.$emit('change', reader.result);
                 }

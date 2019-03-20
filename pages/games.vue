@@ -57,7 +57,7 @@ export default {
         '$route.query.season': {
             immediate: true,
             async handler(newSeason) {
-                this.season = parseInt(newSeason || '3');
+                this.season = parseInt(newSeason || '3', 10);
 
                 this.games = await Http.for('game/season').get(this.season);
 

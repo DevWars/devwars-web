@@ -129,6 +129,7 @@ export default {
         this.refresh();
     },
     methods: {
+        team_for_game,
         addPlayer(user) {
             this.$open(AddPlayerModal, { user, game: this.game });
         },

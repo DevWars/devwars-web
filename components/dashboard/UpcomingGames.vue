@@ -1,6 +1,7 @@
 <template>
     <DashboardCard title="Upcoming Games" icon="fa fa-calendar">
         <Applications :games="upcoming">
+            <!-- eslint-disable-next-line -->
             <div slot="game" slot-scope="props" class="item">
                 <div class="main">
                     <div class="col-xs-2 no-gutter" :class="[props.color]">{{ props.text }}</div>
@@ -24,14 +25,22 @@
 
 <script>
 import { mapState } from 'vuex';
-import Http from '../../services/Http';
 import Applications from '~/components/game/Applications';
 import DashboardCard from '~/components/DashboardCard';
 
 export default {
     name: 'UpcomingGames',
     components: { Applications, DashboardCard },
-    props: ['upcoming', 'applied'],
+    props: {
+        'upcoming': {
+            type: Object,
+            required: true,
+        }, 
+        'applied': {
+            type: String,
+            required: true,
+        },
+    },
     computed: {
         ...mapState({
             user: 'user',

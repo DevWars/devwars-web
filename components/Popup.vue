@@ -9,6 +9,7 @@
 
 
 <script>
+/* global $ */
 import jQuery from 'jquery';
 
 export default {

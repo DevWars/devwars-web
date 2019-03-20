@@ -94,7 +94,7 @@ export const actions = {
         }
     },
 
-    async register({ commit, dispatch }, registration) {
+    async register({dispatch }, registration) {
         try {
             await Http.for('auth').post('register', registration);
 
@@ -126,7 +126,7 @@ export const actions = {
         }
     },
 
-    async password({ commit, dispatch, state }, data) {
+    async password({dispatch, state }, data) {
         try {
             await Http.for(`user/${state.user.id}/reset/password`).put(data);
 
@@ -159,7 +159,7 @@ export const actions = {
         }
     },
 
-    async forgot({ dispatch, commit }, email) {
+    async forgot({ dispatch }, email) {
         try {
             await Http.for('auth/reset').save({ username_or_email: email });
 
@@ -177,7 +177,7 @@ export const actions = {
         }
     },
 
-    async resetByKey({ dispatch, commit }, data) {
+    async resetByKey({ dispatch }, data) {
         await Http.for('auth/reset').put({}, data);
 
         dispatch(
@@ -187,7 +187,7 @@ export const actions = {
         );
     },
 
-    async avatar({ dispatch, commit, state }, data) {
+    async avatar({ dispatch, state }, data) {
         const formData = new FormData();
         formData.append('avatar', data, 'avatar.jpg');
 
@@ -201,7 +201,7 @@ export const actions = {
         await dispatch('refresh');
     },
 
-    async linkedAccounts({ dispatch, commit, state }) {
+    async linkedAccounts({ commit, state }) {
         const accounts = await Http.for(`user/${state.user.id}`).get(
             'linked-accounts'
         );

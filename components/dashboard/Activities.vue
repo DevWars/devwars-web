@@ -30,7 +30,12 @@ import DashboardCard from '~/components/DashboardCard';
 export default {
     name: 'Activities',
     components: { DashboardCard },
-    props: ['paged'],
+    props: {
+        'paged': {
+            type: Object,
+            required: true,
+        },
+    },
 };
 </script>
 

@@ -19,10 +19,10 @@ Vue.filter('moment', (input, format) => {
 
 Vue.mixin({
     methods: {
-        close() {
+        close(args) {
             this.$emit('close');
 
-            this.resolve(arguments);
+            this.resolve(args);
         },
 
         $open(component, props) {

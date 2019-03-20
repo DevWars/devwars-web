@@ -43,14 +43,13 @@ import CreateGameModal from '~/components/modal/CreateGameModal';
 import PanelHeader from '~/components/mod/PanelHeader';
 import ListingFilters from '~/components/mod/ListingFilters';
 import Table from '~/components/Table';
-import Input from '~/components/form/Input';
 import Pagination from '~/components/Pagination';
 
-import { nameFromStatus } from '../../utils/gameStatus';
+import nameFromStatus from '../../utils/gameStatus';
 
 export default {
     name: 'ModGames',
-    components: { PanelHeader, ListingFilters, Table, Input, Pagination },
+    components: { PanelHeader, ListingFilters, Table, Pagination },
     computed: {
         all() {
             return this.$store.state.game.all;

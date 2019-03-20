@@ -46,7 +46,12 @@
 <script>
 export default {
     name: "Error",
-    props: ['error'],
+    props: {
+        'error': {
+            type: Object,
+            required: true,
+        },
+    },
     layout: 'header',
     mounted() {
         console.log(this.error);

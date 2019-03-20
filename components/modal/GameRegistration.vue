@@ -44,11 +44,19 @@
 
 <script>
 import { mapActions } from 'vuex';
-import Http from '../../services/Http';
 
 export default {
     name: 'GameRegistration',
-    props: ['resolve', 'game'],
+    props: {
+        'resolve': {
+            type: Function,
+            required: true,
+        },
+        'game': {
+            type: Object,
+            required: true,
+        },
+    },
     computed: {
         competitor() {
             return this.$store.state.user.competitor;

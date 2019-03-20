@@ -35,7 +35,20 @@ import Http from '../../services/Http';
 
 export default {
     name: 'AddPlayerModal',
-    props: ['game', 'user', 'resolve'],
+    props: {
+        'game': {
+            type: Object,
+            required: true,
+        },
+        'user': {
+            type: Object,
+            required: true,
+        },
+        'resolve': {
+            type: Function,
+            required: true,
+        },
+    },
     data: () => {
         return {
             team: 0,

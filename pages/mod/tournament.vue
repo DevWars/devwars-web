@@ -94,10 +94,10 @@ export default {
             });
 
             // Last but not least, save the game
-            const game = await Http.for('tournament').save(cloned);
+            // const game = await Http.for('tournament').save(cloned);
 
             // Can't forget to update our state with the new game
-            this.$store.commit('tournament/tournament', tournament);
+            this.$store.commit('tournament/tournament', this.tournament);
         },
         async remove() {
             const [confirmed] = await this.$open(DeleteModal, {

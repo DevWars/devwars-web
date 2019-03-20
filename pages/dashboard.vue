@@ -24,7 +24,6 @@
 
 
 <script>
-import { mapState } from 'vuex';
 import Http from '../services/Http';
 import ProfileCard from '~/components/dashboard/ProfileCard';
 import Wallet from '~/components/dashboard/Wallet';

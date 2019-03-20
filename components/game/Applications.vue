@@ -16,39 +16,10 @@ import GameRegistration from '~/components/modal/GameRegistration';
 
 export default {
     name: 'Applications',
-    props: ['games'],
-    methods: {
-        async enter(game) {
-            if (!this.user) {
-                this.$router.push('/login');
-
-                return;
-            }
-            const [entered] = await this.$open(GameRegistration, { game });
-
-            if (!entered) return;
-
-            await this.$store.dispatch('game/apply', game);
-        },
-        async cancel(game) {
-            const [result] = await this.$open(ConfirmModal, {
-                title: 'Confirm',
-                description: 'Are you sure you would like to cancel?',
-            });
-
-            if (!result) return;
-
-            await this.$store.dispatch('game/forfeit', game);
-        },
-        enterOrCancel(altered) {
-            if (altered.applied) {
-                this.cancel(altered.game);
-            } else this.enter(altered.game);
-        },
-        isApplied(game) {
-            return this.applied.some(
-                (it) => it.id === game.id || it === game.id
-            );
+    props: {
+        'games': {
+            type: Object,
+            required: true,
         },
     },
     computed: {
@@ -100,5 +71,40 @@ export default {
             });
         },
     },
+    methods: {
+        async enter(game) {
+            if (!this.user) {
+                this.$router.push('/login');
+
+                return;
+            }
+            const [entered] = await this.$open(GameRegistration, { game });
+
+            if (!entered) return;
+
+            await this.$store.dispatch('game/apply', game);
+        },
+        async cancel(game) {
+            const [result] = await this.$open(ConfirmModal, {
+                title: 'Confirm',
+                description: 'Are you sure you would like to cancel?',
+            });
+
+            if (!result) return;
+
+            await this.$store.dispatch('game/forfeit', game);
+        },
+        enterOrCancel(altered) {
+            if (altered.applied) {
+                this.cancel(altered.game);
+            } else this.enter(altered.game);
+        },
+        isApplied(game) {
+            return this.applied.some(
+                (it) => it.id === game.id || it === game.id
+            );
+        },
+    },
+
 };
 </script>

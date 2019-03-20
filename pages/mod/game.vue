@@ -75,7 +75,7 @@ export default {
                 const cloned = { ...team };
                 delete cloned.players;
 
-                await Http.for('game/team').save(cloned);
+                Http.for('game/team').save(cloned);
             }
 
             // Last but not least, save the game

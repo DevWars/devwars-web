@@ -16,16 +16,19 @@
 
 
 <script>
-import moment from 'moment';
-import RegistrationButton from '~/components/game/RegistrationButton';
 import Recap from '~/components/game/Recap';
 import NowShowing from './NowShowing';
 import NextShowing from './NextShowing';
 
 export default {
     name: 'Highlights',
-    components: { NextShowing, NowShowing, Recap, RegistrationButton },
-    props: ['latest'],
+    components: { NextShowing, NowShowing, Recap },
+    props: {
+        'latest': {
+            type: Object,
+            required: true,
+        },
+    },
     computed: {
         altered() {
             if (process.server) return this.posts;

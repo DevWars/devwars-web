@@ -14,16 +14,29 @@
 
 
 <script>
-import Http from '../../services/Http';
 import Input from '../form/Input';
-import Avatar from '../user/Avatar';
 
 export default {
     name: 'AddRegistrantModal',
-    components: { Input, Avatar },
-    props: ['game', 'resolve', 'reject'],
+    components: { Input },
+    props: {
+        'game': {
+            type: Object,
+            required: true,
+        }, 
+        'resolve': {
+            type: Function,
+            required: true,
+        },
+        'reject': {
+            type: Function,
+            required: true,
+        },
+    },
     data: () => {
-        '';
+        return {
+            username: '',
+        }
     },
     methods: {
         async addRegistrant() {

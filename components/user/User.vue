@@ -12,7 +12,12 @@ import Avatar from '~/components/user/Avatar';
 export default {
     name: 'User',
     components: { Avatar },
-    props: ['user'],
+    props: {
+        'user': {
+            type: Object,
+            required: true,
+        },
+    },
 };
 </script>
 

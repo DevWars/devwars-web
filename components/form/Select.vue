@@ -16,7 +16,20 @@
 <script>
 export default {
     name: 'Select',
-    props: ['type', 'value', 'label'],
+    props: {
+        'type': {
+            type: String,
+            required: true,
+        },
+        'value': {
+            type: String,
+            required: true,
+        },
+        'label': {
+            type: String,
+            required: true,
+        },
+    },
     computed: {
         valid() {
             return !(this.value == null || typeof this.value === 'undefined');

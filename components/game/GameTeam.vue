@@ -13,14 +13,18 @@
 
 
 <script>
-import Player from '~/components/game/Player';
 
 export default {
     name: 'GameTeam',
-    components: { Player },
     props: {
-        team: String,
-        points: Number,
+        team: {
+            type:String,
+            required: true,
+        },
+        points: {
+            type: Number,
+            required: true,
+        },
     },
 };
 </script>

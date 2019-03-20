@@ -25,7 +25,12 @@ import Progress from '~/components/form/Progress';
 export default {
     name: 'DashboardBadges',
     components: { DashboardCard, Progress },
-    props: ['owned'],
+    props: {
+        'owned': {
+            type: Object,
+            required: true,
+        },
+    },
     computed: {
         badges() {
             return this.$store.state.badges.badges;

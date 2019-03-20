@@ -17,7 +17,12 @@ import Card from "./Card";
 export default {
     name: "HomeCard",
     components: { Card },
-    props: [ 'title' ],
+    props: {
+        'title': {
+            type: String,
+            default: '',
+        },
+    },
 }
 </script>
 

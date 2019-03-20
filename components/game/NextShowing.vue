@@ -64,13 +64,10 @@ export default {
 
             const updated = {};
 
-            units.forEach(
-                (unit) =>
-                    (updated[unit] = moment
-                        .duration(diff)
-                        [unit]()
-                        .toFixed(0))
-            );
+            units.forEach( unit => {
+                updated[unit] = moment.duration(diff)[unit]().toFixed(0)
+                
+            });
 
             this.timeDifference = updated;
         },

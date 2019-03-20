@@ -20,7 +20,12 @@ import Avatar from '~/components/user/Avatar';
 export default {
     name: 'UserMenu',
     components: { Popup, Avatar },
-    props: ['user'],
+    props: {
+        'user': {
+            type: Object,
+            required: true,
+        },
+    },
 };
 </script>
 

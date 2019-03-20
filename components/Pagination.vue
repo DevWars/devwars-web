@@ -18,7 +18,20 @@
 <script>
 export default {
     name: 'Pagination',
-    props: ['page', 'perPage', 'count'],
+    props: {
+        'page': {
+            type: Number,
+            required: true,
+        },
+        'perPage': {
+            type: Number,
+            required: true,
+        },
+        'count': {
+            type: Number,
+            required: true,
+        },
+    },
     computed: {
         canGoPrevious() {
             return this.page > 0;

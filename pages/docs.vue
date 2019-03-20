@@ -760,7 +760,7 @@ export default {
 
         const scrollable = document.querySelector('.docs__main');
 
-        scrollable.addEventListener('scroll', (event) => {
+        scrollable.addEventListener('scroll', () => {
             const sections = Array.prototype.slice.apply(
                 document.querySelectorAll('section')
             );

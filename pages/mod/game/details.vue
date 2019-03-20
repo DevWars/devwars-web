@@ -99,8 +99,7 @@ import Input from '~/components/form/Input';
 import VoteBoxInput from '../../../components/game/VoteBoxInput';
 import SquareToggle from '../../../components/SquareToggle';
 
-import { team_completed_objective } from '../../../utils/objectives';
-import { team_for_game } from '../../../utils/objectives';
+import { team_for_game, team_completed_objective } from '../../../utils/objectives';
 
 export default {
     name: 'DashboardGameDetails',
@@ -132,6 +131,7 @@ export default {
         this.time = moment.utc(this.game.startTime).format('HH:mm');
     },
     methods: {
+        team_for_game,
         timestampChanged() {
             const timestamp =
                 moment

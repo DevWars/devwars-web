@@ -1,6 +1,6 @@
 const translate_request_to_mjml = require('./index');
 
-module.exports = async function (req, res) {
+module.exports = async function render(req, res) {
     try {
         const { html } = await translate_request_to_mjml(req);
 
