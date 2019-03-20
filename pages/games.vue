@@ -22,7 +22,8 @@
                     <span class="game__mode" :class="[game.name.toLowerCase()]">{{ game.name }}</span>
                     <span
                         class="game__date"
-                    >{{ game.startTime | moment('MMM') }} {{ game.startTime | moment('DD') }}, {{ game.startTime | moment('YYYY') }}</span>
+                    >{{ game.startTime | moment('MMM') }} {{ game.startTime | moment('DD') }}, 
+                    {{ game.startTime | moment('YYYY') }}</span>
                     <span class="game__theme">{{ game.theme }}</span>
                 </div>
                 <div class="game__icons">
@@ -32,7 +33,7 @@
         </div>
 
         <div class="view col-sm-9">
-            <LargeGameDetail :game="viewing"/>
+            <LargeGameDetail :game="viewing" v-if="viewing"/>
         </div>
     </div>
 </template>
@@ -59,7 +60,7 @@ export default {
             async handler(newSeason) {
                 this.season = parseInt(newSeason || '3', 10);
 
-                this.games = await Http.for('game/season').get(this.season);
+                this.games = await Http.for('games/season').get(this.season);
 
                 if (!this.$route.query.game) {
                     this.viewing = await Http.for('game').get(this.games[0].id);

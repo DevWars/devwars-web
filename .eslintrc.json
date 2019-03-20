@@ -22,7 +22,6 @@
         "prefer-destructuring": "off",
         "no-console": "off",
         "no-continue": "off",
-        "no-plusplus": "off",
         "no-param-reassign": "off",
         "no-shadow": "off",
         "import/no-unresolved": "off",
@@ -37,7 +36,6 @@
         "class-methods-use-this": "off",
         "no-restricted-globals": "off",
         "vue/no-use-v-if-with-v-for": "warn",
-        "camelcase": "off",
         "global-require": "off",
         "vue/html-closing-bracket-spacing": [
             "error",
@@ -57,8 +55,15 @@
                 }
             }
         ],
-        "max-len": "off",
+        "max-len": ["error", 120, {
+            "ignoreUrls": true,
+            "ignoreComments": false,
+            "ignoreRegExpLiterals": true,
+            "ignoreStrings": true,
+            "ignoreTemplateLiterals": true
+      }],
         "vetur.format.defaultFormatter.html": "none",
-        "prettier/prettier": 0
+        "prettier/prettier": 0,
+        "camelcase": "off"
     }
 }

@@ -2,8 +2,8 @@
     <div class="dashboard header-offset">
         <div class="container">
             <div class="row">
-                <div class="aside col-md-4">
-                    <ProfileCard :user="user.user"/>
+                <div class="aside col-md-4" v-if="user">
+                    <ProfileCard  :user="user.user"/>
 
                     <Wallet :stats="user.stats"/>
 

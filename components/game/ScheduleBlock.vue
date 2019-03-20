@@ -8,11 +8,13 @@
                 <th>Showing</th>
                 <th></th>
             </tr>
+            <!-- eslint-disable -->
             <tr
-                v-for="game in limitBy"
+                v-for="game in games"
                 v-if="filter ? (filter === game.name) : true"
                 :key="game.id"
             >
+            <!-- eslint-enable -->
                 <td>
                     <div class="dow">{{ game.startTime | moment('dddd') }}</div>
                     <h4 class="date">{{ game.startTime | moment('MMMM D') }}</h4>
@@ -77,11 +79,6 @@ export default {
         },
         _games() {
             return this.$store.state.game.upcoming;
-        },
-        limitBy() {
-            // limitBy was called here with a count but it didnt exist
-            return this.games;
-            // (games, count)
         },
     },
     methods: {

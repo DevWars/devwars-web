@@ -32,7 +32,7 @@ export default {
     components: { DashboardCard },
     props: {
         'paged': {
-            type: Object,
+            type: Array,
             required: true,
         },
     },

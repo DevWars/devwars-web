@@ -15,8 +15,8 @@ export const vote_analysis_for_team = (team, otherTeam, label) => {
     const otherVotes = otherTeam.votes[label] || 0;
     const total = teamVotes + otherVotes;
 
-    if (teamVotes/total > 0.55) { points++; }
-    if (teamVotes/total > 0.80) { points++; }
+    if (teamVotes/total > 0.55) { points += 1; }
+    if (teamVotes/total > 0.80) { points += 1; }
 
     const percent = `${(teamVotes / total * 100).toFixed(0)  }%`;
     const win = teamVotes > otherVotes;
@@ -49,7 +49,7 @@ export const points_for_team = ((team, game) => {
 
     // Aced it
     if (game.objectives.length === team.completedObjectives.length) {
-        points++;
+        points += 1;
     }
 
     const otherTeam = game.teams.find(it => it !== team);

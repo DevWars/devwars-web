@@ -15,14 +15,20 @@
                     font-size="16px"
                     color="#fff"
                     font-family="helvetica"
-                >Hello fellow competitors. We recently added a new connections requirement to link your Discord to compete in future games.</mj-text>
+                >
+                    Hello fellow competitors. We recently added a new connections requirement to link 
+                    your Discord to compete in future games.
+                </mj-text>
                 <mj-text
                     align="center"
                     line-height="1.3"
                     font-size="16px"
                     color="#fff"
                     font-family="helvetica"
-                >Since Discord is an important part of DevWars, connecting your Discord will help us automate more of the sign up process to be faster and easier to join games.</mj-text>
+                >
+                    Since Discord is an important part of DevWars, connecting your Discord will help us 
+                    automate more of the sign up process to be faster and easier to join games.
+                </mj-text>
             </mj-column>
         </mj-section>
 

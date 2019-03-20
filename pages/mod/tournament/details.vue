@@ -70,7 +70,7 @@ export default {
         tournamentChanged() {
             const list = [];
 
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < 5; i += 1) {
                 let item = this.tournament.objectives.find(
                     (it) => it.number === i
                 );

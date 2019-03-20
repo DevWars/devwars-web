@@ -5,7 +5,9 @@
             <span class="gamemode">{{ game.name }}</span>
             <span
                 class="points"
-            >{{ points_for_team(team_for_game("blue", game), game) }}&nbsp;&hyphen;&nbsp;{{ points_for_team(team_for_game("red", game), game) }}</span>
+            >{{ points_for_team(team_for_game("blue", game), game) }}
+            &nbsp;&hyphen;&nbsp;{{ points_for_team(team_for_game("red", game), game) }}
+            </span>
         </div>
         <div class="team team-red"></div>
 

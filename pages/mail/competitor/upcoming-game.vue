@@ -15,7 +15,10 @@
                     line-height="1.3"
                     color="#fff"
                     font-family="helvetica"
-                >We noticed you didn't enter for our upcoming game. This is your chance to sign up to play. Here are the details for next weeks game:</mj-text>
+                >
+                We noticed you didn't enter for our upcoming game. This is your 
+                chance to sign up to play. Here are the details for next weeks game:
+                </mj-text>
             </mj-column>
         </mj-section>
 

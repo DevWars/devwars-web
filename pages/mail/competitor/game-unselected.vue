@@ -15,7 +15,8 @@
                     font-size="16px"
                     color="#fff"
                     font-family="helvetica"
-                >No worries, you still have a chance to play by confirming that you are still able to play in the event a player cannot make it to the game.</mj-text>
+                >No worries, you still have a chance to play by confirming that you are 
+                still able to play in the event a player cannot make it to the game.</mj-text>
             </mj-column>
         </mj-section>
 

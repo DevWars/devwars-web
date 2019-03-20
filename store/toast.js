@@ -5,7 +5,8 @@ export const state = () => ({
 
 export const mutations = {
     push(state, toast) {
-        toast.id = state.id++;
+        state.id += 1;
+        toast.id = state.id;
 
         state.toasts.push(toast);
     },

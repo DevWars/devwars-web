@@ -5,7 +5,8 @@
                 <div class="banner__meta">
                     <span
                         class="banner__date"
-                    >{{ game.startTime | moment('MMM') }} {{ game.startTime | moment('DD') }}, {{ game.startTime | moment('YYYY') }}</span>
+                    >{{ game.startTime | moment('MMM') }} {{ game.startTime | moment('DD') }}, 
+                    {{ game.startTime | moment('YYYY') }}</span>
                     <h2 class="banner__gamemode">{{ game.name }}</h2>
                     <div
                         class="banner__versus"

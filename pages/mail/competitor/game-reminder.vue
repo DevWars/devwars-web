@@ -15,7 +15,8 @@
                     font-size="16px"
                     color="#fff"
                     font-family="helvetica"
-                >You had entered to play in our upcoming game this weekend. If you are selected to play, we will send you an email confirmation.</mj-text>
+                >You had entered to play in our upcoming game this weekend. 
+                If you are selected to play, we will send you an email confirmation.</mj-text>
             </mj-column>
         </mj-section>
 
@@ -59,7 +60,8 @@
                     line-height="1.3"
                     color="#f1c40f"
                     font-family="helvetica"
-                >If you were not selected to play, please leave yourself available to be selected in case a player does not show up to the game.</mj-text>
+                >If you were not selected to play, please leave yourself available 
+                to be selected in case a player does not show up to the game.</mj-text>
             </mj-column>
         </mj-section>
 

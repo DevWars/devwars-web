@@ -143,7 +143,7 @@ export default {
         gameChanged() {
             const list = [];
 
-            for (let i = 1; i <= 5; i++) {
+            for (let i = 1; i <= 5; i += 1) {
                 let item = this.game.objectives.find((it) => it.number === i);
 
                 if (!item) item = { number: i };

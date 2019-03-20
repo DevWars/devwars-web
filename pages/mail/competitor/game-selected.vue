@@ -15,7 +15,8 @@
                     font-size="16px"
                     color="#fff"
                     font-family="helvetica"
-                >Congratulations! You are officially selected to play in our upcoming game this weekend. Below are the details of your upcoming game.</mj-text>
+                >Congratulations! You are officially selected to play in our upcoming
+                game this weekend. Below are the details of your upcoming game.</mj-text>
             </mj-column>
         </mj-section>
 
@@ -57,7 +58,8 @@
                     <a
                         href="https://www.discord.gg/devwars"
                         style="color: #00c9ff;"
-                    >Discord</a> lobby voice channel. One of our moderators will be there to greet you and prepare you for the game.
+                    >Discord</a> lobby voice channel. One of our moderators will 
+                    be there to greet you and prepare you for the game.
                     <br>
                     <br>Be sure to read our
                     <a

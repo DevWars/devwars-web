@@ -26,7 +26,7 @@
         <div class="home-shows home-section">
             <div class="container">
                 <h2 class="home-section__title">Upcoming Shows</h2>
-                <ScheduleBlock count="2"/>
+                <ScheduleBlock :count="2"/>
 
                 <div class="home-section__actions">
                     <a href="/schedule" class="btn btn-outline-white">View Full Schedule</a>

@@ -2,7 +2,7 @@
     <div v-if="user" class="user-menu">
         <Popup>
             <div slot="trigger" class="user-group">
-                <Avatar :user="user" class="sm"/>
+                <Avatar v-if="user" :user="user" class="sm"/>
                 <div class="user-group__name">{{ user.username }}</div>
             </div>
             <div slot="menu" class="menu">

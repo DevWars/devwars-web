@@ -7,7 +7,7 @@
                     <h1 class="blog-read__title">{{ post.title }}</h1>
                     <div class="blog-read__meta">
                         <div class="user-group">
-                            <Avatar :user="post.user"/>
+                            <Avatar v-if="post.user" :user="post.user"/>
 
                             <div class="blog-read__author">{{ post.user.username }}</div>
                         </div>

@@ -62,13 +62,13 @@ export default {
     },
     methods: {
         async previous() {
-            this.page--;
+            this.page -= 1;
             this.leaderboards = await Http.for('leaderboard/users').get({
                 page: this.page,
             });
         },
         async next() {
-            this.page++;
+            this.page += 1;
             this.leaderboards = await Http.for('leaderboard/users').get({
                 page: this.page,
             });

@@ -14,11 +14,11 @@ export default {
     props: {
         'type': {
             type: String,
-            required: true,
+            default: '',
         }, 
         'value': {
             type: String,
-            required: true,
+            default: '',
         },
     },
     computed: {

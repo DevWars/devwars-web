@@ -15,7 +15,8 @@
                     font-size="16px"
                     color="#fff"
                     font-family="helvetica"
-                >This is an email confirmation of your entry to play. Below are the details of your upcoming game.</mj-text>
+                >This is an email confirmation of your entry to play. 
+                Below are the details of your upcoming game.</mj-text>
             </mj-column>
         </mj-section>
 

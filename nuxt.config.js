@@ -18,7 +18,9 @@ module.exports = {
                 hid: 'description',
                 name: 'description',
                 content:
-                    'DevWars is a live game show where web developers compete against each other in 60 minute coding challenges. Join our educational and entertaining platform of experienced and aspiring members.',
+                    'DevWars is a live game show where web developers compete against each other in 60  ' + 
+                    'minute coding challenges. Join our educational and entertaining platform of experienced ' + 
+                    'and aspiring members.',
             },
             {
                 name: 'google-site-verification',
@@ -29,7 +31,9 @@ module.exports = {
             {
                 name: 'og:description',
                 content:
-                    'DevWars is a live game show where web developers compete against each other in 60 minute coding challenges. Join our educational and entertaining platform of experienced and aspiring members.',
+                    'DevWars is a live game show where web developers compete against each other in 60 ' + 
+                    'minute coding challenges. Join our educational and entertaining platform of experienced'+ 
+                    ' and aspiring members.',
             },
         ],
         link: [
@@ -107,6 +111,15 @@ module.exports = {
             }),
             new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         ],
+        babel: {
+            presets() {
+                return [
+                    [ "@nuxt/babel-preset-app", {
+                        useBuiltIns: "entry",
+                    } ],
+                ]
+            },
+        },
         extend(config, ctx) {
             // Run ESLint on save
             if (ctx.isDev && ctx.isClient) {

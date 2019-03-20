@@ -40,7 +40,7 @@
             <div class="col-sm-4">
                 <h3 class="modpanel__subtitle">Avatar</h3>
                 <div class="form-group">
-                    <Avatar :user="user" class="xl"/>
+                    <Avatar v-if="user" :user="user" class="xl"/>
                 </div>
 
                 <FileChooser @change="crop">

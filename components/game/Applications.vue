@@ -18,7 +18,7 @@ export default {
     name: 'Applications',
     props: {
         'games': {
-            type: Object,
+            type: Array,
             required: true,
         },
     },
