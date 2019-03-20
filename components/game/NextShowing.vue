@@ -64,9 +64,11 @@ export default {
 
             const updated = {};
 
-            units.forEach( unit => {
-                updated[unit] = moment.duration(diff)[unit]().toFixed(0)
-                
+            units.forEach((unit) => {
+                updated[unit] = moment
+                    .duration(diff)
+                    [unit]()
+                    .toFixed(0);
             });
 
             this.timeDifference = updated;
@@ -81,6 +83,7 @@ export default {
 
 .countdown {
     @extend %list-unstyled;
+    display: flex;
     width: 100%;
     margin: 0 auto;
     font-weight: $font-weight-bold;
