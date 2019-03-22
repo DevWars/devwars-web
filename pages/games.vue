@@ -19,21 +19,18 @@
                 @click="view(game)"
             >
                 <div class="game__meta">
-                    <span class="game__mode" :class="[game.name.toLowerCase()]">{{ game.name }}</span>
-                    <span
-                        class="game__date"
-                    >{{ game.startTime | moment('MMM') }} {{ game.startTime | moment('DD') }}, 
-                    {{ game.startTime | moment('YYYY') }}</span>
-                    <span class="game__theme">{{ game.theme }}</span>
+                    <span class="game__mode" :class="[game.mode.toLowerCase()]">{{ game.mode }}</span>
+                    <span class="game__date">{{ game.createdAt | moment('MM/DD/YYYY') }}</span>
+                    <span class="game__theme">{{ game.title }}</span>
                 </div>
                 <div class="game__icons">
-                    <i v-show="game.youtube_url" class="game__youtube fab fa-youtube"></i>
+                    <i v-show="game.videoUrl" class="game__youtube fab fa-youtube"></i>
                 </div>
             </div>
         </div>
 
         <div class="view col-sm-9">
-            <LargeGameDetail :game="viewing" v-if="viewing"/>
+            <LargeGameDetail v-if="viewing" :game="viewing"/>
         </div>
     </div>
 </template>
@@ -58,12 +55,14 @@ export default {
         '$route.query.season': {
             immediate: true,
             async handler(newSeason) {
-                this.season = parseInt(newSeason || '3', 10);
+                this.season = Number(newSeason) || 3;
 
                 this.games = await Http.for('games/season').get(this.season);
 
                 if (!this.$route.query.game) {
-                    this.viewing = await Http.for('game').get(this.games[0].id);
+                    this.viewing = await Http.for('games').get(
+                        this.games[0].id
+                    );
                 }
             },
         },
@@ -71,7 +70,7 @@ export default {
             immediate: true,
             async handler(newGame) {
                 if (newGame) {
-                    this.viewing = await Http.for('game').get(newGame);
+                    this.viewing = await Http.for('games').get(newGame);
                 }
             },
         },
@@ -102,6 +101,10 @@ export default {
 .sidebar {
     left: 0;
     background-color: $bg-color-3;
+
+    .nav-tabs {
+        text-align: center;
+    }
 
     .nav-tabs button {
         border-top: none;
@@ -172,6 +175,6 @@ export default {
 
     @include game-item-variant(classic, $brand-primary);
     @include game-item-variant(zen, $green-color);
-    @include game-item-variant(coffee, $yellow-color);
+    @include game-item-variant(blitz, $yellow-color);
 }
 </style>

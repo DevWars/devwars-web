@@ -1,9 +1,9 @@
 <template>
     <SubScore
         v-show="total > 0"
-        :title="label"
-        :blueScore="analysis.blue.points"
-        :redScore="analysis.red.points"
+        :title="category"
+        :blueScore="game.meta.teamScores[0][category]"
+        :redScore="game.meta.teamScores[1][category]"
     >
         <div class="voting">
             <div class="team team-blue" :class="{win: analysis.blue.win}">
@@ -39,14 +39,11 @@ export default {
     name: 'VoteBox',
     components: { SubScore },
     props: {
-        'game': {
+        game: {
             type: Object,
             required: true,
-        }, 
-        'vote': {
-            type: String,
-            required: true,
-        }, 'label': {
+        },
+        category: {
             type: String,
             required: true,
         },
@@ -55,24 +52,32 @@ export default {
         analysis() {
             const analysis = {};
 
-            analysis.red = this.analysisForTeam(
-                team_for_game('red', this.game),
-                team_for_game('blue', this.game)
-            );
             analysis.blue = this.analysisForTeam(
-                team_for_game('blue', this.game),
-                team_for_game('red', this.game)
+                this.game.teams[0],
+                this.game.teams[1]
+            );
+            analysis.red = this.analysisForTeam(
+                this.game.teams[1],
+                this.game.teams[0]
             );
 
             return analysis;
         },
         total() {
-            return this.analysis.blue.votes + this.analysis.red.votes;
+            const teams = this.game.teams;
+            let totalScore = 0;
+            if (teams) {
+                for (const team of Object.values(teams)) {
+                    const vote = team.votes[this.category];
+                    totalScore += vote;
+                }
+            }
+            return totalScore;
         },
     },
     methods: {
         analysisForTeam(team, otherTeam) {
-            return vote_analysis_for_team(team, otherTeam, this.label);
+            return vote_analysis_for_team(team, otherTeam, this.category);
         },
     },
 };

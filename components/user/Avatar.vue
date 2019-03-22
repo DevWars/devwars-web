@@ -9,7 +9,7 @@
 export default {
     name: 'Avatar',
     props: {
-        'user': {
+        user: {
             type: Object,
             required: true,
         },

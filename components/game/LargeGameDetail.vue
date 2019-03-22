@@ -1,20 +1,15 @@
 <template>
-    <div v-if="game">
-        <div class="banner row" :class="[game.name.split(' ').join('-').toLowerCase()]">
+    <div>
+        <div class="banner row">
             <div class="banner__inner">
                 <div class="banner__meta">
-                    <span
-                        class="banner__date"
-                    >{{ game.startTime | moment('MMM') }} {{ game.startTime | moment('DD') }}, 
-                    {{ game.startTime | moment('YYYY') }}</span>
-                    <h2 class="banner__gamemode">{{ game.name }}</h2>
-                    <div
-                        class="banner__versus"
-                    >{{ blue.players.length }} VS {{ red.players.length }}</div>
+                    <span class="banner__date">{{ game.createdAt | moment('MM/DD/YYYY') }}</span>
+                    <h2 class="banner__gamemode">{{ game.mode }}</h2>
+                    <div class="banner__versus">{{ bluePlayers.length }} VS {{ redPlayers.length }}</div>
                 </div>
                 <a
-                    v-show="game.youtube_url"
-                    :href="game.youtube_url"
+                    v-show="game.videoUrl"
+                    :href="game.videoUrl"
                     class="btn btn-icon btn-youtube"
                     target="_blank"
                 >
@@ -25,169 +20,159 @@
         </div>
 
         <div class="roster row">
-            <div
-                v-for="(team, index) in ['blue', 'red']"
-                :key="team"
-                :class="['team-' + team]"
-                class="team mirror col-sm-6"
+            <GameTeam
+                v-for="team in game.teams"
+                :key="team.id"
+                :team="team"
+                :points="teamScore(team.id)"
+                :winner="game.meta.winningTeam === team.id"
             >
-                <div class="team__header row">
-                    <div class="team__header-inner">
-                        <h3
-                            v-if="index === 0"
-                            class="team__name"
-                        >{{ team_for_game(team, game).name }}</h3>
-                        <div class="team__score">
-                            <span
-                                v-show="index === 0 && winner_for_game(game) === team_for_game(team, game)"
-                                class="team__win"
-                            >Win</span>
-                            <span
-                                class="team__points"
-                            >{{ points_for_team(team_for_game(team, game), game)}}</span>
-                            <span
-                                v-show="index === 1 && winner_for_game(game) === team_for_game(team, game)"
-                                class="team__win"
-                            >Win</span>
-                        </div>
-                        <h3
-                            v-if="index === 1"
-                            class="team__name"
-                        >{{ team_for_game(team, game).name }}</h3>
-                    </div>
-                </div>
-                <div v-if="player(team, language)" class="players">
-                    <div
-                        v-for="language in ['html', 'css', 'js']"
-                        :key="language"
-                        class="player"
-                    >
-                        <div class="user-group">
-                            <div v-if="index === 0" class="player__avatar">
-                                <Avatar :user="player(team, language).user"/>
-                            </div>
-                            <div
-                                class="player__name user-group__name"
-                            >{{ player(team, language).user.username }}</div>
-                            <div v-if="index === 1" class="player__avatar">
-                                <Avatar :user="player(team, language).user"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <ul class="roster__positions">
-                <li
-                    v-for="language in ['html', 'css', 'js']"
-                    v-show="player('blue', language) || player('red', language)"
-                    :key="language"
-                    :class="[language + '-color']"
-                >{{ language | uppercase }}</li>
-            </ul>
+                <Player
+                    v-if="users[player.id]"
+                    v-for="player in getTeamPlayers(team.id)"
+                    :key="player.id"
+                    :user="users[player.id]"
+                    :team="team"
+                    :language="languageByPlayer(player)"
+                />
+            </GameTeam>
         </div>
 
-        <!-- <div class="resources">
-            <a
-                target="_blank"
-                :href="'https://s3.amazonaws.com/devwars-cdn/sitestorage/' + game.id + '/blue'"
-                class="btn btn-outline-primary"
-            >
-                View Blue Website
-            </a>
-            <a
-                target="_blank"
-                :href="'/games/code?id=' + game.id"
-                class="btn btn-outline-white">
-                View Game Code
-            </a>
-            <a
-                target="_blank"
-                :href="'https://s3.amazonaws.com/devwars-cdn/sitestorage/' + game.id + '/red'"
-                class="btn btn-outline-secondary"
-            >
-                View Red Website
-            </a>
-        </div>-->
-        <SubScore v-if="game.theme" title="New Theme">
-            <h3>{{ game.theme }}</h3>
+        <SubScore v-if="game.title" title="Theme">
+            <h3>{{ game.title }}</h3>
         </SubScore>
 
         <SubScore
-            v-if="game.objectives.length > 0"
             title="Objectives"
-            :blueScore="team_for_game('blue', game).completedObjectives.length"
-            :redScore="team_for_game('red', game).completedObjectives.length"
+            :blueScore="blueObjectivesScore"
+            :redScore="redObjectivesScore"
         >
             <ul class="objectives">
                 <li
-                    v-for="(objective, index) in game.objectives"
+                    v-for="objective of Object.values(game.objectives)"
                     :key="objective.id"
                     class="objectives__item"
-                    :class="{bonus: index === game.objectives.length - 1 }"
+                    :class="{bonus: objective.isBonus }"
                 >
                     <div
                         class="objectives__square team-blue"
-                        :class="{active: didTeamComplete('blue', objective) }"
+                        :class="{active: teamCompletedObjective(0, objective) }"
                     ></div>
                     <span class="objectives__obj">{{ objective.description }}</span>
                     <div
                         class="objectives__square team-red"
-                        :class="{active: didTeamComplete('red', objective) }"
+                        :class="{active: teamCompletedObjective(1, objective) }"
                     ></div>
                 </li>
             </ul>
         </SubScore>
 
-        <VoteBox :game="game" vote="Design" label="ui"/>
-        <VoteBox :game="game" vote="Functionality" label="ux"/>
+        <VoteBox :game="game" category="ui"/>
+        <VoteBox :game="game" category="ux"/>
     </div>
 </template>
 
 
 <script>
-import Avatar from '~/components/user/Avatar';
+import Avatar from '~/components/user/User';
 import VoteBox from '~/components/game/VoteBox';
 import SubScore from '~/components/game/SubScore';
-
-import {
-    team_completed_objective,
-    team_for_game,
-    points_for_team,
-    winner_for_game,
-} from '../../utils/objectives';
+import GameTeam from '~/components/game/GameTeam';
+import Player from '~/components/game/Player';
 
 export default {
     name: 'LargeGameDetail',
-    components: { Avatar, SubScore, VoteBox },
+    components: { GameTeam, Player, Avatar, SubScore, VoteBox },
     props: {
-        game: { 
+        game: {
             type: Object,
             required: true,
         },
     },
+    data: () => ({
+        users: {},
+    }),
     computed: {
-        blue() {
-            return team_for_game('blue', this.game);
+        bluePlayers() {
+            return Object.values(this.game.players).filter(
+                (player) => player.team === 0
+            );
         },
-        red() {
-            return team_for_game('red', this.game);
+        redPlayers() {
+            return Object.values(this.game.players).filter(
+                (player) => player.team === 1
+            );
+        },
+        blueObjectivesScore() {
+            return this.game.meta.teamScores[0].objectives;
+        },
+        redObjectivesScore() {
+            return this.game.meta.teamScores[1].objectives;
         },
     },
+    watch: {
+        game() {
+            this.getUsersFromGame();
+        },
+    },
+    mounted() {
+        this.getUsersFromGame();
+    },
     methods: {
-        team_for_game,
-        points_for_team,
-        winner_for_game,
-        player(team, language) {
-            return team_for_game(team, this.game).players.find(
-                (player) => player.language.toLowerCase() === language
+        async getUsersFromGame() {
+            const players = Object.values(this.game.players);
+
+            const fetchUser = async (id) => {
+                const res = await this.$axios.get(`/users/${id}`);
+                return res.data;
+            };
+
+            const users = await Promise.all(
+                players.map((player) => fetchUser(player.id))
+            );
+
+            this.users = users.reduce((acc, user) => {
+                acc[user.id] = user;
+                return acc;
+            }, {});
+        },
+        getTeamPlayers(team) {
+            return Object.values(this.game.players).filter(
+                (player) => player.team === team
             );
         },
-        didTeamComplete(team, objective) {
-            return team_completed_objective(
-                team_for_game(team, this.game),
-                objective
-            );
+        teamScore(teamIndex) {
+            const teamScores = this.game.meta.teamScores[teamIndex];
+            let teamScore = 0;
+            if (teamScores) {
+                for (const score of Object.values(teamScores)) {
+                    teamScore += score;
+                }
+            }
+
+            return teamScore;
+        },
+        player(index, language) {
+            const team = this.game.teams[index];
+            return 'html';
+        },
+        teamCompletedObjective(teamIndex, objective) {
+            const objectives = this.game.teams[teamIndex].objectives;
+
+            for (const [key, value] of Object.entries(objectives)) {
+                if (objective.id === Number(key) && value === 'complete') {
+                    return value;
+                }
+            }
+        },
+        languageByPlayer(player) {
+            const editors = this.game.editors;
+
+            for (const editor of Object.values(editors)) {
+                if (player.id === editor.player) {
+                    return editor.language;
+                }
+            }
         },
     },
 };
@@ -198,34 +183,10 @@ export default {
 @import '../../assets/styles/utils';
 
 .roster {
-    position: relative;
+    display: flex;
 
-    &__positions {
-        @extend %absolute-center-x;
-        height: 65px;
-        top: 65px + $xs-space;
-        list-style: none;
-        text-align: center;
-
-        li {
-            height: 50px + ($xs-space * 2) + ($border-size * 2);
-            display: flex;
-            align-items: center;
-            text-align: center;
-            justify-content: center;
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        .html-color {
-            color: $html-color;
-        }
-        .css-color {
-            color: $css-color;
-        }
-        .js-color {
-            color: $js-color;
-        }
+    .GameTeam {
+        flex: 1 1 auto;
     }
 }
 
@@ -270,119 +231,6 @@ export default {
     &__versus {
         font-size: $h4-font-size;
     }
-
-    &.classic {
-        background-image: url('~assets/img/classic-bg.jpg');
-    }
-    &.zen-garden {
-        background-image: url('~assets/img/zen-garden-bg.jpg');
-    }
-    //&.coffee-run { background-image: url('~assets/img/coffee-run-bg.jpg'); }
-}
-
-.team {
-    &__header {
-        border-bottom-width: $border-size;
-        border-bottom-style: solid;
-        text-transform: uppercase;
-    }
-
-    &__header-inner {
-        @extend %flex-justify;
-        padding: 0 $s-space;
-    }
-
-    &__name {
-        font-weight: $font-weight-bold;
-        font-size: 24px;
-    }
-
-    &__score {
-    }
-
-    &__points,
-    &__win {
-        vertical-align: middle;
-    }
-
-    &__points {
-        font-size: 42px;
-        font-weight: bold;
-        text-shadow: 0 0 20px rgba(#fff, 0.6);
-        color: #fff;
-    }
-
-    &__win {
-        padding: 0 $s-space;
-        color: $success-color;
-        font-weight: bold;
-        font-size: 18px;
-    }
-
-    // Variations
-    @mixin team-variant($team, $color, $direction) {
-        &.#{$team} &__header {
-            border-color: $color;
-            background: linear-gradient(
-                to left,
-                rgba($color, 0.3),
-                transparent
-            );
-        }
-        &.#{$team} &__name {
-            color: $color;
-        }
-        &.#{$team} .player__avatar {
-            border-color: $color;
-        }
-
-        &.mirror.#{$team} &__header {
-            background: linear-gradient(
-                to $direction,
-                rgba($color, 0.3),
-                transparent
-            );
-        }
-        &.mirror.#{$team} .player {
-            display: block; // undos flexbox
-            text-align: $direction;
-        }
-    }
-
-    @include team-variant(team-blue, $brand-primary, left);
-    @include team-variant(team-red, $brand-secondary, right);
-}
-
-.players {
-    padding: $xs-space;
-}
-
-.player {
-    @extend %flex-justify;
-    padding: $xs-space 0;
-
-    &__avatar,
-    &__name {
-        @extend %align-middle;
-    }
-
-    &__avatar {
-        border: $border-size solid transparent;
-        border-radius: 50%;
-    }
-
-    &__name {
-        padding: 0 $xs-space;
-        font-size: $h4-font-size;
-    }
-
-    &__position {
-    }
-}
-
-.resources {
-    @extend %flex-justify;
-    padding: $s-space;
 }
 
 .objectives {

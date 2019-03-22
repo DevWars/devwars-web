@@ -1,7 +1,8 @@
 <template>
-    <div class="GameTeam row" :class="team">
+    <div class="GameTeam" :class="team.name">
         <div class="header">
-            <h3 class="team">{{ team }}</h3>
+            <h3 v-if="team" class="team">{{ team.name }}</h3>
+            <span v-if="winner" class="winner">Win</span>
             <span v-if="points" class="points">{{ points }}</span>
         </div>
 
@@ -13,17 +14,20 @@
 
 
 <script>
-
 export default {
     name: 'GameTeam',
     props: {
         team: {
-            type:String,
+            type: Object,
             required: true,
         },
         points: {
             type: Number,
             required: true,
+        },
+        winner: {
+            type: Boolean,
+            required: false,
         },
     },
 };
@@ -57,6 +61,7 @@ export default {
     .team {
         font-weight: $font-weight-bold;
         font-size: 24px;
+        margin-right: auto;
     }
 
     .points {
@@ -64,6 +69,13 @@ export default {
         font-weight: bold;
         text-shadow: 0 0 20px rgba(#fff, 0.6);
         color: #fff;
+    }
+
+    .winner {
+        padding: 0 $s-space;
+        color: $success-color;
+        font-weight: bold;
+        font-size: 18px;
     }
 
     // Variations

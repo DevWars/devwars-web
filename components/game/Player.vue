@@ -1,8 +1,8 @@
 <template>
     <div class="Player">
-        <User :user="user" :class="team.toLowerCase()"/>
+        <User :user="user" :class="team.name.toLowerCase()"/>
 
-        <strong v-if="lang" class="language" :class="lang.toLowerCase()">{{ lang }}</strong>
+        <strong v-if="language" class="language" :class="language.toLowerCase()">{{ language }}</strong>
     </div>
 </template>
 
@@ -19,13 +19,13 @@ export default {
             required: true,
         },
         team: {
+            type: Object,
+            required: true,
+        },
+        language: {
             type: String,
             required: true,
         },
-        lang: {
-            type: String,
-            required: true,
-        }, 
     },
 };
 </script>

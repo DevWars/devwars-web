@@ -8,7 +8,11 @@
                         :key="player.id"
                         @click="removePlayer(player, team_for_game('blue', game))"
                     >
-                        <Player :user="player.user" :lang="player.language" team="blue"/>
+                        <Player
+                            :user="player.user"
+                            :language="player.language"
+                            :team="team_for_game('blue', game)"
+                        />
                     </div>
                 </GameTeam>
 
@@ -29,7 +33,11 @@
                         :key="player.id"
                         @click="removePlayer(player, team_for_game('red', game))"
                     >
-                        <Player :user="player.user" :lang="player.language" team="red"/>
+                        <Player
+                            :user="player.user"
+                            :language="player.language"
+                            :team="team_for_game('red', game)"
+                        />
                     </div>
                 </GameTeam>
 
@@ -122,7 +130,7 @@ export default {
         rating(user, lang) {
             if (!user.competitor) return 0;
 
-            return user.competitor[`${lang  }_rate`];
+            return user.competitor[`${lang}_rate`];
         },
     },
     mounted() {
