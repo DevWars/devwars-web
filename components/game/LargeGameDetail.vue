@@ -5,7 +5,9 @@
                 <div class="banner__meta">
                     <span class="banner__date">{{ game.createdAt | moment('MM/DD/YYYY') }}</span>
                     <h2 class="banner__gamemode">{{ game.mode }}</h2>
-                    <div class="banner__versus">{{ bluePlayers.length }} VS {{ redPlayers.length }}</div>
+                    <div
+                        class="banner__versus"
+                    >{{ teams[0].numPlayers }} VS {{ teams[1].numPlayers }}</div>
                 </div>
                 <a
                     v-show="game.videoUrl"
@@ -21,17 +23,16 @@
 
         <div class="roster row">
             <GameTeam
-                v-for="team in game.teams"
+                v-for="team in teams"
                 :key="team.id"
                 :team="team"
-                :points="teamScore(team.id)"
-                :winner="game.meta.winningTeam === team.id"
+                :points="team.scores.total"
+                :winner="teams.isWinner"
             >
                 <Player
-                    v-if="users[player.id]"
-                    v-for="player in getTeamPlayers(team.id)"
+                    v-for="player in playersWithUser(team.players)"
                     :key="player.id"
-                    :user="users[player.id]"
+                    :user="player"
                     :team="team"
                     :language="languageByPlayer(player)"
                 />
@@ -44,12 +45,12 @@
 
         <SubScore
             title="Objectives"
-            :blueScore="blueObjectivesScore"
-            :redScore="redObjectivesScore"
+            :blueScore="teams[0].scores.objectives"
+            :redScore="teams[1].scores.objectives"
         >
             <ul class="objectives">
                 <li
-                    v-for="objective of Object.values(game.objectives)"
+                    v-for="objective in game.objectives"
                     :key="objective.id"
                     class="objectives__item"
                     :class="{bonus: objective.isBonus }"
@@ -74,7 +75,6 @@
 
 
 <script>
-import Avatar from '~/components/user/User';
 import VoteBox from '~/components/game/VoteBox';
 import SubScore from '~/components/game/SubScore';
 import GameTeam from '~/components/game/GameTeam';
@@ -82,7 +82,7 @@ import Player from '~/components/game/Player';
 
 export default {
     name: 'LargeGameDetail',
-    components: { GameTeam, Player, Avatar, SubScore, VoteBox },
+    components: { GameTeam, Player, SubScore, VoteBox },
     props: {
         game: {
             type: Object,
@@ -93,21 +93,32 @@ export default {
         users: {},
     }),
     computed: {
-        bluePlayers() {
-            return Object.values(this.game.players).filter(
-                (player) => player.team === 0
-            );
-        },
-        redPlayers() {
-            return Object.values(this.game.players).filter(
-                (player) => player.team === 1
-            );
-        },
-        blueObjectivesScore() {
-            return this.game.meta.teamScores[0].objectives;
-        },
-        redObjectivesScore() {
-            return this.game.meta.teamScores[1].objectives;
+        teams() {
+            return Object.values(this.game.teams).reduce((teams, team) => {
+                const players = Object.values(this.game.players).reduce(
+                    (players, player) => {
+                        if (player.team === team.id) {
+                            players[player.id] = player;
+                        }
+                        return players;
+                    },
+                    {}
+                );
+
+                teams[team.id] = {
+                    ...team,
+                    players,
+                    numPlayers: Object.values(players).length,
+                    scores: {
+                        total: Math.floor(Math.random() * 10),
+                        objectives: this.game.meta.teamScores[team.id]
+                            .objectives,
+                    },
+                    isWinner: this.game.meta.winningTeam === team.id,
+                };
+
+                return teams;
+            }, {});
         },
     },
     watch: {
@@ -119,6 +130,18 @@ export default {
         this.getUsersFromGame();
     },
     methods: {
+        playersWithUser(players) {
+            const result = [];
+            for (const player of Object.values(players)) {
+                const user = this.users[player.id];
+                if (user) {
+                    result.push({ ...user, ...player });
+                }
+            }
+
+            return result;
+        },
+
         async getUsersFromGame() {
             const players = Object.values(this.game.players);
 
@@ -135,26 +158,6 @@ export default {
                 acc[user.id] = user;
                 return acc;
             }, {});
-        },
-        getTeamPlayers(team) {
-            return Object.values(this.game.players).filter(
-                (player) => player.team === team
-            );
-        },
-        teamScore(teamIndex) {
-            const teamScores = this.game.meta.teamScores[teamIndex];
-            let teamScore = 0;
-            if (teamScores) {
-                for (const score of Object.values(teamScores)) {
-                    teamScore += score;
-                }
-            }
-
-            return teamScore;
-        },
-        player(index, language) {
-            const team = this.game.teams[index];
-            return 'html';
         },
         teamCompletedObjective(teamIndex, objective) {
             const objectives = this.game.teams[teamIndex].objectives;
@@ -186,7 +189,7 @@ export default {
     display: flex;
 
     .GameTeam {
-        flex: 1 1 auto;
+        flex: 1 1 100%;
     }
 }
 

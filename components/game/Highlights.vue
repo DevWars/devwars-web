@@ -7,7 +7,7 @@
                     <NowShowing v-if="active"/>
                 </div>
                 <div class="col-lg-6">
-                    <Recap v-if="latest" :game="latest"/>
+                    <Recap v-if="game" :game="game"/>
                 </div>
             </div>
         </div>
@@ -24,36 +24,12 @@ export default {
     name: 'Highlights',
     components: { NextShowing, NowShowing, Recap },
     props: {
-        'latest': {
+        game: {
             type: Object,
             required: true,
         },
     },
     computed: {
-        altered() {
-            if (process.server) return this.posts;
-
-            return this.posts.map((post) => {
-                const el = document.createElement('div');
-                el.innerHTML = post.text;
-                let text = el.innerText;
-                el.innerHTML = text;
-                text = el.innerText;
-
-                const cutoff = 100;
-
-                text = `${text.substring(0, cutoff)  }...`;
-
-                return {
-                    user: post.user,
-                    text,
-                    image_url: post.image_url,
-                };
-            });
-        },
-        posts() {
-            return this.$store.state.blog.lastest;
-        },
         upcoming() {
             return this.$store.state.game.upcoming;
         },

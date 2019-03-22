@@ -14,22 +14,24 @@
 
 <script>
 export default {
-    name: "SubScore",
+    name: 'SubScore',
     props: {
-        'title': {
+        title: {
             type: String,
             default: '',
-        }, 
-        'blueScore': {
+        },
+        blueScore: {
             type: Number,
-            required: true,
-        }, 
-        'redScore': {
+            required: false,
+            default: 0,
+        },
+        redScore: {
             type: Number,
-            required: true,
+            required: false,
+            default: 0,
         },
     },
-}
+};
 </script>
 
 <style lang="scss" scoped>

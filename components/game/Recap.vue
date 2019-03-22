@@ -1,31 +1,38 @@
 <template>
-    <HomeCard v-if="game && game.teams" title="Last Game Recap">
-        <div class="team team-blue"></div>
-        <div class="score">
-            <span class="gamemode">{{ game.name }}</span>
-            <span
-                class="points"
-            >{{ points_for_team(team_for_game("blue", game), game) }}
-            &nbsp;&hyphen;&nbsp;{{ points_for_team(team_for_game("red", game), game) }}
-            </span>
+    <HomeCard title="Last Game Recap">
+        <div class="header">
+            <div class="team">
+                <div class="team-logo blue"></div>
+            </div>
+            <div class="score">
+                <div class="gamemode">{{ game.mode }}</div>
+                <div
+                    v-for="team in game.teams"
+                    :key="team.id"
+                    class="points"
+                >{{ getGameTeamScore(game, team) }}</div>
+            </div>
+            <div class="team">
+                <div class="team-logo red"></div>
+            </div>
         </div>
-        <div class="team team-red"></div>
 
         <div class="matchup">
-            <ul class="players players--blue">
-                <li>{{ player('blue', 'html').user.username }}</li>
-                <li>{{ player('blue', 'css').user.username }}</li>
-                <li>{{ player('blue', 'js').user.username }}</li>
+            <ul
+                v-for="team in game.teams"
+                :key="team.id"
+                class="players"
+                :class="{blue: team.name === 'blue', red: team.name === 'red'}"
+            >
+                <li
+                    v-for="player in getGameTeamPlayers(game, team)"
+                    :key="player.id"
+                >{{ player.username }}</li>
             </ul>
             <ul class="pos">
                 <li class="color-html">HTML</li>
                 <li class="color-css">CSS</li>
                 <li class="color-js">JS</li>
-            </ul>
-            <ul class="players players--red">
-                <li>{{ player('red', 'html').user.username }}</li>
-                <li>{{ player('red', 'css').user.username }}</li>
-                <li>{{ player('red', 'js').user.username }}</li>
             </ul>
         </div>
 
@@ -37,37 +44,21 @@
 
 
 <script>
+import { getGameTeamScore, getGameTeamPlayers } from '~/utils';
 import HomeCard from '@/components/HomeCard';
-import { team_for_game, points_for_team } from '../../utils/objectives';
 
 export default {
     name: 'Recap',
     components: { HomeCard },
     props: {
-        'game': {
+        game: {
             type: Object,
             required: true,
         },
     },
-    data: () => {
-        return {
-            points_for_team,
-            team_for_game,
-        };
-    },
     methods: {
-        player(team, language) {
-            return (
-                team_for_game(team, this.game).players.find((player) => {
-                    return (
-                        player.language &&
-                        player.language.toLowerCase() === language
-                    );
-                }) || {
-                    user: {},
-                }
-            );
-        },
+        getGameTeamScore,
+        getGameTeamPlayers,
     },
 };
 </script>
@@ -76,17 +67,12 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/styles/utils';
 
-.team,
-.score {
-    @extend %align-middle;
+.header {
+    display: flex;
 }
 
 .team {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background-size: cover;
-    background-color: $bg-color-2;
+    flex: 1 1 100%;
 
     @include breakpoint(md) {
         width: 60px;
@@ -96,34 +82,47 @@ export default {
     @include breakpoint(xs) {
         display: none;
     }
+}
 
-    &.team-blue {
+.team-logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-size: cover;
+    background-color: $bg-color-2;
+
+    &.blue {
         background-image: url('~assets/img/team-blue.png');
     }
 
-    &.team-red {
+    &.red {
+        margin-left: auto;
         background-image: url('~assets/img/team-red.png');
     }
 }
 
 .score {
-    display: inline-block;
+    display: flex;
+    flex: 1 1 100%;
+    flex-wrap: wrap;
+    justify-content: center;
     text-transform: uppercase;
-    margin: 0 $m-space;
     line-height: 1.37;
-    @include breakpoint(md) {
-        margin: 0 $s-space;
-    }
 }
 
-.gamemode,
-.points {
-    display: block;
+.gamemode {
+    width: 100%;
 }
 
 .points {
     font-size: 48px;
     letter-spacing: 5px;
+
+    &:last-child:before {
+        content: '-';
+        padding: 0 5px;
+    }
+
     @include breakpoint(md) {
         font-size: 24px;
     }
@@ -156,11 +155,14 @@ export default {
 }
 
 .players {
-    &--blue {
+    flex: 1 1 100%;
+
+    &.blue {
         text-align: left;
     }
 
-    &--red {
+    &.red {
+        order: 1;
         text-align: right;
     }
 }

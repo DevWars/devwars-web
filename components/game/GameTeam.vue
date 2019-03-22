@@ -3,7 +3,7 @@
         <div class="header">
             <h3 v-if="team" class="team">{{ team.name }}</h3>
             <span v-if="winner" class="winner">Win</span>
-            <span v-if="points" class="points">{{ points }}</span>
+            <span v-if="points" class="points">{{ points ? points : 0 }}</span>
         </div>
 
         <div class="players">

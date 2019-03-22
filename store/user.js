@@ -72,8 +72,6 @@ export const actions = {
     async stats({ commit, state }) {
         try {
             const stats = await Http.for(`/users/${state.user.id}/stats`).get();
-            console.log('-------STATS', stats);
-
             commit('stats', stats);
         } catch (e) {
             commit('user', null);
