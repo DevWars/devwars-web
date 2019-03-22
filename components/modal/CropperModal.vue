@@ -19,7 +19,7 @@ export default {
     name: 'CropperModal',
     props: {
         'data': {
-            type: Object,
+            type: String,
             required: true,
         }, 
         'resolve': {
@@ -43,7 +43,6 @@ export default {
                     resolve(res);
                 }, 'image/jpeg');
             });
-
             this.close(data);
         },
     },

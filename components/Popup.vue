@@ -1,7 +1,9 @@
 <template>
     <div>
-        <slot name="trigger"></slot>
-        <div class="webui-popover-content">
+        <div  @click.prevent="showPopUp = !showPopUp">
+            <slot name="trigger"></slot>
+        </div>
+        <div  v-if="showPopUp" class="">
             <slot name="menu"></slot>
         </div>
     </div>
@@ -9,25 +11,12 @@
 
 
 <script>
-/* global $ */
-import jQuery from 'jquery';
-
 export default {
     name: 'Popup',
-    mounted() {
-        const el = this.$slots.trigger[0].elm;
-        const content = this.$slots.menu[0].elm;
-
-        $(content).click(() => {
-            $(el).webuiPopover('hide');
-        });
-
-        $(el).webuiPopover({
-            type: 'html',
-            content: jQuery(content),
-            placement: 'bottom',
-            animation: 'pop',
-        });
+    data: () => {
+        return {
+            showPopUp: false,
+        }
     },
 };
 </script>
@@ -35,31 +24,25 @@ export default {
 
 <style lang="scss">
 @import '../assets/styles/utils';
+// .webui-arrow:after {
+//     border-bottom-color: $bg-color-1 !important;
+// }
 
-.webui-popover {
-    padding: 0 !important;
-    border: none !important;
-}
+// .webui-popover-content {
+//     padding-right: $m-space !important;
+//     background-color: $bg-color-1;
 
-.webui-arrow:after {
-    border-bottom-color: $bg-color-1 !important;
-}
+//     a,
+//     button {
+//         display: block;
+//         margin: $xxs-space 0;
+//         text-transform: uppercase;
+//         font-size: $h6-font-size;
+//         color: $text-color-secondary;
 
-.webui-popover-content {
-    padding-right: $m-space !important;
-    background-color: $bg-color-1;
-
-    a,
-    button {
-        display: block;
-        margin: $xxs-space 0;
-        text-transform: uppercase;
-        font-size: $h6-font-size;
-        color: $text-color-secondary;
-
-        &:hover {
-            color: $text-color-primary;
-        }
-    }
-}
+//         &:hover {
+//             color: $text-color-primary;
+//         }
+//     }
+// }
 </style>

@@ -37,13 +37,15 @@
                 </ul>
 
                 <UserMenu v-else :user="user">
-                    <nuxt-link v-if="isAdmin" to="/mod/dashboard" class="btn-link">Modpanel</nuxt-link>
-                    <div v-if="isAdmin" class="divider"></div>
-                    <nuxt-link to="/dashboard" class="btn-link">Dashboard</nuxt-link>
-                    <nuxt-link to="/badges" class="btn-link">Badges</nuxt-link>
-                    <nuxt-link to="/settings/profile" class="btn-link">Settings</nuxt-link>
-                    <div class="divider"></div>
-                    <a class="btn-link" @click="logout">Logout</a>
+                    <template #default>
+                        <nuxt-link v-if="isAdmin" to="/mod/dashboard" class="btn-link">Modpanel</nuxt-link>
+                        <div v-if="isAdmin" class="divider"></div>
+                        <nuxt-link to="/dashboard" class="btn-link">Dashboard</nuxt-link>
+                        <nuxt-link to="/badges" class="btn-link">Badges</nuxt-link>
+                        <nuxt-link to="/settings/profile" class="btn-link">Settings</nuxt-link>
+                        <div class="divider"></div>
+                        <a class="btn-link" @click="logout">Logout</a>
+                    </template>
                 </UserMenu>
             </div>
         </div>

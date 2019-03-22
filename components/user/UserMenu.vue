@@ -1,13 +1,20 @@
 <template>
     <div v-if="user" class="user-menu">
         <Popup>
-            <div slot="trigger" class="user-group">
-                <Avatar v-if="user" :user="user" class="sm"/>
-                <div class="user-group__name">{{ user.username }}</div>
-            </div>
-            <div slot="menu" class="menu">
-                <slot></slot>
-            </div>
+             <template #trigger>
+                <div class="user-group">
+                    <Avatar v-if="user" :user="user" class="sm"/>
+                    <div class="user-group__name">{{ user.username }}</div>
+                </div>
+            </template>
+            <template #menu>
+                <div>
+                    <div class="arrow"></div>
+                    <div class="menu inner">
+                        <slot></slot>
+                    </div>
+                </div>
+            </template>
         </Popup>
     </div>
 </template>
@@ -36,9 +43,29 @@ export default {
 .user-menu {
     cursor: pointer;
     user-select: none;
+    position: relative;
+    // @include breakpoint(sm) {
+    //     display: block;
+    // }
 
-    @include breakpoint(sm) {
-        display: block;
+    .menu {
+        &.inner {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 9999;
+            min-width: 50px;
+            min-height: 32px;
+            padding: 1px;
+            text-align: left;
+            white-space: normal;
+            background-clip: padding-box;
+            border: 1px solid #ccc;
+            border: 1px solid rgba(0,0,0,.2);
+            border-radius: 6px;
+            -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            box-shadow: 0 5px 10px rgba(0,0,0,.2);
+        }
     }
 }
 
