@@ -7,11 +7,11 @@
                     <div class="user-group__name">{{ user.username }}</div>
                 </div>
             </template>
-            <template #menu>
+            <template #menu="{close}">
                 <div>
                     <div class="arrow"></div>
                     <div class="menu inner">
-                        <slot></slot>
+                        <slot :close="close"></slot>
                     </div>
                 </div>
             </template>

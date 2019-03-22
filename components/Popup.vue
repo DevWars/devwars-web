@@ -4,7 +4,7 @@
             <slot name="trigger"></slot>
         </div>
         <div  v-if="showPopUp" class="">
-            <slot name="menu"></slot>
+            <slot name="menu" :close="close"></slot>
         </div>
     </div>
 </template>
@@ -17,6 +17,11 @@ export default {
         return {
             showPopUp: false,
         }
+    },
+    methods: {
+        close() {
+            this.showPopUp = !this.showPopUp;
+        },
     },
 };
 </script>

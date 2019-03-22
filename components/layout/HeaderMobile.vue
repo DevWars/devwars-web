@@ -19,12 +19,15 @@
             </div>
 
             <UserMenu v-if="user" :user="user">
-                <template #default>
-                    <nuxt-link v-if="isAdmin" to="/mod/dashboard" class="btn-link">Modpanel</nuxt-link>
+                <template #default="{close}">
+                    <nuxt-link v-if="isAdmin"   
+                        to="/mod/dashboard"
+                         class="btn-link"
+                         @click.native="close">Modpanel</nuxt-link>
                     <div v-if="isAdmin" class="menu-divider"></div>
-                    <nuxt-link to="/dashboard" class="btn-link">Dashboard</nuxt-link>
-                    <nuxt-link to="/badges" class="btn-link">Badges</nuxt-link>
-                    <nuxt-link to="/settings/profile" class="btn-link">Settings</nuxt-link>
+                    <nuxt-link   to="/dashboard" class="btn-link" @click.native="close">Dashboard</nuxt-link>
+                    <nuxt-link   to="/badges" class="btn-link" @click.native="close">Badges</nuxt-link>
+                    <nuxt-link   to="/settings/profile" class="btn-link" @click.native="close">Settings</nuxt-link>
                     <div class="menu-divider"></div>
                     <a class="btn-link" @click="logout">Logout</a>
                 </template>
