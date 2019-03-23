@@ -1,6 +1,5 @@
 import Vue from 'vue';
 
-/* eslint-disable */
 Vue.directive('closable', {
     inserted (el, binding) {
         const {outSideFrom, handler} = binding.value;
@@ -16,13 +15,14 @@ Vue.directive('closable', {
             }
         }
 
-        topContainer.addEventListener("touch", binding.handler );
-        topContainer.addEventListener("click", binding.handler );
+        setTimeout(() => {
+            topContainer.addEventListener("touch", binding.handler );
+            topContainer.addEventListener("click", binding.handler );
+        }, 0)
     },
     unbind: (el, binding)  => {
-        console.log("asjkddhaskjdhajksdh")
-         document.body.removeEventListener("touch", binding.handler );
-         document.body.removeEventListener("click", binding.handler );
+        document.body.removeEventListener("touch", binding.handler );
+        document.body.removeEventListener("click", binding.handler );
     },
 })
 

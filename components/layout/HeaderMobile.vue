@@ -1,17 +1,17 @@
 <template>
-    <div>
-        <div class="header">
+    <div  v-closable="{handler: toggleMobileMenu, outSideFrom: ' .headerMobile'}">
+        <div class="headerMobile">
             <div class="head">
-                <nuxt-link to="/" class="logo">
+                <nuxt-link to="/" class="logo" @click.native="toggleMobileMenu">
                     <img src="~assets/img/logo.png" alt="DevWars">
                 </nuxt-link>
             </div>
 
-            <nuxt-link to="/" class="link btn-icon">Home</nuxt-link>
-            <nuxt-link to="/games" class="link btn-icon">Games</nuxt-link>
-            <nuxt-link to="/schedule" class="link btn-icon">Schedule</nuxt-link>
-            <nuxt-link to="/leaderboards" class="link btn-icon">Leaders</nuxt-link>
-            <nuxt-link to="/blog" class="link btn-icon">Blog</nuxt-link>
+            <nuxt-link to="/" class="link btn-icon" @click.native="toggleMobileMenu">Home</nuxt-link>
+            <nuxt-link to="/games" class="link btn-icon" @click.native="toggleMobileMenu">Games</nuxt-link>
+            <nuxt-link to="/schedule" class="link btn-icon" @click.native="toggleMobileMenu">Schedule</nuxt-link>
+            <nuxt-link to="/leaderboards" class="link btn-icon" @click.native="toggleMobileMenu">Leaders</nuxt-link>
+            <nuxt-link to="/blog" class="link btn-icon" @click.native="toggleMobileMenu">Blog</nuxt-link>
 
             <div v-if="!user" class="actions">
                 <nuxt-link to="/register" class="btn btn-primary btn-block">Register</nuxt-link>
@@ -51,6 +51,12 @@ import UserMenu from '~/components/user/UserMenu';
 export default {
     name: 'HeaderMobile',
     components: { UserMenu },
+    props: {
+        toggleMobileMenu: {
+            type: Function,
+            required: true,
+        },
+    },
     computed: {
         user() {
             return this.$store.state.user.user;
@@ -72,7 +78,7 @@ export default {
 @import 'utils.scss';
 $mobile-nav-width: 300px;
 
-.header {
+.headerMobile {
     height: 100%;
     width: $mobile-nav-width;
     padding: $grid-gutter-width 0;

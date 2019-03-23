@@ -62,7 +62,7 @@
         <!-- Mobile -->
         <HeaderMobile
             v-if="toggleMobileMenuVal"
-            v-closable="{handler: toggleMobileMenu, outSideFrom: ' .header'}"
+            :toggleMobileMenu="toggleMobileMenu"
         />
     </div>
 </template>
