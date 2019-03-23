@@ -1,7 +1,7 @@
 <template>
     <div v-if="user" class="user-menu">
         <Popup>
-             <template #trigger>
+            <template #trigger>
                 <div class="user-group">
                     <Avatar v-if="user" :user="user" class="sm"/>
                     <div class="user-group__name">{{ user.username }}</div>
@@ -28,7 +28,7 @@ export default {
     name: 'UserMenu',
     components: { Popup, Avatar },
     props: {
-        'user': {
+        user: {
             type: Object,
             required: true,
         },
@@ -38,7 +38,7 @@ export default {
 
 
 <style lang="scss" scoped>
-@import '../../assets/styles/utils';
+@import 'utils.scss';
 
 .user-menu {
     cursor: pointer;
@@ -61,10 +61,10 @@ export default {
             white-space: normal;
             background-clip: padding-box;
             border: 1px solid #ccc;
-            border: 1px solid rgba(0,0,0,.2);
+            border: 1px solid rgba(0, 0, 0, 0.2);
             border-radius: 6px;
-            -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-            box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
         }
     }
 }

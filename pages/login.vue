@@ -51,7 +51,7 @@ export default {
 
 
 <style lang="scss" scoped>
-@import '../assets/styles/utils';
+@import 'utils.scss';
 
 .Login {
     padding-top: $l-space;

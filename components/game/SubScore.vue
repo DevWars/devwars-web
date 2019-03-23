@@ -35,7 +35,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/styles/utils';
+@import 'utils.scss';
 
 .section {
     padding: 0 $s-space;

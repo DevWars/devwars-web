@@ -13,7 +13,7 @@ export default {
     name: 'User',
     components: { Avatar },
     props: {
-        'user': {
+        user: {
             type: Object,
             required: true,
         },
@@ -23,7 +23,7 @@ export default {
 
 
 <style lang="scss" scoped>
-@import '../../assets/styles/utils';
+@import 'utils.scss';
 
 .User {
     display: flex;

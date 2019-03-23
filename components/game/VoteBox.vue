@@ -85,7 +85,7 @@ export default {
 
 
 <style lang="scss" scoped>
-@import '../../assets/styles/utils';
+@import 'utils.scss';
 $voting-bar-height: 20px;
 
 .voting {

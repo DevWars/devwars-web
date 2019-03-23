@@ -64,7 +64,7 @@ export default {
 
 
 <style lang="scss" scoped>
-@import '../assets/styles/utils';
+@import 'utils.scss';
 
 .dashboard {
     padding-top: $header-offset + $grid-gutter-width;

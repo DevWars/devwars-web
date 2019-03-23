@@ -40,7 +40,7 @@ export default {
 
 
 <style lang="scss" scoped>
-@import '../../assets/styles/utils';
+@import 'utils.scss';
 
 .PanelHeader {
     @extend %flex-justify;

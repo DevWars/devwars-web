@@ -31,7 +31,7 @@ export default {
     name: 'Activities',
     components: { DashboardCard },
     props: {
-        'paged': {
+        paged: {
             type: Array,
             required: true,
         },
@@ -41,7 +41,7 @@ export default {
 
 
 <style lang="scss" scoped>
-@import '../../assets/styles/utils';
+@import 'utils.scss';
 
 .activity-history {
     @extend %list-unstyled;

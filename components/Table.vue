@@ -13,13 +13,13 @@
 
 <script>
 export default {
-    name: "Table",
-}
+    name: 'Table',
+};
 </script>
 
 
 <style lang="scss" scoped>
-@import '../assets/styles/utils';
+@import 'utils.scss';
 
 .Table {
     width: 100%;
@@ -70,7 +70,8 @@ export default {
         white-space: nowrap;
     }
 
-    th, td {
+    th,
+    td {
         &:first-child {
             padding-left: 30px;
             font-weight: $font-weight-bold;

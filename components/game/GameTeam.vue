@@ -35,7 +35,7 @@ export default {
 
 
 <style lang="scss" scoped>
-@import '../../assets/styles/utils.scss';
+@import 'utils.scss';
 
 .GameTeam {
     .Player {

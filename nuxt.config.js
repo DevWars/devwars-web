@@ -1,3 +1,4 @@
+const path = require('path');
 const webpack = require('webpack');
 const parser = require('body-parser');
 
@@ -18,8 +19,8 @@ module.exports = {
                 hid: 'description',
                 name: 'description',
                 content:
-                    'DevWars is a live game show where web developers compete against each other in 60  ' + 
-                    'minute coding challenges. Join our educational and entertaining platform of experienced ' + 
+                    'DevWars is a live game show where web developers compete against each other in 60  ' +
+                    'minute coding challenges. Join our educational and entertaining platform of experienced ' +
                     'and aspiring members.',
             },
             {
@@ -31,8 +32,8 @@ module.exports = {
             {
                 name: 'og:description',
                 content:
-                    'DevWars is a live game show where web developers compete against each other in 60 ' + 
-                    'minute coding challenges. Join our educational and entertaining platform of experienced'+ 
+                    'DevWars is a live game show where web developers compete against each other in 60 ' +
+                    'minute coding challenges. Join our educational and entertaining platform of experienced' +
                     ' and aspiring members.',
             },
         ],
@@ -103,20 +104,17 @@ module.exports = {
      ** Build configuration
      */
     build: {
-        plugins: [
-            // i think we can delete that
-            // new webpack.ProvidePlugin({
-            //     Popper: 'popper.js',
-            // }),
-            new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-        ],
+        plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
         babel: {
             presets() {
                 return [
-                    [ "@nuxt/babel-preset-app", {
-                        useBuiltIns: "entry",
-                    } ],
-                ]
+                    [
+                        '@nuxt/babel-preset-app',
+                        {
+                            useBuiltIns: 'entry',
+                        },
+                    ],
+                ];
             },
         },
         extend(config, ctx) {
@@ -129,6 +127,10 @@ module.exports = {
                     exclude: /(node_modules)/,
                 });
             }
+
+            config.resolve.alias['utils.scss$'] = path.resolve(
+                'assets/styles/utils.scss'
+            );
         },
     },
     watchers: {

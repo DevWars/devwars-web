@@ -21,7 +21,7 @@ export default {
 
 
 <style lang="scss" scoped>
-@import '../assets/styles/utils';
+@import 'utils.scss';
 
 .ModPanel {
     height: calc(100vh - #{$header-height});

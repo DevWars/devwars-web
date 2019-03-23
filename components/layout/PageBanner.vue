@@ -26,22 +26,22 @@
 
 <script>
 export default {
-    name: "PageBanner",
+    name: 'PageBanner',
     props: {
-        'title': {
+        title: {
             type: String,
             default: '',
         },
-        'type': {
+        type: {
             type: String,
             default: '',
         },
     },
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/styles/utils';
+@import 'utils.scss';
 
 $banner-height: 300px;
 $banner-bg: #0c0a27;

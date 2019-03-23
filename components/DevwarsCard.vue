@@ -15,29 +15,28 @@
 
 <script>
 export default {
-    name: "DevwarsCard",
+    name: 'DevwarsCard',
     props: {
-        'title': {
+        title: {
             type: String,
             default: '',
-        }, 
-        'desc': {
+        },
+        desc: {
             type: String,
             default: '',
-        }, 
+        },
     },
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/styles/utils';
+@import 'utils.scss';
 
 .DevwarsCard {
     max-width: 400px;
     border-width: $border-size;
     border-style: solid;
-    border-image:
-        linear-gradient(
+    border-image: linear-gradient(
             110deg,
             $brand-primary 0%,
             $brand-primary 47%,
@@ -45,7 +44,8 @@ export default {
             $bg-color-4 53%,
             $brand-secondary 53%,
             $brand-secondary 100%
-        ) 1;
+        )
+        1;
     padding: $m-space $ms-space $ms-space;
     margin: 0 auto;
     text-align: center;
@@ -62,7 +62,7 @@ export default {
     }
 
     .main {
-       padding-top: $grid-gutter-part;
+        padding-top: $grid-gutter-part;
     }
 
     .actions {

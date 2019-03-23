@@ -12,30 +12,30 @@
 
 <script>
 export default {
-    name: "Progress",
+    name: 'Progress',
     props: {
-        'progress': {
-            type: String,
-            required: true,
-        }, 
-        'title': {
+        progress: {
             type: String,
             required: true,
         },
-        'meta': {
+        title: {
+            type: String,
+            required: true,
+        },
+        meta: {
             type: String,
             default: '',
-        }, 
-        'color': {
+        },
+        color: {
             type: String,
             default: '',
-        }, 
+        },
     },
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/styles/utils';
+@import 'utils.scss';
 
 .progress {
     width: 100%;
@@ -49,9 +49,15 @@ export default {
     background-color: #fff;
     transition: all 0.4s cubic-bezier(0, 0.5, 0.35, 1.4);
 
-    &.primary{ background-color: $brand-primary; }
-    &.secondary{ background-color: $brand-secondary; }
-    &.yellow{ background-color: $yellow-color; }
+    &.primary {
+        background-color: $brand-primary;
+    }
+    &.secondary {
+        background-color: $brand-secondary;
+    }
+    &.yellow {
+        background-color: $yellow-color;
+    }
 }
 
 .progress-header {

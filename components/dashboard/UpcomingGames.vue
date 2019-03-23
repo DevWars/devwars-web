@@ -5,10 +5,10 @@
             <div slot="game" slot-scope="props" class="item">
                 <div class="main">
                     <div class="col-xs-2 no-gutter" :class="[props.color]">{{ props.text }}</div>
-                    <div
-                        class="col-xs-8 no-gutter"
-                    >{{ props.game.startTime | moment('longDate') }} @ {{ props.game.startTime | moment('HH:mm') }} 
-                    (UTC)</div>
+                    <div class="col-xs-8 no-gutter">
+                        {{ props.game.startTime | moment('longDate') }} @ {{ props.game.startTime | moment('HH:mm') }}
+                        (UTC)
+                    </div>
                 </div>
                 <div class="actions">
                     <button
@@ -33,11 +33,11 @@ export default {
     name: 'UpcomingGames',
     components: { Applications, DashboardCard },
     props: {
-        'upcoming': {
+        upcoming: {
             type: Array,
             required: true,
-        }, 
-        'applied': {
+        },
+        applied: {
             type: Array,
             required: true,
         },
@@ -52,7 +52,7 @@ export default {
 
 
 <style lang="scss" scoped>
-@import '../../assets/styles/utils';
+@import 'utils.scss';
 
 .item {
     @extend %flex-justify;

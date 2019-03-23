@@ -19,15 +19,15 @@
 export default {
     name: 'Pagination',
     props: {
-        'page': {
+        page: {
             type: Number,
             required: true,
         },
-        'perPage': {
+        perPage: {
             type: Number,
             required: true,
         },
-        'count': {
+        count: {
             type: Number,
             required: true,
         },
@@ -46,7 +46,7 @@ export default {
 
 
 <style lang="scss" scoped>
-@import '../assets/styles/utils';
+@import 'utils.scss';
 
 .Pagination {
     display: flex;

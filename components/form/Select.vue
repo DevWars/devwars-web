@@ -17,15 +17,15 @@
 export default {
     name: 'Select',
     props: {
-        'type': {
+        type: {
             type: String,
             required: true,
         },
-        'value': {
+        value: {
             type: String,
             required: true,
         },
-        'label': {
+        label: {
             type: String,
             required: true,
         },
@@ -40,7 +40,7 @@ export default {
 
 
 <style lang="scss" scoped>
-@import '../../assets/styles/utils';
+@import 'utils.scss';
 
 .select-container {
     font-family: $alt-font-face;

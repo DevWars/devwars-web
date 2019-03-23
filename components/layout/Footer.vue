@@ -99,7 +99,7 @@ export default {
 
 
 <style lang="scss" scoped>
-@import '../../assets/styles/utils';
+@import 'utils.scss';
 
 .footer {
     background-color: $bg-color-4;

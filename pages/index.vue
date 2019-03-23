@@ -201,9 +201,9 @@ export default {
 
 
 <style lang="scss" scoped>
-@import '../assets/styles/utils';
+@import 'utils.scss';
 
-$home-card-margin: $l-space;
+$home-card-margin: 80px;
 
 .hero {
     height: 500px;
@@ -232,8 +232,8 @@ $home-card-margin: $l-space;
         }
 
         @include breakpoint(xs) {
-            padding-top: $ms-space;
-            padding-bottom: ($ms-space + $home-card-margin);
+            padding-top: 60px;
+            padding-bottom: (60px + $home-card-margin);
         }
     }
 
@@ -245,7 +245,7 @@ $home-card-margin: $l-space;
 
     &__title {
         font-size: 42px;
-        margin-bottom: $xs-space;
+        margin-bottom: 10px;
 
         @include breakpoint(sm) {
             font-size: $h1-font-size;
@@ -259,7 +259,7 @@ $home-card-margin: $l-space;
     }
 
     &__btn {
-        margin: 0 $xs-space;
+        margin: 0 10px;
 
         @include breakpoint(sm) {
             width: auto;
@@ -301,7 +301,7 @@ $home-card-margin: $l-space;
 
 .home-display {
     @extend %clear;
-    padding: $ms-space 0;
+    padding: 60px 0;
     background-size: cover;
     background-position: top;
 

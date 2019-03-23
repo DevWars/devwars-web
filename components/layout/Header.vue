@@ -38,13 +38,20 @@
 
                 <UserMenu v-else :user="user">
                     <template #default="{close}">
-                        <nuxt-link v-if="isAdmin"
-                            to="/mod/dashboard" 
-                            class="btn-link" @click.native="close">Modpanel</nuxt-link>
+                        <nuxt-link
+                            v-if="isAdmin"
+                            to="/mod/dashboard"
+                            class="btn-link"
+                            @click.native="close"
+                        >Modpanel</nuxt-link>
                         <div v-if="isAdmin" class="divider"></div>
                         <nuxt-link to="/dashboard" class="btn-link" @click.native="close">Dashboard</nuxt-link>
                         <nuxt-link to="/badges" class="btn-link" @click.native="close">Badges</nuxt-link>
-                        <nuxt-link to="/settings/profile"  class="btn-link" @click.native="close">Settings</nuxt-link>
+                        <nuxt-link
+                            to="/settings/profile"
+                            class="btn-link"
+                            @click.native="close"
+                        >Settings</nuxt-link>
                         <div class="divider"></div>
                         <a class="btn-link" @click="logout">Logout</a>
                     </template>
@@ -53,7 +60,10 @@
         </div>
 
         <!-- Mobile -->
-        <HeaderMobile v-if="toggleMobileMenuVal" v-closable="{handler: toggleMobileMenu, outSideFrom: ' .header'}"/>
+        <HeaderMobile
+            v-if="toggleMobileMenuVal"
+            v-closable="{handler: toggleMobileMenu, outSideFrom: ' .header'}"
+        />
     </div>
 </template>
 
@@ -84,7 +94,7 @@ export default {
             this.$store.dispatch('user/logout');
         },
         toggleMobileMenu() {
-            this.toggleMobileMenuVal = ! this.toggleMobileMenuVal;
+            this.toggleMobileMenuVal = !this.toggleMobileMenuVal;
         },
     },
 };
@@ -92,7 +102,7 @@ export default {
 
 
 <style lang="scss" scoped>
-@import '../../assets/styles/utils';
+@import 'utils.scss';
 
 .header {
     height: $header-height;

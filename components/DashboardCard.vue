@@ -18,11 +18,11 @@ export default {
     name: 'DashboardCard',
     components: { Card },
     props: {
-        'title': {
+        title: {
             type: String,
             default: '',
-        }, 
-        'icon': {
+        },
+        icon: {
             type: String,
             default: '',
         },
@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/styles/utils';
+@import 'utils.scss';
 
 .header {
     background-color: lighten($bg-color-2, 4%);

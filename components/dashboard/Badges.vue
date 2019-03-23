@@ -26,7 +26,7 @@ export default {
     name: 'DashboardBadges',
     components: { DashboardCard, Progress },
     props: {
-        'owned': {
+        owned: {
             type: Object,
             required: true,
         },
@@ -41,7 +41,7 @@ export default {
 
 
 <style lang="scss" scoped>
-@import '../../assets/styles/utils';
+@import 'utils.scss';
 
 .dashboard-badges {
     padding: $grid-gutter-width;

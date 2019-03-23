@@ -9,12 +9,8 @@
                 <th></th>
             </tr>
             <!-- eslint-disable -->
-            <tr
-                v-for="game in games"
-                v-if="filter ? (filter === game.name) : true"
-                :key="game.id"
-            >
-            <!-- eslint-enable -->
+            <tr v-for="game in games" v-if="filter ? (filter === game.name) : true" :key="game.id">
+                <!-- eslint-enable -->
                 <td>
                     <div class="dow">{{ game.startTime | moment('dddd') }}</div>
                     <h4 class="date">{{ game.startTime | moment('MMMM D') }}</h4>
@@ -97,7 +93,7 @@ export default {
 
 
 <style lang="scss" scoped>
-@import '../../assets/styles/utils';
+@import 'utils.scss';
 
 .dow {
     text-transform: uppercase;

@@ -54,7 +54,7 @@ export default {
     },
     methods: {
         reset() {
-            const {key} = this.$route.query;
+            const { key } = this.$route.query;
 
             this.$store.dispatch('user/resetByKey', {
                 key,
@@ -69,7 +69,7 @@ export default {
 
 
 <style lang="scss" scoped>
-@import '../assets/styles/utils';
+@import 'utils.scss';
 
 .ResetPassword {
     padding-top: $l-space;

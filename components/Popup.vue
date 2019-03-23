@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div  @click.prevent="showPopUp = !showPopUp">
+        <div @click.prevent="showPopUp = !showPopUp">
             <slot name="trigger"></slot>
         </div>
-        <div  v-if="showPopUp" class="">
+        <div v-if="showPopUp" class>
             <slot name="menu" :close="close"></slot>
         </div>
     </div>
@@ -16,7 +16,7 @@ export default {
     data: () => {
         return {
             showPopUp: false,
-        }
+        };
     },
     methods: {
         close() {
@@ -28,7 +28,7 @@ export default {
 
 
 <style lang="scss">
-@import '../assets/styles/utils';
+@import 'utils.scss';
 // .webui-arrow:after {
 //     border-bottom-color: $bg-color-1 !important;
 // }

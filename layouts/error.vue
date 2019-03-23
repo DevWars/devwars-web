@@ -22,9 +22,8 @@
                         <h1>500</h1>
                         <h2>It's not you, It's us.</h2>
                         <p>
-                            This page is experiencing internal server issues <span class="font-size-sm">
-                                (blame Terence)
-                            </span>
+                            This page is experiencing internal server issues
+                            <span class="font-size-sm">(blame Terence)</span>
                         </p>
                         <nuxt-link to="/" class="btn btn-outline-primary btn-lg">Go to home</nuxt-link>
                     </div>
@@ -47,9 +46,9 @@
 
 <script>
 export default {
-    name: "Error",
+    name: 'Error',
     props: {
-        'error': {
+        error: {
             type: Object,
             required: true,
         },
@@ -58,11 +57,11 @@ export default {
     mounted() {
         console.log(this.error);
     },
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/styles/utils';
+@import 'utils.scss';
 
 .page {
     padding: $l-space 0 $xl-space;

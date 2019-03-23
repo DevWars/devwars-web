@@ -20,14 +20,20 @@
 
             <UserMenu v-if="user" :user="user">
                 <template #default="{close}">
-                    <nuxt-link v-if="isAdmin"   
+                    <nuxt-link
+                        v-if="isAdmin"
                         to="/mod/dashboard"
-                         class="btn-link"
-                         @click.native="close">Modpanel</nuxt-link>
+                        class="btn-link"
+                        @click.native="close"
+                    >Modpanel</nuxt-link>
                     <div v-if="isAdmin" class="menu-divider"></div>
-                    <nuxt-link   to="/dashboard" class="btn-link" @click.native="close">Dashboard</nuxt-link>
-                    <nuxt-link   to="/badges" class="btn-link" @click.native="close">Badges</nuxt-link>
-                    <nuxt-link   to="/settings/profile" class="btn-link" @click.native="close">Settings</nuxt-link>
+                    <nuxt-link to="/dashboard" class="btn-link" @click.native="close">Dashboard</nuxt-link>
+                    <nuxt-link to="/badges" class="btn-link" @click.native="close">Badges</nuxt-link>
+                    <nuxt-link
+                        to="/settings/profile"
+                        class="btn-link"
+                        @click.native="close"
+                    >Settings</nuxt-link>
                     <div class="menu-divider"></div>
                     <a class="btn-link" @click="logout">Logout</a>
                 </template>
@@ -63,7 +69,7 @@ export default {
 
 
 <style lang="scss" scoped>
-@import '../../assets/styles/utils';
+@import 'utils.scss';
 $mobile-nav-width: 300px;
 
 .header {
