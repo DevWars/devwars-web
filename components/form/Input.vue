@@ -12,11 +12,11 @@
 export default {
     name: 'Input',
     props: {
-        'type': {
+        type: {
             type: String,
             default: '',
-        }, 
-        'value': {
+        },
+        value: {
             type: String,
             default: '',
         },

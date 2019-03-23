@@ -29,3 +29,11 @@ export default {
     components: { PageBanner },
 };
 </script>
+
+
+<style lang="scss" scoped>
+/deep/ h3 {
+    margin-bottom: 30px;
+}
+</style>
+

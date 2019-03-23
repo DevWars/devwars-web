@@ -71,6 +71,10 @@ export default {
             margin-bottom: $m-space;
             font-weight: $font-weight-regular;
         }
+
+        .points {
+            display: none;
+        }
     }
 }
 

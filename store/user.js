@@ -131,7 +131,8 @@ export const actions = {
 
     async settings({ commit, dispatch, state }, data) {
         try {
-            const user = await Http.for(`users/${state.user.id}/settings`).post(
+            const user = await this.$axios.put(
+                `users/${state.user.id}/profile`,
                 data
             );
 
@@ -208,7 +209,7 @@ export const actions = {
 
         await Http.axios({
             url: `/users/${state.user.id}/avatar`,
-            method: 'POST',
+            method: 'PUT',
             data: formData,
             noTransform: true,
         });

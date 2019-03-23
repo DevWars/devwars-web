@@ -1,6 +1,10 @@
 <template>
-    <div class="row">
+    <div v-if="user" class="row">
         <div class="col-sm-8">
+            <div class="form-group">
+                <Input v-model="user.username"/>
+                <label>Username</label>
+            </div>
             <h3 class="modpanel__subtitle">Email</h3>
             <div class="form-group">
                 <Input v-model="emailCurrentPassword" type="password" required/>
