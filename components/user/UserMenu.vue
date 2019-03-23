@@ -1,16 +1,13 @@
 <template>
-    <div v-if="user" class="user-menu">
+    <div v-if="user" class="UserMenu">
         <Popup>
             <template #trigger>
-                <div class="user-group">
-                    <Avatar v-if="user" :user="user" class="sm"/>
-                    <div class="user-group__name">{{ user.username }}</div>
-                </div>
+                <User size="sm" :user="user"/>
             </template>
             <template #menu="{close}">
                 <div>
                     <div class="arrow"></div>
-                    <div class="menu inner">
+                    <div class="menu">
                         <slot :close="close"></slot>
                     </div>
                 </div>
@@ -22,11 +19,11 @@
 
 <script>
 import Popup from '~/components/Popup';
-import Avatar from '~/components/user/Avatar';
+import User from '~/components/user/User';
 
 export default {
     name: 'UserMenu',
-    components: { Popup, Avatar },
+    components: { Popup, User },
     props: {
         user: {
             type: Object,
@@ -40,58 +37,54 @@ export default {
 <style lang="scss" scoped>
 @import 'utils.scss';
 
-.user-menu {
+.UserMenu {
     cursor: pointer;
     user-select: none;
     position: relative;
-    // @include breakpoint(sm) {
-    //     display: block;
-    // }
 
     .menu {
-        &.inner {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 0;
+        z-index: $zindex-popover;
+        min-width: 120px;
+        padding: 10px 15px;
+        background-color: $bg-color-2;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+
+        &:before {
+            content: '';
             position: absolute;
-            top: 100%;
-            left: 0;
-            z-index: 9999;
-            min-width: 50px;
-            min-height: 32px;
-            padding: 1px;
-            text-align: left;
-            white-space: normal;
-            background-clip: padding-box;
-            border: 1px solid #ccc;
-            border: 1px solid rgba(0, 0, 0, 0.2);
-            border-radius: 6px;
-            -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            left: 50%;
+            bottom: 100%;
+            display: block;
+            width: 0;
+            height: 0;
+            border-color: transparent;
+            border-style: solid;
+            border-width: 10px;
+            border-bottom-color: $bg-color-2;
+            transform: translateX(-50%);
         }
     }
 }
 
-.user-group {
-    .user-avatar,
-    &__name {
-        @extend %align-middle;
+.menu /deep/ {
+    .divider {
+        border-top: 1px solid $divider-color;
+        margin: $xxs-space 0;
     }
 
-    &__name {
-        margin-left: $xs-space;
-        margin-right: $xs-space;
-        font-weight: $font-weight-bold;
-        line-height: 1;
-    }
-
-    &__meta {
+    a,
+    button {
         display: block;
-        margin-top: $xxxs-space;
-        font-size: $h6-font-size;
-        color: $p-color;
-    }
-}
+        width: 100%;
+        color: $text-color-secondary;
+        text-align: left;
 
-.menu /deep/ > .divider {
-    border-top: 1px solid $divider-color;
-    margin: $xxs-space 0;
+        &:hover {
+            color: $text-color-primary;
+        }
+    }
 }
 </style>

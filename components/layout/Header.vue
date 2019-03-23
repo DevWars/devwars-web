@@ -53,7 +53,7 @@
                             @click.native="close"
                         >Settings</nuxt-link>
                         <div class="divider"></div>
-                        <a class="btn-link" @click="logout">Logout</a>
+                        <button class="btn-link" @click="logout">Logout</button>
                     </template>
                 </UserMenu>
             </div>
