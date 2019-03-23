@@ -14,7 +14,7 @@ export default {
     props: {
         type: {
             type: String,
-            default: '',
+            default: 'text',
         },
         value: {
             type: String,
