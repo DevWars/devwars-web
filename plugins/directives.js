@@ -1,5 +1,21 @@
 import Vue from 'vue';
 
+Vue.directive('closable', {
+    bind (el, binding) {
+        const {outSideFrom, handler} = binding.value;
+        const container = el.querySelector(outSideFrom)  || el;
+
+        binding.handler = e => !container.contains(e.target)  ?   handler() : "";
+        
+        el.addEventListener("touch", binding.handler );
+        el.addEventListener("click", binding.handler );
+    },
+    unbind: (el, binding)  => {
+        el.removeEventListener("touch", binding.handler );
+        el.removeEventListener("click", binding.handler );
+    },
+})
+
 Vue.directive('asyncClick', {
     bind(el, binding) {
         const func = binding.value[0];

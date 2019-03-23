@@ -53,7 +53,7 @@
         </div>
 
         <!-- Mobile -->
-        <HeaderMobile ref="mobileHeader"/>
+        <HeaderMobile v-if="toggleMobileMenuVal" v-closable="{handler: toggleMobileMenu, outSideFrom: ' .header'}"/>
     </div>
 </template>
 
@@ -68,6 +68,7 @@ export default {
     data: () => {
         return {
             isMobile: false,
+            toggleMobileMenuVal: false,
         };
     },
     computed: {
@@ -83,7 +84,7 @@ export default {
             this.$store.dispatch('user/logout');
         },
         toggleMobileMenu() {
-            this.$refs.mobileHeader.toggleMenu();
+            this.toggleMobileMenuVal = ! this.toggleMobileMenuVal;
         },
     },
 };
