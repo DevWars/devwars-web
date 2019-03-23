@@ -1,6 +1,6 @@
 <template>
     <div class="User">
-        <Avatar :user="user"/>
+        <Avatar :user="user" :class="size"/>
         <strong class="username">{{ user.username }}</strong>
     </div>
 </template>
@@ -16,6 +16,11 @@ export default {
         user: {
             type: Object,
             required: true,
+        },
+        size: {
+            type: String,
+            required: false,
+            default: 'md',
         },
     },
 };
