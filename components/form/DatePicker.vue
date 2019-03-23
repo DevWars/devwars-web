@@ -1,7 +1,6 @@
 <template>
     <FlatPickr
         ref="pickr"
-        v-click-outside="closePicker"
         :class="['form-control', {empty: !value || !value.length}, {valid: value && value.length }]"
         :value="value"
         :config="config"
@@ -12,12 +11,10 @@
 
 <script>
 import FlatPickr from 'vue-flatpickr-component';
-import ClickOutside from 'vue-click-outside';
 
 export default {
     name: 'DatePicker',
     components: { FlatPickr },
-    directives: { ClickOutside },
     props: {
         'value': {
             type: String,
@@ -38,9 +35,10 @@ export default {
         onChange(e) {
             this.$emit('input', e);
         },
-        closePicker() {
-            this.$refs.pickr.fp.close();
-        },
+        // i comment that but the close  for click outside should be on FlatPickr
+        // closePicker() {
+        //     this.$refs.pickr.fp.close();
+        // },
     },
 };
 </script>

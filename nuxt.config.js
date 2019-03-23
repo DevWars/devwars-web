@@ -77,7 +77,6 @@ module.exports = {
 
     css: [
         '~assets/scss/main.scss',
-        'webui-popover/src/jquery.webui-popover.css',
         'cropperjs/dist/cropper.css',
         'flatpickr/dist/flatpickr.css',
         'vue-js-modal/dist/styles.css',
@@ -85,11 +84,11 @@ module.exports = {
 
     plugins: [
         { src: '~plugins/ga.js', ssr: false },
-        { src: '~/plugins/popover', ssr: false },
         { src: '~/plugins/send-back', ssr: false },
         '~/plugins/directives',
         '~/plugins/axios',
         '~/plugins/filters',
+        '~/plugins/mixins',
         '~/plugins/modal',
     ],
 
@@ -105,10 +104,10 @@ module.exports = {
      */
     build: {
         plugins: [
-            new webpack.ProvidePlugin({
-                $: 'jquery',
-                Popper: 'popper.js',
-            }),
+            // i think we can delete that
+            // new webpack.ProvidePlugin({
+            //     Popper: 'popper.js',
+            // }),
             new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         ],
         babel: {

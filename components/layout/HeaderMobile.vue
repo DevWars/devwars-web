@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="isVisible" v-click-outside="toggleMenu" class="header">
+        <div class="header">
             <div class="head">
                 <nuxt-link to="/" class="logo">
                     <img src="~assets/img/logo.png" alt="DevWars">
@@ -19,34 +19,32 @@
             </div>
 
             <UserMenu v-if="user" :user="user">
-                <nuxt-link v-if="isAdmin" to="/mod/dashboard" class="btn-link">Modpanel</nuxt-link>
-                <div v-if="isAdmin" class="menu-divider"></div>
-                <nuxt-link to="/dashboard" class="btn-link">Dashboard</nuxt-link>
-                <nuxt-link to="/badges" class="btn-link">Badges</nuxt-link>
-                <nuxt-link to="/settings/profile" class="btn-link">Settings</nuxt-link>
-                <div class="menu-divider"></div>
-                <a class="btn-link" @click="logout">Logout</a>
+                <template #default="{close}">
+                    <nuxt-link v-if="isAdmin"   
+                        to="/mod/dashboard"
+                         class="btn-link"
+                         @click.native="close">Modpanel</nuxt-link>
+                    <div v-if="isAdmin" class="menu-divider"></div>
+                    <nuxt-link   to="/dashboard" class="btn-link" @click.native="close">Dashboard</nuxt-link>
+                    <nuxt-link   to="/badges" class="btn-link" @click.native="close">Badges</nuxt-link>
+                    <nuxt-link   to="/settings/profile" class="btn-link" @click.native="close">Settings</nuxt-link>
+                    <div class="menu-divider"></div>
+                    <a class="btn-link" @click="logout">Logout</a>
+                </template>
             </UserMenu>
         </div>
 
-        <div v-if="isVisible" class="overlay"></div>
+        <div class="overlay"></div>
     </div>
 </template>
 
 
 <script>
-import ClickOutside from 'vue-click-outside';
 import UserMenu from '~/components/user/UserMenu';
 
 export default {
     name: 'HeaderMobile',
     components: { UserMenu },
-    directives: { ClickOutside },
-    data: () => {
-        return {
-            isVisible: false,
-        };
-    },
     computed: {
         user() {
             return this.$store.state.user.user;
@@ -56,9 +54,6 @@ export default {
         },
     },
     methods: {
-        toggleMenu() {
-            this.isVisible = !this.isVisible;
-        },
         logout() {
             this.$store.dispatch('user/logout');
         },
