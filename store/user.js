@@ -20,7 +20,11 @@ export const mutations = {
     },
 
     profile(state, profile) {
-        state.profile = profile;
+        state.profile = profile
+    },
+
+    profileUpdate(state, {key, values}) {
+        state.profile[key] = values;
     },
 
     stats(state, stats) {
@@ -62,7 +66,6 @@ export const actions = {
             const profile = await Http.for(
                 `/users/${state.user.id}/profile`
             ).get();
-
             commit('profile', profile);
         } catch (e) {
             commit('user', null);
@@ -129,11 +132,11 @@ export const actions = {
         commit('user', null);
     },
 
-    async settings({ commit, dispatch, state }, data) {
+    async settings({ commit, dispatch, state }) {
         try {
             const user = await this.$axios.put(
                 `users/${state.user.id}/profile`,
-                data
+                state.profile
             );
 
             commit('user', user);

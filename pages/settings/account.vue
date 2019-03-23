@@ -59,6 +59,11 @@ export default {
             newEmail: '',
         };
     },
+    computed: {
+        user() {
+            return this.$store.state.user.user;
+        },
+    },
     methods: {
         async changeEmail() {
             await this.$store.dispatch('user/email', {
