@@ -3,7 +3,7 @@
         <div @click.prevent="showPopUp = !showPopUp">
             <slot name="trigger"></slot>
         </div>
-        <div v-if="showPopUp" class>
+        <div v-if="showPopUp"  v-closable="{handler: close, outSideFrom: '.UserMenu'}" class="popupClass">
             <slot name="menu" :close="close"></slot>
         </div>
     </div>

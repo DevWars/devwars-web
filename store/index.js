@@ -21,4 +21,5 @@ export const actions = {
     },
 };
 
+// export const strict = process.env.NODE_ENV = "development";
 export const strict = false;

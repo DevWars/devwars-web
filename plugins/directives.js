@@ -1,18 +1,28 @@
 import Vue from 'vue';
 
 Vue.directive('closable', {
-    bind (el, binding) {
+    inserted (el, binding) {
         const {outSideFrom, handler} = binding.value;
-        const container = el.querySelector(outSideFrom)  || el;
+        const topContainer = document.body;
+        const container = outSideFrom ? document.querySelector(outSideFrom) : el;
 
-        binding.handler = e => !container.contains(e.target)  ?   handler() : "";
-        
-        el.addEventListener("touch", binding.handler );
-        el.addEventListener("click", binding.handler );
+        binding.handler = e => {
+            e.stopPropagation();
+            if (!container.contains(e.target)) {
+                document.body.removeEventListener("touch", binding.handler );
+                document.body.removeEventListener("click", binding.handler );
+                handler();
+            }
+        }
+
+        setTimeout(() => {
+            topContainer.addEventListener("touch", binding.handler );
+            topContainer.addEventListener("click", binding.handler );
+        }, 0)
     },
     unbind: (el, binding)  => {
-        el.removeEventListener("touch", binding.handler );
-        el.removeEventListener("click", binding.handler );
+        document.body.removeEventListener("touch", binding.handler );
+        document.body.removeEventListener("click", binding.handler );
     },
 })
 
