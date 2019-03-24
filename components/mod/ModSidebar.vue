@@ -18,6 +18,11 @@
                 </nuxt-link>
             </li>
             <li>
+                <nuxt-link to="/mod/schedules">
+                    <i class="fa fa-calendar"></i>Schedules
+                </nuxt-link>
+            </li>
+            <li>
                 <nuxt-link to="/mod/games">
                     <i class="fa fa-gamepad"></i>Games
                 </nuxt-link>

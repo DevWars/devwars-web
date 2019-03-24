@@ -4,6 +4,7 @@ export const state = () => ({
     applied: [],
     entered: [],
     upcoming: [],
+    schedules: [],
     all: [],
     game: {},
     active: null,
@@ -38,6 +39,10 @@ export const mutations = {
         state.applied = state.applied.filter(
             (it) => it.id !== game.id && it !== game.id
         );
+    },
+
+    schedules(state, schedules) {
+        state.schedules = schedules;
     },
 
     upcoming(state, upcoming) {
@@ -82,6 +87,15 @@ export const actions = {
             commit('entered', entered || []);
         } catch (e) {
             console.log("Couldn't load entered games", e);
+        }
+    },
+
+    async schedules({ commit }) {
+        try {
+            const schedules = await Http.for('schedules').get();
+            commit('schedules', schedules);
+        } catch (e) {
+            commit('schedules', null);
         }
     },
 

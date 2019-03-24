@@ -1,3 +1,3 @@
 export default function nameFromStatus(status) {
-    return ['SCHEDULING', 'PREPARING', 'ACTIVE', 'ENDED'][status];
+    return ['SCHEDULED', 'ACTIVE', 'ENDED'][status];
 }

@@ -1,9 +1,9 @@
 <template>
     <div>
-        <PanelHeader title="Games" showSearch>
-            <button class="btn btn-primary btn-icon btn-sm" @click="createGame">
+        <PanelHeader title="Schedules" showSearch>
+            <button class="btn btn-primary btn-icon btn-sm" disabled>
                 <i class="fa fa-plus"></i>
-                <span>Add Game</span>
+                <span>Add Schedule</span>
             </button>
         </PanelHeader>
 
@@ -12,19 +12,26 @@
         <Table>
             <tr slot="head">
                 <th>Date</th>
-                <th>Season</th>
+                <th>Status</th>
                 <th>Theme</th>
                 <th>Gamemode</th>
                 <th>&nbsp;</th>
             </tr>
 
-            <tr v-for="game in games" :key="game.id">
-                <td>{{ game.createdAt | moment('MM/DD/YYYY') }}</td>
-                <td>{{ game.season }}</td>
-                <td>{{ game.title }}</td>
-                <td>{{ game.mode }}</td>
+            <tr v-for="schedule in schedules" :key="schedule.id">
+                <td>{{ schedule.startTime | moment('MM/DD/YYYY') }}</td>
                 <td>
-                    <nuxt-link :to="'/mod/game/brief?game=' + game.id" class="btn-link">Edit</nuxt-link>
+                    <span
+                        :class="['mod-status', nameFromStatus(schedule.status).toLowerCase()]"
+                    >{{ nameFromStatus(schedule.status) }}</span>
+                </td>
+                <td>{{ schedule.setup.title }}</td>
+                <td>{{ schedule.setup.mode }}</td>
+                <td>
+                    <nuxt-link
+                        :to="'/mod/schedule/index?schedule=' + schedule.id"
+                        class="btn-link"
+                    >Edit</nuxt-link>
                 </td>
             </tr>
         </Table>
@@ -35,34 +42,26 @@
 
 
 <script>
-import CreateGameModal from '~/components/modal/CreateGameModal';
 import PanelHeader from '~/components/mod/PanelHeader';
 import ListingFilters from '~/components/mod/ListingFilters';
 import Table from '~/components/Table';
 import Pagination from '~/components/Pagination';
 
+import nameFromStatus from '../../utils/gameStatus';
+
 export default {
-    name: 'ModGames',
+    name: 'ModSchedules',
     components: { PanelHeader, ListingFilters, Table, Pagination },
     computed: {
-        games() {
-            return this.$store.state.game.all;
+        schedules() {
+            return this.$store.state.game.schedules;
         },
     },
     async fetch({ store }) {
-        await store.dispatch('game/all');
+        await store.dispatch('game/schedules');
     },
     methods: {
-        async createGame() {
-            const [game] = await this.$open(CreateGameModal, {});
-
-            if (!game) return;
-
-            this.$router.push({
-                path: `/mod/game/details`,
-                params: { game: game.id },
-            });
-        },
+        nameFromStatus,
     },
 };
 </script>

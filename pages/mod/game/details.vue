@@ -3,17 +3,13 @@
         <form class="mod-form">
             <h3 class="modpanel__subtitle">Main</h3>
             <div class="form-group">
-                <Input v-model="date"/>
+                <Input v-model="game.startTime"/>
                 <label>Date</label>
-            </div>
-            <div class="form-group">
-                <Input v-model="time"/>
-                <label>Time</label>
             </div>
             <h3 class="modpanel__subtitle">Game</h3>
             <div class="form-group">
                 <div class="select-container">
-                    <select v-model="game.name" class="form-control">
+                    <select v-model="game.mode" class="form-control">
                         <option value></option>
                         <option>Classic</option>
                         <option>Zen Garden</option>
@@ -24,7 +20,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <Input v-model="game.theme"/>
+                <Input v-model="game.title"/>
                 <label>Theme</label>
             </div>
             <h3 class="modpanel__subtitle">Objectives</h3>
@@ -49,8 +45,8 @@
                 />
             </div>
 
-            <h3 v-if="game.name === 'Zen Garden'" class="modpanel__subtitle">Zen Garden HTML</h3>
-            <div v-if="game.name === 'Zen Garden'" class="form-group">
+            <h3 v-if="game.title === 'Zen Garden'" class="modpanel__subtitle">Zen Garden HTML</h3>
+            <div v-if="game.title === 'Zen Garden'" class="form-group">
                 <textarea
                     v-model="game.languageTemplates.html"
                     class="form-control"
@@ -99,7 +95,10 @@ import Input from '~/components/form/Input';
 import VoteBoxInput from '../../../components/game/VoteBoxInput';
 import SquareToggle from '../../../components/SquareToggle';
 
-import { team_for_game, team_completed_objective } from '../../../utils/objectives';
+import {
+    team_for_game,
+    team_completed_objective,
+} from '../../../utils/objectives';
 
 export default {
     name: 'DashboardGameDetails',
@@ -115,9 +114,6 @@ export default {
     },
     watch: {
         date() {
-            this.timestampChanged();
-        },
-        time() {
             this.timestampChanged();
         },
         game() {
