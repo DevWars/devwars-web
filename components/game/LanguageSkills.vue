@@ -10,7 +10,7 @@
                                         <li
                                             v-for="(skill, index) in skillNames"
                                             :key="skill"
-                                            :class="{active: index <= language.skill}"
+                                            :class="{active: index <= language.skill - 1}"
                                         ></li>
                                     </ul>
                                     <div class="lang-rating__main">
@@ -21,14 +21,14 @@
                                             <button
                                                 type="button"
                                                 class="lang-rating__arrow fa fa-chevron-left"
-                                                :class="{disabled: language.skill < 1}"
+                                                :class="{disabled: language.skill <= 1}"
                                                 @click="language.skill--"
                                             ></button>
-                                            <div class="lang-rating__score">{{ language.skill + 1}}</div>
+                                            <div class="lang-rating__score">{{ language.skill }}</div>
                                             <button
                                                 type="button"
                                                 class="lang-rating__arrow fa fa-chevron-right"
-                                                :class="{disabled: language.skill > 3}"
+                                                :class="{disabled: language.skill > 4}"
                                                 @click="language.skill++"
                                             ></button>
                                         </div>
@@ -118,7 +118,7 @@ export default {
     },
     methods: {
         tooltip(language) {
-            return this[`${language.name}Tooltips`][language.skill];
+            return this[`${language.name}Tooltips`][language.skill - 1];
         },
     },
 };
