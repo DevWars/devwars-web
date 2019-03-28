@@ -67,8 +67,8 @@ module.exports = {
     loading: { color: '#ff007d' },
 
     axios: {
-        baseURL: 'http://localhost:3030/',
-        browserBaseURL: 'http://localhost:3030/',
+        baseURL: 'http://localhost:8080/',
+        browserBaseURL: 'http://localhost:8080/',
         credentials: true,
     },
 
