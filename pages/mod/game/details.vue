@@ -3,7 +3,7 @@
         <form class="mod-form">
             <h3 class="modpanel__subtitle">Main</h3>
             <div class="form-group">
-                <Input v-model="game.startTime"/>
+                <Input v-model="game.createdAt"/>
                 <label>Date</label>
             </div>
             <h3 class="modpanel__subtitle">Game</h3>
@@ -24,24 +24,17 @@
                 <label>Theme</label>
             </div>
             <h3 class="modpanel__subtitle">Objectives</h3>
-            <div
-                v-for="objective in orderBy(game.objectives, 'number')"
-                :key="objective.id"
-                class="mod-objectives form-group"
-            >
+            <div v-for="objective in game.objectives" :key="objective.id">
                 <div class="mod-objectives__input">
                     <Input v-model="objective.description" maxlength="110"/>
                     <label>Objective #{{ objective.number }} (Bonus)</label>
                 </div>
                 <SquareToggle
-                    :active="team_completed_objective(team_for_game('red', game), objective)"
-                    name="red"
-                    @change="toggleObjective(team_for_game('red', game), objective)"
-                />
-                <SquareToggle
-                    :active="team_completed_objective(team_for_game('blue', game), objective)"
-                    name="blue"
-                    @change="toggleObjective(team_for_game('blue', game), objective)"
+                    v-for="team of teams"
+                    :key="team.id"
+                    :name="team.name"
+                    :active="!!teamCompletedObjective(team.id, objective)"
+                    @change="toggleObjective(team.id, objective.id)"
                 />
             </div>
 
@@ -62,16 +55,18 @@
             </div>
 
             <h3 class="modpanel__subtitle">Votes</h3>
-            <div v-for="vote in ['UI', 'UX']" :key="vote" class="row">
-                <div v-for="team in game.teams" :key="team.id" class="col-sm-6 form-group">
-                    <VoteBoxInput
-                        :team="team"
-                        :vote="vote"
-                        @change="updated => team.votes[vote] = updated"
-                    />
-                    <label>{{ vote }} - {{ team.name | capitalize }} Votes</label>
+            <div class="row">
+                <div v-for="team in teams" :key="team.id" class="col-sm-6">
+                    <div v-for="vote in team.votes" :key="vote.id" class="form-group">
+                        <Input :value="vote" @change="updated => team.votes[vote] = updated"/>
+                        <label>
+                            {{ Object.keys(team.votes).find(key => team.votes[key] === vote) }}
+                            - {{ team.name | capitalize }} Votes
+                        </label>
+                    </div>
                 </div>
             </div>
+
             <!--
             <h3 class="modpanel__subtitle">Files</h3>
             <div class="row">
@@ -90,19 +85,15 @@
 
 
 <script>
-import moment from 'moment';
 import Input from '~/components/form/Input';
-import VoteBoxInput from '../../../components/game/VoteBoxInput';
 import SquareToggle from '../../../components/SquareToggle';
-
-import {
-    team_for_game,
-    team_completed_objective,
-} from '../../../utils/objectives';
+import { teams } from '~/utils/mixins';
+import { teamCompletedObjective } from '~/utils';
 
 export default {
     name: 'DashboardGameDetails',
-    components: { SquareToggle, VoteBoxInput, Input },
+    components: { SquareToggle, Input },
+    mixins: [teams],
     data: () => ({
         date: '',
         time: '',
@@ -112,50 +103,16 @@ export default {
             return this.$store.state.game.game;
         },
     },
-    watch: {
-        date() {
-            this.timestampChanged();
-        },
-        game() {
-            this.gameChanged();
-        },
-    },
-    mounted() {
-        this.gameChanged();
-
-        this.date = moment.utc(this.game.startTime).format('DD/MM/YYYY');
-        this.time = moment.utc(this.game.startTime).format('HH:mm');
-    },
     methods: {
-        team_for_game,
-        timestampChanged() {
-            const timestamp =
-                moment
-                    .utc(`${this.date} ${this.time}`, 'DD/MM/YYYY HH:mm')
-                    .unix() * 1000;
+        teamCompletedObjective,
+        toggleObjective(teamId, objectiveId) {
+            const objectives = this.game.teams[teamId].objectives;
 
-            this.game.startTime = timestamp;
-        },
-        gameChanged() {
-            const list = [];
-
-            for (let i = 1; i <= 5; i += 1) {
-                let item = this.game.objectives.find((it) => it.number === i);
-
-                if (!item) item = { number: i };
-
-                list.push(item);
+            if (objectives[objectiveId] === 'complete') {
+                objectives[objectiveId] = 'incomplete';
+            } else {
+                objectives[objectiveId] = 'complete';
             }
-
-            this.game.objectives = list;
-        },
-        toggleObjective(team, objective) {
-            const hasCompleted = team_completed_objective(team, objective);
-            if (!hasCompleted) return team.completedObjectives.push(objective);
-
-            team.completedObjectives = team.completedObjectives.filter(
-                (it) => it.id !== objective.id
-            );
         },
     },
 };

@@ -1,3 +1,5 @@
+// ---------------------------------------------------------
+// Methods
 export function getScoreByGameTeam(game, team) {
     const teamScores = game.meta.teamScores[team.id];
     let teamScore = 0;
@@ -22,6 +24,16 @@ export function getLanguageByGamePlayer(game, player) {
     for (const editor of Object.values(editors)) {
         if (player.id === editor.player) {
             return editor.language;
+        }
+    }
+}
+
+export function teamCompletedObjective(teamIndex, objective) {
+    const objectives = this.game.teams[teamIndex].objectives;
+
+    for (const [key, value] of Object.entries(objectives)) {
+        if (objective.id === Number(key) && value === 'complete') {
+            return value;
         }
     }
 }

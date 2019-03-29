@@ -55,13 +55,17 @@
                 }
             }
         ],
-        "max-len": ["error", 120, {
-            "ignoreUrls": true,
-            "ignoreComments": false,
-            "ignoreRegExpLiterals": true,
-            "ignoreStrings": true,
-            "ignoreTemplateLiterals": true
-      }],
+        "max-len": [
+            "error",
+            120,
+            {
+                "ignoreUrls": true,
+                "ignoreComments": false,
+                "ignoreRegExpLiterals": true,
+                "ignoreStrings": true,
+                "ignoreTemplateLiterals": true
+            }
+        ],
         "vetur.format.defaultFormatter.html": "none",
         "prettier/prettier": 0,
         "camelcase": "off"

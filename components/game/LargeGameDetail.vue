@@ -79,11 +79,13 @@ import VoteBox from '~/components/game/VoteBox';
 import SubScore from '~/components/game/SubScore';
 import GameTeam from '~/components/game/GameTeam';
 import Player from '~/components/game/Player';
-import { getLanguageByGamePlayer } from '~/utils';
+import { teams } from '~/utils/mixins';
+import { getLanguageByGamePlayer, teamCompletedObjective } from '~/utils';
 
 export default {
     name: 'LargeGameDetail',
     components: { GameTeam, Player, SubScore, VoteBox },
+    mixins: [teams],
     props: {
         game: {
             type: Object,
@@ -93,35 +95,6 @@ export default {
     data: () => ({
         users: {},
     }),
-    computed: {
-        teams() {
-            return Object.values(this.game.teams).reduce((teams, team) => {
-                const players = Object.values(this.game.players).reduce(
-                    (players, player) => {
-                        if (player.team === team.id) {
-                            players[player.id] = player;
-                        }
-                        return players;
-                    },
-                    {}
-                );
-
-                teams[team.id] = {
-                    ...team,
-                    players,
-                    numPlayers: Object.values(players).length,
-                    scores: {
-                        total: Math.floor(Math.random() * 10),
-                        objectives: this.game.meta.teamScores[team.id]
-                            .objectives,
-                    },
-                    isWinner: this.game.meta.winningTeam === team.id,
-                };
-
-                return teams;
-            }, {});
-        },
-    },
     watch: {
         game() {
             this.getUsersFromGame();
@@ -132,6 +105,7 @@ export default {
     },
     methods: {
         getLanguageByGamePlayer,
+        teamCompletedObjective,
         playersWithUser(players) {
             const result = [];
             for (const player of Object.values(players)) {
@@ -160,15 +134,6 @@ export default {
                 acc[user.id] = user;
                 return acc;
             }, {});
-        },
-        teamCompletedObjective(teamIndex, objective) {
-            const objectives = this.game.teams[teamIndex].objectives;
-
-            for (const [key, value] of Object.entries(objectives)) {
-                if (objective.id === Number(key) && value === 'complete') {
-                    return value;
-                }
-            }
         },
     },
 };
