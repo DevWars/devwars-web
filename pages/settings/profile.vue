@@ -5,20 +5,35 @@
                 <h3 class="modpanel__subtitle">Profile</h3>
                 <div class="row">
                     <div class="col-md-6 form-group">
-                        <Input type="text" :value="firstName" @input="updateForm({values: $event, key: 'firstName'})"/>
+                        <Input
+                            type="text"
+                            :value="firstName"
+                            @input="updateForm({values: $event, key: 'firstName'})"
+                        />
                         <label>First Name</label>
                     </div>
                     <div class="col-md-6 form-group">
-                        <Input type="text" :value="lastName" @input="updateForm({values: $event, key: 'lastName'})"/>
+                        <Input
+                            type="text"
+                            :value="lastName"
+                            @input="updateForm({values: $event, key: 'lastName'})"
+                        />
                         <label>Last Name</label>
                     </div>
                 </div>
                 <div class="form-group">
-                    <Input type="text" :value="addressOne" @input="updateForm({values: $event, key: 'addressOne'})"/>
+                    <Input
+                        type="text"
+                        :value="addressOne"
+                        @input="updateForm({values: $event, key: 'addressOne'})"
+                    />
                     <label>Address 1</label>
                 </div>
                 <div class="form-group">
-                    <Input :value="addressTwo" @input="updateForm({values: $event, key: 'addressTwo'})"/>
+                    <Input
+                        :value="addressTwo"
+                        @input="updateForm({values: $event, key: 'addressTwo'})"
+                    />
                     <label>Address 2</label>
                 </div>
                 <div class="row">
@@ -35,10 +50,11 @@
                         <label>Zip/Postal</label>
                     </div>
                     <div class="col-sm-3 form-group">
-                        <Select 
-                            :value="country" 
-                            @input="updateForm({values: $event, key: 'country'})" 
-                            label="Select Country">
+                        <Select
+                            :value="country"
+                            label="Select Country"
+                            @input="updateForm({values: $event, key: 'country'})"
+                        >
                             <option v-for="country in countries" :key="country">{{ country }}</option>
                         </Select>
                     </div>
@@ -50,15 +66,18 @@
                 <div class="form-group">
                     <textarea
                         :value="about"
-                        @input="updateForm({values: $event.target.value, key:'about'})"
                         rows="4"
                         class="form-control"
                         placeholder="Tell us a little bit about yourself"
+                        @input="updateForm({values: $event.target.value, key:'about'})"
                     ></textarea>
                     <label>About</label>
                 </div>
                 <div class="form-group">
-                    <Input :value="websiteUrl" @input="updateForm({values: $event, key: 'websiteUrl'})"/>
+                    <Input
+                        :value="websiteUrl"
+                        @input="updateForm({values: $event, key: 'websiteUrl'})"
+                    />
                     <label>URL</label>
                 </div>
 
@@ -73,12 +92,13 @@
                             id="for-hire"
                             type="checkbox"
                             class="checkbox"
-                            :checked="forHire" @input="updateForm({values: $event.target.checked, key: 'forHire'})"
+                            :checked="forHire"
+                            @input="updateForm({values: $event.target.checked, key: 'forHire'})"
                         >
                         <label for="for-hire">Available for hire</label>
                     </div>
                 </div>
-                <LanguageSkills  :profile="profile" @change="updateForm"/>
+                <LanguageSkills :profile="profile" @change="updateForm"/>
             </div>
             <div class="col-sm-4">
                 <h3 class="modpanel__subtitle">Avatar</h3>
@@ -87,7 +107,7 @@
                 </div>
 
                 <FileChooser @change="crop">
-                    <template #default="{update}"> 
+                    <template #default="{update}">
                         <button
                             type="button"
                             class="btn btn-outline-gray"
@@ -115,7 +135,7 @@ import { mapState } from 'vuex';
 
 export default {
     name: 'Profile',
-    components: { Avatar, FileChooser, Input, Select, LanguageSkills},
+    components: { Avatar, FileChooser, Input, Select, LanguageSkills },
     data: () => {
         return {
             countries: Object.keys(countryList().getNameList()).map(
@@ -125,19 +145,19 @@ export default {
     },
     computed: {
         ...mapState({
-            addressTwo: state => state.user.profile.addressTwo,
-            firstName: state => state.user.profile.firstName,
-            lastName: state => state.user.profile.lastName,
-            addressOne: state => state.user.profile.addressOne,
-            city: state => state.user.profile.city,
-            state: state => state.user.profile.state,
-            zip: state => state.user.profile.zip,
-            country: state => state.user.profile.country,
-            dob: state => state.user.profile.dob,
-            about: state => state.user.profile.about,
-            websiteUrl: state => state.user.profile.websiteUrl,
-            company: state => state.user.profile.company,
-            forHire: state => state.user.profile.forHire,
+            addressTwo: (state) => state.user.profile.addressTwo,
+            firstName: (state) => state.user.profile.firstName,
+            lastName: (state) => state.user.profile.lastName,
+            addressOne: (state) => state.user.profile.addressOne,
+            city: (state) => state.user.profile.city,
+            state: (state) => state.user.profile.state,
+            zip: (state) => state.user.profile.zip,
+            country: (state) => state.user.profile.country,
+            dob: (state) => state.user.profile.dob,
+            about: (state) => state.user.profile.about,
+            websiteUrl: (state) => state.user.profile.websiteUrl,
+            company: (state) => state.user.profile.company,
+            forHire: (state) => state.user.profile.forHire,
         }),
         user() {
             return this.$store.state.user.user;
@@ -147,8 +167,8 @@ export default {
         },
     },
     methods: {
-        updateForm({values, key}) {
-            this.$store.commit('user/profileUpdate', {key, values});
+        updateForm({ values, key }) {
+            this.$store.commit('user/profileUpdate', { key, values });
         },
         async crop(result) {
             const [cropped] = await this.$open(CropperModal, { data: result });
