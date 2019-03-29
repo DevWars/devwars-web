@@ -1,13 +1,13 @@
 <template>
     <div>
         <div class="roster mod-card card-bezeless">
-            <GameTeam v-for="team in game.teams" :key="team.id" :team="team">
+            <GameTeam v-for="team in teams" :key="team.id" :team="team">
                 <Player
-                    v-for="player in getPlayersByGameTeam(game, team)"
+                    v-for="player in playersWithUser(team.players)"
                     :key="player.id"
                     :user="player"
-                    :language="getLanguageByGamePlayer(game, player)"
                     :team="team"
+                    :language="getLanguageByGamePlayer(game, player)"
                     @click="removePlayer(player)"
                 />
             </GameTeam>
@@ -69,6 +69,7 @@ import Player from '~/components/game/Player';
 import AddPlayerModal from '~/components/modal/AddPlayerModal';
 import ConfirmModal from '~/components/modal/ConfirmModal';
 import AddRegistrantModal from '~/components/modal/AddRegistrantModal';
+import { teams, usersFromGame } from '~/utils/mixins';
 import {
     getScoreByGameTeam,
     getPlayersByGameTeam,
@@ -78,6 +79,7 @@ import {
 export default {
     name: 'GameBrief',
     components: { Table, GameTeam, Player },
+    mixins: [teams, usersFromGame],
     data() {
         return {
             applications: [],

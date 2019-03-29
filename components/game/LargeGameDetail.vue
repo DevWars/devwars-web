@@ -79,62 +79,22 @@ import VoteBox from '~/components/game/VoteBox';
 import SubScore from '~/components/game/SubScore';
 import GameTeam from '~/components/game/GameTeam';
 import Player from '~/components/game/Player';
-import { teams } from '~/utils/mixins';
+import { teams, usersFromGame } from '~/utils/mixins';
 import { getLanguageByGamePlayer, teamCompletedObjective } from '~/utils';
 
 export default {
     name: 'LargeGameDetail',
     components: { GameTeam, Player, SubScore, VoteBox },
-    mixins: [teams],
+    mixins: [teams, usersFromGame],
     props: {
         game: {
             type: Object,
             required: true,
         },
     },
-    data: () => ({
-        users: {},
-    }),
-    watch: {
-        game() {
-            this.getUsersFromGame();
-        },
-    },
-    mounted() {
-        this.getUsersFromGame();
-    },
     methods: {
         getLanguageByGamePlayer,
         teamCompletedObjective,
-        playersWithUser(players) {
-            const result = [];
-            for (const player of Object.values(players)) {
-                const user = this.users[player.id];
-                if (user) {
-                    result.push({ ...user, ...player });
-                }
-            }
-
-            return result;
-        },
-
-        async getUsersFromGame() {
-            const players = Object.values(this.game.players);
-
-            const fetchUser = async (id) => {
-                const res = await this.$axios.get(`/users/${id}`);
-                return res.data;
-            };
-
-            const users = await Promise.all(
-                players.map((player) => fetchUser(player.id))
-            );
-
-            this.users = users.reduce((acc, user) => {
-                acc[user.id] = user;
-                return acc;
-            }, {});
-        },
     },
 };
 </script>

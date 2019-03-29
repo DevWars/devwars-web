@@ -30,3 +30,48 @@ export const teams = {
         },
     },
 };
+
+export const usersFromGame = {
+    data: () => ({
+        users: {},
+    }),
+    watch: {
+        game() {
+            this.getUsersFromGame();
+        },
+    },
+    mounted() {
+        this.getUsersFromGame();
+    },
+    methods: {
+        playersWithUser(players) {
+            const result = [];
+            for (const player of Object.values(players)) {
+                const user = this.users[player.id];
+                if (user) {
+                    result.push({ ...user, ...player });
+                }
+            }
+
+            return result;
+        },
+
+        async getUsersFromGame() {
+            const players = Object.values(this.game.players);
+
+            const fetchUser = async (id) => {
+                const res = await this.$axios.get(`/users/${id}`);
+                return res.data;
+            };
+
+            const users = await Promise.all(
+                players.map((player) => fetchUser(player.id))
+            );
+
+            this.users = users.reduce((acc, user) => {
+                acc[user.id] = user;
+                return acc;
+            }, {});
+        },
+    },
+};
