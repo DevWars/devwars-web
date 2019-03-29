@@ -10,7 +10,7 @@
                     v-for="team in game.teams"
                     :key="team.id"
                     class="points"
-                >{{ getGameTeamScore(game, team) }}</div>
+                >{{ getScoreByGameTeam(game, team) }}</div>
             </div>
             <div class="team">
                 <div class="team-logo red"></div>
@@ -25,7 +25,7 @@
                 :class="{blue: team.name === 'blue', red: team.name === 'red'}"
             >
                 <li
-                    v-for="player in getGameTeamPlayers(game, team)"
+                    v-for="player in getPlayersByGameTeam(game, team)"
                     :key="player.id"
                 >{{ player.username }}</li>
             </ul>
@@ -44,7 +44,7 @@
 
 
 <script>
-import { getGameTeamScore, getGameTeamPlayers } from '~/utils';
+import { getScoreByGameTeam, getPlayersByGameTeam } from '~/utils';
 import HomeCard from '@/components/HomeCard';
 
 export default {
@@ -57,8 +57,8 @@ export default {
         },
     },
     methods: {
-        getGameTeamScore,
-        getGameTeamPlayers,
+        getScoreByGameTeam,
+        getPlayersByGameTeam,
     },
 };
 </script>

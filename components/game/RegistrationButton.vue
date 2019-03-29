@@ -1,12 +1,16 @@
 <template>
-    <Applications :games="[game]">
+    <Applications :schedules="[schedule]">
         <div slot-scope="{isApplied, enter, cancel}">
             <a
-                v-show="!isApplied(game)"
+                v-show="!isApplied(schedule)"
                 class="btn btn-primary"
-                @click="enter(game)"
+                @click="enter(schedule)"
             >Register for Entry</a>
-            <a v-show="isApplied(game)" class="btn btn-outline-danger" @click="cancel(game)">Resign</a>
+            <a
+                v-show="isApplied(schedule)"
+                class="btn btn-outline-danger"
+                @click="cancel(schedule)"
+            >Resign</a>
         </div>
     </Applications>
 </template>
@@ -19,7 +23,7 @@ export default {
     name: 'RegistrationButton',
     components: { Applications },
     props: {
-        'game': {
+        schedule: {
             type: Object,
             required: true,
         },

@@ -2,7 +2,7 @@
     <div class="ListingFilters">
         <div class="main">
             <span>Showing All</span>
-            <Select>
+            <Select value>
                 <option value="Infinity" selected>Show All</option>
             </Select>
         </div>

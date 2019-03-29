@@ -27,7 +27,8 @@ export default {
         },
         label: {
             type: String,
-            required: true,
+            required: false,
+            default: undefined,
         },
     },
     computed: {

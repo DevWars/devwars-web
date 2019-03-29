@@ -1,13 +1,12 @@
 <template>
     <DashboardCard title="Upcoming Games" icon="fa fa-calendar">
-        <Applications :games="upcoming">
-            <!-- eslint-disable-next-line -->
-            <div slot="game" slot-scope="props" class="item">
+        <Applications :schedules="upcoming">
+            <div slot="schedule" slot-scope="props" class="item">
                 <div class="main">
                     <div class="col-xs-2 no-gutter" :class="[props.color]">{{ props.text }}</div>
                     <div class="col-xs-8 no-gutter">
-                        {{ props.game.startTime | moment('longDate') }} @ {{ props.game.startTime | moment('HH:mm') }}
-                        (UTC)
+                        {{ props.schedule.startTime | moment('longDate') }}
+                        @ {{ props.schedule.startTime | moment('HH:mm') }} (UTC)
                     </div>
                 </div>
                 <div class="actions">

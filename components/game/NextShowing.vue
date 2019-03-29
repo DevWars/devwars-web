@@ -1,5 +1,5 @@
 <template>
-    <HomeCard v-if="game" title="Next Showing">
+    <HomeCard v-if="schedule" title="Next Showing">
         <ul id="countdown" class="countdown">
             <li id="days" class="countdown__item">
                 <div class="countdown__number">{{ timeDifference.days}}</div>
@@ -19,12 +19,12 @@
             </li>
         </ul>
         <div class="next-showing">
-            <div class="next-showing__date">{{ game.startTime | moment('dddd, MMMM DD') }}</div>
-            <div class="next-showing__time">{{ game.startTime | moment('H:mm')}} (UTC)</div>
+            <div class="next-showing__date">{{ schedule.startTime | moment('dddd, MMMM DD') }}</div>
+            <div class="next-showing__time">{{ schedule.startTime | moment('H:mm')}} (UTC)</div>
         </div>
 
         <div slot="actions">
-            <RegistrationButton :game="game"/>
+            <RegistrationButton :schedule="schedule"/>
         </div>
     </HomeCard>
 </template>
@@ -48,7 +48,7 @@ export default {
         upcoming() {
             return this.$store.state.game.upcoming;
         },
-        game() {
+        schedule() {
             return first(sortBy(this.upcoming, (game) => game.startTime));
         },
     },
@@ -59,7 +59,7 @@ export default {
     },
     methods: {
         updateTime() {
-            const diff = moment.utc(this.game.startTime).diff(moment());
+            const diff = moment.utc(this.schedule.startTime).diff(moment());
             const units = ['days', 'hours', 'minutes', 'seconds'];
 
             const updated = {};

@@ -35,12 +35,12 @@
                 </div>
                 <SquareToggle
                     :active="team_completed_objective(team_for_game('red', game), objective)"
-                    color="red"
+                    name="red"
                     @change="toggleObjective(team_for_game('red', game), objective)"
                 />
                 <SquareToggle
                     :active="team_completed_objective(team_for_game('blue', game), objective)"
-                    color="blue"
+                    name="blue"
                     @change="toggleObjective(team_for_game('blue', game), objective)"
                 />
             </div>
@@ -72,7 +72,7 @@
                     <label>{{ vote }} - {{ team.name | capitalize }} Votes</label>
                 </div>
             </div>
-
+            <!--
             <h3 class="modpanel__subtitle">Files</h3>
             <div class="row">
                 <div class="col-sm-6 form-group">
@@ -83,7 +83,7 @@
                     <Input id="force-valid" type="file"/>
                     <label>Red Files</label>
                 </div>
-            </div>
+            </div>-->
         </form>
     </div>
 </template>

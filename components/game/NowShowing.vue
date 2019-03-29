@@ -24,7 +24,7 @@
                 class="btn btn-twitch"
                 target="_blank"
             >Watch on Twitch</a>
-            <RegistrationButton :game="game"/>
+            <RegistrationButton :schedule="schedule"/>
         </div>
     </HomeCard>
 </template>
@@ -38,7 +38,7 @@ export default {
     name: 'NowShowing',
     components: { HomeCard, RegistrationButton },
     computed: {
-        game() {
+        schedule() {
             return this.$store.state.game.active;
         },
     },

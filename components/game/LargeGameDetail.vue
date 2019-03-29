@@ -34,7 +34,7 @@
                     :key="player.id"
                     :user="player"
                     :team="team"
-                    :language="languageByPlayer(player)"
+                    :language="getLanguageByGamePlayer(game, player)"
                 />
             </GameTeam>
         </div>
@@ -79,6 +79,7 @@ import VoteBox from '~/components/game/VoteBox';
 import SubScore from '~/components/game/SubScore';
 import GameTeam from '~/components/game/GameTeam';
 import Player from '~/components/game/Player';
+import { getLanguageByGamePlayer } from '~/utils';
 
 export default {
     name: 'LargeGameDetail',
@@ -130,6 +131,7 @@ export default {
         this.getUsersFromGame();
     },
     methods: {
+        getLanguageByGamePlayer,
         playersWithUser(players) {
             const result = [];
             for (const player of Object.values(players)) {
@@ -165,15 +167,6 @@ export default {
             for (const [key, value] of Object.entries(objectives)) {
                 if (objective.id === Number(key) && value === 'complete') {
                     return value;
-                }
-            }
-        },
-        languageByPlayer(player) {
-            const editors = this.game.editors;
-
-            for (const editor of Object.values(editors)) {
-                if (player.id === editor.player) {
-                    return editor.language;
                 }
             }
         },

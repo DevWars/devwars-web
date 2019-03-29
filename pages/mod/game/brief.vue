@@ -1,61 +1,19 @@
 <template>
     <div>
-        <div class="games-roster mod-card card-bezeless">
-            <div class="col-sm-6">
-                <GameTeam team="blue">
-                    <div
-                        v-for="player in team_for_game('blue', game).players"
-                        :key="player.id"
-                        @click="removePlayer(player, team_for_game('blue', game))"
-                    >
-                        <Player
-                            :user="player.user"
-                            :language="player.language"
-                            :team="team_for_game('blue', game)"
-                        />
-                    </div>
-                </GameTeam>
-
-                <div class="status">
-                    <Select v-model="team_for_game('blue', game).status">
-                        <option>Waiting for players...</option>
-                        <option>Setting up Discord</option>
-                        <option>Setting up game</option>
-                        <option>Ready to play!</option>
-                    </Select>
-                </div>
-            </div>
-
-            <div class="col-sm-6">
-                <GameTeam team="red">
-                    <div
-                        v-for="player in team_for_game('red', game).players"
-                        :key="player.id"
-                        @click="removePlayer(player, team_for_game('red', game))"
-                    >
-                        <Player
-                            :user="player.user"
-                            :language="player.language"
-                            :team="team_for_game('red', game)"
-                        />
-                    </div>
-                </GameTeam>
-
-                <div class="status">
-                    <Select v-model="team_for_game('red', game).status">
-                        <option>Waiting for players...</option>
-                        <option>Setting up Discord</option>
-                        <option>Setting up game</option>
-                        <option>Ready to play!</option>
-                    </Select>
-                </div>
-            </div>
+        <div class="roster mod-card card-bezeless">
+            <GameTeam v-for="team in game.teams" :key="team.id" :team="team">
+                <Player
+                    v-for="player in getPlayersByGameTeam(game, team)"
+                    :key="player.id"
+                    :user="player"
+                    :language="getLanguageByGamePlayer(game, player)"
+                    :team="team"
+                    @click="removePlayer(player)"
+                />
+            </GameTeam>
         </div>
 
-        <br>
-        <br>
-
-        <div class="mod-card">
+        <!-- <div class="mod-card">
             <div class="mod-card__header">
                 <h4
                     class="modpanel__subtitle"
@@ -63,7 +21,7 @@
                 >({{ applications.length }}) Applicants</h4>
                 <button class="btn btn-outline-primary" @click="addRegistrant">Add Registrant</button>
             </div>
-        </div>
+        </div>-->
 
         <Table>
             <tr slot="head">
@@ -79,7 +37,7 @@
                 <th>&nbsp;</th>
             </tr>
 
-            <tr v-for="user in applications" :key="user.id">
+            <!-- <tr v-for="user in applications" :key="user.id">
                 <td>
                     <User :user="user"/>
                 </td>
@@ -97,27 +55,29 @@
                         <i class="fa fa-caret-down"></i>
                     </a>
                 </td>
-            </tr>
+            </tr>-->
         </Table>
     </div>
 </template>
 
 
 <script>
-import User from '~/components/user/User';
 import Table from '~/components/Table';
 import Http from '../../../services/Http';
 import GameTeam from '~/components/game/GameTeam';
 import Player from '~/components/game/Player';
-import Select from '~/components/form/Select';
 import AddPlayerModal from '~/components/modal/AddPlayerModal';
 import ConfirmModal from '~/components/modal/ConfirmModal';
 import AddRegistrantModal from '~/components/modal/AddRegistrantModal';
-import { team_for_game } from '../../../utils/objectives';
+import {
+    getScoreByGameTeam,
+    getPlayersByGameTeam,
+    getLanguageByGamePlayer,
+} from '~/utils';
 
 export default {
     name: 'GameBrief',
-    components: { User, Table, GameTeam, Player, Select },
+    components: { Table, GameTeam, Player },
     data() {
         return {
             applications: [],
@@ -133,35 +93,36 @@ export default {
             return user.competitor[`${lang}_rate`];
         },
     },
-    mounted() {
-        this.refresh();
-    },
+    // mounted() {
+    //     this.refresh();
+    // },
     methods: {
-        team_for_game,
+        getScoreByGameTeam,
+        getPlayersByGameTeam,
+        getLanguageByGamePlayer,
         addPlayer(user) {
             this.$open(AddPlayerModal, { user, game: this.game });
         },
-        async refresh() {
-            this.applications = await Http.for(`game/${this.game.id}`).get(
-                'applications'
-            );
-        },
+        // async refresh() {
+        //     this.applications = await Http.for(`game/${this.game.id}`).get(
+        //         'applications'
+        //     );
+        // },
         async addRegistrant() {
             await this.$open(AddRegistrantModal, { game: this.game });
 
             await this.refresh();
         },
-        async removePlayer(player, team) {
+        async removePlayer(player) {
             const confirmed = await this.$open(ConfirmModal, {
                 description:
                     'Are you sure you would like to remove this player?',
             });
-
             if (!confirmed) return;
 
             await Http.for(`/game/players/${player.id}`).delete();
 
-            team.players.splice(team.players.indexOf(player), 1);
+            // team.players.splice(team.players.indexOf(player), 1);
         },
     },
 };
@@ -169,6 +130,15 @@ export default {
 
 
 <style lang="scss" scoped>
+.roster {
+    display: flex;
+    margin-bottom: 30px;
+
+    .GameTeam {
+        flex: 1 1 100%;
+    }
+}
+
 .status {
     margin: 10px 0 20px;
 }

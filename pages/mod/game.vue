@@ -2,7 +2,7 @@
     <div>
         <PanelHeader
             :title="game.startTime | moment('mediumDate')"
-            :subtitle="`${game.id} / ${game.season} / ${game.name}`"
+            :subtitle="`#${game.id} / S${game.season} / ${game.mode}`"
         >
             <a href="/mod/games" class="btn btn-outline-gray">Back</a>
             <button

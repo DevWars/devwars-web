@@ -22,14 +22,4 @@
     &__input {
         flex: 1;
     }
-
-    .obj-list__square {
-        margin-left: $grid-gutter-part;
-        cursor: pointer;
-
-        &:hover {
-            &.team-blue { background-color: $brand-primary; }
-            &.team-red { background-color: $brand-secondary; }
-        }
-    }
 }

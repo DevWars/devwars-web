@@ -23,7 +23,8 @@ export default {
         },
         points: {
             type: Number,
-            required: true,
+            required: false,
+            default: 0,
         },
         winner: {
             type: Boolean,

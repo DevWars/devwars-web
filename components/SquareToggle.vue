@@ -1,7 +1,7 @@
 <template>
     <div
-        class="obj-list__square"
-        :style="{backgroundColor: highlighted ? colors[color] : ''}"
+        class="SquareToggle"
+        :class="[name ? name : '', active ? 'active' : '']"
         @click="$emit('change', !active)"
         @mouseover="hovered = true"
         @mouseleave="hovered = false"
@@ -13,28 +13,46 @@
 export default {
     name: 'SquareToggle',
     props: {
-        color: {
-            type: Object,
-            required: true,
+        name: {
+            type: String,
+            required: false,
+            default: undefined,
         },
         active: {
             type: Boolean,
+            required: false,
             default: false,
-        },
-    },
-    data: () => {
-        return {
-            colors: {
-                blue: '#00c9ff',
-                red: '#ff007d',
-            },
-            hovered: false,
-        };
-    },
-    computed: {
-        highlighted() {
-            return this.hovered || this.active;
         },
     },
 };
 </script>
+
+
+<style lang="scss" scoped>
+@import 'utils.scss';
+
+.SquareToggle {
+    width: 30px;
+    height: 30px;
+    border: 5px solid #23252c;
+    cursor: pointer;
+
+    &.active,
+    &:hover {
+        background-color: rgba(#fff, 0.8);
+    }
+
+    &.blue.active,
+    &.blue:hover {
+        background-color: $blue-color;
+    }
+    &.red.active,
+    &.red:hover {
+        background-color: $red-color;
+    }
+    &.bonus.active,
+    &.bonus:hover {
+        background-color: $bonus-color;
+    }
+}
+</style>

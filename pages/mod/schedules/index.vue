@@ -25,18 +25,13 @@
                         :class="['mod-status', nameFromStatus(schedule.status).toLowerCase()]"
                     >{{ nameFromStatus(schedule.status) }}</span>
                 </td>
-                <td>{{ schedule.setup.title }}</td>
-                <td>{{ schedule.setup.mode }}</td>
+                <td>{{ schedule.title }}</td>
+                <td>{{ schedule.mode }}</td>
                 <td>
-                    <nuxt-link
-                        :to="'/mod/schedule/index?schedule=' + schedule.id"
-                        class="btn-link"
-                    >Edit</nuxt-link>
+                    <nuxt-link :to="`/mod/schedules/${schedule.id}`" class="btn-link">Edit</nuxt-link>
                 </td>
             </tr>
         </Table>
-
-        <Pagination/>
     </div>
 </template>
 
@@ -45,13 +40,12 @@
 import PanelHeader from '~/components/mod/PanelHeader';
 import ListingFilters from '~/components/mod/ListingFilters';
 import Table from '~/components/Table';
-import Pagination from '~/components/Pagination';
 
-import nameFromStatus from '../../utils/gameStatus';
+import nameFromStatus from '~/utils/gameStatus';
 
 export default {
     name: 'ModSchedules',
-    components: { PanelHeader, ListingFilters, Table, Pagination },
+    components: { PanelHeader, ListingFilters, Table },
     computed: {
         schedules() {
             return this.$store.state.game.schedules;

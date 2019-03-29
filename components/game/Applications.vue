@@ -2,8 +2,8 @@
     <div>
         <slot name="default" :isApplied="isApplied" :cancel="cancel" :enter="enter"></slot>
 
-        <div v-for="game in altered" :key="game.game.id">
-            <slot name="game" v-bind="game"></slot>
+        <div v-for="schedule in altered" :key="schedule.id">
+            <slot name="schedule" v-bind="schedule"></slot>
         </div>
     </div>
 </template>
@@ -17,7 +17,7 @@ import GameRegistration from '~/components/modal/GameRegistration';
 export default {
     name: 'Applications',
     props: {
-        'games': {
+        schedules: {
             type: Array,
             required: true,
         },
@@ -33,12 +33,12 @@ export default {
             return this.$store.state.game.entered;
         },
         altered() {
-            return this.games.map((game) => {
+            return this.schedules.map((schedule) => {
                 const applied = this.applied.some(
-                    (it) => it.id === game.id || it === game.id
+                    (it) => it.id === schedule.id || it === schedule.id
                 );
                 const playing = this.entered.some(
-                    (it) => it.id === game.id || it === game.id
+                    (it) => it.id === schedule.id || it === schedule.id
                 );
 
                 let text;
@@ -60,7 +60,7 @@ export default {
                 }
 
                 return {
-                    game,
+                    schedule,
                     applied,
                     playing,
                     text,
@@ -72,19 +72,19 @@ export default {
         },
     },
     methods: {
-        async enter(game) {
+        async enter(schedule) {
             if (!this.user) {
                 this.$router.push('/login');
 
                 return;
             }
-            const [entered] = await this.$open(GameRegistration, { game });
+            const [entered] = await this.$open(GameRegistration, { schedule });
 
             if (!entered) return;
 
-            await this.$store.dispatch('game/apply', game);
+            await this.$store.dispatch('game/apply', schedule);
         },
-        async cancel(game) {
+        async cancel(schedule) {
             const [result] = await this.$open(ConfirmModal, {
                 title: 'Confirm',
                 description: 'Are you sure you would like to cancel?',
@@ -92,19 +92,18 @@ export default {
 
             if (!result) return;
 
-            await this.$store.dispatch('game/forfeit', game);
+            await this.$store.dispatch('game/forfeit', schedule);
         },
         enterOrCancel(altered) {
             if (altered.applied) {
-                this.cancel(altered.game);
-            } else this.enter(altered.game);
+                this.cancel(altered.schedule);
+            } else this.enter(altered.schedule);
         },
-        isApplied(game) {
+        isApplied(schedule) {
             return this.applied.some(
-                (it) => it.id === game.id || it === game.id
+                (it) => it.id === schedule.id || it === schedule.id
             );
         },
     },
-
 };
 </script>
