@@ -30,7 +30,7 @@
             <nuxt-link class="sitemap__link" to="/docs">Documentation</nuxt-link>
           </li>
           <li class="sitemap__list-item">
-            <nuxt-link class="sitemap__link" to="https://www.discord.gg/devwars" target="_blank">Join Discord</nuxt-link>
+            <a class="sitemap__link" href="https://www.discord.gg/devwars" target="_blank">Join Discord</a>
           </li>
         </ul>
         <ul class="sitemap__list">
@@ -42,8 +42,8 @@
         <ul class="sitemap__list">
           <li class="sitemap__list-item">EXTRAS</li>
           <li class="sitemap__list-item">
-            <nuxt-link class="sitemap__link" to="https://www.twitchalerts.com/donate/devwars"
-               target="_blank">Donate</nuxt-link>
+            <a class="sitemap__link" href="https://www.twitchalerts.com/donate/devwars"
+               target="_blank">Donate</a>
           </li>
         </ul>
       </div>
@@ -51,39 +51,39 @@
       <div class="footer-bottom">
         <ul class="footer-socials">
           <li class="footer-socials__item twitch">
-            <nuxt-link class="footer-socials__link" to="http://www.twitch.tv/devwars" target="_blank">
+            <a class="footer-socials__link" href="http://www.twitch.tv/devwars" target="_blank">
               <i class="fab fa-twitch"></i>
-            </nuxt-link>
+            </a>
           </li>
           <li class="footer-socials__item discord">
-            <nuxt-link class="footer-socials__link" to="https://www.discord.gg/devwars" target="_blank">
+            <a class="footer-socials__link" href="https://www.discord.gg/devwars" target="_blank">
               <i class="fab fa-discord"></i>
-            </nuxt-link>
+            </a>
           </li>
           <li class="footer-socials__item youtube">
-            <nuxt-link class="footer-socials__link" to="https://www.youtube.com/c/DevWars" target="_blank">
+            <a class="footer-socials__link" href="https://www.youtube.com/c/DevWars" target="_blank">
               <i class="fab fa-youtube"></i>
-            </nuxt-link>
+            </a>
           </li>
           <li class="footer-socials__item reddit">
-            <nuxt-link class="footer-socials__link" to="http://www.reddit.com/r/devwars" target="_blank">
+            <a class="footer-socials__link" href="http://www.reddit.com/r/devwars" target="_blank">
               <i class="fab fa-reddit"></i>
-            </nuxt-link>
+            </a>
           </li>
           <li class="footer-socials__item facebook">
-            <nuxt-link class="footer-socials__link" to="https://www.facebook.com/DevWars" target="_blank">
+            <a class="footer-socials__link" href="https://www.facebook.com/DevWars" target="_blank">
               <i class="fab fa-facebook"></i>
-            </nuxt-link>
+            </a>
           </li>
           <li class="footer-socials__item twitter">
-            <nuxt-link class="footer-socials__link" to="https://twitter.com/devwarstv" target="_blank">
+            <a class="footer-socials__link" href="https://twitter.com/devwarstv" target="_blank">
               <i class="fab fa-twitter"></i>
-            </nuxt-link>
+            </a>
           </li>
           <li class="footer-socials__item google">
-            <nuxt-link class="footer-socials__link" to="https://plus.google.com/112749022510452176816" target="_blank">
+            <a class="footer-socials__link" href="https://plus.google.com/112749022510452176816" target="_blank">
               <i class="fab fa-google-plus"></i>
-            </nuxt-link>
+            </a>
           </li>
 
         </ul>
