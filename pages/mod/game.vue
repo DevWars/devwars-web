@@ -34,9 +34,13 @@ import Http from '../../services/Http';
 import PanelHeader from '~/components/mod/PanelHeader';
 import DeleteModal from '~/components/modal/DeleteModal';
 import EndGameModal from '~/components/modal/EndGameModal';
+import { roles } from '../../utils/auth';
 
 export default {
     name: 'DashboardGame',
+    meta: {
+        auth: [roles.moderator, roles.admin],
+    },
     components: { PanelHeader },
     computed: {
         game() {

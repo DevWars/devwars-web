@@ -75,9 +75,13 @@ import {
     getPlayersByGameTeam,
     getLanguageByGamePlayer,
 } from '~/utils';
+import { roles } from '../../../utils/auth';
 
 export default {
     name: 'GameBrief',
+    meta: {
+        auth: [roles.moderator, roles.admin],
+    },
     components: { Table, GameTeam, Player },
     mixins: [teams, usersFromGame],
     data() {

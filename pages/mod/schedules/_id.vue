@@ -52,9 +52,13 @@ import PanelHeader from '~/components/mod/PanelHeader';
 import Input from '~/components/form/Input';
 import Select from '~/components/form/Select';
 import SquareToggle from '~/components/SquareToggle';
+import { roles } from '../../../utils/auth';
 
 export default {
     name: 'DashboardSchedule',
+    meta: {
+        auth: [roles.moderator, roles.admin],
+    },
     components: { PanelHeader, Input, Select, SquareToggle },
     computed: {
         schedule() {

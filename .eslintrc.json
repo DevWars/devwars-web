@@ -16,6 +16,8 @@
     ],
     "plugins": ["vue", "prettier"],
     "rules": {
+        "array-callback-return": "off",
+        "import/prefer-default-export": "off",
         "indent": ["error", 4],
         "comma-dangle": ["error", "always-multiline"],
         "consistent-return": "off",

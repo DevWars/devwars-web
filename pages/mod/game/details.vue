@@ -89,9 +89,13 @@ import Input from '~/components/form/Input';
 import SquareToggle from '../../../components/SquareToggle';
 import { teams } from '~/utils/mixins';
 import { teamCompletedObjective } from '~/utils';
+import { roles } from '../../../utils/auth';
 
 export default {
     name: 'DashboardGameDetails',
+    meta: {
+        auth: [roles.moderator, roles.admin],
+    },
     components: { SquareToggle, Input },
     mixins: [teams],
     data: () => ({

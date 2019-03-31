@@ -48,9 +48,13 @@
 <script>
 import Http from '../../services/Http';
 import DeleteModal from '~/components/modal/DeleteModal';
+import { roles } from '../../utils/auth';
 
 export default {
     name: 'DashboardTournament',
+    meta: {
+        auth: [roles.moderator, roles.admin],
+    },
     computed: {
         tournament() {
             return this.$store.state.tournament.tournament;

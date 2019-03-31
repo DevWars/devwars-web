@@ -97,7 +97,7 @@ module.exports = {
 
     router: {
         linkExactActiveClass: 'active',
-        middleware: ['pending', 'update-latest-route'],
+        middleware: ['pending', 'update-latest-route', 'auth'],
     },
 
     /*

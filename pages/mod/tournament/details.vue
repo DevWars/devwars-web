@@ -28,9 +28,13 @@
 <script>
 import moment from 'moment';
 import Input from '~/components/form/Input';
+import { roles } from '../../../utils/auth';
 
 export default {
     name: 'DashboardTournamentDetails',
+    meta: {
+        auth: [roles.moderator, roles.admin],
+    },
     components: { Input },
     data: () => ({
         date: '',

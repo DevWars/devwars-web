@@ -3,9 +3,14 @@
 </template>
 
 <script>
+import { roles } from '../../utils/auth';
+
 export default {
-    name: "ModDashboard",
-}
+    name: 'ModDashboard',
+    meta: {
+        auth: [roles.moderator, roles.admin],
+    },
+};
 </script>
 
 

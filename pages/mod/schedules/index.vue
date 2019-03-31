@@ -40,11 +40,15 @@
 import PanelHeader from '~/components/mod/PanelHeader';
 import ListingFilters from '~/components/mod/ListingFilters';
 import Table from '~/components/Table';
+import { roles } from '../../../utils/auth';
 
 import nameFromStatus from '~/utils/gameStatus';
 
 export default {
     name: 'ModSchedules',
+    meta: {
+        auth: [roles.moderator, roles.admin],
+    },
     components: { PanelHeader, ListingFilters, Table },
     computed: {
         schedules() {
