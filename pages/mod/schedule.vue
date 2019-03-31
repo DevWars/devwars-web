@@ -25,10 +25,14 @@
 <script>
 import moment from 'moment';
 import PanelHeader from '~/components/mod/PanelHeader';
+import { roles } from '../../utils/auth';
 
 export default {
     name: 'DashboardSchedule',
     components: { PanelHeader },
+    meta: {
+        auth: [roles.moderator, roles.admin],
+    },
     computed: {
         schedule() {
             const schedules = this.$store.state.game.schedules;

@@ -21,15 +21,15 @@ export default {
     props: {
         page: {
             type: Number,
-            required: true,
+            default: 0,
         },
         perPage: {
             type: Number,
-            required: true,
+            default: 0,
         },
         count: {
             type: Number,
-            required: true,
+            default: 0,
         },
     },
     computed: {
