@@ -28,7 +28,10 @@
                 <td>{{ schedule.title }}</td>
                 <td>{{ schedule.mode }}</td>
                 <td>
-                    <nuxt-link :to="`/mod/schedules/${schedule.id}`" class="btn-link">Edit</nuxt-link>
+                    <nuxt-link
+                        :to="`/mod/schedule/setup?schedule=${schedule.id}`"
+                        class="btn-link"
+                    >Edit</nuxt-link>
                 </td>
             </tr>
         </Table>
