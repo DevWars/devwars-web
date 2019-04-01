@@ -30,7 +30,8 @@
                 <div class="mod-objectives__input">
                     <Input v-model="objective.description" maxlength="110"/>
                     <label>Objective #{{ objective.id }} {{ objective.isBonus ? '(Bonus)' : '' }}</label>
-                    <SquareToggle :active="objective.isBonus" name="bonus"/>
+                    <SquareToggle  :active="objective.isBonus"
+                         name="bonus" @change="objectiveUpdate($event, objective.id)"/>
                 </div>
             </div>
         </form>
@@ -61,6 +62,15 @@ export default {
     },
     async fetch({ store }) {
         await store.dispatch('game/schedules');
+    },
+    methods: {
+        objectiveUpdate(value, objectiveId) {
+            this.$store.dispatch('game/updateScheduleObjective', {
+                value,
+                objectiveId,
+                scheduleId: this.schedule.id,
+            });
+        },
     },
 };
 </script>

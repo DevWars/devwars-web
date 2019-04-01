@@ -20,7 +20,7 @@ export default {
         },
         active: {
             type: Boolean,
-            required: false,
+            required: true,
             default: false,
         },
     },
