@@ -3,12 +3,12 @@ const path = require('path');
 const webpack = require('webpack');
 const parser = require('body-parser');
 
+const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
+const apiUrl = process.env.API_URL || 'http://localhost:8080';
+
 module.exports = {
     mode: 'universal',
-    env: {
-        baseUrl: process.env.BASE_URL || 'http://localhost:3000',
-        apiUrl: process.env.API_URL || 'http://localhost:8080',
-    },
+    env: { baseUrl, apiUrl },
     /*
      ** Headers of the page
      */
@@ -72,8 +72,8 @@ module.exports = {
     loading: { color: '#ff007d' },
 
     axios: {
-        baseURL: process.env.API_URL,
-        browserBaseURL: process.env.API_URL,
+        baseURL: apiUrl,
+        browserBaseURL: apiUrl,
         credentials: true,
     },
 
