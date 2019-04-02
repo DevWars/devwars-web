@@ -1,9 +1,14 @@
+require('dotenv');
 const path = require('path');
 const webpack = require('webpack');
 const parser = require('body-parser');
 
 module.exports = {
     mode: 'universal',
+    env: {
+        baseUrl: process.env.BASE_URL || 'http://localhost:3000',
+        apiUrl: process.env.API_URL || 'http://localhost:8080',
+    },
     /*
      ** Headers of the page
      */
@@ -67,8 +72,8 @@ module.exports = {
     loading: { color: '#ff007d' },
 
     axios: {
-        baseURL: 'http://localhost:8080/',
-        browserBaseURL: 'http://localhost:8080/',
+        baseURL: process.env.API_URL,
+        browserBaseURL: process.env.API_URL,
         credentials: true,
     },
 
