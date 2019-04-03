@@ -39,12 +39,12 @@
                 <UserMenu v-else :user="user">
                     <template #default="{close}">
                         <nuxt-link
-                            v-if="isAdmin"
+                            v-if="isStaff"
                             to="/mod/dashboard"
                             class="btn-link"
                             @click.native="close"
                         >Modpanel</nuxt-link>
-                        <div v-if="isAdmin" class="divider"></div>
+                        <div v-if="isStaff" class="divider"></div>
                         <nuxt-link to="/dashboard" class="btn-link" @click.native="close">Dashboard</nuxt-link>
                         <nuxt-link to="/badges" class="btn-link" @click.native="close">Badges</nuxt-link>
                         <nuxt-link
@@ -60,10 +60,7 @@
         </div>
 
         <!-- Mobile -->
-        <HeaderMobile
-            v-if="toggleMobileMenuVal"
-            :toggleMobileMenu="toggleMobileMenu"
-        />
+        <HeaderMobile v-if="toggleMobileMenuVal" :toggleMobileMenu="toggleMobileMenu"/>
     </div>
 </template>
 
@@ -85,8 +82,8 @@ export default {
         user() {
             return this.$store.state.user.user;
         },
-        isAdmin() {
-            return this.user.role === 'ADMIN';
+        isStaff() {
+            return this.user.role === 'ADMIN' || this.user.role === 'MODERATOR';
         },
     },
     methods: {

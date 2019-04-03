@@ -26,7 +26,6 @@
         <Table>
             <tr slot="head">
                 <th>Username</th>
-                <th>Rank</th>
                 <th>Games</th>
                 <th>Won</th>
                 <th>Lost</th>
@@ -37,25 +36,24 @@
                 <th>&nbsp;</th>
             </tr>
 
-            <!-- <tr v-for="user in applications" :key="user.id">
+            <tr v-for="applicant in applications" :key="applicant.id">
                 <td>
-                    <User :user="user"/>
+                    <User :user="applicant"/>
                 </td>
-                <td>{{ user.statistics.rank.rank }}</td>
-                <td>{{ user.statistics.wins + user.statistics.losses }}</td>
-                <td>{{ user.statistics.wins }}</td>
-                <td>{{ user.statistics.losses }}</td>
-                <td>{{ rating(user, 'html')}}</td>
-                <td>{{ rating(user, 'css')}}</td>
-                <td>{{ rating(user, 'js')}}</td>
-                <td class="color-devcoins">{{ user.statistics.coins | number }}</td>
+                <td>{{ applicant.gameStats.wins + applicant.gameStats.loses }}</td>
+                <td>{{ applicant.gameStats.wins }}</td>
+                <td>{{ applicant.gameStats.loses }}</td>
+                <td>{{ applicant.profile.skills.html }}</td>
+                <td>{{ applicant.profile.skills.css }}</td>
+                <td>{{ applicant.profile.skills.js }}</td>
+                <td class="color-devcoins">{{ applicant.stats.coins }}</td>
                 <td class="modpanel-table__actions">
                     <a href="#edit" class="btn-link btn-icon-reverse" @click="addPlayer(user)">
                         <span>Add Player</span>
                         <i class="fa fa-caret-down"></i>
                     </a>
                 </td>
-            </tr>-->
+            </tr>
         </Table>
     </div>
 </template>
@@ -66,6 +64,7 @@ import Table from '~/components/Table';
 import Http from '../../../services/Http';
 import GameTeam from '~/components/game/GameTeam';
 import Player from '~/components/game/Player';
+import User from '~/components/user/User';
 import AddPlayerModal from '~/components/modal/AddPlayerModal';
 import ConfirmModal from '~/components/modal/ConfirmModal';
 import AddRegistrantModal from '~/components/modal/AddRegistrantModal';
@@ -82,7 +81,7 @@ export default {
     meta: {
         auth: [roles.moderator, roles.admin],
     },
-    components: { Table, GameTeam, Player },
+    components: { Table, GameTeam, Player, User },
     mixins: [teams, usersFromGame],
     data() {
         return {
@@ -98,6 +97,28 @@ export default {
 
             return user.competitor[`${lang}_rate`];
         },
+    },
+    async asyncData({ query }) {
+        const applications = await Http.for(
+            `/applications/${query.game}`
+        ).get();
+
+        for (const applicant of applications) {
+            // eslint-disable-next-line no-await-in-loop
+            applicant.stats = await Http.for(
+                `/users/${applicant.id}/stats`
+            ).get();
+            // eslint-disable-next-line no-await-in-loop
+            applicant.gameStats = await Http.for(
+                `/users/${applicant.id}/stats/game`
+            ).get();
+            // eslint-disable-next-line no-await-in-loop
+            applicant.profile = await Http.for(
+                `/users/${applicant.id}/profile`
+            ).get();
+        }
+
+        return { applications };
     },
     // mounted() {
     //     this.refresh();
