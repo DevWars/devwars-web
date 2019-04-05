@@ -70,7 +70,6 @@ export default {
         nameFromStatus,
         async activate() {
             await this.$axios.post(`/games/${this.game.id}/activate`);
-
             await this.$store.dispatch('game/game', this.game.id);
         },
         async endGame() {
@@ -78,28 +77,7 @@ export default {
         },
         async save() {
             await this.$axios.patch(`/games/${this.game.id}`, this.game);
-        },
-        async oldSave() {
-            // const cloned = { ...this.game };
-            // delete cloned.objectives;
-            // delete cloned.teams;
-            // // Make sure the list doesn't include objectives with games
-            // const transformed = this.game.objectives
-            //     .map((it) => ({ ...it, game: null }))
-            //     .filter((it) => it.description);
-            // await Http.for(`/game/${this.game.id}/objectives`).post(
-            //     transformed
-            // );
-            // // Go ahead and save each team
-            // for (const team of Object.values(this.game.teams)) {
-            //     const cloned = { ...team };
-            //     delete cloned.players;
-            //     Http.for('game/team').save(cloned);
-            // }
-            // // Last but not least, save the game
-            // await Http.for('games').save(cloned);
-            // // Can't forget to update our state with the new game
-            // await this.$store.dispatch('game/game', this.game.id);
+            await this.$store.dispatch('game/game', this.game.id);
         },
         async remove() {
             const [confirmed] = await this.$open(DeleteModal, {

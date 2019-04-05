@@ -1,0 +1,75 @@
+<template>
+    <form v-async-submit="[submit]" class="modal">
+        <h1>New Schedule</h1>
+
+        <div class="form-group">
+            <Select v-model="mode" :selected="mode" required>
+                <option value="Classic">Classic</option>
+                <option value="Zen Garden">Zen Garden</option>
+                <option value="Blitz">Blitz</option>
+            </Select>
+            <label>Game mode</label>
+        </div>
+        <div class="form-group">
+            <div class="form-group">
+                <Input v-model="date" required/>
+                <label>Date</label>
+            </div>
+            <div class="form-group">
+                <Input v-model="time" required/>
+                <label>Time</label>
+            </div>
+        </div>
+        <div class="align-right">
+            <button type="button" class="btn btn-outline-gray" @click.prevent="close(false)">Cancel</button>
+            <button class="btn btn-primary">Create Schedule</button>
+        </div>
+    </form>
+</template>
+
+
+<script>
+import moment from 'moment';
+import Select from '~/components/form/Select';
+import Input from '~/components/form/Input';
+
+export default {
+    name: 'CreateGameModal',
+    components: { Select, Input },
+    props: {
+        resolve: {
+            type: Function,
+            required: true,
+        },
+    },
+    data: () => ({
+        mode: 'Classic',
+        date: moment
+            .utc(new Date())
+            .add(2, 'weeks')
+            .format('MM/DD/YYYY'),
+        time: '17:00',
+    }),
+    computed: {
+        startTime() {
+            const timestamp = `${this.date} ${this.time}`;
+            return moment.utc(timestamp);
+        },
+    },
+    methods: {
+        async submit() {
+            const res = await this.$axios.post('/schedules', {
+                mode: this.mode,
+                startTime: this.startTime,
+            });
+
+            this.$router.push({
+                path: '/mod/schedule/setup',
+                query: { schedule: res.data.id },
+            });
+
+            this.close(true);
+        },
+    },
+};
+</script>

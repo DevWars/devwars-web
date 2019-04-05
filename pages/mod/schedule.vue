@@ -36,20 +36,18 @@ export default {
     computed: {
         schedule() {
             const schedules = this.$store.state.game.schedules;
-
             return schedules.find(
                 (schedule) => schedule.id === Number(this.$route.query.schedule)
             );
         },
         startDate() {
-            return moment(this.schedule.startTime).format('MMMM D, YYYY');
+            return moment(this.schedule.startTime).format('MM/DD/YYYY');
         },
         startTime() {
             return moment(this.schedule.startTime).format('HH:mm');
         },
         viewingSetupPage() {
             const currentPage = this.$route.path.split('/').pop();
-
             return currentPage === 'setup';
         },
     },

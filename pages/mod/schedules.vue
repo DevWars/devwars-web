@@ -1,7 +1,7 @@
 <template>
     <div>
         <PanelHeader title="Schedules" showSearch>
-            <button class="btn btn-primary btn-icon btn-sm" disabled>
+            <button class="btn btn-primary btn-icon btn-sm" @click="createSchedule">
                 <i class="fa fa-plus"></i>
                 <span>Add Schedule</span>
             </button>
@@ -46,6 +46,7 @@ import Table from '~/components/Table';
 import { roles } from '../../utils/auth';
 
 import nameFromStatus from '~/utils/gameStatus';
+import CreateScheduleModal from '../../components/modal/CreateScheduleModal.vue';
 
 export default {
     name: 'ModSchedules',
@@ -63,6 +64,9 @@ export default {
     },
     methods: {
         nameFromStatus,
+        async createSchedule() {
+            await this.$open(CreateScheduleModal, {});
+        },
     },
 };
 </script>
