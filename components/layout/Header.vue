@@ -121,11 +121,9 @@ export default {
     display: inline-block;
     margin-right: $s-space;
 
-    img {
-        max-height: 40px;
-    }
-
     &-full {
+        width: 160px;
+
         @include breakpoint(sm) {
             display: none;
         }
@@ -133,6 +131,7 @@ export default {
 
     &-icon {
         display: none;
+        width: 40px;
 
         @include breakpoint(sm) {
             display: inline-block;
