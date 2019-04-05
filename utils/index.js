@@ -20,12 +20,15 @@ export function getPlayersByGameTeam(game, team) {
 
 export function getLanguageByGamePlayer(game, player) {
     const editors = game.editors;
+    const languages = [];
 
     for (const editor of Object.values(editors)) {
         if (player.id === editor.player) {
-            return editor.language;
+            languages.push(editor.language);
         }
     }
+
+    return languages;
 }
 
 export function teamCompletedObjective(teamIndex, objective) {

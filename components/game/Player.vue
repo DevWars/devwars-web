@@ -1,8 +1,10 @@
 <template>
-    <div class="Player">
-        <User :user="user" :class="team.name.toLowerCase()"/>
+    <div class="Player" @click="$emit('click')">
+        <User :user="user" :class="team.name"/>
 
-        <strong v-if="language" class="language" :class="language.toLowerCase()">{{ language }}</strong>
+        <div class="languages">
+            <strong v-for="language in languages" :key="language" :class="language">{{ language }}</strong>
+        </div>
     </div>
 </template>
 
@@ -22,8 +24,8 @@ export default {
             type: Object,
             required: true,
         },
-        language: {
-            type: String,
+        languages: {
+            type: Array,
             required: true,
         },
     },
@@ -63,8 +65,13 @@ export default {
         font-size: $h4-font-size;
     }
 
-    .language {
+    .languages > strong {
+        display: inline-block;
         text-transform: uppercase;
+
+        &:not(:first-child) {
+            padding-left: 10px;
+        }
 
         &.html {
             color: $html-color;

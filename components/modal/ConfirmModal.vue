@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="modal">
         <h1 v-if="title">{{ title }}</h1>
         <p>{{ description }}</p>
 

@@ -7,7 +7,7 @@
                     :key="player.id"
                     :user="player"
                     :team="team"
-                    :language="getLanguageByGamePlayer(game, player)"
+                    :languages="getLanguageByGamePlayer(game, player)"
                     @click="removePlayer(player)"
                 />
             </GameTeam>
@@ -48,7 +48,7 @@
                 <td>{{ applicant.profile.skills.js }}</td>
                 <td class="color-devcoins">{{ applicant.stats.coins }}</td>
                 <td class="modpanel-table__actions">
-                    <a href="#edit" class="btn-link btn-icon-reverse" @click="addPlayer(user)">
+                    <a href="#edit" class="btn-link btn-icon-reverse" @click="addPlayer(applicant)">
                         <span>Add Player</span>
                         <i class="fa fa-caret-down"></i>
                     </a>
@@ -66,7 +66,7 @@ import GameTeam from '~/components/game/GameTeam';
 import Player from '~/components/game/Player';
 import User from '~/components/user/User';
 import AddPlayerModal from '~/components/modal/AddPlayerModal';
-import ConfirmModal from '~/components/modal/ConfirmModal';
+import DeleteModal from '~/components/modal/DeleteModal';
 import AddRegistrantModal from '~/components/modal/AddRegistrantModal';
 import { teams, usersFromGame } from '~/utils/mixins';
 import {
@@ -120,36 +120,43 @@ export default {
 
         return { applications };
     },
-    // mounted() {
-    //     this.refresh();
-    // },
     methods: {
         getScoreByGameTeam,
         getPlayersByGameTeam,
         getLanguageByGamePlayer,
         addPlayer(user) {
+            // Add languages to each player for Database
+            for (const player of Object.values(this.game.players)) {
+                player.language = getLanguageByGamePlayer(this.game, player);
+            }
+
             this.$open(AddPlayerModal, { user, game: this.game });
         },
-        // async refresh() {
-        //     this.applications = await Http.for(`game/${this.game.id}`).get(
-        //         'applications'
-        //     );
-        // },
         async addRegistrant() {
             await this.$open(AddRegistrantModal, { game: this.game });
 
             await this.refresh();
         },
         async removePlayer(player) {
-            const confirmed = await this.$open(ConfirmModal, {
-                description:
-                    'Are you sure you would like to remove this player?',
+            const confirmed = await this.$open(DeleteModal, {
+                title: 'Remove Player?',
+                description: `Are you sure you would like to remove this player?`,
             });
             if (!confirmed) return;
 
-            await Http.for(`/game/players/${player.id}`).delete();
+            // Add languages to each player for Database
+            for (const player of Object.values(this.game.players)) {
+                player.language = getLanguageByGamePlayer(this.game, player);
+            }
 
-            // team.players.splice(team.players.indexOf(player), 1);
+            const res = await this.$axios.delete(
+                `/games/${this.game.id}/player`,
+                {
+                    data: { player },
+                }
+            );
+
+            this.$store.commit('game/game', res.data);
         },
     },
 };

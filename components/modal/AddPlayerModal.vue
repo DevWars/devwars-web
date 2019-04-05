@@ -1,5 +1,5 @@
 <template>
-    <form v-async-submit="[save]">
+    <form v-async-submit="[addPlayer]">
         <div class="form-group">
             <div class="select-container">
                 <select v-model="team" class="form-control" required>
@@ -23,28 +23,26 @@
             </div>
         </div>
         <div class="modal__actions">
-            <button class="btn btn-outline-gray">Cancel</button>
-            <button class="btn btn-primary">Save</button>
+            <button class="btn btn-outline-gray" @click.prevent="close(false)">Cancel</button>
+            <button class="btn btn-primary">Add Player</button>
         </div>
     </form>
 </template>
 
 
 <script>
-import Http from '../../services/Http';
-
 export default {
     name: 'AddPlayerModal',
     props: {
-        'game': {
+        game: {
             type: Object,
             required: true,
         },
-        'user': {
+        user: {
             type: Object,
             required: true,
         },
-        'resolve': {
+        resolve: {
             type: Function,
             required: true,
         },
@@ -56,18 +54,32 @@ export default {
         };
     },
     methods: {
-        async save() {
-            const player = await Http.for(`game/team/${this.team}/players`).post(
-                {},
+        async addPlayer() {
+            this.language = this.language.toLowerCase();
+
+            const player = {
+                id: this.user.id,
+                username: this.user.username,
+                language: this.language,
+                team: this.team,
+            };
+
+            const team = {
+                id: this.team,
+                name: this.team === 0 ? 'blue' : 'red',
+                players: this.game.players,
+            };
+
+            const res = await this.$axios.post(
+                `/games/${this.game.id}/player`,
                 {
-                    user: this.user.id,
+                    player,
+                    team,
                     language: this.language,
                 }
             );
 
-            Object.values(this.game.teams)
-                .find((it) => it.id === this.team)
-                .players.push(player);
+            this.$store.commit('game/game', res.data);
 
             this.close(true);
         },

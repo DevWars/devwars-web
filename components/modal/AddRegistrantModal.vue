@@ -20,15 +20,15 @@ export default {
     name: 'AddRegistrantModal',
     components: { Input },
     props: {
-        'game': {
+        game: {
             type: Object,
             required: true,
-        }, 
-        'resolve': {
+        },
+        resolve: {
             type: Function,
             required: true,
         },
-        'reject': {
+        reject: {
             type: Function,
             required: true,
         },
@@ -36,7 +36,7 @@ export default {
     data: () => {
         return {
             username: '',
-        }
+        };
     },
     methods: {
         async addRegistrant() {
