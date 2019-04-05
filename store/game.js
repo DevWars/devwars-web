@@ -52,6 +52,48 @@ export const mutations = {
     active(state, game) {
         state.active = game;
     },
+
+    updateScheduleObjective(state , { value, objectiveId, scheduleId }) {
+        let tmp = null;
+
+        const schedules = state.schedules.map((schedule) => {
+            if (schedule.id === scheduleId) {
+                schedule.objectives[objectiveId].isBonus = value;
+                tmp = schedule;
+            }
+            return schedule;
+        });
+
+        if (tmp != null) state.schedules = schedules;
+    },
+
+    addScheduleObjective(state, { scheduleId, objective }) {
+        let objectives = null;
+
+        const schedules = state.schedules.map((schedule) => {
+            if (schedule.id === scheduleId) {
+                schedule.objectives[objective.id] = objective;
+                objectives = schedule.objectives;
+            }
+            return schedule;
+        });
+        
+        if (objectives != null) state.schedules = schedules;
+    },
+
+    deleteScheduleObjective(state, { scheduleId, objectiveId }) {
+        let objectives = null;
+
+        const schedules = state.schedules.map((schedule) => {
+            if (schedule.id === scheduleId) {
+                delete schedule.objectives[objectiveId]
+                objectives = schedule.objectives;
+            }
+            return schedule;
+        });
+
+        if (objectives != null) state.schedules = schedules;
+    },
 };
 
 export const actions = {
@@ -63,7 +105,6 @@ export const actions = {
 
     async game({ commit }, id) {
         const game = await Http.for(`games/${id}`).get();
-
         commit('game', game);
     },
 
@@ -139,42 +180,5 @@ export const actions = {
             { type: 'success', message: `Sorry to see you go.` },
             { root: true }
         );
-    },
-
-    async updateScheduleObjective(
-        { state, commit, dispatch },
-        { value, objectiveId, scheduleId }
-    ) {
-        let tmp = null;
-
-        const schedules = state.schedules.map((schedule) => {
-            if (schedule.id === scheduleId) {
-                schedule.objectives[objectiveId].isBonus = value;
-                tmp = schedule;
-            }
-            return schedule;
-        });
-
-        // maybe we can here split the full schedules update for a specific update in commit but it look's
-        // like ok for me right now
-
-        try {
-            await this.$axios.patch(`schedules/${scheduleId}`, {
-                objectives: tmp.objectives,
-            });
-            commit('schedules', schedules);
-
-            dispatch(
-                'toast/add',
-                { type: 'success', message: 'Objectives updated' },
-                { root: true }
-            );
-        } catch (e) {
-            dispatch(
-                'toast/add',
-                { type: 'error', message: "Couldn't save objectives" },
-                { root: true }
-            );
-        }
     },
 };
