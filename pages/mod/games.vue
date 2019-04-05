@@ -12,6 +12,7 @@
         <Table>
             <tr slot="head">
                 <th>Date</th>
+                <th>Status</th>
                 <th>Season</th>
                 <th>Theme</th>
                 <th>Gamemode</th>
@@ -20,6 +21,11 @@
 
             <tr v-for="game in games" :key="game.id">
                 <td>{{ game.createdAt | moment('MM/DD/YYYY') }}</td>
+                <td>
+                    <span
+                        :class="['mod-status', nameFromStatus(game.status).toLowerCase()]"
+                    >{{ nameFromStatus(game.status) }}</span>
+                </td>
                 <td>{{ game.season }}</td>
                 <td>{{ game.title }}</td>
                 <td>{{ game.mode }}</td>
@@ -42,6 +48,8 @@ import Table from '~/components/Table';
 import Pagination from '~/components/Pagination';
 import { roles } from '../../utils/auth';
 
+import nameFromStatus from '~/utils/gameStatus';
+
 export default {
     name: 'ModGames',
     meta: {
@@ -57,6 +65,7 @@ export default {
         await store.dispatch('game/all');
     },
     methods: {
+        nameFromStatus,
         async createGame() {
             const [game] = await this.$open(CreateGameModal, {});
 

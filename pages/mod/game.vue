@@ -6,16 +6,16 @@
         >
             <a href="/mod/games" class="btn btn-outline-gray">Back</a>
             <button
-                v-if="game.active && !game.done"
+                v-if="isActive && !isEnded && !isScheduled"
                 v-async-click="[endGame]"
                 class="btn btn-danger"
             >End</button>
             <button
-                v-show="!game.done && !game.active"
+                v-if="!isActive && !isEnded && isScheduled"
                 v-async-click="[activate]"
                 class="btn btn-primary"
             >Activate</button>
-            <button v-async-click="[save]" class="btn btn-primary">Save</button>
+            <button v-if="viewingDetailsPage" v-async-click="[save]" class="btn btn-primary">Save</button>
             <button v-async-click="[remove]" class="btn btn-secondary">Delete</button>
         </PanelHeader>
 
@@ -36,6 +36,8 @@ import DeleteModal from '~/components/modal/DeleteModal';
 import EndGameModal from '~/components/modal/EndGameModal';
 import { roles } from '../../utils/auth';
 
+import nameFromStatus from '~/utils/gameStatus';
+
 export default {
     name: 'DashboardGame',
     meta: {
@@ -46,47 +48,58 @@ export default {
         game() {
             return this.$store.state.game.game;
         },
+        isActive() {
+            return nameFromStatus(this.game.status) === 'ACTIVE';
+        },
+        isEnded() {
+            return nameFromStatus(this.game.status) === 'ENDED';
+        },
+        isScheduled() {
+            return nameFromStatus(this.game.status) === 'SCHEDULED';
+        },
+        viewingDetailsPage() {
+            const currentPage = this.$route.path.split('/').pop();
+
+            return currentPage === 'details';
+        },
     },
     async fetch({ store, query }) {
         await store.dispatch('game/game', query.game);
     },
     methods: {
+        nameFromStatus,
         async activate() {
-            this.game.status = 2;
+            await this.$axios.post(`/games/${this.game.id}/activate`);
 
-            await this.save();
+            await this.$store.dispatch('game/game', this.game.id);
         },
         async endGame() {
             await this.$open(EndGameModal, { game: this.game });
         },
         async save() {
-            const cloned = { ...this.game };
-
-            delete cloned.objectives;
-            delete cloned.teams;
-
-            // Make sure the list doesn't include objectives with games
-            const transformed = this.game.objectives
-                .map((it) => ({ ...it, game: null }))
-                .filter((it) => it.description);
-
-            await Http.for(`/game/${this.game.id}/objectives`).post(
-                transformed
-            );
-
-            // Go ahead and save each team
-            for (const team of Object.values(this.game.teams)) {
-                const cloned = { ...team };
-                delete cloned.players;
-
-                Http.for('game/team').save(cloned);
-            }
-
-            // Last but not least, save the game
-            await Http.for('games').save(cloned);
-
-            // Can't forget to update our state with the new game
-            await this.$store.dispatch('game/game', this.game.id);
+            console.log('TO-DO: Implement Saving');
+        },
+        async oldSave() {
+            // const cloned = { ...this.game };
+            // delete cloned.objectives;
+            // delete cloned.teams;
+            // // Make sure the list doesn't include objectives with games
+            // const transformed = this.game.objectives
+            //     .map((it) => ({ ...it, game: null }))
+            //     .filter((it) => it.description);
+            // await Http.for(`/game/${this.game.id}/objectives`).post(
+            //     transformed
+            // );
+            // // Go ahead and save each team
+            // for (const team of Object.values(this.game.teams)) {
+            //     const cloned = { ...team };
+            //     delete cloned.players;
+            //     Http.for('game/team').save(cloned);
+            // }
+            // // Last but not least, save the game
+            // await Http.for('games').save(cloned);
+            // // Can't forget to update our state with the new game
+            // await this.$store.dispatch('game/game', this.game.id);
         },
         async remove() {
             const [confirmed] = await this.$open(DeleteModal, {
