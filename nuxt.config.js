@@ -84,7 +84,6 @@ module.exports = {
     css: [
         '~assets/scss/main.scss',
         'cropperjs/dist/cropper.css',
-        'flatpickr/dist/flatpickr.css',
         'vue-js-modal/dist/styles.css',
     ],
 

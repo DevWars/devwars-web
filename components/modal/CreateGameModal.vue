@@ -9,7 +9,7 @@
             </select>
         </div>
         <div class="form-group">
-            <DatePicker v-model="date"/>
+            <!-- <DatePicker v-model="date"/> -->
 
             <label>When is the game?</label>
         </div>
@@ -23,13 +23,11 @@
 
 <script>
 import moment from 'moment';
-import DatePicker from '../form/DatePicker';
 
 export default {
     name: 'CreateGameModal',
-    components: { DatePicker },
     props: {
-        'resolve': {
+        resolve: {
             type: Function,
             required: true,
         },

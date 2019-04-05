@@ -141,17 +141,19 @@ export const actions = {
         );
     },
 
-    async updateScheduleObjective({state, commit, dispatch}, { value, objectiveId, scheduleId}) {
-
+    async updateScheduleObjective(
+        { state, commit, dispatch },
+        { value, objectiveId, scheduleId }
+    ) {
         let tmp = null;
 
-        const schedules = state.schedules.map(schedule => {
+        const schedules = state.schedules.map((schedule) => {
             if (schedule.id === scheduleId) {
-                schedule.objectives[objectiveId].isBonus = value
+                schedule.objectives[objectiveId].isBonus = value;
                 tmp = schedule;
             }
-            return schedule
-        })
+            return schedule;
+        });
 
         // maybe we can here split the full schedules update for a specific update in commit but it look's
         // like ok for me right now
@@ -159,21 +161,20 @@ export const actions = {
         try {
             await this.$axios.patch(`schedules/${scheduleId}`, {
                 objectives: tmp.objectives,
-            })
+            });
             commit('schedules', schedules);
 
             dispatch(
                 'toast/add',
-                { type: 'success', message: `update objectve ok` },
+                { type: 'success', message: 'Objectives updated' },
                 { root: true }
             );
-        } catch(e) {
+        } catch (e) {
             dispatch(
                 'toast/add',
-                { type: 'error', message: `update objective failed` },
+                { type: 'error', message: "Couldn't save objectives" },
                 { root: true }
             );
         }
-
     },
 };

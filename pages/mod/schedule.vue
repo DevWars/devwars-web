@@ -1,8 +1,8 @@
 <template>
     <div>
         <PanelHeader :title="startDate" :subtitle="`@ ${startTime} UTC`">
-            <a href="/mod/schedule" class="btn btn-outline-gray">Back</a>
-            <button class="btn btn-primary" disabled>Save</button>
+            <a href="/mod/schedules" class="btn btn-outline-gray">Back</a>
+            <button v-if="viewingSetupPage" v-async-click="[save]" class="btn btn-primary">Save</button>
             <button class="btn btn-secondary" disabled>Delete</button>
         </PanelHeader>
 
@@ -47,9 +47,22 @@ export default {
         startTime() {
             return moment(this.schedule.startTime).format('HH:mm');
         },
+        viewingSetupPage() {
+            const currentPage = this.$route.path.split('/').pop();
+
+            return currentPage === 'setup';
+        },
     },
     async fetch({ store, query }) {
         await store.dispatch('game/schedules', query.schedule);
+    },
+    methods: {
+        async save() {
+            await this.$axios.patch(
+                `/schedules/${this.schedule.id}`,
+                this.schedule
+            );
+        },
     },
 };
 </script>

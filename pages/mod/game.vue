@@ -77,7 +77,7 @@ export default {
             await this.$open(EndGameModal, { game: this.game });
         },
         async save() {
-            console.log('TO-DO: Implement Saving');
+            await this.$axios.patch(`/games/${this.game.id}`, this.game);
         },
         async oldSave() {
             // const cloned = { ...this.game };

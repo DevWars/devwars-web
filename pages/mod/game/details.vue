@@ -1,23 +1,15 @@
 <template>
     <div class="mod-card">
         <form class="mod-form">
-            <h3 class="modpanel__subtitle">Main</h3>
-            <div class="form-group">
-                <Input v-model="game.createdAt"/>
-                <label>Date</label>
-            </div>
             <h3 class="modpanel__subtitle">Game</h3>
             <div class="form-group">
-                <div class="select-container">
-                    <select v-model="game.mode" class="form-control">
-                        <option value></option>
-                        <option>Classic</option>
-                        <option>Zen Garden</option>
-                        <option>Blitz</option>
-                        <option>Coffee Run</option>
-                    </select>
-                    <label>Gamemode</label>
-                </div>
+                <Select v-model="game.mode" :selected="game.mode">
+                    <option value></option>
+                    <option value="Classic">Classic</option>
+                    <option value="Zen Garden">Zen Garden</option>
+                    <option value="Blitz">Blitz</option>
+                </Select>
+                <label>Gamemode</label>
             </div>
             <div class="form-group">
                 <Input v-model="game.title"/>
@@ -86,6 +78,7 @@
 
 <script>
 import Input from '~/components/form/Input';
+import Select from '~/components/form/Select';
 import SquareToggle from '../../../components/SquareToggle';
 import { teams } from '~/utils/mixins';
 import { teamCompletedObjective } from '~/utils';
@@ -96,7 +89,7 @@ export default {
     meta: {
         auth: [roles.moderator, roles.admin],
     },
-    components: { SquareToggle, Input },
+    components: { SquareToggle, Input, Select },
     mixins: [teams],
     data: () => ({
         date: '',
