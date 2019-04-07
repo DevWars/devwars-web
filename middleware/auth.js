@@ -11,7 +11,6 @@ export default ({ store, route, redirect, error }) => {
             else auth = meta.auth;
 
             if (!isAuthorized(role, auth)) {
-                console.log('je suis autorized');
                 return error({
                     statusCode: 401,
                     message: 'What you trying',
