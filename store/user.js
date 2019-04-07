@@ -142,7 +142,7 @@ export const actions = {
 
     async settings({ commit, dispatch, state }) {
         try {
-            const user = await this.$axios.put(
+            const user = await this.$axios.patch(
                 `users/${state.user.id}/profile`,
                 state.profile
             );
