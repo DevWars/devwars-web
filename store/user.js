@@ -20,10 +20,10 @@ export const mutations = {
     },
 
     profile(state, profile) {
-        state.profile = profile
+        state.profile = profile;
     },
 
-    profileUpdate(state, {key, values}) {
+    profileUpdate(state, { key, values }) {
         state.profile[key] = values;
     },
 
@@ -114,9 +114,17 @@ export const actions = {
 
     async register({ dispatch }, registration) {
         try {
-            await Http.for('auth').post('register', registration);
+            await this.$axios.post('/auth/register', registration);
 
             await dispatch('refresh');
+
+            dispatch(
+                'toast/add',
+                { type: 'success', message: 'Welcome to DevWars!' },
+                { root: true }
+            );
+
+            await dispatch('nuxtServerInit', null, { root: true });
 
             dispatch('navigate', '/dashboard', { root: true });
         } catch (e) {
