@@ -59,12 +59,6 @@ module.exports = {
         ],
     },
 
-    serverMiddleware: [
-        { path: '/mail/translate', handler: parser.json({ limit: '5mb' }) },
-        { path: '/mail/translate', handler: '~/mail/translate' },
-        { path: '/mail/render', handler: '~/mail/render' },
-    ],
-
     debug: true,
     /*
      ** Customize the progress bar color
