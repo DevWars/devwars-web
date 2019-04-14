@@ -238,6 +238,7 @@ export default {
         if (!query.game) return {};
 
         return { game: await Http.for(`game/${query.game}`).get() };
+        // return { game: await this.$axios.get(`game/${query.game}`) };
     },
     methods: {
         tooltip(language) {
@@ -263,9 +264,11 @@ export default {
             this.competitor.dob = date.unix() * 1000;
 
             try {
-                await Http.for(`user/${this.user.id}/competitor`).save(
-                    this.competitor
-                );
+                // await Http.for(`user/${this.user.id}/competitor`).save(
+                //     this.competitor
+                // );
+
+                // await this.$axios.
 
                 if (this.game) {
                     await this.$store.dispatch('game/apply', this.game);

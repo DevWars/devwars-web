@@ -11,7 +11,7 @@
 
 
 <script>
-import Http from '../../services/Http';
+// import Http from '../../services/Http';
 
 export default {
     name: 'EndGameModal',
@@ -27,9 +27,16 @@ export default {
     },
     methods: {
         async end(team) {
-            await Http.for(`game/${this.game.id}/ended`).post({
-                winner: team.id,
-            });
+            await this.$axios({
+                method: 'post',
+                url: `game/${this.game.id}/ended`,
+                data: {
+                    winner: team.id,
+                },
+            })
+            // await Http.for(`game/${this.game.id}/ended`).post({
+            //     winner: team.id,
+            // });
 
             this.close(team);
         },

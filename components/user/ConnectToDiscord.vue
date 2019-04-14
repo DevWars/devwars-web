@@ -1,14 +1,13 @@
 <template>
-    <a v-if="!hasDiscord" :href="discordUrl" class="btn btn-discord btn-icon" target="_blank">
+    <a v-if="!hasDiscord" :href="discordUrl" class="btn btn-discord btn-icon">
         <i class="fab fa-discord"></i>
         <span>Connect Discord</span>
     </a>
-    <a v-else v-async-click="[removeProvider, 'DISCORD']" class="btn btn-outline-success btn-icon">
+    <a v-else  class="btn btn-outline-success btn-icon" @click="removeProvider('DISCORD')">
         <i class="fa fa-check"></i>
         <span>Discord Connected</span>
     </a>
 </template>
-
 
 <script>
 import { mapActions } from 'vuex';
@@ -18,15 +17,12 @@ export default {
     name: 'ConnectToDiscord',
     data: () => {
         return {
-            discordUrl: `https://discordapp.com/api/oauth2/authorize?client_id=465280450420670484&redirect_uri=${
+            discordUrl: `https://discordapp.com/api/oauth2/authorize?client_id=${process.env.clientID}&redirect_uri=${
                 process.env.apiUrl
             }/oauth/discord&response_type=code&scope=identify`,
         };
     },
     computed: {
-        ...mapActions('user', {
-            removeProvider: 'disconnectLinkedAccount',
-        }),
         user() {
             return this.$store.state.user.user;
         },
@@ -38,21 +34,12 @@ export default {
         },
     },
     mounted() {
-        this.check();
-    },
-    beforeDestroy() {
-        if (this.timeout) {
-            clearTimeout(this.timeout);
-        }
+        this.refresh();
     },
     methods: {
-        async check() {
-            await this.refreshLinks();
-
-            this.timeout = setTimeout(this.check.bind(this), 3000);
-        },
         ...mapActions('user', {
-            refreshLinks: 'linkedAccounts',
+            removeProvider: 'disconnectLinkedAccount',
+            refresh: 'linkedAccounts',
         }),
     },
 };

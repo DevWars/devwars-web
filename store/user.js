@@ -234,6 +234,7 @@ export const actions = {
         );
 
         commit('linkedAccounts', accounts);
+
         return accounts;
     },
 

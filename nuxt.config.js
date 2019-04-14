@@ -1,14 +1,15 @@
-require('dotenv');
+require('dotenv').config();
 const path = require('path');
 const webpack = require('webpack');
 const parser = require('body-parser');
 
 const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
 const apiUrl = process.env.API_URL || 'http://localhost:8080';
+const clientID = process.env.CLIENT_ID || '';
 
 module.exports = {
     mode: 'universal',
-    env: { baseUrl, apiUrl },
+    env: { baseUrl, apiUrl, clientID },
     /*
      ** Headers of the page
      */
@@ -91,7 +92,9 @@ module.exports = {
         '~/plugins/modal',
     ],
 
-    modules: ['@nuxtjs/axios'],
+    modules: [
+        ['@nuxtjs/axios']
+    ],
 
     router: {
         linkExactActiveClass: 'active',
