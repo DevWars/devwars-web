@@ -2,16 +2,15 @@
     <Applications :schedules="schedules">
         <Table slot-scope="{enterOrCancel, isApplied, cancel, enter}">
             <tr slot="head">
-                <th>Date</th>
-                <th>Time</th>
-                <th>Duration</th>
-                <th>Showing</th>
+                <th @click="time = !time">Date</th>
+                <th @click="time = !time">Time</th>
+                <th @click="duration = !duration">Duration</th>
+                <th @click="duration = !duration">Showing</th>
                 <th></th>
             </tr>
             <!-- eslint-disable -->
             <tr
                 v-for="schedule in schedules"
-                v-if="filter ? (filter === schedule.name) : true"
                 :key="schedule.id"
             >
                 <!-- eslint-enable -->
@@ -50,7 +49,7 @@
 
 
 <script>
-// import { sortBy } from 'lodash';
+import { sortBy } from 'lodash';
 import Table from '~/components/Table';
 import Applications from '~/components/game/Applications';
 import GameDurations from '../../utils/gameDurations';
@@ -71,11 +70,23 @@ export default {
     data: () => {
         return {
             durations: GameDurations,
+            duration: false,
+            time: false,
         };
     },
     computed: {
         schedules() {
-            return this.$store.state.game.upcoming;
+            const ret = [];
+            this.$store.state.game.upcoming.map(e => {
+                if(this.filter === '') ret.push(e);
+                if(e.mode === this.filter) ret.push(e);
+            });
+
+            const subFilters = []
+            if (this.time)  subFilters.push('startTime');
+            if (this.duration)  subFilters.push('mode');
+           
+            return sortBy(ret, subFilters);
         },
     },
     methods: {
