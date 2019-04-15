@@ -71,7 +71,7 @@ export default {
         return {
             durations: GameDurations,
             duration: false,
-            time: false,
+            time: true,
         };
     },
     computed: {
