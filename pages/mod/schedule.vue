@@ -3,7 +3,7 @@
         <PanelHeader :title="startDate" :subtitle="`@ ${startTime} UTC`">
             <a href="/mod/schedules" class="btn btn-outline-gray">Back</a>
             <button v-if="viewingSetupPage" v-async-click="[save]" class="btn btn-primary">Save</button>
-            <button class="btn btn-secondary" disabled>Delete</button>
+            <button v-if="user.role === 'ADMIN'" class="btn btn-secondary" disabled>Delete</button>
         </PanelHeader>
 
         <nav class="nav-tabs">
@@ -49,6 +49,9 @@ export default {
         viewingSetupPage() {
             const currentPage = this.$route.path.split('/').pop();
             return currentPage === 'setup';
+        },
+        user() {
+            return this.$store.state.user.user
         },
     },
     async fetch({ store, query }) {

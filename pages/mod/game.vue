@@ -16,7 +16,7 @@
                 class="btn btn-primary"
             >Activate</button>
             <button v-if="viewingDetailsPage" v-async-click="[save]" class="btn btn-primary">Save</button>
-            <button v-async-click="[remove]" class="btn btn-secondary">Delete</button>
+            <button v-if="user.role === 'ADMIN'" v-async-click="[remove]" class="btn btn-secondary">Delete</button>
         </PanelHeader>
 
         <nav class="nav-tabs">
@@ -61,6 +61,9 @@ export default {
             const currentPage = this.$route.path.split('/').pop();
 
             return currentPage === 'details';
+        },
+        user() {
+            return this.$store.state.user.user
         },
     },
     async fetch({ store, query }) {
