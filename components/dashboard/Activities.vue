@@ -1,7 +1,7 @@
 <template>
     <DashboardCard title="Activity Log" icon="fa fa-bar-chart">
         <ul class="activity-history">
-            <li v-for="activity in paged.data" :key="activity.id" class="item">
+            <li v-for="activity in paged" :key="activity.id" class="item">
                 <div
                     class="date col-xs-3 no-gutter"
                 >{{ activity.created_at | moment('mediumDate') }}</div>

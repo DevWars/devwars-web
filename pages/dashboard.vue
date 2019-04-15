@@ -24,7 +24,6 @@
 
 
 <script>
-import Http from '../services/Http';
 import ProfileCard from '~/components/dashboard/ProfileCard';
 import Wallet from '~/components/dashboard/Wallet';
 import Activities from '~/components/dashboard/Activities';
@@ -53,11 +52,9 @@ export default {
         upcomingGames() {
             return this.$store.state.game.upcoming;
         },
-    },
-    async asyncData() {
-        return {
-            activities: await Http.for('activities').get('mine'),
-        };
+        activities() {
+            return this.$store.state.user.activities;
+        },
     },
 };
 </script>

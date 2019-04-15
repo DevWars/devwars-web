@@ -5,6 +5,7 @@ export const state = () => ({
     profile: null,
     stats: null,
     count: 0,
+    activities: [],
     linkedAccounts: [],
 });
 
@@ -21,6 +22,10 @@ export const mutations = {
 
     profile(state, profile) {
         state.profile = profile;
+    },
+
+    activities(state, activities) {
+        state.activities = activities;
     },
 
     profileUpdate(state, { key, values }) {
@@ -56,8 +61,20 @@ export const actions = {
             await dispatch('profile');
             await dispatch('stats');
             await dispatch('linkedAccounts');
+            await dispatch('activities');
         } catch (e) {
             commit('user', null);
+        }
+    },
+
+    async activities({ commit }) {
+        try {
+            const activities = await Http.for('activities/mine').get();
+
+            commit('activities', activities);
+        } catch(e) {
+            console.log(e);
+            commit('user', null)
         }
     },
 
