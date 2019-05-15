@@ -55,4 +55,9 @@ export default {
         text-transform: uppercase;
     }
 }
+
+.content {
+    max-height: 300px;
+    overflow-y: auto;
+}
 </style>
