@@ -39,10 +39,10 @@
                     name="bonus"
                     @change="objectiveUpdate($event, objective.id)"
                 />
-                <button @click.prevent="objectiveDelete(objective.id)">DELETE</button>
+                <button class="btn btn-link" @click.prevent="objectiveDelete(objective.id)">DELETE</button>
             </div>
         </form>
-        <button class="mod-add-schedule" @click="objectiveAdd">Add Objective</button>
+        <button class="btn btn-outline-white" @click="objectiveAdd">Add Objective</button>
     </div>
 </template>
 
@@ -68,9 +68,7 @@ export default {
     computed: {
         schedule() {
             const schedules = this.$store.state.game.schedules;
-            return schedules.find(
-                (schedule) => schedule.id === Number(this.$route.query.schedule)
-            );
+            return schedules.find((schedule) => schedule.id === Number(this.$route.query.schedule));
         },
         startTime() {
             const timestamp = `${this.date} ${this.time}`;
@@ -99,9 +97,9 @@ export default {
         },
         objectiveAdd() {
             let id = 1;
-            Object.keys(this.schedule.objectives).map(obj => {
-                id = this.schedule.objectives[obj].id
-            })
+            Object.keys(this.schedule.objectives).map((obj) => {
+                id = this.schedule.objectives[obj].id;
+            });
             this.$store.commit('game/addScheduleObjective', {
                 scheduleId: this.schedule.id,
                 objective: {
@@ -109,13 +107,13 @@ export default {
                     description: '',
                     isBonus: false,
                 },
-            })
+            });
         },
         objectiveDelete(objectiveId) {
             this.$store.commit('game/deleteScheduleObjective', {
                 scheduleId: this.schedule.id,
                 objectiveId,
-            })
+            });
         },
     },
 };
@@ -123,7 +121,17 @@ export default {
 
 
 <style lang="scss" scoped>
+@import 'utils.scss';
+
 .objective {
     display: flex;
+
+    .btn {
+        color: $text-color-muted;
+
+        &:hover {
+            color: $danger-color;
+        }
+    }
 }
 </style>
