@@ -45,9 +45,7 @@ export const mutations = {
     },
 
     removeLinkedAccount(state, provider) {
-        state.linkedAccounts = state.linkedAccounts.filter(
-            (it) => it.provider !== provider
-        );
+        state.linkedAccounts = state.linkedAccounts.filter((it) => it.provider !== provider);
     },
 };
 
@@ -72,17 +70,15 @@ export const actions = {
             const activities = await Http.for('activities/mine').get();
 
             commit('activities', activities);
-        } catch(e) {
+        } catch (e) {
             console.log(e);
-            commit('user', null)
+            commit('user', null);
         }
     },
 
     async profile({ commit, state }) {
         try {
-            const profile = await Http.for(
-                `/users/${state.user.id}/profile`
-            ).get();
+            const profile = await Http.for(`/users/${state.user.id}/profile`).get();
             commit('profile', profile);
         } catch (e) {
             commit('user', null);
@@ -113,11 +109,7 @@ export const actions = {
 
             await dispatch('refresh');
 
-            dispatch(
-                'toast/add',
-                { type: 'success', message: 'Welcome back to DevWars!' },
-                { root: true }
-            );
+            dispatch('toast/add', { type: 'success', message: 'Welcome back to DevWars!' }, { root: true });
 
             await dispatch('nuxtServerInit', null, { root: true });
 
@@ -135,11 +127,7 @@ export const actions = {
 
             await dispatch('refresh');
 
-            dispatch(
-                'toast/add',
-                { type: 'success', message: 'Welcome to DevWars!' },
-                { root: true }
-            );
+            dispatch('toast/add', { type: 'success', message: 'Welcome to DevWars!' }, { root: true });
 
             await dispatch('nuxtServerInit', null, { root: true });
 
@@ -159,10 +147,7 @@ export const actions = {
 
     async settings({ commit, dispatch, state }) {
         try {
-            const user = await this.$axios.patch(
-                `users/${state.user.id}/profile`,
-                state.profile
-            );
+            const user = await this.$axios.patch(`users/${state.user.id}/profile`, state.profile);
 
             commit('user', user);
         } catch (e) {
@@ -170,9 +155,9 @@ export const actions = {
         }
     },
 
-    async password({ dispatch, state }, data) {
+    async password({ dispatch }, data) {
         try {
-            await Http.for(`users/${state.user.id}/reset/password`).put(data);
+            await Http.for(`auth/reset/password`).put(data);
 
             dispatch('toast/success', `We've updated your password!`, {
                 root: true,
@@ -182,20 +167,13 @@ export const actions = {
         }
     },
 
-    async email({ dispatch, commit, state }, data) {
+    async email({ dispatch, commit }, data) {
         try {
-            const user = await Http.for(`users/${state.user.id}/reset`).post(
-                'email',
-                data
-            );
+            const user = await Http.for('auth/reset/email').post('email', data);
 
             commit('user', user);
 
-            await dispatch(
-                'toast/success',
-                `We've updated your email, please go verify your email.`,
-                { root: true }
-            );
+            await dispatch('toast/success', `We've updated your email, please go verify your email.`, { root: true });
             await dispatch('navigate', '/pending', { root: true });
         } catch (e) {
             console.error(e);
@@ -205,13 +183,9 @@ export const actions = {
 
     async forgot({ dispatch }, email) {
         try {
-            await Http.for('auth/reset').save({ username_or_email: email });
+            await Http.for('auth/forgot/password').save({ username_or_email: email });
 
-            dispatch(
-                'toast/success',
-                `Check your email for a guide to reset your password.`,
-                { root: true }
-            );
+            dispatch('toast/success', `Check your email for a guide to reset your password.`, { root: true });
 
             return true;
         } catch (e) {
@@ -222,13 +196,9 @@ export const actions = {
     },
 
     async resetByKey({ dispatch }, data) {
-        await Http.for('auth/reset').put({}, data);
+        await Http.for('auth/reset/password').post({}, data);
 
-        dispatch(
-            'toast/success',
-            `We've updated your password, give it a go!`,
-            { root: true }
-        );
+        dispatch('toast/success', `We've updated your password, give it a go!`, { root: true });
     },
 
     async avatar({ dispatch, state }, data) {
@@ -246,9 +216,7 @@ export const actions = {
     },
 
     async linkedAccounts({ commit, state }) {
-        const accounts = await Http.for(`users/${state.user.id}`).get(
-            'linked-accounts'
-        );
+        const accounts = await Http.for(`users/${state.user.id}`).get('linked-accounts');
 
         commit('linkedAccounts', accounts);
 
@@ -256,9 +224,7 @@ export const actions = {
     },
 
     async disconnectLinkedAccount({ dispatch, commit, state }, provider) {
-        await Http.for(
-            `users/${state.user.id}/linked-accounts/${provider}`
-        ).delete();
+        await Http.for(`users/${state.user.id}/linked-accounts/${provider}`).delete();
 
         commit('removeLinkedAccount', provider);
 
