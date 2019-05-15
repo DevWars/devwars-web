@@ -1,14 +1,4 @@
-devcoin,
-#devcoin {
-    @extend %align-middle;
-}
-
-.devcoin {
-    fill: $devcoin-color;
-}
-
 .devcoins {
-
     &__icon,
     &__amount {
         @extend %align-middle;
@@ -26,13 +16,13 @@ devcoin,
     }
 
     // Medium
-    #devcoin {
+    .Devcoin {
         width: $h4-font-size;
         margin-right: $xxs-space + 1px;
     }
 
     // Large
-    &-lg #devcoin {
+    &-lg .Devcoin {
         width: $h3-font-size;
         margin-right: $xs-space;
     }
@@ -41,7 +31,7 @@ devcoin,
     }
 
     // Extra Large
-    &-xl #devcoin {
+    &-xl .Devcoin {
         width: $h2-font-size;
         margin-right: $xs-space;
     }

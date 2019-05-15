@@ -1,35 +1,48 @@
 <template>
     <DashboardCard title="Activity Log" icon="fa fa-bar-chart" class="scrollable">
-        <ul class="activity-history">
-            <li v-for="activity in paged" :key="activity.id" class="item">
+        <div class="activity-history">
+            <div v-for="activity in paged" :key="activity.id" class="item">
                 <div
-                    class="date col-xs-3 no-gutter"
+                    class="date col-xs-2 no-gutter"
                 >{{ activity.created_at | moment('mediumDate') }}</div>
-                <div class="title col-xs-6 no-gutter">{{ activity.description}}</div>
-                <div class="rewards col-sm-3 no-gutter">
-                    <div
-                        v-if="activity.bits"
-                        class="reward"
-                        :class="[activity.bits > 0 ? 'win' : '']"
-                    >{{ (activity.bits) }} Devcoins</div>
-                    <div
-                        v-if="activity.xp"
-                        class="reward"
-                        :class="[activity.xp > 0 ? 'win' : '']"
-                    >{{ (activity.xp) }} XP</div>
+
+                <div class="col-sm-9 no-gutter">
+                    <div class="title">{{ activity.description}}</div>
+
+                    <div class="rewards">
+                        <div
+                            v-if="activity.coins"
+                            class="reward"
+                            :class="[activity.coins > 0 ? 'win' : 'lose']"
+                        >
+                            <Devcoin/>
+                            <span>{{ activity.coins }}</span>
+                        </div>
+                        <div
+                            v-if="activity.xp"
+                            class="reward"
+                            :class="[activity.xp > 0 ? 'win' : 'lose']"
+                        >
+                            <div class="xp">XP</div>
+                            <span>{{ activity.xp }}</span>
+                        </div>
+                    </div>
                 </div>
-            </li>
-        </ul>
+            </div>
+        </div>
     </DashboardCard>
 </template>
 
 
 <script>
 import DashboardCard from '~/components/DashboardCard';
+import Devcoin from '~/components/Devcoin';
 
 export default {
     name: 'Activities',
-    components: { DashboardCard },
+
+    components: { DashboardCard, Devcoin },
+
     props: {
         paged: {
             type: Array,
@@ -43,24 +56,10 @@ export default {
 <style lang="scss" scoped>
 @import 'utils.scss';
 
-.activity-history {
-    @extend %list-unstyled;
-    max-height: 250px;
-    padding-top: 0;
-    overflow-y: auto;
-}
-
-.date,
-.title,
-.rewards {
-    font-size: $font-size-sm;
-}
-
 .item {
-    @extend %clear;
+    display: flex;
     padding: $grid-gutter-part;
     border-bottom: 1px solid $divider-color;
-    font-size: 0;
 }
 
 .date {
@@ -68,30 +67,40 @@ export default {
 }
 
 .rewards {
-    text-align: right;
+    display: flex;
 }
 
 .reward {
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    min-width: 100px;
+    margin-top: $xs-space;
     padding: $xxs-space $grid-gutter-part;
     border-radius: 50px;
     background-color: darken($bg-color-2, 3%);
+    font-size: $font-size-sm;
     color: $success-color;
 
     & + & {
-        margin-top: $xs-space;
+        margin-left: $xxs-space;
     }
 
-    &:before {
-        content: '+';
+    span {
+        margin-left: 10px;
     }
 
     &.lose {
         color: $danger-color;
+    }
 
-        &:before {
-            content: '-';
-        }
+    .Devcoin {
+        width: 18px;
+        height: 18px;
+    }
+
+    .xp {
+        font-size: 15px;
+        color: $blue-color;
     }
 }
 </style>

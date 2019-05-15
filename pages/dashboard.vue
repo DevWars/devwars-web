@@ -13,9 +13,13 @@
                 <div class="main col-md-8">
                     <DailyPrizes/>
 
-                    <UpcomingGames :upcoming="upcomingGames" :applied="appliedGames"/>
+                    <UpcomingGames
+                        v-if="upcomingGames.length > 0"
+                        :upcoming="upcomingGames"
+                        :applied="appliedGames"
+                    />
 
-                    <Activities :paged="activities"/>
+                    <Activities v-if="activities.length > 0" :paged="activities"/>
                 </div>
             </div>
         </div>
