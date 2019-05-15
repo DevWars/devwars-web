@@ -1,5 +1,5 @@
 <template>
-    <Card class="bezeless dark">
+    <Card class="DashboardCard bezeless dark">
         <div v-if="title" class="header">
             <i :class="icon"></i>
             <h5>{{ title }}</h5>
@@ -33,31 +33,33 @@ export default {
 <style lang="scss" scoped>
 @import 'utils.scss';
 
-.header {
-    background-color: lighten($bg-color-2, 4%);
-    padding: $xs-space $grid-gutter-part;
-    font-size: 0;
+.DashboardCard {
+    .header {
+        background-color: lighten($bg-color-2, 4%);
+        padding: $xs-space $grid-gutter-part;
+        font-size: 0;
 
-    i,
-    h5 {
-        @extend %align-middle;
-    }
+        i,
+        h5 {
+            @extend %align-middle;
+        }
 
-    i {
-        padding-right: $xs-space;
+        i {
+            padding-right: $xs-space;
 
-        &:before {
-            font-size: $p-font-size;
+            &:before {
+                font-size: $p-font-size;
+            }
+        }
+
+        h5 {
+            text-transform: uppercase;
         }
     }
 
-    h5 {
-        text-transform: uppercase;
+    &.scrollable .content {
+        max-height: 300px;
+        overflow-y: auto;
     }
-}
-
-.content {
-    max-height: 300px;
-    overflow-y: auto;
 }
 </style>

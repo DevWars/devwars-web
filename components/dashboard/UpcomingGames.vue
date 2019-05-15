@@ -1,5 +1,5 @@
 <template>
-    <DashboardCard title="Upcoming Games" icon="fa fa-calendar">
+    <DashboardCard title="Upcoming Games" icon="fa fa-calendar" class="scrollable">
         <Applications :schedules="upcoming">
             <div slot="schedule" slot-scope="props" class="item">
                 <div class="main">

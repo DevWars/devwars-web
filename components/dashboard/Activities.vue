@@ -1,5 +1,5 @@
 <template>
-    <DashboardCard title="Activity Log" icon="fa fa-bar-chart">
+    <DashboardCard title="Activity Log" icon="fa fa-bar-chart" class="scrollable">
         <ul class="activity-history">
             <li v-for="activity in paged" :key="activity.id" class="item">
                 <div

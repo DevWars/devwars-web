@@ -1,5 +1,5 @@
 <template>
-    <DashboardCard title="Daily Tasks" icon="fa fa-gift">
+    <DashboardCard title="Daily Tasks" icon="fa fa-gift" class="scrollable">
         <div class="item">
             <div class="main">
                 <div class="col-xs-2 no-gutter">
