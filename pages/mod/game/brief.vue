@@ -40,9 +40,9 @@
                 <td>
                     <User :user="applicant"/>
                 </td>
-                <td>{{ applicant.gameStats.wins + applicant.gameStats.loses }}</td>
-                <td>{{ applicant.gameStats.wins }}</td>
-                <td>{{ applicant.gameStats.loses }}</td>
+                <td>{{ applicant.stats.game.wins + applicant.stats.game.loses }}</td>
+                <td>{{ applicant.stats.game.wins }}</td>
+                <td>{{ applicant.stats.game.loses }}</td>
                 <td>{{ applicant.profile.skills.html }}</td>
                 <td>{{ applicant.profile.skills.css }}</td>
                 <td>{{ applicant.profile.skills.js }}</td>
@@ -69,11 +69,7 @@ import AddPlayerModal from '~/components/modal/AddPlayerModal';
 import DeleteModal from '~/components/modal/DeleteModal';
 import AddRegistrantModal from '~/components/modal/AddRegistrantModal';
 import { teams, usersFromGame } from '~/utils/mixins';
-import {
-    getScoreByGameTeam,
-    getPlayersByGameTeam,
-    getLanguageByGamePlayer,
-} from '~/utils';
+import { getScoreByGameTeam, getPlayersByGameTeam, getLanguageByGamePlayer } from '~/utils';
 import { roles } from '../../../utils/auth';
 
 export default {
@@ -99,23 +95,13 @@ export default {
         },
     },
     async asyncData({ query }) {
-        const applications = await Http.for(
-            `/applications/${query.game}`
-        ).get();
+        const applications = await Http.for(`/applications/game/${query.game}`).get();
 
         for (const applicant of applications) {
             // eslint-disable-next-line no-await-in-loop
-            applicant.stats = await Http.for(
-                `/users/${applicant.id}/stats`
-            ).get();
+            applicant.stats = await Http.for(`/users/${applicant.id}/stats`).get();
             // eslint-disable-next-line no-await-in-loop
-            applicant.gameStats = await Http.for(
-                `/users/${applicant.id}/stats/game`
-            ).get();
-            // eslint-disable-next-line no-await-in-loop
-            applicant.profile = await Http.for(
-                `/users/${applicant.id}/profile`
-            ).get();
+            applicant.profile = await Http.for(`/users/${applicant.id}/profile`).get();
         }
 
         return { applications };
@@ -149,12 +135,9 @@ export default {
                 player.language = getLanguageByGamePlayer(this.game, player);
             }
 
-            const res = await this.$axios.delete(
-                `/games/${this.game.id}/player`,
-                {
-                    data: { player },
-                }
-            );
+            const res = await this.$axios.delete(`/games/${this.game.id}/player`, {
+                data: { player },
+            });
 
             this.$store.commit('game/game', res.data);
         },

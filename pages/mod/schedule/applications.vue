@@ -16,9 +16,9 @@
                 <td>
                     <User :user="applicant"/>
                 </td>
-                <td>{{ applicant.gameStats.wins + applicant.gameStats.loses }}</td>
-                <td>{{ applicant.gameStats.wins }}</td>
-                <td>{{ applicant.gameStats.loses }}</td>
+                <td>{{ applicant.stats.game.wins + applicant.stats.game.loses }}</td>
+                <td>{{ applicant.stats.game.wins }}</td>
+                <td>{{ applicant.stats.game.loses }}</td>
                 <td>{{ applicant.profile.skills.html }}</td>
                 <td>{{ applicant.profile.skills.css }}</td>
                 <td>{{ applicant.profile.skills.js }}</td>
@@ -45,29 +45,17 @@ export default {
         schedule() {
             const schedules = this.$store.state.game.schedules;
 
-            return schedules.find(
-                (schedule) => schedule.id === Number(this.$route.query.schedule)
-            );
+            return schedules.find((schedule) => schedule.id === Number(this.$route.query.schedule));
         },
     },
     async asyncData({ query }) {
-        const applications = await Http.for(
-            `/applications/${query.schedule}`
-        ).get();
+        const applications = await Http.for(`/applications/schedule/${query.schedule}`).get();
 
         for (const applicant of applications) {
             // eslint-disable-next-line no-await-in-loop
-            applicant.stats = await Http.for(
-                `/users/${applicant.id}/stats`
-            ).get();
+            applicant.stats = await Http.for(`/users/${applicant.id}/stats`).get();
             // eslint-disable-next-line no-await-in-loop
-            applicant.gameStats = await Http.for(
-                `/users/${applicant.id}/stats/game`
-            ).get();
-            // eslint-disable-next-line no-await-in-loop
-            applicant.profile = await Http.for(
-                `/users/${applicant.id}/profile`
-            ).get();
+            applicant.profile = await Http.for(`/users/${applicant.id}/profile`).get();
         }
 
         return { applications };
