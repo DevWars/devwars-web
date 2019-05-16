@@ -23,10 +23,10 @@
             >Delete</button>
         </PanelHeader>
 
-        <nav class="nav-tabs">
-            <nuxt-link :to="'/mod/game/details?game=' + game.id" class="nav-tabs__item">Details</nuxt-link>
-            <nuxt-link :to="'/mod/game/brief?game=' + game.id" class="nav-tabs__item">Brief</nuxt-link>
-        </nav>
+        <Tabs>
+            <nuxt-link :to="'/mod/game/details?game=' + game.id">Details</nuxt-link>
+            <nuxt-link :to="'/mod/game/brief?game=' + game.id">Brief</nuxt-link>
+        </Tabs>
 
         <nuxt/>
     </div>
@@ -35,6 +35,7 @@
 
 <script>
 import Http from '../../services/Http';
+import Tabs from '~/components/Tabs';
 import PanelHeader from '~/components/mod/PanelHeader';
 import DeleteModal from '~/components/modal/DeleteModal';
 import EndGameModal from '~/components/modal/EndGameModal';
@@ -44,48 +45,62 @@ import nameFromStatus from '~/utils/gameStatus';
 
 export default {
     name: 'DashboardGame',
+
     meta: {
         auth: [roles.moderator, roles.admin],
     },
-    components: { PanelHeader },
+
+    components: { Tabs, PanelHeader },
+
     computed: {
         game() {
             return this.$store.state.game.game;
         },
+
         isActive() {
             return nameFromStatus(this.game.status) === 'ACTIVE';
         },
+
         isEnded() {
             return nameFromStatus(this.game.status) === 'ENDED';
         },
+
         isScheduled() {
             return nameFromStatus(this.game.status) === 'SCHEDULED';
         },
+
         viewingDetailsPage() {
             const currentPage = this.$route.path.split('/').pop();
 
             return currentPage === 'details';
         },
+
         user() {
             return this.$store.state.user.user;
         },
     },
+
     async fetch({ store, query }) {
         await store.dispatch('game/game', query.game);
     },
+
     methods: {
         nameFromStatus,
+
         async activate() {
             await this.$axios.post(`/games/${this.game.id}/activate`);
             await this.$store.dispatch('game/game', this.game.id);
         },
+
         async endGame() {
             await this.$open(EndGameModal, { game: this.game });
         },
+
         async save() {
             await this.$axios.patch(`/games/${this.game.id}`, this.game);
             await this.$store.dispatch('game/game', this.game.id);
         },
+
         async remove() {
             const [confirmed] = await this.$open(DeleteModal, {
                 title: 'Delete Game?',

@@ -33,12 +33,9 @@
             </div>
         </div>
 
-        <nav class="nav-tabs">
-            <nuxt-link
-                :to="'/mod/tournament/details?tournament=' + tournament.id"
-                class="nav-tabs__item"
-            >Details</nuxt-link>
-        </nav>
+        <Tabs>
+            <nuxt-link :to="'/mod/tournament/details?tournament=' + tournament.id">Details</nuxt-link>
+        </Tabs>
 
         <nuxt/>
     </div>
@@ -47,31 +44,40 @@
 
 <script>
 import Http from '../../services/Http';
+import Tabs from '~/components/Tabs';
 import DeleteModal from '~/components/modal/DeleteModal';
 import { roles } from '../../utils/auth';
 
 export default {
     name: 'DashboardTournament',
+
     meta: {
         auth: [roles.moderator, roles.admin],
     },
+
+    components: { Tabs },
+
     computed: {
         tournament() {
             return this.$store.state.tournament.tournament;
         },
     },
+
     async fetch({ store, query }) {
         await store.dispatch('tournament/tournament', query.tournament);
     },
+
     methods: {
         async activate() {
             this.tournament.active = true;
 
             await this.save();
         },
+
         async endGame() {
             await Http.for(`/tournament/${this.tournament.id}/ended`).save();
         },
+
         async save() {
             const cloned = { ...this.tournament };
 
@@ -85,9 +91,7 @@ export default {
             }));
 
             // Save the objectives
-            await Http.for(`/game/${this.tournament.id}/objective`).save(
-                transformed
-            );
+            await Http.for(`/game/${this.tournament.id}/objective`).save(transformed);
 
             // Go ahead and save each team
             Object.values(this.tournament.teams).forEach(async (team) => {
@@ -103,6 +107,7 @@ export default {
             // Can't forget to update our state with the new game
             this.$store.commit('tournament/tournament', this.tournament);
         },
+
         async remove() {
             const [confirmed] = await this.$open(DeleteModal, {
                 title: 'Delete Tournament?',
@@ -118,10 +123,7 @@ export default {
 
                 this.$router.push({ path: '/mod/tournaments' });
             } catch (e) {
-                this.$store.dispatch(
-                    'toast/error',
-                    'Tournament could not be deleted.'
-                );
+                this.$store.dispatch('toast/error', 'Tournament could not be deleted.');
             }
         },
     },

@@ -1,15 +1,13 @@
 <template>
     <div class="container-fluid">
         <div class="sidebar no-gutter col-sm-3">
-            <nav class="nav-tabs nav-tabs-fluid">
+            <Tabs class="fluid invert">
                 <nuxt-link
                     v-for="current in seasons"
                     :key="current"
                     :to="'/games?season=' + current"
-                    class="nav-tabs__item"
-                    :class="{active: season === current}"
                 >Season {{ current }}</nuxt-link>
-            </nav>
+            </Tabs>
 
             <div
                 v-for="game in games"
@@ -38,11 +36,14 @@
 
 <script>
 import Http from '../services/Http';
+import Tabs from '../components/Tabs';
 import LargeGameDetail from '../components/game/LargeGameDetail';
 
 export default {
     name: 'Games',
-    components: { LargeGameDetail },
+
+    components: { Tabs, LargeGameDetail },
+
     data() {
         return {
             seasons: [3, 2, 1],
@@ -51,6 +52,7 @@ export default {
             viewing: null,
         };
     },
+
     watch: {
         '$route.query.season': {
             immediate: true,
@@ -60,12 +62,11 @@ export default {
                 this.games = await Http.for('games/season').get(this.season);
 
                 if (!this.$route.query.game) {
-                    this.viewing = await Http.for('games').get(
-                        this.games[0].id
-                    );
+                    this.viewing = await Http.for('games').get(this.games[0].id);
                 }
             },
         },
+
         '$route.query.game': {
             immediate: true,
             async handler(newGame) {
@@ -75,6 +76,7 @@ export default {
             },
         },
     },
+
     methods: {
         async view(game) {
             this.$router.push({
@@ -101,15 +103,6 @@ export default {
 .sidebar {
     left: 0;
     background-color: $bg-color-3;
-
-    .nav-tabs {
-        text-align: center;
-    }
-
-    .nav-tabs button {
-        border-top: none;
-        border-bottom-style: solid;
-    }
 }
 
 .view {
