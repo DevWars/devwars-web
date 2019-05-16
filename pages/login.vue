@@ -31,7 +31,9 @@ export default {
     name: 'Login',
     components: { DevwarsCard, Input },
     layout: 'header',
-    middleware: 'guest',
+    meta: {
+        noAuth: true,
+    },
     data: () => {
         return {
             username: '',
