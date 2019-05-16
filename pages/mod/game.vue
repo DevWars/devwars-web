@@ -16,7 +16,11 @@
                 class="btn btn-primary"
             >Activate</button>
             <button v-if="viewingDetailsPage" v-async-click="[save]" class="btn btn-primary">Save</button>
-            <button v-if="user.role === 'ADMIN'" v-async-click="[remove]" class="btn btn-secondary">Delete</button>
+            <button
+                v-if="user.role === 'ADMIN'"
+                v-async-click="[remove]"
+                class="btn btn-secondary"
+            >Delete</button>
         </PanelHeader>
 
         <nav class="nav-tabs">
@@ -63,7 +67,7 @@ export default {
             return currentPage === 'details';
         },
         user() {
-            return this.$store.state.user.user
+            return this.$store.state.user.user;
         },
     },
     async fetch({ store, query }) {
@@ -97,10 +101,7 @@ export default {
 
                 this.$router.push({ path: '/mod/games' });
             } catch (e) {
-                this.$store.dispatch(
-                    'toast/error',
-                    'Game could not be deleted.'
-                );
+                this.$store.dispatch('toast/error', 'Game could not be deleted.');
             }
         },
     },

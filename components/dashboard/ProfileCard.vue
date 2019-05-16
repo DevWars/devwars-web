@@ -27,7 +27,6 @@ export default {
     },
     computed: {
         stats() {
-            console.log('-----------------', this.$store.state.stats.stats);
             return this.$store.state.stats;
         },
         progress() {

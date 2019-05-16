@@ -1,6 +1,6 @@
 <template>
     <Applications :schedules="schedules">
-        <Table slot-scope="{enterOrCancel, isApplied, cancel, enter}">
+        <Table slot-scope="{isApplied, cancel, enter}">
             <tr slot="head">
                 <th @click="time = !time">Date</th>
                 <th @click="time = !time">Time</th>
@@ -8,12 +8,8 @@
                 <th @click="duration = !duration">Showing</th>
                 <th></th>
             </tr>
-            <!-- eslint-disable -->
-            <tr
-                v-for="schedule in schedules"
-                :key="schedule.id"
-            >
-                <!-- eslint-enable -->
+
+            <tr v-for="schedule in schedules" :key="schedule.id">
                 <td>
                     <div class="dow">{{ schedule.startTime | moment('dddd') }}</div>
                     <h4 class="date">{{ schedule.startTime | moment('MMMM D') }}</h4>
@@ -31,15 +27,11 @@
                 <td>
                     <div>
                         <a
-                            v-show="!isApplied(schedule)"
+                            v-if="!isApplied(schedule)"
                             class="btn btn-primary"
                             @click="enter(schedule)"
                         >Register for Entry</a>
-                        <a
-                            v-show="isApplied(schedule)"
-                            class="btn btn-outline-danger"
-                            @click="cancel(schedule)"
-                        >Resign</a>
+                        <a v-else class="btn btn-outline-danger" @click="cancel(schedule)">Resign</a>
                     </div>
                 </td>
             </tr>
@@ -56,17 +48,21 @@ import GameDurations from '../../utils/gameDurations';
 
 export default {
     name: 'ScheduleBlock',
+
     components: { Table, Applications },
+
     props: {
         filter: {
             type: String,
             default: '',
         },
+
         count: {
             type: Number,
             default: 0,
         },
     },
+
     data: () => {
         return {
             durations: GameDurations,
@@ -74,21 +70,23 @@ export default {
             time: true,
         };
     },
+
     computed: {
         schedules() {
             const ret = [];
-            this.$store.state.game.upcoming.map(e => {
-                if(this.filter === '') ret.push(e);
-                if(e.mode === this.filter) ret.push(e);
+            this.$store.state.game.upcoming.map((e) => {
+                if (this.filter === '') ret.push(e);
+                if (e.mode === this.filter) ret.push(e);
             });
 
-            const subFilters = []
-            if (this.time)  subFilters.push('startTime');
-            if (this.duration)  subFilters.push('mode');
-           
+            const subFilters = [];
+            if (this.time) subFilters.push('startTime');
+            if (this.duration) subFilters.push('mode');
+
             return sortBy(ret, subFilters);
         },
     },
+
     methods: {
         description(schedule) {
             const descriptions = {

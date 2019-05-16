@@ -1,21 +1,35 @@
 <template>
     <DashboardCard title="Upcoming Games" icon="fa fa-calendar" class="scrollable">
-        <Applications :schedules="upcoming">
-            <div slot="schedule" slot-scope="props" class="item">
-                <div class="main">
-                    <div class="col-xs-2 no-gutter" :class="[props.color]">{{ props.text }}</div>
-                    <div class="col-xs-8 no-gutter">
-                        {{ props.schedule.startTime | moment('longDate') }}
-                        @ {{ props.schedule.startTime | moment('HH:mm') }} (UTC)
+        <Applications>
+            <div slot-scope="{isApplied, cancel, enter}">
+                <div
+                    v-for="schedule in upcoming"
+                    :key="schedule.id"
+                    class="schedule"
+                    :class="{ entered: isApplied(schedule) }"
+                >
+                    <div class="main">
+                        <div
+                            class="col-xs-2 no-gutter status"
+                        >{{ isApplied(schedule) ? 'Entered' : 'Not Entered'}}</div>
+                        <div class="col-xs-8 no-gutter">
+                            {{ schedule.startTime | moment('longDate') }}
+                            @ {{ schedule.startTime | moment('HH:mm') }} (UTC)
+                        </div>
                     </div>
-                </div>
-                <div class="actions">
-                    <button
-                        v-show="!props.playing"
-                        class="btn btn-sm btn-block"
-                        :class="['btn-outline-' + (props.applied ? 'danger': 'white')]"
-                        @click="props.enterOrCancel(props)"
-                    >{{ props.applied ? 'Cancel' : 'Enter'}}</button>
+
+                    <div class="actions">
+                        <button
+                            v-if="!isApplied(schedule)"
+                            class="btn btn-outline-white btn-sm btn-block"
+                            @click="enter(schedule)"
+                        >Enter</button>
+                        <button
+                            v-else
+                            class="btn btn-outline-danger btn-sm btn-block"
+                            @click="cancel(schedule)"
+                        >Cancel</button>
+                    </div>
                 </div>
             </div>
         </Applications>
@@ -24,27 +38,19 @@
 
 
 <script>
-import { mapState } from 'vuex';
 import Applications from '~/components/game/Applications';
 import DashboardCard from '~/components/DashboardCard';
 
 export default {
     name: 'UpcomingGames',
+
     components: { Applications, DashboardCard },
+
     props: {
         upcoming: {
             type: Array,
             required: true,
         },
-        applied: {
-            type: Array,
-            required: true,
-        },
-    },
-    computed: {
-        ...mapState({
-            user: 'user',
-        }),
     },
 };
 </script>
@@ -53,10 +59,18 @@ export default {
 <style lang="scss" scoped>
 @import 'utils.scss';
 
-.item {
+.schedule {
     @extend %flex-justify;
     padding: $grid-gutter-part;
     border-bottom: 1px solid $divider-color;
+
+    .status {
+        color: $text-color-muted;
+    }
+
+    &.entered .status {
+        color: $warning-color;
+    }
 }
 
 /deep/ {

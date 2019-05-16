@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!competitor">
+    <div v-if="applications.length === 0">
         <!-- NOT PRE-REGISTERED -->
         <h1>Become a competitor</h1>
         <p>
@@ -9,21 +9,21 @@
         <div class="modal__actions">
             <button class="btn btn-outline-gray" @click="close(false)">Nevermind</button>
             <a
-                :href="'/competitor/register?game=' + game.id "
+                :href="'/competitor/register?game=' + schedule.id "
                 class="btn btn-primary"
                 @click="close(false)"
             >Begin Registration</a>
         </div>
     </div>
 
-    <div v-else-if="competitor">
+    <div v-else>
         <!-- REGISTERED -->
         <h1>Entry confirmation</h1>
         <p>
             You are entering to play on
-            <b>{{ game.startTime | moment('fullDate') }}</b> at
+            <b>{{ schedule.startTime | moment('fullDate') }}</b> at
             <b>
-                {{ game.startTime |
+                {{ schedule.startTime |
                 moment('HH:mm')}} (UTC)
             </b>. Are you sure?
         </p>
@@ -36,38 +36,36 @@
 
         <div class="modal__actions">
             <button class="btn btn-outline-gray" @click="close(false)">Nevermind</button>
-            <button v-async-click="[enter]" class="btn btn-primary">Enter</button>
+            <button class="btn btn-primary" @click="enter(schedule)">Enter</button>
         </div>
     </div>
 </template>
 
 
 <script>
-import { mapActions } from 'vuex';
-
 export default {
     name: 'GameRegistration',
+
     props: {
-        'resolve': {
+        resolve: {
             type: Function,
             required: true,
         },
-        'game': {
+        schedule: {
             type: Object,
             required: true,
         },
     },
+
     computed: {
-        competitor() {
-            return this.$store.state.user.competitor;
+        applications() {
+            return this.$store.state.game.applications;
         },
-        ...mapActions({
-            apply: 'game/apply',
-        }),
     },
+
     methods: {
-        async enter() {
-            await this.apply(this.game);
+        async enter(schedule) {
+            await this.$store.dispatch('game/apply', schedule);
 
             this.close(true);
         },

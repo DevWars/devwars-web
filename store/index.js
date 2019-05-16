@@ -7,11 +7,14 @@ export const actions = {
         await Promise.all([
             // dispatch('user/refreshUserCount'),
             dispatch('user/refresh'),
-            // dispatch('game/applied'),
-            // dispatch('game/entered'),
+
             dispatch('game/schedules'),
             dispatch('game/upcoming'),
             dispatch('game/active'),
+
+            // Needs to only dispatch when User is logged in
+            dispatch('game/applications'),
+
             // dispatch('badges/refresh'),
         ]);
     },

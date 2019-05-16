@@ -1,8 +1,7 @@
 import Http from '../services/Http';
 
 export const state = () => ({
-    applied: [],
-    entered: [],
+    applications: [],
     upcoming: [],
     schedules: [],
     all: [],
@@ -11,12 +10,8 @@ export const state = () => ({
 });
 
 export const mutations = {
-    applied(state, applied) {
-        state.applied = applied;
-    },
-
-    entered(state, entered) {
-        state.entered = entered;
+    applications(state, applications) {
+        state.applications = applications;
     },
 
     all(state, all) {
@@ -31,14 +26,12 @@ export const mutations = {
         state.game = game;
     },
 
-    apply(state, applied) {
-        state.applied.push(applied);
+    apply(state, applications) {
+        state.applications.push(applications);
     },
 
     forfeit(state, game) {
-        state.applied = state.applied.filter(
-            (it) => it.id !== game.id && it !== game.id
-        );
+        state.applications = state.applications.filter((it) => it.id !== game.id && it !== game.id);
     },
 
     schedules(state, schedules) {
@@ -53,7 +46,7 @@ export const mutations = {
         state.active = game;
     },
 
-    updateScheduleObjective(state , { value, objectiveId, scheduleId }) {
+    updateScheduleObjective(state, { value, objectiveId, scheduleId }) {
         let tmp = null;
 
         const schedules = state.schedules.map((schedule) => {
@@ -77,7 +70,7 @@ export const mutations = {
             }
             return schedule;
         });
-        
+
         if (objectives != null) state.schedules = schedules;
     },
 
@@ -86,7 +79,7 @@ export const mutations = {
 
         const schedules = state.schedules.map((schedule) => {
             if (schedule.id === scheduleId) {
-                delete schedule.objectives[objectiveId]
+                delete schedule.objectives[objectiveId];
                 objectives = schedule.objectives;
             }
             return schedule;
@@ -113,21 +106,12 @@ export const actions = {
         commit('add', game);
     },
 
-    async applied({ commit }) {
+    async applications({ commit }) {
         try {
-            const applied = await Http.for('applications').get('mine');
-            commit('applied', applied || []);
+            const applications = await Http.for('applications').get('mine');
+            commit('applications', applications);
         } catch (e) {
-            console.log("Couldn't load applied games", e);
-        }
-    },
-
-    async entered({ commit }) {
-        try {
-            const entered = await Http.for('applications/entered').get('mine');
-            commit('entered', entered || []);
-        } catch (e) {
-            console.log("Couldn't load entered games", e);
+            console.log("Couldn't load applications games", e);
         }
     },
 
@@ -158,27 +142,28 @@ export const actions = {
         }
     },
 
-    async apply({ commit, dispatch }, game) {
-        await Http.for(`applications/${game.id}`).save();
-        commit('apply', game);
+    async apply({ commit, dispatch }, schedule) {
+        try {
+            await this.$axios.post(`applications/schedule/${schedule.id}`);
 
-        dispatch(
-            'toast/add',
-            { type: 'success', message: `Thanks for signing up! See ya soon` },
-            { root: true }
-        );
-        dispatch('navigate', '/game/confirmation', { root: true });
+            commit('apply', schedule);
+
+            dispatch('toast/add', { type: 'success', message: `Thanks for signing up! See ya soon` }, { root: true });
+            dispatch('navigate', '/game/confirmation', { root: true });
+        } catch (e) {
+            dispatch('toast/errors', e, { root: true });
+        }
     },
 
-    async forfeit({ commit, dispatch }, game) {
-        await Http.for('applications').delete(game);
+    async forfeit({ commit, dispatch }, schedule) {
+        try {
+            await this.$axios.delete(`applications/schedule/${schedule.id}`);
 
-        commit('forfeit', game);
+            commit('forfeit', schedule);
 
-        dispatch(
-            'toast/add',
-            { type: 'success', message: `Sorry to see you go.` },
-            { root: true }
-        );
+            dispatch('toast/add', { type: 'success', message: `Sorry to see you go.` }, { root: true });
+        } catch (e) {
+            dispatch('toast/errors', e, { root: true });
+        }
     },
 };

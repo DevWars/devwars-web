@@ -13,11 +13,7 @@
                 <div class="main col-md-8">
                     <DailyPrizes/>
 
-                    <UpcomingGames
-                        v-if="upcomingGames.length > 0"
-                        :upcoming="upcomingGames"
-                        :applied="appliedGames"
-                    />
+                    <UpcomingGames v-if="upcomingGames.length > 0" :upcoming="upcomingGames"/>
 
                     <Activities v-if="activities.length > 0" :paged="activities"/>
                 </div>
@@ -49,9 +45,6 @@ export default {
         },
         stats() {
             return this.$store.state.stats;
-        },
-        appliedGames() {
-            return this.$store.state.game.applied;
         },
         upcomingGames() {
             return this.$store.state.game.upcoming;
