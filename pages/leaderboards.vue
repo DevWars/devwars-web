@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="Leaderboards">
         <PageBanner title="Leaderboards">
             <!-- <select class="select--clear">
                 <option>Today</option>
@@ -20,7 +20,7 @@
                 </tr>
 
                 <tr v-for="(user, index) in leaderboards.users" :key="user.id">
-                    <td scope="row" class="leaderboard__rank">{{ (page * 10) + index + 1 }}</td>
+                    <td scope="row" class="rank">{{ (page * 10) + index + 1 }}</td>
                     <td>
                         <User :user="user"/>
                     </td>
@@ -51,15 +51,19 @@ import User from '~/components/user/User';
 
 export default {
     name: 'Leaderboards',
+
     components: { PageBanner, Table, Pagination, User },
+
     data: () => {
         return {
             page: 0,
         };
     },
+
     async asyncData() {
         return { leaderboards: await Http.for('leaderboard/users').get() };
     },
+
     methods: {
         async previous() {
             this.page -= 1;
@@ -67,6 +71,7 @@ export default {
                 page: this.page,
             });
         },
+
         async next() {
             this.page += 1;
             this.leaderboards = await Http.for('leaderboard/users').get({
@@ -76,3 +81,26 @@ export default {
     },
 };
 </script>
+
+
+<style lang="scss" scoped>
+@import 'utils.scss';
+
+.Leaderboards {
+    .rank {
+        padding-left: 20px;
+        font-size: 15px;
+
+        &.increase {
+            color: $success-color;
+        }
+        &.neutral {
+            color: $blue-color;
+            font-size: 12px;
+        }
+        &.decrease {
+            color: $danger-color;
+        }
+    }
+}
+</style>

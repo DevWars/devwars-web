@@ -1,6 +1,6 @@
 <template>
-    <div class="mod-card">
-        <form class="mod-form">
+    <Card class="plain dark">
+        <form>
             <h3 class="modpanel__subtitle">Schedule</h3>
             <div class="form-group">
                 <Input v-model="date"/>
@@ -43,13 +43,14 @@
             </div>
         </form>
         <button class="btn btn-outline-white" @click="objectiveAdd">Add Objective</button>
-    </div>
+    </Card>
 </template>
 
 
 <script>
 import moment from 'moment';
 
+import Card from '~/components/Card';
 import Input from '~/components/form/Input';
 import Select from '~/components/form/Select';
 import SquareToggle from '~/components/SquareToggle';
@@ -60,7 +61,7 @@ export default {
     meta: {
         auth: [roles.moderator, roles.admin],
     },
-    components: { Input, Select, SquareToggle },
+    components: { Card, Input, Select, SquareToggle },
     data: () => ({
         date: '',
         time: '',
@@ -122,6 +123,10 @@ export default {
 
 <style lang="scss" scoped>
 @import 'utils.scss';
+
+form {
+    max-width: 500px;
+}
 
 .objective {
     display: flex;

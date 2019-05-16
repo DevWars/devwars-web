@@ -6,9 +6,6 @@
 
 // Base
 // ==================================
-@import 'base/normalize';
-@import 'base/reset';
-@import 'base/global';
 @import 'base/grid';
 @import 'base/type';
 @import 'base/form';
@@ -17,19 +14,6 @@
 // ==================================
 @import 'components/button';
 @import 'components/nav'; // tabs (Games, Game, Tournament, Settings)
-@import 'components/toasts';
 @import 'components/modals';
-@import 'components/loader';
 @import 'components/labels';
 @import 'components/devcoins';
-
-// Layout
-// ==================================
-@import 'layout/modpanel';
-
-@import 'layout/dashboard';
-
-// Pages
-// ==================================
-@import 'pages/shop';
-@import 'pages/leaderboards';

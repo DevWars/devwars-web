@@ -4,7 +4,7 @@
 
         <div class="footer-offset align-center">
             <div class="container">
-                <div class="mod-card">
+                <Card class="plain dark">
                     <h3 class="modpanel__subtitle">Verify your email address</h3>
                     <p class="form-group">
                         Confirm your email by clicking the verification link we sent to your inbox.
@@ -14,7 +14,7 @@
                     <div>
                         <button v-async-click="[resend]" class="btn btn-outline-gray">Resend Email</button>
                     </div>
-                </div>
+                </Card>
             </div>
         </div>
     </div>
@@ -23,6 +23,7 @@
 
 <script>
 import Http from '../services/Http';
+import Card from '~/components/Card';
 import PageBanner from '~/components/layout/PageBanner';
 
 export default {
@@ -30,7 +31,7 @@ export default {
 
     middleware: ['auth', 'guest'],
 
-    components: { PageBanner },
+    components: { Card, PageBanner },
 
     methods: {
         async resend() {

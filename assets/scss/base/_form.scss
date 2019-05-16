@@ -9,7 +9,6 @@ $file__element--property_modifier
 ============================================================================ */
 $input-label-offset: $input-padding-y * 2;
 
-
 /*  ========================================================================
 	01. Inputs
 	======================================================================== */
@@ -157,11 +156,10 @@ select {
 
 .required {
     &:after {
-        content: "*";
+        content: '*';
         color: red;
     }
 }
-
 
 $checkbox-size: 25px;
 
@@ -220,7 +218,8 @@ $checkbox-size: 25px;
         @extend .far;
         content: $fa-check;
         position: absolute;
-        top: 50%; left: $checkbox-size / 2;
+        top: 50%;
+        left: $checkbox-size / 2;
         transform: translate(-50%, -50%);
         display: block;
         width: 100%;
@@ -236,7 +235,6 @@ $checkbox-size: 25px;
         content: $fa-times;
     }
 }
-
 
 .search-input {
     position: relative;
@@ -263,28 +261,19 @@ $checkbox-size: 25px;
     }
 }
 
-
-
-
-
-
-
 /* Change Autocomplete styles in Chrome*/
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
-input:-webkit-autofill:focus
-input:-webkit-autofill,
+input:-webkit-autofill:focus input:-webkit-autofill,
 textarea:-webkit-autofill,
-textarea:-webkit-autofill:hover
-textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-  -webkit-text-fill-color: #fff;
-  box-shadow: 0 0 0px 1000px transparent inset;
-  transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: #fff;
+    box-shadow: 0 0 0px 1000px transparent inset;
+    transition: background-color 5000s ease-in-out 0s;
 }
-
 
 .tooltip-devcoins {
     position: relative;
@@ -298,9 +287,10 @@ select:-webkit-autofill:focus {
     margin-left: 35px;
 
     &:before {
-        content: "";
+        content: '';
         position: absolute;
-        width: 0; height: 0;
+        width: 0;
+        height: 0;
         border-style: solid;
         border-width: 20px 20px 20px 0;
         border-color: transparent $bg-color-1 transparent transparent;

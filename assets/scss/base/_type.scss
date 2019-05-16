@@ -1,65 +1,60 @@
-/* Name:			Typography
-
-Contents:
-	01. Typeface import
-	02. Heading
-	03. Display
-	04. Paragraph
-	05. Links
-	06. Lists
-
-/*  ========================================================================
-01. Typeface import
-======================================================================== */
-
-//@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:300,400,500,700);
-
-/*  ========================================================================
-02. Heading
-======================================================================== */
-
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
-	margin: 0;
-	line-height: normal;
-	color: $headings-color;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    margin: 0;
+    line-height: normal;
+    color: $headings-color;
     word-wrap: break-word;
 }
 
-h1, .h1 {
-	text-transform: $h1-transform;
-	font-weight: $h1-font-weight;
-	font-family: $h1-font-family;
-	font-size: $h1-font-size;
+h1,
+.h1 {
+    text-transform: $h1-transform;
+    font-weight: $h1-font-weight;
+    font-family: $h1-font-family;
+    font-size: $h1-font-size;
 }
 
-h2, .h2 {
-	text-transform: $h2-transform;
-	font-weight: $h2-font-weight;
-	font-family: $h2-font-family;
-	font-size: $h2-font-size;
+h2,
+.h2 {
+    text-transform: $h2-transform;
+    font-weight: $h2-font-weight;
+    font-family: $h2-font-family;
+    font-size: $h2-font-size;
 }
 
-h3, .h3 {
-	font-weight: $h3-font-weight;
-	font-size: $h3-font-size;
+h3,
+.h3 {
+    font-weight: $h3-font-weight;
+    font-size: $h3-font-size;
 }
 
-h4, .h4 {
-	font-weight: $h4-font-weight;
-	font-size: $h4-font-size;
+h4,
+.h4 {
+    font-weight: $h4-font-weight;
+    font-size: $h4-font-size;
 }
 
-h5, .h5 {
-	font-weight: $h5-font-weight;
-	font-size: $h5-font-size;
+h5,
+.h5 {
+    font-weight: $h5-font-weight;
+    font-size: $h5-font-size;
 }
 
-h6, .h6 {
-	font-weight: $h6-font-weight;
-	font-size: $h6-font-size;
+h6,
+.h6 {
+    font-weight: $h6-font-weight;
+    font-size: $h6-font-size;
 }
-
 
 /* =========================================================================
 03. Display
@@ -90,20 +85,16 @@ h6, .h6 {
     font-weight: $display6-weight;
 }
 
-
 /* ==========================================================================
 04. Paragraph
 ========================================================================== */
 
-p, .p {
+p,
+.p {
     color: $p-color;
     line-height: $p-line-height;
     font-size: $p-font-size;
     word-wrap: break-word;
-}
-
-.lead {
-    font-size: $p-lead-font-size;
 }
 
 /* ==========================================================================
@@ -122,117 +113,11 @@ a {
     }
 }
 
-.underline-hover {
-    &:hover {
-        text-decoration: underline;
-    }
-}
-
-
-/* ==========================================================================
-06. Span
-========================================================================== */
-
-span {
-
-}
-
-
-
-/* ==========================================================================
-07. List
-========================================================================== */
-
-%list-unstyled {
-    padding-left: 0;
-    list-style: none;
-}
-
-// Inline turns list items into inline-block
-.list-inline {
-    @extend %list-unstyled;
-    font-size: 0;
-
-    li {
-        display: inline-block;
-        font-size: $font-size-base;
-    }
-
-}
-.list-inline-item {
-    display: inline-block;
-
-    &:not(:last-child) {
-        //margin-right: $list-inline-padding;
-    }
-}
-
-
-
-/* ==========================================================================
-08. Divider
-========================================================================== */
-
-hr {
-    margin-top: $s-space;
-    margin-bottom: $s-space;
-    border: 0;
-    border-top: 1px solid gray;
-}
-
-.divider {
-
-}
-
-
 /* ==========================================================================
 09. Misc
 ========================================================================== */
-
-abbr {
-
-}
-
-// Builds on `abbr`
-.initialism {
-  font-size: 90%;
-  text-transform: uppercase;
-}
-
-
-.text-underline {
-    display: inline-block;
-    border-bottom: 2px solid $silver-color;
-}
-
-.color-primary {
-    color: $brand-primary !important;
-}
-
-.color-base {
-    color: $base-font-color !important;
-}
-
-.color-secondary {
-    color: $text-color-secondary !important;
-}
-
-.color-muted {
-    color: $text-color-muted !important;
-}
-
 .color-white {
     color: #fff !important;
-}
-
-.color-success {
-    color: $success-color !important;
-}
-.color-warning {
-    color: $warning-color !important;
-}
-.color-danger {
-    color: $danger-color !important;
 }
 
 .color-devcoins {
@@ -246,13 +131,14 @@ abbr {
 .color-html {
     color: $html-color !important;
 }
+
 .color-css {
     color: $css-color !important;
 }
+
 .color-js {
     color: $js-color !important;
 }
-
 
 .align-right {
     text-align: right;
@@ -260,10 +146,6 @@ abbr {
 
 .align-center {
     text-align: center;
-}
-
-.align-left {
-    text-align: left;
 }
 
 .font-size-sm {

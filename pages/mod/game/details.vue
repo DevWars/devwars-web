@@ -1,6 +1,6 @@
 <template>
-    <div class="mod-card">
-        <form class="mod-form">
+    <Card class="plain dark">
+        <form>
             <h3 class="modpanel__subtitle">Game</h3>
             <div class="form-group">
                 <Select v-model="game.mode" :selected="game.mode">
@@ -72,11 +72,12 @@
                 </div>
             </div>-->
         </form>
-    </div>
+    </Card>
 </template>
 
 
 <script>
+import Card from '~/components/Card';
 import Input from '~/components/form/Input';
 import Select from '~/components/form/Select';
 import SquareToggle from '../../../components/SquareToggle';
@@ -86,20 +87,26 @@ import { roles } from '../../../utils/auth';
 
 export default {
     name: 'DashboardGameDetails',
+
     meta: {
         auth: [roles.moderator, roles.admin],
     },
-    components: { SquareToggle, Input, Select },
+
+    components: { Card, SquareToggle, Input, Select },
+
     mixins: [teams],
+
     data: () => ({
         date: '',
         time: '',
     }),
+
     computed: {
         game() {
             return this.$store.state.game.game;
         },
     },
+
     methods: {
         teamCompletedObjective,
         toggleObjective(teamId, objectiveId) {
@@ -114,3 +121,10 @@ export default {
     },
 };
 </script>
+
+<style lang="scss" scoped>
+form {
+    max-width: 500px;
+}
+</style>
+

@@ -1,6 +1,6 @@
 <template>
-    <div class="mod-card">
-        <form class="mod-form">
+    <Card class="plain dark">
+        <form>
             <h3 class="modpanel__subtitle">Main</h3>
             <div class="form-group">
                 <Input v-model="tournament.name"/>
@@ -21,12 +21,13 @@
                 <label>3rd Place Prize</label>
             </div>
         </form>
-    </div>
+    </Card>
 </template>
 
 
 <script>
 import moment from 'moment';
+import Card from '~/components/Card';
 import Input from '~/components/form/Input';
 import { roles } from '../../../utils/auth';
 
@@ -35,7 +36,7 @@ export default {
     meta: {
         auth: [roles.moderator, roles.admin],
     },
-    components: { Input },
+    components: { Card, Input },
     data: () => ({
         date: '',
         time: '',
@@ -64,10 +65,7 @@ export default {
     },
     methods: {
         timestampChanged() {
-            const timestamp =
-                moment
-                    .utc(`${this.date} ${this.time}`, 'DD/MM/YYYY HH:mm')
-                    .unix() * 1000;
+            const timestamp = moment.utc(`${this.date} ${this.time}`, 'DD/MM/YYYY HH:mm').unix() * 1000;
 
             this.tournament.timestamp = timestamp;
         },
@@ -75,9 +73,7 @@ export default {
             const list = [];
 
             for (let i = 0; i < 5; i += 1) {
-                let item = this.tournament.objectives.find(
-                    (it) => it.number === i
-                );
+                let item = this.tournament.objectives.find((it) => it.number === i);
 
                 if (!item) item = { number: i };
 

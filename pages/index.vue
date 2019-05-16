@@ -79,44 +79,41 @@
 
                 <div class="home-quotes row">
                     <div class="col-md-4">
-                        <div class="quote-card card">
-                            <div class="card__inner">
-                                <img
-                                    class="quote-card__avatar"
-                                    src="~assets/img/companies/scotchio-square.jpg"
-                                >
-                                <p
-                                    class="quote-card__desc"
-                                >Need something to watch on a Saturday? Watch 2 teams of 3 battle it out in DevWars!</p>
-                                <h6 class="quote-card__name">Scotch.io</h6>
-                                <a
-                                    href="https://twitter.com/scotch_io/"
-                                    class="quote-card__username"
-                                    target="_blank"
-                                    rel="nofollow"
-                                >@scotch_io</a>
-                            </div>
-                        </div>
+                        <Card class="quote-card">
+                            <img
+                                class="quote-card__avatar"
+                                src="~assets/img/companies/scotchio-square.jpg"
+                            >
+                            <p
+                                class="quote-card__desc"
+                            >Need something to watch on a Saturday? Watch 2 teams of 3 battle it out in DevWars!</p>
+                            <h6 class="quote-card__name">Scotch.io</h6>
+                            <a
+                                href="https://twitter.com/scotch_io/"
+                                class="quote-card__username"
+                                target="_blank"
+                                rel="nofollow"
+                            >@scotch_io</a>
+                        </Card>
                     </div>
+
                     <div class="col-md-4">
-                        <div class="quote-card card">
-                            <div class="card__inner">
-                                <img
-                                    class="quote-card__avatar"
-                                    src="~assets/img/companies/devtips-square.png"
-                                >
-                                <p
-                                    class="quote-card__desc"
-                                >Have you guys seen @devwarstv ? Pretty novel stuff happening over there: devwars.tv</p>
-                                <h6 class="quote-card__name">DevTips</h6>
-                                <a
-                                    href="https://twitter.com/DevTipsShow/"
-                                    class="quote-card__username"
-                                    target="_blank"
-                                    rel="nofollow"
-                                >@devtips</a>
-                            </div>
-                        </div>
+                        <Card class="quote-card">
+                            <img
+                                class="quote-card__avatar"
+                                src="~assets/img/companies/devtips-square.png"
+                            >
+                            <p
+                                class="quote-card__desc"
+                            >Have you guys seen @devwarstv ? Pretty novel stuff happening over there: devwars.tv</p>
+                            <h6 class="quote-card__name">DevTips</h6>
+                            <a
+                                href="https://twitter.com/DevTipsShow/"
+                                class="quote-card__username"
+                                target="_blank"
+                                rel="nofollow"
+                            >@devtips</a>
+                        </Card>
                     </div>
                 </div>
             </div>
@@ -182,12 +179,14 @@
 
 <script>
 import Http from '../services/Http';
+import Card from '~/components/Card';
 import Highlights from '~/components/game/Highlights';
 import ScheduleBlock from '~/components/game/ScheduleBlock';
 
 export default {
     name: 'Index',
     components: {
+        Card,
         Highlights,
         ScheduleBlock,
     },

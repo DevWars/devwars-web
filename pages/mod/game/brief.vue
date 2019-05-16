@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="roster mod-card card-bezeless">
+        <Card class="roster plain dark bezeless">
             <GameTeam v-for="team in teams" :key="team.id" :team="team">
                 <Player
                     v-for="player in playersWithUser(team.players)"
@@ -11,9 +11,9 @@
                     @click="removePlayer(player)"
                 />
             </GameTeam>
-        </div>
+        </Card>
 
-        <!-- <div class="mod-card">
+        <!-- <Card>
             <div class="mod-card__header">
                 <h4
                     class="modpanel__subtitle"
@@ -21,7 +21,7 @@
                 >({{ applications.length }}) Applicants</h4>
                 <button class="btn btn-outline-primary" @click="addRegistrant">Add Registrant</button>
             </div>
-        </div>-->
+        </Card>-->
 
         <Table>
             <tr slot="head">
@@ -62,6 +62,7 @@
 <script>
 import Table from '~/components/Table';
 import Http from '../../../services/Http';
+import Card from '~/components/Card';
 import GameTeam from '~/components/game/GameTeam';
 import Player from '~/components/game/Player';
 import User from '~/components/user/User';
@@ -77,7 +78,7 @@ export default {
     meta: {
         auth: [roles.moderator, roles.admin],
     },
-    components: { Table, GameTeam, Player, User },
+    components: { Card, Table, GameTeam, Player, User },
     mixins: [teams, usersFromGame],
     data() {
         return {
@@ -148,8 +149,11 @@ export default {
 
 <style lang="scss" scoped>
 .roster {
-    display: flex;
     margin-bottom: 30px;
+
+    /deep/ .inner {
+        display: flex;
+    }
 
     .GameTeam {
         flex: 1 1 100%;

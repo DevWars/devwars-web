@@ -11,9 +11,9 @@
                         <nuxt-link to="connections" class="nav-tabs__item">Connections</nuxt-link>
                     </nav>
 
-                    <div class="mod-card">
+                    <Card class="plain dark">
                         <nuxt/>
-                    </div>
+                    </Card>
                 </div>
             </div>
         </div>
@@ -22,11 +22,12 @@
 
 
 <script>
+import Card from '~/components/Card';
 import PageBanner from '~/components/layout/PageBanner';
 
 export default {
     name: 'Settings',
-    components: { PageBanner },
+    components: { Card, PageBanner },
 };
 </script>
 

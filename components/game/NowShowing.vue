@@ -57,12 +57,17 @@ export default {
 }
 
 .embed-video {
+    @include aspect-ratio(16, 9);
     width: 100%;
     max-width: 350px;
     margin: 0 auto;
 
     @include breakpoint(xs) {
         max-width: none;
+    }
+
+    iframe {
+        @extend .aspect;
     }
 }
 
