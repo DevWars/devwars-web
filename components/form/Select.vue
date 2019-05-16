@@ -23,11 +23,10 @@ export default {
         },
         value: {
             type: String,
-            required: true,
+            default: undefined,
         },
         label: {
             type: String,
-            required: false,
             default: undefined,
         },
     },
