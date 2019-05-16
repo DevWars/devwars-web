@@ -1,5 +1,5 @@
 <template>
-    <div  v-closable="{handler: toggleMobileMenu, outSideFrom: ' .headerMobile'}">
+    <div v-closable="{handler: toggleMobileMenu, outSideFrom: ' .headerMobile'}">
         <div class="headerMobile">
             <div class="head">
                 <nuxt-link to="/" class="logo" @click.native="toggleMobileMenu">
@@ -9,9 +9,16 @@
 
             <nuxt-link to="/" class="link btn-icon" @click.native="toggleMobileMenu">Home</nuxt-link>
             <nuxt-link to="/games" class="link btn-icon" @click.native="toggleMobileMenu">Games</nuxt-link>
-            <nuxt-link to="/schedule" class="link btn-icon" @click.native="toggleMobileMenu">Schedule</nuxt-link>
-            <nuxt-link to="/leaderboards" class="link btn-icon" @click.native="toggleMobileMenu">Leaders</nuxt-link>
-            <nuxt-link to="/blog" class="link btn-icon" @click.native="toggleMobileMenu">Blog</nuxt-link>
+            <nuxt-link
+                to="/schedule"
+                class="link btn-icon"
+                @click.native="toggleMobileMenu"
+            >Schedule</nuxt-link>
+            <nuxt-link
+                to="/leaderboards"
+                class="link btn-icon"
+                @click.native="toggleMobileMenu"
+            >Leaders</nuxt-link>
 
             <div v-if="!user" class="actions">
                 <nuxt-link to="/register" class="btn btn-primary btn-block">Register</nuxt-link>
@@ -50,21 +57,26 @@ import UserMenu from '~/components/user/UserMenu';
 
 export default {
     name: 'HeaderMobile',
+
     components: { UserMenu },
+
     props: {
         toggleMobileMenu: {
             type: Function,
             required: true,
         },
     },
+
     computed: {
         user() {
             return this.$store.state.user.user;
         },
+
         isAdmin() {
             return this.user.role === 'ADMIN';
         },
     },
+
     methods: {
         logout() {
             this.$store.dispatch('user/logout');
