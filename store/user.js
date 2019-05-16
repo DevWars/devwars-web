@@ -13,6 +13,20 @@ export const getters = {
     userCount(state) {
         return state.count;
     },
+
+    isCompetitor({ profile, linkedAccounts }) {
+        if (!profile) return false;
+
+        const { firstName, lastName, country, skills } = profile;
+        if ((!firstName, !lastName, !country, !skills)) return false;
+
+        if (linkedAccounts.length <= 0) return false;
+
+        const discordAccount = linkedAccounts.find((account) => account.provider === 'DISCORD');
+        if (!discordAccount) return false;
+
+        return true;
+    },
 };
 
 export const mutations = {
@@ -88,6 +102,7 @@ export const actions = {
     async stats({ commit, state }) {
         try {
             const stats = await Http.for(`/users/${state.user.id}/stats`).get();
+
             commit('stats', stats);
         } catch (e) {
             commit('user', null);

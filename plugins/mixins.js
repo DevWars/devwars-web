@@ -1,10 +1,12 @@
-import Vue from 'vue'
+import Vue from 'vue';
 
 Vue.mixin({
     methods: {
         close(args) {
             this.$emit('close');
 
+            // Not sure what resolve is used for but prevents 500 error when missing
+            if (!this.resolve) return;
             this.resolve(args);
         },
 

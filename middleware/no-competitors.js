@@ -1,7 +1,5 @@
-export default function ({ store, redirect }) {
-    const {user} = store.state.user;
-
-    if (user && user.competitor) {
+export default function({ store, redirect }) {
+    if (store.getters['user/isCompetitor']) {
         return redirect('/competitor/registered');
     }
 }

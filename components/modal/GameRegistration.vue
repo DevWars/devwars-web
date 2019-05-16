@@ -1,5 +1,5 @@
 <template>
-    <div v-if="applications.length === 0">
+    <div v-if="!isCompetitor">
         <!-- NOT PRE-REGISTERED -->
         <h1>Become a competitor</h1>
         <p>
@@ -58,8 +58,8 @@ export default {
     },
 
     computed: {
-        applications() {
-            return this.$store.state.game.applications;
+        isCompetitor() {
+            return this.$store.getters['user/isCompetitor'];
         },
     },
 
