@@ -93,12 +93,12 @@ module.exports = {
     ],
 
     modules: [
-        ['@nuxtjs/axios']
+        ['@nuxtjs/axios'],
     ],
 
     router: {
         linkExactActiveClass: 'active',
-        middleware: ['pending', 'update-latest-route', 'auth'],
+        middleware: ['update-latest-route', 'auth'],
     },
 
     /*

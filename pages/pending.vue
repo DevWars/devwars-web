@@ -12,7 +12,7 @@
                         <u>check your spam folder</u>.
                     </p>
                     <div>
-                        <button v-async-click="[resend]" class="btn btn-outline-gray">Resend Email</button>
+                        <button class="btn btn-outline-gray" @click="resend">Resend Email</button>
                     </div>
                 </Card>
             </div>
@@ -25,12 +25,16 @@
 import Http from '../services/Http';
 import Card from '~/components/Card';
 import PageBanner from '~/components/layout/PageBanner';
+import { roles } from '../utils/auth';
 
 export default {
     name: 'Pending',
 
-    middleware: ['auth', 'guest'],
-
+    meta: {
+        auth: [roles.pending],
+        redirectIfNot: "/",
+    },
+    
     components: { Card, PageBanner },
 
     methods: {

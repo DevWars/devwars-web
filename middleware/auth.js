@@ -7,10 +7,15 @@ export default ({ store, route, redirect, error }) => {
             if (!store.state.user.user) return redirect('/login');
 
             const role = store.state.user.user.role || 'PENDING';
+
             if (typeof meta.auth === 'string') auth.push(meta.auth);
             else auth = meta.auth;
+            
 
-            if (!isAuthorized(role, auth)) {
+            const ok = isAuthorized(role, auth);
+
+            if (!ok && meta.redirectIfNot) return redirect(meta.redirectIfNot);
+            if(!ok) {
                 return error({
                     statusCode: 401,
                     message: 'What you trying',
