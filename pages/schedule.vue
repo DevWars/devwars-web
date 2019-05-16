@@ -1,12 +1,12 @@
 <template>
     <div>
         <PageBanner title="Schedule">
-            <select v-model="filter" class="select--clear">
+            <Select v-model="filter" class="clear">
                 <option value selected="selected">Filter by</option>
                 <option>Classic</option>
                 <option>Zen Garden</option>
                 <option>Blitz</option>
-            </select>
+            </Select>
         </PageBanner>
 
         <div class="footer-offset">
@@ -20,11 +20,14 @@
 
 <script>
 import PageBanner from '~/components/layout/PageBanner';
+import Select from '~/components/form/Select';
 import ScheduleBlock from '~/components/game/ScheduleBlock';
 
 export default {
     name: 'Schedule',
-    components: { PageBanner, ScheduleBlock },
+
+    components: { Select, PageBanner, ScheduleBlock },
+
     data: () => {
         return {
             filter: '',
@@ -32,3 +35,7 @@ export default {
     },
 };
 </script>
+
+
+<style lang="scss" scoped>
+</style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="select-container">
+    <div class="Select">
         <select
             :type="type"
             :value="value"
@@ -42,8 +42,50 @@ export default {
 <style lang="scss" scoped>
 @import 'utils.scss';
 
-.select-container {
+.Select {
+    display: block;
+    position: relative;
     font-family: $alt-font-face;
+    outline: none;
+
+    &.clear select {
+        background: transparent;
+        border: none;
+        font-family: $alt-font-face;
+        text-transform: uppercase;
+        font-weight: $font-weight-bold;
+        outline: none;
+
+        option {
+            background-color: #fff;
+            color: $black-color;
+        }
+    }
+
+    &:after {
+        @extend .fa;
+        content: $fa-caret-down;
+        color: $text-color-secondary;
+        position: absolute;
+        right: $input-padding-x;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    select {
+        padding-right: $grid-gutter-width;
+        margin-top: 0;
+        appearance: none;
+
+        &:focus::-ms-value {
+            color: $input-color;
+            background-color: $input-bg;
+        }
+
+        option {
+            color: $black-color;
+        }
+    }
 }
 </style>
 
