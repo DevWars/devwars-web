@@ -9,7 +9,7 @@
         <div class="modal__actions">
             <button class="btn btn-outline-gray" @click="close(false)">Nevermind</button>
             <a
-                :href="'/competitor/register?game=' + schedule.id "
+                :href="'/competitor/register?schedule=' + schedule.id "
                 class="btn btn-primary"
                 @click="close(false)"
             >Begin Registration</a>
