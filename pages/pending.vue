@@ -26,15 +26,16 @@ import Http from '../services/Http';
 import PageBanner from '~/components/layout/PageBanner';
 
 export default {
-    nam: 'Pending',
+    name: 'Pending',
+
+    middleware: ['auth', 'guest'],
+
     components: { PageBanner },
+
     methods: {
         async resend() {
             await Http.for('auth/re-verify').save();
-            return this.$store.dispatch(
-                'toast/success',
-                `We have sent off another email, please wait patiently.`
-            );
+            return this.$store.dispatch('toast/success', `We have sent off another email, please wait patiently.`);
         },
     },
 };
