@@ -25,7 +25,7 @@
                 <nuxt-link to="/login" class="btn btn-link btn-block color-white">Log In</nuxt-link>
             </div>
 
-            <UserMenu v-if="user" :user="user">
+            <UserMenu v-if="user" :user="user" class="link">
                 <template #default="{close}">
                     <nuxt-link
                         v-if="isAdmin"
