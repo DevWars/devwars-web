@@ -1,7 +1,7 @@
 <template>
     <div class="Card">
         <div class="inner">
-            <h2 v-if="title" class="card__title">{{ title }}</h2>
+            <h2 v-if="title" class="title">{{ title }}</h2>
             <slot></slot>
         </div>
     </div>
@@ -10,6 +10,7 @@
 <script>
 export default {
     name: 'Card',
+
     props: {
         title: {
             type: String,
@@ -33,7 +34,7 @@ export default {
         text-decoration: none;
     }
 
-    &__title {
+    .title {
         padding: 0 0 15px;
         font-size: $h4-font-size;
         text-transform: uppercase;

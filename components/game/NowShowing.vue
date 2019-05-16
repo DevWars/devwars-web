@@ -66,7 +66,7 @@ export default {
     }
 }
 
-/deep/ .card__title {
+/deep/ .Card .title {
     display: flex;
     align-items: center;
 
