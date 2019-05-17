@@ -1,13 +1,13 @@
 <template>
     <div class="footer">
         <div class="newsletter">
-            <div class="container">
+            <Container>
                 <h2>Receive our weekly challenge, and other DevWars updates!</h2>
                 <Button href="http://eepurl.com/bffR51" target="_blank" class="primary">Subscribe</Button>
-            </div>
+            </Container>
         </div>
 
-        <div class="container">
+        <Container>
             <div class="sitemap">
                 <ul>
                     <li>DEVWARS</li>
@@ -86,7 +86,7 @@
                     <span>All rights reserved</span>
                 </div>
             </div>
-        </div>
+        </Container>
     </div>
 </template>
 
@@ -177,7 +177,7 @@ export default {
 
     a {
         display: inline-block;
-        padding: $grid-gutter-part;
+        padding: $grid-gutter-width;
         font-size: $h4-font-size;
         color: $text-color-muted;
         transition: color 0.2s ease-in-out;
@@ -203,7 +203,7 @@ export default {
 }
 
 .legal {
-    padding: $xs-space 0 $grid-gutter-width;
+    padding: 10px 0 30px;
     text-align: center;
 
     span {

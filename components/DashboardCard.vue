@@ -36,7 +36,7 @@ export default {
 .DashboardCard {
     .header {
         background-color: lighten($bg-color-2, 4%);
-        padding: $xs-space $grid-gutter-part;
+        padding: $xs-space $grid-gutter-width;
         font-size: 0;
 
         i,

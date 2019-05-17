@@ -2,26 +2,22 @@
     <DashboardCard title="Daily Tasks" icon="fa fa-gift" class="scrollable">
         <div class="item">
             <div class="main">
-                <div class="col-xs-2 no-gutter">
+                <Column :xs="2" class="no-gutter">
                     <Devcoins amount="500" class="xs"/>
-                </div>
-                <div class="col-xs-8 no-gutter">Submit 5 Objectives</div>
+                </Column>
+                <Column :xs="10" class="no-gutter">Submit 5 Objectives</Column>
             </div>
-            <div>
-                <Button class="outline sm">Claim</Button>
-            </div>
+            <Button class="outline sm">Claim</Button>
         </div>
 
         <div class="item">
             <div class="main">
-                <div class="col-xs-2 no-gutter">
-                    <Devcoins amount="300" class="xs"/>
-                </div>
-                <div class="col-xs-8 no-gutter">Comment on a User Submission</div>
+                <Column :xs="2" class="no-gutter">
+                    <Devcoins amount="500" class="xs"/>
+                </Column>
+                <Column :xs="10" class="no-gutter">Comment on a User Submission</Column>
             </div>
-            <div>
-                <Button class="outline sm" disabled>Claim</Button>
-            </div>
+            <Button class="outline sm" disabled>Claim</Button>
         </div>
     </DashboardCard>
 </template>
@@ -43,7 +39,7 @@ export default {
 
 .item {
     @extend %flex-justify;
-    padding: $grid-gutter-part;
+    padding: $grid-gutter-width;
     border-bottom: 1px solid $divider-color;
 }
 

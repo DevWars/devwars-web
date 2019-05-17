@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="Header">
         <div class="header">
-            <div class="inner container-fluid">
+            <Container class="fluid">
                 <div>
                     <Button class="link burger-menu" @click="toggleMobileMenu"/>
 
@@ -54,7 +54,7 @@
                         <Button class="link" @click="logout">Logout</Button>
                     </template>
                 </UserMenu>
-            </div>
+            </Container>
         </div>
 
         <!-- Mobile -->
@@ -105,110 +105,111 @@ export default {
 <style lang="scss" scoped>
 @import 'utils.scss';
 
-.header {
-    height: $header-height;
-    background: #000;
-    transition: all 0.6s;
-}
+.Header {
+    .header {
+        height: $header-height;
+        background: #000;
+        transition: all 0.6s;
+    }
 
-.inner {
-    @extend %flex-justify;
-    height: 100%;
-}
+    .Container {
+        @extend %flex-justify;
+        height: 100%;
+    }
 
-.logo,
-.burger-menu {
-    vertical-align: middle;
-}
+    .logo,
+    .burger-menu {
+        vertical-align: middle;
+    }
 
-.logo {
-    display: inline-block;
-    margin-right: $s-space;
+    .logo {
+        display: inline-block;
+        margin-right: $s-space;
 
-    &-full {
-        width: 160px;
+        &-full {
+            width: 160px;
 
-        @include breakpoint(sm) {
+            @include breakpoint(sm) {
+                display: none;
+            }
+        }
+
+        &-icon {
             display: none;
-        }
-    }
+            width: 40px;
 
-    &-icon {
-        display: none;
-        width: 40px;
-
-        @include breakpoint(sm) {
-            display: inline-block;
-        }
-    }
-}
-
-.burger-menu.Button {
-    display: none;
-    padding: $xs-space $xs-space $xs-space 0;
-    margin-right: $xs-space;
-
-    @include breakpoint(md) {
-        display: inline-block;
-    }
-
-    &:before {
-        @extend .fa;
-        content: $fa-bars;
-        font-size: $h3-font-size;
-    }
-
-    &:hover,
-    &:focus {
-        color: $brand-primary;
-    }
-}
-
-.nav {
-    @extend %list-unstyled;
-    @extend %align-middle;
-
-    &__item {
-        @extend %align-middle;
-        padding: $btn-padding-y 0;
-        position: relative;
-
-        &:hover .nav__link {
-            color: #fff;
-        }
-    }
-
-    &__link {
-        display: inline-block;
-        padding: $btn-padding-y ($btn-padding-x / 2);
-        margin: $xxs-space 0;
-        line-height: $btn-line-height;
-        font-weight: bold;
-        text-transform: uppercase;
-        font-size: $font-size-base;
-        color: $text-color-secondary;
-        font-family: $alt-font-face;
-
-        &.active {
-            color: $base-font-color;
-
-            &:before {
-                content: '';
-                display: block;
-                width: 100%;
-                height: 2px;
-                position: absolute;
-                background-color: $brand-primary;
-                bottom: 0;
-                left: 0;
-                right: 0;
+            @include breakpoint(sm) {
+                display: inline-block;
             }
         }
     }
 
-    &-main {
+    .burger-menu.Button {
+        display: none;
+        padding: $xs-space $xs-space $xs-space 0;
+        margin-right: $xs-space;
+
         @include breakpoint(md) {
-            display: none;
+            display: inline-block;
+        }
+
+        &:before {
+            @extend .fa;
+            content: $fa-bars;
+            font-size: $h3-font-size;
+        }
+
+        &:hover,
+        &:focus {
+            color: $brand-primary;
+        }
+    }
+
+    .nav {
+        @extend %list-unstyled;
+        @extend %align-middle;
+
+        &__item {
+            @extend %align-middle;
+            padding: 10px 0;
+            position: relative;
+
+            &:hover .nav__link {
+                color: #fff;
+            }
+        }
+
+        &__link {
+            display: inline-block;
+            padding: 10px;
+            margin: $xxs-space 0;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: $font-size-base;
+            color: $text-color-secondary;
+            font-family: $alt-font-face;
+
+            &.active {
+                color: $base-font-color;
+
+                &:before {
+                    content: '';
+                    display: block;
+                    width: 100%;
+                    height: 2px;
+                    position: absolute;
+                    background-color: $brand-primary;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                }
+            }
+        }
+
+        &-main {
+            @include breakpoint(md) {
+                display: none;
+            }
         }
     }
 }

@@ -9,7 +9,7 @@
             </Select>
         </PageBanner>
 
-        <div class="footer-offset container">
+        <Container class="footer-offset">
             <Table>
                 <tr slot="head">
                     <th width="10%">Rank</th>
@@ -37,7 +37,7 @@
                 @previous="previous"
                 @next="next"
             />
-        </div>
+        </Container>
     </div>
 </template>
 

@@ -1,26 +1,26 @@
 <template>
     <form v-if="user && profile" v-async-submit="[save]">
-        <div class="row">
-            <div class="col-sm-8">
+        <Row>
+            <Column :md="8">
                 <h3 class="modpanel__subtitle">Profile</h3>
-                <div class="row">
-                    <div class="col-md-6">
+                <Row>
+                    <Column :md="6">
                         <Input
                             v-model="firstName"
                             label="First Name"
                             class="group"
                             @input="updateForm({values: $event, key: 'firstName'})"
                         />
-                    </div>
-                    <div class="col-md-6">
+                    </Column>
+                    <Column :md="6">
                         <Input
                             v-model="lastName"
                             label="Last Name"
                             class="group"
                             @input="updateForm({values: $event, key: 'lastName'})"
                         />
-                    </div>
-                </div>
+                    </Column>
+                </Row>
 
                 <Input
                     v-model="addressOne"
@@ -36,32 +36,32 @@
                     @input="updateForm({values: $event, key: 'addressTwo'})"
                 />
 
-                <div class="row">
-                    <div class="col-md-5">
+                <Row>
+                    <Column :md="5">
                         <Input
                             v-model="city"
                             label="City"
                             class="group"
                             @input="updateForm({values: $event, key: 'city'})"
                         />
-                    </div>
-                    <div class="col-md-2">
+                    </Column>
+                    <Column :md="2">
                         <Input
                             v-model="state"
                             label="State"
                             class="group"
                             @input="updateForm({values: $event, key: 'state'})"
                         />
-                    </div>
-                    <div class="col-md-2">
+                    </Column>
+                    <Column :md="2">
                         <Input
                             v-model="zip"
                             label="Zip or Postal"
                             class="group"
                             @input="updateForm({values: $event, key: 'zip'})"
                         />
-                    </div>
-                    <div class="col-sm-3">
+                    </Column>
+                    <Column :md="3">
                         <Select
                             v-model="country"
                             label="Select Country"
@@ -70,8 +70,8 @@
                         >
                             <option v-for="country in countries" :key="country">{{ country }}</option>
                         </Select>
-                    </div>
-                </div>
+                    </Column>
+                </Row>
 
                 <Input
                     v-model="dob"
@@ -113,8 +113,8 @@
                 />
 
                 <LanguageSkills :profile="profile" @change="updateForm"/>
-            </div>
-            <div class="col-sm-4">
+            </Column>
+            <Column :md="4">
                 <h3 class="modpanel__subtitle">Avatar</h3>
 
                 <Avatar v-if="user" :user="user" class="xl"/>
@@ -128,8 +128,8 @@
                         >Upload new avatar</Button>
                     </template>
                 </FileChooser>
-            </div>
-        </div>
+            </Column>
+        </Row>
 
         <Button class="primary" type="submit">Save</Button>
     </form>

@@ -2,9 +2,9 @@
     <div>
         <PageBanner title="Contact"/>
 
-        <div class="footer-offset container">
-            <div class="row">
-                <div class="col-md-8">
+        <Container class="footer-offset">
+            <Row>
+                <Column :md="8">
                     <Card v-show="!submitted" class="dark plain">
                         <form v-async-submit="[sendEmail]">
                             <Input v-model="name" label="Name" class="group" required/>
@@ -24,13 +24,13 @@
                             <h4>We received your email, you will hear back from us soon.</h4>
                         </div>
                     </Card>
-                </div>
+                </Column>
 
-                <div class="col-md-4">
+                <Column :md="4">
                     <Card class="dark plain">contact@devwars.tv</Card>
-                </div>
-            </div>
-        </div>
+                </Column>
+            </Row>
+        </Container>
     </div>
 </template>
 
@@ -89,6 +89,6 @@ export default {
 @import 'utils.scss';
 
 form {
-    margin-top: $grid-gutter-width;
+    margin-top: 30px;
 }
 </style>

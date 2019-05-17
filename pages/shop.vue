@@ -22,9 +22,9 @@
         </PageBanner>
 
         <div class="footer-offset">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-4 col-sm-6">
+            <Container>
+                <Row>
+                    <Column :lg="3" :md="4" :sm="6">
                         <div class="shop-card consumable">
                             <div class="shop-card__cover">
                                 <i class="fa fa-question-circle shop-card__img"></i>
@@ -38,8 +38,8 @@
                             </div>
                             <Devcoins amount="232" class="sm"/>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
+                    </Column>
+                    <Column :lg="3" :md="4" :sm="6">
                         <div class="shop-card wearable">
                             <div class="shop-card__cover">
                                 <i class="fa fa-chess-queen shop-card__img"></i>
@@ -51,8 +51,8 @@
                             </div>
                             <Devcoins amount="232" class="sm"/>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
+                    </Column>
+                    <Column :lg="3" :md="4" :sm="6">
                         <div class="shop-card cosmetic">
                             <div class="shop-card__cover">
                                 <i class="fa fa-camera-retro shop-card__img"></i>
@@ -64,8 +64,8 @@
                             </div>
                             <Devcoins amount="232" class="sm"/>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
+                    </Column>
+                    <Column :lg="3" :md="4" :sm="6">
                         <div class="shop-card consumable">
                             <div class="shop-card__cover">
                                 <i class="fa fa-shield-alt shop-card__img"></i>
@@ -79,8 +79,8 @@
                             </div>
                             <Devcoins amount="232" class="sm"/>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
+                    </Column>
+                    <Column :lg="3" :md="4" :sm="6">
                         <div class="shop-card consumable">
                             <div class="shop-card__cover">
                                 <i class="fa fa-tag shop-card__img"></i>
@@ -92,8 +92,8 @@
                             </div>
                             <Devcoins amount="232" class="sm"/>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
+                    </Column>
+                    <Column :lg="3" :md="4" :sm="6">
                         <div class="shop-card consumable">
                             <div class="shop-card__cover">
                                 <i class="fa fa-music shop-card__img"></i>
@@ -107,8 +107,8 @@
                             </div>
                             <Devcoins amount="232" class="sm"/>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
+                    </Column>
+                    <Column :lg="3" :md="4" :sm="6">
                         <div class="shop-card consumable">
                             <div class="shop-card__cover">
                                 <i class="fa fa-ticket-alt shop-card__img"></i>
@@ -122,9 +122,9 @@
                             </div>
                             <Devcoins amount="232" class="sm"/>
                         </div>
-                    </div>
-                </div>
-            </div>
+                    </Column>
+                </Row>
+            </Container>
         </div>
     </div>
 </template>
@@ -147,7 +147,7 @@ export default {
 @import 'utils.scss';
 
 .shop-card {
-    margin-bottom: $grid-gutter-width;
+    margin-bottom: 30px;
     background-color: $bg-color-3;
     cursor: pointer;
 
@@ -174,7 +174,7 @@ export default {
 
     &__main {
         min-height: 120px;
-        padding: $xs-space $grid-gutter-part 0;
+        padding: $xs-space $grid-gutter-width 0;
     }
 
     &__type {
@@ -258,7 +258,7 @@ export default {
         }
 
         &:not(:last-of-type) {
-            margin-right: $grid-gutter-width;
+            margin-right: 30px;
         }
 
         &:hover {

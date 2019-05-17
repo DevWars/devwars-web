@@ -1,6 +1,6 @@
 <template>
     <div class="Register header-offset">
-        <div class="container">
+        <Container>
             <form v-async-submit="[submit]">
                 <DevwarsCard title="Register">
                     <Input v-model="email" label="Email" class="group" required/>
@@ -28,7 +28,7 @@
                     </div>
                 </DevwarsCard>
             </form>
-        </div>
+        </Container>
     </div>
 </template>
 

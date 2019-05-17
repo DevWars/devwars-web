@@ -1,6 +1,6 @@
 <template>
-    <div class="LanguageSkills row">
-        <div v-for="language in languages" :key="language.name" class="col-md-4">
+    <Row class="LanguageSkills">
+        <Column v-for="language in languages" :key="language.name" :md="4">
             <div class="language" :class="language.name">
                 <ul class="meter">
                     <li
@@ -30,8 +30,8 @@
 
                 <p class="desc">{{ tooltip(language) }}</p>
             </div>
-        </div>
-    </div>
+        </Column>
+    </Row>
 </template>
 
 
@@ -146,7 +146,7 @@ export default {
         }
 
         .arrow {
-            padding: $grid-gutter-width;
+            padding: 30px;
             font-size: $h3-font-size;
             cursor: pointer;
 
@@ -158,7 +158,7 @@ export default {
 
         .desc {
             min-height: 130px;
-            padding: $s-space $grid-gutter-width;
+            padding: $s-space 30px;
             background-color: $bg-color-3;
             line-height: 1.3;
             font-size: $font-size-base;

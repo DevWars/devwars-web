@@ -46,7 +46,7 @@ export default {
     @extend %flex-justify;
     border-top: 1px solid $divider-color;
     padding: $xs-space;
-    margin: $grid-gutter-width auto $s-space;
+    margin: 30px auto $s-space;
     position: relative;
 
     h3 {
@@ -88,7 +88,7 @@ export default {
         content: 'ACED';
         border: 1px solid $bonus-color;
         padding: $xxxs-space $xxs-space;
-        margin: 0 $grid-gutter-part;
+        margin: 0 $grid-gutter-width;
         font-weight: $font-weight-regular;
         font-size: $font-size-xs;
         color: $bonus-color;

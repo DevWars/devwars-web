@@ -1,6 +1,6 @@
 <template>
     <div class="ForgotPassword header-offset">
-        <div class="container">
+        <Container>
             <form v-show="!done" v-async-submit="[forgot]">
                 <DevwarsCard
                     title="Forgot Password"
@@ -33,7 +33,7 @@
                     </div>
                 </DevwarsCard>
             </div>
-        </div>
+        </Container>
     </div>
 </template>
 

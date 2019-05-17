@@ -56,13 +56,13 @@ export default {
     }
 
     .desc {
-        margin-top: -$grid-gutter-width;
+        margin-top: -30px;
         margin-bottom: $m-space;
         color: $text-color-secondary;
     }
 
     .main {
-        padding-top: $grid-gutter-part;
+        padding-top: $grid-gutter-width;
     }
 
     .actions {

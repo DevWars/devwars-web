@@ -9,13 +9,14 @@
                     :class="{ entered: isApplied(schedule) }"
                 >
                     <div class="main">
-                        <div
-                            class="col-xs-2 no-gutter status"
-                        >{{ isApplied(schedule) ? 'Entered' : 'Not Entered'}}</div>
-                        <div class="col-xs-8 no-gutter">
+                        <Column
+                            :xs="2"
+                            class="no-gutter status"
+                        >{{ isApplied(schedule) ? 'Entered' : 'Not Entered'}}</Column>
+                        <Column :xs="10" class="no-gutter">
                             {{ schedule.startTime | moment('longDate') }}
                             @ {{ schedule.startTime | moment('HH:mm') }} (UTC)
-                        </div>
+                        </Column>
                     </div>
 
                     <ButtonGroup>
@@ -61,7 +62,7 @@ export default {
 
 .schedule {
     @extend %flex-justify;
-    padding: $grid-gutter-part;
+    padding: $grid-gutter-width;
     border-bottom: 1px solid $divider-color;
 
     .status {

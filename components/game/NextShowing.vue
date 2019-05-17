@@ -107,7 +107,7 @@ export default {
 
 .next-showing {
     width: 100%;
-    padding-top: $grid-gutter-width;
+    padding-top: 30px;
     margin-top: $s-space;
     border-top: $border-size solid $divider-color;
     line-height: 1.4;

@@ -74,7 +74,7 @@ module.exports = {
         gzip: false,
     },
 
-    css: ['~assets/scss/main.scss', 'cropperjs/dist/cropper.css', 'vue-js-modal/dist/styles.css'],
+    css: ['cropperjs/dist/cropper.css', 'vue-js-modal/dist/styles.css'],
 
     plugins: [
         { src: '~plugins/ga.js', ssr: false },

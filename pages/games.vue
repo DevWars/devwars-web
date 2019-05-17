@@ -1,6 +1,6 @@
 <template>
-    <div class="container-fluid">
-        <div class="sidebar no-gutter col-sm-3">
+    <Container class="fluid">
+        <Column :sm="3" class="sidebar no-gutter">
             <Tabs class="fluid invert">
                 <nuxt-link
                     v-for="current in seasons"
@@ -25,12 +25,12 @@
                     <i v-show="game.videoUrl" class="youtube fab fa-youtube"></i>
                 </div>
             </div>
-        </div>
+        </Column>
 
-        <div class="view col-sm-9">
+        <Column :sm="9" class="view">
             <LargeGameDetail v-if="viewing" :game="viewing"/>
-        </div>
-    </div>
+        </Column>
+    </Container>
 </template>
 
 
@@ -116,7 +116,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: $grid-gutter-part;
+    padding: $grid-gutter-width;
     border-bottom: 1px solid $divider-color;
     background-color: $bg-color-3;
     cursor: pointer;

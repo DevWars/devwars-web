@@ -1,24 +1,24 @@
 <template>
     <div class="dashboard header-offset">
-        <div class="container">
-            <div class="row">
-                <div v-if="user" class="aside col-md-4">
+        <Container>
+            <Row>
+                <Column v-if="user" :md="4" class="aside">
                     <ProfileCard :user="user.user"/>
 
                     <Wallet :stats="user.stats"/>
 
                     <!-- <Badges :owned="mine"/> -->
-                </div>
+                </Column>
 
-                <div class="main col-md-8">
+                <Column :md="8" class="main">
                     <DailyPrizes/>
 
                     <UpcomingGames v-if="upcomingGames.length > 0" :upcoming="upcomingGames"/>
 
                     <Activities v-if="activities.length > 0" :paged="activities"/>
-                </div>
-            </div>
-        </div>
+                </Column>
+            </Row>
+        </Container>
     </div>
 </template>
 
@@ -61,7 +61,7 @@ export default {
 @import 'utils.scss';
 
 .dashboard {
-    padding-top: $header-offset + $grid-gutter-width;
+    padding-top: $header-offset + 30px;
 }
 
 .aside {

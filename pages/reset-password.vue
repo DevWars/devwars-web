@@ -1,6 +1,6 @@
 <template>
     <div class="ResetPassword header-offset">
-        <div class="container">
+        <Container>
             <form v-show="!done">
                 <DevwarsCard title="Reset Password">
                     <Input
@@ -40,7 +40,7 @@
                     </div>
                 </DevwarsCard>
             </div>
-        </div>
+        </Container>
     </div>
 </template>
 

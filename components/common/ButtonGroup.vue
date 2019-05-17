@@ -17,7 +17,7 @@
             display: block;
             width: 100%;
             margin-left: 0;
-            margin-top: $grid-gutter-part;
+            margin-top: $grid-gutter-width;
         }
     }
 }

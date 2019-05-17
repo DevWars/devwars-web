@@ -42,7 +42,7 @@ export default {
 html {
     font-family: $base-font-face;
     font-size: $font-size-base;
-    line-height: $line-height-base;
+    line-height: 1.5;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -110,7 +110,6 @@ h5,
 h6 {
     margin: 0;
     line-height: normal;
-    color: $headings-color;
     word-wrap: break-word;
 }
 

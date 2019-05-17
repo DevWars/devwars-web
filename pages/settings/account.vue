@@ -1,6 +1,6 @@
 <template>
-    <div v-if="user" class="row">
-        <div class="col-sm-8">
+    <Row v-if="user">
+        <Column :sm="8">
             <Input v-model="user.username" label="Username" class="group"/>
 
             <h3 class="modpanel__subtitle">Email</h3>
@@ -43,9 +43,9 @@
                 class="primary"
                 :disabled="!(currentPassword && newPassword && newPassword === newPasswordConfirmed)"
             >Change Password</Button>
-        </div>
-        <div class="col-sm-4"></div>
-    </div>
+        </Column>
+        <Column :sm="4"/>
+    </Row>
 </template>
 
 

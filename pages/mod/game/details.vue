@@ -41,8 +41,8 @@
             <Input v-model="game.videoUrl" label="YouTube URL" class="group"/>
 
             <h3 class="modpanel__subtitle">Votes</h3>
-            <div class="row">
-                <div v-for="team in teams" :key="team.id" class="col-sm-6">
+            <Row>
+                <Column v-for="team in teams" :key="team.id" :sm="6">
                     <div v-for="vote in team.votes" :key="vote.id">
                         <Input
                             :value="vote"
@@ -54,19 +54,19 @@
                             @change="updated => team.votes[vote] = updated"
                         />
                     </div>
-                </div>
-            </div>
+                </Column>
+            </Row>
 
             <!--
             <h3 class="modpanel__subtitle">Files</h3>
-            <div class="row">
-                <div class="col-sm-6">
+            <Row>
+                <Column :sm="6">
                     <Input type="file" label="Blue Files" class="group"/>
-                </div>
-                <div class="col-sm-6">
+                </Column>
+                <Column :sm="6">
                     <Input type="file" label="Red Files" class="group"/>
-                </div>
-            </div>-->
+                </Column>
+            </Row>-->
         </form>
     </Card>
 </template>

@@ -54,7 +54,7 @@ export default {
     text-align: center;
 
     /deep/ .content {
-        padding: $grid-gutter-width;
+        padding: 30px;
     }
 }
 
@@ -63,12 +63,12 @@ export default {
 }
 
 .user-rank {
-    margin-bottom: $grid-gutter-part;
+    margin-bottom: $grid-gutter-width;
 }
 
 /deep/ .user-avatar-wrapper {
     border: $border-size-lg solid $divider-color;
-    margin: -($user-avatar-offset * 2) auto $grid-gutter-part;
+    margin: -($user-avatar-offset * 2) auto $grid-gutter-width;
     border-radius: 50%;
 }
 </style>

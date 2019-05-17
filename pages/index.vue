@@ -1,44 +1,42 @@
 <template>
     <div>
         <div class="hero">
-            <div class="row">
-                <div class="hero__inner">
-                    <h1 class="hero__title">
-                        A live
-                        <strong>game show</strong> for developers
-                    </h1>
-                    <h2 class="hero__subtitle">Every other Saturday @ 5:00 PM (UTC)</h2>
+            <div class="hero__inner">
+                <h1 class="hero__title">
+                    A live
+                    <strong>game show</strong> for developers
+                </h1>
+                <h2 class="hero__subtitle">Every other Saturday @ 5:00 PM (UTC)</h2>
 
-                    <ButtonGroup>
-                        <Button
-                            href="https://twitch.tv/devwars"
-                            target="_blank"
-                            class="primary"
-                        >Watch on Twitch</Button>
-                        <Button to="/games" class="link">View Past Games</Button>
-                    </ButtonGroup>
-                </div>
+                <ButtonGroup>
+                    <Button
+                        href="https://twitch.tv/devwars"
+                        target="_blank"
+                        class="primary"
+                    >Watch on Twitch</Button>
+                    <Button to="/games" class="link">View Past Games</Button>
+                </ButtonGroup>
             </div>
         </div>
 
         <Highlights :game="latest"/>
 
         <div class="home-shows home-section">
-            <div class="container">
+            <Container>
                 <h2 class="home-section__title">Upcoming Shows</h2>
                 <ScheduleBlock :count="2"/>
 
                 <div class="home-section__actions">
                     <Button to="/schedule" class="outline white">View Full Schedule</Button>
                 </div>
-            </div>
+            </Container>
         </div>
 
         <div
             class="home-display"
             :style="{backgroundImage: 'url(' + require('~/assets/img/become-contestant-bg.jpg') + ')'}"
         >
-            <div class="container">
+            <Container>
                 <div class="home-display__content">
                     <h3 class="home-display__title">
                         Think you
@@ -47,14 +45,14 @@
                     </h3>
                     <Button to="/competitor/register" class="outline lg">Become a competitor</Button>
                 </div>
-            </div>
+            </Container>
         </div>
 
         <div
             class="home-display reverse"
             :style="{backgroundImage: 'url(' + require('~/assets/img/devwars-docs-bg.jpg') + ')'}"
         >
-            <div class="container">
+            <Container>
                 <div class="home-display__content">
                     <h3 class="home-display__title">
                         Get familiar
@@ -63,19 +61,19 @@
                     </h3>
                     <Button to="/docs" class="outline lg">View Documentation</Button>
                 </div>
-            </div>
+            </Container>
         </div>
 
         <div class="home-section">
-            <div class="container">
+            <Container>
                 <h2 class="home-section__title">Honorable Mentions</h2>
                 <p class="home-section__desc">
                     We are peaking the interests of well-known developers and
                     organizations
                 </p>
 
-                <div class="home-quotes row">
-                    <div class="col-md-4">
+                <Row class="home-quotes">
+                    <Column :md="4">
                         <Card class="quote-card">
                             <img
                                 class="quote-card__avatar"
@@ -92,9 +90,9 @@
                                 rel="nofollow"
                             >@scotch_io</a>
                         </Card>
-                    </div>
+                    </Column>
 
-                    <div class="col-md-4">
+                    <Column :md="4">
                         <Card class="quote-card">
                             <img
                                 class="quote-card__avatar"
@@ -111,13 +109,13 @@
                                 rel="nofollow"
                             >@devtips</a>
                         </Card>
-                    </div>
-                </div>
-            </div>
+                    </Column>
+                </Row>
+            </Container>
         </div>
 
         <div class="home-section">
-            <div class="container">
+            <Container>
                 <h2 class="home-section__title">Our Supporters</h2>
                 <p
                     class="home-section__desc"
@@ -168,7 +166,7 @@
                         >
                     </a>
                 </div>
-            </div>
+            </Container>
         </div>
     </div>
 </template>
@@ -217,12 +215,12 @@ $home-card-margin: 80px;
         width: 100%;
         z-index: 1;
         margin-top: -($home-card-margin / 2);
-        padding: 0 $grid-gutter-width;
+        padding: 0 30px;
         left: 0;
 
         @include breakpoint(sm) {
             @include clear-position;
-            padding: $l-space $grid-gutter-width ($l-space + $home-card-margin);
+            padding: $l-space 30px ($l-space + $home-card-margin);
             transform: none;
             margin-top: 0;
         }
@@ -273,12 +271,12 @@ $home-card-margin: 80px;
 
     &__desc {
         margin-bottom: $m-space;
-        margin-top: -$grid-gutter-width;
+        margin-top: -30px;
         color: $text-color-secondary;
     }
 
     &__actions {
-        margin-top: $grid-gutter-width;
+        margin-top: 30px;
     }
 
     & + & {
@@ -294,7 +292,7 @@ $home-card-margin: 80px;
 
     &__title {
         max-width: 800px;
-        margin-bottom: $grid-gutter-width;
+        margin-bottom: 30px;
         font-weight: $font-weight-bold;
         font-size: $display4-size;
         line-height: 1.2;
@@ -317,14 +315,14 @@ $home-card-margin: 80px;
     }
 
     &__item {
-        padding: $grid-gutter-width;
+        padding: 30px;
 
         @include breakpoint(sm) {
             width: 50%;
         }
 
         @include breakpoint(xs) {
-            padding: $grid-gutter-part;
+            padding: $grid-gutter-width;
         }
     }
 
@@ -348,7 +346,7 @@ $home-card-margin: 80px;
 }
 
 .quote-card {
-    margin-top: $grid-gutter-width;
+    margin-top: 30px;
 
     &__avatar {
         width: 73px;
@@ -358,11 +356,11 @@ $home-card-margin: 80px;
     }
 
     &__desc {
-        margin-top: $grid-gutter-part;
+        margin-top: $grid-gutter-width;
     }
 
     &__name {
-        margin-top: $grid-gutter-part;
+        margin-top: $grid-gutter-width;
         font-size: $h5-font-size;
     }
 }

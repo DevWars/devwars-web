@@ -133,7 +133,7 @@ export default {
 
 .matchup {
     width: 100%;
-    padding: 0 $grid-gutter-width;
+    padding: 0 30px;
     display: flex;
     justify-content: space-between;
     margin: $s-space auto 0;

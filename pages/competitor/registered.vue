@@ -3,7 +3,7 @@
         <PageBanner title="Compete in DevWars" type="competitor"/>
 
         <div class="footer-offset">
-            <div class="container">
+            <Container>
                 <Card class="plain dark">
                     <h3 class="modpanel__title">You are already registered as a Competitor</h3>
                     <p>Want to compete in an upcoming game?</p>
@@ -12,7 +12,7 @@
                         <Button href="/" class="outline">Back to home</Button>
                     </ButtonGroup>
                 </Card>
-            </div>
+            </Container>
         </div>
     </div>
 </template>

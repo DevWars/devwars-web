@@ -44,7 +44,7 @@ export default {
 @import 'utils.scss';
 
 .dashboard-badges {
-    padding: $grid-gutter-width;
+    padding: 30px;
     text-align: center;
     font-size: 0;
     line-height: 1;

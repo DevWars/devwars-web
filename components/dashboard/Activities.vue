@@ -2,11 +2,12 @@
     <DashboardCard title="Activity Log" icon="fa fa-bar-chart" class="scrollable">
         <div class="activity-history">
             <div v-for="activity in paged" :key="activity.id" class="item">
-                <div
-                    class="date col-xs-2 no-gutter"
-                >{{ activity.created_at | moment('mediumDate') }}</div>
+                <Column
+                    :xs="2"
+                    class="date no-gutter"
+                >{{ activity.created_at | moment('mediumDate') }}</Column>
 
-                <div class="col-sm-9 no-gutter">
+                <Column :xs="9" class="no-gutter">
                     <div>{{ activity.description}}</div>
 
                     <div class="rewards">
@@ -27,7 +28,7 @@
                             <span>{{ activity.xp | number }}</span>
                         </div>
                     </div>
-                </div>
+                </Column>
             </div>
         </div>
     </DashboardCard>
@@ -58,7 +59,7 @@ export default {
 
 .item {
     display: flex;
-    padding: $grid-gutter-part;
+    padding: $grid-gutter-width;
     border-bottom: 1px solid $divider-color;
 }
 
@@ -75,7 +76,7 @@ export default {
     align-items: center;
     min-width: 100px;
     margin-top: $xs-space;
-    padding: $xxs-space $grid-gutter-part;
+    padding: $xxs-space $grid-gutter-width;
     border-radius: 50px;
     background-color: darken($bg-color-2, 3%);
     font-size: $font-size-sm;

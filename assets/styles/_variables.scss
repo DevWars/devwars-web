@@ -1,25 +1,60 @@
-/* Name: Variables
+/*  ========================================================================
+New Variables List
+----------------------------------------------------------------------------
+The variables below this section are messy, so we need to start reducing
+the list by moving the variables we use directly below:
+*/
 
-Contents:
-    01. Colors
-        01.1 DevWars Colors
-        01.2 Standard Colors
-        01.3 Tutorial Colors
-        01.4 Brand Colors
-    02. Grid
-    03. Spacing
-    04. Type
-    05. Globals
-    06. Z-index
+/* ==========================================================================
+01. Main
+========================================================================== */
+$brand-primary: #00c9ff;
+$brand-secondary: #ff007d;
+
+
+
+/* ==========================================================================
+01. Grid
+========================================================================== */
+$grid-breakpoints: (
+    xs: 576px,
+    sm: 768px,
+    md: 992px,
+    lg: 1200px,
+);
+
+$container-max-widths: (
+    xs: 540px,
+    sm: 720px,
+    md: 960px,
+    lg: 1140px,
+);
+
+$grid-columns: 12;
+$grid-gutter-width: 15px;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*  ========================================================================
+Old Variables List
+----------------------------------------------------------------------------
+We need to move variables we need to the New Variables List above.
+*/
+/*  ========================================================================
 01.1 DevWars Colors
 ======================================================================== */
-$brand-primary                                      : #00c9ff;
-$brand-secondary                                    : #ff007d;
-$brand-tertiary                                     : mix($brand-primary, $brand-secondary, 50%);
-
 $bg-color-1                                         : #383b48;
 $bg-color-2                                         : #1e202c;
 $bg-color-3                                         : #14161f;
@@ -115,29 +150,6 @@ $website-color                                      : #fff;
 $email-color                                        : #fff;
 
 
-/*  ========================================================================
-02. Grid
-======================================================================== */
-$grid-breakpoints: (
-    xs: 0,
-    sm: 544px,
-    md: 768px,
-    lg: 992px,
-    xl: 1200px
-);
-
-$container-max-widths: (
-    sm: 576px,
-    md: 720px,
-    lg: 940px,
-    xl: 1140px
-);
-
-$grid-columns                                       : 12;
-$grid-gutter-width                                  : 30px;
-$grid-gutter-part                                   : $grid-gutter-width / 2;
-
-
 /* ========================================================================
 03. Spacing
 ======================================================================== */
@@ -215,16 +227,8 @@ $display4-size                                      : 3.5rem;
 $display5-size                                      : 2.5rem;
 $display6-size                                      : 2rem;
 
-$display1-weight                                    : $font-weight-book;
-$display2-weight                                    : $font-weight-book;
-$display3-weight                                    : $font-weight-book;
-$display4-weight                                    : $font-weight-book;
-$display5-weight                                    : $font-weight-book;
-$display6-weight                                    : $font-weight-book;
-
 $border-radius                                      : 5px;
 $border-radius-sm                                   : 3px;
-$border-radius-lg                                   : 5px;
 
 
 /*  ========================================================================
@@ -240,72 +244,7 @@ $border-size-lg                                     : 3px;
 
 $user-avatar-offset                                 : 40px;
 
-/* ==========================================================================
-05. Buttons
-========================================================================== */
 
-$btn-padding-x                                      : $s-space;
-$btn-padding-y                                      : $xs-space;
-$btn-line-height                                    : initial;
-$btn-font-weight                                    : $font-weight-bold;
-
-$btn-primary-color                                  : #fff;
-$btn-primary-bg                                     : $brand-primary;
-$btn-primary-border                                 : $btn-primary-bg;
-
-$btn-secondary-color                                : #fff;
-$btn-secondary-bg                                   : $brand-secondary;
-$btn-secondary-border                               : $btn-secondary-bg;
-
-$btn-tertiary-color                                 : #fff;
-$btn-tertiary-bg                                    : $brand-tertiary;
-$btn-tertiary-border                                : $btn-tertiary-bg;
-
-$btn-info-color                                     : #fff;
-$btn-info-bg                                        : $info-color;
-$btn-info-border                                    : $btn-info-bg;
-
-$btn-success-color                                  : #fff;
-$btn-success-bg                                     : $success-color;
-$btn-success-border                                 : $btn-success-bg;
-
-$btn-warning-color                                  : #fff;
-$btn-warning-bg                                     : $warning-color;
-$btn-warning-border                                 : $btn-warning-bg;
-
-$btn-danger-color                                   : #fff;
-$btn-danger-bg                                      : $danger-color;
-$btn-danger-border                                  : $btn-danger-bg;
-
-$btn-white-color                                    : $brand-primary;
-$btn-white-bg                                       : #fff;
-$btn-white-border                                   : $btn-white-bg;
-
-$btn-black-color                                    : #fff;
-$btn-black-bg                                       : #000;
-$btn-black-border                                   : $btn-black-bg;
-
-$btn-gray-color                                     : #fff;
-$btn-gray-bg                                        : $text-color-muted;
-$btn-gray-border                                    : $btn-gray-bg;
-
-$btn-link-disabled-color                            : #ccc;
-
-$btn-padding-x-sm                                   : 1rem;
-$btn-padding-y-sm                                   : 0.35rem;
-
-$btn-padding-x-lg                                   : 2.5rem;
-$btn-padding-y-lg                                   : 1rem;
-
-$btn-font-weight-sm                                 : $btn-font-weight;
-$btn-font-weight-lg                                 : $btn-font-weight;
-
-$btn-block-spacing-y                                : 0.5rem;
-$btn-toolbar-margin                                 : 0.5rem;
-
-$btn-border-radius                                  : 0px;
-$btn-border-radius-sm                               : 0px;
-$btn-border-radius-lg                               : 0px;
 
 /* ==========================================================================
 06. Typography
@@ -315,26 +254,6 @@ $font-size-xl                                       : $font-size-base * 1.4;
 $font-size-lg                                       : $font-size-base * 1.25;
 $font-size-sm                                       : $font-size-base * 0.875;
 $font-size-xs                                       : $font-size-base * 0.75;
-
-$line-height-base                                   : 1.5;
-
-$font-size-h1                                       : $font-size-base * 2.5;
-$font-size-h2                                       : $font-size-base * 2;
-$font-size-h3                                       : $font-size-base * 1.75;
-$font-size-h4                                       : $font-size-base * 1.5;
-$font-size-h5                                       : $font-size-base * 1.25;
-$font-size-h6                                       : $font-size-base * 1;
-
-$headings-font-family                               : $alt-font-face;
-$headings-font-weight                               : 400;
-$headings-line-height                               : 1.1;
-$headings-color                                     : inherit;
-
-$lead-font-size                                     : 1.25rem;
-$lead-font-weight                                   : 300;
-
-$line-height-lg                                     : (4 / 3);
-$line-height-sm                                     : 1.5;
 
 
 /* ==========================================================================
@@ -350,23 +269,6 @@ $zindex-navbar-fixed                                : 1030;
 $zindex-navbar-sticky                               : 1030;
 $zindex-modal-bg                                    : 1040;
 $zindex-modal                                       : 1050;
-
-
-/* ==========================================================================
-05. Form
-========================================================================== */
-$input-padding-x                                    : 0;
-$input-padding-y                                    : 6px;
-$input-line-height                                  : 1.25;
-
-$input-bg                                           : #fff;
-$input-color                                        : #818a91;
-
-$input-border-radius                                : $border-radius;
-$input-border-radius-lg                             : $border-radius-lg;
-$input-border-radius-sm                             : $border-radius-sm;
-
-$cursor-disabled                                    : not-allowed;
 
 
 /* ==========================================================================

@@ -1,6 +1,6 @@
 <template>
-    <div class="docs container">
-        <div class="sidebar col-sm-3">
+    <Container class="docs">
+        <Column :sm="3" class="sidebar">
             <div class="nav">
                 <ButtonIcon href="#devwars" icon="fa fa-home" class="link">DevWars</ButtonIcon>
                 <ul>
@@ -75,9 +75,9 @@
                     <em>Last Modified: June 30, 2018</em>
                 </div>
             </div>
-        </div>
+        </Column>
 
-        <div class="main col-sm-9">
+        <Column :sm="9" class="main">
             <article id="devwars">
                 <header>
                     <h1>DevWars</h1>
@@ -100,8 +100,8 @@
                         their website in unison. There are currently only 3 positions available
                         to play in DevWars: HTML, CSS and JavaScript.
                     </p>
-                    <ul class="positions section row">
-                        <li class="html col-sm-4">
+                    <Row class="positions section">
+                        <Column :sm="4" class="html">
                             <div class="circle">
                                 <div class="elements">
                                     <span class="bracket">&lt;</span>
@@ -112,8 +112,8 @@
                             </div>
                             <h5>HTML</h5>
                             <div class="role">Templating</div>
-                        </li>
-                        <li class="css col-sm-4">
+                        </Column>
+                        <Column :sm="4" class="css">
                             <div class="circle">
                                 <div class="elements">
                                     <span class="bracket">{</span>
@@ -124,8 +124,8 @@
                             </div>
                             <h5>CSS</h5>
                             <div class="role">Styling</div>
-                        </li>
-                        <li class="js col-sm-4">
+                        </Column>
+                        <Column :sm="4" class="js">
                             <div class="circle">
                                 <div class="elements">
                                     <span class="bracket">(</span>
@@ -136,8 +136,8 @@
                             </div>
                             <h5>JAVASCRIPT</h5>
                             <div class="role">Functionality</div>
-                        </li>
-                    </ul>
+                        </Column>
+                    </Row>
                     <p>
                         Each position plays a critical role for the team. HTML is in charge of
                         templating the DOM, CSS handles the design for the website and
@@ -589,41 +589,41 @@
 
                     <section>
                         <h3>Browsers</h3>
-                        <div class="browsers row row-normaled section">
-                            <div class="col-sm-3">
+                        <Row class="browsers normalize section">
+                            <Column :sm="3">
                                 <img src="~assets/img/browsers/chrome_48x48.png" title="Chrome">
                                 <p>v.61 +</p>
-                            </div>
-                            <div class="col-sm-3">
+                            </Column>
+                            <Column :sm="3">
                                 <img src="~assets/img/browsers/firefox_48x48.png" title="Firefox">
                                 <p>v.56 +</p>
-                            </div>
-                            <div class="col-sm-3">
+                            </Column>
+                            <Column :sm="3">
                                 <img src="~assets/img/browsers/edge_48x48.png" title="Edge">
                                 <p>v.16 +</p>
-                            </div>
-                            <div class="col-sm-3">
+                            </Column>
+                            <Column :sm="3">
                                 <img src="~assets/img/browsers/safari_48x48.png" title="Safari">
                                 <p>v.11 +</p>
-                            </div>
-                        </div>
+                            </Column>
+                        </Row>
                     </section>
 
                     <section>
                         <h3>Communication</h3>
                         <div class="communications row row-normaled section">
-                            <div class="col-sm-3">
+                            <Column :sm="3">
                                 <i class="fa fa-microphone"></i>
                                 <p>Microphone</p>
-                            </div>
-                            <div class="col-sm-3">
+                            </Column>
+                            <Column :sm="3">
                                 <i class="fab fa-discord"></i>
                                 <p>Discord</p>
-                            </div>
-                            <div class="col-sm-3">
+                            </Column>
+                            <Column :sm="3">
                                 <img src="~assets/img/docs/en-lang.png" title="Speak English">
                                 <p>English</p>
-                            </div>
+                            </Column>
                         </div>
 
                         <p>
@@ -817,8 +817,8 @@
                     </section>
                 </section>
             </article>
-        </div>
-    </div>
+        </Column>
+    </Container>
 </template>
 
 
@@ -889,7 +889,7 @@ $ol-bullet-size: 20px;
 }
 
 .main {
-    padding: $grid-gutter-part 0 $m-space;
+    padding: $grid-gutter-width 0 $m-space;
     background-color: rgba($bg-color-3, 0.6);
     float: right;
 }
@@ -936,9 +936,9 @@ $ol-bullet-size: 20px;
 
 article {
     border-top: $border-size-sm solid $brand-primary;
-    padding: $grid-gutter-width;
+    padding: 30px;
     background-color: $bg-color-2;
-    margin-top: $grid-gutter-width;
+    margin-top: 30px;
 
     header,
     section {
@@ -993,7 +993,7 @@ article {
     p,
     ul,
     ol {
-        padding: $grid-gutter-part 0 0;
+        padding: $grid-gutter-width 0 0;
         color: rgba(#fff, 0.85);
     }
 
@@ -1027,7 +1027,7 @@ article {
     }
 
     table {
-        margin-top: $grid-gutter-part;
+        margin-top: $grid-gutter-width;
 
         thead tr {
             text-align: left;
@@ -1193,7 +1193,7 @@ code {
     li {
         flex-shrink: 0;
         width: 48%;
-        margin: 0 0 $grid-gutter-width;
+        margin: 0 0 30px;
     }
 
     a {
@@ -1213,7 +1213,7 @@ code {
     &__circle {
         width: 50px;
         height: 50px;
-        margin-right: $grid-gutter-part;
+        margin-right: $grid-gutter-width;
         background-color: $bg-color-3;
         border-radius: 50%;
         overflow: hidden;
@@ -1248,7 +1248,7 @@ code {
 
 .warning {
     border-top: 1px solid $warning-color;
-    margin-top: $grid-gutter-part;
+    margin-top: $grid-gutter-width;
     background-color: rgba($warning-color, 0.025);
     padding: $s-space;
 
@@ -1258,7 +1258,7 @@ code {
     }
 
     p {
-        margin-bottom: $grid-gutter-width;
+        margin-bottom: 30px;
         font-size: $font-size-sm;
         line-height: 1.3;
     }

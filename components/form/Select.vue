@@ -58,13 +58,12 @@ export default {
 
     select {
         @extend %form-control;
-        padding-right: $grid-gutter-width;
+        padding-right: 30px;
         margin-top: 0;
         appearance: none;
 
         &:focus::-ms-value {
-            color: $input-color;
-            background-color: $input-bg;
+            color: #fff;
         }
 
         option {
@@ -77,7 +76,7 @@ export default {
         content: $fa-caret-down;
         color: $text-color-secondary;
         position: absolute;
-        right: $input-padding-x;
+        right: 0;
         top: 50%;
         transform: translateY(-50%);
     }

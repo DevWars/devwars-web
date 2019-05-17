@@ -1,43 +1,43 @@
 <template>
     <div class="page">
-        <div class="container">
-            <div class="row">
+        <Container>
+            <Row>
                 <div v-if="error.statusCode === 404">
-                    <div class="col-sm-4">
+                    <Column :sm="4">
                         <img src="~assets/img/error-sad.png" alt="Error">
-                    </div>
-                    <div class="col-sm-8">
+                    </Column>
+                    <Column :sm="8">
                         <h1>404</h1>
                         <h2>Page not found</h2>
                         <p>The page you are looking for does not exist. Sorry!</p>
                         <Button to="/" class="outline primary lg">Go to home</Button>
-                    </div>
+                    </Column>
                 </div>
 
                 <div v-else-if="error.statusCode === 500">
-                    <div class="col-sm-4">
+                    <Column :sm="4">
                         <img src="~assets/img/error-sad.png" alt="Error">
-                    </div>
-                    <div class="col-sm-8">
+                    </Column>
+                    <Column :sm="8">
                         <h1>500</h1>
                         <h2>It's not you, It's us.</h2>
                         <p>This page is experiencing internal server issues.</p>
                         <Button to="/" class="outline primary lg">Go to home</Button>
-                    </div>
+                    </Column>
                 </div>
 
                 <div v-else>
-                    <div class="col-sm-4">
+                    <Column :sm="4">
                         <img src="~assets/img/error-sad.png" alt="Error">
-                    </div>
-                    <div class="col-sm-8">
+                    </Column>
+                    <Column :sm="8">
                         <h2>Oops!</h2>
                         <p>Looks like something went wrong.</p>
                         <Button to="/" class="outline primary lg">Go to home</Button>
-                    </div>
+                    </Column>
                 </div>
-            </div>
-        </div>
+            </Row>
+        </Container>
     </div>
 </template>
 

@@ -9,15 +9,16 @@
         </div>
 
         <div class="inventory">
-            <div class="inventory__slot col-xs-3 no-gutter"></div>
-            <div class="inventory__slot col-xs-3 no-gutter"></div>
-            <div class="inventory__slot col-xs-3 no-gutter"></div>
-            <div class="inventory__slot col-xs-3 no-gutter"></div>
-            <div class="inventory__slot col-xs-3 no-gutter"></div>
-            <div class="inventory__slot col-xs-3 no-gutter"></div>
-            <div class="inventory__slot col-xs-3 no-gutter"></div>
-            <div class="inventory__slot col-xs-3 no-gutter"></div>
+            <Column :xs="3" class="inventory__slot no-gutter"/>
+            <Column :xs="3" class="inventory__slot no-gutter"/>
+            <Column :xs="3" class="inventory__slot no-gutter"/>
+            <Column :xs="3" class="inventory__slot no-gutter"/>
+            <Column :xs="3" class="inventory__slot no-gutter"/>
+            <Column :xs="3" class="inventory__slot no-gutter"/>
+            <Column :xs="3" class="inventory__slot no-gutter"/>
+            <Column :xs="3" class="inventory__slot no-gutter"/>
         </div>
+
         <div class="inventory__footer">
             <a href="#">Open Inventory</a>
         </div>
@@ -50,7 +51,7 @@ export default {
 
     &__inner {
         @extend %flex-justify;
-        padding: $grid-gutter-part;
+        padding: $grid-gutter-width;
     }
 }
 
@@ -70,7 +71,7 @@ export default {
 
     &__footer {
         line-height: 1;
-        padding: $xs-space $grid-gutter-part $grid-gutter-part;
+        padding: $xs-space $grid-gutter-width $grid-gutter-width;
         text-align: right;
 
         a {

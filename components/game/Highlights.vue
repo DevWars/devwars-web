@@ -1,16 +1,17 @@
 <template>
     <div class="home-highlights">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
+        <Container>
+            <Row>
+                <Column :lg="6">
                     <NextShowing v-if="!active"/>
                     <NowShowing v-if="active"/>
-                </div>
-                <div class="col-lg-6">
+                </Column>
+
+                <Column :lg="6">
                     <Recap v-if="game" :game="game"/>
-                </div>
-            </div>
-        </div>
+                </Column>
+            </Row>
+        </Container>
     </div>
 </template>
 

@@ -10,9 +10,9 @@
         </PageBanner>
 
         <div class="footer-offset">
-            <div class="container">
+            <Container>
                 <ScheduleBlock :filter="filter"/>
-            </div>
+            </Container>
         </div>
     </div>
 </template>

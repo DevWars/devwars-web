@@ -1,6 +1,6 @@
 <template>
     <div class="Login header-offset">
-        <div class="container">
+        <Container>
             <form v-async-submit="[login]">
                 <DevwarsCard title="Login">
                     <Input v-model="username" label="Email or Username" class="group" required/>
@@ -24,7 +24,7 @@
                     </div>
                 </DevwarsCard>
             </form>
-        </div>
+        </Container>
     </div>
 </template>
 

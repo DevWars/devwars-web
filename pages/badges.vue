@@ -3,9 +3,9 @@
         <!--
         <PageBanner title="Badges"/>
         <div class="footer-offset">
-            <div class="container">
-                <div class="row">
-                    <div v-for="badge in badges" :key="badge.id" class="col-lg-3 col-md-4 col-sm-6">
+            <Container>
+                <Row
+                    <Column v-for="badge in badges" :key="badge.id" :lg="3" :md="4" :sm="6">
                         <div
                             class="badge-card bronze"
                             :class="{complete: completed(badge)}"
@@ -23,9 +23,9 @@
                             </div>
                             <Devcoins :amount="badge.coins"/>
                         </div>
-                    </div>
-                </div>
-            </div>
+                    </Column>
+                </Row>
+            </Container>
         </div>
         -->
     </div>
@@ -89,8 +89,8 @@ export default {
 
 .badge-card {
     border-top: $border-size solid $divider-color;
-    padding: $xs-space $grid-gutter-part $grid-gutter-part;
-    margin-bottom: $grid-gutter-width;
+    padding: $xs-space $grid-gutter-width $grid-gutter-width;
+    margin-bottom: 30px;
     background-color: $bg-color-3;
     text-align: center;
     opacity: 0.5;

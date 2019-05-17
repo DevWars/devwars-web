@@ -3,29 +3,29 @@
         <PageBanner title="Compete in DevWars" type="competitor"/>
 
         <div class="footer-offset">
-            <div class="container">
+            <Container>
                 <Card class="plain dark" title="About You">
-                    <div class="row">
-                        <div class="col-sm-6">
+                    <Row>
+                        <Column :sm="6">
                             <Input
                                 v-model="competitor.name.firstName"
                                 label="First Name"
                                 class="group"
                                 required
                             />
-                        </div>
-                        <div class="col-sm-6">
+                        </Column>
+                        <Column :sm="6">
                             <Input
                                 v-model="competitor.name.lastName"
                                 label="Last Name"
                                 class="group"
                                 required
                             />
-                        </div>
-                    </div>
+                        </Column>
+                    </Row>
 
-                    <div class="row">
-                        <div class="col-sm-3">
+                    <Row>
+                        <Column :sm="3">
                             <Select
                                 v-model="competitor.address.country"
                                 label="Select Country"
@@ -34,16 +34,16 @@
                             >
                                 <option v-for="country in countries" :key="country">{{ country }}</option>
                             </Select>
-                        </div>
-                    </div>
+                        </Column>
+                    </Row>
 
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="dob row">
-                                <div class="col-sm-4">
+                    <Row>
+                        <Column :sm="6">
+                            <Row class="dob">
+                                <Column :sm="4">
                                     <label>Date of birth</label>
-                                </div>
-                                <div class="col-sm-2">
+                                </Column>
+                                <Column :sm="2">
                                     <Input
                                         v-model="day"
                                         label="DD"
@@ -51,8 +51,8 @@
                                         maxlength="2"
                                         required
                                     />
-                                </div>
-                                <div class="col-sm-2">
+                                </Column>
+                                <Column :sm="2">
                                     <Input
                                         v-model="month"
                                         label="MM"
@@ -60,8 +60,8 @@
                                         maxlength="2"
                                         required
                                     />
-                                </div>
-                                <div class="col-sm-4">
+                                </Column>
+                                <Column :sm="4">
                                     <Input
                                         v-model="year"
                                         label="YYYY"
@@ -69,13 +69,13 @@
                                         maxlength="4"
                                         required
                                     />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
+                                </Column>
+                            </Row>
+                        </Column>
+                        <Column :sm="6">
                             <Input v-model="competitor.company" label="Company" class="group"/>
-                        </div>
-                    </div>
+                        </Column>
+                    </Row>
                 </Card>
 
                 <Card class="plain dark" title="Skill Assessment">
@@ -99,7 +99,7 @@
                 <div class="actions">
                     <Button class="primary lg" @click="submit">Register to Compete</Button>
                 </div>
-            </div>
+            </Container>
         </div>
     </div>
 </template>

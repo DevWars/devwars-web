@@ -7,13 +7,7 @@
     "env": {
         "commonjs": true
     },
-    "extends": [
-        "airbnb-base",
-        "plugin:vue/recommended",
-        "plugin:prettier/recommended",
-        "prettier",
-        "prettier/vue"
-    ],
+    "extends": ["airbnb-base", "plugin:vue/recommended", "plugin:prettier/recommended", "prettier", "prettier/vue"],
     "plugins": ["vue", "prettier"],
     "rules": {
         "array-callback-return": "off",

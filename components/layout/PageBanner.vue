@@ -2,7 +2,7 @@
     <div>
         <div :class="['banner', type]"></div>
 
-        <div class="container">
+        <Container>
             <div class="heading">
                 <h1 v-if="title">{{ title }}</h1>
 
@@ -20,7 +20,7 @@
                     <slot name="sub-actions"></slot>
                 </div>
             </div>
-        </div>
+        </Container>
     </div>
 </template>
 

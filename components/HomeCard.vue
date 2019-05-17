@@ -57,12 +57,12 @@ export default {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin-top: $grid-gutter-width;
+    margin-top: 30px;
 
     @include breakpoint(xs) {
         display: block;
         width: 100%;
-        margin-top: $grid-gutter-part;
+        margin-top: $grid-gutter-width;
     }
 
     .Button {
@@ -71,7 +71,7 @@ export default {
         @include breakpoint(xs) {
             width: 100%;
             display: block;
-            margin: $grid-gutter-part 0 0 0;
+            margin: $grid-gutter-width 0 0 0;
         }
     }
 }

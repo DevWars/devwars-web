@@ -3,7 +3,7 @@
         <PageBanner title="You've been entered!" type="competitor"/>
 
         <div class="footer-offset">
-            <div class="container">
+            <Container>
                 <Card>
                     <h2>What's next?</h2>
                     <p>
@@ -23,7 +23,7 @@
                         <a href="/contact">Contact Us</a>
                     </p>
                 </Card>
-            </div>
+            </Container>
         </div>
     </div>
 </template>

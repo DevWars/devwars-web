@@ -92,8 +92,8 @@
 
 %fill-gutter {
     width: calc(100% - $grid-gutter-width);
-    margin-left: $grid-gutter-part;
-    margin-right: $grid-gutter-part;
+    margin-left: $grid-gutter-width;
+    margin-right: $grid-gutter-width;
 }
 
 %readable-width {

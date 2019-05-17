@@ -3,8 +3,8 @@
         <PageBanner title="Settings"/>
 
         <div class="footer-offset">
-            <div class="container">
-                <div class="row">
+            <Container>
+                <Row>
                     <Tabs>
                         <nuxt-link to="profile">Profile</nuxt-link>
                         <nuxt-link to="account">Account</nuxt-link>
@@ -14,8 +14,8 @@
                     <Card class="plain dark">
                         <nuxt/>
                     </Card>
-                </div>
-            </div>
+                </Row>
+            </Container>
         </div>
     </div>
 </template>

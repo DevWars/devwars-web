@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="banner row">
+        <Row class="banner">
             <div class="banner__inner">
                 <div class="banner__meta">
                     <span class="banner__date">{{ game.createdAt | moment('MM/DD/YYYY') }}</span>
@@ -17,9 +17,9 @@
                     class="youtube"
                 >Watch on YouTube</ButtonIcon>
             </div>
-        </div>
+        </Row>
 
-        <div class="roster row">
+        <Row class="roster">
             <GameTeam
                 v-for="team in teams"
                 :key="team.id"
@@ -35,7 +35,7 @@
                     :languages="getLanguageByGamePlayer(game, player)"
                 />
             </GameTeam>
-        </div>
+        </Row>
 
         <SubScore v-if="game.title" title="Theme">
             <h3>{{ game.title }}</h3>

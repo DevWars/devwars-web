@@ -77,7 +77,7 @@ $mobile-nav-width: 300px;
     .main {
         height: 100%;
         width: $mobile-nav-width;
-        padding: $grid-gutter-width 0;
+        padding: 30px 0;
         background-color: $bg-color-3;
         position: fixed;
         top: 0;
@@ -91,8 +91,8 @@ $mobile-nav-width: 300px;
 
     .actions {
         border-top: 1px solid $divider-color;
-        padding: $grid-gutter-width;
-        margin-top: $grid-gutter-part;
+        padding: 30px;
+        margin-top: $grid-gutter-width;
     }
 
     .overlay {
@@ -105,7 +105,7 @@ $mobile-nav-width: 300px;
     .nav-link {
         display: block;
         color: #fff;
-        padding: $s-space $grid-gutter-width;
+        padding: 20px 30px;
         font-weight: bold;
         text-transform: uppercase;
         line-height: 1;
