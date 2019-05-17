@@ -153,10 +153,10 @@
 
                     <section>
                         <h3>Classic</h3>
-                        <span class="tag tag-outline-white tag-sm">3 VS 3</span>
-                        <span class="tag tag-outline-html tag-sm">HTML</span>
-                        <span class="tag tag-outline-css tag-sm">CSS</span>
-                        <span class="tag tag-outline-js tag-sm">JAVASCRIPT</span>
+                        <Tag class="outline sm">3 VS 3</Tag>
+                        <Tag class="outline html sm">HTML</Tag>
+                        <Tag class="outline css sm">CSS</Tag>
+                        <Tag class="outline js sm">JAVASCRIPT</Tag>
                         <p>Time: 60:00</p>
                         <p>
                             This action-packed game mode is the only one that features all 3
@@ -167,8 +167,8 @@
 
                     <section>
                         <h3>Zen Garden</h3>
-                        <span class="tag tag-outline-white tag-sm">1 VS 1</span>
-                        <span class="tag tag-outline-css tag-sm">CSS</span>
+                        <Tag class="outline sm">1 VS 1</Tag>
+                        <Tag class="outline css sm">CSS</Tag>
                         <p>Time: 60:00</p>
                         <p>
                             This 1 vs 1 game mode provides both teams the same pre-made
@@ -179,8 +179,8 @@
 
                     <section class="coming-soon">
                         <h3>Coffee Run</h3>
-                        <span class="tag tag-outline-white tag-sm">1 VS 1</span>
-                        <span class="tag tag-outline-js tag-sm">JAVASCRIPT</span>
+                        <Tag class="outline sm">1 VS 1</Tag>
+                        <Tag class="outline js sm">JAVASCRIPT</Tag>
                         <p>Coming soon!</p>
                     </section>
                 </section>
@@ -830,10 +830,11 @@
 
 <script>
 import Devcoin from '~/components/Devcoin';
+import Tag from '~/components/Tag';
 
 export default {
     name: 'Docs',
-    components: { Devcoin },
+    components: { Devcoin, Tag },
     layout: 'header',
     mounted() {
         if (!this.$route.hash) return;
