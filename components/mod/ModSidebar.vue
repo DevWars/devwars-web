@@ -66,7 +66,7 @@
 
 
 <script>
-import Progress from '~/components/form/Progress';
+import Progress from '@/components/form/Progress';
 
 export default {
     name: 'ModSidebar',

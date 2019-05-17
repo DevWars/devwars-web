@@ -7,8 +7,8 @@
 
 <script>
 import { mapState } from 'vuex';
-import GameResignModal from '~/components/modal/GameResignModal';
-import GameRegistration from '~/components/modal/GameRegistration';
+import GameResignModal from '@/components/modal/GameResignModal';
+import GameRegistration from '@/components/modal/GameRegistration';
 
 export default {
     name: 'Applications',

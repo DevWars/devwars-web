@@ -44,11 +44,11 @@
 
 <script>
 import Http from '../services/Http';
-import PageBanner from '~/components/layout/PageBanner';
-import Table from '~/components/Table';
-import Select from '~/components/form/Select';
-import Pagination from '~/components/Pagination';
-import User from '~/components/user/User';
+import PageBanner from '@/components/layout/PageBanner';
+import Table from '@/components/Table';
+import Select from '@/components/form/Select';
+import Pagination from '@/components/Pagination';
+import User from '@/components/user/User';
 
 export default {
     name: 'Leaderboards',

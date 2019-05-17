@@ -64,18 +64,18 @@
 
 
 <script>
-import Table from '~/components/Table';
+import Table from '@/components/Table';
 import Http from '../../../services/Http';
-import Card from '~/components/Card';
-import GameTeam from '~/components/game/GameTeam';
-import Player from '~/components/game/Player';
-import User from '~/components/user/User';
-import Devcoins from '~/components/Devcoins';
-import AddPlayerModal from '~/components/modal/AddPlayerModal';
-import DeleteModal from '~/components/modal/DeleteModal';
-import AddRegistrantModal from '~/components/modal/AddRegistrantModal';
-import { teams, usersFromGame } from '~/utils/mixins';
-import { getScoreByGameTeam, getPlayersByGameTeam, getLanguageByGamePlayer } from '~/utils';
+import Card from '@/components/Card';
+import GameTeam from '@/components/game/GameTeam';
+import Player from '@/components/game/Player';
+import User from '@/components/user/User';
+import Devcoins from '@/components/Devcoins';
+import AddPlayerModal from '@/components/modal/AddPlayerModal';
+import DeleteModal from '@/components/modal/DeleteModal';
+import AddRegistrantModal from '@/components/modal/AddRegistrantModal';
+import { teams, usersFromGame } from '@/utils/mixins';
+import { getScoreByGameTeam, getPlayersByGameTeam, getLanguageByGamePlayer } from '@/utils';
 import { names } from '../../../utils/auth';
 
 export default {

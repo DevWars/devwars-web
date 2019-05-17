@@ -34,12 +34,12 @@
 
 
 <script>
-import PanelHeader from '~/components/mod/PanelHeader';
-import ListingFilters from '~/components/mod/ListingFilters';
-import Table from '~/components/Table';
+import PanelHeader from '@/components/mod/PanelHeader';
+import ListingFilters from '@/components/mod/ListingFilters';
+import Table from '@/components/Table';
 import { names } from '../../utils/auth';
 
-import nameFromStatus from '~/utils/gameStatus';
+import nameFromStatus from '@/utils/gameStatus';
 import CreateScheduleModal from '../../components/modal/CreateScheduleModal.vue';
 
 export default {

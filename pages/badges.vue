@@ -36,8 +36,8 @@
 <script>
 // import { mapGetters } from 'vuex';
 // import Http from '../services/Http';
-// import PageBanner from '~/components/layout/PageBanner';
-// import Devcoins from '~/components/Devcoins';
+// import PageBanner from '@/components/layout/PageBanner';
+// import Devcoins from '@/components/Devcoins';
 import { names } from '../utils/auth';
 
 export default {

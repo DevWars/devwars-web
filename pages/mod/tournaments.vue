@@ -32,10 +32,10 @@
 
 
 <script>
-import PanelHeader from '~/components/mod/PanelHeader';
-import ListingFilters from '~/components/mod/ListingFilters';
-import Table from '~/components/Table';
-import Pagination from '~/components/Pagination';
+import PanelHeader from '@/components/mod/PanelHeader';
+import ListingFilters from '@/components/mod/ListingFilters';
+import Table from '@/components/Table';
+import Pagination from '@/components/Pagination';
 import { names } from '../../utils/auth';
 
 export default {

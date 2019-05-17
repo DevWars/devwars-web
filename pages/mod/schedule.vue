@@ -20,8 +20,8 @@
 
 <script>
 import moment from 'moment';
-import Tabs from '~/components/Tabs';
-import PanelHeader from '~/components/mod/PanelHeader';
+import Tabs from '@/components/Tabs';
+import PanelHeader from '@/components/mod/PanelHeader';
 import { names } from '../../utils/auth';
 
 export default {

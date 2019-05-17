@@ -39,10 +39,10 @@
 <script>
 import moment from 'moment';
 
-import Card from '~/components/Card';
-import Input from '~/components/form/Input';
-import Select from '~/components/form/Select';
-import SquareToggle from '~/components/SquareToggle';
+import Card from '@/components/Card';
+import Input from '@/components/form/Input';
+import Select from '@/components/form/Select';
+import SquareToggle from '@/components/SquareToggle';
 import { names } from '../../../utils/auth';
 
 export default {

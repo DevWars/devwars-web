@@ -32,10 +32,10 @@
 
 
 <script>
-import Table from '~/components/Table';
+import Table from '@/components/Table';
 import Http from '../../../services/Http';
-import User from '~/components/user/User';
-import Devcoins from '~/components/Devcoins';
+import User from '@/components/user/User';
+import Devcoins from '@/components/Devcoins';
 import { names } from '../../../utils/auth';
 
 export default {

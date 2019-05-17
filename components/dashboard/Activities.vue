@@ -36,8 +36,8 @@
 
 
 <script>
-import DashboardCard from '~/components/DashboardCard';
-import DevcoinIcon from '~/components/DevcoinIcon';
+import DashboardCard from '@/components/DashboardCard';
+import DevcoinIcon from '@/components/DevcoinIcon';
 
 export default {
     name: 'Activities',

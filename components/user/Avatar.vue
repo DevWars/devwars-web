@@ -18,7 +18,7 @@ export default {
         style() {
             return {
                 backgroundImage: `url(${this.user.avatarUrl ||
-                    require('~/assets/img/default-avatar.png')})`,
+                    require('@/assets/img/default-avatar.png')})`,
             };
         },
     },

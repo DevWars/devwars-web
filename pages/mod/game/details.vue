@@ -73,13 +73,13 @@
 
 
 <script>
-import Card from '~/components/Card';
-import Input from '~/components/form/Input';
-import Select from '~/components/form/Select';
-import Textarea from '~/components/form/Textarea';
+import Card from '@/components/Card';
+import Input from '@/components/form/Input';
+import Select from '@/components/form/Select';
+import Textarea from '@/components/form/Textarea';
 import SquareToggle from '../../../components/SquareToggle';
-import { teams } from '~/utils/mixins';
-import { teamCompletedObjective } from '~/utils';
+import { teams } from '@/utils/mixins';
+import { teamCompletedObjective } from '@/utils';
 import { names } from '../../../utils/auth';
 
 export default {

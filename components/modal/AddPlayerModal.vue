@@ -18,7 +18,7 @@
 
 
 <script>
-import Select from '~/components/form/Select';
+import Select from '@/components/form/Select';
 
 export default {
     name: 'AddPlayerModal',

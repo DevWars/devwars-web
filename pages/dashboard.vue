@@ -24,11 +24,11 @@
 
 
 <script>
-import ProfileCard from '~/components/dashboard/ProfileCard';
-import Wallet from '~/components/dashboard/Wallet';
-import Activities from '~/components/dashboard/Activities';
-import UpcomingGames from '~/components/dashboard/UpcomingGames';
-import DailyPrizes from '~/components/dashboard/DailyPrizes';
+import ProfileCard from '@/components/dashboard/ProfileCard';
+import Wallet from '@/components/dashboard/Wallet';
+import Activities from '@/components/dashboard/Activities';
+import UpcomingGames from '@/components/dashboard/UpcomingGames';
+import DailyPrizes from '@/components/dashboard/DailyPrizes';
 import { names } from '../utils/auth';
 
 export default {

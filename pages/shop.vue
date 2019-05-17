@@ -131,9 +131,9 @@
 
 
 <script>
-import PageBanner from '~/components/layout/PageBanner';
-import Select from '~/components/form/Select';
-import Devcoins from '~/components/Devcoins';
+import PageBanner from '@/components/layout/PageBanner';
+import Select from '@/components/form/Select';
+import Devcoins from '@/components/Devcoins';
 
 export default {
     name: 'Shop',

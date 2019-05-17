@@ -22,9 +22,9 @@
 
 
 <script>
-import Tabs from '~/components/Tabs';
-import Card from '~/components/Card';
-import PageBanner from '~/components/layout/PageBanner';
+import Tabs from '@/components/Tabs';
+import Card from '@/components/Card';
+import PageBanner from '@/components/layout/PageBanner';
 import { names } from '../utils/auth';
 
 export default {

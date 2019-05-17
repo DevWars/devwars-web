@@ -32,7 +32,7 @@
 
 
 <script>
-import SubScore from '~/components/game/SubScore';
+import SubScore from '@/components/game/SubScore';
 import { vote_analysis_for_team } from '../../utils/objectives';
 
 export default {

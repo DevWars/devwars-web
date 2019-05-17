@@ -7,7 +7,7 @@
 
 
 <script>
-import Avatar from '~/components/user/Avatar';
+import Avatar from '@/components/user/Avatar';
 
 export default {
     name: 'User',

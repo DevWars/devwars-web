@@ -36,7 +36,7 @@
 
 
 <script>
-import UserMenu from '~/components/user/UserMenu';
+import UserMenu from '@/components/user/UserMenu';
 
 export default {
     name: 'HeaderMobile',

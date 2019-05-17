@@ -44,8 +44,8 @@
 
 <script>
 import Http from '../../services/Http';
-import Tabs from '~/components/Tabs';
-import DeleteModal from '~/components/modal/DeleteModal';
+import Tabs from '@/components/Tabs';
+import DeleteModal from '@/components/modal/DeleteModal';
 import { names } from '../../utils/auth';
 
 export default {

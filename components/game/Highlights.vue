@@ -17,7 +17,7 @@
 
 
 <script>
-import Recap from '~/components/game/Recap';
+import Recap from '@/components/game/Recap';
 import NowShowing from './NowShowing';
 import NextShowing from './NextShowing';
 
