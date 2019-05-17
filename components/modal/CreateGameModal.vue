@@ -8,10 +8,10 @@
 
         <!-- <DatePicker v-model="date" label="When is the game?" class="group"/> -->
 
-        <div class="align-right">
+        <ButtonGroup class="modal__actions">
             <Button type="button" class="muted link" @click="close(false)">Cancel</Button>
             <Button class="primary">Save</Button>
-        </div>
+        </ButtonGroup>
     </form>
 </template>
 

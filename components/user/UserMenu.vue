@@ -45,10 +45,10 @@ export default {
     .menu {
         position: absolute;
         top: calc(100% + 10px);
-        left: 0;
+        right: 0;
         z-index: $zindex-popover;
-        min-width: 120px;
-        padding: 10px 15px;
+        min-width: 150px;
+        padding: 10px 0;
         background-color: $bg-color-2;
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 

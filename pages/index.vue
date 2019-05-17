@@ -8,12 +8,15 @@
                         <strong>game show</strong> for developers
                     </h1>
                     <h2 class="hero__subtitle">Every other Saturday @ 5:00 PM (UTC)</h2>
-                    <Button
-                        href="https://twitch.tv/devwars"
-                        target="_blank"
-                        class="primary"
-                    >Watch on Twitch</Button>
-                    <Button to="/games" class="link">View Past Games</Button>
+
+                    <ButtonGroup>
+                        <Button
+                            href="https://twitch.tv/devwars"
+                            target="_blank"
+                            class="primary"
+                        >Watch on Twitch</Button>
+                        <Button to="/games" class="link">View Past Games</Button>
+                    </ButtonGroup>
                 </div>
             </div>
         </div>

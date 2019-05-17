@@ -18,14 +18,14 @@
             </div>
         </div>
 
-        <div slot="actions">
+        <ButtonGroup>
             <Button
                 href="https://www.twitch.tv/devwars"
                 target="_blank"
                 class="twitch"
             >Watch on Twitch</Button>
             <RegistrationButton :schedule="schedule"/>
-        </div>
+        </ButtonGroup>
     </HomeCard>
 </template>
 

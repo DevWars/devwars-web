@@ -9,10 +9,10 @@
             <option>JS</option>
         </Select>
 
-        <div class="modal__actions">
+        <ButtonGroup class="modal__actions">
             <Button class="muted link" @click.prevent="close(false)">Cancel</Button>
             <Button class="primary">Add Player</Button>
-        </div>
+        </ButtonGroup>
     </form>
 </template>
 

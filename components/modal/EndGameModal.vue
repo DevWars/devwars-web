@@ -1,12 +1,12 @@
 <template>
-    <div class="modal__actions">
+    <ButtonGroup class="modal__actions">
         <Button
             v-for="team in game.teams"
             :key="team"
             v-async-click="[end, team]"
             class="link"
         >{{ team.name | capitalize }}</Button>
-    </div>
+    </ButtonGroup>
 </template>
 
 

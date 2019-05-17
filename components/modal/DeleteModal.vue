@@ -3,10 +3,10 @@
         <h1 class="modal__title">{{ title }}</h1>
         <p v-if="description" class="modal__desc">{{ description }}</p>
 
-        <div class="modal__actions">
+        <ButtonGroup class="modal__actions">
             <Button class="link muted" @click="$emit('close')">{{ cancel }}</Button>
             <Button class="danger" @click="close(true)">{{ confirm }}</Button>
-        </div>
+        </ButtonGroup>
     </div>
 </template>
 

@@ -3,10 +3,10 @@
         <h1>Resign confirmation</h1>
         <p>Are you sure you would like to cancel?</p>
 
-        <div class="modal__actions">
+        <ButtonGroup class="modal__actions">
             <Button class="outline muted" @click="close(false)">Cancel</Button>
             <Button class="danger" @click="resign(schedule)">Resign</Button>
-        </div>
+        </ButtonGroup>
     </div>
 </template>
 

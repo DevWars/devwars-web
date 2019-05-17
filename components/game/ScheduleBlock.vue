@@ -25,14 +25,14 @@
                     <div class="title">{{ description(schedule)}}</div>
                 </td>
                 <td>
-                    <div>
+                    <ButtonGroup>
                         <Button
                             v-if="!isApplied(schedule)"
                             class="primary"
                             @click="enter(schedule)"
                         >Register for Entry</Button>
                         <Button v-else class="outline danger" @click="cancel(schedule)">Resign</Button>
-                    </div>
+                    </ButtonGroup>
                 </td>
             </tr>
         </Table>

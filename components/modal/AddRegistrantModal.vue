@@ -4,10 +4,10 @@
             <Input v-model="username" placeholder="Username"/>
         </div>
 
-        <div class="modal__actions">
+        <ButtonGroup class="modal__actions">
             <Button class="muted link" @click="close(false)">Cancel</Button>
             <Button class="primary">Add</Button>
-        </div>
+        </ButtonGroup>
     </form>
 </template>
 

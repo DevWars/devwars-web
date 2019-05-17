@@ -1,9 +1,11 @@
 <template>
     <div>
         <PanelHeader :title="startDate" :subtitle="`@ ${startTime} UTC`">
-            <Button to="/mod/schedules" class="outline muted">Back</Button>
-            <Button v-if="viewingSetupPage" v-async-click="[save]" class="primary">Save</Button>
-            <Button v-if="user.role === 'ADMIN'" class="danger" disabled>Delete</Button>
+            <ButtonGroup>
+                <Button to="/mod/schedules" class="outline muted">Back</Button>
+                <Button v-if="viewingSetupPage" v-async-click="[save]" class="primary">Save</Button>
+                <Button v-if="user.role === 'ADMIN'" class="danger" disabled>Delete</Button>
+            </ButtonGroup>
         </PanelHeader>
 
         <Tabs>

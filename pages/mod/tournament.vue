@@ -16,7 +16,7 @@
                 </h2>
             </div>
 
-            <div class="modpanel__header-actions">
+            <ButtonGroup class="modpanel__header-actions">
                 <Button href="/mod/tournaments" class="outline muted">Back</Button>
                 <Button
                     v-if="tournament.active && !tournament.done"
@@ -30,7 +30,7 @@
                 >Activate</Button>
                 <Button v-async-click="[save]" class="primary">Save</Button>
                 <Button v-async-click="[remove]" class="danger">Delete</Button>
-            </div>
+            </ButtonGroup>
         </div>
 
         <Tabs>

@@ -18,7 +18,7 @@
                         </div>
                     </div>
 
-                    <div class="actions">
+                    <ButtonGroup>
                         <Button
                             v-if="!isApplied(schedule)"
                             class="outline sm block"
@@ -29,7 +29,7 @@
                             class="outline danger sm block"
                             @click="cancel(schedule)"
                         >Cancel</Button>
-                    </div>
+                    </ButtonGroup>
                 </div>
             </div>
         </Applications>

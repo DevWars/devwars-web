@@ -7,10 +7,10 @@
                 <Card class="plain dark">
                     <h3 class="modpanel__title">You are already registered as a Competitor</h3>
                     <p>Want to compete in an upcoming game?</p>
-                    <div class="mt-30">
+                    <ButtonGroup class="mt-30">
                         <Button href="/schedule" class="primary">View schedule</Button>
                         <Button href="/" class="outline">Back to home</Button>
-                    </div>
+                    </ButtonGroup>
                 </Card>
             </div>
         </div>

@@ -13,9 +13,9 @@
 
                             <Textarea v-model="message" label="Message" class="group" required/>
 
-                            <div class="align-right">
+                            <ButtonGroup class="align-right">
                                 <Button type="submit" class="primary">Send Email</Button>
-                            </div>
+                            </ButtonGroup>
                         </form>
                     </Card>
                     <Card v-show="submitted" class="dark plain">

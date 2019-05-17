@@ -7,10 +7,10 @@
                 </nuxt-link>
             </div>
 
-            <Button to="/" class="link block static" @click="toggleMobileMenu">Home</Button>
-            <Button to="/games" class="link block static" @click="toggleMobileMenu">Games</Button>
-            <Button to="/schedule" class="link block static" @click="toggleMobileMenu">Schedule</Button>
-            <Button to="/leaderboards" class="link block static" @click="toggleMobileMenu">Leaders</Button>
+            <Button to="/" class="link block" @click="toggleMobileMenu">Home</Button>
+            <Button to="/games" class="link block" @click="toggleMobileMenu">Games</Button>
+            <Button to="/schedule" class="link block" @click="toggleMobileMenu">Schedule</Button>
+            <Button to="/leaderboards" class="link block" @click="toggleMobileMenu">Leaders</Button>
 
             <div v-if="!user" class="actions">
                 <Button to="/register" class="primary block">Register</Button>
@@ -19,13 +19,13 @@
 
             <UserMenu v-if="user" :user="user" class="nav-link">
                 <template #default="{close}">
-                    <nuxt-link v-if="isAdmin" to="/mod/dashboard" @click="close">Modpanel</nuxt-link>
+                    <Button v-if="isAdmin" to="/mod/dashboard" class="link" @click="close">Modpanel</Button>
                     <div v-if="isAdmin" class="menu-divider"></div>
-                    <nuxt-link to="/dashboard" @click="close">Dashboard</nuxt-link>
-                    <nuxt-link to="/badges" @click="close">Badges</nuxt-link>
-                    <nuxt-link to="/settings/profile" @click="close">Settings</nuxt-link>
+                    <Button to="/dashboard" class="link" @click="close">Dashboard</Button>
+                    <Button to="/badges" class="link" @click="close">Badges</Button>
+                    <Button to="/settings/profile" class="link" @click="close">Settings</Button>
                     <div class="menu-divider"></div>
-                    <a @click="logout">Logout</a>
+                    <Button class="link" @click="logout">Logout</Button>
                 </template>
             </UserMenu>
         </div>

@@ -64,14 +64,6 @@ $colors: (
         opacity: 0.25;
     }
 
-    & + & {
-        margin-left: $grid-gutter-width;
-
-        @include breakpoint(sm) {
-            margin-top: $grid-gutter-width;
-        }
-    }
-
     &.block {
         display: block;
         width: 100%;
@@ -79,12 +71,6 @@ $colors: (
 
         & + & {
             margin-top: $grid-gutter-part;
-        }
-    }
-
-    &.static {
-        & + & {
-            margin: initial;
         }
     }
 

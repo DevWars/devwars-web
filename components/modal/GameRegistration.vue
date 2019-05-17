@@ -6,14 +6,14 @@
             In order to compete in live DevWars games, you must first complete the
             <b>competitor registration form</b>.
         </p>
-        <div class="modal__actions">
+        <ButtonGroup class="modal__actions">
             <Button class="outline muted" @click="close(false)">Nevermind</Button>
             <a
                 :href="'/competitor/register?schedule=' + schedule.id "
                 class="primary"
                 @click="close(false)"
             >Begin Registration</a>
-        </div>
+        </ButtonGroup>
     </div>
 
     <div v-else>
@@ -34,10 +34,10 @@
             eligible to play if you are available and a selected contestant is unable to play.
         </p>
 
-        <div class="modal__actions">
+        <ButtonGroup class="modal__actions">
             <button class="outline muted" @click="close(false)">Nevermind</button>
             <button class="primary" @click="enter(schedule)">Enter</button>
-        </div>
+        </ButtonGroup>
     </div>
 </template>
 

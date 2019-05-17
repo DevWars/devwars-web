@@ -36,9 +36,9 @@
             </ul>
         </div>
 
-        <div slot="actions">
+        <ButtonGroup>
             <Button to="/games" class="outline primary">View Full Game</Button>
-        </div>
+        </ButtonGroup>
     </HomeCard>
 </template>
 

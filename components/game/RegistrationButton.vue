@@ -1,6 +1,6 @@
 <template>
     <Applications :schedules="[schedule]">
-        <div slot-scope="{isApplied, enter, cancel}">
+        <ButtonGroup slot-scope="{isApplied, enter, cancel}">
             <Button
                 v-show="!isApplied(schedule)"
                 class="primary"
@@ -11,7 +11,7 @@
                 class="outline danger"
                 @click="cancel(schedule)"
             >Resign</Button>
-        </div>
+        </ButtonGroup>
     </Applications>
 </template>
 

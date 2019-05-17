@@ -4,19 +4,21 @@
             :title="game.startTime | moment('mediumDate')"
             :subtitle="`#${game.id} / S${game.season} / ${game.mode}`"
         >
-            <Button to="/mod/games" class="outline muted">Back</Button>
-            <Button
-                v-if="isActive && !isEnded && !isScheduled"
-                v-async-click="[endGame]"
-                class="danger"
-            >End</Button>
-            <Button
-                v-if="!isActive && !isEnded && isScheduled"
-                v-async-click="[activate]"
-                class="primary"
-            >Activate</Button>
-            <Button v-if="viewingDetailsPage" v-async-click="[save]" class="primary">Save</Button>
-            <Button v-if="user.role === 'ADMIN'" v-async-click="[remove]" class="danger">Delete</Button>
+            <ButtonGroup>
+                <Button to="/mod/games" class="outline muted">Back</Button>
+                <Button
+                    v-if="isActive && !isEnded && !isScheduled"
+                    v-async-click="[endGame]"
+                    class="danger"
+                >End</Button>
+                <Button
+                    v-if="!isActive && !isEnded && isScheduled"
+                    v-async-click="[activate]"
+                    class="primary"
+                >Activate</Button>
+                <Button v-if="viewingDetailsPage" v-async-click="[save]" class="primary">Save</Button>
+                <Button v-if="user.role === 'ADMIN'" v-async-click="[remove]" class="danger">Delete</Button>
+            </ButtonGroup>
         </PanelHeader>
 
         <Tabs>
