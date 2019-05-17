@@ -55,3 +55,9 @@ export default {
     },
 };
 </script>
+
+<style lang="scss" scoped>
+.discord {
+    width: 200px;
+}
+</style>

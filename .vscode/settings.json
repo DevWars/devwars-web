@@ -4,6 +4,9 @@
             "tabWidth": 4
         }
     },
+    "path-intellisense.mappings": {
+        "~": "${workspaceRoot}"
+    },
     "eslint.validate": [
         {
             "language": "vue",

@@ -1,5 +1,5 @@
 <template>
-    <Button class="ButtonIcon">
+    <Button class="ButtonIcon" v-bind="$attrs" @click.native="$emit('click')">
         <div v-if="image" class="image">
             <slot name="image"></slot>
         </div>

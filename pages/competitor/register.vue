@@ -7,23 +7,31 @@
                 <Card class="plain dark" title="About You">
                     <div class="row">
                         <div class="col-sm-6 form-group">
-                            {{profile}}
-                            <Input v-model="competitor.name.firstName" required/>
+                            <Input
+                                v-model="profile.firstName"
+                                required
+                                @input="e => change('profile.firstName', e)"
+                            />
                             <label>First name</label>
                         </div>
                         <div class="col-sm-6 form-group">
-                            <Input v-model="competitor.name.lastName" required/>
+                            <Input
+                                v-model="profile.lastName"
+                                required
+                                @input="e => change('profile.lastName', e)"
+                            />
                             <label>Last name</label>
                         </div>
                     </div>
-
                     <Row>
                         <Column :sm="3">
+                            {{profile.country}}
                             <Select
-                                v-model="competitor.address.country"
+                                v-model="profile.country"
                                 label="Select Country"
                                 class="group"
                                 required
+                                @change="e => change('profile.country', e)"
                             >
                                 <option v-for="country in countries" :key="country">{{ country }}</option>
                             </Select>
@@ -43,6 +51,7 @@
                                         class="group"
                                         maxlength="2"
                                         required
+                                        @input="e => day = e"
                                     />
                                 </Column>
                                 <Column :sm="2">
@@ -51,7 +60,10 @@
                                         label="MM"
                                         class="group"
                                         maxlength="2"
+                                        min="01"
+                                        max="12"
                                         required
+                                        @input="e => month = e"
                                     />
                                 </Column>
                                 <Column :sm="4">
@@ -61,18 +73,27 @@
                                         class="group"
                                         maxlength="4"
                                         required
+                                        @input="e => year = e"
                                     />
                                 </Column>
                             </Row>
                         </Column>
                         <Column :sm="6">
-                            <Input v-model="competitor.company" label="Company" class="group"/>
+                            <Input
+                                v-model="profile.company"
+                                label="Company"
+                                class="group"
+                                @input="e => change('profile.company', e)"
+                            />
                         </Column>
                     </Row>
                 </Card>
 
                 <Card class="plain dark" title="Skill Assessment">
-                    <LanguageSkills :profile="profile"/>
+                    <LanguageSkills
+                        :profile="profile"
+                        @change="e => change('profile.skills', e.values)"
+                    />
                 </Card>
 
                 <Card class="plain dark" title="Requirements">
@@ -86,6 +107,7 @@
                         name="has-microphone"
                         class="group"
                         required
+                        @input="e => mic = e"
                     />
                 </Card>
 
@@ -99,7 +121,7 @@
 
 
 <script>
-// import moment from 'moment';
+import moment from 'moment';
 import * as countryList from 'country-list';
 import { mapActions } from 'vuex';
 
@@ -109,13 +131,16 @@ import Input from '~/components/form/Input';
 import Select from '~/components/form/Select';
 import LanguageSkills from '~/components/game/LanguageSkills';
 import ConnectToDiscord from '~/components/user/ConnectToDiscord';
-// import userHasProvider from '../../utils/linkedAccounts';
+import Checkbox from '~/components/form/Checkbox';
+import userHasProvider from '../../utils/linkedAccounts';
 import { names } from '../../utils/auth';
+
+import Http from '../../services/Http';
 
 export default {
     name: 'CompetitorRegistration',
 
-    components: { PageBanner, Card, Input, LanguageSkills, Select, ConnectToDiscord },
+    components: { PageBanner, Checkbox, Select, Card, Input, ConnectToDiscord, LanguageSkills },
     // middleware: ['auth', 'no-competitors'],
     meta: {
         auth: names.USER,
@@ -123,28 +148,61 @@ export default {
 
     data: () => {
         return {
-            month: '',
-            day: '',
-            year: '',
-            languages: [{ name: 'html', skill: 0 }, { name: 'css', skill: 0 }, { name: 'js', skill: 0 }],
-            competitor: {
-                name: {},
-                address: {},
-                ratings: {},
+            mic: false,
+            tmp: {
+                profile: {},
+                skills: {},
             },
-            // countries: [],
             countries: Object.keys(countryList().getNameList()).map((it) => it[0].toUpperCase() + it.slice(1)),
         };
     },
 
     computed: {
-        user() {
-            console.log(this.$store.state.user.user);
-            return this.$store.state.user.user;
-        },
+        // user() {
+        //     return this.$store.state.user.user;
+        // },
 
         links() {
             return this.$store.state.user.linkedAccounts;
+        },
+
+        day: {
+            get() {
+                return new Date(this.profile.dob).getUTCDate();
+            },
+            set(val) {
+                this.tmp.dob = {
+                    day: val,
+                    month: this.month,
+                    year: this.year,
+                };
+            },
+        },
+
+        month: {
+            get() {
+                return new Date(this.profile.dob).getUTCMonth();
+            },
+            set(val) {
+                this.tmp.dob = {
+                    day: this.day,
+                    month: val,
+                    year: this.year,
+                };
+            },
+        },
+
+        year: {
+            get() {
+                return new Date(this.profile.dob).getUTCFullYear();
+            },
+            set(val) {
+                this.tmp.dob = {
+                    day: this.day,
+                    month: this.month,
+                    year: val,
+                };
+            },
         },
 
         profile() {
@@ -164,27 +222,53 @@ export default {
 
     methods: {
         async submit() {
-            // const hasDiscord = userHasProvider(this.links, 'DISCORD');
-            // if (!hasDiscord) {
-            //     return this.error('You must connect your discord before moving forward with your registration.');
-            // }
-            // const date = moment.utc(`${this.month} ${this.day} ${this.year}`, 'MM DD YYYY').startOf('day');
-            // this.languages.forEach((language) => {
-            //     this.competitor.ratings[language] = language.skill + 1;
-            // });
-            // this.competitor.dob = date.unix() * 1000;
-            // try {
-            //     // await Http.for(`user/${this.user.id}/competitor`).save(
-            //     //     this.competitor
-            //     // );
-            //     // await this.$axios.
-            //     if (this.schedule) {
-            //         await this.$store.dispatch('game/apply', this.schedule);
-            //     }
-            //     this.$store.dispatch('toast/success', `Congratulations! You are now a competitor!`);
-            // } catch (e) {
-            //     this.$store.dispatch('toast/errors', e);
-            // }
+            const hasDiscord = userHasProvider(this.links, 'DISCORD');
+            if (!hasDiscord)
+                return this.$store.dispatch(
+                    'toast/error',
+                    'You must connect your discord before moving forward with your registration.'
+                );
+
+            if (!this.mic) return this.$store.dispatch('toast/error', 'you must check mic');
+
+            const finalProfile = {
+                ...this.profile,
+                ...this.tmp.profile,
+            };
+            const finalSkills = {
+                ...this.profile.skills,
+                ...this.tmp.skills,
+            };
+            let date = this.profile.dob;
+            if (this.tmp.dob) {
+                const { year, month, day } = this.tmp.dob;
+                // const finalDob = new Date(Date.UTC(year, month - 1, day));
+                // TODO: we should discuss about it here i am not sure i format well the date
+                date = moment.utc(`${month} ${day} ${year}`, 'MM DD YYYY').startOf('day');
+                date = date.unit() * 1000;
+            }
+
+            try {
+                const competitor = {
+                    ...finalProfile,
+                    skills: finalSkills,
+                    dob: date,
+                };
+                await Http.for(`user/${this.user.id}/competitor`).save(competitor);
+                if (this.schedule) {
+                    await this.$store.dispatch('game/apply', this.schedule);
+                }
+
+                console.log(competitor);
+                this.$store.dispatch('toast/success', `Congratulations! You are now a competitor!`);
+            } catch (e) {
+                this.$store.dispatch('toast/errors', e);
+            }
+        },
+        change(key, val) {
+            const dest = key.split('.');
+            if (dest.length !== 2) return console.error('shoud be a path in data');
+            this.tmp[dest[0]][dest[1]] = val;
         },
     },
 };

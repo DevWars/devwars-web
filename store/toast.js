@@ -17,7 +17,7 @@ export const mutations = {
 };
 
 export const actions = {
-    add({commit}, toast) {
+    add({ commit }, toast) {
         commit('push', toast);
 
         setTimeout(() => {
@@ -25,21 +25,21 @@ export const actions = {
         }, 3000);
     },
 
-    async error({dispatch}, message) {
-        await dispatch('add', {type: 'error', message});
+    async error({ dispatch }, message) {
+        await dispatch('add', { type: 'error', message });
     },
 
-    async success({dispatch}, message) {
-        await dispatch('add', {type: 'success', message});
+    async success({ dispatch }, message) {
+        await dispatch('add', { type: 'success', message });
     },
 
-    errors({dispatch}, e) {
-        if(e.response.status === 400) {
-            e.response.data.forEach(it => {
-                dispatch('add', {type: 'error', message: it.message});
+    errors({ dispatch }, e) {
+        if (e.response.status === 400) {
+            e.response.data.forEach((it) => {
+                dispatch('add', { type: 'error', message: it.message });
             });
         } else {
-            dispatch('add', {type: 'error', message: `${e.response.status  } : ${  e.response.statusText}`});
+            dispatch('add', { type: 'error', message: `${e.response.status} : ${e.response.statusText}` });
         }
     },
 };
