@@ -3,11 +3,13 @@
         <div class="header">
             <div class="inner container-fluid">
                 <div>
-                    <button class="burger-menu" @click="toggleMobileMenu"></button>
+                    <Button class="link burger-menu" @click="toggleMobileMenu"/>
+
                     <nuxt-link to="/" class="logo">
                         <img class="logo-full" src="~assets/img/logo.png" alt="DevWars">
                         <img class="logo-icon" src="~assets/img/logo-icon.png" alt="DevWars">
                     </nuxt-link>
+
                     <ul class="nav nav-main">
                         <li class="nav__item">
                             <nuxt-link to="/" class="nav__link">Home</nuxt-link>
@@ -42,12 +44,12 @@
                             v-if="isStaff"
                             to="/mod/dashboard"
                             class="link"
-                            @click.native="close"
+                            @click="close"
                         >Modpanel</Button>
                         <div v-if="isStaff" class="divider"></div>
-                        <Button to="/dashboard" class="link" @click.native="close">Dashboard</Button>
-                        <Button to="/badges" class="link" @click.native="close">Badges</Button>
-                        <Button to="/settings/profile" class="link" @click.native="close">Settings</Button>
+                        <Button to="/dashboard" class="link" @click="close">Dashboard</Button>
+                        <Button to="/badges" class="link" @click="close">Badges</Button>
+                        <Button to="/settings/profile" class="link" @click="close">Settings</Button>
                         <div class="divider"></div>
                         <Button class="link" @click="logout">Logout</Button>
                     </template>
@@ -67,25 +69,31 @@ import HeaderMobile from './HeaderMobile';
 
 export default {
     name: 'ComponentHeader',
+
     components: { HeaderMobile, UserMenu },
+
     data: () => {
         return {
             isMobile: false,
             toggleMobileMenuVal: false,
         };
     },
+
     computed: {
         user() {
             return this.$store.state.user.user;
         },
+
         isStaff() {
             return this.user.role === 'ADMIN' || this.user.role === 'MODERATOR';
         },
     },
+
     methods: {
         logout() {
             this.$store.dispatch('user/logout');
         },
+
         toggleMobileMenu() {
             this.toggleMobileMenuVal = !this.toggleMobileMenuVal;
         },
@@ -135,7 +143,7 @@ export default {
     }
 }
 
-.burger-menu {
+.burger-menu.Button {
     display: none;
     padding: $xs-space $xs-space $xs-space 0;
     margin-right: $xs-space;

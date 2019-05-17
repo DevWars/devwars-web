@@ -17,6 +17,12 @@ export default {
             default: '',
         },
     },
+
+    computed: {
+        image() {
+            return this.$slots.image || undefined;
+        },
+    },
 };
 </script>
 

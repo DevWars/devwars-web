@@ -1,27 +1,16 @@
 <template>
-    <div
-        v-closable="{handler: toggleMobileMenu, outSideFrom: ' .headerMobile'}"
-        class="HeaderMobile"
-    >
-        <div class="main">
+    <div v-closable="{handler: toggleMobileMenu, outSideFrom: '#MobileMenu'}" class="HeaderMobile">
+        <div id="MobileMenu" class="main">
             <div class="head">
                 <nuxt-link to="/" class="logo" @click.native="toggleMobileMenu">
                     <img src="~assets/img/logo.png" alt="DevWars">
                 </nuxt-link>
             </div>
 
-            <Button to="/" class="link block static" @click.native="toggleMobileMenu">Home</Button>
-            <Button to="/games" class="link block static" @click.native="toggleMobileMenu">Games</Button>
-            <Button
-                to="/schedule"
-                class="link block static"
-                @click.native="toggleMobileMenu"
-            >Schedule</Button>
-            <Button
-                to="/leaderboards"
-                class="link block static"
-                @click.native="toggleMobileMenu"
-            >Leaders</Button>
+            <Button to="/" class="link block static" @click="toggleMobileMenu">Home</Button>
+            <Button to="/games" class="link block static" @click="toggleMobileMenu">Games</Button>
+            <Button to="/schedule" class="link block static" @click="toggleMobileMenu">Schedule</Button>
+            <Button to="/leaderboards" class="link block static" @click="toggleMobileMenu">Leaders</Button>
 
             <div v-if="!user" class="actions">
                 <Button to="/register" class="primary block">Register</Button>
@@ -30,11 +19,11 @@
 
             <UserMenu v-if="user" :user="user" class="nav-link">
                 <template #default="{close}">
-                    <nuxt-link v-if="isAdmin" to="/mod/dashboard" @click.native="close">Modpanel</nuxt-link>
+                    <nuxt-link v-if="isAdmin" to="/mod/dashboard" @click="close">Modpanel</nuxt-link>
                     <div v-if="isAdmin" class="menu-divider"></div>
-                    <nuxt-link to="/dashboard" @click.native="close">Dashboard</nuxt-link>
-                    <nuxt-link to="/badges" @click.native="close">Badges</nuxt-link>
-                    <nuxt-link to="/settings/profile" @click.native="close">Settings</nuxt-link>
+                    <nuxt-link to="/dashboard" @click="close">Dashboard</nuxt-link>
+                    <nuxt-link to="/badges" @click="close">Badges</nuxt-link>
+                    <nuxt-link to="/settings/profile" @click="close">Settings</nuxt-link>
                     <div class="menu-divider"></div>
                     <a @click="logout">Logout</a>
                 </template>
