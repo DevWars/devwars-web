@@ -765,10 +765,7 @@
                                     </td>
                                     <td>Awarded every 30 minutes</td>
                                     <td>
-                                        <div class="devcoins">
-                                            <Devcoin/>
-                                            <div class="devcoins__amount">2</div>
-                                        </div>
+                                        <Devcoins amount="2" class="xs"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -777,10 +774,7 @@
                                     </td>
                                     <td>Awarded every 30 minutes</td>
                                     <td>
-                                        <div class="devcoins">
-                                            <Devcoin/>
-                                            <div class="devcoins__amount">10</div>
-                                        </div>
+                                        <Devcoins amount="10" class="xs"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -829,12 +823,12 @@
 
 
 <script>
-import Devcoin from '~/components/Devcoin';
+import Devcoins from '~/components/Devcoins';
 import Tag from '~/components/Tag';
 
 export default {
     name: 'Docs',
-    components: { Devcoin, Tag },
+    components: { Devcoins, Tag },
     layout: 'header',
     mounted() {
         if (!this.$route.hash) return;

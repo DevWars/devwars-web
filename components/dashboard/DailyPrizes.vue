@@ -3,10 +3,7 @@
         <div class="item">
             <div class="main">
                 <div class="col-xs-2 no-gutter">
-                    <div class="devcoins">
-                        <Devcoin/>
-                        <div class="devcoins__amount">500</div>
-                    </div>
+                    <Devcoins amount="500" class="xs"/>
                 </div>
                 <div class="col-xs-8 no-gutter">Submit 5 Objectives</div>
             </div>
@@ -18,12 +15,7 @@
         <div class="item">
             <div class="main">
                 <div class="col-xs-2 no-gutter">
-                    <div class="devcoins">
-                        <no-ssr>
-                            <Devcoin/>
-                        </no-ssr>
-                        <div class="devcoins__amount">200</div>
-                    </div>
+                    <Devcoins amount="300" class="xs"/>
                 </div>
                 <div class="col-xs-8 no-gutter">Comment on a User Submission</div>
             </div>
@@ -37,11 +29,11 @@
 
 <script>
 import DashboardCard from '~/components/DashboardCard';
-import Devcoin from '~/components/Devcoin';
+import Devcoins from '~/components/Devcoins';
 
 export default {
     name: 'DailyPrizes',
-    components: { DashboardCard, Devcoin },
+    components: { DashboardCard, Devcoins },
 };
 </script>
 

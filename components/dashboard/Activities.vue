@@ -15,8 +15,8 @@
                             class="reward"
                             :class="[activity.coins > 0 ? 'win' : 'lose']"
                         >
-                            <Devcoin/>
-                            <span>{{ activity.coins }}</span>
+                            <DevcoinIcon/>
+                            <span>{{ activity.coins | number }}</span>
                         </div>
                         <div
                             v-if="activity.xp"
@@ -24,7 +24,7 @@
                             :class="[activity.xp > 0 ? 'win' : 'lose']"
                         >
                             <div class="xp">XP</div>
-                            <span>{{ activity.xp }}</span>
+                            <span>{{ activity.xp | number }}</span>
                         </div>
                     </div>
                 </div>
@@ -36,12 +36,12 @@
 
 <script>
 import DashboardCard from '~/components/DashboardCard';
-import Devcoin from '~/components/Devcoin';
+import DevcoinIcon from '~/components/DevcoinIcon';
 
 export default {
     name: 'Activities',
 
-    components: { DashboardCard, Devcoin },
+    components: { DashboardCard, DevcoinIcon },
 
     props: {
         paged: {
@@ -93,7 +93,7 @@ export default {
         color: $danger-color;
     }
 
-    .Devcoin {
+    .DevcoinIcon {
         width: 18px;
         height: 18px;
     }

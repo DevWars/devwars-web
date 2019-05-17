@@ -1,17 +1,14 @@
 <template>
     <div>
         <PageBanner title="Shop">
-            <div class="devcoins devcoins-xl">
-                <Devcoin/>
-                <div class="devcoins__amount">232</div>
-            </div>
+            <Devcoins amount="7400" class="xl"/>
 
             <div slot="nav">
                 <div class="shop-nav">
-                    <button class="shop-nav__link active">All</button>
-                    <button class="shop-nav__link">Consumable</button>
-                    <button class="shop-nav__link">Wearable</button>
-                    <button class="shop-nav__link">Cosmetic</button>
+                    <div class="shop-nav__link active">All</div>
+                    <div class="shop-nav__link">Consumable</div>
+                    <div class="shop-nav__link">Wearable</div>
+                    <div class="shop-nav__link">Cosmetic</div>
                 </div>
             </div>
 
@@ -39,10 +36,7 @@
                                     class="shop-card__desc"
                                 >Activate a quiz round during a live game show.</p>
                             </div>
-                            <div class="devcoins devcoins-lg">
-                                <Devcoin/>
-                                <div class="devcoins__amount">232</div>
-                            </div>
+                            <Devcoins amount="232" class="sm"/>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-6">
@@ -55,10 +49,7 @@
                                 <h2 class="shop-card__name">Crown of Prosperity</h2>
                                 <p class="shop-card__desc">+5 DevBit Earnings</p>
                             </div>
-                            <div class="devcoins devcoins-lg">
-                                <Devcoin/>
-                                <div class="devcoins__amount">232</div>
-                            </div>
+                            <Devcoins amount="232" class="sm"/>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-6">
@@ -71,10 +62,7 @@
                                 <h2 class="shop-card__name">Upload Avatar</h2>
                                 <p class="shop-card__desc">Allows upload of a custom avatar.</p>
                             </div>
-                            <div class="devcoins devcoins-lg">
-                                <Devcoin/>
-                                <div class="devcoins__amount">232</div>
-                            </div>
+                            <Devcoins amount="232" class="sm"/>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-6">
@@ -89,10 +77,7 @@
                                     class="shop-card__desc"
                                 >Protects 5%-30% of your gambled assets on your next bet.</p>
                             </div>
-                            <div class="devcoins devcoins-lg">
-                                <Devcoin/>
-                                <div class="devcoins__amount">232</div>
-                            </div>
+                            <Devcoins amount="232" class="sm"/>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-6">
@@ -105,10 +90,7 @@
                                 <h2 class="shop-card__name">Name Tag</h2>
                                 <p class="shop-card__desc">Allows for 1 username change.</p>
                             </div>
-                            <div class="devcoins devcoins-lg">
-                                <Devcoin/>
-                                <div class="devcoins__amount">232</div>
-                            </div>
+                            <Devcoins amount="232" class="sm"/>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-6">
@@ -123,10 +105,7 @@
                                     class="shop-card__desc"
                                 >Place a song request to play on the live stream.</p>
                             </div>
-                            <div class="devcoins devcoins-lg">
-                                <Devcoin/>
-                                <div class="devcoins__amount">232</div>
-                            </div>
+                            <Devcoins amount="232" class="sm"/>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-6">
@@ -141,10 +120,7 @@
                                     class="shop-card__desc"
                                 >Enter for a chance to win the weekly DevWars Jackpot.</p>
                             </div>
-                            <div class="devcoins devcoins-lg">
-                                <Devcoin/>
-                                <div class="devcoins__amount">232</div>
-                            </div>
+                            <Devcoins amount="232" class="sm"/>
                         </div>
                     </div>
                 </div>
@@ -157,12 +133,12 @@
 <script>
 import PageBanner from '~/components/layout/PageBanner';
 import Select from '~/components/form/Select';
-import Devcoin from '~/components/Devcoin';
+import Devcoins from '~/components/Devcoins';
 
 export default {
     name: 'Shop',
 
-    components: { PageBanner, Select, Devcoin },
+    components: { PageBanner, Select, Devcoins },
 };
 </script>
 
@@ -220,11 +196,11 @@ export default {
         color: $text-color-secondary;
     }
 
-    .devcoins {
+    .Devcoins {
+        justify-content: center;
         border-top: 1px solid $divider-color;
         padding: $xs-space 0;
         margin-top: $xs-space;
-        text-align: center;
         position: relative;
 
         &:after {
@@ -240,7 +216,7 @@ export default {
         }
     }
 
-    &:hover .devcoins:after {
+    &:hover .Devcoins:after {
         opacity: 1;
     }
 

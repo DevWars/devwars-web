@@ -1,6 +1,6 @@
 <template>
     <!-- eslint-disable vue/html-self-closing -->
-    <svg class="Devcoin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 787.5 787.5">
+    <svg class="DevcoinIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 787.5 787.5">
         <path
             d="M0 393.8C0 446.9 10.4 498.5 31 547c19.8 46.9 48.2 89 84.4 125.1 36.1 36.1 78.3 64.5
             125.1 84.4 48.6 20.5 100.1 31 153.3 31 53.1 0 104.7-10.4 153.3-31 46.9-19.8 89-48.2 125.1-84.4
@@ -23,7 +23,7 @@
 
 <script>
 export default {
-    name: 'Devcoin',
+    name: 'DevcoinIcon',
 };
 </script>
 
@@ -31,12 +31,7 @@ export default {
 <style lang="scss" scoped>
 @import 'utils.scss';
 
-.Devcoin {
-    @extend %align-middle;
-
-    path {
-        @extend %align-middle;
-        fill: $devcoin-color;
-    }
+.DevcoinIcon {
+    fill: $devcoin-color;
 }
 </style>

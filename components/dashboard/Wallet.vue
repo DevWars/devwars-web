@@ -1,12 +1,8 @@
 <template>
     <DashboardCard class="wallet">
         <div class="wallet__inner">
-            <div>
-                <div class="devcoins devcoins-lg">
-                    <Devcoin/>
-                    <div class="devcoins__amount">{{ stats.coins | number }}</div>
-                </div>
-            </div>
+            <Devcoins :amount="stats.coins"/>
+
             <div class="devcoins-wallet__actions">
                 <Button class="outline sm" disabled>Shop</Button>
             </div>
@@ -31,11 +27,11 @@
 
 <script>
 import DashboardCard from '~/components/DashboardCard';
-import Devcoin from '~/components/Devcoin';
+import Devcoins from '~/components/Devcoins';
 
 export default {
     name: 'Wallet',
-    components: { DashboardCard, Devcoin },
+    components: { DashboardCard, Devcoins },
     props: {
         stats: {
             type: Object,

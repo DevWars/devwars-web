@@ -21,10 +21,7 @@
                             <div class="progress">
                                 <div class="progress__bar" :style="[style(badge)]"></div>
                             </div>
-                            <div class="devcoins">
-                                <Devcoin/>
-                                <div class="devcoins__amount color-white">{{ badge.coins | number }}</div>
-                            </div>
+                            <Devcoins :amount="badge.coins"/>
                         </div>
                     </div>
                 </div>
@@ -39,13 +36,13 @@
 // import { mapGetters } from 'vuex';
 // import Http from '../services/Http';
 // import PageBanner from '~/components/layout/PageBanner';
-// import Devcoin from '~/components/Devcoin';
+// import Devcoins from '~/components/Devcoins';
 
 export default {
     // name: 'Badges',
     // components: {
     //     PageBanner,
-    //     Devcoin,
+    //     Devcoins,
     // },
     // computed: {
     //     ...mapGetters({
