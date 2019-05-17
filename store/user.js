@@ -27,6 +27,10 @@ export const getters = {
 
         return true;
     },
+
+    getDiscord({ linkedAccounts }) {
+        return linkedAccounts.find((account) => account.provider === 'DISCORD');
+    },
 };
 
 export const mutations = {

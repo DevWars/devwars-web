@@ -132,7 +132,6 @@ import Select from '~/components/form/Select';
 import LanguageSkills from '~/components/game/LanguageSkills';
 import ConnectToDiscord from '~/components/user/ConnectToDiscord';
 import Checkbox from '~/components/form/Checkbox';
-import userHasProvider from '../../utils/linkedAccounts';
 import { names } from '../../utils/auth';
 
 import Http from '../../services/Http';
@@ -141,7 +140,7 @@ export default {
     name: 'CompetitorRegistration',
 
     components: { PageBanner, Checkbox, Select, Card, Input, ConnectToDiscord, LanguageSkills },
-    // middleware: ['auth', 'no-competitors'],
+    middleware: ['no-competitors'],
     meta: {
         auth: names.USER,
     },
@@ -158,9 +157,9 @@ export default {
     },
 
     computed: {
-        // user() {
-        //     return this.$store.state.user.user;
-        // },
+        discord() {
+            return this.$store.getters['user/getDiscord'];
+        },
 
         links() {
             return this.$store.state.user.linkedAccounts;
@@ -222,8 +221,7 @@ export default {
 
     methods: {
         async submit() {
-            const hasDiscord = userHasProvider(this.links, 'DISCORD');
-            if (!hasDiscord)
+            if (!this.getDiscord)
                 return this.$store.dispatch(
                     'toast/error',
                     'You must connect your discord before moving forward with your registration.'
