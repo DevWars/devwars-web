@@ -1,7 +1,7 @@
 <template>
     <div>
         <PageBanner title="Shop">
-            <Devcoins amount="7400" class="xl"/>
+            <Devcoins amount="7400" class="lg"/>
 
             <div slot="nav">
                 <div class="shop-nav">

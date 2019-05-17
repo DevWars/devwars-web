@@ -8,11 +8,11 @@
         </p>
         <ButtonGroup class="modal__actions">
             <Button class="outline muted" @click="close(false)">Nevermind</Button>
-            <a
+            <Button
                 :href="'/competitor/register?schedule=' + schedule.id "
                 class="primary"
                 @click="close(false)"
-            >Begin Registration</a>
+            >Begin Registration</Button>
         </ButtonGroup>
     </div>
 

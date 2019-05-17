@@ -2,7 +2,7 @@
     <div>
         <PageBanner title="Welcome to DevWars!"/>
 
-        <div class="footer-offset align-center">
+        <div class="footer-offset">
             <div class="container">
                 <Card class="plain dark">
                     <h3 class="modpanel__subtitle">Verify your email address</h3>
@@ -45,3 +45,10 @@ export default {
     },
 };
 </script>
+
+
+<style lang="scss" scoped>
+.footer-offset {
+    text-align: center;
+}
+</style>

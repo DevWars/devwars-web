@@ -7,7 +7,7 @@
                 >{{ activity.created_at | moment('mediumDate') }}</div>
 
                 <div class="col-sm-9 no-gutter">
-                    <div class="title">{{ activity.description}}</div>
+                    <div>{{ activity.description}}</div>
 
                     <div class="rewards">
                         <div

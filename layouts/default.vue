@@ -97,6 +97,64 @@ label {
     display: block;
 }
 
+a {
+    color: $link-color;
+    text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    line-height: normal;
+    color: $headings-color;
+    word-wrap: break-word;
+}
+
+h1 {
+    text-transform: $h1-transform;
+    font-weight: $h1-font-weight;
+    font-family: $h1-font-family;
+    font-size: $h1-font-size;
+}
+
+h2 {
+    text-transform: $h2-transform;
+    font-weight: $h2-font-weight;
+    font-family: $h2-font-family;
+    font-size: $h2-font-size;
+}
+
+h3 {
+    font-weight: $h3-font-weight;
+    font-size: $h3-font-size;
+}
+
+h4 {
+    font-weight: $h4-font-weight;
+    font-size: $h4-font-size;
+}
+
+h5 {
+    font-weight: $h5-font-weight;
+    font-size: $h5-font-size;
+}
+
+h6 {
+    font-weight: $h6-font-weight;
+    font-size: $h6-font-size;
+}
+
+p {
+    color: $p-color;
+    line-height: $p-line-height;
+    font-size: $p-font-size;
+    word-wrap: break-word;
+}
+
 .header-offset {
     padding-top: $header-offset;
     padding-bottom: $xl-space;

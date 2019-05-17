@@ -589,7 +589,7 @@
 
                     <section>
                         <h3>Browsers</h3>
-                        <div class="row row-normaled align-center section">
+                        <div class="browsers row row-normaled section">
                             <div class="col-sm-3">
                                 <img src="~assets/img/browsers/chrome_48x48.png" title="Chrome">
                                 <p>v.61 +</p>
@@ -611,7 +611,7 @@
 
                     <section>
                         <h3>Communication</h3>
-                        <div class="communications row row-normaled align-center section">
+                        <div class="communications row row-normaled section">
                             <div class="col-sm-3">
                                 <i class="fa fa-microphone"></i>
                                 <p>Microphone</p>
@@ -1150,7 +1150,13 @@ code {
     @include position(js, $js-color);
 }
 
+.browsers {
+    text-align: center;
+}
+
 .communications {
+    text-align: center;
+
     .fa,
     .fab,
     .far,
@@ -1256,5 +1262,9 @@ code {
         font-size: $font-size-sm;
         line-height: 1.3;
     }
+}
+
+.color-bonus {
+    color: $bonus-color;
 }
 </style>

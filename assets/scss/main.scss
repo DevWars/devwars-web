@@ -1,14 +1,27 @@
-// Avails / Utilities
-// ==================================
 @import 'avail/variables';
 @import 'avail/mixins';
 @import 'avail/placeholders';
 
-// Base
-// ==================================
-@import 'base/grid';
-@import 'base/type';
+.container {
+    @include make-container();
+    @include make-container-max-widths();
+}
 
-// Components
-// ==================================
-@import 'components/modals';
+.container-fluid {
+    @include make-container();
+}
+
+.no-gutter {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.row {
+    @include make-row();
+}
+
+.row-normaled {
+    @include normalize-row();
+}
+
+@include make-grid-columns();

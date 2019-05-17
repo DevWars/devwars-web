@@ -13,17 +13,15 @@
 
                             <Textarea v-model="message" label="Message" class="group" required/>
 
-                            <ButtonGroup class="align-right">
+                            <ButtonGroup>
                                 <Button type="submit" class="primary">Send Email</Button>
                             </ButtonGroup>
                         </form>
                     </Card>
                     <Card v-show="submitted" class="dark plain">
-                        <div class="align-center">
-                            <h1>Thank you!</h1>
-                            <div class="mt-xs mb-md">
-                                <h4>We received your email, you will hear back from us soon.</h4>
-                            </div>
+                        <h1>Thank you!</h1>
+                        <div class="mt-xs mb-md">
+                            <h4>We received your email, you will hear back from us soon.</h4>
                         </div>
                     </Card>
                 </div>

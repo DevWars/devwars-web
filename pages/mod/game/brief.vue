@@ -46,7 +46,9 @@
                 <td>{{ applicant.profile.skills.html }}</td>
                 <td>{{ applicant.profile.skills.css }}</td>
                 <td>{{ applicant.profile.skills.js }}</td>
-                <td class="color-devcoins">{{ applicant.stats.coins }}</td>
+                <td>
+                    <Devcoins :amount="applicant.stats.coins" class="xs"/>
+                </td>
                 <td class="modpanel-table__actions">
                     <ButtonIcon
                         href="#edit"
@@ -68,6 +70,7 @@ import Card from '~/components/Card';
 import GameTeam from '~/components/game/GameTeam';
 import Player from '~/components/game/Player';
 import User from '~/components/user/User';
+import Devcoins from '~/components/Devcoins';
 import AddPlayerModal from '~/components/modal/AddPlayerModal';
 import DeleteModal from '~/components/modal/DeleteModal';
 import AddRegistrantModal from '~/components/modal/AddRegistrantModal';
@@ -80,7 +83,7 @@ export default {
     meta: {
         auth: [roles.moderator, roles.admin],
     },
-    components: { Card, Table, GameTeam, Player, User },
+    components: { Card, Table, GameTeam, Player, User, Devcoins },
     mixins: [teams, usersFromGame],
     data() {
         return {

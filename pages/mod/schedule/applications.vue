@@ -22,7 +22,9 @@
                 <td>{{ applicant.profile.skills.html }}</td>
                 <td>{{ applicant.profile.skills.css }}</td>
                 <td>{{ applicant.profile.skills.js }}</td>
-                <td class="color-devcoins">{{ applicant.stats.coins }}</td>
+                <td>
+                    <Devcoins :amount="applicant.stats.coins" class="xs"/>
+                </td>
             </tr>
         </Table>
     </div>
@@ -33,6 +35,7 @@
 import Table from '~/components/Table';
 import Http from '../../../services/Http';
 import User from '~/components/user/User';
+import Devcoins from '~/components/Devcoins';
 import { roles } from '../../../utils/auth';
 
 export default {
@@ -40,7 +43,7 @@ export default {
     meta: {
         auth: [roles.moderator, roles.admin],
     },
-    components: { Table, User },
+    components: { Table, User, Devcoins },
     computed: {
         schedule() {
             const schedules = this.$store.state.game.schedules;

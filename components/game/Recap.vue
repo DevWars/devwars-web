@@ -30,9 +30,9 @@
                 >{{ player.username }}</li>
             </ul>
             <ul class="pos">
-                <li class="color-html">HTML</li>
-                <li class="color-css">CSS</li>
-                <li class="color-js">JS</li>
+                <li class="html">HTML</li>
+                <li class="css">CSS</li>
+                <li class="js">JS</li>
             </ul>
         </div>
 
@@ -169,5 +169,15 @@ export default {
 
 .pos {
     text-align: center;
+
+    &.html {
+        color: $html-color;
+    }
+    &.css {
+        color: $css-color;
+    }
+    &.js {
+        color: $js-color;
+    }
 }
 </style>

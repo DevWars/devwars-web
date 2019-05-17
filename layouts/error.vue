@@ -21,12 +21,7 @@
                     <div class="col-sm-8">
                         <h1>500</h1>
                         <h2>It's not you, It's us.</h2>
-                        <p>
-                            This page is experiencing internal server issues
-                            <span
-                                class="font-size-sm"
-                            >(blame Terence)</span>
-                        </p>
+                        <p>This page is experiencing internal server issues.</p>
                         <Button to="/" class="outline primary lg">Go to home</Button>
                     </div>
                 </div>

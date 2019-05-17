@@ -11,7 +11,7 @@
 .ButtonGroup {
     .Button + .Button,
     & > * + & > * {
-        margin-left: $grid-gutter-width;
+        margin-left: 10px;
 
         @include breakpoint(xs) {
             display: block;

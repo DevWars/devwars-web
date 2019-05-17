@@ -13,19 +13,17 @@
                 <div class="main">
                     <div class="position">{{ language.name | uppercase }}</div>
                     <div class="reel">
-                        <button
-                            type="button"
+                        <div
                             class="arrow fa fa-chevron-left"
                             :class="{disabled: language.skill <= 1}"
                             @click="language.skill--"
-                        ></button>
+                        ></div>
                         <div class="score">{{ language.skill }}</div>
-                        <button
-                            type="button"
+                        <div
                             class="arrow fa fa-chevron-right"
                             :class="{disabled: language.skill > 4}"
                             @click="language.skill++"
-                        ></button>
+                        ></div>
                     </div>
                     <div class="name">{{ skillNames[language.skill - 1] }}</div>
                 </div>
@@ -150,6 +148,7 @@ export default {
         .arrow {
             padding: $grid-gutter-width;
             font-size: $h3-font-size;
+            cursor: pointer;
 
             &.disabled {
                 pointer-events: none;
