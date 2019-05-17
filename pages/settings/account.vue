@@ -1,43 +1,48 @@
 <template>
     <div v-if="user" class="row">
         <div class="col-sm-8">
-            <div class="form-group">
-                <Input v-model="user.username"/>
-                <label>Username</label>
-            </div>
+            <Input v-model="user.username" label="Username" class="group"/>
+
             <h3 class="modpanel__subtitle">Email</h3>
-            <div class="form-group">
-                <Input v-model="emailCurrentPassword" type="password" required/>
-                <label>Current password</label>
-            </div>
-            <div class="form-group">
-                <Input v-model="newEmail"/>
-                <label>New Email</label>
-            </div>
-            <div class="form-group">
-                <button v-async-click="[changeEmail]" class="btn btn-primary">Change Email</button>
-            </div>
+            <Input
+                v-model="emailCurrentPassword"
+                type="password"
+                label="Current Password"
+                class="group"
+                required
+            />
+            <Input v-model="newEmail" label="New Email" class="group"/>
+
+            <button v-async-click="[changeEmail]" class="btn btn-primary">Change Email</button>
 
             <h3 class="modpanel__subtitle">Password</h3>
-            <div class="form-group">
-                <Input v-model="currentPassword" type="password" required/>
-                <label>Current password</label>
-            </div>
-            <div class="form-group">
-                <Input v-model="newPassword" type="password" required/>
-                <label>New password</label>
-            </div>
-            <div class="form-group">
-                <Input v-model="newPasswordConfirmed" type="password" required/>
-                <label>Confirm new password</label>
-            </div>
-            <div class="form-group">
-                <button
-                    v-async-click="[changePassword]"
-                    class="btn btn-primary"
-                    :disabled="!(currentPassword && newPassword && newPassword === newPasswordConfirmed)"
-                >Change Password</button>
-            </div>
+            <Input
+                v-model="currentPassword"
+                type="password"
+                label="Current Password"
+                class="group"
+                required
+            />
+            <Input
+                v-model="newPassword"
+                type="password"
+                label="New Password"
+                class="group"
+                required
+            />
+            <Input
+                v-model="newPasswordConfirmed"
+                type="password"
+                label="Confirm New Password"
+                class="group"
+                required
+            />
+
+            <button
+                v-async-click="[changePassword]"
+                class="btn btn-primary"
+                :disabled="!(currentPassword && newPassword && newPassword === newPasswordConfirmed)"
+            >Change Password</button>
         </div>
         <div class="col-sm-4"></div>
     </div>

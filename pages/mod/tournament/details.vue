@@ -2,24 +2,12 @@
     <Card class="plain dark">
         <form>
             <h3 class="modpanel__subtitle">Main</h3>
-            <div class="form-group">
-                <Input v-model="tournament.name"/>
-                <label>Tournament Name</label>
-            </div>
+            <Input v-model="tournament.name" label="Tournament Name" class="group"/>
 
             <h3 class="modpanel__subtitle">Prizes</h3>
-            <div class="form-group">
-                <Input/>
-                <label>1st Place Prize</label>
-            </div>
-            <div class="form-group">
-                <Input/>
-                <label>2nd Place Prize</label>
-            </div>
-            <div class="form-group">
-                <Input/>
-                <label>3rd Place Prize</label>
-            </div>
+            <Input label="1st Place Prize" class="group"/>
+            <Input label="2nd Place Prize" class="group"/>
+            <Input label="3rd Place Prize" class="group"/>
         </form>
     </Card>
 </template>

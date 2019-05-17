@@ -1,27 +1,14 @@
 <template>
     <form v-async-submit="[addPlayer]">
-        <div class="form-group">
-            <div class="select-container">
-                <select v-model="team" class="form-control" required>
-                    <option value>Select Team</option>
-                    <option
-                        v-for="team in game.teams"
-                        :key="team.id"
-                        :value="team.id"
-                    >{{ team.name }}</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="select-container">
-                <select v-model="language" class="form-control" required>
-                    <option value>Select Language</option>
-                    <option>HTML</option>
-                    <option>CSS</option>
-                    <option>JS</option>
-                </select>
-            </div>
-        </div>
+        <Select v-model="team" label="Select Team" class="group" required>
+            <option v-for="team in game.teams" :key="team.id" :value="team.id">{{ team.name }}</option>
+        </Select>
+        <Select v-model="language" label="Select Language" class="group" required>
+            <option>HTML</option>
+            <option>CSS</option>
+            <option>JS</option>
+        </Select>
+
         <div class="modal__actions">
             <button class="btn btn-outline-gray" @click.prevent="close(false)">Cancel</button>
             <button class="btn btn-primary">Add Player</button>
@@ -31,8 +18,13 @@
 
 
 <script>
+import Select from '~/components/form/Select';
+
 export default {
     name: 'AddPlayerModal',
+
+    components: { Select },
+
     props: {
         game: {
             type: Object,
@@ -47,12 +39,14 @@ export default {
             required: true,
         },
     },
+
     data: () => {
         return {
             team: 0,
             language: '',
         };
     },
+
     methods: {
         async addPlayer() {
             this.language = this.language.toLowerCase();
@@ -70,14 +64,11 @@ export default {
                 players: this.game.players,
             };
 
-            const res = await this.$axios.post(
-                `/games/${this.game.id}/player`,
-                {
-                    player,
-                    team,
-                    language: this.language,
-                }
-            );
+            const res = await this.$axios.post(`/games/${this.game.id}/player`, {
+                player,
+                team,
+                language: this.language,
+            });
 
             this.$store.commit('game/game', res.data);
 

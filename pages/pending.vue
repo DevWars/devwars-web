@@ -6,7 +6,7 @@
             <div class="container">
                 <Card class="plain dark">
                     <h3 class="modpanel__subtitle">Verify your email address</h3>
-                    <p class="form-group">
+                    <p>
                         Confirm your email by clicking the verification link we sent to your inbox.
                         Don't forget to
                         <u>check your spam folder</u>.
@@ -34,7 +34,7 @@ export default {
         auth: [roles.pending],
         redirectIfNot: "/",
     },
-    
+
     components: { Card, PageBanner },
 
     methods: {

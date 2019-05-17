@@ -1,13 +1,12 @@
 <template>
-    <div class="Input" :class="{ label }">
-        <input
+    <div class="Textarea" :class="{ label }">
+        <textarea
             :id="labelName"
             ref="input"
-            :type="type"
             :class="[{ empty: !valid },  { valid }]"
             v-bind="$attrs"
             @input="e => [$emit('input', e.target.value), inputChange(e.target.value)]"
-        >
+        ></textarea>
         <label v-if="label" :for="labelName">{{ label }}</label>
     </div>
 </template>
@@ -18,10 +17,6 @@ export default {
     name: 'Input',
 
     props: {
-        type: {
-            type: String,
-            default: 'text',
-        },
         label: {
             type: String,
             default: '',
@@ -54,11 +49,13 @@ export default {
 <style lang="scss" scoped>
 @import 'utils.scss';
 
-.Input {
+.Textarea {
     width: 100%;
 
-    input {
+    textarea {
         @extend %form-control;
+        min-height: 100px;
+        resize: vertical;
     }
 
     &.label {

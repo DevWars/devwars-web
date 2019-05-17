@@ -1,10 +1,9 @@
 <template>
     <form v-async-submit="[addRegistrant]">
-        <div class="form-group">
-            <div class="search-input">
-                <Input v-model="username" placeholder="Username"/>
-            </div>
+        <div class="search">
+            <Input v-model="username" placeholder="Username"/>
         </div>
+
         <div class="modal__actions">
             <button class="btn btn-outline-gray" @click="close(false)">Cancel</button>
             <button class="btn btn-primary">Add</button>
@@ -41,9 +40,7 @@ export default {
     methods: {
         async addRegistrant() {
             try {
-                await this.$axios.$post(
-                    `/game/${this.game.id}/applications/${this.username}`
-                );
+                await this.$axios.$post(`/game/${this.game.id}/applications/${this.username}`);
             } catch (e) {
                 console.error(e);
             }
@@ -53,3 +50,34 @@ export default {
     },
 };
 </script>
+
+
+<style lang="scss" scoped>
+@import 'utils.scss';
+
+.search {
+    /* position: relative;
+
+    &__list {
+        @extend %material;
+        width: 100%;
+        max-height: 150px;
+        border: 1px solid $divider-color;
+        position: absolute;
+        top: calc(100% - 1px);
+        z-index: $zindex-popover;
+        overflow-y: auto;
+    }
+
+    &__item {
+        padding: $xxs-space $xs-space;
+        background-color: #fff;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $link-color;
+            color: #fff;
+        }
+    } */
+}
+</style>

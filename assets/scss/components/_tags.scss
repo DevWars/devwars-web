@@ -1,0 +1,133 @@
+/* Name: Docs
+
+Contents:
+	01. Doc Layout
+
+
+/*  ========================================================================
+01. tags
+========================================================================= */
+.tag {
+    display: inline-block;
+    padding: 0.3em 0.6em;
+    border-radius: $border-radius-sm;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+
+    & + & {
+        margin-left: $xxs-space;
+    }
+}
+
+.tag-sm {
+    font-size: $font-size-xs;
+
+    & + & {
+        margin-left: $xxxs-space;
+    }
+}
+
+/*  ========================================================================
+01. tags
+========================================================================= */
+
+@mixin tag-variant($bg) {
+    background-color: $bg;
+    color: #fff;
+
+    @if ($bg == '#fff') {
+        color: #111;
+    }
+}
+
+@mixin tag-outline-variant($bg) {
+    border: 1px solid $bg;
+    background-color: transparent;
+    color: $bg;
+}
+
+/*  ========================================================================
+01. Alternate tags
+========================================================================= */
+
+.tag-primary {
+    @include tag-variant($brand-primary);
+}
+.tag-secondary {
+    @include tag-variant($brand-secondary);
+}
+.tag-info {
+    @include tag-variant($info-color);
+}
+.tag-success {
+    @include tag-variant($success-color);
+}
+.tag-warning {
+    @include tag-variant($warning-color);
+}
+.tag-danger {
+    @include tag-variant($danger-color);
+}
+.tag-white {
+    @include tag-variant(#fff);
+}
+.tag-black {
+    @include tag-variant(#000);
+}
+.tag-gray {
+    @include tag-variant(#ccc);
+}
+.tag-html {
+    @include tag-variant($html-color);
+}
+.tag-css {
+    @include tag-variant($css-color);
+}
+.tag-js {
+    @include tag-variant($js-color);
+}
+
+/*  ========================================================================
+01. Outline Variants
+========================================================================= */
+.tag-outline-primary {
+    @include tag-outline-variant($brand-primary);
+}
+.tag-outline-secondary {
+    @include tag-outline-variant($brand-secondary);
+}
+.tag-outline-info {
+    @include tag-outline-variant($info-color);
+}
+.tag-outline-success {
+    @include tag-outline-variant($success-color);
+}
+.tag-outline-warning {
+    @include tag-outline-variant($warning-color);
+}
+.tag-outline-danger {
+    @include tag-outline-variant($danger-color);
+}
+.tag-outline-white {
+    @include tag-outline-variant(#fff);
+}
+.tag-outline-black {
+    @include tag-outline-variant(#000);
+}
+.tag-outline-gray {
+    @include tag-outline-variant(#ccc);
+}
+.tag-outline-html {
+    @include tag-outline-variant($html-color);
+}
+.tag-outline-css {
+    @include tag-outline-variant($css-color);
+}
+.tag-outline-js {
+    @include tag-outline-variant($js-color);
+}

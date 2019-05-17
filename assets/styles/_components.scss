@@ -1,0 +1,88 @@
+$input-label-offset: $input-padding-y * 2;
+
+%form-control {
+    display: block;
+    width: 100%;
+    padding: $input-padding-y $input-padding-x;
+    font-size: $font-size-base;
+    line-height: $input-line-height;
+    color: $base-font-color;
+    background-color: transparent;
+    background-image: none;
+    background-clip: padding-box;
+    border: none;
+    border-bottom: 1px solid $text-color-muted;
+
+    &:focus {
+        border-color: $brand-secondary;
+        outline: none;
+    }
+
+    &::placeholder {
+        color: $text-color-muted;
+    }
+
+    // Change Autocomplete styles in Chrome
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus {
+        -webkit-text-fill-color: #fff;
+        box-shadow: 0 0 0px 1000px transparent inset;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+}
+
+%form-group {
+    margin-bottom: 30px;
+}
+
+%form-label {
+    margin-top: $input-label-offset;
+    position: relative;
+
+    label {
+        line-height: 1;
+        color: $text-color-muted;
+        font-size: $font-size-base;
+        position: absolute;
+        pointer-events: none;
+        left: $input-padding-x;
+        top: $input-padding-y;
+        transition: 0.2s ease all;
+    }
+
+    input,
+    select,
+    textarea {
+        &:required ~ label:after {
+            content: ' *';
+            color: $danger-color;
+            opacity: 0.4;
+        }
+
+        &:focus ~ label,
+        &.valid ~ label,
+        &.empty:focus ~ label {
+            top: -($input-label-offset / 0.9);
+            font-size: $font-size-sm;
+        }
+
+        &.empty ~ label {
+            font-size: $font-size-base;
+            top: $input-padding-y;
+        }
+
+        &:focus ~ label {
+            color: $brand-secondary;
+        }
+
+        &:required:focus ~ label:after {
+            opacity: 1;
+        }
+    }
+}
+
+// Aligns element to baseline of any form element with labels
+%align-baseline-to-input-with-labels {
+    margin-top: $input-label-offset + $input-padding-y / 2;
+}

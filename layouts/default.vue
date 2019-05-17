@@ -93,6 +93,10 @@ table {
     width: 100%;
 }
 
+label {
+    display: block;
+}
+
 .header-offset {
     padding-top: $header-offset;
     padding-bottom: $xl-space;

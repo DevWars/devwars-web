@@ -1,18 +1,13 @@
 <template>
     <form v-async-submit="[submit]">
-        <div class="form-group">
-            <select v-model="name" class="form-control">
-                <option value>Select Game Type</option>
-                <option>Classic</option>
-                <option>Zen Garden</option>
-                <option>Blitz</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <!-- <DatePicker v-model="date"/> -->
+        <Select v-model="name" label="Select Game Type" class="group">
+            <option>Classic</option>
+            <option>Zen Garden</option>
+            <option>Blitz</option>
+        </Select>
 
-            <label>When is the game?</label>
-        </div>
+        <!-- <DatePicker v-model="date" label="When is the game?" class="group"/> -->
+
         <div class="align-right">
             <button type="button" class="btn btn-outline-gray" @click="close(false)">Cancel</button>
             <button class="btn btn-primary">Save</button>
@@ -23,25 +18,30 @@
 
 <script>
 import moment from 'moment';
+import Select from '~/components/form/Select';
 
 export default {
     name: 'CreateGameModal',
+
+    components: { Select },
+
     props: {
         resolve: {
             type: Function,
             required: true,
         },
     },
+
     data: () => {
         return {
             name: '',
             date: '',
         };
     },
+
     methods: {
         async submit() {
-            const timestamp =
-                moment.utc(this.date, 'MM/DD/YYYY HH:mm').unix() * 1000;
+            const timestamp = moment.utc(this.date, 'MM/DD/YYYY HH:mm').unix() * 1000;
 
             await this.$store.dispatch('game/create', {
                 name: this.name,

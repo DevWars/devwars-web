@@ -3,14 +3,24 @@
         <div class="container">
             <form v-show="!done">
                 <DevwarsCard title="Reset Password">
-                    <div class="form-group">
-                        <Input v-model="password" type="password" tabindex="1" required/>
-                        <label>New Password</label>
-                    </div>
-                    <div class="form-group">
-                        <Input v-model="confirmed" type="password" tabindex="2" required/>
-                        <label>Confirm Password</label>
-                    </div>
+                    <Input
+                        v-model="password"
+                        type="password"
+                        label="New Password"
+                        class="group"
+                        tabindex="1"
+                        required
+                    />
+
+                    <Input
+                        v-model="confirmed"
+                        type="password"
+                        label="Confirm Password"
+                        class="group"
+                        tabindex="2"
+                        required
+                    />
+
                     <div slot="actions">
                         <button
                             v-async-click="[reset]"

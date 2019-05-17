@@ -6,21 +6,30 @@
             <div class="container">
                 <Card class="plain dark" title="About You">
                     <div class="row">
-                        <div class="col-sm-6 form-group">
-                            <Input v-model="competitor.name.firstName" required/>
-                            <label>First name</label>
+                        <div class="col-sm-6">
+                            <Input
+                                v-model="competitor.name.firstName"
+                                label="First Name"
+                                class="group"
+                                required
+                            />
                         </div>
-                        <div class="col-sm-6 form-group">
-                            <Input v-model="competitor.name.lastName" required/>
-                            <label>Last name</label>
+                        <div class="col-sm-6">
+                            <Input
+                                v-model="competitor.name.lastName"
+                                label="Last Name"
+                                class="group"
+                                required
+                            />
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-3 form-group">
+                        <div class="col-sm-3">
                             <Select
                                 v-model="competitor.address.country"
                                 label="Select Country"
+                                class="group"
                                 required
                             >
                                 <option v-for="country in countries" :key="country">{{ country }}</option>
@@ -30,29 +39,41 @@
 
                     <div class="row">
                         <div class="col-sm-6">
-                            <div class="row">
-                                <div class="col-sm-4 form-group">
+                            <div class="dob row">
+                                <div class="col-sm-4">
                                     <label>Date of birth</label>
                                 </div>
-                                <div class="col-sm-2 form-group">
-                                    <Input v-model="day" placeholder="DD" maxlength="2" required/>
+                                <div class="col-sm-2">
+                                    <Input
+                                        v-model="day"
+                                        label="DD"
+                                        class="group"
+                                        maxlength="2"
+                                        required
+                                    />
                                 </div>
-                                <div class="col-sm-2 form-group">
-                                    <Input v-model="month" placeholder="MM" maxlength="2" required/>
+                                <div class="col-sm-2">
+                                    <Input
+                                        v-model="month"
+                                        label="MM"
+                                        class="group"
+                                        maxlength="2"
+                                        required
+                                    />
                                 </div>
-                                <div class="col-sm-4 form-group">
+                                <div class="col-sm-4">
                                     <Input
                                         v-model="year"
-                                        placeholder="YYYY"
+                                        label="YYYY"
+                                        class="group"
                                         maxlength="4"
                                         required
                                     />
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group col-sm-6">
-                            <Input v-model="competitor.company"/>
-                            <label>Company</label>
+                        <div class="col-sm-6">
+                            <Input v-model="competitor.company" label="Company" class="group"/>
                         </div>
                     </div>
                 </Card>
@@ -62,19 +83,15 @@
                 </Card>
 
                 <Card class="plain dark" title="Requirements">
-                    <div class="form-group">
-                        <ConnectToDiscord/>
-                    </div>
+                    <ConnectToDiscord/>
 
-                    <div class="form-group">
-                        <p>
-                            A microphone is required to play in DevWars to communicate with your team during a
-                            game.
-                        </p>
-                        <div class="form-check">
-                            <input id="has-microphone" type="checkbox" class="checkbox" required>
-                            <label for="has-microphone">I have a microphone</label>
-                        </div>
+                    <p>
+                        A microphone is required to play in DevWars to communicate with your team during a
+                        game.
+                    </p>
+                    <div class="form-check">
+                        <input id="has-microphone" type="checkbox" class="checkbox" required>
+                        <label for="has-microphone">I have a microphone</label>
                     </div>
                 </Card>
 
@@ -202,6 +219,10 @@ export default {
                 margin-top: 0;
             }
         }
+    }
+
+    .dob label {
+        @extend %align-baseline-to-input-with-labels;
     }
 
     .actions {

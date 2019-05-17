@@ -1,12 +1,12 @@
 <template>
     <div class="Leaderboards">
         <PageBanner title="Leaderboards">
-            <!-- <select class="select--clear">
+            <Select class="clear">
                 <option>Today</option>
                 <option selected="selected">Weekly</option>
                 <option>Monthly</option>
                 <option>All Time</option>
-            </select>-->
+            </Select>
         </PageBanner>
 
         <div class="footer-offset container">
@@ -46,13 +46,14 @@
 import Http from '../services/Http';
 import PageBanner from '~/components/layout/PageBanner';
 import Table from '~/components/Table';
+import Select from '~/components/form/Select';
 import Pagination from '~/components/Pagination';
 import User from '~/components/user/User';
 
 export default {
     name: 'Leaderboards',
 
-    components: { PageBanner, Table, Pagination, User },
+    components: { PageBanner, Table, Select, Pagination, User },
 
     data: () => {
         return {

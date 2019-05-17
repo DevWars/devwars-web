@@ -7,22 +7,11 @@
                 <div class="col-md-8">
                     <Card v-show="!submitted" class="dark plain">
                         <form v-async-submit="[sendEmail]">
-                            <div class="form-group">
-                                <Input v-model="name" required/>
-                                <label>Name</label>
-                            </div>
-                            <div class="form-group">
-                                <Input v-model="email" required/>
-                                <label>Email</label>
-                            </div>
-                            <div class="form-group">
-                                <textarea
-                                    v-model="message"
-                                    class="form-control"
-                                    rows="8"
-                                    placeholder="Message"
-                                ></textarea>
-                            </div>
+                            <Input v-model="name" label="Name" class="group" required/>
+
+                            <Input v-model="email" label="Email" class="group" required/>
+
+                            <Textarea v-model="message" label="Message" class="group" required/>
 
                             <div class="align-right">
                                 <button type="submit" class="btn btn-primary">Send Email</button>
@@ -53,6 +42,7 @@ import { mapActions } from 'vuex';
 import PageBanner from '~/components/layout/PageBanner';
 import Card from '~/components/Card';
 import Input from '~/components/form/Input';
+import Textarea from '~/components/form/Textarea';
 
 export default {
     name: 'Contact',
@@ -60,6 +50,7 @@ export default {
         PageBanner,
         Card,
         Input,
+        Textarea,
     },
     data: () => {
         return {

@@ -3,14 +3,16 @@
         <div class="container">
             <form v-async-submit="[login]">
                 <DevwarsCard title="Login">
-                    <div class="form-group">
-                        <Input v-model="username" required/>
-                        <label>Email or Username</label>
-                    </div>
-                    <div class="form-group">
-                        <Input v-model="password" name="password" type="password" required/>
-                        <label>Password</label>
-                    </div>
+                    <Input v-model="username" label="Email or Username" class="group" required/>
+
+                    <Input
+                        v-model="password"
+                        label="Password"
+                        class="group"
+                        type="password"
+                        required
+                    />
+
                     <div slot="actions">
                         <button type="submit" href="#" class="btn btn-outline-white btn-block">LOGIN</button>
                         <a href="/register" class="btn btn-outline-gray btn-block">REGISTER</a>

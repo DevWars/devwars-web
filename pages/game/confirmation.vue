@@ -4,29 +4,25 @@
 
         <div class="footer-offset">
             <div class="container">
-                <div class="card">
-                    <div class="card__inner">
-                        <div class="form-group">
-                            <h2>What's next?</h2>
-                            <p>You will receive an email confirmation if you have been
-                                 selected to play. Only 6 players will be selected, one for each position.</p>
-                        </div>
+                <Card>
+                    <h2>What's next?</h2>
+                    <p>
+                        You will receive an email confirmation if you have been
+                        selected to play. Only 6 players will be selected, one for each position.
+                    </p>
 
-                        <div class="form-group">
-                            <h2>How to prepare</h2>
-                            <p
-                                class="form-group"
-                            >There are a lot of things you should probably catch up on before 
-                            game day. Below is our DevWars Documentation covering everything you need to know.</p>
-                            <a href="/docs" class="btn btn-primary">View Documentation</a>
-                        </div>
+                    <h2>How to prepare</h2>
+                    <p>
+                        There are a lot of things you should probably catch up on before
+                        game day. Below is our DevWars Documentation covering everything you need to know.
+                    </p>
 
-                        <p>
-                            Have any questions?
-                            <a href="/contact">Contact Us</a>
-                        </p>
-                    </div>
-                </div>
+                    <a href="/docs" class="btn btn-primary">View Documentation</a>
+                    <p>
+                        Have any questions?
+                        <a href="/contact">Contact Us</a>
+                    </p>
+                </Card>
             </div>
         </div>
     </div>
@@ -34,10 +30,11 @@
 
 
 <script>
+import Card from '~/components/Card';
 import PageBanner from '~/components/layout/PageBanner';
 
 export default {
     name: 'GameConfirmation',
-    components: { PageBanner },
+    components: { Card, PageBanner },
 };
 </script>

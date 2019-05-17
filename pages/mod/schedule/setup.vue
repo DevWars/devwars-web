@@ -2,38 +2,27 @@
     <Card class="plain dark">
         <form>
             <h3 class="modpanel__subtitle">Schedule</h3>
-            <div class="form-group">
-                <Input v-model="date"/>
-                <label>Date</label>
-            </div>
-            <div class="form-group">
-                <Input v-model="time"/>
-                <label>Time</label>
-            </div>
+            <Input v-model="date" label="Date" class="group"/>
+
+            <Input v-model="time" label="Time" class="group"/>
 
             <h3 class="modpanel__subtitle">Game</h3>
-            <div class="form-group">
-                <Select v-model="schedule.mode" :selected="schedule.mode">
-                    <option value></option>
-                    <option value="Classic">Classic</option>
-                    <option value="Zen Garden">Zen Garden</option>
-                    <option value="Blitz">Blitz</option>
-                </Select>
-                <label>Gamemode</label>
-            </div>
-            <div class="form-group">
-                <Input v-model="schedule.title"/>
-                <label>Theme</label>
-            </div>
+
+            <Select v-model="schedule.mode" label="Game mode" class="group">
+                <option value="Classic">Classic</option>
+                <option value="Zen Garden">Zen Garden</option>
+                <option value="Blitz">Blitz</option>
+            </Select>
+
+            <Input v-model="schedule.title" label="Theme" class="group"/>
 
             <h3 class="modpanel__subtitle">Objectives</h3>
-            <div
-                v-for="objective in schedule.objectives"
-                :key="objective.id"
-                class="objective form-group"
-            >
-                <Input v-model="objective.description" maxlength="110"/>
-                <label>Objective #{{ objective.id }} {{ objective.isBonus ? '(Bonus)' : '' }}</label>
+            <div v-for="objective in schedule.objectives" :key="objective.id" class="objective">
+                <Input
+                    v-model="objective.description"
+                    :label="`Objective ${objective.id}`"
+                    maxlength="110"
+                />
                 <SquareToggle
                     :active="objective.isBonus"
                     name="bonus"
@@ -58,36 +47,45 @@ import { roles } from '../../../utils/auth';
 
 export default {
     name: 'DashboardScheduleSetup',
+
     meta: {
         auth: [roles.moderator, roles.admin],
     },
+
     components: { Card, Input, Select, SquareToggle },
+
     data: () => ({
         date: '',
         time: '',
     }),
+
     computed: {
         schedule() {
             const schedules = this.$store.state.game.schedules;
             return schedules.find((schedule) => schedule.id === Number(this.$route.query.schedule));
         },
+
         startTime() {
             const timestamp = `${this.date} ${this.time}`;
             return moment.utc(timestamp);
         },
     },
+
     watch: {
         startTime() {
             this.schedule.startTime = this.startTime;
         },
     },
+
     async fetch({ store }) {
         await store.dispatch('game/schedules');
     },
-    mounted() {
+
+    beforeMount() {
         this.date = moment(this.schedule.startTime).format('MM/DD/YYYY');
         this.time = moment(this.schedule.startTime).format('HH:mm');
     },
+
     methods: {
         objectiveUpdate(value, objectiveId) {
             this.$store.commit('game/updateScheduleObjective', {
@@ -96,6 +94,7 @@ export default {
                 scheduleId: this.schedule.id,
             });
         },
+
         objectiveAdd() {
             let id = 1;
             Object.keys(this.schedule.objectives).map((obj) => {
@@ -110,6 +109,7 @@ export default {
                 },
             });
         },
+
         objectiveDelete(objectiveId) {
             this.$store.commit('game/deleteScheduleObjective', {
                 scheduleId: this.schedule.id,
@@ -130,6 +130,15 @@ form {
 
 .objective {
     display: flex;
+    margin-bottom: 15px;
+
+    & > :not(.Input) {
+        @extend %align-baseline-to-input-with-labels;
+    }
+
+    .Input {
+        margin-right: 15px;
+    }
 
     .btn {
         color: $text-color-muted;

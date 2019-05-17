@@ -16,11 +16,11 @@
             </div>
 
             <div slot="sub-actions">
-                <select class="select--clear">
-                    <option selected="selected">Sort by</option>
+                <Select class="clear">
+                    <option>Sort by</option>
                     <option>Latest</option>
                     <option>Price</option>
-                </select>
+                </Select>
             </div>
         </PageBanner>
 
@@ -156,11 +156,13 @@
 
 <script>
 import PageBanner from '~/components/layout/PageBanner';
+import Select from '~/components/form/Select';
 import Devcoin from '~/components/Devcoin';
 
 export default {
     name: 'Shop',
-    components: { PageBanner, Devcoin },
+
+    components: { PageBanner, Select, Devcoin },
 };
 </script>
 

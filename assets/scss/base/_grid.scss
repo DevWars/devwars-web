@@ -14,10 +14,6 @@
 
 .row {
     @include make-row();
-
-    [class*='col-'].form-group > label {
-        margin-left: $grid-gutter-part;
-    }
 }
 
 .row-normaled {

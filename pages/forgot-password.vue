@@ -6,10 +6,14 @@
                     title="Forgot Password"
                     desc="Enter the email address below and we will send you some instructions."
                 >
-                    <div class="form-group">
-                        <Input v-model="email" name="email" tabindex="1" required/>
-                        <label>Email or Username</label>
-                    </div>
+                    <Input
+                        v-model="email"
+                        label="Email or Username"
+                        class="group"
+                        tabindex="1"
+                        required
+                    />
+
                     <div slot="actions">
                         <button
                             type="submit"

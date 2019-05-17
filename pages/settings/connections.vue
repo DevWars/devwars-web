@@ -1,8 +1,6 @@
 <template>
     <form>
-        <div class="form-group">
-            <ConnectToDiscord/>
-        </div>
+        <ConnectToDiscord/>
     </form>
 </template>
 
