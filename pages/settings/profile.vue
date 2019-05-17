@@ -86,7 +86,7 @@
                     label="About you"
                     class="group"
                     placeholder="Tell us a little bit about yourself"
-                    @input="updateForm({values: $event.target.value, key:'about'})"
+                    @input="updateForm({values: $event, key:'about'})"
                 />
 
                 <Input
@@ -104,16 +104,13 @@
                     @input="updateForm({values: $event, key: 'company'})"
                 />
 
-                <div class="form-check">
-                    <input
-                        id="for-hire"
-                        type="checkbox"
-                        class="checkbox"
-                        :checked="forHire"
-                        @input="updateForm({values: $event.target.checked, key: 'forHire'})"
-                    >
-                    <label for="for-hire">Available for hire</label>
-                </div>
+                <Checkbox
+                    name="for-hire"
+                    label="Available for hire"
+                    class="group"
+                    :checked="forHire"
+                    @input="updateForm({values: $event, key: 'forHire'})"
+                />
 
                 <LanguageSkills :profile="profile" @change="updateForm"/>
             </div>
@@ -147,17 +144,21 @@ import CropperModal from '~/components/modal/CropperModal';
 import Input from '~/components/form/Input';
 import Textarea from '~/components/form/Textarea';
 import Select from '~/components/form/Select';
+import Checkbox from '~/components/form/Checkbox';
 import LanguageSkills from '~/components/game/LanguageSkills.vue';
 import { mapState } from 'vuex';
 
 export default {
     name: 'Profile',
-    components: { Avatar, FileChooser, Input, Textarea, Select, LanguageSkills },
+
+    components: { Avatar, FileChooser, Input, Textarea, Select, Checkbox, LanguageSkills },
+
     data: () => {
         return {
             countries: Object.keys(countryList().getNameList()).map((it) => it[0].toUpperCase() + it.slice(1)),
         };
     },
+
     computed: {
         ...mapState({
             addressTwo: (state) => state.user.profile.addressTwo,
@@ -174,22 +175,27 @@ export default {
             company: (state) => state.user.profile.company,
             forHire: (state) => state.user.profile.forHire,
         }),
+
         user() {
             return this.$store.state.user.user;
         },
+
         profile() {
             return this.$store.state.user.profile;
         },
     },
+
     methods: {
         updateForm({ values, key }) {
             this.$store.commit('user/profileUpdate', { key, values });
         },
+
         async crop(result) {
             const [cropped] = await this.$open(CropperModal, { data: result });
 
             this.$store.dispatch('users/avatar', cropped);
         },
+
         async save() {
             await this.$store.dispatch('user/settings');
         },

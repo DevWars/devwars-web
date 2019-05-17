@@ -24,7 +24,7 @@ export default {
     },
 
     data: () => ({
-        activeTab: null,
+        activeTab: 0,
     }),
 
     computed: {

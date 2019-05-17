@@ -83,16 +83,17 @@
                 </Card>
 
                 <Card class="plain dark" title="Requirements">
-                    <ConnectToDiscord/>
-
-                    <p>
-                        A microphone is required to play in DevWars to communicate with your team during a
-                        game.
-                    </p>
-                    <div class="form-check">
-                        <input id="has-microphone" type="checkbox" class="checkbox" required>
-                        <label for="has-microphone">I have a microphone</label>
+                    <div>
+                        <ConnectToDiscord/>
                     </div>
+
+                    <p>A microphone is required to play in DevWars to communicate with your team during a game.</p>
+                    <Checkbox
+                        label="I have a microphone"
+                        name="has-microphone"
+                        class="group"
+                        required
+                    />
                 </Card>
 
                 <div class="actions">
@@ -113,6 +114,7 @@ import PageBanner from '~/components/layout/PageBanner';
 import Card from '~/components/Card';
 import Input from '~/components/form/Input';
 import Select from '~/components/form/Select';
+import Checkbox from '~/components/form/Checkbox';
 import ConnectToDiscord from '~/components/user/ConnectToDiscord';
 import LanguageSkills from '~/components/game/LanguageSkills';
 import userHasProvider from '../../utils/linkedAccounts';
@@ -120,7 +122,7 @@ import userHasProvider from '../../utils/linkedAccounts';
 export default {
     name: 'CompetitorRegistration',
 
-    components: { PageBanner, Card, Input, ConnectToDiscord, LanguageSkills, Select },
+    components: { PageBanner, Card, Input, ConnectToDiscord, LanguageSkills, Select, Checkbox },
 
     middleware: ['auth', 'no-competitors'],
 

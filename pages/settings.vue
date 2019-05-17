@@ -28,6 +28,7 @@ import PageBanner from '~/components/layout/PageBanner';
 
 export default {
     name: 'Settings',
+
     components: { Tabs, Card, PageBanner },
 };
 </script>

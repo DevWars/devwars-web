@@ -16,13 +16,13 @@
                 :class="{active: viewing && viewing.id === game.id}"
                 @click="view(game)"
             >
-                <div class="game__meta">
-                    <span class="game__mode" :class="[game.mode.toLowerCase()]">{{ game.mode }}</span>
-                    <span class="game__date">{{ game.createdAt | moment('MM/DD/YYYY') }}</span>
-                    <span class="game__theme">{{ game.title }}</span>
+                <div class="meta">
+                    <span class="mode" :class="[game.mode.toLowerCase()]">{{ game.mode }}</span>
+                    <span class="date">{{ game.createdAt | moment('MM/DD/YYYY') }}</span>
+                    <span class="theme">{{ game.title }}</span>
                 </div>
-                <div class="game__icons">
-                    <i v-show="game.videoUrl" class="game__youtube fab fa-youtube"></i>
+                <div class="icons">
+                    <i v-show="game.videoUrl" class="youtube fab fa-youtube"></i>
                 </div>
             </div>
         </div>
@@ -128,18 +128,18 @@ export default {
         background-color: $bg-color-1;
     }
 
-    &__date,
-    &__mode {
+    .date,
+    .mode {
         display: inline-block;
         vertical-align: bottom;
     }
 
-    &__date {
+    .date {
         font-size: $font-size-sm;
         color: lightgray;
     }
 
-    &__mode {
+    .mode {
         padding: $xxxs-space $xxs-space;
         border: 1px solid $brand-primary;
         margin-right: $xxs-space;
@@ -147,20 +147,20 @@ export default {
         font-size: $font-size-xs;
     }
 
-    &__theme {
+    .theme {
         display: block;
         margin-top: $xxs-space;
         font-size: 20px;
     }
 
-    &__youtube {
+    .youtube {
         color: $youtube-color;
         font-size: 24px;
     }
 
     // Variationss
     @mixin game-item-variant($mode, $color) {
-        &__mode.#{$mode} {
+        .mode.#{$mode} {
             border-color: $color;
             color: $color;
         }
