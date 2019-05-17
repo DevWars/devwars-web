@@ -17,7 +17,7 @@
                 @click="view(game)"
             >
                 <div class="meta">
-                    <span class="mode" :class="[game.mode.toLowerCase()]">{{ game.mode }}</span>
+                    <Tag :class="[game.mode.toLowerCase()]" class="sm">{{ game.mode }}</Tag>
                     <span class="date">{{ game.createdAt | moment('MM/DD/YYYY') }}</span>
                     <span class="theme">{{ game.title }}</span>
                 </div>
@@ -37,12 +37,13 @@
 <script>
 import Http from '../services/Http';
 import Tabs from '../components/Tabs';
+import Tag from '../components/Tag';
 import LargeGameDetail from '../components/game/LargeGameDetail';
 
 export default {
     name: 'Games',
 
-    components: { Tabs, LargeGameDetail },
+    components: { Tabs, Tag, LargeGameDetail },
 
     data() {
         return {
@@ -139,14 +140,6 @@ export default {
         color: lightgray;
     }
 
-    .mode {
-        padding: $xxxs-space $xxs-space;
-        border: 1px solid $brand-primary;
-        margin-right: $xxs-space;
-        color: $brand-primary;
-        font-size: $font-size-xs;
-    }
-
     .theme {
         display: block;
         margin-top: $xxs-space;
@@ -158,16 +151,21 @@ export default {
         font-size: 24px;
     }
 
-    // Variationss
-    @mixin game-item-variant($mode, $color) {
-        .mode.#{$mode} {
-            border-color: $color;
-            color: $color;
+    .Tag {
+        margin-right: 5px;
+
+        &.zen {
+            color: $green-color;
+            border-color: $green-color;
+        }
+        &.classic {
+            color: $brand-primary;
+            border-color: $brand-primary;
+        }
+        &.blitz {
+            color: $yellow-color;
+            border-color: $yellow-color;
         }
     }
-
-    @include game-item-variant(classic, $brand-primary);
-    @include game-item-variant(zen, $green-color);
-    @include game-item-variant(blitz, $yellow-color);
 }
 </style>
