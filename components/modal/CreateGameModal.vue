@@ -18,7 +18,7 @@
 
 <script>
 import moment from 'moment';
-import Select from '~/components/form/Select';
+import Select from '@/components/form/Select';
 
 export default {
     name: 'CreateGameModal',

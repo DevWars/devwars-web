@@ -42,8 +42,8 @@
 
 <script>
 import { sortBy } from 'lodash';
-import Table from '~/components/Table';
-import Applications from '~/components/game/Applications';
+import Table from '@/components/Table';
+import Applications from '@/components/game/Applications';
 import GameDurations from '../../utils/gameDurations';
 
 export default {

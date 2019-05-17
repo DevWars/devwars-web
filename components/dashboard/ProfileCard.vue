@@ -12,9 +12,9 @@
 
 
 <script>
-import DashboardCard from '~/components/DashboardCard';
-import Avatar from '~/components/user/Avatar';
-import Progress from '~/components/form/Progress';
+import DashboardCard from '@/components/DashboardCard';
+import Avatar from '@/components/user/Avatar';
+import Progress from '@/components/form/Progress';
 
 export default {
     name: 'ProfileCard',

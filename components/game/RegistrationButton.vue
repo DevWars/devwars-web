@@ -17,7 +17,7 @@
 
 
 <script>
-import Applications from '~/components/game/Applications';
+import Applications from '@/components/game/Applications';
 
 export default {
     name: 'RegistrationButton',

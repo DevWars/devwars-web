@@ -18,8 +18,8 @@
 
 
 <script>
-import Popup from '~/components/Popup';
-import User from '~/components/user/User';
+import Popup from '@/components/Popup';
+import User from '@/components/user/User';
 
 export default {
     name: 'UserMenu',

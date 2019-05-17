@@ -10,7 +10,7 @@
 
 
 <script>
-import User from '~/components/user/User';
+import User from '@/components/user/User';
 
 export default {
     name: 'Player',

@@ -823,8 +823,8 @@
 
 
 <script>
-import Devcoins from '~/components/Devcoins';
-import Tag from '~/components/Tag';
+import Devcoins from '@/components/Devcoins';
+import Tag from '@/components/Tag';
 
 export default {
     name: 'Docs',

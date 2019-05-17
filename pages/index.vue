@@ -34,7 +34,7 @@
 
         <div
             class="home-display"
-            :style="{backgroundImage: 'url(' + require('~/assets/img/become-contestant-bg.jpg') + ')'}"
+            :style="{backgroundImage: 'url(' + require('@/assets/img/become-contestant-bg.jpg') + ')'}"
         >
             <Container>
                 <div class="home-display__content">
@@ -50,7 +50,7 @@
 
         <div
             class="home-display reverse"
-            :style="{backgroundImage: 'url(' + require('~/assets/img/devwars-docs-bg.jpg') + ')'}"
+            :style="{backgroundImage: 'url(' + require('@/assets/img/devwars-docs-bg.jpg') + ')'}"
         >
             <Container>
                 <div class="home-display__content">
@@ -174,9 +174,9 @@
 
 <script>
 import Http from '../services/Http';
-import Card from '~/components/Card';
-import Highlights from '~/components/game/Highlights';
-import ScheduleBlock from '~/components/game/ScheduleBlock';
+import Card from '@/components/Card';
+import Highlights from '@/components/game/Highlights';
+import ScheduleBlock from '@/components/game/ScheduleBlock';
 
 export default {
     name: 'Index',

@@ -103,12 +103,12 @@
 import * as countryList from 'country-list';
 import { mapActions } from 'vuex';
 
-import PageBanner from '~/components/layout/PageBanner';
-import Card from '~/components/Card';
-import Input from '~/components/form/Input';
-import Select from '~/components/form/Select';
-import LanguageSkills from '~/components/game/LanguageSkills';
-import ConnectToDiscord from '~/components/user/ConnectToDiscord';
+import PageBanner from '@/components/layout/PageBanner';
+import Card from '@/components/Card';
+import Input from '@/components/form/Input';
+import Select from '@/components/form/Select';
+import LanguageSkills from '@/components/game/LanguageSkills';
+import ConnectToDiscord from '@/components/user/ConnectToDiscord';
 // import userHasProvider from '../../utils/linkedAccounts';
 import { names } from '../../utils/auth';
 

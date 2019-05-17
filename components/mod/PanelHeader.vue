@@ -16,7 +16,7 @@
 
 
 <script>
-import Input from '~/components/form/Input';
+import Input from '@/components/form/Input';
 
 export default {
     name: 'PanelHeader',

@@ -44,7 +44,7 @@
 
 
 <script>
-import { getScoreByGameTeam, getPlayersByGameTeam } from '~/utils';
+import { getScoreByGameTeam, getPlayersByGameTeam } from '@/utils';
 import HomeCard from '@/components/HomeCard';
 
 export default {

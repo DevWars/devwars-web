@@ -73,12 +73,12 @@
 
 
 <script>
-import VoteBox from '~/components/game/VoteBox';
-import SubScore from '~/components/game/SubScore';
-import GameTeam from '~/components/game/GameTeam';
-import Player from '~/components/game/Player';
-import { teams, usersFromGame } from '~/utils/mixins';
-import { getLanguageByGamePlayer, teamCompletedObjective } from '~/utils';
+import VoteBox from '@/components/game/VoteBox';
+import SubScore from '@/components/game/SubScore';
+import GameTeam from '@/components/game/GameTeam';
+import Player from '@/components/game/Player';
+import { teams, usersFromGame } from '@/utils/mixins';
+import { getLanguageByGamePlayer, teamCompletedObjective } from '@/utils';
 
 export default {
     name: 'LargeGameDetail',

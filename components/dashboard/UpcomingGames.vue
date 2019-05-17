@@ -39,8 +39,8 @@
 
 
 <script>
-import Applications from '~/components/game/Applications';
-import DashboardCard from '~/components/DashboardCard';
+import Applications from '@/components/game/Applications';
+import DashboardCard from '@/components/DashboardCard';
 
 export default {
     name: 'UpcomingGames',

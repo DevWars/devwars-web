@@ -30,8 +30,8 @@
 
 
 <script>
-import DevwarsCard from '~/components/DevwarsCard';
-import Input from '~/components/form/Input';
+import DevwarsCard from '@/components/DevwarsCard';
+import Input from '@/components/form/Input';
 
 export default {
     name: 'Login',

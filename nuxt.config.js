@@ -78,13 +78,13 @@ module.exports = {
 
     plugins: [
         { src: '~plugins/ga.js', ssr: false },
-        { src: '~/plugins/send-back', ssr: false },
-        '~/plugins/global',
-        '~/plugins/directives',
-        '~/plugins/axios',
-        '~/plugins/filters',
-        '~/plugins/mixins',
-        '~/plugins/modal',
+        { src: '@/plugins/send-back', ssr: false },
+        '@/plugins/global',
+        '@/plugins/directives',
+        '@/plugins/axios',
+        '@/plugins/filters',
+        '@/plugins/mixins',
+        '@/plugins/modal',
     ],
 
     modules: [['@nuxtjs/axios']],

@@ -38,14 +38,14 @@
 
 
 <script>
-import CreateGameModal from '~/components/modal/CreateGameModal';
-import PanelHeader from '~/components/mod/PanelHeader';
-import ListingFilters from '~/components/mod/ListingFilters';
-import Table from '~/components/Table';
-import Pagination from '~/components/Pagination';
+import CreateGameModal from '@/components/modal/CreateGameModal';
+import PanelHeader from '@/components/mod/PanelHeader';
+import ListingFilters from '@/components/mod/ListingFilters';
+import Table from '@/components/Table';
+import Pagination from '@/components/Pagination';
 import { names } from '../../utils/auth';
 
-import nameFromStatus from '~/utils/gameStatus';
+import nameFromStatus from '@/utils/gameStatus';
 
 export default {
     name: 'ModGames',

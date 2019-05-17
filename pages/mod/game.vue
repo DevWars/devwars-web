@@ -33,13 +33,13 @@
 
 <script>
 import Http from '../../services/Http';
-import Tabs from '~/components/Tabs';
-import PanelHeader from '~/components/mod/PanelHeader';
-import DeleteModal from '~/components/modal/DeleteModal';
-import EndGameModal from '~/components/modal/EndGameModal';
+import Tabs from '@/components/Tabs';
+import PanelHeader from '@/components/mod/PanelHeader';
+import DeleteModal from '@/components/modal/DeleteModal';
+import EndGameModal from '@/components/modal/EndGameModal';
 import { names } from '../../utils/auth';
 
-import nameFromStatus from '~/utils/gameStatus';
+import nameFromStatus from '@/utils/gameStatus';
 
 export default {
     name: 'DashboardGame',

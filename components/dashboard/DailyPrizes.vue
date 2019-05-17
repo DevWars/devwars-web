@@ -24,8 +24,8 @@
 
 
 <script>
-import DashboardCard from '~/components/DashboardCard';
-import Devcoins from '~/components/Devcoins';
+import DashboardCard from '@/components/DashboardCard';
+import Devcoins from '@/components/Devcoins';
 
 export default {
     name: 'DailyPrizes',

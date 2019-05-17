@@ -6,7 +6,7 @@
 
 
 <script>
-import Toast from '~/components/toast/Toast';
+import Toast from '@/components/toast/Toast';
 
 export default {
     name: 'Toasts',

@@ -15,8 +15,8 @@
 
 <script>
 import moment from 'moment';
-import Card from '~/components/Card';
-import Input from '~/components/form/Input';
+import Card from '@/components/Card';
+import Input from '@/components/form/Input';
 import { names } from '../../../utils/auth';
 
 export default {

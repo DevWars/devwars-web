@@ -138,14 +138,14 @@
 
 <script>
 import * as countryList from 'country-list';
-import Avatar from '~/components/user/Avatar';
-import FileChooser from '~/components/FileChooser';
-import CropperModal from '~/components/modal/CropperModal';
-import Input from '~/components/form/Input';
-import Textarea from '~/components/form/Textarea';
-import Select from '~/components/form/Select';
-import Checkbox from '~/components/form/Checkbox';
-import LanguageSkills from '~/components/game/LanguageSkills.vue';
+import Avatar from '@/components/user/Avatar';
+import FileChooser from '@/components/FileChooser';
+import CropperModal from '@/components/modal/CropperModal';
+import Input from '@/components/form/Input';
+import Textarea from '@/components/form/Textarea';
+import Select from '@/components/form/Select';
+import Checkbox from '@/components/form/Checkbox';
+import LanguageSkills from '@/components/game/LanguageSkills.vue';
 import { mapState } from 'vuex';
 
 export default {

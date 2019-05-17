@@ -19,9 +19,9 @@
 
 
 <script>
-import PageBanner from '~/components/layout/PageBanner';
-import Select from '~/components/form/Select';
-import ScheduleBlock from '~/components/game/ScheduleBlock';
+import PageBanner from '@/components/layout/PageBanner';
+import Select from '@/components/form/Select';
+import ScheduleBlock from '@/components/game/ScheduleBlock';
 
 export default {
     name: 'Schedule',

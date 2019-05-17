@@ -37,10 +37,10 @@
 
 <script>
 import { mapActions } from 'vuex';
-import PageBanner from '~/components/layout/PageBanner';
-import Card from '~/components/Card';
-import Input from '~/components/form/Input';
-import Textarea from '~/components/form/Textarea';
+import PageBanner from '@/components/layout/PageBanner';
+import Card from '@/components/Card';
+import Input from '@/components/form/Input';
+import Textarea from '@/components/form/Textarea';
 
 export default {
     name: 'Contact',

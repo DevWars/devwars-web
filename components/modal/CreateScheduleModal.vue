@@ -22,8 +22,8 @@
 
 <script>
 import moment from 'moment';
-import Select from '~/components/form/Select';
-import Input from '~/components/form/Input';
+import Select from '@/components/form/Select';
+import Input from '@/components/form/Input';
 
 export default {
     name: 'CreateGameModal',
