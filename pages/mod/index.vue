@@ -3,11 +3,11 @@
 </template>
 
 <script>
-import { roles } from '../../utils/auth';
+import { names } from '../../utils/auth';
 
 export default {
     meta: {
-        auth: [roles.moderator, roles.admin],
+        auth: names.MODERATOR,
     },
 };
 </script>

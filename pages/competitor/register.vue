@@ -5,24 +5,17 @@
         <div class="footer-offset">
             <Container>
                 <Card class="plain dark" title="About You">
-                    <Row>
-                        <Column :sm="6">
-                            <Input
-                                v-model="competitor.name.firstName"
-                                label="First Name"
-                                class="group"
-                                required
-                            />
-                        </Column>
-                        <Column :sm="6">
-                            <Input
-                                v-model="competitor.name.lastName"
-                                label="Last Name"
-                                class="group"
-                                required
-                            />
-                        </Column>
-                    </Row>
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            {{profile}}
+                            <Input v-model="competitor.name.firstName" required/>
+                            <label>First name</label>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <Input v-model="competitor.name.lastName" required/>
+                            <label>Last name</label>
+                        </div>
+                    </div>
 
                     <Row>
                         <Column :sm="3">
@@ -106,7 +99,7 @@
 
 
 <script>
-import moment from 'moment';
+// import moment from 'moment';
 import * as countryList from 'country-list';
 import { mapActions } from 'vuex';
 
@@ -114,17 +107,19 @@ import PageBanner from '~/components/layout/PageBanner';
 import Card from '~/components/Card';
 import Input from '~/components/form/Input';
 import Select from '~/components/form/Select';
-import Checkbox from '~/components/form/Checkbox';
-import ConnectToDiscord from '~/components/user/ConnectToDiscord';
 import LanguageSkills from '~/components/game/LanguageSkills';
-import userHasProvider from '../../utils/linkedAccounts';
+import ConnectToDiscord from '~/components/user/ConnectToDiscord';
+// import userHasProvider from '../../utils/linkedAccounts';
+import { names } from '../../utils/auth';
 
 export default {
     name: 'CompetitorRegistration',
 
-    components: { PageBanner, Card, Input, ConnectToDiscord, LanguageSkills, Select, Checkbox },
-
-    middleware: ['auth', 'no-competitors'],
+    components: { PageBanner, Card, Input, LanguageSkills, Select, ConnectToDiscord },
+    // middleware: ['auth', 'no-competitors'],
+    meta: {
+        auth: names.USER,
+    },
 
     data: () => {
         return {
@@ -137,12 +132,14 @@ export default {
                 address: {},
                 ratings: {},
             },
+            // countries: [],
             countries: Object.keys(countryList().getNameList()).map((it) => it[0].toUpperCase() + it.slice(1)),
         };
     },
 
     computed: {
         user() {
+            console.log(this.$store.state.user.user);
             return this.$store.state.user.user;
         },
 
@@ -153,50 +150,41 @@ export default {
         profile() {
             return this.$store.state.user.profile;
         },
-
         ...mapActions({
             error: 'toast/error',
         }),
     },
 
-    async asyncData({ query, $axios }) {
-        if (!query.schedule) return;
-        const res = await $axios.get(`/schedules/${query.schedule}`);
+    // async asyncData({ query, $axios }) {
+    //     if (!query.schedule) return;
+    //     const res = await $axios.get(`/schedules/${query.schedule}`);
 
-        return { schedule: res.data };
-    },
+    //     return { schedule: res.data };
+    // },
 
     methods: {
         async submit() {
-            const hasDiscord = userHasProvider(this.links, 'DISCORD');
-
-            if (!hasDiscord) {
-                return this.error('You must connect your discord before moving forward with your registration.');
-            }
-
-            const date = moment.utc(`${this.month} ${this.day} ${this.year}`, 'MM DD YYYY').startOf('day');
-
-            this.languages.forEach((language) => {
-                this.competitor.ratings[language] = language.skill + 1;
-            });
-
-            this.competitor.dob = date.unix() * 1000;
-
-            try {
-                // await Http.for(`user/${this.user.id}/competitor`).save(
-                //     this.competitor
-                // );
-
-                // await this.$axios.
-
-                if (this.schedule) {
-                    await this.$store.dispatch('game/apply', this.schedule);
-                }
-
-                this.$store.dispatch('toast/success', `Congratulations! You are now a competitor!`);
-            } catch (e) {
-                this.$store.dispatch('toast/errors', e);
-            }
+            // const hasDiscord = userHasProvider(this.links, 'DISCORD');
+            // if (!hasDiscord) {
+            //     return this.error('You must connect your discord before moving forward with your registration.');
+            // }
+            // const date = moment.utc(`${this.month} ${this.day} ${this.year}`, 'MM DD YYYY').startOf('day');
+            // this.languages.forEach((language) => {
+            //     this.competitor.ratings[language] = language.skill + 1;
+            // });
+            // this.competitor.dob = date.unix() * 1000;
+            // try {
+            //     // await Http.for(`user/${this.user.id}/competitor`).save(
+            //     //     this.competitor
+            //     // );
+            //     // await this.$axios.
+            //     if (this.schedule) {
+            //         await this.$store.dispatch('game/apply', this.schedule);
+            //     }
+            //     this.$store.dispatch('toast/success', `Congratulations! You are now a competitor!`);
+            // } catch (e) {
+            //     this.$store.dispatch('toast/errors', e);
+            // }
         },
     },
 };

@@ -43,14 +43,14 @@ import PanelHeader from '~/components/mod/PanelHeader';
 import ListingFilters from '~/components/mod/ListingFilters';
 import Table from '~/components/Table';
 import Pagination from '~/components/Pagination';
-import { roles } from '../../utils/auth';
+import { names } from '../../utils/auth';
 
 import nameFromStatus from '~/utils/gameStatus';
 
 export default {
     name: 'ModGames',
     meta: {
-        auth: [roles.moderator, roles.admin],
+        auth: names.MODERATOR,
     },
     components: { PanelHeader, ListingFilters, Table, Pagination },
     computed: {

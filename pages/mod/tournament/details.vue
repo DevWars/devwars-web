@@ -17,12 +17,12 @@
 import moment from 'moment';
 import Card from '~/components/Card';
 import Input from '~/components/form/Input';
-import { roles } from '../../../utils/auth';
+import { names } from '../../../utils/auth';
 
 export default {
     name: 'DashboardTournamentDetails',
     meta: {
-        auth: [roles.moderator, roles.admin],
+        auth: names.MODERATOR,
     },
     components: { Card, Input },
     data: () => ({

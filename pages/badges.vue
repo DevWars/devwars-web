@@ -28,6 +28,7 @@
             </Container>
         </div>
         -->
+        <h1>badges</h1>
     </div>
 </template>
 
@@ -37,6 +38,7 @@
 // import Http from '../services/Http';
 // import PageBanner from '~/components/layout/PageBanner';
 // import Devcoins from '~/components/Devcoins';
+import { names } from '../utils/auth';
 
 export default {
     // name: 'Badges',
@@ -44,6 +46,9 @@ export default {
     //     PageBanner,
     //     Devcoins,
     // },
+    meta: {
+        auth: names.USER,
+    },
     // computed: {
     //     ...mapGetters({
     //         badges: 'badges/badges',

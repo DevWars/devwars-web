@@ -22,7 +22,7 @@
 import moment from 'moment';
 import Tabs from '~/components/Tabs';
 import PanelHeader from '~/components/mod/PanelHeader';
-import { roles } from '../../utils/auth';
+import { names } from '../../utils/auth';
 
 export default {
     name: 'DashboardSchedule',
@@ -30,7 +30,7 @@ export default {
     components: { Tabs, PanelHeader },
 
     meta: {
-        auth: [roles.moderator, roles.admin],
+        auth: names.MODERATOR,
     },
 
     computed: {

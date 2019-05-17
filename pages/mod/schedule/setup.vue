@@ -43,13 +43,13 @@ import Card from '~/components/Card';
 import Input from '~/components/form/Input';
 import Select from '~/components/form/Select';
 import SquareToggle from '~/components/SquareToggle';
-import { roles } from '../../../utils/auth';
+import { names } from '../../../utils/auth';
 
 export default {
     name: 'DashboardScheduleSetup',
 
     meta: {
-        auth: [roles.moderator, roles.admin],
+        auth: names.MODERATOR,
     },
 
     components: { Card, Input, Select, SquareToggle },

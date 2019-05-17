@@ -21,10 +21,13 @@
 <script>
 import Card from '~/components/Card';
 import PageBanner from '~/components/layout/PageBanner';
+import { names } from '../../utils/auth';
 
 export default {
     name: 'CompetitorRegistration',
     components: { Card, PageBanner },
-    middleware: 'auth',
+    meta: {
+        auth: names.USER,
+    },
 };
 </script>

@@ -36,12 +36,12 @@ import Table from '~/components/Table';
 import Http from '../../../services/Http';
 import User from '~/components/user/User';
 import Devcoins from '~/components/Devcoins';
-import { roles } from '../../../utils/auth';
+import { names } from '../../../utils/auth';
 
 export default {
     name: 'DashboardSchedulesApplications',
     meta: {
-        auth: [roles.moderator, roles.admin],
+        auth: names.MODERATOR,
     },
     components: { Table, User, Devcoins },
     computed: {

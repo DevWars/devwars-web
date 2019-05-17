@@ -1,14 +1,14 @@
 <template>
-  <h1>Welcome to the Dashboard</h1>
+    <h1>Welcome to the Dashboard</h1>
 </template>
 
 <script>
-import { roles } from '../../utils/auth';
+import { names } from '../../utils/auth';
 
 export default {
     name: 'ModDashboard',
     meta: {
-        auth: [roles.moderator, roles.admin],
+        auth: names.MODERATOR,
     },
 };
 </script>

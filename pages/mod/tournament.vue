@@ -46,13 +46,13 @@
 import Http from '../../services/Http';
 import Tabs from '~/components/Tabs';
 import DeleteModal from '~/components/modal/DeleteModal';
-import { roles } from '../../utils/auth';
+import { names } from '../../utils/auth';
 
 export default {
     name: 'DashboardTournament',
 
     meta: {
-        auth: [roles.moderator, roles.admin],
+        auth: names.MODERATOR,
     },
 
     components: { Tabs },

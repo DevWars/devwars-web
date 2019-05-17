@@ -25,10 +25,13 @@
 import Tabs from '~/components/Tabs';
 import Card from '~/components/Card';
 import PageBanner from '~/components/layout/PageBanner';
+import { names } from '../utils/auth';
 
 export default {
     name: 'Settings',
-
+    meta: {
+        auth: names.USER,
+    },
     components: { Tabs, Card, PageBanner },
 };
 </script>

@@ -80,13 +80,13 @@ import Textarea from '~/components/form/Textarea';
 import SquareToggle from '../../../components/SquareToggle';
 import { teams } from '~/utils/mixins';
 import { teamCompletedObjective } from '~/utils';
-import { roles } from '../../../utils/auth';
+import { names } from '../../../utils/auth';
 
 export default {
     name: 'DashboardGameDetails',
 
     meta: {
-        auth: [roles.moderator, roles.admin],
+        auth: names.MODERATOR,
     },
 
     components: { Card, SquareToggle, Input, Select, Textarea },

@@ -76,12 +76,12 @@ import DeleteModal from '~/components/modal/DeleteModal';
 import AddRegistrantModal from '~/components/modal/AddRegistrantModal';
 import { teams, usersFromGame } from '~/utils/mixins';
 import { getScoreByGameTeam, getPlayersByGameTeam, getLanguageByGamePlayer } from '~/utils';
-import { roles } from '../../../utils/auth';
+import { names } from '../../../utils/auth';
 
 export default {
     name: 'GameBrief',
     meta: {
-        auth: [roles.moderator, roles.admin],
+        auth: names.MODERATOR,
     },
     components: { Card, Table, GameTeam, Player, User, Devcoins },
     mixins: [teams, usersFromGame],

@@ -29,9 +29,13 @@ import Wallet from '~/components/dashboard/Wallet';
 import Activities from '~/components/dashboard/Activities';
 import UpcomingGames from '~/components/dashboard/UpcomingGames';
 import DailyPrizes from '~/components/dashboard/DailyPrizes';
+import { names } from '../utils/auth';
 
 export default {
     name: 'Dashboard',
+    meta: {
+        auth: names.USER,
+    },
     components: {
         ProfileCard,
         Wallet,

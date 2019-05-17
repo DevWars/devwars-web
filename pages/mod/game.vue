@@ -37,7 +37,7 @@ import Tabs from '~/components/Tabs';
 import PanelHeader from '~/components/mod/PanelHeader';
 import DeleteModal from '~/components/modal/DeleteModal';
 import EndGameModal from '~/components/modal/EndGameModal';
-import { roles } from '../../utils/auth';
+import { names } from '../../utils/auth';
 
 import nameFromStatus from '~/utils/gameStatus';
 
@@ -45,7 +45,7 @@ export default {
     name: 'DashboardGame',
 
     meta: {
-        auth: [roles.moderator, roles.admin],
+        auth: names.MODERATOR,
     },
 
     components: { Tabs, PanelHeader },

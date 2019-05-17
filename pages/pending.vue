@@ -25,14 +25,14 @@
 import Http from '../services/Http';
 import Card from '~/components/Card';
 import PageBanner from '~/components/layout/PageBanner';
-import { roles } from '../utils/auth';
+import { names } from '../utils/auth';
 
 export default {
     name: 'Pending',
 
     meta: {
-        auth: [roles.pending],
-        redirectIfNot: '/',
+        auth: names.PENDING,
+        limit: true,
     },
 
     components: { Card, PageBanner },

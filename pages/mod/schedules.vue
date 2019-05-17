@@ -37,7 +37,7 @@
 import PanelHeader from '~/components/mod/PanelHeader';
 import ListingFilters from '~/components/mod/ListingFilters';
 import Table from '~/components/Table';
-import { roles } from '../../utils/auth';
+import { names } from '../../utils/auth';
 
 import nameFromStatus from '~/utils/gameStatus';
 import CreateScheduleModal from '../../components/modal/CreateScheduleModal.vue';
@@ -45,7 +45,7 @@ import CreateScheduleModal from '../../components/modal/CreateScheduleModal.vue'
 export default {
     name: 'ModSchedules',
     meta: {
-        auth: [roles.moderator, roles.admin],
+        auth: names.MODERATOR,
     },
     components: { PanelHeader, ListingFilters, Table },
     computed: {
