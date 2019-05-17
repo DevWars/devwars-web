@@ -67,10 +67,6 @@ export default {
 
     .actions {
         margin-top: $m-space;
-
-        .btn + .btn {
-            margin-top: $grid-gutter-part;
-        }
     }
 }
 </style>

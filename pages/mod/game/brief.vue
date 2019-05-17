@@ -19,7 +19,7 @@
                     class="modpanel__subtitle"
                     style="margin-bottom: 0"
                 >({{ applications.length }}) Applicants</h4>
-                <button class="btn btn-outline-primary" @click="addRegistrant">Add Registrant</button>
+                <Button class="outline primary" @click="addRegistrant">Add Registrant</Button>
             </div>
         </Card>-->
 
@@ -48,10 +48,12 @@
                 <td>{{ applicant.profile.skills.js }}</td>
                 <td class="color-devcoins">{{ applicant.stats.coins }}</td>
                 <td class="modpanel-table__actions">
-                    <a href="#edit" class="btn-link btn-icon-reverse" @click="addPlayer(applicant)">
-                        <span>Add Player</span>
-                        <i class="fa fa-caret-down"></i>
-                    </a>
+                    <ButtonIcon
+                        href="#edit"
+                        icon="fa fa-caret-down"
+                        class="link reverse"
+                        @click="addPlayer(applicant)"
+                    >Add Player</ButtonIcon>
                 </td>
             </tr>
         </Table>

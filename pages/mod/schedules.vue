@@ -1,10 +1,7 @@
 <template>
     <div>
         <PanelHeader title="Schedules" showSearch>
-            <button class="btn btn-primary btn-icon btn-sm" @click="createSchedule">
-                <i class="fa fa-plus"></i>
-                <span>Add Schedule</span>
-            </button>
+            <ButtonIcon icon="fa fa-plus" class="primary sm" @click="createSchedule">Add Schedule</ButtonIcon>
         </PanelHeader>
 
         <ListingFilters/>
@@ -28,10 +25,7 @@
                 <td>{{ schedule.title }}</td>
                 <td>{{ schedule.mode }}</td>
                 <td>
-                    <nuxt-link
-                        :to="`/mod/schedule/setup?schedule=${schedule.id}`"
-                        class="btn-link"
-                    >Edit</nuxt-link>
+                    <Button :to="`/mod/schedule/setup?schedule=${schedule.id}`" class="link">Edit</Button>
                 </td>
             </tr>
         </Table>

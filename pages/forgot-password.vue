@@ -15,12 +15,7 @@
                     />
 
                     <div slot="actions">
-                        <button
-                            type="submit"
-                            href="#"
-                            class="btn btn-outline-white btn-block"
-                            tabindex="2"
-                        >Reset Password</button>
+                        <Button type="submit" class="outline block" tabindex="2">Reset Password</Button>
                     </div>
                 </DevwarsCard>
             </form>
@@ -31,10 +26,10 @@
                     desc="Please check your email for instructions on how to reset your password."
                 >
                     <div slot="actions">
-                        <a
+                        <Button
                             href="/forgot-password"
-                            class="btn btn-outline-gray btn-block"
-                        >Need to try again?</a>
+                            class="outline muted block"
+                        >Need to try again?</Button>
                     </div>
                 </DevwarsCard>
             </div>

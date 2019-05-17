@@ -1,10 +1,7 @@
 <template>
     <div>
         <PanelHeader title="Games" showSearch>
-            <button class="btn btn-primary btn-icon btn-sm" @click="createGame">
-                <i class="fa fa-plus"></i>
-                <span>Add Game</span>
-            </button>
+            <ButtonIcon icon="fa fa-plus" class="primary sm" @click="createGame">Add Game</ButtonIcon>
         </PanelHeader>
 
         <ListingFilters/>
@@ -30,7 +27,7 @@
                 <td>{{ game.title }}</td>
                 <td>{{ game.mode }}</td>
                 <td>
-                    <nuxt-link :to="'/mod/game/brief?game=' + game.id" class="btn-link">Edit</nuxt-link>
+                    <Button :to="'/mod/game/brief?game=' + game.id" class="link">Edit</Button>
                 </td>
             </tr>
         </Table>

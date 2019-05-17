@@ -2,10 +2,7 @@
     <div class="docs container">
         <div class="sidebar col-sm-3">
             <div class="nav">
-                <a href="#devwars" class="btn-icon">
-                    <i class="fa fa-home"></i>
-                    <span>DevWars</span>
-                </a>
+                <ButtonIcon href="#devwars" icon="fa fa-home" class="link">DevWars</ButtonIcon>
                 <ul>
                     <li>
                         <a href="#about">About</a>
@@ -30,10 +27,7 @@
                     </li>
                 </ul>
 
-                <a href="#watching" class="btn-icon">
-                    <i class="fa fa-eye"></i>
-                    <span>Watching</span>
-                </a>
+                <ButtonIcon href="#watching" icon="fa fa-eye" class="link">Watching</ButtonIcon>
                 <ul>
                     <li>
                         <a href="#tools">Tools</a>
@@ -46,10 +40,7 @@
                     </li>
                 </ul>
 
-                <a href="#competing" class="btn-icon">
-                    <i class="fa fa-gamepad"></i>
-                    <span>Competing</span>
-                </a>
+                <ButtonIcon href="#competing" icon="fa fa-gamepad" class="link">Competing</ButtonIcon>
                 <ul>
                     <li>
                         <a href="#requirements">Requirements</a>
@@ -59,10 +50,7 @@
                     </li>
                 </ul>
 
-                <a href="#earning" class="btn-icon">
-                    <i class="fa fa-trophy"></i>
-                    <span>Earning</span>
-                </a>
+                <ButtonIcon href="#earning" icon="fa fa-trophy" class="link">Earning</ButtonIcon>
                 <ul>
                     <li>
                         <a href="#xp" class="disabled">XP</a>
@@ -165,10 +153,10 @@
 
                     <section>
                         <h3>Classic</h3>
-                        <span class="label label-outline-white label-sm">3 VS 3</span>
-                        <span class="label label-outline-html label-sm">HTML</span>
-                        <span class="label label-outline-css label-sm">CSS</span>
-                        <span class="label label-outline-js label-sm">JAVASCRIPT</span>
+                        <span class="tag tag-outline-white tag-sm">3 VS 3</span>
+                        <span class="tag tag-outline-html tag-sm">HTML</span>
+                        <span class="tag tag-outline-css tag-sm">CSS</span>
+                        <span class="tag tag-outline-js tag-sm">JAVASCRIPT</span>
                         <p>Time: 60:00</p>
                         <p>
                             This action-packed game mode is the only one that features all 3
@@ -179,8 +167,8 @@
 
                     <section>
                         <h3>Zen Garden</h3>
-                        <span class="label label-outline-white label-sm">1 VS 1</span>
-                        <span class="label label-outline-css label-sm">CSS</span>
+                        <span class="tag tag-outline-white tag-sm">1 VS 1</span>
+                        <span class="tag tag-outline-css tag-sm">CSS</span>
                         <p>Time: 60:00</p>
                         <p>
                             This 1 vs 1 game mode provides both teams the same pre-made
@@ -191,8 +179,8 @@
 
                     <section class="coming-soon">
                         <h3>Coffee Run</h3>
-                        <span class="label label-outline-white label-sm">1 VS 1</span>
-                        <span class="label label-outline-js label-sm">JAVASCRIPT</span>
+                        <span class="tag tag-outline-white tag-sm">1 VS 1</span>
+                        <span class="tag tag-outline-js tag-sm">JAVASCRIPT</span>
                         <p>Coming soon!</p>
                     </section>
                 </section>
@@ -857,12 +845,8 @@ export default {
         const scrollable = document.querySelector('.docs__main');
 
         scrollable.addEventListener('scroll', () => {
-            const sections = Array.prototype.slice.apply(
-                document.querySelectorAll('section')
-            );
-            const links = Array.prototype.slice.apply(
-                document.querySelectorAll('.nav__link')
-            );
+            const sections = Array.prototype.slice.apply(document.querySelectorAll('section'));
+            const links = Array.prototype.slice.apply(document.querySelectorAll('.nav__link'));
 
             links.forEach((it) => it.classList.remove('active'));
 
@@ -877,9 +861,7 @@ export default {
                     return 0;
                 })[0];
 
-            const link = document.querySelector(
-                `.nav__link[href='#${active.id}']`
-            );
+            const link = document.querySelector(`.nav__link[href='#${active.id}']`);
 
             if (link) link.classList.add('active');
         });
@@ -1219,13 +1201,11 @@ code {
         height: 100px;
         padding: 0 $xs-space;
         background-color: lighten($bg-color-2, 3%);
-        box-shadow: 0 1px 5px 0 rgba($bg-color-4, 0.47),
-            0 7px 17px 0 rgba($bg-color-4, 0.41);
+        box-shadow: 0 1px 5px 0 rgba($bg-color-4, 0.47), 0 7px 17px 0 rgba($bg-color-4, 0.41);
         transition: box-shadow 0.2s ease-in-out;
 
         &:hover {
-            box-shadow: 0 1px 5px 0 rgba($bg-color-4, 0.57),
-                0 7px 17px 0 rgba($bg-color-4, 0.71);
+            box-shadow: 0 1px 5px 0 rgba($bg-color-4, 0.57), 0 7px 17px 0 rgba($bg-color-4, 0.71);
         }
     }
 

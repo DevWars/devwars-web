@@ -5,7 +5,7 @@
         </div>
 
         <div class="modal-dialog__actions">
-            <button class="btn btn-black" @click="submit">Crop Image</button>
+            <Button class="primary" @click="submit">Crop Image</Button>
         </div>
     </div>
 </template>
@@ -18,11 +18,11 @@ import 'cropperjs/dist/cropper.css';
 export default {
     name: 'CropperModal',
     props: {
-        'data': {
+        data: {
             type: String,
             required: true,
-        }, 
-        'resolve': {
+        },
+        resolve: {
             type: Function,
             required: true,
         },

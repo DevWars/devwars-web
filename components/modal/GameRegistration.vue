@@ -7,10 +7,10 @@
             <b>competitor registration form</b>.
         </p>
         <div class="modal__actions">
-            <button class="btn btn-outline-gray" @click="close(false)">Nevermind</button>
+            <Button class="outline muted" @click="close(false)">Nevermind</Button>
             <a
                 :href="'/competitor/register?schedule=' + schedule.id "
-                class="btn btn-primary"
+                class="primary"
                 @click="close(false)"
             >Begin Registration</a>
         </div>
@@ -35,8 +35,8 @@
         </p>
 
         <div class="modal__actions">
-            <button class="btn btn-outline-gray" @click="close(false)">Nevermind</button>
-            <button class="btn btn-primary" @click="enter(schedule)">Enter</button>
+            <button class="outline muted" @click="close(false)">Nevermind</button>
+            <button class="primary" @click="enter(schedule)">Enter</button>
         </div>
     </div>
 </template>

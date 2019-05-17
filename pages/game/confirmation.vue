@@ -17,7 +17,7 @@
                         game day. Below is our DevWars Documentation covering everything you need to know.
                     </p>
 
-                    <a href="/docs" class="btn btn-primary">View Documentation</a>
+                    <Button to="/docs" class="primary">View Documentation</Button>
                     <p>
                         Have any questions?
                         <a href="/contact">Contact Us</a>

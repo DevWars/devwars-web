@@ -1,11 +1,11 @@
 <template>
     <div class="modal__actions">
-        <button
+        <Button
             v-for="team in game.teams"
             :key="team"
             v-async-click="[end, team]"
-            class="btn btn-link"
-        >{{ team.name | capitalize }}</button>
+            class="link"
+        >{{ team.name | capitalize }}</Button>
     </div>
 </template>
 
@@ -16,11 +16,11 @@
 export default {
     name: 'EndGameModal',
     props: {
-        'resolve': {
+        resolve: {
             type: Function,
             required: true,
         },
-        'game': {
+        game: {
             type: Object,
             required: true,
         },
@@ -33,7 +33,7 @@ export default {
                 data: {
                     winner: team.id,
                 },
-            })
+            });
             // await Http.for(`game/${this.game.id}/ended`).post({
             //     winner: team.id,
             // });

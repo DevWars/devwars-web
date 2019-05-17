@@ -6,7 +6,7 @@
                 <p class="total">{{owned.length }}</p>
             </div>
 
-            <nuxt-link to="/badges" class="btn btn-outline-white btn-sm">View Badges</nuxt-link>
+            <Button to="/badges" class="outline sm">View Badges</Button>
 
             <Progress
                 title="Badges"
@@ -73,7 +73,7 @@ export default {
     }
 }
 
-.btn {
+.Button {
     margin-bottom: $m-space;
 }
 </style>

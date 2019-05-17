@@ -9,8 +9,8 @@
         <!-- <DatePicker v-model="date" label="When is the game?" class="group"/> -->
 
         <div class="align-right">
-            <button type="button" class="btn btn-outline-gray" @click="close(false)">Cancel</button>
-            <button class="btn btn-primary">Save</button>
+            <Button type="button" class="muted link" @click="close(false)">Cancel</Button>
+            <Button class="primary">Save</Button>
         </div>
     </form>
 </template>

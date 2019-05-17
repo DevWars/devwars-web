@@ -10,7 +10,7 @@
                         <h1>404</h1>
                         <h2>Page not found</h2>
                         <p>The page you are looking for does not exist. Sorry!</p>
-                        <nuxt-link to="/" class="btn btn-outline-primary btn-lg">Go to home</nuxt-link>
+                        <Button to="/" class="outline primary lg">Go to home</Button>
                     </div>
                 </div>
 
@@ -23,9 +23,11 @@
                         <h2>It's not you, It's us.</h2>
                         <p>
                             This page is experiencing internal server issues
-                            <span class="font-size-sm">(blame Terence)</span>
+                            <span
+                                class="font-size-sm"
+                            >(blame Terence)</span>
                         </p>
-                        <nuxt-link to="/" class="btn btn-outline-primary btn-lg">Go to home</nuxt-link>
+                        <Button to="/" class="outline primary lg">Go to home</Button>
                     </div>
                 </div>
 
@@ -36,7 +38,7 @@
                     <div class="col-sm-8">
                         <h2>Oops!</h2>
                         <p>Looks like something went wrong.</p>
-                        <nuxt-link to="/" class="btn btn-outline-primary btn-lg">Go to home</nuxt-link>
+                        <Button to="/" class="outline primary lg">Go to home</Button>
                     </div>
                 </div>
             </div>

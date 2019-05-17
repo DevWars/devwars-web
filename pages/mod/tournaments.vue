@@ -1,10 +1,7 @@
 <template>
     <div>
         <PanelHeader title="Tournament">
-            <button class="btn btn-primary btn-icon btn-sm">
-                <i class="fa fa-plus"></i>
-                <span>Add Tournament</span>
-            </button>
+            <ButtonIcon icon="fa fa-plus" class="primary sm">Add Tournament</ButtonIcon>
         </PanelHeader>
 
         <ListingFilters/>
@@ -24,7 +21,7 @@
                 </td>
                 <td>DigitalOcean Tournament</td>
                 <td>
-                    <nuxt-link to class="btn-link">Edit</nuxt-link>
+                    <Button class="link">Edit</Button>
                 </td>
             </tr>
         </Table>

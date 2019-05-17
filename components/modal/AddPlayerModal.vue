@@ -10,8 +10,8 @@
         </Select>
 
         <div class="modal__actions">
-            <button class="btn btn-outline-gray" @click.prevent="close(false)">Cancel</button>
-            <button class="btn btn-primary">Add Player</button>
+            <Button class="muted link" @click.prevent="close(false)">Cancel</Button>
+            <Button class="primary">Add Player</Button>
         </div>
     </form>
 </template>

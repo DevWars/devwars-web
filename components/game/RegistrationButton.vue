@@ -1,16 +1,16 @@
 <template>
     <Applications :schedules="[schedule]">
         <div slot-scope="{isApplied, enter, cancel}">
-            <a
+            <Button
                 v-show="!isApplied(schedule)"
-                class="btn btn-primary"
+                class="primary"
                 @click="enter(schedule)"
-            >Register for Entry</a>
-            <a
+            >Register for Entry</Button>
+            <Button
                 v-show="isApplied(schedule)"
-                class="btn btn-outline-danger"
+                class="outline danger"
                 @click="cancel(schedule)"
-            >Resign</a>
+            >Resign</Button>
         </div>
     </Applications>
 </template>

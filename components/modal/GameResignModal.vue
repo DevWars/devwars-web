@@ -4,8 +4,8 @@
         <p>Are you sure you would like to cancel?</p>
 
         <div class="modal__actions">
-            <button class="btn btn-outline-gray" @click="close(false)">Cancel</button>
-            <button class="btn btn-danger" @click="resign(schedule)">Resign</button>
+            <Button class="outline muted" @click="close(false)">Cancel</Button>
+            <Button class="danger" @click="resign(schedule)">Resign</Button>
         </div>
     </div>
 </template>

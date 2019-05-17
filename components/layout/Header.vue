@@ -29,31 +29,27 @@
 
                 <ul v-if="!user" class="nav nav-actions">
                     <li class="nav__item">
-                        <nuxt-link to="/register" class="btn btn-primary">Register</nuxt-link>
+                        <Button to="/register" class="primary">Register</Button>
                     </li>
                     <li class="nav__item">
-                        <nuxt-link to="/login" class="btn btn-link color-white">Log In</nuxt-link>
+                        <Button to="/login" class="link">Log In</Button>
                     </li>
                 </ul>
 
                 <UserMenu v-else :user="user">
                     <template #default="{close}">
-                        <nuxt-link
+                        <Button
                             v-if="isStaff"
                             to="/mod/dashboard"
-                            class="btn-link"
+                            class="link"
                             @click.native="close"
-                        >Modpanel</nuxt-link>
+                        >Modpanel</Button>
                         <div v-if="isStaff" class="divider"></div>
-                        <nuxt-link to="/dashboard" class="btn-link" @click.native="close">Dashboard</nuxt-link>
-                        <nuxt-link to="/badges" class="btn-link" @click.native="close">Badges</nuxt-link>
-                        <nuxt-link
-                            to="/settings/profile"
-                            class="btn-link"
-                            @click.native="close"
-                        >Settings</nuxt-link>
+                        <Button to="/dashboard" class="link" @click.native="close">Dashboard</Button>
+                        <Button to="/badges" class="link" @click.native="close">Badges</Button>
+                        <Button to="/settings/profile" class="link" @click.native="close">Settings</Button>
                         <div class="divider"></div>
-                        <button class="btn-link" @click="logout">Logout</button>
+                        <Button class="link" @click="logout">Logout</Button>
                     </template>
                 </UserMenu>
             </div>

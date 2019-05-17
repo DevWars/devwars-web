@@ -4,8 +4,8 @@
         <p v-if="description" class="modal__desc">{{ description }}</p>
 
         <div class="modal__actions">
-            <button class="btn btn-link" @click="$emit('close')">{{ cancel }}</button>
-            <button class="btn btn-danger" @click="close(true)">{{ confirm }}</button>
+            <Button class="link muted" @click="$emit('close')">{{ cancel }}</Button>
+            <Button class="danger" @click="close(true)">{{ confirm }}</Button>
         </div>
     </div>
 </template>

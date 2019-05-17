@@ -14,9 +14,13 @@
                     />
 
                     <div slot="actions">
-                        <button type="submit" href="#" class="btn btn-outline-white btn-block">LOGIN</button>
-                        <a href="/register" class="btn btn-outline-gray btn-block">REGISTER</a>
-                        <a href="/forgot-password" class="forgot">Forgot your password?</a>
+                        <Button type="submit" class="outline block">Login</Button>
+                        <Button href="/register" class="outline muted block">Register</Button>
+
+                        <Button
+                            href="/forgot-password"
+                            class="link muted block"
+                        >Forgot your password?</Button>
                     </div>
                 </DevwarsCard>
             </form>
@@ -60,7 +64,7 @@ export default {
 .Login {
     padding-top: $l-space;
 
-    .forgot {
+    /* .forgot {
         display: block;
         margin-top: $s-space;
         color: $text-color-muted;
@@ -68,6 +72,6 @@ export default {
         &:hover {
             color: $text-color-secondary;
         }
-    }
+    } */
 }
 </style>

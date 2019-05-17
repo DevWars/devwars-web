@@ -8,7 +8,7 @@
                 </div>
             </div>
             <div class="devcoins-wallet__actions">
-                <button class="btn btn-outline-white btn-sm" disabled>Shop</button>
+                <Button class="outline sm" disabled>Shop</Button>
             </div>
         </div>
 

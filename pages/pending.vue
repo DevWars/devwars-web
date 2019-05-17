@@ -12,7 +12,7 @@
                         <u>check your spam folder</u>.
                     </p>
                     <div>
-                        <button class="btn btn-outline-gray" @click="resend">Resend Email</button>
+                        <Button class="outline muted" @click="resend">Resend Email</Button>
                     </div>
                 </Card>
             </div>
@@ -32,7 +32,7 @@ export default {
 
     meta: {
         auth: [roles.pending],
-        redirectIfNot: "/",
+        redirectIfNot: '/',
     },
 
     components: { Card, PageBanner },

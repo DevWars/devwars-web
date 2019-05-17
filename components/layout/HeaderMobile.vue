@@ -1,48 +1,42 @@
 <template>
-    <div v-closable="{handler: toggleMobileMenu, outSideFrom: ' .headerMobile'}">
-        <div class="headerMobile">
+    <div
+        v-closable="{handler: toggleMobileMenu, outSideFrom: ' .headerMobile'}"
+        class="HeaderMobile"
+    >
+        <div class="main">
             <div class="head">
                 <nuxt-link to="/" class="logo" @click.native="toggleMobileMenu">
                     <img src="~assets/img/logo.png" alt="DevWars">
                 </nuxt-link>
             </div>
 
-            <nuxt-link to="/" class="link btn-icon" @click.native="toggleMobileMenu">Home</nuxt-link>
-            <nuxt-link to="/games" class="link btn-icon" @click.native="toggleMobileMenu">Games</nuxt-link>
-            <nuxt-link
+            <Button to="/" class="link block static" @click.native="toggleMobileMenu">Home</Button>
+            <Button to="/games" class="link block static" @click.native="toggleMobileMenu">Games</Button>
+            <Button
                 to="/schedule"
-                class="link btn-icon"
+                class="link block static"
                 @click.native="toggleMobileMenu"
-            >Schedule</nuxt-link>
-            <nuxt-link
+            >Schedule</Button>
+            <Button
                 to="/leaderboards"
-                class="link btn-icon"
+                class="link block static"
                 @click.native="toggleMobileMenu"
-            >Leaders</nuxt-link>
+            >Leaders</Button>
 
             <div v-if="!user" class="actions">
-                <nuxt-link to="/register" class="btn btn-primary btn-block">Register</nuxt-link>
-                <nuxt-link to="/login" class="btn btn-link btn-block color-white">Log In</nuxt-link>
+                <Button to="/register" class="primary block">Register</Button>
+                <Button to="/login" class="link block">Log In</Button>
             </div>
 
-            <UserMenu v-if="user" :user="user" class="link">
+            <UserMenu v-if="user" :user="user" class="nav-link">
                 <template #default="{close}">
-                    <nuxt-link
-                        v-if="isAdmin"
-                        to="/mod/dashboard"
-                        class="btn-link"
-                        @click.native="close"
-                    >Modpanel</nuxt-link>
+                    <nuxt-link v-if="isAdmin" to="/mod/dashboard" @click.native="close">Modpanel</nuxt-link>
                     <div v-if="isAdmin" class="menu-divider"></div>
-                    <nuxt-link to="/dashboard" class="btn-link" @click.native="close">Dashboard</nuxt-link>
-                    <nuxt-link to="/badges" class="btn-link" @click.native="close">Badges</nuxt-link>
-                    <nuxt-link
-                        to="/settings/profile"
-                        class="btn-link"
-                        @click.native="close"
-                    >Settings</nuxt-link>
+                    <nuxt-link to="/dashboard" @click.native="close">Dashboard</nuxt-link>
+                    <nuxt-link to="/badges" @click.native="close">Badges</nuxt-link>
+                    <nuxt-link to="/settings/profile" @click.native="close">Settings</nuxt-link>
                     <div class="menu-divider"></div>
-                    <a class="btn-link" @click="logout">Logout</a>
+                    <a @click="logout">Logout</a>
                 </template>
             </UserMenu>
         </div>
@@ -90,58 +84,62 @@ export default {
 @import 'utils.scss';
 $mobile-nav-width: 300px;
 
-.headerMobile {
-    height: 100%;
-    width: $mobile-nav-width;
-    padding: $grid-gutter-width 0;
-    background-color: $bg-color-3;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: $zindex-navbar-fixed;
+.HeaderMobile {
+    .main {
+        height: 100%;
+        width: $mobile-nav-width;
+        padding: $grid-gutter-width 0;
+        background-color: $bg-color-3;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: $zindex-navbar-fixed;
 
-    @include breakpoint(md) {
-        display: inline-block;
+        @include breakpoint(md) {
+            display: inline-block;
+        }
     }
-}
 
-.actions {
-    border-top: 1px solid $divider-color;
-    padding: $grid-gutter-width;
-    margin-top: $grid-gutter-part;
-}
-
-.overlay {
-    @extend %fixed-overlay;
-    background-color: rgba(#000, 0.85);
-    z-index: $zindex-navbar-fixed - 1;
-}
-
-.link {
-    display: block;
-    color: #fff;
-    padding: $s-space $grid-gutter-width;
-    font-weight: bold;
-    text-transform: uppercase;
-    line-height: 1;
-
-    &:hover,
-    &:focus {
-        background-color: $bg-color-2;
+    .actions {
+        border-top: 1px solid $divider-color;
+        padding: $grid-gutter-width;
+        margin-top: $grid-gutter-part;
     }
-}
 
-.head {
-    margin-bottom: $m-space;
-    text-align: center;
-}
+    .overlay {
+        @extend %fixed-overlay;
+        background-color: rgba(#000, 0.85);
+        z-index: $zindex-navbar-fixed - 1;
+    }
 
-.logo {
-    display: block;
+    .Button.link,
+    .nav-link {
+        display: block;
+        color: #fff;
+        padding: $s-space $grid-gutter-width;
+        font-weight: bold;
+        text-transform: uppercase;
+        line-height: 1;
+        text-align: left;
 
-    img {
-        display: inline-block;
-        width: 60%;
+        &:hover,
+        &:focus {
+            background-color: $bg-color-2;
+        }
+    }
+
+    .head {
+        margin-bottom: $m-space;
+        text-align: center;
+    }
+
+    .logo {
+        display: block;
+
+        img {
+            display: inline-block;
+            width: 60%;
+        }
     }
 }
 </style>

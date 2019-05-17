@@ -19,16 +19,16 @@
                     </div>
 
                     <div class="actions">
-                        <button
+                        <Button
                             v-if="!isApplied(schedule)"
-                            class="btn btn-outline-white btn-sm btn-block"
+                            class="outline sm block"
                             @click="enter(schedule)"
-                        >Enter</button>
-                        <button
+                        >Enter</Button>
+                        <Button
                             v-else
-                            class="btn btn-outline-danger btn-sm btn-block"
+                            class="outline danger sm block"
                             @click="cancel(schedule)"
-                        >Cancel</button>
+                        >Cancel</Button>
                     </div>
                 </div>
             </div>

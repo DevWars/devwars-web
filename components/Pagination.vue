@@ -1,16 +1,8 @@
 <template>
     <div class="Pagination">
-        <button
-            class="btn btn-gray btn-sm"
-            :class="{disabled: !canGoPrevious}"
-            @click="$emit('previous')"
-        >Prev</button>
+        <Button class="muted sm" :class="{disabled: !canGoPrevious}" @click="$emit('previous')">Prev</Button>
         <strong class="page">PAGE {{ page + 1 }}</strong>
-        <button
-            class="btn btn-gray btn-sm"
-            :class="{disabled: !canGoNext}"
-            @click="$emit('next')"
-        >Next</button>
+        <Button class="muted sm" :class="{disabled: !canGoNext}" @click="$emit('next')">Next</Button>
     </div>
 </template>
 
@@ -18,6 +10,7 @@
 <script>
 export default {
     name: 'Pagination',
+
     props: {
         page: {
             type: Number,
@@ -32,10 +25,12 @@ export default {
             default: 0,
         },
     },
+
     computed: {
         canGoPrevious() {
             return this.page > 0;
         },
+
         canGoNext() {
             const totalPages = Math.ceil(this.count / this.perPage);
             return this.page < totalPages - 1;

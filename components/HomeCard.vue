@@ -65,8 +65,7 @@ export default {
         margin-top: $grid-gutter-part;
     }
 
-    .btn {
-        margin: 0 ($grid-gutter-part / 2);
+    .Button {
         align-self: flex-end;
 
         @include breakpoint(xs) {

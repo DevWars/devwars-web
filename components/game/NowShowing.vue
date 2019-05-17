@@ -19,11 +19,11 @@
         </div>
 
         <div slot="actions">
-            <a
+            <Button
                 href="https://www.twitch.tv/devwars"
-                class="btn btn-twitch"
                 target="_blank"
-            >Watch on Twitch</a>
+                class="twitch"
+            >Watch on Twitch</Button>
             <RegistrationButton :schedule="schedule"/>
         </div>
     </HomeCard>

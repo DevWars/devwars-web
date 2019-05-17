@@ -17,19 +17,19 @@
             </div>
 
             <div class="modpanel__header-actions">
-                <a href="/mod/tournaments" class="btn btn-outline-gray">Back</a>
-                <button
+                <Button href="/mod/tournaments" class="outline muted">Back</Button>
+                <Button
                     v-if="tournament.active && !tournament.done"
                     v-async-click="[endTournament]"
-                    class="btn btn-danger"
-                >End</button>
-                <button
+                    class="danger"
+                >End</Button>
+                <Button
                     v-show="!tournament.done && !tournament.active"
                     v-async-click="[activate]"
-                    class="btn btn-primary"
-                >Activate</button>
-                <button v-async-click="[save]" class="btn btn-primary">Save</button>
-                <button v-async-click="[remove]" class="btn btn-secondary">Delete</button>
+                    class="primary"
+                >Activate</Button>
+                <Button v-async-click="[save]" class="primary">Save</Button>
+                <Button v-async-click="[remove]" class="danger">Delete</Button>
             </div>
         </div>
 

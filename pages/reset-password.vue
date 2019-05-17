@@ -22,13 +22,13 @@
                     />
 
                     <div slot="actions">
-                        <button
+                        <Button
                             v-async-click="[reset]"
                             type="button"
                             :disabled="confirmed !== password"
-                            class="btn btn-outline-white btn-block"
+                            class="outline block"
                             tabindex="3"
-                        >Reset Password</button>
+                        >Reset Password</Button>
                     </div>
                 </DevwarsCard>
             </form>
@@ -36,7 +36,7 @@
             <div v-show="done">
                 <DevwarsCard title="Success!" desc="Your password has successfully been updated.">
                     <div slot="actions">
-                        <a href="/login" class="btn btn-outline-white btn-block">Login</a>
+                        <Button to="/login" class="outline block">Login</Button>
                     </div>
                 </DevwarsCard>
             </div>

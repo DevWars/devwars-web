@@ -8,15 +8,12 @@
                         <strong>game show</strong> for developers
                     </h1>
                     <h2 class="hero__subtitle">Every other Saturday @ 5:00 PM (UTC)</h2>
-                    <a
+                    <Button
                         href="https://twitch.tv/devwars"
                         target="_blank"
-                        class="btn btn-primary hero__btn"
-                    >
-                        Watch on
-                        Twitch
-                    </a>
-                    <a href="/games" class="btn btn-link color-white hero__btn">View Past Games</a>
+                        class="primary"
+                    >Watch on Twitch</Button>
+                    <Button to="/games" class="link">View Past Games</Button>
                 </div>
             </div>
         </div>
@@ -29,7 +26,7 @@
                 <ScheduleBlock :count="2"/>
 
                 <div class="home-section__actions">
-                    <a href="/schedule" class="btn btn-outline-white">View Full Schedule</a>
+                    <Button to="/schedule" class="outline white">View Full Schedule</Button>
                 </div>
             </div>
         </div>
@@ -45,10 +42,7 @@
                         <br>got what
                         <br>it takes?
                     </h3>
-                    <nuxt-link
-                        to="/competitor/register"
-                        class="btn btn-outline-white btn-lg"
-                    >Become a competitor</nuxt-link>
+                    <Button to="/competitor/register" class="outline lg">Become a competitor</Button>
                 </div>
             </div>
         </div>
@@ -64,7 +58,7 @@
                         <br>with DevWars
                         <br>knowledge base.
                     </h3>
-                    <nuxt-link to="docs" class="btn btn-outline-white btn-lg">View Documentation</nuxt-link>
+                    <Button to="/docs" class="outline lg">View Documentation</Button>
                 </div>
             </div>
         </div>
@@ -255,15 +249,6 @@ $home-card-margin: 80px;
         font-size: 24px;
         margin-bottom: $m-space;
         color: $text-color-secondary;
-    }
-
-    &__btn {
-        margin: 0 10px;
-
-        @include breakpoint(sm) {
-            width: auto;
-            max-width: none;
-        }
     }
 }
 

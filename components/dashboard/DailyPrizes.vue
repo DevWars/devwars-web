@@ -11,7 +11,7 @@
                 <div class="col-xs-8 no-gutter">Submit 5 Objectives</div>
             </div>
             <div>
-                <a href="#" class="btn btn-outline-white btn-sm">Claim</a>
+                <Button class="outline sm">Claim</Button>
             </div>
         </div>
 
@@ -28,7 +28,7 @@
                 <div class="col-xs-8 no-gutter">Comment on a User Submission</div>
             </div>
             <div>
-                <a href="#" class="btn btn-outline-white btn-sm disabled">Claim</a>
+                <Button class="outline sm" disabled>Claim</Button>
             </div>
         </div>
     </DashboardCard>

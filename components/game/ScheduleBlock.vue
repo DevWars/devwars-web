@@ -26,12 +26,12 @@
                 </td>
                 <td>
                     <div>
-                        <a
+                        <Button
                             v-if="!isApplied(schedule)"
-                            class="btn btn-primary"
+                            class="primary"
                             @click="enter(schedule)"
-                        >Register for Entry</a>
-                        <a v-else class="btn btn-outline-danger" @click="cancel(schedule)">Resign</a>
+                        >Register for Entry</Button>
+                        <Button v-else class="outline danger" @click="cancel(schedule)">Resign</Button>
                     </div>
                 </td>
             </tr>

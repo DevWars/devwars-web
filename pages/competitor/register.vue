@@ -97,7 +97,7 @@
                 </Card>
 
                 <div class="actions">
-                    <button class="btn btn-primary btn-lg" @click="submit">Register to Compete</button>
+                    <Button class="primary lg" @click="submit">Register to Compete</Button>
                 </div>
             </div>
         </div>

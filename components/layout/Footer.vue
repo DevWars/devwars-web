@@ -3,7 +3,7 @@
         <div class="newsletter">
             <div class="container">
                 <h2>Receive our weekly challenge, and other DevWars updates!</h2>
-                <a href="http://eepurl.com/bffR51" target="_blank" class="btn btn-primary">Subscribe</a>
+                <Button href="http://eepurl.com/bffR51" target="_blank" class="primary">Subscribe</Button>
             </div>
         </div>
 

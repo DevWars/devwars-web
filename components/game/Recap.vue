@@ -37,7 +37,7 @@
         </div>
 
         <div slot="actions">
-            <a href="/games" class="btn btn-outline-primary">View Full Game</a>
+            <Button to="/games" class="outline primary">View Full Game</Button>
         </div>
     </HomeCard>
 </template>

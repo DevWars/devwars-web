@@ -5,8 +5,8 @@
         </div>
 
         <div class="modal__actions">
-            <button class="btn btn-outline-gray" @click="close(false)">Cancel</button>
-            <button class="btn btn-primary">Add</button>
+            <Button class="muted link" @click="close(false)">Cancel</Button>
+            <Button class="primary">Add</Button>
         </div>
     </form>
 </template>

@@ -28,10 +28,10 @@
                     name="bonus"
                     @change="objectiveUpdate($event, objective.id)"
                 />
-                <button class="btn btn-link" @click.prevent="objectiveDelete(objective.id)">DELETE</button>
+                <Button class="link muted" @click.prevent="objectiveDelete(objective.id)">DELETE</Button>
             </div>
         </form>
-        <button class="btn btn-outline-white" @click="objectiveAdd">Add Objective</button>
+        <Button class="outline" @click="objectiveAdd">Add Objective</Button>
     </Card>
 </template>
 
@@ -140,9 +140,7 @@ form {
         margin-right: 15px;
     }
 
-    .btn {
-        color: $text-color-muted;
-
+    .Button {
         &:hover {
             color: $danger-color;
         }

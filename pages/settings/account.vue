@@ -13,7 +13,7 @@
             />
             <Input v-model="newEmail" label="New Email" class="group"/>
 
-            <button v-async-click="[changeEmail]" class="btn btn-primary">Change Email</button>
+            <Button v-async-click="[changeEmail]" class="primary">Change Email</Button>
 
             <h3 class="modpanel__subtitle">Password</h3>
             <Input
@@ -38,11 +38,11 @@
                 required
             />
 
-            <button
+            <Button
                 v-async-click="[changePassword]"
-                class="btn btn-primary"
+                class="primary"
                 :disabled="!(currentPassword && newPassword && newPassword === newPasswordConfirmed)"
-            >Change Password</button>
+            >Change Password</Button>
         </div>
         <div class="col-sm-4"></div>
     </div>

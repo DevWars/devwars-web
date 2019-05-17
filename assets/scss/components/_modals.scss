@@ -4,7 +4,6 @@
         padding: $grid-gutter-width !important;
         background-color: $bg-color-3 !important;
         animation-duration: 250ms !important;
-
     }
 
     &-overlay {
@@ -17,12 +16,11 @@
 }
 
 .modal {
-
     &__actions {
         margin-top: $m-space;
         text-align: right;
 
-        .btn:not(:last-child) {
+        .Button:not(:last-child) {
             margin-right: $grid-gutter-part;
         }
     }

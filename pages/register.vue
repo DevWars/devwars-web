@@ -23,8 +23,8 @@
                     />
 
                     <div slot="actions">
-                        <button type="submit" class="btn btn-outline-white btn-block">REGISTER</button>
-                        <a href="/login" class="forgot">Already have an account?</a>
+                        <Button type="submit" class="outline block">REGISTER</Button>
+                        <Button href="/login" class="link muted">Already have an account?</Button>
                     </div>
                 </DevwarsCard>
             </form>
@@ -69,15 +69,5 @@ export default {
 
 .Register {
     padding-top: $l-space;
-
-    .forgot {
-        display: block;
-        margin-top: $s-space;
-        color: $text-color-muted;
-
-        &:hover {
-            color: $text-color-secondary;
-        }
-    }
 }
 </style>

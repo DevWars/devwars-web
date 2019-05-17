@@ -121,17 +121,17 @@
 
                 <FileChooser @change="crop">
                     <template #default="{update}">
-                        <button
+                        <Button
                             type="button"
-                            class="btn btn-outline-gray"
+                            class="outline muted"
                             @click="update"
-                        >Upload new avatar</button>
+                        >Upload new avatar</Button>
                     </template>
                 </FileChooser>
             </div>
         </div>
 
-        <button class="btn btn-primary" type="submit">Save</button>
+        <Button class="primary" type="submit">Save</Button>
     </form>
 </template>
 

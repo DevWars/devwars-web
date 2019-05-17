@@ -9,15 +9,13 @@
                         class="banner__versus"
                     >{{ teams[0].numPlayers }} VS {{ teams[1].numPlayers }}</div>
                 </div>
-                <a
+                <ButtonIcon
                     v-show="game.videoUrl"
                     :href="game.videoUrl"
-                    class="btn btn-icon btn-youtube"
                     target="_blank"
-                >
-                    <i class="fab fa-youtube"></i>
-                    <span>Watch on YouTube</span>
-                </a>
+                    icon="fab fa-youtube"
+                    class="youtube"
+                >Watch on YouTube</ButtonIcon>
             </div>
         </div>
 

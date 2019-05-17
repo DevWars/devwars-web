@@ -13,8 +13,8 @@
         <Input v-model="time" label="Time" class="group" required/>
 
         <div class="align-right">
-            <button type="button" class="btn btn-outline-gray" @click.prevent="close(false)">Cancel</button>
-            <button class="btn btn-primary">Create Schedule</button>
+            <Button type="button" class="muted link" @click.prevent="close(false)">Cancel</Button>
+            <Button class="primary">Create Schedule</Button>
         </div>
     </form>
 </template>

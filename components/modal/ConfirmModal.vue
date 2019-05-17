@@ -4,8 +4,8 @@
         <p>{{ description }}</p>
 
         <div class="modal__actions">
-            <button class="btn btn-link" @click="close(false)">{{ cancelText }}</button>
-            <button class="btn btn-primary" @click="close(true)">{{ confirmText }}</button>
+            <Button class="link muted" @click="close(false)">{{ cancelText }}</Button>
+            <Button class="primary" @click="close(true)">{{ confirmText }}</Button>
         </div>
     </div>
 </template>
