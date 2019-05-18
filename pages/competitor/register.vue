@@ -108,7 +108,7 @@
                         name="has-microphone"
                         class="group"
                         required
-                        @input="e => mic = e"
+                        @input="e => hasMic = e"
                     />
                 </Card>
 
@@ -148,7 +148,7 @@ export default {
 
     data: () => {
         return {
-            mic: false,
+            hasMic: false,
             tmp: {
                 profile: {},
                 skills: {},
@@ -208,6 +208,7 @@ export default {
         profile() {
             return this.$store.state.user.profile;
         },
+
         ...mapActions({
             error: 'toast/error',
         }),
@@ -222,13 +223,9 @@ export default {
 
     methods: {
         async submit() {
-            if (!this.getDiscord)
-                return this.$store.dispatch(
-                    'toast/error',
-                    'You must connect your discord before moving forward with your registration.'
-                );
+            if (!this.getDiscord) return this.$store.dispatch('toast/error', 'You must connect your Discord account');
 
-            if (!this.mic) return this.$store.dispatch('toast/error', 'you must check mic');
+            if (!this.hasMic) return this.$store.dispatch('toast/error', 'Microphone required to compete');
 
             const finalProfile = {
                 ...this.profile,
@@ -264,6 +261,7 @@ export default {
                 this.$store.dispatch('toast/errors', e);
             }
         },
+
         change(key, val) {
             const dest = key.split('.');
             if (dest.length !== 2) return console.error('shoud be a path in data');
