@@ -5,7 +5,7 @@
         }
     },
     "path-intellisense.mappings": {
-        "~": "${workspaceRoot}"
+        "@": "${workspaceRoot}"
     },
     "eslint.validate": [
         {

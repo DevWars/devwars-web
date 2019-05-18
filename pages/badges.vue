@@ -74,7 +74,7 @@ export default {
     //     },
     //     image(badge) {
     //         /* eslint-disable */
-    //         const url = `~/assets/img/badges/${badge.name
+    //         const url = `@/assets/img/badges/${badge.name
     //             .split(' ')
     //             .join('-')
     //             .toLowerCase()}.png`;

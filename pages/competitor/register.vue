@@ -125,16 +125,16 @@ import moment from 'moment';
 import * as countryList from 'country-list';
 import { mapActions } from 'vuex';
 
-import PageBanner from '~/components/layout/PageBanner';
-import Card from '~/components/Card';
-import Input from '~/components/form/Input';
-import Select from '~/components/form/Select';
-import LanguageSkills from '~/components/game/LanguageSkills';
-import ConnectToDiscord from '~/components/user/ConnectToDiscord';
-import Checkbox from '~/components/form/Checkbox';
-import { names } from '../../utils/auth';
+import PageBanner from '@/components/layout/PageBanner';
+import Card from '@/components/Card';
+import Input from '@/components/form/Input';
+import Select from '@/components/form/Select';
+import LanguageSkills from '@/components/game/LanguageSkills';
+import ConnectToDiscord from '@/components/user/ConnectToDiscord';
+import Checkbox from '@/components/form/Checkbox';
+import { names } from '@/utils/auth';
 
-import Http from '../../services/Http';
+import Http from '@/services/Http';
 
 export default {
     name: 'CompetitorRegistration',
