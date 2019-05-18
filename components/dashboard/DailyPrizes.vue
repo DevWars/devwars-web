@@ -3,7 +3,7 @@
         <div class="item">
             <div class="main">
                 <Column :xs="2" class="no-gutter">
-                    <Devcoins amount="500" class="xs"/>
+                    <Devcoins :amount="500" class="xs"/>
                 </Column>
                 <Column :xs="10" class="no-gutter">Submit 5 Objectives</Column>
             </div>
@@ -13,7 +13,7 @@
         <div class="item">
             <div class="main">
                 <Column :xs="2" class="no-gutter">
-                    <Devcoins amount="500" class="xs"/>
+                    <Devcoins :amount="500" class="xs"/>
                 </Column>
                 <Column :xs="10" class="no-gutter">Comment on a User Submission</Column>
             </div>

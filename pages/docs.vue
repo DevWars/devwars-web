@@ -765,7 +765,7 @@
                                     </td>
                                     <td>Awarded every 30 minutes</td>
                                     <td>
-                                        <Devcoins amount="2" class="xs"/>
+                                        <Devcoins :amount="2" class="xs"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -774,7 +774,7 @@
                                     </td>
                                     <td>Awarded every 30 minutes</td>
                                     <td>
-                                        <Devcoins amount="10" class="xs"/>
+                                        <Devcoins :amount="10" class="xs"/>
                                     </td>
                                 </tr>
                                 <tr>

@@ -1,7 +1,7 @@
 <template>
     <div>
         <PageBanner title="Shop">
-            <Devcoins amount="7400" class="lg"/>
+            <Devcoins :amount="7400" class="lg"/>
 
             <div slot="nav">
                 <div class="shop-nav">
@@ -36,7 +36,7 @@
                                     class="shop-card__desc"
                                 >Activate a quiz round during a live game show.</p>
                             </div>
-                            <Devcoins amount="232" class="sm"/>
+                            <Devcoins :amount="232" class="sm"/>
                         </div>
                     </Column>
                     <Column :lg="3" :md="4" :sm="6">
@@ -49,7 +49,7 @@
                                 <h2 class="shop-card__name">Crown of Prosperity</h2>
                                 <p class="shop-card__desc">+5 DevBit Earnings</p>
                             </div>
-                            <Devcoins amount="232" class="sm"/>
+                            <Devcoins :amount="232" class="sm"/>
                         </div>
                     </Column>
                     <Column :lg="3" :md="4" :sm="6">
@@ -62,7 +62,7 @@
                                 <h2 class="shop-card__name">Upload Avatar</h2>
                                 <p class="shop-card__desc">Allows upload of a custom avatar.</p>
                             </div>
-                            <Devcoins amount="232" class="sm"/>
+                            <Devcoins :amount="232" class="sm"/>
                         </div>
                     </Column>
                     <Column :lg="3" :md="4" :sm="6">
@@ -77,7 +77,7 @@
                                     class="shop-card__desc"
                                 >Protects 5%-30% of your gambled assets on your next bet.</p>
                             </div>
-                            <Devcoins amount="232" class="sm"/>
+                            <Devcoins :amount="232" class="sm"/>
                         </div>
                     </Column>
                     <Column :lg="3" :md="4" :sm="6">
@@ -90,7 +90,7 @@
                                 <h2 class="shop-card__name">Name Tag</h2>
                                 <p class="shop-card__desc">Allows for 1 username change.</p>
                             </div>
-                            <Devcoins amount="232" class="sm"/>
+                            <Devcoins :amount="232" class="sm"/>
                         </div>
                     </Column>
                     <Column :lg="3" :md="4" :sm="6">
@@ -105,7 +105,7 @@
                                     class="shop-card__desc"
                                 >Place a song request to play on the live stream.</p>
                             </div>
-                            <Devcoins amount="232" class="sm"/>
+                            <Devcoins :amount="232" class="sm"/>
                         </div>
                     </Column>
                     <Column :lg="3" :md="4" :sm="6">
@@ -120,7 +120,7 @@
                                     class="shop-card__desc"
                                 >Enter for a chance to win the weekly DevWars Jackpot.</p>
                             </div>
-                            <Devcoins amount="232" class="sm"/>
+                            <Devcoins :amount="232" class="sm"/>
                         </div>
                     </Column>
                 </Row>
