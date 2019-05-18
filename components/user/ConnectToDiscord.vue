@@ -25,9 +25,9 @@ export default {
 
     data: () => {
         return {
-            discordUrl: `https://discordapp.com/api/oauth2/authorize?client_id=${process.env.clientID}&redirect_uri=${
-                process.env.apiUrl
-            }/oauth/discord&response_type=code&scope=identify`,
+            discordUrl: `https://discordapp.com/api/oauth2/authorize?client_id=${
+                process.env.discordClient
+            }&redirect_uri=${process.env.apiUrl}/oauth/discord&response_type=code&scope=identify`,
         };
     },
 

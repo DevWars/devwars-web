@@ -5,11 +5,11 @@ const parser = require('body-parser');
 
 const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
 const apiUrl = process.env.API_URL || 'http://localhost:8080';
-const clientID = process.env.CLIENT_ID || '';
+const discordClient = process.env.DISCORD_CLIENT || '';
 
 module.exports = {
     mode: 'universal',
-    env: { baseUrl, apiUrl, clientID },
+    env: { baseUrl, apiUrl, discordClient },
     /*
      ** Headers of the page
      */
