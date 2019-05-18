@@ -1,12 +1,12 @@
 <template>
     <Card class="plain dark">
         <form>
-            <h3 class="modpanel__subtitle">Schedule</h3>
+            <h3>Schedule</h3>
             <Input v-model="date" label="Date" class="group"/>
 
             <Input v-model="time" label="Time" class="group"/>
 
-            <h3 class="modpanel__subtitle">Game</h3>
+            <h3>Game</h3>
 
             <Select v-model="schedule.mode" label="Game mode" class="group">
                 <option value="Classic">Classic</option>
@@ -16,7 +16,7 @@
 
             <Input v-model="schedule.title" label="Theme" class="group"/>
 
-            <h3 class="modpanel__subtitle">Objectives</h3>
+            <h3>Objectives</h3>
             <div v-for="objective in schedule.objectives" :key="objective.id" class="objective">
                 <Input
                     v-model="objective.description"

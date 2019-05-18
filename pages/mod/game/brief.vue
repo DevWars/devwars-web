@@ -16,7 +16,7 @@
         <!-- <Card>
             <div class="mod-card__header">
                 <h4
-                    class="modpanel__subtitle"
+
                     style="margin-bottom: 0"
                 >({{ applications.length }}) Applicants</h4>
                 <Button class="outline primary" @click="addRegistrant">Add Registrant</Button>
@@ -49,7 +49,7 @@
                 <td>
                     <Devcoins :amount="applicant.stats.coins" class="xs"/>
                 </td>
-                <td class="modpanel-table__actions">
+                <td>
                     <ButtonIcon
                         href="#edit"
                         icon="fa fa-caret-down"

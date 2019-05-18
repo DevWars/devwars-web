@@ -2,7 +2,7 @@
     <form v-if="user && profile" v-async-submit="[save]">
         <Row>
             <Column :md="8">
-                <h3 class="modpanel__subtitle">Profile</h3>
+                <h3>Profile</h3>
                 <Row>
                     <Column :md="6">
                         <Input
@@ -96,7 +96,7 @@
                     @input="updateForm({values: $event, key: 'websiteUrl'})"
                 />
 
-                <h3 class="modpanel__subtitle">Work</h3>
+                <h3>Work</h3>
                 <Input
                     v-model="company"
                     label="Company"
@@ -115,7 +115,7 @@
                 <LanguageSkills :profile="profile" @change="updateForm"/>
             </Column>
             <Column :md="4">
-                <h3 class="modpanel__subtitle">Avatar</h3>
+                <h3>Avatar</h3>
 
                 <Avatar v-if="user" :user="user" class="xl"/>
 

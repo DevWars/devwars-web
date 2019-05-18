@@ -1,7 +1,7 @@
 <template>
     <Card class="plain dark">
         <form>
-            <h3 class="modpanel__subtitle">Game</h3>
+            <h3>Game</h3>
             <Select v-model="game.mode" label="Game mode" class="group">
                 <option value="Classic">Classic</option>
                 <option value="Zen Garden">Zen Garden</option>
@@ -10,7 +10,7 @@
 
             <Input v-model="game.title" label="Theme" class="group"/>
 
-            <h3 class="modpanel__subtitle">Objectives</h3>
+            <h3>Objectives</h3>
             <div v-for="objective in game.objectives" :key="objective.id" class="objective">
                 <Input
                     v-model="objective.description"
@@ -28,7 +28,7 @@
                 />
             </div>
 
-            <h3 v-if="game.title === 'Zen Garden'" class="modpanel__subtitle">Zen Garden HTML</h3>
+            <h3 v-if="game.title === 'Zen Garden'">Zen Garden HTML</h3>
             <Textarea
                 v-if="game.title === 'Zen Garden'"
                 v-model="game.languageTemplates.html"
@@ -37,10 +37,10 @@
                 rows="10"
             />
 
-            <h3 class="modpanel__subtitle">Media</h3>
+            <h3>Media</h3>
             <Input v-model="game.videoUrl" label="YouTube URL" class="group"/>
 
-            <h3 class="modpanel__subtitle">Votes</h3>
+            <h3>Votes</h3>
             <Row>
                 <Column v-for="team in teams" :key="team.id" :sm="6">
                     <div v-for="vote in team.votes" :key="vote.id">
@@ -58,7 +58,7 @@
             </Row>
 
             <!--
-            <h3 class="modpanel__subtitle">Files</h3>
+            <h3>Files</h3>
             <Row>
                 <Column :sm="6">
                     <Input type="file" label="Blue Files" class="group"/>

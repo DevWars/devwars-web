@@ -5,7 +5,7 @@
         <div class="footer-offset">
             <Container>
                 <Card class="plain dark">
-                    <h3 class="modpanel__subtitle">Verify your email address</h3>
+                    <h3>Verify your email address</h3>
                     <p>
                         Confirm your email by clicking the verification link we sent to your inbox.
                         Don't forget to

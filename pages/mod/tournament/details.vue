@@ -1,10 +1,10 @@
 <template>
     <Card class="plain dark">
         <form>
-            <h3 class="modpanel__subtitle">Main</h3>
+            <h3>Main</h3>
             <Input v-model="tournament.name" label="Tournament Name" class="group"/>
 
-            <h3 class="modpanel__subtitle">Prizes</h3>
+            <h3>Prizes</h3>
             <Input label="1st Place Prize" class="group"/>
             <Input label="2nd Place Prize" class="group"/>
             <Input label="3rd Place Prize" class="group"/>

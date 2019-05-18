@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div class="modpanel__header">
-            <div class="modpanel__header-main">
-                <h1 class="modpanel__header-title">{{ tournament.timestamp | moment('mediumDate')}}</h1>
-                <h2 class="modpanel__header-subtitle">
+        <div>
+            <div>
+                <h1>{{ tournament.timestamp | moment('mediumDate')}}</h1>
+                <h2>
                     #{{ tournament.id }}
                     &nbsp;&nbsp;/&nbsp;&nbsp;
                     S{{ tournament.season}}
@@ -16,7 +16,7 @@
                 </h2>
             </div>
 
-            <ButtonGroup class="modpanel__header-actions">
+            <ButtonGroup>
                 <Button href="/mod/tournaments" class="outline muted">Back</Button>
                 <Button
                     v-if="tournament.active && !tournament.done"

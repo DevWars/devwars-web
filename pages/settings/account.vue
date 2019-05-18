@@ -3,7 +3,7 @@
         <Column :sm="8">
             <Input v-model="user.username" label="Username" class="group"/>
 
-            <h3 class="modpanel__subtitle">Email</h3>
+            <h3>Email</h3>
             <Input
                 v-model="emailCurrentPassword"
                 type="password"
@@ -15,7 +15,7 @@
 
             <Button v-async-click="[changeEmail]" class="primary">Change Email</Button>
 
-            <h3 class="modpanel__subtitle">Password</h3>
+            <h3>Password</h3>
             <Input
                 v-model="currentPassword"
                 type="password"

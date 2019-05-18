@@ -5,7 +5,7 @@
         <div class="footer-offset">
             <Container>
                 <Card class="plain dark">
-                    <h3 class="modpanel__title">You are already registered as a Competitor</h3>
+                    <h3>You are already registered as a Competitor</h3>
                     <p>Want to compete in an upcoming game?</p>
                     <ButtonGroup class="mt-30">
                         <Button href="/schedule" class="primary">View schedule</Button>
