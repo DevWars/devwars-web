@@ -5,27 +5,28 @@
         <div class="footer-offset">
             <Container>
                 <Card class="plain dark" title="About You">
-                    <div class="row">
-                        <div class="col-sm-6 form-group">
+                    <Row>
+                        <Column :sm="6">
                             <Input
                                 v-model="profile.firstName"
+                                label="First Name"
+                                class="group"
                                 required
                                 @input="e => change('profile.firstName', e)"
                             />
-                            <label>First name</label>
-                        </div>
-                        <div class="col-sm-6 form-group">
+                        </Column>
+                        <Column :sm="6">
                             <Input
                                 v-model="profile.lastName"
+                                label="Last Name"
+                                class="group"
                                 required
                                 @input="e => change('profile.lastName', e)"
                             />
-                            <label>Last name</label>
-                        </div>
-                    </div>
+                        </Column>
+                    </Row>
                     <Row>
                         <Column :sm="3">
-                            {{profile.country}}
                             <Select
                                 v-model="profile.country"
                                 label="Select Country"
@@ -300,6 +301,10 @@ export default {
     .actions {
         text-align: center;
         margin-top: $m-space;
+    }
+
+    .ConnectToDiscord {
+        margin-bottom: 30px;
     }
 }
 </style>

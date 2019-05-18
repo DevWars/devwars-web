@@ -1,16 +1,18 @@
 <template>
-    <ButtonIcon
-        v-if="!hasDiscord"
-        :href="discordUrl"
-        icon="fab fa-discord"
-        class="discord"
-    >Connect Discord</ButtonIcon>
-    <ButtonIcon
-        v-else
-        class="outline success"
-        icon="fa fa-check"
-        @click="removeProvider('DISCORD')"
-    >Discord Connected</ButtonIcon>
+    <div class="ConnectToDiscord">
+        <ButtonIcon
+            v-if="!hasDiscord"
+            :href="discordUrl"
+            icon="fab fa-discord"
+            class="discord"
+        >Connect Discord</ButtonIcon>
+        <ButtonIcon
+            v-else
+            class="outline success"
+            icon="fa fa-check"
+            @click="removeProvider('DISCORD')"
+        >Discord Connected</ButtonIcon>
+    </div>
 </template>
 
 

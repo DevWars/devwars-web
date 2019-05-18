@@ -53,6 +53,7 @@ $checkbox-size: 35px;
             padding: 0;
             margin-bottom: 0;
             pointer-events: initial;
+            user-select: none;
             cursor: pointer;
         }
 
