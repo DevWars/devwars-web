@@ -35,8 +35,8 @@
         </p>
 
         <ButtonGroup class="modal__actions">
-            <button class="outline muted" @click="close(false)">Nevermind</button>
-            <button class="primary" @click="enter(schedule)">Enter</button>
+            <Button class="outline muted" @click="close(false)">Nevermind</Button>
+            <Button class="primary" @click="enter(schedule)">Enter</Button>
         </ButtonGroup>
     </div>
 </template>

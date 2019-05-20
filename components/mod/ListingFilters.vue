@@ -8,7 +8,7 @@
         </div>
 
         <div class="actions">
-            <button class="fal fa-cog"></button>
+            <Button class="link fal fa-cog"/>
         </div>
     </div>
 </template>
