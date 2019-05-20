@@ -1,10 +1,12 @@
 <template>
     <Button class="ButtonIcon" v-bind="$attrs" @click.native="$emit('click')">
-        <div v-if="image" class="image">
-            <slot name="image"></slot>
+        <div class="inner">
+            <div v-if="image" class="image">
+                <slot name="image"></slot>
+            </div>
+            <i v-if="icon" class="icon" :class="icon"></i>
+            <slot></slot>
         </div>
-        <i v-if="icon" class="icon" :class="icon"></i>
-        <slot></slot>
     </Button>
 </template>
 
@@ -31,8 +33,10 @@ export default {
 @import 'utils.scss';
 
 .ButtonIcon {
-    display: flex;
-    align-items: center;
+    .inner {
+        display: flex;
+        align-items: center;
+    }
 
     .icon {
         padding-right: 10px;
