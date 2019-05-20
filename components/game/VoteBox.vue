@@ -33,7 +33,7 @@
 
 <script>
 import SubScore from '@/components/game/SubScore';
-import { vote_analysis_for_team } from '../../utils/objectives';
+import { voteAnalysisForTeam } from '../../utils/objectives';
 
 export default {
     name: 'VoteBox',
@@ -77,7 +77,7 @@ export default {
     },
     methods: {
         analysisForTeam(team, otherTeam) {
-            return vote_analysis_for_team(team, otherTeam, this.category);
+            return voteAnalysisForTeam(team, otherTeam, this.category);
         },
     },
 };
