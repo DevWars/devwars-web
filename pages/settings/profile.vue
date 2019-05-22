@@ -73,12 +73,30 @@
                     </Column>
                 </Row>
 
-                <Input
-                    v-model="dob"
-                    label="Date of Birth"
-                    class="group"
-                    @input="updateForm({values: $event, key: 'dob'})"
-                />
+                <Row>
+                    <Column :md="8">
+                        <Input
+                            v-model="dob"
+                            label="Date of Birth"
+                            class="group"
+                            @input="updateForm({values: $event, key: 'dob'})"
+                        />
+                    </Column>
+
+                    <Column :md="4">
+                        <Select
+                            v-model="sex"
+                            label="Sex"
+                            @input="updateForm({values: $event, key: 'sex'})"
+                        >
+                            <option
+                                v-for="(sex, index) in sexes"
+                                :key="sex"
+                                :value="index"
+                            >{{ sex }}</option>
+                        </Select>
+                    </Column>
+                </Row>
 
                 <Textarea
                     v-model="about"
@@ -156,6 +174,7 @@ export default {
     data: () => {
         return {
             countries: Object.keys(countryList().getNameList()).map((it) => it[0].toUpperCase() + it.slice(1)),
+            sexes: ['Male', 'Female', 'Other'],
         };
     },
 
@@ -170,6 +189,7 @@ export default {
             zip: (state) => state.user.profile.zip,
             country: (state) => state.user.profile.country,
             dob: (state) => state.user.profile.dob,
+            sex: (state) => state.user.profile.sex,
             about: (state) => state.user.profile.about,
             websiteUrl: (state) => state.user.profile.websiteUrl,
             company: (state) => state.user.profile.company,

@@ -25,19 +25,6 @@
                             />
                         </Column>
                     </Row>
-                    <Row>
-                        <Column :sm="3">
-                            <Select
-                                v-model="profile.country"
-                                label="Select Country"
-                                class="group"
-                                required
-                                @change="e => change('profile.country', e)"
-                            >
-                                <option v-for="country in countries" :key="country">{{ country }}</option>
-                            </Select>
-                        </Column>
-                    </Row>
 
                     <Row>
                         <Column :sm="6">
@@ -79,6 +66,33 @@
                                 </Column>
                             </Row>
                         </Column>
+                        <Column :md="3">
+                            <Select
+                                v-model="sex"
+                                label="Sex"
+                                @change="e => change('profile.sex', e)"
+                            >
+                                <option
+                                    v-for="(sex, index) in sexes"
+                                    :key="sex"
+                                    :value="index"
+                                >{{ sex }}</option>
+                            </Select>
+                        </Column>
+                        <Column :sm="3">
+                            <Select
+                                v-model="profile.country"
+                                label="Select Country"
+                                class="group"
+                                required
+                                @change="e => change('profile.country', e)"
+                            >
+                                <option v-for="country in countries" :key="country">{{ country }}</option>
+                            </Select>
+                        </Column>
+                    </Row>
+
+                    <Row>
                         <Column :sm="6">
                             <Input
                                 v-model="profile.company"
@@ -154,6 +168,7 @@ export default {
                 skills: {},
             },
             countries: Object.keys(countryList().getNameList()).map((it) => it[0].toUpperCase() + it.slice(1)),
+            sexes: ['Male', 'Female', 'Other'],
         };
     },
 
