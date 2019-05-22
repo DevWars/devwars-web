@@ -34,14 +34,6 @@ export default {
             return <nuxt-link to={this.$attrs.to}>{this.$slots.default}</nuxt-link>;
         }
 
-        return h(
-            tag,
-            {
-                onNative: {
-                    click: this.$emit('click'),
-                },
-            },
-            this.$slots.default
-        );
+        return h(tag, this.$slots.default);
     },
 };
