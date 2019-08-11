@@ -18,6 +18,7 @@ export default {
 @import 'utils.scss';
 $colors: (
     primary: $brand-primary,
+    secondary: $brand-secondary,
     success: #2ecc71,
     warning: #f1c40f,
     danger: #e74c3c,
