@@ -20,9 +20,9 @@
                     <li>
                         <nuxt-link to="/games">Games</nuxt-link>
                     </li>
-                    <li>
+                    <!-- <li>
                         <nuxt-link to="/leaderboards">Leaderboards</nuxt-link>
-                    </li>
+                    </li>-->
                 </ul>
                 <ul>
                     <li>RESOURCES</li>

@@ -10,7 +10,7 @@
             <Button to="/" class="link block" @click="toggleMobileMenu">Home</Button>
             <Button to="/games" class="link block" @click="toggleMobileMenu">Games</Button>
             <Button to="/schedule" class="link block" @click="toggleMobileMenu">Schedule</Button>
-            <Button to="/leaderboards" class="link block" @click="toggleMobileMenu">Leaders</Button>
+            <!-- <Button to="/leaderboards" class="link block" @click="toggleMobileMenu">Leaders</Button> -->
 
             <div v-if="!user" class="actions">
                 <Button to="/register" class="primary block">Register</Button>

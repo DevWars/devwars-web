@@ -20,9 +20,9 @@
                         <li class="nav__item">
                             <nuxt-link to="/schedule" class="nav__link">Schedule</nuxt-link>
                         </li>
-                        <li class="nav__item">
+                        <!-- <li class="nav__item">
                             <nuxt-link to="/leaderboards" class="nav__link">Leaders</nuxt-link>
-                        </li>
+                        </li>-->
                         <li class="nav__item">
                             <nuxt-link to="/docs" class="nav__link">About</nuxt-link>
                         </li>
