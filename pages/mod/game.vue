@@ -1,9 +1,6 @@
 <template>
     <div>
-        <PanelHeader
-            :title="game.startTime | moment('mediumDate')"
-            :subtitle="`#${game.id} / S${game.season} / ${game.mode}`"
-        >
+        <PanelHeader :title="startDate" :subtitle="`@ ${startTime} UTC`">
             <ButtonGroup>
                 <Button to="/mod/games" class="outline muted">Back</Button>
                 <Button
@@ -32,6 +29,7 @@
 
 
 <script>
+import moment from 'moment';
 import Http from '../../services/Http';
 import Tabs from '@/components/Tabs';
 import PanelHeader from '@/components/mod/PanelHeader';
@@ -52,7 +50,16 @@ export default {
 
     computed: {
         game() {
-            return this.$store.state.game.game;
+            const games = this.$store.state.game.game;
+            return Array(games).find((game) => game.id === Number(this.$route.query.game));
+        },
+
+        startDate() {
+            return moment(this.game.startTime).format('MM/DD/YYYY');
+        },
+
+        startTime() {
+            return moment(this.game.startTime).format('HH:mm');
         },
 
         isActive() {

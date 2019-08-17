@@ -15,32 +15,21 @@
                 <Input
                     v-model="objective.description"
                     :label="`Objective ${objective.id}`"
-                    class="group"
                     maxlength="110"
                 />
-
                 <SquareToggle
-                    v-for="team of teams"
-                    :key="team.id"
-                    :name="team.name"
-                    :active="!!teamCompletedObjective(team.id, objective)"
-                    @change="toggleObjective(team.id, objective.id)"
+                    :active="objective.isBonus"
+                    name="bonus"
+                    @change="objectiveUpdate($event, objective.id)"
                 />
+                <Button class="link muted" @click.prevent="objectiveDelete(objective.id)">DELETE</Button>
             </div>
-
-            <h3 v-if="game.title === 'Zen Garden'">Zen Garden HTML</h3>
-            <Textarea
-                v-if="game.title === 'Zen Garden'"
-                v-model="game.languageTemplates.html"
-                label="HTML Code"
-                class="group"
-                rows="10"
-            />
+            <Button class="outline" @click="objectiveAdd">Add Objective</Button>
 
             <h3>Media</h3>
             <Input v-model="game.videoUrl" label="YouTube URL" class="group"/>
 
-            <h3>Votes</h3>
+            <!-- <h3>Votes</h3>
             <Row>
                 <Column v-for="team in teams" :key="team.id" :sm="6">
                     <div v-for="vote in team.votes" :key="vote.id">
@@ -55,7 +44,7 @@
                         />
                     </div>
                 </Column>
-            </Row>
+            </Row>-->
 
             <!--
             <h3>Files</h3>
@@ -76,10 +65,8 @@
 import Card from '@/components/Card';
 import Input from '@/components/form/Input';
 import Select from '@/components/form/Select';
-import Textarea from '@/components/form/Textarea';
 import SquareToggle from '../../../components/SquareToggle';
 import { teams } from '@/utils/mixins';
-import { teamCompletedObjective } from '@/utils';
 import { names } from '../../../utils/auth';
 
 export default {
@@ -89,7 +76,7 @@ export default {
         auth: names.MODERATOR,
     },
 
-    components: { Card, SquareToggle, Input, Select, Textarea },
+    components: { Card, SquareToggle, Input, Select },
 
     mixins: [teams],
 
@@ -100,34 +87,69 @@ export default {
 
     computed: {
         game() {
-            return this.$store.state.game.game;
+            const games = this.$store.state.game.game;
+            return Array(games).find((game) => game.id === Number(this.$route.query.game));
         },
     },
 
     methods: {
-        teamCompletedObjective,
+        objectiveUpdate(value, objectiveId) {
+            this.$store.commit('game/updateScheduleObjective', {
+                value,
+                objectiveId,
+                scheduleId: this.schedule.id,
+            });
+        },
 
-        toggleObjective(teamId, objectiveId) {
-            const objectives = this.game.teams[teamId].objectives;
+        objectiveAdd() {
+            let id = 1;
+            Object.keys(this.schedule.objectives).map((obj) => {
+                id = this.schedule.objectives[obj].id;
+            });
+            this.$store.commit('game/addScheduleObjective', {
+                scheduleId: this.schedule.id,
+                objective: {
+                    id: id + 1,
+                    description: '',
+                    isBonus: false,
+                },
+            });
+        },
 
-            if (objectives[objectiveId] === 'complete') {
-                objectives[objectiveId] = 'incomplete';
-            } else {
-                objectives[objectiveId] = 'complete';
-            }
+        objectiveDelete(objectiveId) {
+            this.$store.commit('game/deleteScheduleObjective', {
+                scheduleId: this.schedule.id,
+                objectiveId,
+            });
         },
     },
 };
 </script>
 
 <style lang="scss" scoped>
+@import 'utils.scss';
+
 form {
     max-width: 500px;
 }
 
 .objective {
     display: flex;
-    width: 100%;
+    margin-bottom: 15px;
+
+    & > :not(.Input) {
+        @extend %align-baseline-to-input-with-labels;
+    }
+
+    .Input {
+        margin-right: 15px;
+    }
+
+    .Button {
+        &:hover {
+            color: $danger-color;
+        }
+    }
 }
 </style>
 

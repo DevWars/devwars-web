@@ -6,6 +6,7 @@
             :class="[{ empty: !valid },  { valid }]"
             v-bind="$attrs"
             @change="e => [$emit('change', e.target.value), inputChange(e.target.value)]"
+            @input="e => $emit('input', e.target.value)"
         >
             <slot></slot>
         </select>

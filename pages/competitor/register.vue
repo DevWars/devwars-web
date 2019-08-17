@@ -28,7 +28,7 @@
 
                     <Row>
                         <Column :sm="6">
-                            <Row class="dob">
+                            <!-- <Row class="dob">
                                 <Column :sm="4">
                                     <label>Date of birth</label>
                                 </Column>
@@ -64,7 +64,7 @@
                                         @input="e => year = e"
                                     />
                                 </Column>
-                            </Row>
+                            </Row>-->
                         </Column>
                         <Column :md="3">
                             <Select
@@ -136,7 +136,7 @@
 
 
 <script>
-import moment from 'moment';
+// import moment from 'moment';
 import * as countryList from 'country-list';
 import { mapActions } from 'vuex';
 
@@ -148,8 +148,6 @@ import LanguageSkills from '@/components/game/LanguageSkills';
 import ConnectToDiscord from '@/components/user/ConnectToDiscord';
 import Checkbox from '@/components/form/Checkbox';
 import { names } from '@/utils/auth';
-
-import Http from '@/services/Http';
 
 export default {
     name: 'CompetitorRegistration',
@@ -173,7 +171,7 @@ export default {
     },
 
     computed: {
-        discord() {
+        getDiscord() {
             return this.$store.getters['user/getDiscord'];
         },
 
@@ -181,44 +179,44 @@ export default {
             return this.$store.state.user.linkedAccounts;
         },
 
-        day: {
-            get() {
-                return new Date(this.profile.dob).getUTCDate();
-            },
-            set(val) {
-                this.tmp.dob = {
-                    day: val,
-                    month: this.month,
-                    year: this.year,
-                };
-            },
-        },
+        // day: {
+        //     get() {
+        //         return new Date(this.profile.dob).getUTCDate();
+        //     },
+        //     set(val) {
+        //         this.tmp.dob = {
+        //             day: val,
+        //             month: this.month,
+        //             year: this.year,
+        //         };
+        //     },
+        // },
 
-        month: {
-            get() {
-                return new Date(this.profile.dob).getUTCMonth();
-            },
-            set(val) {
-                this.tmp.dob = {
-                    day: this.day,
-                    month: val,
-                    year: this.year,
-                };
-            },
-        },
+        // month: {
+        //     get() {
+        //         return new Date(this.profile.dob).getUTCMonth();
+        //     },
+        //     set(val) {
+        //         this.tmp.dob = {
+        //             day: this.day,
+        //             month: val,
+        //             year: this.year,
+        //         };
+        //     },
+        // },
 
-        year: {
-            get() {
-                return new Date(this.profile.dob).getUTCFullYear();
-            },
-            set(val) {
-                this.tmp.dob = {
-                    day: this.day,
-                    month: this.month,
-                    year: val,
-                };
-            },
-        },
+        // year: {
+        //     get() {
+        //         return new Date(this.profile.dob).getUTCFullYear();
+        //     },
+        //     set(val) {
+        //         this.tmp.dob = {
+        //             day: this.day,
+        //             month: this.month,
+        //             year: val,
+        //         };
+        //     },
+        // },
 
         profile() {
             return this.$store.state.user.profile;
@@ -238,9 +236,13 @@ export default {
 
     methods: {
         async submit() {
-            if (!this.getDiscord) return this.$store.dispatch('toast/error', 'You must connect your Discord account');
+            if (!this.discord) {
+                return this.$store.dispatch('toast/error', 'You must connect your Discord account');
+            }
 
-            if (!this.hasMic) return this.$store.dispatch('toast/error', 'Microphone required to compete');
+            if (!this.hasMic) {
+                return this.$store.dispatch('toast/error', 'Microphone required to compete');
+            }
 
             const finalProfile = {
                 ...this.profile,
@@ -250,27 +252,29 @@ export default {
                 ...this.profile.skills,
                 ...this.tmp.skills,
             };
-            let date = this.profile.dob;
-            if (this.tmp.dob) {
-                const { year, month, day } = this.tmp.dob;
-                // const finalDob = new Date(Date.UTC(year, month - 1, day));
-                // TODO: we should discuss about it here i am not sure i format well the date
-                date = moment.utc(`${month} ${day} ${year}`, 'MM DD YYYY').startOf('day');
-                date = date.unit() * 1000;
-            }
+            // let date = this.profile.dob;
+            // if (this.tmp.dob) {
+            //     const { year, month, day } = this.tmp.dob;
+            //     // const finalDob = new Date(Date.UTC(year, month - 1, day));
+            //     // TODO: we should discuss about it here i am not sure i format well the date
+            //     date = moment.utc(`${month} ${day} ${year}`, 'MM DD YYYY');
+            //     // date = date.unit() * 1000;
+            // }
 
             try {
-                const competitor = {
+                const userProfile = {
                     ...finalProfile,
                     skills: finalSkills,
-                    dob: date,
+                    // dob: date,
                 };
-                await Http.for(`user/${this.user.id}/competitor`).save(competitor);
+                console.log(userProfile);
+                await this.$axios.patch(`/user/${this.user.id}/profile`, userProfile);
+                console.log('DID THE PATCH');
+
                 if (this.schedule) {
                     await this.$store.dispatch('game/apply', this.schedule);
                 }
 
-                console.log(competitor);
                 this.$store.dispatch('toast/success', `Congratulations! You are now a competitor!`);
             } catch (e) {
                 this.$store.dispatch('toast/errors', e);

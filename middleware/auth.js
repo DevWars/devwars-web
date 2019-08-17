@@ -24,7 +24,8 @@ export default ({ store, route, redirect, error }) => {
                 });
             }
 
-            if (role === 'PENDING' && route.name !== 'pending') return redirect('/pending');
+            // Temporarily remove PENDING check
+            // if (role === 'PENDING' && route.name !== 'pending') return redirect('/pending');
 
             if (meta.limit && !sameRole(role, meta.auth)) {
                 if (meta.redirectIfNot) return redirect(meta.redirectIfNot);

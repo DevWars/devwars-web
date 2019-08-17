@@ -13,7 +13,7 @@
         <Input v-model="time" label="Time" class="group" required/>
 
         <ButtonGroup class="modal__actions">
-            <Button type="button" class="muted link" @click.prevent="close(false)">Cancel</Button>
+            <!-- <Button type="button" class="muted link" @click.prevent="close(false)">Cancel</Button> -->
             <Button class="primary">Create Schedule</Button>
         </ButtonGroup>
     </form>

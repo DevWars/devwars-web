@@ -49,9 +49,9 @@ export default {
     data: (vm) => {
         return {
             languages: [
-                { name: 'html', skill: vm.profile.skills.html },
-                { name: 'css', skill: vm.profile.skills.css },
-                { name: 'js', skill: vm.profile.skills.js },
+                { name: 'html', skill: vm.profile.skills ? vm.profile.skills.html : 1 },
+                { name: 'css', skill: vm.profile.skills ? vm.profile.skills.css : 1 },
+                { name: 'js', skill: vm.profile.skills ? vm.profile.skills.js : 1 },
             ],
             skillNames: ['Novice', 'Beginner', 'Intermediate', 'Advanced', 'Expert'],
             htmlTooltips: [

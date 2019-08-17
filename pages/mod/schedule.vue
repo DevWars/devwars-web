@@ -4,7 +4,13 @@
             <ButtonGroup>
                 <Button to="/mod/schedules" class="outline muted">Back</Button>
                 <Button v-if="viewingSetupPage" v-async-click="[save]" class="primary">Save</Button>
-                <Button v-if="user.role === 'ADMIN'" class="danger" disabled>Delete</Button>
+                <Button
+                    v-if="schedule.status !== 1"
+                    v-async-click="[activate]"
+                    class="success"
+                >Activate</Button>
+                <Button v-if="schedule.status === 1" v-async-click="[end]" class="danger">End</Button>
+                <Button v-if="user.role === 'ADMIN'" class="outline danger" disabled>Delete</Button>
             </ButtonGroup>
         </PanelHeader>
 
@@ -64,6 +70,16 @@ export default {
     methods: {
         async save() {
             await this.$axios.patch(`/schedules/${this.schedule.id}`, this.schedule);
+        },
+
+        async activate() {
+            const schedule = this.schedule;
+            schedule.season = 3;
+            await this.$axios.post(`/schedules/${this.schedule.id}/activate`, schedule);
+        },
+
+        async end() {
+            await this.$axios.post(`/schedules/${this.schedule.id}/end`);
         },
     },
 };

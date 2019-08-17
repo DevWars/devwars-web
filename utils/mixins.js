@@ -2,6 +2,8 @@
 export const teams = {
     computed: {
         teams() {
+            if (!this.game.teams) return null;
+
             return Object.values(this.game.teams).reduce((teams, team) => {
                 const players = Object.values(this.game.players).reduce((players, player) => {
                     if (player.team === team.id) {
@@ -10,15 +12,23 @@ export const teams = {
                     return players;
                 }, {});
 
+                let scores = {};
+                let isWinner;
+                if (this.game.meta && this.game.meta.teamScores) {
+                    scores = {
+                        total: Math.floor(Math.random() * 10),
+                        objectives: this.game.meta.teamScores[team.id].objectives,
+                    };
+
+                    isWinner = this.game.meta.winningTeam === team.id;
+                }
+
                 teams[team.id] = {
                     ...team,
                     players,
                     numPlayers: Object.values(players).length,
-                    scores: {
-                        total: Math.floor(Math.random() * 10),
-                        objectives: this.game.meta.teamScores[team.id].objectives,
-                    },
-                    isWinner: this.game.meta.winningTeam === team.id,
+                    scores,
+                    isWinner,
                 };
 
                 return teams;

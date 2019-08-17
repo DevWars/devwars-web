@@ -1,45 +1,50 @@
 <template>
-    <HomeCard title="Last Game Recap">
-        <div class="header">
-            <div class="team">
-                <div class="team-logo blue"></div>
+    <div>
+        <HomeCard v-if="team" title="Last Game Recap">
+            <div class="header">
+                <div class="team">
+                    <div class="team-logo blue"></div>
+                </div>
+                <div class="score">
+                    <div class="gamemode">{{ game.mode }}</div>
+                    <div
+                        v-for="team in game.teams"
+                        :key="team.id"
+                        class="points"
+                    >{{ getScoreByGameTeam(game, team) }}</div>
+                </div>
+                <div class="team">
+                    <div class="team-logo red"></div>
+                </div>
             </div>
-            <div class="score">
-                <div class="gamemode">{{ game.mode }}</div>
-                <div
+
+            <div class="matchup">
+                <ul
                     v-for="team in game.teams"
                     :key="team.id"
-                    class="points"
-                >{{ getScoreByGameTeam(game, team) }}</div>
+                    class="players"
+                    :class="{blue: team.name === 'blue', red: team.name === 'red'}"
+                >
+                    <li
+                        v-for="player in getPlayersByGameTeam(game, team)"
+                        :key="player.id"
+                    >{{ player.username }}</li>
+                </ul>
+                <ul class="pos">
+                    <li class="html">HTML</li>
+                    <li class="css">CSS</li>
+                    <li class="js">JS</li>
+                </ul>
             </div>
-            <div class="team">
-                <div class="team-logo red"></div>
-            </div>
-        </div>
 
-        <div class="matchup">
-            <ul
-                v-for="team in game.teams"
-                :key="team.id"
-                class="players"
-                :class="{blue: team.name === 'blue', red: team.name === 'red'}"
-            >
-                <li
-                    v-for="player in getPlayersByGameTeam(game, team)"
-                    :key="player.id"
-                >{{ player.username }}</li>
-            </ul>
-            <ul class="pos">
-                <li class="html">HTML</li>
-                <li class="css">CSS</li>
-                <li class="js">JS</li>
-            </ul>
-        </div>
-
-        <ButtonGroup>
-            <Button to="/games" class="outline primary">View Full Game</Button>
-        </ButtonGroup>
-    </HomeCard>
+            <ButtonGroup>
+                <Button to="/games" class="outline primary">View Full Game</Button>
+            </ButtonGroup>
+        </HomeCard>
+        <HomeCard v-else title="Last Game Recap">
+            <p>Please check back at a later time</p>
+        </HomeCard>
+    </div>
 </template>
 
 

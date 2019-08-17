@@ -8,10 +8,10 @@
         >Connect Discord</ButtonIcon>
         <ButtonIcon
             v-else
-            class="outline success"
-            icon="fa fa-check"
+            class="outline danger"
+            icon="fab fa-discord"
             @click="removeProvider('DISCORD')"
-        >Discord Connected</ButtonIcon>
+        >Disconnect Discord</ButtonIcon>
     </div>
 </template>
 

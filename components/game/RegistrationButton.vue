@@ -1,5 +1,5 @@
 <template>
-    <Applications :schedules="[schedule]">
+    <UserApplications :schedules="[schedule]">
         <ButtonGroup slot-scope="{isApplied, enter, cancel}">
             <Button
                 v-show="!isApplied(schedule)"
@@ -12,16 +12,16 @@
                 @click="cancel(schedule)"
             >Resign</Button>
         </ButtonGroup>
-    </Applications>
+    </UserApplications>
 </template>
 
 
 <script>
-import Applications from '@/components/game/Applications';
+import UserApplications from '@/components/game/UserApplications';
 
 export default {
     name: 'RegistrationButton',
-    components: { Applications },
+    components: { UserApplications },
     props: {
         schedule: {
             type: Object,

@@ -1,5 +1,6 @@
 <template>
     <div class="Input" :class="{ label }">
+        <!-- eslint-disable-next-line -->
         <input
             :id="labelName"
             ref="input"
@@ -7,7 +8,7 @@
             :class="[{ empty: !valid },  { valid }]"
             v-bind="$attrs"
             @input="e => [$emit('input', e.target.value), inputChange(e.target.value)]"
-        >
+        />
         <label v-if="label" :for="labelName">{{ label }}</label>
     </div>
 </template>

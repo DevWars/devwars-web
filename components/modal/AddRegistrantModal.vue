@@ -2,10 +2,11 @@
     <form v-async-submit="[addRegistrant]">
         <div class="search">
             <Input v-model="username" placeholder="Username"/>
+            TESTING {{ username}}
         </div>
 
         <ButtonGroup class="modal__actions">
-            <Button class="muted link" @click="close(false)">Cancel</Button>
+            <!-- <Button class="muted link" @click="close(false)">Cancel</Button> -->
             <Button class="primary">Add</Button>
         </ButtonGroup>
     </form>
@@ -40,7 +41,7 @@ export default {
     methods: {
         async addRegistrant() {
             try {
-                await this.$axios.$post(`/game/${this.game.id}/applications/${this.username}`);
+                await this.$axios.$post(`/applications/game/${this.game.id}/username/${this.username}`);
             } catch (e) {
                 console.error(e);
             }

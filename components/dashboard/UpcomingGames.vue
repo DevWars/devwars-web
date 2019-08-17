@@ -1,6 +1,6 @@
 <template>
     <DashboardCard title="Upcoming Games" icon="fa fa-calendar" class="scrollable">
-        <Applications>
+        <UserApplications>
             <div slot-scope="{isApplied, cancel, enter}">
                 <div
                     v-for="schedule in upcoming"
@@ -33,19 +33,19 @@
                     </ButtonGroup>
                 </div>
             </div>
-        </Applications>
+        </UserApplications>
     </DashboardCard>
 </template>
 
 
 <script>
-import Applications from '@/components/game/Applications';
+import UserApplications from '@/components/game/UserApplications';
 import DashboardCard from '@/components/DashboardCard';
 
 export default {
     name: 'UpcomingGames',
 
-    components: { Applications, DashboardCard },
+    components: { UserApplications, DashboardCard },
 
     props: {
         upcoming: {

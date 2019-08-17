@@ -1,5 +1,5 @@
 <template>
-    <Applications :schedules="schedules">
+    <UserApplications :schedules="schedules">
         <Table slot-scope="{isApplied, cancel, enter}">
             <tr slot="head">
                 <th @click="time = !time">Date</th>
@@ -36,20 +36,20 @@
                 </td>
             </tr>
         </Table>
-    </Applications>
+    </UserApplications>
 </template>
 
 
 <script>
 import { sortBy } from 'lodash';
 import Table from '@/components/Table';
-import Applications from '@/components/game/Applications';
+import UserApplications from '@/components/game/UserApplications';
 import GameDurations from '../../utils/gameDurations';
 
 export default {
     name: 'ScheduleBlock',
 
-    components: { Table, Applications },
+    components: { Table, UserApplications },
 
     props: {
         filter: {

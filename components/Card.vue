@@ -58,6 +58,14 @@ export default {
     &.dark {
         background-color: $bg-color-2;
     }
+
+    &.transparent {
+        background-color: transparent;
+    }
+
+    &.shadowless {
+        box-shadow: none;
+    }
 }
 
 .inner {
