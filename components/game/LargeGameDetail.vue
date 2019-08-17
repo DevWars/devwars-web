@@ -3,7 +3,7 @@
         <Row class="banner">
             <div class="banner__inner">
                 <div class="banner__meta">
-                    <span class="banner__date">{{ game.createdAt | moment('MM/DD/YYYY') }}</span>
+                    <span class="banner__date">{{ game.startTime | moment('M/DD/YYYY') }}</span>
                     <h2 class="banner__gamemode">{{ game.mode }}</h2>
                     <div
                         class="banner__versus"

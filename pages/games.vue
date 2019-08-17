@@ -18,7 +18,7 @@
             >
                 <div class="meta">
                     <Tag :class="[game.mode.toLowerCase()]" class="sm">{{ game.mode }}</Tag>
-                    <span class="date">{{ game.createdAt | moment('MM/DD/YYYY') }}</span>
+                    <span class="date">{{ game.startTime | moment('M/DD/YYYY') }}</span>
                     <span class="theme">{{ game.title }}</span>
                 </div>
                 <div class="icons">
