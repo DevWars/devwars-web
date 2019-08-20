@@ -3,18 +3,18 @@ import { isAuthorized, sameRole } from '../utils/auth';
 
 export default ({ store, route, redirect, error }) => {
     route.meta.map((meta) => {
-        if (meta.token) {
+        if (meta.auth) {
             if (!store.state.user.user) return redirect('/login');
 
             const role = store.state.user.user.role || 'PENDING';
 
-            if (typeof meta.token !== 'string')
+            if (typeof meta.auth !== 'string')
                 return error({
                     statusCode: 500,
                     message: 'meta auth should be a string',
                 });
 
-            const ok = isAuthorized(role, meta.token);
+            const ok = isAuthorized(role, meta.auth);
 
             if (!ok && meta.redirectIfNot) return redirect(meta.redirectIfNot);
             if (!ok) {
@@ -24,10 +24,10 @@ export default ({ store, route, redirect, error }) => {
                 });
             }
 
-            // Temporarily remove PENDING check
-            // if (role === 'PENDING' && route.name !== 'pending') return redirect('/pending');
+            // Redirect user if email has not been verified
+            if (role === 'PENDING' && route.name !== 'pending') return redirect('/pending');
 
-            if (meta.limit && !sameRole(role, meta.token)) {
+            if (meta.limit && !sameRole(role, meta.auth)) {
                 if (meta.redirectIfNot) return redirect(meta.redirectIfNot);
                 return redirect('/');
             }
