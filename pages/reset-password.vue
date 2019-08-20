@@ -60,14 +60,14 @@ export default {
         };
     },
     async asyncData({ params }) {
-        return { key: params.key };
+        return { token: params.token };
     },
     methods: {
         reset() {
-            const { key } = this.$route.query;
+            const { token } = this.$route.query;
 
-            this.$store.dispatch('user/resetByKey', {
-                key,
+            this.$store.dispatch('user/resetByToken', {
+                token,
                 password: this.password,
             });
 

@@ -214,7 +214,7 @@ export const actions = {
         }
     },
 
-    async resetByKey({ dispatch }, data) {
+    async resetByToken({ dispatch }, data) {
         await Http.for('auth/reset/password').post({}, data);
 
         dispatch('toast/success', `We've updated your password, give it a go!`, { root: true });
