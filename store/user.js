@@ -234,16 +234,25 @@ export const actions = {
         await dispatch('refresh');
     },
 
-    async linkedAccounts({ commit, state }) {
-        const accounts = await Http.for(`users/${state.user.id}`).get('linked-accounts');
+    async linkedAccounts({ commit }) {
+        const req = await this.$axios.get(`/oauth`);
+        const accounts = req.data;
 
         commit('linkedAccounts', accounts);
 
         return accounts;
     },
 
-    async disconnectLinkedAccount({ dispatch, commit, state }, provider) {
-        await Http.for(`users/${state.user.id}/linked-accounts/${provider}`).delete();
+    async connectLinkedAccount({ dispatch, commit }, provider) {
+        await this.$axios.get(`/oauth/${provider}`);
+
+        commit('connectLinkedAccount', provider);
+
+        await dispatch('refresh');
+    },
+
+    async disconnectLinkedAccount({ dispatch, commit }, provider) {
+        await this.$axios.delete(`/oauth/${provider}`);
 
         commit('removeLinkedAccount', provider);
 
