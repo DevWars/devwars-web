@@ -8,11 +8,7 @@
                     v-async-click="[endGame]"
                     class="danger"
                 >End</Button>
-                <Button
-                    v-if="!isActive && !isEnded && isScheduled"
-                    v-async-click="[activate]"
-                    class="primary"
-                >Activate</Button>
+                <Button v-if="!isActive" v-async-click="[activate]" class="primary">Activate</Button>
                 <Button v-if="viewingDetailsPage" v-async-click="[save]" class="primary">Save</Button>
                 <Button v-if="user.role === 'ADMIN'" v-async-click="[remove]" class="danger">Delete</Button>
             </ButtonGroup>
