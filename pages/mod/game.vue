@@ -34,7 +34,6 @@ import Http from '../../services/Http';
 import Tabs from '@/components/Tabs';
 import PanelHeader from '@/components/mod/PanelHeader';
 import DeleteModal from '@/components/modal/DeleteModal';
-import EndGameModal from '@/components/modal/EndGameModal';
 import { names } from '../../utils/auth';
 
 import nameFromStatus from '@/utils/gameStatus';
@@ -98,7 +97,8 @@ export default {
         },
 
         async endGame() {
-            await this.$open(EndGameModal, { game: this.game });
+            await this.$axios.post(`/games/${this.game.id}/end`);
+            await this.$store.dispatch('game/game', this.game.id);
         },
 
         async save() {
