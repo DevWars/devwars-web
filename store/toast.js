@@ -26,6 +26,12 @@ export const actions = {
     },
 
     async error({ dispatch }, message) {
+        // since in most cases and future bases we want to look to include a error message with
+        // error responses from the server. If the message contains an error object or message
+        // object then use this before falling back on itsself.
+        if (message.error != null) message = message.error;
+        else if (message.message != null) message = message.message;
+
         await dispatch('add', { type: 'error', message });
     },
 
