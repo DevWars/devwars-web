@@ -2,7 +2,6 @@
     <form v-async-submit="[addRegistrant]">
         <div class="search">
             <Input v-model="username" placeholder="Username"/>
-            TESTING {{ username}}
         </div>
 
         <ButtonGroup class="modal__actions">

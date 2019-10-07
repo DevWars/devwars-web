@@ -94,7 +94,7 @@ export default {
 
         async addRegistrant() {
             await this.$open(AddRegistrantModal, { game: this.game });
-            await this.refresh();
+            window.location.reload(true);
         },
     },
 };
