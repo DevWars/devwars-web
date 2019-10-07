@@ -1,5 +1,10 @@
 <template>
     <div class="Applications">
+        <div v-if="game" class="controls">
+            <h4>({{ applications.length }}) Applicants</h4>
+            <Button class="outline primary" @click="addRegistrant">Add Registrant</Button>
+        </div>
+
         <Table>
             <tr slot="head">
                 <th>Username</th>
@@ -12,7 +17,7 @@
                 <th>Devcoins</th>
             </tr>
 
-            <tr v-for="applicant in applications" :key="applicant.id">
+            <tr v-for="applicant in applications" :key="applicant.id" @click="addPlayer(applicant)">
                 <td>
                     <User :user="applicant"/>
                 </td>
@@ -40,6 +45,9 @@ import Table from '@/components/Table';
 import Card from '@/components/Card';
 import User from '@/components/user/User';
 import Devcoins from '@/components/Devcoins';
+import AddPlayerModal from '@/components/modal/AddPlayerModal';
+import AddRegistrantModal from '@/components/modal/AddRegistrantModal';
+import { getLanguageByGamePlayer } from '@/utils';
 
 export default {
     name: 'Applications',
@@ -47,7 +55,8 @@ export default {
     components: { Table, Card, User, Devcoins },
 
     props: {
-        schedule: { type: Object, required: true },
+        schedule: { type: Object, default: undefined },
+        game: { type: Object, default: undefined },
     },
 
     data() {
@@ -57,7 +66,9 @@ export default {
     },
 
     async mounted() {
-        const applications = (await this.$axios.get(`/applications/schedule/${this.schedule.id}`)).data;
+        if (!this.schedule && !this.game) return;
+        const scheduleOrGame = this.schedule ? `schedule/${this.schedule.id}` : `game/${this.game.id}`;
+        const applications = (await this.$axios.get(`/applications/${scheduleOrGame}`)).data;
 
         for (const applicant of applications) {
             // eslint-disable-next-line no-await-in-loop
@@ -68,25 +79,35 @@ export default {
 
         this.applications = applications;
     },
+
+    methods: {
+        getLanguageByGamePlayer,
+
+        addPlayer(user) {
+            if (!this.game) return;
+            this.$open(AddPlayerModal, { user, game: this.game });
+        },
+
+        async addRegistrant() {
+            await this.$open(AddRegistrantModal, { game: this.game });
+            await this.refresh();
+        },
+    },
 };
 </script>
 
 
 <style lang="scss" scoped>
-.roster {
-    display: flex;
-    margin-bottom: 30px;
-
-    .GameTeam {
-        flex: 1 1 100%;
+.Applications {
+    .Table tbody td:last-of-type {
+        text-align: left;
     }
-}
 
-.Table tbody td:last-of-type {
-    text-align: left;
-}
-
-.status {
-    margin: 10px 0 20px;
+    .controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+    }
 }
 </style>
