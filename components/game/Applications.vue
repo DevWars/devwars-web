@@ -2,7 +2,11 @@
     <div class="Applications">
         <div v-if="game" class="controls">
             <h4>({{ applications.length }}) Applicants</h4>
-            <Button class="outline primary" @click="addRegistrant">Add Registrant</Button>
+            <Button
+                class="outline primary"
+                :class="{disabled: applications.length === 0}"
+                @click="addRegistrant"
+            >Add Registrant</Button>
         </div>
 
         <Table>
@@ -33,7 +37,7 @@
             </tr>
         </Table>
 
-        <Card v-if="!applications || applications.length === 0" class="dark plain">
+        <Card v-if="applications.length === 0" class="dark plain">
             <p>No players have applied for this game</p>
         </Card>
     </div>
