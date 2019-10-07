@@ -17,17 +17,20 @@
                 <Button to="/login" class="link block">Log In</Button>
             </div>
 
-            <UserMenu v-if="user" :user="user" class="nav-link">
-                <template #default="{close}">
-                    <Button v-if="isAdmin" to="/mod/dashboard" class="link" @click="close">Modpanel</Button>
-                    <div v-if="isAdmin" class="menu-divider"></div>
-                    <Button to="/dashboard" class="link" @click="close">Dashboard</Button>
-                    <Button to="/badges" class="link" @click="close">Badges</Button>
-                    <Button to="/settings/profile" class="link" @click="close">Settings</Button>
-                    <div class="menu-divider"></div>
-                    <Button class="link" @click="logout">Logout</Button>
+            <Popup v-if="user" class="nav-link">
+                <template #trigger>
+                    <User size="sm" :user="user"/>
                 </template>
-            </UserMenu>
+                <template #menu="{close}">
+                    <Button v-if="isAdmin" to="/mod/dashboard" @click="close">Modpanel</Button>
+                    <div v-if="isAdmin" class="menu-divider"></div>
+                    <Button to="/dashboard" @click="close">Dashboard</Button>
+                    <Button to="/badges" @click="close">Badges</Button>
+                    <Button to="/settings/profile" @click="close">Settings</Button>
+                    <div class="menu-divider"></div>
+                    <Button @click="logout">Logout</Button>
+                </template>
+            </Popup>
         </div>
 
         <div class="overlay"></div>
@@ -36,12 +39,13 @@
 
 
 <script>
-import UserMenu from '@/components/user/UserMenu';
+import Popup from '@/components/Popup';
+import User from '@/components/user/User';
 
 export default {
     name: 'HeaderMobile',
 
-    components: { UserMenu },
+    components: { Popup, User },
 
     props: {
         toggleMobileMenu: {

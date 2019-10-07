@@ -34,26 +34,24 @@
                         <Button to="/register" class="primary">Register</Button>
                     </li>
                     <li class="nav__item">
-                        <Button to="/login" class="link">Log In</Button>
+                        <Button to="/login">Log In</Button>
                     </li>
                 </ul>
 
-                <UserMenu v-else :user="user">
-                    <template #default="{close}">
-                        <Button
-                            v-if="isStaff"
-                            to="/mod/dashboard"
-                            class="link"
-                            @click="close"
-                        >Modpanel</Button>
-                        <div v-if="isStaff" class="divider"></div>
-                        <Button to="/dashboard" class="link" @click="close">Dashboard</Button>
-                        <Button to="/badges" class="link" @click="close">Badges</Button>
-                        <Button to="/settings/profile" class="link" @click="close">Settings</Button>
-                        <div class="divider"></div>
-                        <Button class="link" @click="logout">Logout</Button>
+                <Popup v-else>
+                    <template #trigger>
+                        <User size="sm" :user="user"/>
                     </template>
-                </UserMenu>
+                    <template #menu="{close}">
+                        <Button v-if="isStaff" to="/mod/dashboard">Modpanel</Button>
+                        <div v-if="isStaff" class="divider"></div>
+                        <Button to="/dashboard">Dashboard</Button>
+                        <Button to="/badges">Badges</Button>
+                        <Button to="/settings/profile">Settings</Button>
+                        <div class="divider"></div>
+                        <Button @click="logout">Logout</Button>
+                    </template>
+                </Popup>
             </Container>
         </div>
 
@@ -64,13 +62,14 @@
 
 
 <script>
-import UserMenu from '@/components/user/UserMenu';
+import Popup from '@/components/Popup';
+import User from '@/components/user/User';
 import HeaderMobile from './HeaderMobile';
 
 export default {
     name: 'ComponentHeader',
 
-    components: { HeaderMobile, UserMenu },
+    components: { HeaderMobile, Popup, User },
 
     data: () => {
         return {
