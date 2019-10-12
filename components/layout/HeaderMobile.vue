@@ -21,7 +21,7 @@
                 <template #trigger>
                     <User size="sm" :user="user"/>
                 </template>
-                <template #menu="{close}">
+                <template #menu>
                     <Button v-if="isAdmin" to="/mod/dashboard" @click="close">Modpanel</Button>
                     <div v-if="isAdmin" class="menu-divider"></div>
                     <Button to="/dashboard" @click="close">Dashboard</Button>

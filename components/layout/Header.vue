@@ -34,7 +34,7 @@
                         <Button to="/register" class="primary">Register</Button>
                     </li>
                     <li class="nav__item">
-                        <Button to="/login">Log In</Button>
+                        <Button to="/login" class="link">Log In</Button>
                     </li>
                 </ul>
 
@@ -42,7 +42,7 @@
                     <template #trigger>
                         <User size="sm" :user="user"/>
                     </template>
-                    <template #menu="{close}">
+                    <template #menu>
                         <Button v-if="isStaff" to="/mod/dashboard">Modpanel</Button>
                         <div v-if="isStaff" class="divider"></div>
                         <Button to="/dashboard">Dashboard</Button>

@@ -26,7 +26,6 @@
 
 <script>
 import moment from 'moment';
-import Http from '../../services/Http';
 import Tabs from '@/components/Tabs';
 import PanelHeader from '@/components/mod/PanelHeader';
 import DeleteModal from '@/components/modal/DeleteModal';
@@ -103,15 +102,14 @@ export default {
         },
 
         async remove() {
-            const [confirmed] = await this.$open(DeleteModal, {
+            const confirmed = await this.$open(DeleteModal, {
                 title: 'Delete Game?',
                 description: `Are you sure you want to delete this game?`,
             });
-
             if (!confirmed) return;
 
             try {
-                await Http.for('games').delete(this.game);
+                await this.$axios.delete(`/games/${this.game.id}`);
 
                 this.$store.dispatch('toast/success', 'Game deleted.');
 

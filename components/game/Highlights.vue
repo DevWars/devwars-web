@@ -4,7 +4,7 @@
             <Row>
                 <Column :lg="6">
                     <NowShowing v-if="active"/>
-                    <NextShowing v-if="!active && upcoming.length > 0"/>
+                    <NextShowing v-else-if="!active && upcoming.length > 0"/>
                     <HomeCard v-else class="no-showing" title="Next Showing">
                         <div>
                             <h3>No upcoming games</h3>
