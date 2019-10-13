@@ -1,5 +1,5 @@
 <template>
-    <Button class="ButtonIcon" v-bind="$attrs" @click.native="$emit('click')">
+    <Button class="ButtonIcon" type="button" v-bind="$attrs" @click.native="$emit('click')">
         <div class="inner">
             <div v-if="image" class="image">
                 <slot name="image"></slot>
@@ -9,7 +9,6 @@
         </div>
     </Button>
 </template>
-
 
 <script>
 export default {
@@ -27,7 +26,6 @@ export default {
     },
 };
 </script>
-
 
 <style lang="scss" scoped>
 @import 'utils.scss';
@@ -59,6 +57,3 @@ export default {
     }
 }
 </style>
-
-
-

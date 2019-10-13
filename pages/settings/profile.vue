@@ -9,7 +9,7 @@
                             v-model="firstName"
                             label="First Name"
                             class="group"
-                            @input="updateForm({values: $event, key: 'firstName'})"
+                            @input="updateForm({ values: $event, key: 'firstName' })"
                         />
                     </Column>
                     <Column :md="6">
@@ -17,7 +17,7 @@
                             v-model="lastName"
                             label="Last Name"
                             class="group"
-                            @input="updateForm({values: $event, key: 'lastName'})"
+                            @input="updateForm({ values: $event, key: 'lastName' })"
                         />
                     </Column>
                 </Row>
@@ -26,14 +26,14 @@
                     v-model="addressOne"
                     label="Address 1"
                     class="group"
-                    @input="updateForm({values: $event, key: 'addressOne'})"
+                    @input="updateForm({ values: $event, key: 'addressOne' })"
                 />
 
                 <Input
                     v-model="addressTwo"
                     label="Address 2"
                     class="group"
-                    @input="updateForm({values: $event, key: 'addressTwo'})"
+                    @input="updateForm({ values: $event, key: 'addressTwo' })"
                 />
 
                 <Row>
@@ -42,7 +42,7 @@
                             v-model="city"
                             label="City"
                             class="group"
-                            @input="updateForm({values: $event, key: 'city'})"
+                            @input="updateForm({ values: $event, key: 'city' })"
                         />
                     </Column>
                     <Column :md="2">
@@ -50,7 +50,7 @@
                             v-model="state"
                             label="State"
                             class="group"
-                            @input="updateForm({values: $event, key: 'state'})"
+                            @input="updateForm({ values: $event, key: 'state' })"
                         />
                     </Column>
                     <Column :md="2">
@@ -58,7 +58,7 @@
                             v-model="zip"
                             label="Zip or Postal"
                             class="group"
-                            @input="updateForm({values: $event, key: 'zip'})"
+                            @input="updateForm({ values: $event, key: 'zip' })"
                         />
                     </Column>
                     <Column :md="3">
@@ -66,7 +66,7 @@
                             v-model="country"
                             label="Select Country"
                             class="group"
-                            @input="updateForm({values: $event, key: 'country'})"
+                            @input="updateForm({ values: $event, key: 'country' })"
                         >
                             <option v-for="country in countries" :key="country">{{ country }}</option>
                         </Select>
@@ -79,21 +79,13 @@
                             v-model="dob"
                             label="Date of Birth"
                             class="group"
-                            @input="updateForm({values: $event, key: 'dob'})"
+                            @input="updateForm({ values: $event, key: 'dob' })"
                         />
                     </Column>
 
                     <Column :md="4">
-                        <Select
-                            v-model="sex"
-                            label="Sex"
-                            @input="updateForm({values: $event, key: 'sex'})"
-                        >
-                            <option
-                                v-for="(sex, index) in sexes"
-                                :key="sex"
-                                :value="index"
-                            >{{ sex }}</option>
+                        <Select v-model="sex" label="Sex" @input="updateForm({ values: $event, key: 'sex' })">
+                            <option v-for="(sex, index) in sexes" :key="sex" :value="index">{{ sex }}</option>
                         </Select>
                     </Column>
                 </Row>
@@ -104,14 +96,14 @@
                     label="About you"
                     class="group"
                     placeholder="Tell us a little bit about yourself"
-                    @input="updateForm({values: $event, key:'about'})"
+                    @input="updateForm({ values: $event, key: 'about' })"
                 />
 
                 <Input
                     v-model="websiteUrl"
                     label="URL"
                     class="group"
-                    @input="updateForm({values: $event, key: 'websiteUrl'})"
+                    @input="updateForm({ values: $event, key: 'websiteUrl' })"
                 />
 
                 <h3>Work</h3>
@@ -119,7 +111,7 @@
                     v-model="company"
                     label="Company"
                     class="group"
-                    @input="updateForm({values: $event, key: 'company'})"
+                    @input="updateForm({ values: $event, key: 'company' })"
                 />
 
                 <Checkbox
@@ -127,7 +119,7 @@
                     label="Available for hire"
                     class="group"
                     :checked="forHire"
-                    @input="updateForm({values: $event, key: 'forHire'})"
+                    @input="updateForm({ values: $event, key: 'forHire' })"
                 />
 
                 <LanguageSkills :profile="profile" @change="updateForm"/>
@@ -139,11 +131,7 @@
 
                 <FileChooser @change="crop">
                     <template #default="{update}">
-                        <Button
-                            type="button"
-                            class="outline muted"
-                            @click="update"
-                        >Upload new avatar</Button>
+                        <Button type="button" class="outline muted" @click="update">Upload new avatar</Button>
                     </template>
                 </FileChooser>
             </Column>
@@ -153,9 +141,10 @@
     </form>
 </template>
 
-
 <script>
 import * as countryList from 'country-list';
+import { mapState } from 'vuex';
+
 import Avatar from '@/components/user/Avatar';
 import FileChooser from '@/components/FileChooser';
 import CropperModal from '@/components/modal/CropperModal';
@@ -164,7 +153,6 @@ import Textarea from '@/components/form/Textarea';
 import Select from '@/components/form/Select';
 import Checkbox from '@/components/form/Checkbox';
 import LanguageSkills from '@/components/game/LanguageSkills.vue';
-import { mapState } from 'vuex';
 
 export default {
     name: 'Profile',

@@ -1,20 +1,13 @@
 <template>
     <div class="ConnectToDiscord">
-        <ButtonIcon
-            v-if="!hasDiscord"
-            :href="discordUrl"
-            icon="fab fa-discord"
-            class="discord"
-        >Connect Discord</ButtonIcon>
-        <ButtonIcon
-            v-else
-            class="outline danger"
-            icon="fab fa-discord"
-            @click="removeProvider('DISCORD')"
-        >Disconnect Discord</ButtonIcon>
+        <ButtonIcon v-if="!hasDiscord" :href="discordUrl" icon="fab fa-discord" class="discord"
+            >Connect Discord</ButtonIcon
+        >
+        <ButtonIcon v-else class="outline danger" icon="fab fa-discord" @click="removeProvider('DISCORD')"
+            >Disconnect Discord</ButtonIcon
+        >
     </div>
 </template>
-
 
 <script>
 import { mapActions } from 'vuex';
