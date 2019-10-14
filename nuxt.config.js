@@ -1,7 +1,6 @@
 require('dotenv').config();
 const path = require('path');
 const webpack = require('webpack');
-const parser = require('body-parser');
 
 const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
 const apiUrl = process.env.API_URL || 'http://localhost:8080';
