@@ -13,9 +13,7 @@ export function getScoreByGameTeam(game, team) {
 }
 
 export function getPlayersByGameTeam(game, team) {
-    return Object.values(game.players).filter(
-        (player) => player.team === team.id
-    );
+    return Object.values(game.players).filter((player) => player.team === team.id);
 }
 
 export function getLanguageByGamePlayer(game, player) {
@@ -33,6 +31,7 @@ export function getLanguageByGamePlayer(game, player) {
 
 export function teamCompletedObjective(teamIndex, objective) {
     const objectives = this.game.teams[teamIndex].objectives;
+    if (!objectives) return;
 
     for (const [key, value] of Object.entries(objectives)) {
         if (objective.id === Number(key) && value === 'complete') {

@@ -1,9 +1,14 @@
 export const voteAnalysisForTeam = (team, otherTeam, category) => {
     let points = 0;
-    const blueVotes = team.votes[category] || 0;
-    const redVotes = otherTeam.votes[category] || 0;
-    const total = blueVotes + redVotes;
+    let blueVotes = 0;
+    let redVotes = 0;
 
+    if (team.votes) {
+        blueVotes = team.votes[category];
+        redVotes = otherTeam.votes[category];
+    }
+
+    const total = blueVotes + redVotes;
     if (blueVotes / total > 0.55) {
         points += 1;
     }

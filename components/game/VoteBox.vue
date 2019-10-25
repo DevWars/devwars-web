@@ -2,8 +2,8 @@
     <SubScore
         v-show="total > 0"
         :title="category"
-        :blueScore="game.meta.teamScores[0][category]"
-        :redScore="game.meta.teamScores[1][category]"
+        :blueScore="teamScore('blue')"
+        :redScore="teamScore('red')"
     >
         <div class="voting">
             <div class="team team-blue" :class="{win: analysis.blue.win}">
@@ -52,22 +52,18 @@ export default {
         analysis() {
             const analysis = {};
 
-            analysis.blue = this.analysisForTeam(
-                this.game.teams[0],
-                this.game.teams[1]
-            );
-            analysis.red = this.analysisForTeam(
-                this.game.teams[1],
-                this.game.teams[0]
-            );
+            analysis.blue = this.analysisForTeam(this.team('blue'), this.team('red'));
+            analysis.red = this.analysisForTeam(this.team('red'), this.team('blue'));
 
             return analysis;
         },
+
         total() {
             const teams = this.game.teams;
             let totalScore = 0;
             if (teams) {
                 for (const team of Object.values(teams)) {
+                    if (!team.votes) continue;
                     const vote = team.votes[this.category];
                     totalScore += vote;
                 }
@@ -76,6 +72,23 @@ export default {
         },
     },
     methods: {
+        team(team) {
+            if (!this.game.teams) return;
+
+            const teamIndex = team === 'blue' ? 0 : 1;
+            return this.game.teams[teamIndex];
+        },
+
+        teamScore(team) {
+            if (!this.game.meta || !this.game.meta.teamScores) return;
+
+            const teamIndex = team === 'blue' ? 0 : 1;
+            const teamScores = this.game.meta.teamScores[teamIndex];
+            if (!teamScores && !teamScores[this.category]) return;
+
+            return teamScores[this.category];
+        },
+
         analysisForTeam(team, otherTeam) {
             return voteAnalysisForTeam(team, otherTeam, this.category);
         },
