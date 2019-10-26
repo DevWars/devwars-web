@@ -1,5 +1,5 @@
 <template>
-    <form v-if="user && profile" v-async-submit="[save]">
+    <form v-if="user && profile">
         <Row>
             <Column :md="8">
                 <h3>Profile</h3>
@@ -84,8 +84,16 @@
                     </Column>
 
                     <Column :md="4">
-                        <Select v-model="sex" label="Sex" @input="updateForm({ values: $event, key: 'sex' })">
-                            <option v-for="(sex, index) in sexes" :key="sex" :value="index">{{ sex }}</option>
+                        <Select
+                            v-model="sex"
+                            label="Sex"
+                            @input="updateForm({ values: $event, key: 'sex' })"
+                        >
+                            <option
+                                v-for="(sex, index) in sexes"
+                                :key="sex"
+                                :value="index"
+                            >{{ sex }}</option>
                         </Select>
                     </Column>
                 </Row>
@@ -131,13 +139,17 @@
 
                 <FileChooser @change="crop">
                     <template #default="{update}">
-                        <Button type="button" class="outline muted" @click="update">Upload new avatar</Button>
+                        <Button
+                            type="button"
+                            class="outline muted"
+                            @click="update"
+                        >Upload new avatar</Button>
                     </template>
                 </FileChooser>
             </Column>
         </Row>
 
-        <Button class="primary" type="submit">Save</Button>
+        <Button class="primary" type="submit" @click="save">Save</Button>
     </form>
 </template>
 

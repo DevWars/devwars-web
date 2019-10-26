@@ -1,12 +1,12 @@
 <template>
-    <form v-async-submit="[addRegistrant]">
+    <form>
         <div class="search">
             <Input v-model="username" placeholder="Username"/>
         </div>
 
         <ButtonGroup class="modal__actions">
             <!-- <Button class="muted link" @click="close(false)">Cancel</Button> -->
-            <Button class="primary">Add</Button>
+            <Button class="primary" @click="addRegistrant">Add</Button>
         </ButtonGroup>
     </form>
 </template>

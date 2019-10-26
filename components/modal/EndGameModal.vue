@@ -3,8 +3,8 @@
         <Button
             v-for="team in game.teams"
             :key="team"
-            v-async-click="[end, team]"
             class="link"
+            @click="end(team)"
         >{{ team.name | capitalize }}</Button>
     </ButtonGroup>
 </template>

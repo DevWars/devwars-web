@@ -1,5 +1,5 @@
 <template>
-    <form v-async-submit="[submit]">
+    <form>
         <Select v-model="name" label="Select Game Type" class="group">
             <option>Classic</option>
             <option>Zen Garden</option>
@@ -10,7 +10,7 @@
 
         <ButtonGroup class="modal__actions">
             <!-- <Button type="button" class="muted link" @click="close(false)">Cancel</Button> -->
-            <Button class="primary">Save</Button>
+            <Button class="primary" @click="submit">Save</Button>
         </ButtonGroup>
     </form>
 </template>
