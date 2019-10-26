@@ -12,7 +12,7 @@
                         <u>check your spam folder</u>.
                     </p>
                     <div>
-                        <Button class="outline muted" @click="resend">Resend Email</Button>
+                        <Button v-async-submit="[resend]" class="outline muted">Resend Email</Button>
                     </div>
                 </Card>
             </Container>

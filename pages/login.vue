@@ -1,7 +1,7 @@
 <template>
     <div class="Login header-offset">
         <Container>
-            <form>
+            <form v-async-submit="[login]">
                 <DevwarsCard title="Login">
                     <Input v-model="username" label="Email or Username" class="group" required/>
 
@@ -14,7 +14,7 @@
                     />
 
                     <div slot="actions">
-                        <Button type="submit" class="outline block" @click="login">Login</Button>
+                        <Button type="submit" class="outline block">Login</Button>
                         <Button href="/register" class="outline muted block">Register</Button>
 
                         <Button
@@ -48,7 +48,7 @@ export default {
     },
     methods: {
         async login() {
-            await this.$store.dispatch('user/login', {
+            this.$store.dispatch('user/login', {
                 username: this.username,
                 password: this.password,
             });

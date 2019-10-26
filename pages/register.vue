@@ -1,7 +1,7 @@
 <template>
     <div class="Register header-offset">
         <Container>
-            <form>
+            <form v-async-submit="[submit]">
                 <DevwarsCard title="Register">
                     <Input v-model="email" label="Email" class="group" required/>
 
@@ -23,7 +23,7 @@
                     />
 
                     <div slot="actions">
-                        <Button type="submit" class="outline block" @click="submit">REGISTER</Button>
+                        <Button type="submit" class="outline block">REGISTER</Button>
                         <Button href="/login" class="link muted">Already have an account?</Button>
                     </div>
                 </DevwarsCard>
