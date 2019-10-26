@@ -3,9 +3,9 @@
         <div v-if="game" class="controls">
             <h4>({{ applications.length }}) Applicants</h4>
             <Button
+                v-asnc-submit="[addRegistrant]"
                 class="outline primary"
                 :class="{disabled: applications.length === 0}"
-                @click="addRegistrant"
             >Add Registrant</Button>
         </div>
 
