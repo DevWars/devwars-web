@@ -1,5 +1,11 @@
 <template>
-    <btn class="Button" v-bind="$attrs" @click.native="$emit('click')">
+    <btn
+        class="Button"
+        :class="{ loading: isLoading }"
+        v-bind="$attrs"
+        :disabled="isLoading"
+        @click.native="click"
+    >
         <slot></slot>
     </btn>
 </template>
@@ -10,6 +16,36 @@ import btn from './button.module';
 
 export default {
     components: { btn },
+
+    props: {
+        asyncClick: {
+            type: Function,
+            default: undefined,
+        },
+    },
+
+    data: () => ({
+        isLoading: false,
+    }),
+
+    methods: {
+        async click() {
+            if (!this.$props.asyncClick) {
+                this.$emit('click');
+                return;
+            }
+
+            this.isLoading = true;
+
+            try {
+                await this.$props.asyncClick();
+            } catch (e) {
+                console.error(e);
+            }
+
+            this.isLoading = false;
+        },
+    },
 };
 </script>
 
@@ -37,10 +73,11 @@ $colors: (
 .Button {
     display: inline-block;
     vertical-align: middle;
+    height: 35px;
+    line-height: 35px;
     border: 1px solid transparent;
-    padding: 10px 20px;
+    padding: 0 20px;
     outline: 0;
-    line-height: 1;
     background-color: rgba(#fff, 0.85);
     font-family: $alt-font-face;
     font-weight: $font-weight-bold;
@@ -62,7 +99,7 @@ $colors: (
     &.disabled,
     &:disabled {
         pointer-events: none;
-        opacity: 0.25;
+        opacity: 0.3;
     }
 
     &.block {
@@ -136,13 +173,52 @@ $colors: (
     }
 
     &.sm {
-        padding: 6px 12px;
+        height: 26px;
+        line-height: 26px;
+        padding: 0 12px;
         font-size: $font-size-sm;
     }
 
     &.lg {
-        padding: 15px 35px;
+        height: 45px;
+        line-height: 45px;
+        padding: 0 25px;
         font-size: $font-size-lg;
+    }
+
+    $spinner-size: 20px;
+    $spiner-border-width: 3px;
+    &.loading {
+        position: relative;
+
+        &:after {
+            content: '';
+            display: inline-block;
+            vertical-align: middle;
+            width: $spinner-size;
+            height: $spinner-size;
+            border-radius: 50%;
+            border: $spiner-border-width solid rgba(#000, 0.2);
+            border-top-color: #fff;
+            animation: spinner 0.6s linear infinite;
+
+            margin-top: -$spiner-border-width;
+            margin-left: 10px;
+        }
+
+        &.block:after {
+            position: absolute;
+            right: 0;
+            margin-left: 0;
+            right: 30px;
+        }
+
+        @keyframes spinner {
+            to {
+                transform: rotateZ(360deg);
+            }
+        }
     }
 }
 </style>
+

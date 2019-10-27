@@ -20,16 +20,16 @@
                 <Button href="/mod/tournaments" class="outline muted">Back</Button>
                 <Button
                     v-if="tournament.active && !tournament.done"
-                    v-async-click="[endTournament]"
                     class="danger"
+                    :async-click="endTournament"
                 >End</Button>
                 <Button
                     v-show="!tournament.done && !tournament.active"
-                    v-async-click="[activate]"
                     class="primary"
+                    :async-click="activate"
                 >Activate</Button>
-                <Button v-async-click="[save]" class="primary">Save</Button>
-                <Button v-async-click="[remove]" class="danger">Delete</Button>
+                <Button class="primary" :async-click="save">Save</Button>
+                <Button class="danger" :async-click="remove">Delete</Button>
             </ButtonGroup>
         </div>
 

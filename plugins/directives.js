@@ -25,24 +25,3 @@ Vue.directive('closable', {
         document.body.removeEventListener('click', binding.handler);
     },
 });
-
-Vue.directive('asyncClick', {
-    bind(el, binding) {
-        const func = binding.value[0];
-        const args = binding.value.slice(1);
-
-        el.addEventListener('click', async () => {
-            el.classList.add('loading');
-            el.disabled = true;
-
-            try {
-                await func(...args);
-            } catch (e) {
-                console.error(e);
-            }
-
-            el.classList.remove('loading');
-            el.disabled = false;
-        });
-    },
-});

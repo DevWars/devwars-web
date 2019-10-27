@@ -3,13 +3,13 @@
         <PanelHeader :title="startDate" :subtitle="`@ ${startTime} UTC`">
             <ButtonGroup>
                 <Button to="/mod/schedules" class="outline muted">Back</Button>
-                <Button v-if="viewingSetupPage" v-async-click="[save]" class="primary">Save</Button>
+                <Button v-if="viewingSetupPage" class="primary" :async-click="save">Save</Button>
                 <Button
                     v-if="schedule.status !== 1"
-                    v-async-click="[activate]"
                     class="success"
+                    :async-click="activate"
                 >Activate</Button>
-                <Button v-if="schedule.status === 1" v-async-click="[end]" class="danger">End</Button>
+                <Button v-if="schedule.status === 1" class="danger" :async-click="end">End</Button>
                 <Button v-if="user.role === 'ADMIN'" class="outline danger" disabled>Delete</Button>
             </ButtonGroup>
         </PanelHeader>

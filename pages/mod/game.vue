@@ -5,12 +5,12 @@
                 <Button to="/mod/games" class="outline muted">Back</Button>
                 <Button
                     v-if="isActive && !isEnded && !isScheduled"
-                    v-async-click="[endGame]"
                     class="danger"
+                    :async-click="endGame"
                 >End</Button>
-                <Button v-if="!isActive" v-async-click="[activate]" class="primary">Activate</Button>
-                <Button v-if="viewingDetailsPage" v-async-click="[save]" class="primary">Save</Button>
-                <Button v-if="user.role === 'ADMIN'" v-async-click="[remove]" class="danger">Delete</Button>
+                <Button v-if="!isActive" class="primary" :async-click="activate">Activate</Button>
+                <Button v-if="viewingDetailsPage" class="primary" :async-click="save">Save</Button>
+                <Button v-if="user.role === 'ADMIN'" class="danger" :async-click="remove">Delete</Button>
             </ButtonGroup>
         </PanelHeader>
 

@@ -13,7 +13,7 @@
             />
             <Input v-model="newEmail" label="New Email" class="group"/>
 
-            <Button v-async-click="[changeEmail]" class="primary">Change Email</Button>
+            <Button class="primary" :async-click="changeEmail">Change Email</Button>
 
             <h3>Password</h3>
             <Input
@@ -39,9 +39,9 @@
             />
 
             <Button
-                v-async-click="[changePassword]"
                 class="primary"
                 :disabled="!(currentPassword && newPassword && newPassword === newPasswordConfirmed)"
+                :async-click="changePassword"
             >Change Password</Button>
         </Column>
         <Column :sm="4"/>
