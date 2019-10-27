@@ -93,7 +93,9 @@ export default {
         },
 
         async addRegistrant() {
-            await this.$open(AddRegistrantModal, { game: this.game });
+            const modalSuccess = await this.$open(AddRegistrantModal, { game: this.game });
+            if (!modalSuccess) return;
+
             window.location.reload(true);
         },
     },

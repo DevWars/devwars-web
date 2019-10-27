@@ -4,7 +4,7 @@
         <p>{{ description }}</p>
 
         <ButtonGroup class="modal__actions">
-            <!-- <Button class="link muted" @click="close(false)">{{ cancelText }}</Button> -->
+            <Button class="link muted" @click="close">{{ cancelText }}</Button>
             <Button class="primary" @click="close(true)">{{ confirmText }}</Button>
         </ButtonGroup>
     </div>

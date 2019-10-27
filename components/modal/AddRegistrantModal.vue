@@ -5,7 +5,7 @@
         </div>
 
         <ButtonGroup class="modal__actions">
-            <!-- <Button class="muted link" @click="close(false)">Cancel</Button> -->
+            <Button class="muted link" @click="close">Cancel</Button>
             <Button type="submit" class="primary">Add</Button>
         </ButtonGroup>
     </form>

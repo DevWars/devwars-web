@@ -7,11 +7,11 @@
             <b>competitor registration form</b>.
         </p>
         <ButtonGroup class="modal__actions">
-            <Button class="outline muted" @click="close(false)">Nevermind</Button>
+            <Button class="outline muted" @click="close">Nevermind</Button>
             <Button
                 :href="'/competitor/register?schedule=' + schedule.id "
                 class="primary"
-                @click="close(false)"
+                @click="close"
             >Begin Registration</Button>
         </ButtonGroup>
     </div>
@@ -35,7 +35,7 @@
         </p>
 
         <ButtonGroup class="modal__actions">
-            <!-- <Button class="outline muted" @click="close(false)">Nevermind</Button> -->
+            <Button class="outline muted" @click="close">Nevermind</Button>
             <Button class="primary" @click="enter(schedule)">Enter</Button>
         </ButtonGroup>
     </div>
