@@ -1,7 +1,7 @@
 <template>
     <div class="ForgotPassword header-offset">
         <Container>
-            <form v-show="!done">
+            <form v-show="!done" @submit.prevent="forgot">
                 <DevwarsCard
                     title="Forgot Password"
                     desc="Enter the email address below and we will send you some instructions."
@@ -15,12 +15,7 @@
                     />
 
                     <div slot="actions">
-                        <Button
-                            type="submit"
-                            class="outline block"
-                            tabindex="2"
-                            @click="forgot"
-                        >Reset Password</Button>
+                        <Button type="submit" class="outline block" tabindex="2">Reset Password</Button>
                     </div>
                 </DevwarsCard>
             </form>

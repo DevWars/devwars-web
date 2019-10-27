@@ -1,5 +1,5 @@
 <template>
-    <form class="AddPlayerModal">
+    <form class="AddPlayerModal" @submit.prevent="addPlayer">
         <Select v-model="team" label="Select Team" class="group" required>
             <option value="0">Blue</option>
             <option value="1">Red</option>
@@ -13,7 +13,7 @@
 
         <ButtonGroup class="modal__actions">
             <!-- <Button class="muted link" @click.prevent="close(false)">Cancel</Button> -->
-            <Button class="primary" @click="addPlayer">Add Player</Button>
+            <Button type="submit" class="primary">Add Player</Button>
         </ButtonGroup>
     </form>
 </template>

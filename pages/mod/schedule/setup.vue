@@ -1,19 +1,16 @@
 <template>
     <Card class="plain dark">
-        <form>
+        <div class="container">
             <h3>Schedule</h3>
             <Input v-model="date" label="Date" class="group"/>
-
             <Input v-model="time" label="Time" class="group"/>
 
             <h3>Game</h3>
-
             <Select v-model="schedule.mode" label="Game mode" class="group">
                 <option value="Classic">Classic</option>
                 <option value="Zen Garden">Zen Garden</option>
                 <option value="Blitz">Blitz</option>
             </Select>
-
             <Input v-model="schedule.title" label="Theme" class="group"/>
 
             <h3>Objectives</h3>
@@ -30,15 +27,14 @@
                 />
                 <Button class="link muted" @click.prevent="objectiveDelete(objective.id)">DELETE</Button>
             </div>
-        </form>
-        <Button class="outline" @click="objectiveAdd">Add Objective</Button>
+            <Button class="outline" @click="objectiveAdd">Add Objective</Button>
+        </div>
     </Card>
 </template>
 
 
 <script>
 import moment from 'moment';
-
 import Card from '@/components/Card';
 import Input from '@/components/form/Input';
 import Select from '@/components/form/Select';
@@ -124,7 +120,7 @@ export default {
 <style lang="scss" scoped>
 @import 'utils.scss';
 
-form {
+.container {
     max-width: 500px;
 }
 

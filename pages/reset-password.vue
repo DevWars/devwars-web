@@ -1,7 +1,7 @@
 <template>
     <div class="ResetPassword header-offset">
         <Container>
-            <form v-show="!done">
+            <form v-show="!done" @submit.prevent="reset">
                 <DevwarsCard title="Reset Password">
                     <Input
                         v-model="password"
@@ -23,8 +23,7 @@
 
                     <div slot="actions">
                         <Button
-                            v-async-click="[reset]"
-                            type="button"
+                            type="submit"
                             :disabled="confirmed !== password"
                             class="outline block"
                             tabindex="3"

@@ -1,5 +1,5 @@
 <template>
-    <form>
+    <form @submit.prevent="submit">
         <Select v-model="name" label="Select Game Type" class="group">
             <option>Classic</option>
             <option>Zen Garden</option>
@@ -10,7 +10,7 @@
 
         <ButtonGroup class="modal__actions">
             <!-- <Button type="button" class="muted link" @click="close(false)">Cancel</Button> -->
-            <Button class="primary" @click="submit">Save</Button>
+            <Button type="submit" class="primary">Save</Button>
         </ButtonGroup>
     </form>
 </template>

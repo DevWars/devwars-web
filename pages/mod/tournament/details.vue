@@ -1,6 +1,6 @@
 <template>
     <Card class="plain dark">
-        <form>
+        <div class="container">
             <h3>Main</h3>
             <Input v-model="tournament.name" label="Tournament Name" class="group"/>
 
@@ -8,7 +8,7 @@
             <Input label="1st Place Prize" class="group"/>
             <Input label="2nd Place Prize" class="group"/>
             <Input label="3rd Place Prize" class="group"/>
-        </form>
+        </div>
     </Card>
 </template>
 
@@ -73,3 +73,12 @@ export default {
     },
 };
 </script>
+
+
+<style lang="scss" scoped>
+@import 'utils.scss';
+
+.container {
+    max-width: 500px;
+}
+</style>

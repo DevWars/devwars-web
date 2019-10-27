@@ -1,5 +1,5 @@
 <template>
-    <form class="modal">
+    <form class="modal" @submit.prevent="submit">
         <h1>New Schedule</h1>
 
         <Select v-model="mode" label="Game mode" class="group" required>
@@ -14,7 +14,7 @@
 
         <ButtonGroup class="modal__actions">
             <!-- <Button type="button" class="muted link" @click.prevent="close(false)">Cancel</Button> -->
-            <Button class="primary" @click="submit">Create Schedule</Button>
+            <Button type="submit" class="primary">Create Schedule</Button>
         </ButtonGroup>
     </form>
 </template>

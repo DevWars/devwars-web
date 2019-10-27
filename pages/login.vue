@@ -1,7 +1,7 @@
 <template>
     <div class="Login header-offset">
         <Container>
-            <form v-async-submit="[login]">
+            <form @submit.prevent="login">
                 <DevwarsCard title="Login">
                     <Input v-model="username" label="Email or Username" class="group" required/>
 

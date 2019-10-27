@@ -6,7 +6,7 @@
             <Row>
                 <Column :md="8">
                     <Card v-show="!submitted" class="dark plain">
-                        <form>
+                        <form @submit.prevent="sendEmail">
                             <Input v-model="name" label="Name" class="group" required/>
 
                             <Input v-model="email" label="Email" class="group" required/>
@@ -14,7 +14,7 @@
                             <Textarea v-model="message" label="Message" class="group" required/>
 
                             <ButtonGroup>
-                                <Button type="submit" class="primary" @click="sendEmail">Send Email</Button>
+                                <Button type="submit" class="primary">Send Email</Button>
                             </ButtonGroup>
                         </form>
                     </Card>

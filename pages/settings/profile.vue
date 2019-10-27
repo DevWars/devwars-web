@@ -1,5 +1,5 @@
 <template>
-    <form v-if="user && profile">
+    <form v-if="user && profile" @submit.prevent="save">
         <Row>
             <Column :md="8">
                 <h3>Profile</h3>
@@ -149,7 +149,7 @@
             </Column>
         </Row>
 
-        <Button class="primary" type="submit" @click="save">Save</Button>
+        <Button type="submit" class="primary">Save</Button>
     </form>
 </template>
 

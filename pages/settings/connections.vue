@@ -1,7 +1,7 @@
 <template>
-    <form>
+    <div>
         <ConnectToDiscord/>
-    </form>
+    </div>
 </template>
 
 

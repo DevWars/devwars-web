@@ -1,6 +1,6 @@
 <template>
     <Card class="plain dark">
-        <form>
+        <div class="container">
             <h3>Game</h3>
             <Select v-model="game.mode" label="Game mode" class="group">
                 <option value="Classic">Classic</option>
@@ -56,7 +56,7 @@
                     <Input type="file" label="Red Files" class="group"/>
                 </Column>
             </Row>-->
-        </form>
+        </div>
     </Card>
 </template>
 
@@ -129,7 +129,7 @@ export default {
 <style lang="scss" scoped>
 @import 'utils.scss';
 
-form {
+.container {
     max-width: 500px;
 }
 
