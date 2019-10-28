@@ -1,9 +1,7 @@
 <template>
     <div class="Card">
-        <div class="inner">
-            <h2 v-if="title" class="title">{{ title }}</h2>
-            <slot></slot>
-        </div>
+        <h2 v-if="title" class="title">{{ title }}</h2>
+        <slot></slot>
     </div>
 </template>
 
@@ -27,8 +25,13 @@ export default {
     @extend %material;
     display: block;
     margin-bottom: 20px;
+    padding: 15px 15px 30px;
     border-top: $border-size-sm solid $brand-secondary;
     background-color: $bg-color-1;
+
+    @include breakpoint(xs) {
+        padding-bottom: $s-space;
+    }
 
     a {
         text-decoration: none;
@@ -51,20 +54,12 @@ export default {
         border-top: none;
     }
 
-    &.bezeless .inner {
+    &.bezeless {
         padding: 0 !important;
     }
 
     &.dark {
         background-color: $bg-color-2;
-    }
-}
-
-.inner {
-    padding: 15px 15px 30px;
-
-    @include breakpoint(xs) {
-        padding-bottom: $s-space;
     }
 }
 </style>

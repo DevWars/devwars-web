@@ -78,10 +78,8 @@ export default {
 
 
 <style lang="scss" scoped>
-.roster {
-    /deep/ .inner {
-        display: flex;
-    }
+.Card {
+    display: flex;
 
     .GameTeam {
         flex: 1 1 100%;

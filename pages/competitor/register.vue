@@ -295,12 +295,10 @@ export default {
 @import 'utils.scss';
 
 .CompetitorRegistration {
-    .Card /deep/ {
-        .inner {
-            padding: 25px 30px 35px;
-        }
+    .Card {
+        padding: 25px 30px 35px;
 
-        .title {
+        /deep/ .title {
             display: inline-block;
             border-bottom: 1px solid $brand-secondary;
             margin-bottom: 30px;
