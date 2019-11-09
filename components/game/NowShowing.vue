@@ -24,7 +24,7 @@
                 target="_blank"
                 class="twitch"
             >Watch on Twitch</Button>
-            <RegistrationButton :schedule="schedule"/>
+            <RegistrationButtons :schedule="schedule"/>
         </ButtonGroup>
     </HomeCard>
 </template>
@@ -32,11 +32,11 @@
 
 <script>
 import HomeCard from '@/components/HomeCard';
-import RegistrationButton from './RegistrationButton';
+import RegistrationButtons from './RegistrationButtons';
 
 export default {
     name: 'NowShowing',
-    components: { HomeCard, RegistrationButton },
+    components: { HomeCard, RegistrationButtons },
     computed: {
         schedule() {
             return this.$store.state.game.active;

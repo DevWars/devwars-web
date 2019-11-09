@@ -1,6 +1,13 @@
 <template>
-    <div class="UserApplications">
-        <slot :isApplied="isApplied" :cancel="cancel" :enter="enter"></slot>
+    <div class="RegistrationButtons">
+        <ButtonGroup>
+            <Button
+                v-if="!isApplied(schedule)"
+                class="primary"
+                @click="enter(schedule)"
+            >Register</Button>
+            <Button v-else class="outline danger" @click="cancel(schedule)">Resign</Button>
+        </ButtonGroup>
     </div>
 </template>
 
@@ -11,7 +18,14 @@ import GameResignModal from '@/components/modal/GameResignModal';
 import GameRegistration from '@/components/modal/GameRegistration';
 
 export default {
-    name: 'Applications',
+    name: 'RegistrationButtons',
+
+    props: {
+        schedule: {
+            type: Object,
+            required: true,
+        },
+    },
 
     computed: {
         ...mapState({
@@ -44,7 +58,7 @@ export default {
 
         isApplied(schedule) {
             return this.applications.some((application) => {
-                return application.schedule.id === schedule.id;
+                return application.schedule && application.schedule.id === schedule.id;
             });
         },
     },

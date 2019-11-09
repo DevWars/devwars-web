@@ -148,8 +148,12 @@ export const actions = {
 
             commit('apply', schedule);
 
-            dispatch('toast/add', { type: 'success', message: `Thanks for signing up! See ya soon` }, { root: true });
-            dispatch('navigate', '/game/confirmation', { root: true });
+            await dispatch(
+                'toast/add',
+                { type: 'success', message: `Thanks for signing up! See ya soon` },
+                { root: true }
+            );
+            await dispatch('navigate', '/game/confirmation', { root: true });
         } catch (e) {
             dispatch('toast/errors', e, { root: true });
         }

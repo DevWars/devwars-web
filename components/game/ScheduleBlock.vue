@@ -1,55 +1,46 @@
 <template>
-    <UserApplications :schedules="schedules">
-        <Table slot-scope="{isApplied, cancel, enter}">
-            <tr slot="head">
-                <th @click="time = !time">Date</th>
-                <th @click="time = !time">Time</th>
-                <th @click="duration = !duration">Duration</th>
-                <th @click="duration = !duration">Showing</th>
-                <th></th>
-            </tr>
+    <Table>
+        <tr slot="head">
+            <th @click="time = !time">Date</th>
+            <th @click="time = !time">Time</th>
+            <th @click="duration = !duration">Duration</th>
+            <th @click="duration = !duration">Showing</th>
+            <th></th>
+        </tr>
 
-            <tr v-for="schedule in schedules" :key="schedule.id">
-                <td>
-                    <div class="dow">{{ schedule.startTime | moment('dddd') }}</div>
-                    <h4 class="date">{{ schedule.startTime | moment('MMMM D') }}</h4>
-                </td>
-                <td>
-                    <h4 class="time">{{ schedule.startTime | moment('H:mm') }} UTC</h4>
-                </td>
-                <td>
-                    <h4 class="duration">{{ durations[schedule.mode] || '30' }}</h4>
-                </td>
-                <td>
-                    <div class="show">DevWars Live</div>
-                    <div class="title">{{ description(schedule)}}</div>
-                </td>
-                <td>
-                    <ButtonGroup>
-                        <Button
-                            v-if="!isApplied(schedule)"
-                            class="primary"
-                            @click="enter(schedule)"
-                        >Register for Entry</Button>
-                        <Button v-else class="outline danger" @click="cancel(schedule)">Resign</Button>
-                    </ButtonGroup>
-                </td>
-            </tr>
-        </Table>
-    </UserApplications>
+        <tr v-for="schedule in schedules" :key="schedule.id">
+            <td>
+                <div class="dow">{{ schedule.startTime | moment('dddd') }}</div>
+                <h4 class="date">{{ schedule.startTime | moment('MMMM D') }}</h4>
+            </td>
+            <td>
+                <h4 class="time">{{ schedule.startTime | moment('H:mm') }} UTC</h4>
+            </td>
+            <td>
+                <h4 class="duration">{{ durations[schedule.mode] || '30' }}</h4>
+            </td>
+            <td>
+                <div class="show">DevWars Live</div>
+                <div class="title">{{ description(schedule)}}</div>
+            </td>
+            <td>
+                <RegistrationButtons :schedule="schedule"/>
+            </td>
+        </tr>
+    </Table>
 </template>
 
 
 <script>
 import { sortBy } from 'lodash';
 import Table from '@/components/Table';
-import UserApplications from '@/components/game/UserApplications';
+import RegistrationButtons from '@/components/game/RegistrationButtons';
 import GameDurations from '../../utils/gameDurations';
 
 export default {
     name: 'ScheduleBlock',
 
-    components: { Table, UserApplications },
+    components: { Table, RegistrationButtons },
 
     props: {
         filter: {

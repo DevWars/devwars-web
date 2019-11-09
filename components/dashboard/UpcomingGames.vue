@@ -1,56 +1,55 @@
 <template>
     <DashboardCard title="Upcoming Games" icon="fa fa-calendar" class="scrollable">
-        <UserApplications>
-            <div slot-scope="{isApplied, cancel, enter}">
-                <div
-                    v-for="schedule in upcoming"
-                    :key="schedule.id"
-                    class="schedule"
-                    :class="{ entered: isApplied(schedule) }"
-                >
-                    <div class="main">
-                        <Column
-                            :xs="2"
-                            class="no-gutter status"
-                        >{{ isApplied(schedule) ? 'Entered' : 'Not Entered'}}</Column>
-                        <Column :xs="10" class="no-gutter">
-                            {{ schedule.startTime | moment('longDate') }}
-                            @ {{ schedule.startTime | moment('HH:mm') }} (UTC)
-                        </Column>
-                    </div>
-
-                    <ButtonGroup>
-                        <Button
-                            v-if="!isApplied(schedule)"
-                            class="outline sm block"
-                            @click="enter(schedule)"
-                        >Enter</Button>
-                        <Button
-                            v-else
-                            class="outline danger sm block"
-                            @click="cancel(schedule)"
-                        >Cancel</Button>
-                    </ButtonGroup>
-                </div>
+        <div
+            v-for="schedule in upcoming"
+            :key="schedule.id"
+            class="schedule"
+            :class="{ entered: isApplied(schedule) }"
+        >
+            <div class="main">
+                <Column
+                    :xs="2"
+                    class="no-gutter status"
+                >{{ isApplied(schedule) ? 'Entered' : 'Not Entered'}}</Column>
+                <Column :xs="10" class="no-gutter">
+                    {{ schedule.startTime | moment('longDate') }}
+                    @ {{ schedule.startTime | moment('HH:mm') }} (UTC)
+                </Column>
             </div>
-        </UserApplications>
+
+            <RegistrationButtons :schedule="schedule"/>
+        </div>
     </DashboardCard>
 </template>
 
 
 <script>
-import UserApplications from '@/components/game/UserApplications';
+import RegistrationButtons from '@/components/game/RegistrationButtons';
 import DashboardCard from '@/components/DashboardCard';
 
 export default {
     name: 'UpcomingGames',
 
-    components: { UserApplications, DashboardCard },
+    components: { RegistrationButtons, DashboardCard },
 
     props: {
         upcoming: {
             type: Array,
             required: true,
+        },
+    },
+
+    computed: {
+        applications() {
+            return this.$store.state.game.applications;
+        },
+    },
+
+    methods: {
+        isApplied(schedule) {
+            return this.applications.some((application) => {
+                return application.schedule && application.schedule.id === schedule.id;
+            });
         },
     },
 };

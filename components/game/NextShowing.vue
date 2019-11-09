@@ -24,7 +24,7 @@
         </div>
 
         <div slot="actions">
-            <RegistrationButton :schedule="latestSchedule"/>
+            <RegistrationButtons :schedule="latestSchedule"/>
         </div>
     </HomeCard>
 </template>
@@ -34,11 +34,11 @@
 import moment from 'moment';
 import { sortBy, first } from 'lodash';
 import HomeCard from '@/components/HomeCard';
-import RegistrationButton from '@/components/game/RegistrationButton';
+import RegistrationButtons from '@/components/game/RegistrationButtons';
 
 export default {
     name: 'NextShowing',
-    components: { HomeCard, RegistrationButton },
+    components: { HomeCard, RegistrationButtons },
     data: () => {
         return {
             timeDifference: {},
