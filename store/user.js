@@ -166,9 +166,8 @@ export const actions = {
 
     async settings({ commit, dispatch, state }) {
         try {
-            const user = await this.$axios.patch(`users/${state.user.id}/profile`, state.profile);
-
-            commit('user', user);
+            const profile = await this.$axios.patch(`users/${state.user.id}/profile`, state.profile);
+            commit('profile', profile.data);
         } catch (e) {
             dispatch('toast/error', e.response.data, { root: true });
         }
