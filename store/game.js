@@ -170,4 +170,17 @@ export const actions = {
             dispatch('toast/errors', e, { root: true });
         }
     },
+
+    async sendPatch({ commit, dispatch }, game) {
+        try {
+            await this.$axios.patch(`/games/${game.id}`, game);
+
+            commit('game', game);
+
+            dispatch('toast/add', { type: 'success', message: 'Game updated' }, { root: true });
+        } catch (e) {
+            console.log('e', e);
+            dispatch('toast/errors', e, { root: true });
+        }
+    },
 };

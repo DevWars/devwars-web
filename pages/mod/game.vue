@@ -97,8 +97,7 @@ export default {
         },
 
         async save() {
-            await this.$axios.patch(`/games/${this.game.id}`, this.game);
-            await this.$store.dispatch('game/game', this.game.id);
+            await this.$store.dispatch('game/sendPatch', this.game);
         },
 
         async remove() {
