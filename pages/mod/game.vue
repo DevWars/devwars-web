@@ -3,11 +3,7 @@
         <PanelHeader :title="startDate" :subtitle="`@ ${startTime} UTC`">
             <ButtonGroup>
                 <Button to="/mod/games" class="outline muted">Back</Button>
-                <Button
-                    v-if="isActive && !isEnded && !isScheduled"
-                    class="danger"
-                    :async-click="endGame"
-                >End</Button>
+                <Button v-if="isActive && !isEnded && !isScheduled" class="danger" :async-click="endGame">End</Button>
                 <Button v-if="!isActive" class="primary" :async-click="activate">Activate</Button>
                 <Button v-if="viewingDetailsPage" class="primary" :async-click="save">Save</Button>
                 <Button v-if="user.role === 'ADMIN'" class="danger" :async-click="remove">Delete</Button>
@@ -15,14 +11,13 @@
         </PanelHeader>
 
         <Tabs>
-            <nuxt-link :to="'/mod/game/details?game=' + game.id">Details</nuxt-link>
-            <nuxt-link :to="'/mod/game/brief?game=' + game.id">Brief</nuxt-link>
+            <nuxt-link :to="`/mod/game/details?game=${game.id}`">Details</nuxt-link>
+            <nuxt-link :to="`/mod/game/brief?game=${game.id}`">Brief</nuxt-link>
         </Tabs>
 
         <nuxt/>
     </div>
 </template>
-
 
 <script>
 import moment from 'moment';
