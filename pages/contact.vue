@@ -9,7 +9,7 @@
                         <form @submit.prevent="sendEmail">
                             <Input v-model="name" label="Name" class="group" required/>
 
-                            <Input v-model="email" label="Email" class="group" required/>
+                            <Input v-model="email" type="email" label="Email" class="group" required/>
 
                             <Textarea v-model="message" label="Message" class="group" required/>
 
@@ -33,7 +33,6 @@
         </Container>
     </div>
 </template>
-
 
 <script>
 import { mapActions } from 'vuex';
@@ -63,27 +62,26 @@ export default {
             try {
                 const { name, email, message } = this;
 
-                const response = await this.$axios.$post('/contact', {
+                await this.$axios.$post('/contact', {
                     name,
                     email,
                     message,
                 });
 
-                this.toastSuccess(response);
-
+                this.toastSuccess('Contact-us sent successfully.');
                 this.submitted = true;
             } catch (e) {
-                this.toastErrors(e);
+                const message = e.response ? e.response.data : 'failed to send contact-us';
+                this.toastError(message);
             }
         },
         ...mapActions({
-            toastErrors: 'toast/errors',
+            toastError: 'toast/error',
             toastSuccess: 'toast/success',
         }),
     },
 };
 </script>
-
 
 <style lang="scss" scoped>
 @import 'utils.scss';
