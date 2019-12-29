@@ -9,6 +9,7 @@
                         <nuxt-link to="profile">Profile</nuxt-link>
                         <nuxt-link to="account">Account</nuxt-link>
                         <nuxt-link to="connections">Connections</nuxt-link>
+                        <nuxt-link to="email">Email Settings</nuxt-link>
                     </Tabs>
 
                     <Card class="plain dark">
@@ -19,7 +20,6 @@
         </div>
     </div>
 </template>
-
 
 <script>
 import Tabs from '@/components/Tabs';
@@ -36,10 +36,8 @@ export default {
 };
 </script>
 
-
 <style lang="scss" scoped>
 /deep/ h3 {
     margin-bottom: 30px;
 }
 </style>
-

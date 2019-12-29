@@ -4,6 +4,7 @@ export const state = () => ({
     user: null,
     profile: null,
     stats: null,
+    emailPermissions: {},
     count: 0,
     activities: [],
     linkedAccounts: [],
@@ -64,6 +65,14 @@ export const mutations = {
 
     removeLinkedAccount(state, provider) {
         state.linkedAccounts = state.linkedAccounts.filter((it) => it.provider !== provider);
+    },
+
+    emailPermissions(state, permissions) {
+        state.emailPermissions = permissions;
+    },
+
+    emailPermissionsUpdate(state, { key, values }) {
+        state.emailPermissions[key] = values;
     },
 };
 
@@ -197,6 +206,28 @@ export const actions = {
         } catch (e) {
             console.error(e);
             dispatch('toast/errors', e, { root: true });
+        }
+    },
+
+    async getEmailPermissions({ dispatch, commit, state }) {
+        try {
+            const userPermission = await Http.for(`/users/${state.user.id}/emails`).get('permissions');
+            commit('emailPermissions', userPermission);
+        } catch (e) {
+            dispatch('toast/error', e.response ? e.response.data : e, { root: true });
+            commit('emailPermissions', null);
+        }
+    },
+
+    async updateEmailPermissions({ dispatch, commit, state }) {
+        try {
+            const permissions = state.emailPermissions;
+
+            const response = await this.$axios.patch(`users/${state.user.id}/emails/permissions`, permissions);
+            commit('emailPermissions', response.data);
+        } catch (e) {
+            dispatch('toast/error', e.response ? e.response.data : e, { root: true });
+            commit('emailPermissions', null);
         }
     },
 
