@@ -161,7 +161,7 @@ export const actions = {
 
             dispatch('navigate', '/dashboard', { root: true });
         } catch (e) {
-            dispatch('toast/errors', e, { root: true });
+            dispatch('toast/error', e.response.data, { root: true });
         }
     },
 
@@ -175,11 +175,10 @@ export const actions = {
 
     async settings({ commit, dispatch, state }) {
         try {
-            const user = await this.$axios.patch(`users/${state.user.id}/profile`, state.profile);
-
-            commit('user', user);
+            const profile = await this.$axios.patch(`users/${state.user.id}/profile`, state.profile);
+            commit('profile', profile.data);
         } catch (e) {
-            dispatch('toast/errors', e, { root: true });
+            dispatch('toast/error', e.response.data, { root: true });
         }
     },
 
@@ -191,7 +190,7 @@ export const actions = {
                 root: true,
             });
         } catch (e) {
-            dispatch('toast/errors', e, { root: true });
+            dispatch('toast/error', e.response.data, { root: true });
         }
     },
 
@@ -205,7 +204,29 @@ export const actions = {
             await dispatch('navigate', '/pending', { root: true });
         } catch (e) {
             console.error(e);
-            dispatch('toast/errors', e, { root: true });
+            dispatch('toast/error', e.response.data, { root: true });
+        }
+    },
+
+    async getEmailPermissions({ dispatch, commit, state }) {
+        try {
+            const userPermission = await Http.for(`/users/${state.user.id}/emails`).get('permissions');
+            commit('emailPermissions', userPermission);
+        } catch (e) {
+            dispatch('toast/error', e.response ? e.response.data : e, { root: true });
+            commit('emailPermissions', null);
+        }
+    },
+
+    async updateEmailPermissions({ dispatch, commit, state }) {
+        try {
+            const permissions = state.emailPermissions;
+
+            const response = await this.$axios.patch(`users/${state.user.id}/emails/permissions`, permissions);
+            commit('emailPermissions', response.data);
+        } catch (e) {
+            dispatch('toast/error', e.response ? e.response.data : e, { root: true });
+            commit('emailPermissions', null);
         }
     },
 
@@ -239,7 +260,7 @@ export const actions = {
 
             return true;
         } catch (e) {
-            dispatch('toast/errors', e, { root: true });
+            dispatch('toast/error', e.response.data, { root: true });
 
             return false;
         }

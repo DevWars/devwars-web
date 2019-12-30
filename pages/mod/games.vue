@@ -19,15 +19,15 @@
             <tr v-for="game in games" :key="game.id">
                 <td>{{ game.createdAt | moment('MM/DD/YYYY') }}</td>
                 <td>
-                    <span
-                        :class="['mod-status', nameFromStatus(game.status).toLowerCase()]"
-                    >{{ nameFromStatus(game.status) }}</span>
+                    <span :class="['mod-status', nameFromStatus(game.status).toLowerCase()]">{{
+                        nameFromStatus(game.status)
+                    }}</span>
                 </td>
                 <td>{{ game.season }}</td>
                 <td>{{ game.title }}</td>
                 <td>{{ game.mode }}</td>
                 <td>
-                    <Button :to="'/mod/game/brief?game=' + game.id" class="link">Edit</Button>
+                    <Button :to="'/mod/game/details?game=' + game.id" class="link">Edit</Button>
                 </td>
             </tr>
         </Table>
@@ -35,7 +35,6 @@
         <Pagination/>
     </div>
 </template>
-
 
 <script>
 import CreateGameModal from '@/components/modal/CreateGameModal';
@@ -76,7 +75,6 @@ export default {
     },
 };
 </script>
-
 
 <style lang="scss" scoped>
 @import 'utils.scss';

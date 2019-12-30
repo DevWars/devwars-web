@@ -2,11 +2,7 @@
     <div class="Applications">
         <div v-if="game" class="controls">
             <h4>({{ applications.length }}) Applicants</h4>
-            <Button
-                class="outline primary"
-                :class="{disabled: applications.length === 0}"
-                @click="addRegistrant"
-            >Add Registrant</Button>
+            <Button class="outline primary" @click="addRegistrant">Add Registrant</Button>
         </div>
 
         <Table>

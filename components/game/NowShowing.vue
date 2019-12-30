@@ -71,6 +71,14 @@ export default {
     }
 }
 
+.ButtonGroup {
+    display: flex;
+
+    .Button {
+        margin-right: 10px;
+    }
+}
+
 /deep/ .Card .title {
     display: flex;
     align-items: center;

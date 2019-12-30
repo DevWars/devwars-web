@@ -837,7 +837,7 @@ export default {
 
         if (anchored) anchored.scrollIntoView();
 
-        const scrollable = document.querySelector('.docs__main');
+        const scrollable = document.querySelector('.main');
 
         scrollable.addEventListener('scroll', () => {
             const sections = Array.prototype.slice.apply(document.querySelectorAll('section'));
