@@ -18,14 +18,8 @@
 <script>
 export default {
     props: {
-        name: {
-            type: String,
-            required: true,
-        },
-        label: {
-            type: String,
-            default: null,
-        },
+        name: { type: String, required: true },
+        label: { type: String, default: null },
     },
 
     computed: {
@@ -117,6 +111,18 @@ $checkbox-size: 35px;
 
     &.danger:checked + label .box {
         color: $danger-color;
+    }
+
+    &.sm {
+        .box {
+            width: $checkbox-size * 0.6;
+            height: $checkbox-size * 0.6;
+        }
+
+        .fa {
+            left: ($checkbox-size * 0.6) / 2;
+            font-size: $font-size-sm;
+        }
     }
 }
 </style>
