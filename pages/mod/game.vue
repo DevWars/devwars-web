@@ -37,6 +37,10 @@ export default {
 
     components: { Tabs, PanelHeader },
 
+    async fetch({ store, query }) {
+        await store.dispatch('game/game', query.game);
+    },
+
     computed: {
         game() {
             const games = this.$store.state.game.game;
@@ -72,10 +76,6 @@ export default {
         user() {
             return this.$store.state.user.user;
         },
-    },
-
-    async fetch({ store, query }) {
-        await store.dispatch('game/game', query.game);
     },
 
     methods: {

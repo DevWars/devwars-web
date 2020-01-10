@@ -84,16 +84,8 @@
                     </Column>
 
                     <Column :md="4">
-                        <Select
-                            v-model="sex"
-                            label="Sex"
-                            @input="updateForm({ values: $event, key: 'sex' })"
-                        >
-                            <option
-                                v-for="(sex, index) in sexes"
-                                :key="sex"
-                                :value="index"
-                            >{{ sex }}</option>
+                        <Select v-model="sex" label="Sex" @input="updateForm({ values: $event, key: 'sex' })">
+                            <option v-for="(sex, index) in sexes" :key="sex" :value="index">{{ sex }}</option>
                         </Select>
                     </Column>
                 </Row>
@@ -139,11 +131,7 @@
 
                 <FileChooser @change="crop">
                     <template #default="{update}">
-                        <Button
-                            type="button"
-                            class="outline muted"
-                            @click="update"
-                        >Upload new avatar</Button>
+                        <Button type="button" class="outline muted" @click="update">Upload new avatar</Button>
                     </template>
                 </FileChooser>
             </Column>
@@ -154,7 +142,7 @@
 </template>
 
 <script>
-import * as countryList from 'country-list';
+import { getNameList } from 'country-list';
 import { mapState } from 'vuex';
 
 import Avatar from '@/components/user/Avatar';
@@ -173,7 +161,7 @@ export default {
 
     data: () => {
         return {
-            countries: Object.keys(countryList().getNameList()).map((it) => it[0].toUpperCase() + it.slice(1)),
+            countries: Object.keys(getNameList()).map((it) => it[0].toUpperCase() + it.slice(1)),
             sexes: ['Male', 'Female', 'Other'],
         };
     },

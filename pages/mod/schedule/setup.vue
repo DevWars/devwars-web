@@ -50,6 +50,10 @@ export default {
 
     components: { Card, Input, Select, SquareToggle },
 
+    async fetch({ store }) {
+        await store.dispatch('game/schedules');
+    },
+
     data: () => ({
         date: '',
         time: '',
@@ -71,10 +75,6 @@ export default {
         startTime() {
             this.schedule.startTime = this.startTime;
         },
-    },
-
-    async fetch({ store }) {
-        await store.dispatch('game/schedules');
     },
 
     beforeMount() {

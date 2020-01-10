@@ -52,13 +52,13 @@ export default {
         auth: names.MODERATOR,
     },
     components: { PanelHeader, ListingFilters, Table, Pagination },
+    async fetch({ store }) {
+        await store.dispatch('game/all');
+    },
     computed: {
         games() {
             return this.$store.state.game.all;
         },
-    },
-    async fetch({ store }) {
-        await store.dispatch('game/all');
     },
     methods: {
         nameFromStatus,

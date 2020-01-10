@@ -51,15 +51,15 @@ import Input from '@/components/form/Input';
 export default {
     name: 'ResetPassword',
     components: { DevwarsCard, Input },
+    async asyncData({ params }) {
+        return { token: params.token };
+    },
     data: () => {
         return {
             done: false,
             password: '',
             confirmed: '',
         };
-    },
-    async asyncData({ params }) {
-        return { token: params.token };
     },
     methods: {
         reset() {

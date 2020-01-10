@@ -57,14 +57,14 @@ export default {
 
     components: { Tabs },
 
+    async fetch({ store, query }) {
+        await store.dispatch('tournament/tournament', query.tournament);
+    },
+
     computed: {
         tournament() {
             return this.$store.state.tournament.tournament;
         },
-    },
-
-    async fetch({ store, query }) {
-        await store.dispatch('tournament/tournament', query.tournament);
     },
 
     methods: {

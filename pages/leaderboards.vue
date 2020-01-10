@@ -55,14 +55,14 @@ export default {
 
     components: { PageBanner, Table, Select, Pagination, User },
 
+    async asyncData() {
+        return { leaderboards: await Http.for('leaderboard/users').get() };
+    },
+
     data: () => {
         return {
             page: 0,
         };
-    },
-
-    async asyncData() {
-        return { leaderboards: await Http.for('leaderboard/users').get() };
     },
 
     methods: {
