@@ -264,13 +264,9 @@ export const actions = {
         await dispatch('refresh');
     },
 
-    async linkedAccounts({ commit }) {
-        const req = await this.$axios.get(`/oauth`);
-        const accounts = req.data;
-
-        commit('linkedAccounts', accounts);
-
-        return accounts;
+    async linkedAccounts({ state, commit }) {
+        const response = await this.$axios.get(`/users/${state.user.id}/connections`);
+        commit('linkedAccounts', response.data);
     },
 
     async connectLinkedAccount({ dispatch, commit }, provider) {
