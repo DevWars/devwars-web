@@ -63,16 +63,17 @@ export const usersFromGame = {
         },
 
         async getUsersFromGame() {
-            const players = Object.values(this.game.players);
+            const standardPlayers = Object.values(this.game.players).filter((e) => e.id !== 0);
+            const competitorPlayers = Object.values(this.game.players).filter((e) => e.id === 0);
 
             const fetchUser = async (id) => {
                 const res = await this.$axios.get(`/users/${id}`);
                 return res.data;
             };
 
-            const users = await Promise.all(players.map((player) => fetchUser(player.id)));
+            const standardUsers = await Promise.all(standardPlayers.map((player) => fetchUser(player.id)));
 
-            this.users = users.reduce((acc, user) => {
+            this.users = standardUsers.concat(competitorPlayers).reduce((acc, user) => {
                 acc[user.id] = user;
                 return acc;
             }, {});
