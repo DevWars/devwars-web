@@ -3,48 +3,32 @@
         <h6>Main</h6>
         <ul>
             <li>
-                <nuxt-link to="/mod/dashboard">
-                    <i class="fa fa-tachometer"></i>Dashboard
-                </nuxt-link>
+                <nuxt-link to="/mod/dashboard"> <i class="fa fa-tachometer"></i>Dashboard </nuxt-link>
             </li>
             <li>
-                <nuxt-link to="/mod/users" class="disabled">
-                    <i class="fa fa-user"></i>Users
-                </nuxt-link>
+                <nuxt-link to="/mod/users" class="disabled"> <i class="fa fa-user"></i>Users </nuxt-link>
             </li>
             <li>
-                <nuxt-link to="/mod/teams" class="disabled">
-                    <i class="fa fa-users"></i>Teams
-                </nuxt-link>
+                <nuxt-link to="/mod/teams" class="disabled"> <i class="fa fa-users"></i>Teams </nuxt-link>
             </li>
             <li>
-                <nuxt-link to="/mod/schedules">
-                    <i class="fa fa-calendar"></i>Schedules
-                </nuxt-link>
+                <nuxt-link to="/mod/schedules"> <i class="fa fa-calendar"></i>Schedules </nuxt-link>
             </li>
             <li>
-                <nuxt-link to="/mod/games">
-                    <i class="fa fa-gamepad"></i>Games
-                </nuxt-link>
+                <nuxt-link to="/mod/games"> <i class="fa fa-gamepad"></i>Games </nuxt-link>
             </li>
             <li>
-                <nuxt-link to="/mod/tournaments">
-                    <i class="fa fa-trophy"></i>Tournaments
-                </nuxt-link>
+                <nuxt-link to="/mod/tournaments"> <i class="fa fa-trophy"></i>Tournaments </nuxt-link>
             </li>
             <li>
-                <nuxt-link to="/mod/blogs" class="disabled">
-                    <i class="fa fa-newspaper"></i>Blog
-                </nuxt-link>
+                <nuxt-link to="/mod/blogs" class="disabled"> <i class="fa fa-newspaper"></i>Blog </nuxt-link>
             </li>
         </ul>
 
         <h6>More</h6>
         <ul>
             <li>
-                <nuxt-link to="#" class="disabled">
-                    <i class="fa fa-file-alt"></i>Mod Doc
-                </nuxt-link>
+                <nuxt-link to="#" class="disabled"> <i class="fa fa-file-alt"></i>Mod Doc </nuxt-link>
             </li>
         </ul>
 
@@ -52,28 +36,51 @@
         <ul class="list-info">
             <li>
                 <nuxt-link to="#">
-                    <Progress title="Server Usage" :progress="30 + '%'" color="primary"/>
+                    <Progress title="Server Usage" :progress="30 + '%'" color="primary" />
                 </nuxt-link>
             </li>
             <li>
                 <nuxt-link to="#">
-                    <Progress title="GitHub Issues" :progress="30 + '%'" color="yellow"/>
+                    <Progress title="GitHub Issues" :progress="30 + '%'" color="yellow" />
                 </nuxt-link>
             </li>
         </ul>
+
+        <h6>information</h6>
+        <div class="information">
+            <div>
+                API: <span>v{{ serverVersion }}</span>
+            </div>
+            <div>
+                Status: <span :class="apiStatusColor">{{ serverStatus }}</span>
+            </div>
+        </div>
     </div>
 </template>
 
-
 <script>
+import { mapGetters } from 'vuex';
 import Progress from '@/components/form/Progress';
 
 export default {
     name: 'ModSidebar',
     components: { Progress },
+
+    data() {
+        return {
+            apiStatusColor: 'information__healthy',
+        };
+    },
+
+    computed: {
+        ...mapGetters({ serverVersion: 'server/version', serverStatus: 'server/status' }),
+    },
+
+    mounted() {
+        this.apiStatusColor = `information__${this.serverStatus}`.toLowerCase();
+    },
 };
 </script>
-
 
 <style lang="scss" scoped>
 @import 'utils.scss';
@@ -129,6 +136,34 @@ export default {
             margin-right: 20px;
             text-align: center;
         }
+    }
+}
+
+.information {
+    padding: 10px $s-space;
+
+    h5 {
+        margin-bottom: $xs-space;
+        font-weight: $font-weight-bold;
+    }
+
+    div {
+        margin-bottom: 10px;
+        margin-top: 0px;
+        font-size: $font-size-base;
+        line-height: 1.3;
+    }
+
+    &__healthy {
+        color: $success-color;
+    }
+
+    &__degraded {
+        color: $warning-color;
+    }
+
+    &__error {
+        color: $danger-color;
     }
 }
 </style>
