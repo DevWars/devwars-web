@@ -84,8 +84,8 @@
                     </Column>
 
                     <Column :md="4">
-                        <Select v-model="sex" label="Sex" @input="updateForm({ values: $event, key: 'sex' })">
-                            <option v-for="(sex, index) in sexes" :key="sex" :value="index">{{ sex }}</option>
+                        <Select v-model="sex" label="Sex" @input="updateForm({ values: Number($event), key: 'sex' })">
+                            <option v-for="(sex, index) in sexes" :key="index" :value="index">{{ sex }}</option>
                         </Select>
                     </Column>
                 </Row>
@@ -122,12 +122,12 @@
                     @input="updateForm({ values: $event, key: 'forHire' })"
                 />
 
-                <LanguageSkills :profile="profile" @change="updateForm"/>
+                <LanguageSkills :profile="profile" @change="updateForm" />
             </Column>
             <Column :md="4">
                 <h3>Avatar</h3>
 
-                <Avatar v-if="user" :user="user" class="xl"/>
+                <Avatar v-if="user" :user="user" class="xl" />
 
                 <FileChooser @change="crop">
                     <template #default="{update}">
@@ -195,6 +195,7 @@ export default {
 
     methods: {
         updateForm({ values, key }) {
+            console.log(`values`, values, 'key', key);
             this.$store.commit('user/profileUpdate', { key, values });
         },
 
