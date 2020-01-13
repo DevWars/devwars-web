@@ -1,7 +1,7 @@
 <template>
     <HomeCard v-if="latestSchedule" title="Next Showing">
         <div v-if="updateTimeInterval === null" class="now-showing">
-            <div class="next-showing__time">Any Minute now!</div>
+            <div class="next-showing__time">Any Minute Now!</div>
         </div>
 
         <ul id="countdown" class="countdown">
