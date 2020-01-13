@@ -5,9 +5,7 @@
                 <div class="banner__meta">
                     <span class="banner__date">{{ game.startTime | moment('M/DD/YYYY') }}</span>
                     <h2 class="banner__gamemode">{{ game.mode }}</h2>
-                    <div
-                        class="banner__versus"
-                    >{{ teams[0].numPlayers }} VS {{ teams[1].numPlayers }}</div>
+                    <div class="banner__versus">{{ teams[0].numPlayers }} VS {{ teams[1].numPlayers }}</div>
                 </div>
                 <ButtonIcon
                     v-show="game.videoUrl"
@@ -15,7 +13,8 @@
                     target="_blank"
                     icon="fab fa-youtube"
                     class="youtube"
-                >Watch on YouTube</ButtonIcon>
+                    >Watch on YouTube</ButtonIcon
+                >
             </div>
         </Row>
 
@@ -41,26 +40,22 @@
             <h3>{{ game.title }}</h3>
         </SubScore>
 
-        <SubScore
-            title="Objectives"
-            :blueScore="teams[0].scores.objectives"
-            :redScore="teams[1].scores.objectives"
-        >
+        <SubScore title="Objectives" :blueScore="teams[0].scores.objectives" :redScore="teams[1].scores.objectives">
             <ul class="objectives">
                 <li
                     v-for="objective in game.objectives"
                     :key="objective.id"
                     class="objectives__item"
-                    :class="{bonus: objective.isBonus }"
+                    :class="{ bonus: objective.isBonus }"
                 >
                     <div
                         class="objectives__square team-blue"
-                        :class="{active: teamCompletedObjective(0, objective) }"
+                        :class="{ active: teamCompletedObjective(0, objective) }"
                     ></div>
                     <span class="objectives__obj">{{ objective.description }}</span>
                     <div
                         class="objectives__square team-red"
-                        :class="{active: teamCompletedObjective(1, objective) }"
+                        :class="{ active: teamCompletedObjective(1, objective) }"
                     ></div>
                 </li>
             </ul>
@@ -70,7 +65,6 @@
         <VoteBox :game="game" category="ux"/>
     </div>
 </template>
-
 
 <script>
 import VoteBox from '@/components/game/VoteBox';
@@ -89,6 +83,11 @@ export default {
             type: Object,
             required: true,
         },
+        includePlayers: {
+            type: Boolean,
+            required: false,
+            default: false,
+        },
     },
     methods: {
         getLanguageByGamePlayer,
@@ -96,7 +95,6 @@ export default {
     },
 };
 </script>
-
 
 <style lang="scss" scoped>
 @import 'utils.scss';
