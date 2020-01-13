@@ -1,6 +1,6 @@
 <template>
     <div class="CompetitorRegistration">
-        <PageBanner title="Compete in DevWars" type="competitor"/>
+        <PageBanner title="Compete in DevWars" type="competitor" />
 
         <div class="footer-offset">
             <Container>
@@ -12,7 +12,7 @@
                                 label="First Name"
                                 class="group"
                                 required
-                                @input="e => change('profile.firstName', e)"
+                                @input="(e) => change('profile.firstName', e)"
                             />
                         </Column>
                         <Column :sm="6">
@@ -21,7 +21,7 @@
                                 label="Last Name"
                                 class="group"
                                 required
-                                @input="e => change('profile.lastName', e)"
+                                @input="(e) => change('profile.lastName', e)"
                             />
                         </Column>
                     </Row>
@@ -67,16 +67,8 @@
                             </Row>-->
                         </Column>
                         <Column :md="3">
-                            <Select
-                                v-model="sex"
-                                label="Sex"
-                                @change="e => change('profile.sex', e)"
-                            >
-                                <option
-                                    v-for="(sex, index) in sexes"
-                                    :key="sex"
-                                    :value="index"
-                                >{{ sex }}</option>
+                            <Select v-model="sex" label="Sex" @change="(e) => change('profile.sex', e)">
+                                <option v-for="(sex, index) in sexes" :key="sex" :value="index">{{ sex }}</option>
                             </Select>
                         </Column>
                         <Column :sm="3">
@@ -85,7 +77,7 @@
                                 label="Select Country"
                                 class="group"
                                 required
-                                @change="e => change('profile.country', e)"
+                                @change="(e) => change('profile.country', e)"
                             >
                                 <option v-for="country in countries" :key="country">{{ country }}</option>
                             </Select>
@@ -98,22 +90,19 @@
                                 v-model="profile.company"
                                 label="Company"
                                 class="group"
-                                @input="e => change('profile.company', e)"
+                                @input="(e) => change('profile.company', e)"
                             />
                         </Column>
                     </Row>
                 </Card>
 
                 <Card class="plain dark" title="Skill Assessment">
-                    <LanguageSkills
-                        :profile="profile"
-                        @change="e => change('profile.skills', e.values)"
-                    />
+                    <LanguageSkills :profile="profile" @change="(e) => change('profile.skills', e.values)" />
                 </Card>
 
                 <Card class="plain dark" title="Requirements">
                     <div>
-                        <ConnectToDiscord/>
+                        <ConnectToDiscord />
                     </div>
 
                     <p>A microphone is required to play in DevWars to communicate with your team during a game.</p>
@@ -122,7 +111,7 @@
                         name="has-microphone"
                         class="group"
                         required
-                        @input="e => hasMic = e"
+                        @input="(e) => (hasMic = e)"
                     />
                 </Card>
 
@@ -133,7 +122,6 @@
         </div>
     </div>
 </template>
-
 
 <script>
 // import moment from 'moment';
@@ -267,9 +255,7 @@ export default {
                     skills: finalSkills,
                     // dob: date,
                 };
-                console.log(userProfile);
                 await this.$axios.patch(`/user/${this.user.id}/profile`, userProfile);
-                console.log('DID THE PATCH');
 
                 if (this.schedule) {
                     await this.$store.dispatch('game/apply', this.schedule);
@@ -289,7 +275,6 @@ export default {
     },
 };
 </script>
-
 
 <style lang="scss" scoped>
 @import 'utils.scss';

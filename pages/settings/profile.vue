@@ -195,14 +195,12 @@ export default {
 
     methods: {
         updateForm({ values, key }) {
-            console.log(`values`, values, 'key', key);
             this.$store.commit('user/profileUpdate', { key, values });
         },
 
         async crop(result) {
-            const [cropped] = await this.$open(CropperModal, { data: result });
-
-            this.$store.dispatch('users/avatar', cropped);
+            const cropped = await this.$open(CropperModal, { data: result });
+            this.$store.dispatch('user/avatar', cropped);
         },
 
         async save() {

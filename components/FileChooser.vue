@@ -1,10 +1,9 @@
 <template>
     <div>
-        <input ref="chooser" type="file" style="display: none;" @change="change">
+        <input ref="chooser" type="file" style="display: none;" @change="change" />
         <slot :update="slotClicked"></slot>
     </div>
 </template>
-
 
 <script>
 export default {
@@ -13,6 +12,7 @@ export default {
         slotClicked() {
             this.$refs.chooser.click();
         },
+
         change() {
             const reader = new FileReader();
             const file = this.$refs.chooser.files[0];
