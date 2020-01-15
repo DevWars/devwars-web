@@ -33,24 +33,7 @@
         "no-restricted-globals": "off",
         "vue/no-use-v-if-with-v-for": "warn",
         "global-require": "off",
-        "vue/html-closing-bracket-spacing": [
-            "error",
-            {
-                "startTag": "never",
-                "endTag": "never",
-                "selfClosingTag": "never"
-            }
-        ],
-        "vue/html-self-closing": [
-            "error",
-            {
-                "html": {
-                    "void": "never",
-                    "normal": "never",
-                    "component": "always"
-                }
-            }
-        ],
+
         "max-len": [
             "error",
             120,

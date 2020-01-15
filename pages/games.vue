@@ -2,18 +2,16 @@
     <Container class="fluid">
         <Column :sm="3" class="sidebar no-gutter">
             <Tabs class="fluid invert">
-                <nuxt-link
-                    v-for="current in seasons"
-                    :key="current"
-                    :to="'/games?season=' + current"
-                >Season {{ current }}</nuxt-link>
+                <nuxt-link v-for="current in seasons" :key="current" :to="'/games?season=' + current"
+                    >Season {{ current }}</nuxt-link
+                >
             </Tabs>
 
             <div
                 v-for="game in games"
                 :key="game.id"
                 class="game"
-                :class="{active: viewing && viewing.id === game.id}"
+                :class="{ active: viewing && viewing.id === game.id }"
                 @click="view(game)"
             >
                 <div class="meta">
@@ -28,11 +26,10 @@
         </Column>
 
         <Column :sm="9" class="view">
-            <LargeGameDetail v-if="viewing" :game="viewing"/>
+            <LargeGameDetail v-if="viewing" :game="viewing" :includePlayers="includePlayers"/>
         </Column>
     </Container>
 </template>
-
 
 <script>
 import Http from '../services/Http';
@@ -51,6 +48,7 @@ export default {
             season: 3,
             games: [],
             viewing: null,
+            includePlayers: true,
         };
     },
 
@@ -63,7 +61,7 @@ export default {
                 this.games = await Http.for('games/season').get(this.season);
 
                 if (!this.$route.query.game) {
-                    this.viewing = await Http.for('games').get(this.games[0].id);
+                    this.viewing = await Http.for('games').get(`${this.games[0].id}?players=${this.includePlayers}`);
                 }
             },
         },
@@ -72,7 +70,7 @@ export default {
             immediate: true,
             async handler(newGame) {
                 if (newGame) {
-                    this.viewing = await Http.for('games').get(newGame);
+                    this.viewing = await Http.for('games').get(`${newGame}?players=${this.includePlayers}`);
                 }
             },
         },
@@ -88,7 +86,6 @@ export default {
     },
 };
 </script>
-
 
 <style lang="scss" scoped>
 @import 'utils.scss';

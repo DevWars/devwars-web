@@ -1,34 +1,37 @@
 <template>
     <HomeCard v-if="latestSchedule" title="Next Showing">
+        <div v-if="updateTimeInterval === null" class="now-showing">
+            <div class="next-showing__time">Any Minute Now!</div>
+        </div>
+
         <ul id="countdown" class="countdown">
             <li id="days" class="countdown__item">
-                <div class="countdown__number">{{ timeDifference.days}}</div>
+                <div class="countdown__number">{{ timeDifference.days }}</div>
                 <div class="countdown__label">Days</div>
             </li>
             <li id="hours" class="countdown__item">
-                <div class="countdown__number">{{ timeDifference.hours}}</div>
+                <div class="countdown__number">{{ timeDifference.hours }}</div>
                 <div class="countdown__label">Hours</div>
             </li>
             <li id="minutes" class="countdown__item">
-                <div class="countdown__number">{{ timeDifference.minutes}}</div>
+                <div class="countdown__number">{{ timeDifference.minutes }}</div>
                 <div class="countdown__label">Minutes</div>
             </li>
             <li id="seconds" class="countdown__item">
-                <div class="countdown__number">{{ timeDifference.seconds}}</div>
+                <div class="countdown__number">{{ timeDifference.seconds }}</div>
                 <div class="countdown__label">Seconds</div>
             </li>
         </ul>
         <div class="next-showing">
             <div class="next-showing__date">{{ latestSchedule.startTime | moment('dddd, MMMM DD') }}</div>
-            <div class="next-showing__time">{{ latestSchedule.startTime | moment('H:mm')}} (UTC)</div>
+            <div class="next-showing__time">{{ latestSchedule.startTime | moment('H:mm') }} (UTC)</div>
         </div>
 
         <div slot="actions">
-            <RegistrationButtons :schedule="latestSchedule"/>
+            <RegistrationButtons :schedule="latestSchedule" />
         </div>
     </HomeCard>
 </template>
-
 
 <script>
 import moment from 'moment';
@@ -42,6 +45,8 @@ export default {
     data: () => {
         return {
             timeDifference: {},
+            updateTimeInterval: null,
+            units: ['days', 'hours', 'minutes', 'seconds'],
         };
     },
     computed: {
@@ -55,30 +60,38 @@ export default {
         },
     },
     mounted() {
+        this.updateTimeInterval = setInterval(this.updateTime.bind(this), 1000);
         this.updateTime();
-
-        setInterval(this.updateTime.bind(this), 1000);
     },
     methods: {
-        updateTime() {
-            const diff = moment.utc(this.latestSchedule.startTime).diff(moment());
-            const units = ['days', 'hours', 'minutes', 'seconds'];
+        resetTime() {
+            clearInterval(this.updateTimeInterval);
+            const updatedTimeDifference = {};
 
-            const updated = {};
-
-            units.forEach((unit) => {
-                updated[unit] = moment
-                    .duration(diff)
-                    [unit]()
-                    .toFixed(0);
+            this.units.forEach((value) => {
+                updatedTimeDifference[value] = 0;
             });
 
-            this.timeDifference = updated;
+            this.timeDifference = updatedTimeDifference;
+            this.updateTimeInterval = null;
+        },
+
+        updateTime() {
+            const delta = moment.utc(this.latestSchedule.startTime).diff(moment());
+            if (delta <= 0) return this.resetTime();
+
+            const updatedTimeDifference = {};
+
+            this.units.forEach((unit) => {
+                const unitTime = moment.duration(delta)[unit]();
+                updatedTimeDifference[unit] = unitTime.toFixed(0);
+            });
+
+            this.timeDifference = updatedTimeDifference;
         },
     },
 };
 </script>
-
 
 <style lang="scss" scoped>
 @import 'utils.scss';
@@ -105,6 +118,12 @@ export default {
         color: $text-color-secondary;
         text-transform: uppercase;
     }
+}
+
+.now-showing {
+    width: 100%;
+    margin-bottom: 0px;
+    margin-top: -25px;
 }
 
 .next-showing {

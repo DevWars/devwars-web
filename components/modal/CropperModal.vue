@@ -1,7 +1,7 @@
 <template>
     <div>
         <div style="height: 400px;">
-            <img ref="cropper" :src="data" @load="imageLoad">
+            <img ref="cropper" :src="data" @load="imageLoad" />
         </div>
 
         <ButtonGroup class="modal__actions">
@@ -9,7 +9,6 @@
         </ButtonGroup>
     </div>
 </template>
-
 
 <script>
 import Cropper from 'cropperjs';
@@ -43,6 +42,7 @@ export default {
                     resolve(res);
                 }, 'image/jpeg');
             });
+
             this.close(data);
         },
     },

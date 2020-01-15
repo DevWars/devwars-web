@@ -41,28 +41,32 @@ export const usersFromGame = {
     data: () => ({
         users: {},
     }),
+
     watch: {
         game() {
             this.getUsersFromGame();
         },
     },
+
     mounted() {
         this.getUsersFromGame();
     },
     methods: {
         playersWithUser(players) {
             const result = [];
+
             for (const player of Object.values(players)) {
                 const user = this.users[player.id];
-                if (user) {
-                    result.push({ ...user, ...player });
-                }
+                if (user) result.push({ ...user, ...player });
             }
 
             return result;
         },
 
         async getUsersFromGame() {
+            this.users = this.includePlayers ? this.game.players : this.users;
+            if (Object.keys(this.users).length >= 1) return;
+
             const standardPlayers = Object.values(this.game.players).filter((e) => e.id !== 0);
             const competitorPlayers = Object.values(this.game.players).filter((e) => e.id === 0);
 

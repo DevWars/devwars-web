@@ -5,6 +5,8 @@ export const mutations = {};
 export const actions = {
     async nuxtServerInit({ dispatch }) {
         await Promise.all([
+            dispatch('server/health'),
+
             // dispatch('user/refreshUserCount'),
             dispatch('user/refresh'),
 
