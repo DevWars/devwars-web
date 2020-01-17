@@ -5,10 +5,11 @@ const webpack = require('webpack');
 const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
 const apiUrl = process.env.API_URL || 'http://localhost:8080';
 const discordClient = process.env.DISCORD_CLIENT || '';
+const twitchClient = process.env.TWITCH_CLIENT || '';
 
 module.exports = {
     mode: 'universal',
-    env: { baseUrl, apiUrl, discordClient },
+    env: { baseUrl, apiUrl, discordClient, twitchClient },
     /*
      ** Headers of the page
      */
