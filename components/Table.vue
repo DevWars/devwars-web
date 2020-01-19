@@ -62,7 +62,6 @@ export default {
   td {
     border-bottom: 1px solid $divider-color;
     max-width: 40px;
-    overflow: hidden;
     padding: 20px 0;
     text-align: left;
     text-overflow: ellipsis;

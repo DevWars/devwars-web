@@ -9,11 +9,12 @@
       </h2>
     </div>
 
-    <div class="actions">
-      <div v-if="showSearch" class="search">
-        <Input class="labeless" :placeholder="'Search for ' + title" />
-      </div>
-      <slot />
+        <div class="actions">
+            <div v-if="showSearch" class="search">
+                <Input class="labeless" :placeholder="'Search for ' + title" @input="(e) => $emit('input', e)" />
+            </div>
+            <slot></slot>
+        </div>
     </div>
   </div>
 </template>
