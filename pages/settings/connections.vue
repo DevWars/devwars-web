@@ -1,20 +1,14 @@
 <template>
-    <div class="group">
-        <Row>
-            <Column :md="8">
-                <h3>Connections</h3>
-            </Column>
-        </Row>
+    <div class="ConnectionsPage">
+        <h3>Connections</h3>
 
-        <Row>
-            <Column :md="8">
-                <ConnectToDiscord />
-            </Column>
+        <div class="connect">
+            <ConnectToDiscord/>
+        </div>
 
-            <Column :md="8">
-                <ConnectToTwitch />
-            </Column>
-        </Row>
+        <div class="connect">
+            <ConnectToTwitch/>
+        </div>
     </div>
 </template>
 
@@ -23,7 +17,17 @@ import ConnectToDiscord from '../../components/user/ConnectToDiscord';
 import ConnectToTwitch from '../../components/user/ConnectToTwitch';
 
 export default {
-    name: 'Connections',
+    name: 'ConnectionsPage',
     components: { ConnectToDiscord, ConnectToTwitch },
 };
 </script>
+
+<style lang="scss" scoped>
+@import 'utils.scss';
+
+.ConnectionsPage {
+    .connect + .connect {
+        margin-top: $grid-gutter-width;
+    }
+}
+</style>
