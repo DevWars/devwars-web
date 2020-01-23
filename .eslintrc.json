@@ -45,7 +45,7 @@
                 "ignoreTemplateLiterals": true
             }
         ],
-        "vetur.format.defaultFormatter.html": "none",
+        "vetur.format.defaultFormatter.html": "off",
         "prettier/prettier": 0
     }
 }
