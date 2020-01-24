@@ -151,7 +151,7 @@ export const actions = {
             await dispatch(
                 'toast/add',
                 { type: 'success', message: `Thanks for signing up! See ya soon` },
-                { root: true }
+                { root: true },
             );
             await dispatch('navigate', '/game/confirmation', { root: true });
         } catch (e) {

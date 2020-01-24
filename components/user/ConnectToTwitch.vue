@@ -1,10 +1,8 @@
 <template>
-    <div class="ConnectToDiscord">
-        <ButtonIcon v-if="!hasDiscord" :href="discordUrl" icon="fab fa-discord" class="discord"
-            >Connect Discord</ButtonIcon
-        >
-        <ButtonIcon v-else class="outline danger" icon="fab fa-discord" @click="removeProvider('DISCORD')"
-            >Disconnect Discord</ButtonIcon
+    <div class="ConnectToTwitch">
+        <ButtonIcon v-if="!hasTwitch" :href="twitchUrl" icon="fab fa-twitch" class="twitch">Connect Twitch</ButtonIcon>
+        <ButtonIcon v-else class="outline danger" icon="fab fa-twitch" @click="removeProvider('TWITCH')"
+            >Disconnect Twitch</ButtonIcon
         >
     </div>
 </template>
@@ -14,11 +12,11 @@ import { mapActions } from 'vuex';
 import userHasProvider from '../../utils/linkedAccounts';
 
 export default {
-    name: 'ConnectToDiscord',
+    name: 'ConnectToTwitch',
 
     data: () => {
         return {
-            discordUrl: `https://discordapp.com/api/oauth2/authorize?client_id=${process.env.discordClient}&redirect_uri=${process.env.apiUrl}/oauth/discord&response_type=code&scope=identify`,
+            twitchUrl: `https://id.twitch.tv/oauth2/authorize?client_id=${process.env.twitchClient}&redirect_uri=${process.env.apiUrl}/oauth/twitch&response_type=code`,
         };
     },
 
@@ -31,8 +29,8 @@ export default {
             return this.$store.state.user.linkedAccounts;
         },
 
-        hasDiscord() {
-            return userHasProvider(this.links, 'DISCORD');
+        hasTwitch() {
+            return userHasProvider(this.links, 'TWITCH');
         },
     },
 
@@ -50,7 +48,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.discord {
+.twitch {
     width: 200px;
 }
 </style>
