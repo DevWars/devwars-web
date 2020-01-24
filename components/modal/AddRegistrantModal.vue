@@ -1,62 +1,64 @@
 <template>
-    <form @submit.prevent="addRegistrant">
-        <div class="search">
-            <Input v-model="username" placeholder="Username"/>
-        </div>
+  <form @submit.prevent="addRegistrant">
+    <div class="search">
+      <Input v-model="username" placeholder="Username" />
+    </div>
 
-        <ButtonGroup class="modal__actions">
-            <Button class="muted link" @click="close">Cancel</Button>
-            <Button type="submit" class="primary">Add</Button>
-        </ButtonGroup>
-    </form>
+    <ButtonGroup class="modal__actions">
+      <Button class="muted link" @click="close">
+        Cancel
+      </Button>
+      <Button type="submit" class="primary">
+        Add
+      </Button>
+    </ButtonGroup>
+  </form>
 </template>
 
-
 <script>
-import Input from '../form/Input';
+import Input from '../form/Input'
 
 export default {
-    name: 'AddRegistrantModal',
-    components: { Input },
-    props: {
-        game: {
-            type: Object,
-            required: true,
-        },
-        resolve: {
-            type: Function,
-            required: true,
-        },
-        reject: {
-            type: Function,
-            required: true,
-        },
+  name: 'AddRegistrantModal',
+  components: { Input },
+  props: {
+    game: {
+      type: Object,
+      required: true
     },
-    data: () => {
-        return {
-            username: '',
-        };
+    resolve: {
+      type: Function,
+      required: true
     },
-    methods: {
-        async addRegistrant() {
-            try {
-                await this.$axios.$post(`/applications/game/${this.game.id}/username/${this.username}`);
-            } catch (e) {
-                console.error(e);
-            }
-
-            this.close(true);
-        },
-    },
-};
+    reject: {
+      type: Function,
+      required: true
+    }
+  },
+  data: () => {
+    return {
+      username: ''
+    }
+  },
+  methods: {
+    async addRegistrant() {
+      try {
+        await this.$axios.$post(
+          `/applications/game/${this.game.id}/username/${this.username}`
+        )
+      } finally {
+        this.close(true)
+      }
+    }
+  }
+}
 </script>
-
 
 <style lang="scss" scoped>
 @import 'utils.scss';
 
 .search {
-    /* position: relative;
+  /* position: relative;
 
     &__list {
         @extend %material;

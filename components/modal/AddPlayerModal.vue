@@ -1,79 +1,92 @@
 <template>
-    <form class="AddPlayerModal" @submit.prevent="addPlayer">
-        <Select v-model="team" label="Select Team" class="group" required>
-            <option value="0">Blue</option>
-            <option value="1">Red</option>
-        </Select>
+  <form class="AddPlayerModal" @submit.prevent="addPlayer">
+    <Select v-model="team" label="Select Team" class="group" required>
+      <option value="0">
+        Blue
+      </option>
+      <option value="1">
+        Red
+      </option>
+    </Select>
 
-        <Select v-model="language" label="Select Language" class="group" required>
-            <option value="html">HTML</option>
-            <option value="css">CSS</option>
-            <option value="js">JS</option>
-        </Select>
+    <Select v-model="language" label="Select Language" class="group" required>
+      <option value="html">
+        HTML
+      </option>
+      <option value="css">
+        CSS
+      </option>
+      <option value="js">
+        JS
+      </option>
+    </Select>
 
-        <ButtonGroup class="modal__actions">
-            <Button class="muted link" @click="close">Cancel</Button>
-            <Button type="submit" class="primary">Add Player</Button>
-        </ButtonGroup>
-    </form>
+    <ButtonGroup class="modal__actions">
+      <Button class="muted link" @click="close">
+        Cancel
+      </Button>
+      <Button type="submit" class="primary">
+        Add Player
+      </Button>
+    </ButtonGroup>
+  </form>
 </template>
 
-
 <script>
-import Select from '@/components/form/Select';
+import Select from '@/components/form/Select'
 
 export default {
-    name: 'AddPlayerModal',
+  name: 'AddPlayerModal',
 
-    components: { Select },
+  components: { Select },
 
-    props: {
-        game: {
-            type: Object,
-            required: true,
-        },
-        user: {
-            type: Object,
-            required: true,
-        },
-        resolve: {
-            type: Function,
-            required: true,
-        },
+  props: {
+    game: {
+      type: Object,
+      required: true
     },
-
-    data: () => {
-        return {
-            team: 0,
-            language: 'html',
-        };
+    user: {
+      type: Object,
+      required: true
     },
+    resolve: {
+      type: Function,
+      required: true
+    }
+  },
 
-    methods: {
-        async addPlayer() {
-            const teamId = Number(this.team);
-            const player = {
-                id: this.user.id,
-                username: this.user.username,
-                language: this.language,
-                team: teamId,
-            };
+  data: () => {
+    return {
+      team: 0,
+      language: 'html'
+    }
+  },
 
-            const team = {
-                id: teamId,
-                name: teamId === 0 ? 'blue' : 'red',
-                players: this.game.players,
-            };
+  methods: {
+    async addPlayer() {
+      const teamId = Number(this.team)
+      const player = {
+        id: this.user.id,
+        username: this.user.username,
+        language: this.language,
+        team: teamId
+      }
 
-            const res = await this.$axios.post(`/games/${this.game.id}/player`, {
-                player,
-                team,
-            });
+      const team = {
+        id: teamId,
+        name: teamId === 0 ? 'blue' : 'red',
+        players: this.game.players
+      }
 
-            this.$store.commit('game/game', res.data);
+      const res = await this.$axios.post(`/games/${this.game.id}/player`, {
+        player,
+        team
+      })
 
-            this.close(true);
-        },
-    },
-};
+      this.$store.commit('game/game', res.data)
+
+      this.close(true)
+    }
+  }
+}
 </script>
