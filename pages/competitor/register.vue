@@ -141,7 +141,7 @@
 
 <script>
 // import moment from 'moment';
-import * as countryList from 'country-list'
+import { getNameList } from 'country-list'
 import { mapActions } from 'vuex'
 
 import PageBanner from '@/components/layout/PageBanner'
@@ -177,7 +177,7 @@ export default {
         profile: {},
         skills: {}
       },
-      countries: Object.keys(countryList().getNameList()).map(
+      countries: Object.keys(getNameList()).map(
         (it) => it[0].toUpperCase() + it.slice(1)
       ),
       sexes: ['Male', 'Female', 'Other']
@@ -298,7 +298,7 @@ export default {
           `Congratulations! You are now a competitor!`
         )
       } catch (e) {
-        this.$store.dispatch('toast/errors', e)
+        this.$store.dispatch('toast/error', e.response.data)
       }
     },
 
