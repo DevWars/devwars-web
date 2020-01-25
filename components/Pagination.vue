@@ -2,19 +2,17 @@
   <div class="Pagination">
     <Button
       class="muted sm"
-      :class="{ disabled: !canGoPrevious }"
+      :class="{ disabled: !canPrevious }"
       @click="$emit('previous')"
+      >Prev</Button
     >
-      Prev
-    </Button>
     <strong class="page">PAGE {{ page + 1 }}</strong>
     <Button
       class="muted sm"
-      :class="{ disabled: !canGoNext }"
+      :class="{ disabled: !canNext }"
       @click="$emit('next')"
+      >Next</Button
     >
-      Next
-    </Button>
   </div>
 </template>
 
@@ -31,22 +29,17 @@ export default {
       type: Number,
       default: 0
     },
-    count: {
-      type: Number,
-      default: 0
+    canNext: {
+      type: Boolean,
+      default: false
+    },
+    canPrevious: {
+      type: Boolean,
+      default: false
     }
   },
 
-  computed: {
-    canGoPrevious() {
-      return this.page > 0
-    },
-
-    canGoNext() {
-      const totalPages = Math.ceil(this.count / this.perPage)
-      return this.page < totalPages - 1
-    }
-  }
+  computed: {}
 }
 </script>
 

@@ -6,7 +6,7 @@
     <div id="MobileMenu" class="main">
       <div class="head">
         <nuxt-link to="/" class="logo" @click.native="toggleMobileMenu">
-          <img src="~assets/img/logo.png" alt="DevWars">
+          <img src="~assets/img/logo.png" alt="DevWars" />
         </nuxt-link>
       </div>
 
@@ -19,8 +19,9 @@
       <Button to="/schedule" class="link block" @click="toggleMobileMenu">
         Schedule
       </Button>
-      <!-- <Button to="/leaderboards" class="link block" @click="toggleMobileMenu">Leaders</Button> -->
-
+      <Button to="/leaderboards" class="link block" @click="toggleMobileMenu">
+        Leaders
+      </Button>
       <div v-if="!user" class="actions">
         <Button to="/register" class="primary block">
           Register

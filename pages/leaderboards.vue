@@ -1,15 +1,6 @@
 <template>
   <div class="Leaderboards">
-    <PageBanner title="Leaderboards">
-      <Select class="clear">
-        <option>Today</option>
-        <option selected="selected">
-          Weekly
-        </option>
-        <option>Monthly</option>
-        <option>All Time</option>
-      </Select>
-    </PageBanner>
+    <PageBanner title="Leaderboards" />
 
     <Container class="footer-offset">
       <Table>
@@ -17,37 +8,42 @@
           <th width="10%">
             Rank
           </th>
-          <th width="50%">
+          <th width="16%">
             User Name
           </th>
-          <th width="15%">
+          <th width="16%">
             Level
           </th>
-          <th width="15%">
+          <th width="16%">
             Won
           </th>
-          <th width="15%">
+          <th width="16%">
+            Coins
+          </th>
+          <th style="text-align: center" width="10%">
             XP
           </th>
         </tr>
 
-        <tr v-for="(user, index) in leaderboards.users" :key="user.id">
+        <tr v-for="(user, index) in leaderboards.data" :key="user.userId">
           <td scope="row" class="rank">
             {{ page * 10 + index + 1 }}
           </td>
-          <td>
-            <User :user="user" />
+          <td>{{ user.username }}</td>
+          <td>{{ user.level }}</td>
+          <td>{{ user.wins }}</td>
+          <td>{{ user.coins }}</td>
+          <td style="text-align: center">
+            {{ user.xp }}
           </td>
-          <td>{{ user.statistics.rank.rank }}</td>
-          <td>{{ user.statistics.wins }}</td>
-          <td>{{ user.statistics.xp }}</td>
         </tr>
       </Table>
 
       <Pagination
         :page="page"
         :per-page="10"
-        :count="leaderboards.count"
+        :can-next="leaderboards.pagination.after !== null"
+        :can-previous="leaderboards.pagination.before !== null"
         @previous="previous"
         @next="next"
       />
@@ -59,38 +55,45 @@
 import Http from '../services/Http'
 import PageBanner from '@/components/layout/PageBanner'
 import Table from '@/components/Table'
-import Select from '@/components/form/Select'
 import Pagination from '@/components/Pagination'
-import User from '@/components/user/User'
 
 export default {
   name: 'Leaderboards',
 
-  components: { PageBanner, Table, Select, Pagination, User },
+  components: { PageBanner, Table, Pagination },
 
   data: () => {
     return {
-      page: 0
+      page: 0,
+      pagination: {
+        after: null,
+        before: null
+      },
+      data: []
     }
   },
 
   async asyncData() {
-    return { leaderboards: await Http.for('leaderboard/users').get() }
+    return { leaderboards: await Http.for('users/leaderboards?first=10').get() }
   },
+
+  mounted() {},
 
   methods: {
     async previous() {
       this.page -= 1
-      this.leaderboards = await Http.for('leaderboard/users').get({
-        page: this.page
-      })
+
+      const { pagination } = this.leaderboards
+      const before = pagination.before.split('users/leaderboards')[1]
+      this.leaderboards = await Http.for(`users/leaderboards${before}`).get()
     },
 
     async next() {
       this.page += 1
-      this.leaderboards = await Http.for('leaderboard/users').get({
-        page: this.page
-      })
+
+      const { pagination } = this.leaderboards
+      const after = pagination.after.split('users/leaderboards')[1]
+      this.leaderboards = await Http.for(`users/leaderboards${after}`).get()
     }
   }
 }
