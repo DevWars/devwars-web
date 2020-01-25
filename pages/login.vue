@@ -19,7 +19,11 @@
           />
 
           <div slot="actions">
-            <Button type="submit" class="outline block">
+            <Button
+              type="submit"
+              :disabled="authenticating"
+              class="outline block"
+            >
               Login
             </Button>
             <Button href="/register" class="outline muted block">
@@ -49,15 +53,23 @@ export default {
   data: () => {
     return {
       username: '',
-      password: ''
+      password: '',
+      authenticating: false
     }
   },
   methods: {
-    login() {
-      this.$store.dispatch('user/login', {
-        username: this.username,
-        password: this.password
-      })
+    async login() {
+      try {
+        this.authenticating = true
+
+        await this.$store.dispatch('user/login', {
+          username: this.username,
+          password: this.password
+        })
+      } finally {
+        this.authenticating = false
+        this.password = ''
+      }
     }
   }
 }
