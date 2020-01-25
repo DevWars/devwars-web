@@ -128,7 +128,7 @@ export default {
 }
 
 .points {
-  font-size: 48px;
+  font-size: 38px;
   letter-spacing: 1px;
 
   &:last-child:before {
