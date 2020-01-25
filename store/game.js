@@ -114,12 +114,14 @@ export const actions = {
     commit('add', game)
   },
 
-  async applications({ commit, dispatch }) {
+  async applications({ commit, dispatch, state }) {
     try {
       const applications = await Http.for('applications').get('mine')
       commit('applications', applications)
     } catch (e) {
-      dispatch('toast/error', e.response.data, { root: true })
+      if (e.response.status !== 401) {
+        dispatch('toast/error', e.response.data, { root: true })
+      }
     }
   },
 

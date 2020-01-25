@@ -7,7 +7,6 @@ export const actions = {
     await Promise.all([
       dispatch('server/health'),
 
-      // dispatch('user/refreshUserCount'),
       dispatch('user/refresh'),
 
       dispatch('game/schedules'),

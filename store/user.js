@@ -92,7 +92,6 @@ export const actions = {
   async refresh({ commit, dispatch }) {
     try {
       const user = await Http.for('auth/user').get()
-
       commit('user', user)
 
       await dispatch('profile')
