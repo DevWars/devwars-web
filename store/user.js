@@ -151,12 +151,7 @@ export const actions = {
 
       await dispatch('refresh')
 
-      dispatch(
-        'toast/add',
-        { type: 'success', message: 'Welcome back to DevWars!' },
-        { root: true }
-      )
-
+      dispatch('toast/success', 'Welcome back to DevWars!', { root: true })
       await dispatch('nuxtServerInit', null, { root: true })
 
       dispatch('navigate', '/dashboard', { root: true })
@@ -172,11 +167,7 @@ export const actions = {
 
       await dispatch('refresh')
 
-      dispatch(
-        'toast/add',
-        { type: 'success', message: 'Welcome to DevWars!' },
-        { root: true }
-      )
+      dispatch('toast/success', 'Welcome to DevWars!', { root: true })
 
       await dispatch('nuxtServerInit', null, { root: true })
 
@@ -189,7 +180,7 @@ export const actions = {
   async logout({ commit, dispatch }) {
     await Http.for('auth').post('logout')
 
-    await dispatch('navigate', '/', { root: true })
+    dispatch('navigate', '/', { root: true })
 
     commit('user', null)
   },
@@ -218,18 +209,23 @@ export const actions = {
     }
   },
 
-  async email({ dispatch, commit }, data) {
+  async email({ dispatch, commit, state }, { password, email }) {
     try {
-      const user = await Http.for('auth/reset/email').post('email', data)
+      const data = await Http.for('auth/reset').post('email', {
+        password,
+        email
+      })
 
-      commit('user', user)
+      dispatch('toast/success', "We've updated your email!.", { root: true })
 
-      await dispatch(
-        'toast/success',
-        `We've updated your email, please go verify your email.`,
-        { root: true }
-      )
-      await dispatch('navigate', '/pending', { root: true })
+      // If the updated user requires going through the verification process once again, reset there
+      // role state and redirect them to the pending page.
+      if (data.verification) {
+        commit('user', Object.assign(state.user, { role: 'PENDING' }))
+        dispatch('navigate', '/pending', { root: true })
+      } else {
+        commit('user', Object.assign(state.user, { email }))
+      }
     } catch (e) {
       dispatch('toast/error', e.response.data, { root: true })
     }
@@ -240,6 +236,7 @@ export const actions = {
       const userPermission = await Http.for(
         `/users/${state.user.id}/emails`
       ).get('permissions')
+
       commit('emailPermissions', userPermission)
     } catch (e) {
       dispatch('toast/error', e.response ? e.response.data : e, { root: true })
@@ -256,6 +253,9 @@ export const actions = {
         permissions
       )
       commit('emailPermissions', response.data)
+      dispatch('toast/success', "We've updated your email permissions!", {
+        root: true
+      })
     } catch (e) {
       dispatch('toast/error', e.response ? e.response.data : e, { root: true })
       commit('emailPermissions', null)

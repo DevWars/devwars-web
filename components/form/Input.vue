@@ -1,8 +1,8 @@
 <template>
   <div class="Input" :class="{ label }">
     <!-- eslint-disable-next-line -->
-        <input
-      :id="labelName"
+    <input
+      :id="fieldId || labelName"
       ref="input"
       :type="type"
       :class="[{ empty: !valid }, { valid }]"
@@ -27,6 +27,10 @@ export default {
     label: {
       type: String,
       default: ''
+    },
+    inputId: {
+      type: String,
+      default: ''
     }
   },
 
@@ -37,6 +41,9 @@ export default {
   computed: {
     labelName() {
       return this.label.toLowerCase().replace(/\s/g, '-')
+    },
+    fieldId() {
+      return this.inputId.toLowerCase().replace(/\s/g, '-')
     }
   },
 
@@ -68,6 +75,11 @@ export default {
 
   &.group {
     @extend %form-group;
+  }
+
+  input[type='email']:disabled,
+  [type='text']:disabled {
+    color: #484b5b;
   }
 }
 </style>

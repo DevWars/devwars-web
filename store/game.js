@@ -119,7 +119,7 @@ export const actions = {
       const applications = await Http.for('applications').get('mine')
       commit('applications', applications)
     } catch (e) {
-      dispatch('toast/errors', e, { root: true })
+      dispatch('toast/error', e.response.data, { root: true })
     }
   },
 
@@ -146,7 +146,7 @@ export const actions = {
       const upcoming = await Http.for('schedules/status/scheduled').get()
       commit('upcoming', upcoming)
     } catch (e) {
-      dispatch('toast/errors', e, { root: true })
+      dispatch('toast/error', e.response.data, { root: true })
     }
   },
 
@@ -156,14 +156,13 @@ export const actions = {
 
       commit('apply', schedule)
 
-      await dispatch(
-        'toast/add',
-        { type: 'success', message: `Thanks for signing up! See ya soon` },
-        { root: true }
-      )
-      await dispatch('navigate', '/game/confirmation', { root: true })
+      dispatch('toast/success', `Thanks for signing up! See ya soon`, {
+        root: true
+      })
+
+      dispatch('navigate', '/game/confirmation', { root: true })
     } catch (e) {
-      dispatch('toast/errors', e, { root: true })
+      dispatch('toast/error', e.response.data, { root: true })
     }
   },
 
@@ -173,13 +172,9 @@ export const actions = {
 
       commit('forfeit', schedule)
 
-      dispatch(
-        'toast/add',
-        { type: 'success', message: `Sorry to see you go.` },
-        { root: true }
-      )
+      dispatch('toast/success', `Sorry to see you go.`, { root: true })
     } catch (e) {
-      dispatch('toast/errors', e, { root: true })
+      dispatch('toast/error', e.response.data, { root: true })
     }
   },
 
@@ -189,13 +184,9 @@ export const actions = {
 
       commit('game', game)
 
-      dispatch(
-        'toast/add',
-        { type: 'success', message: 'Game updated' },
-        { root: true }
-      )
+      dispatch('toast/success', 'Game updated!', { root: true })
     } catch (e) {
-      dispatch('toast/errors', e, { root: true })
+      dispatch('toast/error', e.response.data, { root: true })
     }
   }
 }
