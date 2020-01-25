@@ -11,7 +11,13 @@ const twitchClient = process.env.TWITCH_CLIENT || ''
 
 export default {
   mode: 'universal',
-  env: { baseUrl, apiUrl, discordClient, twitchClient },
+  env: {
+    baseUrl,
+    apiUrl,
+    discordClient,
+    twitchClient,
+    version: process.env.npm_package_version
+  },
   /*
    ** Headers of the page
    */

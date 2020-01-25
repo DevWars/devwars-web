@@ -65,6 +65,9 @@
     <h6>information</h6>
     <div class="information">
       <div>
+        Client: <span>v{{ version }}</span>
+      </div>
+      <div>
         API: <span>v{{ serverVersion }}</span>
       </div>
       <div>
@@ -84,7 +87,8 @@ export default {
 
   data() {
     return {
-      apiStatusColor: 'information__healthy'
+      apiStatusColor: 'information__healthy',
+      version: process.env.version
     }
   },
 
