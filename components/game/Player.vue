@@ -1,13 +1,26 @@
 <template>
-  <nuxt-link class="Player" :to="`/dashboard/${user.id}`">
+  <nuxt-link
+    v-if="user.id !== 0"
+    class="Player hover"
+    :to="`/dashboard/${user.id}`"
+  >
     <User :user="user" :class="team.name" />
 
     <div class="languages">
-      <strong v-for="language in languages" :key="language" :class="language">{{
-        language
-      }}</strong>
+      <strong v-for="language in languages" :key="language" :class="language">
+        {{ language }}
+      </strong>
     </div>
   </nuxt-link>
+  <div v-else class="Player">
+    <User :user="user" :class="team.name" />
+
+    <div class="languages">
+      <strong v-for="language in languages" :key="language" :class="language">
+        {{ language }}
+      </strong>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -36,17 +49,17 @@ export default {
 <style lang="scss" scoped>
 @import 'utils.scss';
 
+.hover:hover {
+  background-color: rgba(#000, 0.2);
+  cursor: pointer;
+}
+
 .Player {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: $xs-space 0;
   color: inherit;
-
-  &:hover {
-    background-color: rgba(#000, 0.2);
-    cursor: pointer;
-  }
 
   .User {
     /deep/ .Avatar {
