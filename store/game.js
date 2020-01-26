@@ -32,7 +32,7 @@ export const mutations = {
 
   forfeit(state, game) {
     state.applications = state.applications.filter(
-      (it) => it.id !== game.id && it !== game.id
+      (t) => t.schedule.id !== game.id
     )
   },
 
@@ -154,9 +154,8 @@ export const actions = {
 
   async apply({ commit, dispatch }, schedule) {
     try {
-      await this.$axios.post(`applications/schedule/${schedule.id}`)
-
-      commit('apply', schedule)
+      const app = await this.$axios.post(`applications/schedule/${schedule.id}`)
+      commit('apply', app.data)
 
       dispatch('toast/success', 'Thanks for signing up! See ya soon', {
         root: true
@@ -171,7 +170,6 @@ export const actions = {
   async forfeit({ commit, dispatch }, schedule) {
     try {
       await this.$axios.delete(`applications/schedule/${schedule.id}`)
-
       commit('forfeit', schedule)
 
       dispatch('toast/success', 'Sorry to see you go.', { root: true })
