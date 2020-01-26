@@ -1,6 +1,6 @@
 <template>
   <SubScore
-    v-show="total > 0"
+    v-show="total > 0 || showOverride"
     :title="category"
     :blue-score="teamScore('blue')"
     :red-score="teamScore('red')"
@@ -30,13 +30,12 @@
       </div>
     </div>
 
-    <div class="voters">
-      {{ total }} votes
-    </div>
+    <div class="voters">{{ total }} votes</div>
   </SubScore>
 </template>
 
 <script>
+import { isNil } from 'lodash'
 import { voteAnalysisForTeam } from '../../utils/objectives'
 import SubScore from '@/components/game/SubScore'
 
@@ -51,6 +50,10 @@ export default {
     category: {
       type: String,
       required: true
+    },
+    showOverride: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -60,6 +63,8 @@ export default {
       analysis.blue = this.analysisForTeam(this.team('blue'), this.team('red'))
       analysis.red = this.analysisForTeam(this.team('red'), this.team('blue'))
 
+      console.log(analysis)
+
       return analysis
     },
 
@@ -68,30 +73,39 @@ export default {
       let totalScore = 0
       if (teams) {
         for (const team of Object.values(teams)) {
-          if (!team.votes) { continue }
+          if (!team.votes) {
+            continue
+          }
           const vote = team.votes[this.category]
           totalScore += vote
         }
       }
+
       return totalScore
     }
   },
   methods: {
     team(team) {
-      if (!this.game.teams) { return }
+      if (isNil(this.game.teams)) {
+        return
+      }
 
       const teamIndex = team === 'blue' ? 0 : 1
       return this.game.teams[teamIndex]
     },
 
     teamScore(team) {
-      if (!this.game.meta || !this.game.meta.teamScores) { return }
+      if (isNil(this.game.meta) || isNil(this.game.meta.teamScores)) {
+        return 0
+      }
 
       const teamIndex = team === 'blue' ? 0 : 1
       const teamScores = this.game.meta.teamScores[teamIndex]
-      if (!teamScores && !teamScores[this.category]) { return }
+      if (!teamScores && !teamScores[this.category]) {
+        return 0
+      }
 
-      return teamScores[this.category]
+      return teamScores[this.category] || 0
     },
 
     analysisForTeam(team, otherTeam) {

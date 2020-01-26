@@ -3,8 +3,8 @@ import * as _ from 'lodash'
 export const teams = {
   computed: {
     teams() {
-      if (!this.game.teams) {
-        return null
+      if (_.isNil(this.game.teams)) {
+        return
       }
 
       return Object.values(this.game.teams).reduce((teams, team) => {
@@ -64,7 +64,8 @@ export const usersFromGame = {
     },
 
     async getUsersFromGame() {
-      this.users = this.includePlayers ? this.game.players : this.users
+      this.users = (this.includePlayers ? this.game.players : this.users) || []
+
       if (Object.keys(this.users).length >= 1) return
 
       const standardPlayers = _.filter(this.users, (value, key) => {

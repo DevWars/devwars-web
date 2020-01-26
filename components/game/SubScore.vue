@@ -1,13 +1,11 @@
 <template>
   <div class="section">
     <div class="header" :class="{ noScore: !blueScore && !redScore }">
-      <span v-if="blueScore >= 0" class="points team-blue">{{
-        blueScore
-      }}</span>
+      <span class="points team-blue">{{ blueScore }}</span>
       <h3 v-if="title">
         {{ title }}
       </h3>
-      <span v-if="redScore >= 0" class="points team-red">{{ redScore }}</span>
+      <span class="points team-red">{{ redScore }}</span>
     </div>
 
     <div class="main">
