@@ -9,6 +9,7 @@
         </Column>
 
         <Column :md="8" class="main">
+          <Moderation v-if="isModerator && !me" :user="user.user" />
           <DailyPrizes />
 
           <UpcomingGames
@@ -29,6 +30,7 @@ import ProfileCard from '@/components/dashboard/ProfileCard'
 import Wallet from '@/components/dashboard/Wallet'
 import Activities from '@/components/dashboard/Activities'
 import UpcomingGames from '@/components/dashboard/UpcomingGames'
+import Moderation from '@/components/dashboard/Moderation'
 import DailyPrizes from '@/components/dashboard/DailyPrizes'
 
 export default {
@@ -38,6 +40,7 @@ export default {
   },
   components: {
     ProfileCard,
+    Moderation,
     Wallet,
     Activities,
     UpcomingGames,
@@ -61,6 +64,11 @@ export default {
     },
     activities() {
       return this.$store.state.user.activities
+    },
+
+    isModerator() {
+      const { role } = this.$store.state.user.user
+      return role === 'MODERATOR' || role === 'ADMIN'
     }
   },
 
