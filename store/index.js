@@ -15,8 +15,6 @@ export const actions = {
 
       // Needs to only dispatch when User is logged in
       dispatch('game/applications')
-
-      // dispatch('badges/refresh'),
     ])
   },
 

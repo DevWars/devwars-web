@@ -1,21 +1,12 @@
-import { isNil } from 'lodash'
+import { isNil, reduce } from 'lodash'
 
-// ---------------------------------------------------------
-// Methods
 export function getScoreByGameTeam(game, team) {
   if (isNil(game) || isNil(game.meta) || isNil(game.meta.teamScores)) {
     return 0
   }
 
   const teamScores = game.meta.teamScores[team.id]
-  let teamScore = 0
-  if (teamScores) {
-    for (const score of Object.values(teamScores)) {
-      teamScore += score
-    }
-  }
-
-  return teamScore
+  return reduce(Object.values(teamScores), (acc, score) => (acc += score))
 }
 
 export function getPlayersByGameTeam(game, team) {
@@ -27,7 +18,7 @@ export function getLanguageByGamePlayer(game, player) {
   const languages = []
 
   for (const editor of Object.values(editors)) {
-    if (player.id === editor.player) {
+    if (player.originalId === editor.player) {
       languages.push(editor.language)
     }
   }

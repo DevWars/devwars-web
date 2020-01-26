@@ -1,36 +1,34 @@
+import * as _ from 'lodash'
+
 export const teams = {
   computed: {
     teams() {
-      if (!this.game.teams) { return null }
+      if (!this.game.teams) {
+        return null
+      }
 
       return Object.values(this.game.teams).reduce((teams, team) => {
-        const players = Object.values(this.game.players).reduce(
-          (players, player) => {
-            if (player.team === team.id) {
-              players[player.id] = player
-            }
-            return players
-          },
-          {}
-        )
+        const players = {}
 
-        let scores = {}
-        let isWinner
-        if (this.game.meta && this.game.meta.teamScores) {
-          scores = {
-            total: Math.floor(Math.random() * 10),
-            objectives: this.game.meta.teamScores[team.id].objectives
-          }
-
-          isWinner = this.game.meta.winningTeam === team.id
-        }
+        _.forEach(this.game.players, (player, key) => {
+          if (player.team === team.id) players[key] = player
+          player.originalId = Number(key)
+        })
 
         teams[team.id] = {
           ...team,
           players,
-          numPlayers: Object.values(players).length,
-          scores,
-          isWinner
+          scores: { total: 0, objectives: 0 },
+          winner: false,
+          size: _.size(players)
+        }
+
+        if (this.game.meta && this.game.meta.teamScores) {
+          const t = teams[team.id]
+
+          t.scores.total = Math.floor(Math.random() * 10)
+          t.scores.objectives = this.game.meta.teamScores[team.id].objectives
+          t.winner = this.game.meta.winningTeam === team.id
         }
 
         return teams
@@ -50,16 +48,16 @@ export const usersFromGame = {
     }
   },
 
-  mounted() {
-    this.getUsersFromGame()
+  async mounted() {
+    await this.getUsersFromGame()
   },
   methods: {
     playersWithUser(players) {
       const result = []
 
       for (const player of Object.values(players)) {
-        const user = this.users[player.id]
-        if (user) { result.push({ ...user, ...player }) }
+        const user = this.users[player.originalId]
+        if (!_.isNil(user)) result.push({ ...user, ...player })
       }
 
       return result
@@ -67,18 +65,19 @@ export const usersFromGame = {
 
     async getUsersFromGame() {
       this.users = this.includePlayers ? this.game.players : this.users
-      if (Object.keys(this.users).length >= 1) { return }
+      if (Object.keys(this.users).length >= 1) return
 
-      const standardPlayers = Object.values(this.game.players).filter(
-        (e) => e.id !== 0
-      )
-      const competitorPlayers = Object.values(this.game.players).filter(
-        (e) => e.id === 0
-      )
+      const standardPlayers = _.filter(this.users, (value, key) => {
+        return value.id !== 0
+      })
+
+      const competitorPlayers = _.filter(this.users, (value, key) => {
+        return value.id === 0
+      })
 
       const fetchUser = async (id) => {
         const res = await this.$axios.get(`/users/${id}`)
-        return res.data
+        return Object.assign({ originalId: id }, res.data)
       }
 
       const standardUsers = await Promise.all(
@@ -88,7 +87,7 @@ export const usersFromGame = {
       this.users = standardUsers
         .concat(competitorPlayers)
         .reduce((acc, user) => {
-          acc[user.id] = user
+          acc[user.originalId] = user
           return acc
         }, {})
     }

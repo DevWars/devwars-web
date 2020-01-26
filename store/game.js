@@ -99,8 +99,7 @@ export const mutations = {
 
 export const actions = {
   async all({ commit }) {
-    const games = await Http.for('games').get()
-
+    const games = await Http.for('games').get('?players=true')
     commit('all', games)
   },
 

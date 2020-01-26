@@ -10,7 +10,7 @@
             {{ game.mode }}
           </h2>
           <div class="banner__versus">
-            {{ teams[0].numPlayers }} VS {{ teams[1].numPlayers }}
+            {{ teams[0].size }} VS {{ teams[1].size }}
           </div>
         </div>
         <ButtonIcon
@@ -31,11 +31,11 @@
         :key="team.id"
         :team="team"
         :points="team.scores.total"
-        :winner="teams.isWinner"
+        :winner="teams.winner"
       >
         <Player
           v-for="player in playersWithUser(team.players)"
-          :key="player.id"
+          :key="player.originalId || player.id"
           :user="player"
           :team="team"
           :languages="getLanguageByGamePlayer(game, player)"
@@ -97,7 +97,7 @@ export default {
     includePlayers: {
       type: Boolean,
       required: false,
-      default: false
+      default: true
     }
   },
   methods: {
