@@ -12,7 +12,7 @@
       v-else
       class="outline danger"
       icon="fab fa-discord"
-      @click="removeProvider('DISCORD')"
+      @click="removeProvider('discord')"
     >
       Disconnect Discord
     </ButtonIcon>

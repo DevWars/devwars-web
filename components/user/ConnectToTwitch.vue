@@ -12,7 +12,7 @@
       v-else
       class="outline danger"
       icon="fab fa-twitch"
-      @click="removeProvider('TWITCH')"
+      @click="removeProvider('twitch')"
     >
       Disconnect Twitch
     </ButtonIcon>

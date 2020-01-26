@@ -30,7 +30,7 @@ export const getters = {
     }
 
     const discordAccount = linkedAccounts.find(
-      (account) => account.provider === 'DISCORD'
+      (account) => account.provider === 'discord'
     )
     if (!discordAccount) {
       return false
@@ -40,7 +40,7 @@ export const getters = {
   },
 
   getDiscord({ linkedAccounts }) {
-    return linkedAccounts.find((account) => account.provider === 'DISCORD')
+    return linkedAccounts.find((account) => account.provider === 'discord')
   }
 }
 
