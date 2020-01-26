@@ -2,15 +2,17 @@
   <div class="User">
     <Avatar :user="user" :class="size" />
     <strong class="username">{{ user.username }}</strong>
+    <ConnectionsSmall :connections="user.connections" />
   </div>
 </template>
 
 <script>
 import Avatar from '@/components/user/Avatar'
+import ConnectionsSmall from '@/components/user/ConnectionsSmall'
 
 export default {
   name: 'User',
-  components: { Avatar },
+  components: { Avatar, ConnectionsSmall },
   props: {
     user: {
       type: Object,

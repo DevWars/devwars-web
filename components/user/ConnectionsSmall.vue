@@ -7,7 +7,7 @@
     >
       <i
         :title="connection.username"
-        :class="`fab fa-${connection.provider}`"
+        :class="`fab fa-${connection.provider.toLowerCase()}`"
       />
     </span>
   </div>

@@ -42,7 +42,7 @@ export default {
     },
 
     hasDiscord() {
-      return userHasProvider(this.links, 'DISCORD')
+      return userHasProvider(this.links, 'discord')
     }
   },
 

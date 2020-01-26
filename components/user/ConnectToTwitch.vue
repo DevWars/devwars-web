@@ -42,7 +42,7 @@ export default {
     },
 
     hasTwitch() {
-      return userHasProvider(this.links, 'TWITCH')
+      return userHasProvider(this.links, 'twitch')
     }
   },
 

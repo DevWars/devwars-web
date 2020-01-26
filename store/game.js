@@ -104,8 +104,8 @@ export const actions = {
     commit('all', games)
   },
 
-  async game({ commit }, id) {
-    const game = await this.$axios.get(`games/${id}?players=true`)
+  async game({ commit }, { id, players }) {
+    const game = await this.$axios.get(`games/${id}?players=${players}`)
     commit('game', game.data)
   },
 

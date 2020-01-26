@@ -60,7 +60,7 @@ export default {
   components: { Tabs, PanelHeader },
 
   async fetch({ store, query }) {
-    await store.dispatch('game/game', query.game)
+    await store.dispatch('game/game', { id: query.game, players: true })
   },
 
   computed: {
@@ -107,12 +107,12 @@ export default {
 
     async activate() {
       await this.$axios.post(`/games/${this.game.id}/activate`)
-      await this.$store.dispatch('game/game', this.game.id)
+      await this.$store.dispatch('game/game', { id: this.game.id })
     },
 
     async endGame() {
       await this.$axios.post(`/games/${this.game.id}/end`)
-      await this.$store.dispatch('game/game', this.game.id)
+      await this.$store.dispatch('game/game', { id: this.game.id })
     },
 
     async save() {
