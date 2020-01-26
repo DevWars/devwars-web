@@ -50,6 +50,14 @@ export default {
     game: {
       type: Object,
       required: true
+    },
+    resolve: {
+      type: Function,
+      required: true
+    },
+    reject: {
+      type: Function,
+      required: true
     }
   },
   data: () => {
@@ -78,8 +86,10 @@ export default {
       try {
         const url = `/applications/game/${this.game.id}/username/${this.username}`
         await this.$axios.$post(url)
-      } finally {
         this.close(true)
+      } catch (e) {
+        this.$store.dispatch('toast/error', e.response.data)
+        this.close(false)
       }
     }
   }

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <Card class="plain dark">
     <Card v-if="teams" class="roster plain dark bezeless">
       <GameTeam v-for="team in teams" :key="team.id" :team="team">
         <Player
@@ -12,12 +12,14 @@
         />
       </GameTeam>
     </Card>
-    <Card v-else class="plain dark">
+    <Card v-else class="plain">
       <h4>No players</h4>
     </Card>
 
-    <Applications :game="game" />
-  </div>
+    <Card class="plain dark">
+      <Applications :game="game" />
+    </Card>
+  </Card>
 </template>
 
 <script>
@@ -92,7 +94,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.Card {
+.roster {
   display: flex;
 
   .GameTeam {
