@@ -27,9 +27,9 @@
         <td>
           <User :user="applicant" />
         </td>
-        <td>{{ applicant.stats.game.wins + applicant.stats.game.loses }}</td>
-        <td>{{ applicant.stats.game.wins }}</td>
-        <td>{{ applicant.stats.game.loses }}</td>
+        <td>{{ applicant.gameStats.wins + applicant.gameStats.loses }}</td>
+        <td>{{ applicant.gameStats.wins }}</td>
+        <td>{{ applicant.gameStats.loses }}</td>
         <td>
           {{ applicant.profile.skills ? applicant.profile.skills.html : 0 }}
         </td>
@@ -52,6 +52,8 @@
 </template>
 
 <script>
+import { isNil } from 'lodash'
+
 import Table from '@/components/Table'
 import Card from '@/components/Card'
 import User from '@/components/user/User'
@@ -76,44 +78,33 @@ export default {
     }
   },
 
-  async mounted() {
-    if (!this.schedule && !this.game) { return }
-    const scheduleOrGame = this.schedule
-      ? `schedule/${this.schedule.id}`
-      : `game/${this.game.id}`
-    const applications = (
-      await this.$axios.get(`/applications/${scheduleOrGame}`)
-    ).data
-
-    for (const applicant of applications) {
-      // eslint-disable-next-line no-await-in-loop
-      applicant.stats = (
-        await this.$axios.get(`/users/${applicant.id}/stats`)
-      ).data
-      // eslint-disable-next-line no-await-in-loop
-      applicant.profile = (
-        await this.$axios.get(`/users/${applicant.id}/profile`)
-      ).data
-    }
-
-    this.applications = applications
+  mounted() {
+    if (!this.schedule && !this.game) return
+    this.loadApplications()
   },
 
   methods: {
     getLanguageByGamePlayer,
 
+    async loadApplications() {
+      const scheduleOrGame = this.schedule
+        ? `schedule/${this.schedule.id}?stats=true&profile=true`
+        : `game/${this.game.id}?stats=true&profile=true`
+
+      const response = await this.$axios.get(`/applications/${scheduleOrGame}`)
+      const applications = response.data
+
+      this.applications = applications
+    },
+
     addPlayer(user) {
-      if (!this.game) { return }
+      if (isNil(this.game)) return
       this.$open(AddPlayerModal, { user, game: this.game })
     },
 
     async addRegistrant() {
-      const modalSuccess = await this.$open(AddRegistrantModal, {
-        game: this.game
-      })
-      if (!modalSuccess) { return }
-
-      window.location.reload(true)
+      await this.$open(AddRegistrantModal, { game: this.game })
+      this.loadApplications()
     }
   }
 }
