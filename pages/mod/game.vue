@@ -124,9 +124,8 @@ export default {
         title: 'Delete Game?',
         description: 'Are you sure you want to delete this game?'
       })
-      if (!confirmed) {
-        return
-      }
+
+      if (!confirmed) return
 
       try {
         await this.$axios.delete(`/games/${this.game.id}`)

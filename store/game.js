@@ -105,8 +105,8 @@ export const actions = {
   },
 
   async game({ commit }, id) {
-    const game = await Http.for(`games/${id}`).get()
-    commit('game', game)
+    const game = await this.$axios.get(`games/${id}?players=true`)
+    commit('game', game.data)
   },
 
   async create({ commit }, data) {

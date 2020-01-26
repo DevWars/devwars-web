@@ -29,7 +29,9 @@
             v-for="player in getPlayersByGameTeam(game, team)"
             :key="player.id"
           >
-            {{ player.username }}
+            <nuxt-link :to="`/dashboard/${player.id}`">
+              {{ player.username }}
+            </nuxt-link>
           </li>
         </ul>
         <ul class="pos">
@@ -158,6 +160,10 @@ export default {
 
   li {
     margin-top: $xs-space;
+  }
+
+  a {
+    color: inherit;
   }
 }
 

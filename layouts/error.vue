@@ -2,9 +2,23 @@
   <div class="page">
     <Container>
       <Row>
-        <div v-if="error.statusCode === 404">
+        <div v-if="error.description">
           <Column :sm="4">
-            <img src="~assets/img/error-sad.png" alt="Error">
+            <img src="~assets/img/error-sad.png" alt="Error" />
+          </Column>
+          <Column :sm="8">
+            <h1>{{ error.statusCode }}</h1>
+            <h2>{{ error.message }}</h2>
+            <p>{{ error.description }}</p>
+            <Button to="/" class="outline primary lg">
+              Go to home
+            </Button>
+          </Column>
+        </div>
+
+        <div v-else-if="error.statusCode === 404">
+          <Column :sm="4">
+            <img src="~assets/img/error-sad.png" alt="Error" />
           </Column>
           <Column :sm="8">
             <h1>404</h1>
@@ -18,7 +32,7 @@
 
         <div v-else-if="error.statusCode === 500">
           <Column :sm="4">
-            <img src="~assets/img/error-sad.png" alt="Error">
+            <img src="~assets/img/error-sad.png" alt="Error" />
           </Column>
           <Column :sm="8">
             <h1>500</h1>
@@ -32,7 +46,7 @@
 
         <div v-else>
           <Column :sm="4">
-            <img src="~assets/img/error-sad.png" alt="Error">
+            <img src="~assets/img/error-sad.png" alt="Error" />
           </Column>
           <Column :sm="8">
             <h2>Oops!</h2>
@@ -57,7 +71,13 @@ export default {
     }
   },
   layout: 'header',
-  mounted() {}
+  mounted() {
+    const { description, statusCode, message } = this.error
+
+    if (description) this.error.description = description
+    if (statusCode) this.error.statusCode = statusCode
+    if (message) this.error.message = message
+  }
 }
 </script>
 

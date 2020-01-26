@@ -1,5 +1,5 @@
 <template>
-  <div class="Player" @click="$emit('click')">
+  <nuxt-link class="Player" :to="`/dashboard/${user.id}`">
     <User :user="user" :class="team.name" />
 
     <div class="languages">
@@ -7,7 +7,7 @@
         language
       }}</strong>
     </div>
-  </div>
+  </nuxt-link>
 </template>
 
 <script>
@@ -41,6 +41,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: $xs-space 0;
+  color: inherit;
 
   &:hover {
     background-color: rgba(#000, 0.2);

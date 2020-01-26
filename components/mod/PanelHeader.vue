@@ -8,13 +8,15 @@
         {{ subtitle }}
       </h2>
     </div>
-
-        <div class="actions">
-            <div v-if="showSearch" class="search">
-                <Input class="labeless" :placeholder="'Search for ' + title" @input="(e) => $emit('input', e)" />
-            </div>
-            <slot></slot>
-        </div>
+    <div class="actions">
+      <div v-if="showSearch" class="search">
+        <Input
+          class="labeless"
+          :placeholder="'Search for ' + title"
+          @input="(e) => $emit('input', e)"
+        />
+      </div>
+      <slot />
     </div>
   </div>
 </template>
@@ -37,6 +39,10 @@ export default {
     showSearch: {
       type: Boolean,
       default: false
+    },
+    model: {
+      type: String,
+      default: ''
     }
   }
 }

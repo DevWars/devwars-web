@@ -45,6 +45,14 @@ export default {
 
   mixins: [teams, usersFromGame],
 
+  props: {
+    includePlayers: {
+      type: Boolean,
+      required: false,
+      default: true
+    }
+  },
+
   computed: {
     game() {
       const games = this.$store.state.game.game

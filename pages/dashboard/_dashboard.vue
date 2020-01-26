@@ -6,8 +6,6 @@
           <ProfileCard :user="user.user" />
 
           <Wallet :stats="user.stats" />
-
-          <!-- <Badges :owned="mine"/> -->
         </Column>
 
         <Column :md="8" class="main">
@@ -26,7 +24,7 @@
 </template>
 
 <script>
-import { names } from '../utils/auth'
+import { names } from '../../utils/auth'
 import ProfileCard from '@/components/dashboard/ProfileCard'
 import Wallet from '@/components/dashboard/Wallet'
 import Activities from '@/components/dashboard/Activities'
@@ -45,10 +43,16 @@ export default {
     UpcomingGames,
     DailyPrizes
   },
+
+  data() {
+    return {
+      id: this.$route.params.dashboard,
+      user: this.$store.state.user,
+      me: true
+    }
+  },
+
   computed: {
-    user() {
-      return this.$store.state.user
-    },
     stats() {
       return this.$store.state.stats
     },
@@ -57,6 +61,29 @@ export default {
     },
     activities() {
       return this.$store.state.user.activities
+    }
+  },
+
+  async asyncData({ params, error, $axios, store }) {
+    if (params.dashboard == null || params.dashboard.trim() === '') return {}
+
+    try {
+      const user = await await $axios.get(`/users/${params.dashboard}`)
+      const stats = await await $axios.get(`/users/${params.dashboard}/stats`)
+
+      return {
+        me: false,
+        user: {
+          user: user.data,
+          stats: stats.data
+        }
+      }
+    } catch (e) {
+      error({
+        statusCode: e.response.status,
+        description: e.response.data.error,
+        message: e.response.statusText
+      })
     }
   }
 }

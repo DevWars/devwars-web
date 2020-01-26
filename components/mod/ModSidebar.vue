@@ -8,8 +8,9 @@
         </nuxt-link>
       </li>
       <li>
-        <nuxt-link to="/mod/users" class="disabled">
-          <i class="fa fa-user" />Users
+        <nuxt-link to="/mod/users">
+          <i class="fa fa-user" />
+          Users
         </nuxt-link>
       </li>
       <li>
@@ -28,7 +29,7 @@
         </nuxt-link>
       </li>
       <li>
-        <nuxt-link to="/mod/tournaments">
+        <nuxt-link to="/mod/tournaments" class="disabled">
           <i class="fa fa-trophy" />Tournaments
         </nuxt-link>
       </li>
