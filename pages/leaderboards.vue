@@ -8,19 +8,19 @@
           <th width="10%">
             Rank
           </th>
-          <th width="16%">
-            User Name
+          <th width="30%">
+            Username
           </th>
-          <th width="16%">
+          <th width="15%">
             Level
           </th>
-          <th width="16%">
+          <th width="15%">
             Won
           </th>
-          <th width="16%">
+          <th width="15%">
             Coins
           </th>
-          <th style="text-align: center" width="10%">
+          <th width="15%">
             XP
           </th>
         </tr>
@@ -29,11 +29,11 @@
           <td scope="row" class="rank">
             {{ page * 10 + index + 1 }}
           </td>
-          <td>{{ user.username }}</td>
+          <td><User :user="user" size="sm" /></td>
           <td>{{ user.level }}</td>
           <td>{{ user.wins }}</td>
           <td>{{ user.coins }}</td>
-          <td style="text-align: center">
+          <td>
             {{ user.xp }}
           </td>
         </tr>
@@ -55,12 +55,13 @@
 import Http from '../services/Http'
 import PageBanner from '@/components/layout/PageBanner'
 import Table from '@/components/Table'
+import User from '@/components/user/User'
 import Pagination from '@/components/Pagination'
 
 export default {
   name: 'Leaderboards',
 
-  components: { PageBanner, Table, Pagination },
+  components: { PageBanner, Table, User, Pagination },
 
   data: () => {
     return {
@@ -116,6 +117,15 @@ export default {
     }
     &.decrease {
       color: $danger-color;
+    }
+  }
+
+  .Table td {
+    padding-top: $grid-gutter-width;
+    padding-bottom: $grid-gutter-width;
+
+    &:last-child {
+      text-align: left;
     }
   }
 }
