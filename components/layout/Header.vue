@@ -6,12 +6,12 @@
           <Button class="link burger-menu" @click="toggleMobileMenu" />
 
           <nuxt-link to="/" class="logo">
-            <img class="logo-full" src="~assets/img/logo.png" alt="DevWars">
+            <img class="logo-full" src="~assets/img/logo.png" alt="DevWars" />
             <img
               class="logo-icon"
               src="~assets/img/logo-icon.png"
               alt="DevWars"
-            >
+            />
           </nuxt-link>
 
           <ul class="nav nav-main">
@@ -30,9 +30,11 @@
                 Schedule
               </nuxt-link>
             </li>
-            <!-- <li class="nav__item">
-                            <nuxt-link to="/leaderboards" class="nav__link">Leaders</nuxt-link>
-                        </li>-->
+            <li class="nav__item">
+              <nuxt-link to="/leaderboards" class="nav__link">
+                Leaders
+              </nuxt-link>
+            </li>
             <li class="nav__item">
               <nuxt-link to="/docs" class="nav__link">
                 About
