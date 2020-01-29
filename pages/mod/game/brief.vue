@@ -84,6 +84,10 @@ export default {
 
       if (!confirmed) return
 
+      // Reset the id of the player back to its org for the delete. Since the server will not handle
+      // the case for 0 since the root directory would still be the org id.
+      player.id = player.originalId || player.id
+
       // Add languages to each player for Database
       for (const player of Object.values(this.game.players)) {
         player.language = getLanguageByGamePlayer(this.game, player)

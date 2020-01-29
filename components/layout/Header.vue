@@ -114,6 +114,7 @@ export default {
     },
 
     isStaff() {
+      if (this.user == null) return false
       return this.user.role === 'ADMIN' || this.user.role === 'MODERATOR'
     }
   },
