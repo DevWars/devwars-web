@@ -29,7 +29,6 @@ export const mutations = {
   apply(state, applications) {
     state.applications.push(applications)
   },
-
   forfeit(state, game) {
     state.applications = state.applications.filter(
       (t) => t.schedule.id !== game.id
@@ -180,7 +179,6 @@ export const actions = {
   async sendPatch({ commit, dispatch }, game) {
     try {
       await this.$axios.patch(`/games/${game.id}`, game)
-
       commit('game', game)
 
       dispatch('toast/success', 'Game updated!', { root: true })

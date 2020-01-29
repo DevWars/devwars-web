@@ -26,9 +26,9 @@ export const teams = {
         if (this.game.meta && this.game.meta.teamScores) {
           const t = teams[team.id]
 
-          t.scores.total = Math.floor(Math.random() * 10)
           t.scores.objectives = this.game.meta.teamScores[team.id].objectives
           t.winner = this.game.meta.winningTeam === team.id
+          t.scores.total = t.scores.objectives
         }
 
         return teams

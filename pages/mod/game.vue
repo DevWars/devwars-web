@@ -15,7 +15,11 @@
         <Button v-if="!isActive" class="primary" :async-click="activate">
           Activate
         </Button>
-        <Button v-if="viewingDetailsPage" class="primary" :async-click="save">
+        <Button
+          v-if="viewingDetailsPage || viewingEditPage"
+          class="primary"
+          :async-click="save"
+        >
           Save
         </Button>
         <Button
@@ -32,12 +36,17 @@
       <nuxt-link :to="`/mod/game/details?game=${game.id}`">
         Details
       </nuxt-link>
+
       <nuxt-link :to="`/mod/game/brief?game=${game.id}`">
         Brief
       </nuxt-link>
 
       <nuxt-link :to="`/mod/game/results?game=${game.id}`">
         Results
+      </nuxt-link>
+
+      <nuxt-link :to="`/mod/game/edit?game=${game.id}`">
+        Edit
       </nuxt-link>
     </Tabs>
 
@@ -97,8 +106,12 @@ export default {
 
     viewingDetailsPage() {
       const currentPage = this.$route.path.split('/').pop()
-
       return currentPage === 'details'
+    },
+
+    viewingEditPage() {
+      const currentPage = this.$route.path.split('/').pop()
+      return currentPage === 'edit'
     },
 
     user() {

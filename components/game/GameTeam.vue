@@ -5,9 +5,7 @@
         {{ team.name }}
       </h3>
       <span v-if="winner" class="winner">Win</span>
-      <span v-if="points !== undefined" class="points">{{
-        points ? points : 0
-      }}</span>
+      <span v-if="points != null" class="points">{{ points }}</span>
     </div>
 
     <div class="players">

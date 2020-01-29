@@ -1,28 +1,5 @@
 <template>
   <div v-if="nameFromStatus(game.status) === 'ENDED'" class="plain dark">
-    <Card v-if="teams" class="roster plain dark bezeless">
-      <GameTeam
-        v-for="team in teams"
-        :key="team.id"
-        :team="team"
-        :points="team.scores.total"
-        :winner="teams.winner"
-      >
-        <Player
-          v-for="player in playersWithUser(team.players)"
-          :key="player.id"
-          :user="player"
-          :team="team"
-          :navigate="false"
-          :languages="getLanguageByGamePlayer(game, player)"
-          @click="removePlayer(player)"
-        />
-      </GameTeam>
-    </Card>
-    <Card v-else class="plain dark">
-      <h4>No players</h4>
-    </Card>
-
     <Card class="plain dark">
       <SubScore
         title="Objectives"
@@ -39,20 +16,17 @@
             <div
               class="objectives__square team-blue"
               :class="{ active: teamCompletedObjective(0, objective) }"
+              @click="ToggleObjectiveState(0, objective)"
             />
             <span class="objectives__obj">{{ objective.description }}</span>
             <div
               class="objectives__square team-red"
               :class="{ active: teamCompletedObjective(1, objective) }"
+              @click="ToggleObjectiveState(1, objective)"
             />
           </li>
         </ul>
       </SubScore>
-    </Card>
-
-    <Card class="plain dark">
-      <VoteBox :show-override="true" :game="game" category="ui" />
-      <VoteBox :show-override="true" :game="game" category="ux" />
     </Card>
   </div>
   <div v-else>
@@ -61,22 +35,22 @@
 </template>
 
 <script>
+// META: WINNING TEAM, TEAM SCORES (UI, UX, Objective Count)
+// TEAMS: Votes (matches meta team scores), objectives complete.
+import * as _ from 'lodash'
 import { names } from '../../../utils/auth'
-
-import nameFromStatus from '@/utils/gameStatus'
-import Card from '@/components/Card'
-import VoteBox from '@/components/game/VoteBox'
-import GameTeam from '@/components/game/GameTeam'
-import Player from '@/components/game/Player'
-import DeleteModal from '@/components/modal/DeleteModal'
 import { teams, usersFromGame } from '@/utils/mixins'
+
 import {
   getScoreByGameTeam,
   getPlayersByGameTeam,
   getLanguageByGamePlayer,
   teamCompletedObjective
 } from '@/utils'
+
 import SubScore from '@/components/game/SubScore'
+import nameFromStatus from '@/utils/gameStatus'
+import Card from '@/components/Card'
 
 export default {
   name: 'GameBrief',
@@ -85,7 +59,7 @@ export default {
     auth: names.MODERATOR
   },
 
-  components: { SubScore, Card, Player, GameTeam, VoteBox },
+  components: { SubScore, Card },
 
   mixins: [teams, usersFromGame],
 
@@ -106,6 +80,27 @@ export default {
     }
   },
 
+  mounted() {
+    if (_.isNil(this.game.meta)) {
+      this.game.meta = {
+        winningTeam: null,
+        teamScores: _.fill(Array(2), {
+          objectives: 0,
+          ui: 0,
+          ux: 0,
+          tie: 0
+        })
+      }
+    }
+
+    _.forEach(this.game.teams, (team) => {
+      if (_.isNil(team.votes)) team.votes = { ui: 0, ux: 0, tie: 0 }
+      if (_.isNil(team.objectives)) team.objectives = {}
+    })
+
+    this.$store.commit('game/game', Object.assign({}, this.game))
+  },
+
   methods: {
     getScoreByGameTeam,
     getPlayersByGameTeam,
@@ -113,25 +108,26 @@ export default {
     teamCompletedObjective,
     nameFromStatus,
 
-    async removePlayer(player) {
-      const confirmed = await this.$open(DeleteModal, {
-        title: 'Remove Player?',
-        description: `Are you sure you would like to remove this player?`
-      })
-      if (!confirmed) {
-        return
+    ToggleObjectiveState(team, objective) {
+      const specTeam = this.game.teams[team]
+
+      if (_.isNil(specTeam.objectives)) specTeam.objectives = {}
+
+      if (
+        _.isNil(specTeam.objectives[objective.id]) ||
+        specTeam.objectives[objective.id] === 'incomplete'
+      ) {
+        specTeam.objectives[objective.id] = 'complete'
+      } else if (specTeam.objectives[objective.id] === 'complete') {
+        specTeam.objectives[objective.id] = 'incomplete'
       }
 
-      // Add languages to each player for Database
-      for (const player of Object.values(this.game.players)) {
-        player.language = getLanguageByGamePlayer(this.game, player)
-      }
-
-      const res = await this.$axios.delete(`/games/${this.game.id}/player`, {
-        data: { player }
+      let total = 0
+      _.forEach(specTeam.objectives, (obj) => {
+        if (obj === 'complete') total += 1
       })
 
-      this.$store.commit('game/game', res.data)
+      this.game.meta.teamScores[team].objectives = total
     }
   }
 }
@@ -173,6 +169,7 @@ h1 {
   }
 
   &__square {
+    cursor: pointer;
     width: 30px;
     height: 30px;
     border: 5px solid #23252c;

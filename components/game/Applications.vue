@@ -21,7 +21,7 @@
 
       <tr
         v-for="(applicant, index) in applications"
-        :key="applicant.id + index"
+        :key="applicant.id + index + applicant.id"
         @click="addPlayer(applicant)"
       >
         <td>

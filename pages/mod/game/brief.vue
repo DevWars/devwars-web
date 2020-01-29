@@ -1,7 +1,13 @@
 <template>
   <div>
     <Card v-if="teams" class="roster plain dark bezeless">
-      <GameTeam v-for="team in teams" :key="team.id" :team="team">
+      <GameTeam
+        v-for="team in teams"
+        :key="team.id"
+        :team="team"
+        :points="team.scores.total"
+        :winner="teams.winner"
+      >
         <Player
           v-for="player in playersWithUser(team.players)"
           :key="player.id"
