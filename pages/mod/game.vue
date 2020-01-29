@@ -33,18 +33,15 @@
     </PanelHeader>
 
     <Tabs>
-      <nuxt-link :to="`/mod/game/details?game=${game.id}`">
-        Details
-      </nuxt-link>
-
       <nuxt-link :to="`/mod/game/brief?game=${game.id}`">
         Brief
       </nuxt-link>
-
+      <nuxt-link :to="`/mod/game/details?game=${game.id}`">
+        Details
+      </nuxt-link>
       <nuxt-link :to="`/mod/game/results?game=${game.id}`">
         Results
       </nuxt-link>
-
       <nuxt-link :to="`/mod/game/edit?game=${game.id}`">
         Edit
       </nuxt-link>
