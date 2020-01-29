@@ -1,5 +1,5 @@
 <template>
-  <Card class="plain dark">
+  <div>
     <Card v-if="teams" class="roster plain dark bezeless">
       <GameTeam v-for="team in teams" :key="team.id" :team="team">
         <Player
@@ -19,7 +19,7 @@
     <Card class="plain dark">
       <Applications :game="game" />
     </Card>
-  </Card>
+  </div>
 </template>
 
 <script>

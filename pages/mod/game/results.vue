@@ -1,57 +1,55 @@
 <template>
-  <div>
-    <Card v-if="nameFromStatus(game.status) === 'ENDED'" class="plain dark">
-      <Card v-if="teams" class="roster plain dark bezeless">
-        <GameTeam v-for="team in teams" :key="team.id" :team="team">
-          <Player
-            v-for="player in playersWithUser(team.players)"
-            :key="player.id"
-            :user="player"
-            :team="team"
-            :languages="getLanguageByGamePlayer(game, player)"
-            @click="removePlayer(player)"
-          />
-        </GameTeam>
-      </Card>
-      <Card v-else class="plain dark">
-        <h4>No players</h4>
-      </Card>
-
-      <Card class="plain dark">
-        <SubScore
-          title="Objectives"
-          :blue-score="teams[0].scores.objectives"
-          :red-score="teams[1].scores.objectives"
-        >
-          <ul class="objectives">
-            <li
-              v-for="objective in game.objectives"
-              :key="objective.id"
-              class="objectives__item"
-              :class="{ bonus: objective.isBonus }"
-            >
-              <div
-                class="objectives__square team-blue"
-                :class="{ active: teamCompletedObjective(0, objective) }"
-              />
-              <span class="objectives__obj">{{ objective.description }}</span>
-              <div
-                class="objectives__square team-red"
-                :class="{ active: teamCompletedObjective(1, objective) }"
-              />
-            </li>
-          </ul>
-        </SubScore>
-      </Card>
-
-      <Card class="plain dark">
-        <VoteBox :show-override="true" :game="game" category="ui" />
-        <VoteBox :show-override="true" :game="game" category="ux" />
-      </Card>
+  <div v-if="nameFromStatus(game.status) === 'ENDED'" class="plain dark">
+    <Card v-if="teams" class="roster plain dark bezeless">
+      <GameTeam v-for="team in teams" :key="team.id" :team="team">
+        <Player
+          v-for="player in playersWithUser(team.players)"
+          :key="player.id"
+          :user="player"
+          :team="team"
+          :languages="getLanguageByGamePlayer(game, player)"
+          @click="removePlayer(player)"
+        />
+      </GameTeam>
     </Card>
-    <div v-else>
-      <h1>Game Not Ended</h1>
-    </div>
+    <Card v-else class="plain dark">
+      <h4>No players</h4>
+    </Card>
+
+    <Card class="plain dark">
+      <SubScore
+        title="Objectives"
+        :blue-score="teams[0].scores.objectives"
+        :red-score="teams[1].scores.objectives"
+      >
+        <ul class="objectives">
+          <li
+            v-for="objective in game.objectives"
+            :key="objective.id"
+            class="objectives__item"
+            :class="{ bonus: objective.isBonus }"
+          >
+            <div
+              class="objectives__square team-blue"
+              :class="{ active: teamCompletedObjective(0, objective) }"
+            />
+            <span class="objectives__obj">{{ objective.description }}</span>
+            <div
+              class="objectives__square team-red"
+              :class="{ active: teamCompletedObjective(1, objective) }"
+            />
+          </li>
+        </ul>
+      </SubScore>
+    </Card>
+
+    <Card class="plain dark">
+      <VoteBox :show-override="true" :game="game" category="ui" />
+      <VoteBox :show-override="true" :game="game" category="ux" />
+    </Card>
+  </div>
+  <div v-else>
+    <h1>Game Not Ended</h1>
   </div>
 </template>
 

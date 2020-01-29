@@ -1,6 +1,6 @@
 <template>
   <Card class="plain dark">
-    <Card class="plain dark container">
+    <div class="container">
       <div class="game">
         <h3>Game</h3>
 
@@ -52,7 +52,7 @@
         <h3>Media</h3>
         <Input v-model="game.videoUrl" label="YouTube URL" class="group" />
       </div>
-    </Card>
+    </div>
   </Card>
 </template>
 
