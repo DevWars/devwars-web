@@ -7,6 +7,7 @@
           :key="player.id"
           :user="player"
           :team="team"
+          :navigate="false"
           :languages="getLanguageByGamePlayer(game, player)"
           @click="removePlayer(player)"
         />
@@ -74,9 +75,8 @@ export default {
         title: 'Remove Player?',
         description: 'Are you sure you would like to remove this player?'
       })
-      if (!confirmed) {
-        return
-      }
+
+      if (!confirmed) return
 
       // Add languages to each player for Database
       for (const player of Object.values(this.game.players)) {

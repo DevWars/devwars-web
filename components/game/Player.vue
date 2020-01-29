@@ -1,6 +1,6 @@
 <template>
   <nuxt-link
-    v-if="user.id !== 0"
+    v-if="user.id !== 0 && navigate"
     class="Player hover"
     :to="`/dashboard/${user.id}`"
   >
@@ -12,7 +12,7 @@
       </strong>
     </div>
   </nuxt-link>
-  <div v-else class="Player">
+  <div v-else class="Player" @click="$emit('click')">
     <User :user="user" :class="team.name" />
 
     <div class="languages">
@@ -41,6 +41,13 @@ export default {
     languages: {
       type: Array,
       required: true
+    },
+    // If navigation should be setup to allow clicking on the player directly to navigate to the
+    // players profile page. If true, any action or wrapper placed around the player will not work.
+    // Handling custom click events will require this to be false.
+    navigate: {
+      type: Boolean,
+      default: true
     }
   }
 }

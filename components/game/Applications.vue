@@ -20,8 +20,8 @@
       </tr>
 
       <tr
-        v-for="applicant in applications"
-        :key="applicant.id"
+        v-for="(applicant, index) in applications"
+        :key="applicant.id + index"
         @click="addPlayer(applicant)"
       >
         <td>
@@ -45,9 +45,9 @@
       </tr>
     </Table>
 
-    <Card v-if="applications.length === 0" class="dark plain">
+    <div v-if="applications.length === 0" class="dark plain no-players">
       <p>No players have applied for this game</p>
-    </Card>
+    </div>
   </div>
 </template>
 
@@ -55,7 +55,6 @@
 import { isNil } from 'lodash'
 
 import Table from '@/components/Table'
-import Card from '@/components/Card'
 import User from '@/components/user/User'
 import Devcoins from '@/components/Devcoins'
 import AddPlayerModal from '@/components/modal/AddPlayerModal'
@@ -65,7 +64,7 @@ import { getLanguageByGamePlayer } from '@/utils'
 export default {
   name: 'Applications',
 
-  components: { Table, Card, User, Devcoins },
+  components: { Table, User, Devcoins },
 
   props: {
     schedule: { type: Object, default: undefined },
@@ -122,5 +121,9 @@ export default {
     align-items: center;
     padding: 20px;
   }
+}
+
+.no-players {
+  text-align: center;
 }
 </style>
