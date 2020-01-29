@@ -44,7 +44,7 @@ export default {
     },
     reject: {
       type: Function,
-      required: true
+      default: (e) => {}
     }
   }
 }

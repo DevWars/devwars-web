@@ -78,14 +78,21 @@ export default {
         players: this.game.players
       }
 
-      const res = await this.$axios.post(`/games/${this.game.id}/player`, {
-        player,
-        team
-      })
+      try {
+        const data = { player, team }
+        const res = await this.$axios.post(
+          `/games/${this.game.id}/player`,
+          data
+        )
 
-      this.$store.commit('game/game', res.data)
-
-      this.close(true)
+        this.$store.commit('game/game', res.data)
+      } catch (e) {
+        if (e.response && e.response.data) {
+          this.$store.dispatch('toast/error', e.response.data)
+        }
+      } finally {
+        this.close(true)
+      }
     }
   }
 }
