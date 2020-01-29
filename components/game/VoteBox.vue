@@ -30,7 +30,9 @@
       </div>
     </div>
 
-    <div class="voters">{{ total }} votes</div>
+    <div class="voters">
+      {{ total }} votes
+    </div>
   </SubScore>
 </template>
 
@@ -62,8 +64,6 @@ export default {
 
       analysis.blue = this.analysisForTeam(this.team('blue'), this.team('red'))
       analysis.red = this.analysisForTeam(this.team('red'), this.team('blue'))
-
-      console.log(analysis)
 
       return analysis
     },
