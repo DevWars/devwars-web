@@ -27,6 +27,7 @@ export const teams = {
           const t = teams[team.id]
 
           t.scores.objectives = this.game.meta.teamScores[team.id].objectives
+          t.scores.tie = this.game.meta.teamScores[team.id].tie
           t.winner = this.game.meta.winningTeam === team.id
           t.scores.total = t.scores.objectives
         }

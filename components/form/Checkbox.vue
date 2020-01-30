@@ -5,7 +5,7 @@
       type="checkbox"
       v-bind="$attrs"
       @change="(e) => $emit('input', e.target.checked)"
-    >
+    />
     <label :for="labelName">
       <div class="box">
         <i class="fa fa-check" />
@@ -18,7 +18,6 @@
 <script>
 export default {
   props: {
-    name: { type: String, required: true },
     label: { type: String, default: null }
   },
 
