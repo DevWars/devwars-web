@@ -47,6 +47,29 @@ export default {
     DailyPrizes
   },
 
+  async asyncData({ params, error, $axios, store }) {
+    if (params.dashboard == null || params.dashboard.trim() === '') return {}
+
+    try {
+      const user = await await $axios.get(`/users/${params.dashboard}`)
+      const stats = await await $axios.get(`/users/${params.dashboard}/stats`)
+
+      return {
+        me: false,
+        user: {
+          user: user.data,
+          stats: stats.data
+        }
+      }
+    } catch (e) {
+      error({
+        statusCode: e.response.status,
+        description: e.response.data.error,
+        message: e.response.statusText
+      })
+    }
+  },
+
   data() {
     return {
       id: this.$route.params.dashboard,
@@ -69,29 +92,6 @@ export default {
     isModerator() {
       const { role } = this.$store.state.user.user
       return role === 'MODERATOR' || role === 'ADMIN'
-    }
-  },
-
-  async asyncData({ params, error, $axios, store }) {
-    if (params.dashboard == null || params.dashboard.trim() === '') return {}
-
-    try {
-      const user = await await $axios.get(`/users/${params.dashboard}`)
-      const stats = await await $axios.get(`/users/${params.dashboard}/stats`)
-
-      return {
-        me: false,
-        user: {
-          user: user.data,
-          stats: stats.data
-        }
-      }
-    } catch (e) {
-      error({
-        statusCode: e.response.status,
-        description: e.response.data.error,
-        message: e.response.statusText
-      })
     }
   }
 }

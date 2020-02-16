@@ -86,6 +86,11 @@ export default {
     ConnectionsSmall
   },
 
+  async asyncData({ parmas }) {
+    const users = await Http.for('users').get('?after=0&first=10')
+    return { users }
+  },
+
   data() {
     return {
       page: 0,
@@ -96,11 +101,6 @@ export default {
     }
   },
 
-  async asyncData({ parmas }) {
-    const users = await Http.for(`users`).get(`?after=0&first=10`)
-    return { users }
-  },
-
   methods: {
     input(searchText) {
       this.search = searchText
@@ -109,7 +109,7 @@ export default {
     async performSearch() {
       if (this.search == null || this.search.trim() === '') return
 
-      const users = await Http.for(`users/lookup`).get(
+      const users = await Http.for('users/lookup').get(
         `?username=${this.search}&full=true`
       )
 
@@ -118,7 +118,7 @@ export default {
     },
 
     async clearSearch() {
-      this.users = await Http.for(`users`).get(`?after=0&first=10`)
+      this.users = await Http.for('users').get('?after=0&first=10')
       this.searched = false
       this.search = null
       this.page = 0
