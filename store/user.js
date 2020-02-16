@@ -198,9 +198,9 @@ export const actions = {
 
   async password({ dispatch }, data) {
     try {
-      await Http.for(`auth/reset/password`).put(data)
+      await Http.for('auth/reset/password').put(data)
 
-      dispatch('toast/success', `We've updated your password!`, {
+      dispatch('toast/success', "We've updated your password!", {
         root: true
       })
     } catch (e) {
@@ -267,7 +267,7 @@ export const actions = {
 
       dispatch(
         'toast/success',
-        `Check your email for a guide to reset your password.`,
+        'Check your email for a guide to reset your password.',
         { root: true }
       )
 
@@ -282,7 +282,7 @@ export const actions = {
   async resetByToken({ dispatch }, data) {
     await Http.for('auth/reset/password').post({}, data)
 
-    dispatch('toast/success', `We've updated your password, give it a go!`, {
+    dispatch('toast/success', "We've updated your password, give it a go!", {
       root: true
     })
   },

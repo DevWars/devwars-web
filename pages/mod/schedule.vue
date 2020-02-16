@@ -52,6 +52,10 @@ export default {
     auth: names.MODERATOR
   },
 
+  async fetch({ store, query }) {
+    await store.dispatch('game/schedules', query.schedule)
+  },
+
   computed: {
     schedule() {
       const schedules = this.$store.state.game.schedules
@@ -76,10 +80,6 @@ export default {
     user() {
       return this.$store.state.user.user
     }
-  },
-
-  async fetch({ store, query }) {
-    await store.dispatch('game/schedules', query.schedule)
   },
 
   methods: {

@@ -59,6 +59,10 @@ export default {
 
   components: { Tabs, PanelHeader },
 
+  async fetch({ store, query }) {
+    await store.dispatch('game/game', query.game)
+  },
+
   computed: {
     game() {
       const games = this.$store.state.game.game
@@ -98,10 +102,6 @@ export default {
     }
   },
 
-  async fetch({ store, query }) {
-    await store.dispatch('game/game', query.game)
-  },
-
   methods: {
     nameFromStatus,
 
@@ -122,9 +122,11 @@ export default {
     async remove() {
       const confirmed = await this.$open(DeleteModal, {
         title: 'Delete Game?',
-        description: `Are you sure you want to delete this game?`
+        description: 'Are you sure you want to delete this game?'
       })
-      if (!confirmed) { return }
+      if (!confirmed) {
+        return
+      }
 
       try {
         await this.$axios.delete(`/games/${this.game.id}`)

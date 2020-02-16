@@ -63,6 +63,10 @@ export default {
 
   components: { PageBanner, Table, User, Pagination },
 
+  async asyncData() {
+    return { leaderboards: await Http.for('users/leaderboards?first=10').get() }
+  },
+
   data: () => {
     return {
       page: 0,
@@ -72,10 +76,6 @@ export default {
       },
       data: []
     }
-  },
-
-  async asyncData() {
-    return { leaderboards: await Http.for('users/leaderboards?first=10').get() }
   },
 
   mounted() {},

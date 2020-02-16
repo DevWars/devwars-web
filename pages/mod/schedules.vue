@@ -23,7 +23,7 @@
           <span
             :class="[
               'mod-status',
-              nameFromStatus(schedule.status).toLowerCase(),
+              nameFromStatus(schedule.status).toLowerCase()
             ]"
           >
             {{ nameFromStatus(schedule.status) }}
@@ -59,13 +59,13 @@ export default {
     auth: names.MODERATOR
   },
   components: { PanelHeader, ListingFilters, Table },
+  async fetch({ store }) {
+    await store.dispatch('game/schedules')
+  },
   computed: {
     schedules() {
       return this.$store.state.game.schedules
     }
-  },
-  async fetch({ store }) {
-    await store.dispatch('game/schedules')
   },
   methods: {
     nameFromStatus,

@@ -4,15 +4,17 @@
       class="muted sm"
       :class="{ disabled: !canPrevious }"
       @click="$emit('previous')"
-      >Prev</Button
     >
+      Prev
+    </Button>
     <strong class="page">PAGE {{ page + 1 }}</strong>
     <Button
       class="muted sm"
       :class="{ disabled: !canNext }"
       @click="$emit('next')"
-      >Next</Button
     >
+      Next
+    </Button>
   </div>
 </template>
 

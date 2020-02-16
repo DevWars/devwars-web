@@ -62,9 +62,11 @@ export default {
     async removePlayer(player) {
       const confirmed = await this.$open(DeleteModal, {
         title: 'Remove Player?',
-        description: `Are you sure you would like to remove this player?`
+        description: 'Are you sure you would like to remove this player?'
       })
-      if (!confirmed) { return }
+      if (!confirmed) {
+        return
+      }
 
       // Add languages to each player for Database
       for (const player of Object.values(this.game.players)) {

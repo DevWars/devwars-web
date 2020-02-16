@@ -158,7 +158,7 @@ export const actions = {
 
       commit('apply', schedule)
 
-      dispatch('toast/success', `Thanks for signing up! See ya soon`, {
+      dispatch('toast/success', 'Thanks for signing up! See ya soon', {
         root: true
       })
 
@@ -174,7 +174,7 @@ export const actions = {
 
       commit('forfeit', schedule)
 
-      dispatch('toast/success', `Sorry to see you go.`, { root: true })
+      dispatch('toast/success', 'Sorry to see you go.', { root: true })
     } catch (e) {
       dispatch('toast/error', e.response.data, { root: true })
     }

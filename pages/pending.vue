@@ -43,7 +43,7 @@ export default {
       await Http.for('auth/reverify').save()
       return this.$store.dispatch(
         'toast/success',
-        `We have sent off another email, please wait patiently.`
+        'We have sent off another email, please wait patiently.'
       )
     }
   }

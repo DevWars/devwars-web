@@ -295,7 +295,7 @@ export default {
 
         this.$store.dispatch(
           'toast/success',
-          `Congratulations! You are now a competitor!`
+          'Congratulations! You are now a competitor!'
         )
       } catch (e) {
         this.$store.dispatch('toast/error', e.response.data)

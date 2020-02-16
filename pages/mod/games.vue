@@ -58,23 +58,25 @@ export default {
     auth: names.MODERATOR
   },
   components: { PanelHeader, ListingFilters, Table, Pagination },
+  async fetch({ store }) {
+    await store.dispatch('game/all')
+  },
   computed: {
     games() {
       return this.$store.state.game.all
     }
-  },
-  async fetch({ store }) {
-    await store.dispatch('game/all')
   },
   methods: {
     nameFromStatus,
     async createGame() {
       const [game] = await this.$open(CreateGameModal, {})
 
-      if (!game) { return }
+      if (!game) {
+        return
+      }
 
       this.$router.push({
-        path: `/mod/game/details`,
+        path: '/mod/game/details',
         params: { game: game.id }
       })
     }

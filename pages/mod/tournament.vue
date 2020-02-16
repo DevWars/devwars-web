@@ -68,14 +68,14 @@ export default {
 
   components: { Tabs },
 
+  async fetch({ store, query }) {
+    await store.dispatch('tournament/tournament', query.tournament)
+  },
+
   computed: {
     tournament() {
       return this.$store.state.tournament.tournament
     }
-  },
-
-  async fetch({ store, query }) {
-    await store.dispatch('tournament/tournament', query.tournament)
   },
 
   methods: {
@@ -122,10 +122,12 @@ export default {
     async remove() {
       const [confirmed] = await this.$open(DeleteModal, {
         title: 'Delete Tournament?',
-        description: `Are you sure you want to delete this tournament?`
+        description: 'Are you sure you want to delete this tournament?'
       })
 
-      if (!confirmed) { return }
+      if (!confirmed) {
+        return
+      }
 
       try {
         await Http.for('tournament').delete(this.tournament)

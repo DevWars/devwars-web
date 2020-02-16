@@ -16,6 +16,7 @@ module.exports = {
   plugins: ['vue'],
   rules: {
     'space-before-function-paren': 'off',
-    'arrow-parens': 'off'
+    'arrow-parens': 'off',
+    'vue/html-self-closing': 'off'
   }
 }
