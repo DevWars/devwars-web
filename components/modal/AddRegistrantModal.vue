@@ -1,51 +1,47 @@
 <template>
-  <form @submit.prevent="addRegistrant">
-    <div class="search">
-      <Input
-        v-model="username"
-        placeholder="Username"
-        @input="searchByUsername"
-      />
-    </div>
+  <div class="AddRegistrantModal modal">
+    <h1>Add registrant</h1>
+    <form @submit.prevent="addRegistrant">
+      <div class="search">
+        <i class="fa fa-search"></i>
+        <Input
+          v-model="username"
+          placeholder="Username"
+          @input="searchByUsername"
+        />
 
-    <ButtonGroup class="modal__actions">
-      <Button class="muted link" @click="close">
-        Cancel
-      </Button>
-      <Button type="submit" class="primary">
-        Add
-      </Button>
-    </ButtonGroup>
+        <div v-show="searchVisible" class="search__list">
+          <div v-for="user in result.data" :key="user.id" class="search__item" @click="() => userSelected(user.username)">
+            <div>
+              <User :user="user" size="sm" />
+            </div>
+            <div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <Table class="result">
-      <tr slot="head">
-        <th>Username</th>
-        <th>&nbsp;</th>
-      </tr>
-
-      <tr v-for="user in result.data" :key="user.id">
-        <td>{{ user.username }}</td>
-        <td>
-          <Button class="link" @click="() => userSelected(user.username)">
-            Select
-          </Button>
-        </td>
-      </tr>
-
-      <tr v-if="result.data.length === 0">
-        <td />
-      </tr>
-    </Table>
-  </form>
+      <ButtonGroup class="modal__actions">
+        <Button class="muted link" @click="close">
+          Cancel
+        </Button>
+        <Button type="submit" class="primary">
+          Add
+        </Button>
+      </ButtonGroup>
+    </form>
+  </div>
 </template>
 
 <script>
 import Input from '../form/Input'
-import Table from '@/components/Table'
+import User from '@/components/user/User'
 
 export default {
   name: 'AddRegistrantModal',
-  components: { Input, Table },
+
+  components: { Input, User },
+
   props: {
     game: {
       type: Object,
@@ -60,23 +56,22 @@ export default {
       required: true
     }
   },
-  data: () => {
-    return {
-      username: '',
-      usernameOld: '',
-      result: { data: [] },
-      searchDirty: true,
-      searchTimeout: null
-    }
-  },
+
+  data: () => ({
+    username: '',
+    result: { data: [] },
+    searchVisible: false
+  }),
+
   methods: {
-    async userSelected(username) {
+    userSelected(username) {
       this.username = username
-      await this.addRegistrant()
+      this.searchVisible = false
     },
 
     async searchByUsername(username) {
       if (username.trim() === '') return (this.result.data = [])
+      this.searchVisible = true
 
       const url = `/users/lookup?username=${username}`
       this.result = await this.$axios.get(url)
@@ -96,35 +91,48 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import 'utils.scss';
 
-.result {
-  margin-top: 25px;
+.v--modal-box {
+    overflow: visible !important;
 }
 
-.search {
-  position: relative;
-
-  &__list {
-    @extend %material;
-    width: 100%;
-    max-height: 150px;
-    border: 1px solid $divider-color;
-    position: absolute;
-    top: calc(100% - 1px);
-    z-index: $zindex-popover;
-    overflow-y: auto;
+.AddRegistrantModal {
+  .result {
+    margin-top: 25px;
   }
 
-  &__item {
-    padding: $xxs-space $xs-space;
-    background-color: #fff;
-    cursor: pointer;
+  .search {
+    display: flex;
+    align-items: center;
+    position: relative;
 
-    &:hover {
-      background-color: $link-color;
-      color: #fff;
+    .fa {
+        margin-right: $grid-gutter-width;
+        color: $text-color-secondary;
+    }
+
+    &__list {
+      @extend %material;
+      width: 100%;
+      max-height: 250px;
+      position: absolute;
+      top: calc(100% - 1px);
+      z-index: $zindex-popover;
+      overflow-y: auto;
+    }
+
+    &__item {
+      @extend %flex-justify;
+      padding: $xxs-space $xs-space;
+      background-color: $bg-color-1;
+      cursor: pointer;
+
+      &:hover {
+        background-color: lighten($bg-color-1, 10%);
+        color: #fff;
+      }
     }
   }
 }

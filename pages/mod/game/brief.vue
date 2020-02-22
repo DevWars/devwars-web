@@ -23,9 +23,7 @@
       <h4>No players</h4>
     </Card>
 
-    <Card class="plain dark">
-      <Applications :game="game" />
-    </Card>
+    <Applications :game="game" />
   </div>
 </template>
 
