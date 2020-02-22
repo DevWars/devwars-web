@@ -1,8 +1,7 @@
 <template>
   <div class="ListingFilters">
     <div class="main">
-      <span>Showing All</span>
-      <Select value>
+      <Select>
         <option value="Infinity" selected>
           Show All
         </option>

@@ -2,7 +2,7 @@
   <div class="Header">
     <div class="header">
       <Container class="fluid">
-        <div>
+        <div class="header-main">
           <Button class="link burger-menu" @click="toggleMobileMenu" />
 
           <nuxt-link to="/" class="logo">
@@ -146,9 +146,10 @@ export default {
     height: 100%;
   }
 
-  .logo,
-  .burger-menu {
-    vertical-align: middle;
+  .header-main {
+      display: flex;
+      align-items: center;
+      line-height: 1;
   }
 
   .logo {

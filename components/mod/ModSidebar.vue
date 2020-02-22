@@ -113,6 +113,7 @@ export default {
   width: 320px;
   background-color: $bg-color-4;
   position: relative;
+  overflow-y: auto;
 
   @include breakpoint(md) {
     width: 100%;
