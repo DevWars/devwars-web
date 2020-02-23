@@ -11,11 +11,14 @@
         />
 
         <div v-show="searchVisible" class="search__list">
-          <div v-for="user in result.data" :key="user.id" class="search__item" @click="() => userSelected(user.username)">
+          <div
+            v-for="user in result.data"
+            :key="user.id"
+            class="search__item"
+            @click="() => userSelected(user.username)"
+          >
             <div>
               <User :user="user" size="sm" />
-            </div>
-            <div>
             </div>
           </div>
         </div>
@@ -53,7 +56,7 @@ export default {
     },
     reject: {
       type: Function,
-      required: true
+      default: () => {}
     }
   },
 
@@ -95,7 +98,7 @@ export default {
 @import 'utils.scss';
 
 .v--modal-box {
-    overflow: visible !important;
+  overflow: visible !important;
 }
 
 .AddRegistrantModal {
@@ -109,8 +112,8 @@ export default {
     position: relative;
 
     .fa {
-        margin-right: $grid-gutter-width;
-        color: $text-color-secondary;
+      margin-right: $grid-gutter-width;
+      color: $text-color-secondary;
     }
 
     &__list {
