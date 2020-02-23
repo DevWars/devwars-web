@@ -51,35 +51,35 @@
 </template>
 
 <script>
-import DevwarsCard from '@/components/DevwarsCard'
-import Input from '@/components/form/Input'
+import DevwarsCard from '@/components/DevwarsCard';
+import Input from '@/components/form/Input';
 
 export default {
   name: 'ResetPassword',
   components: { DevwarsCard, Input },
   asyncData({ params }) {
-    return { token: params.token }
+    return { token: params.token };
   },
   data: () => {
     return {
       done: false,
       password: '',
-      confirmed: ''
-    }
+      confirmed: '',
+    };
   },
   methods: {
     reset() {
-      const { token } = this.$route.query
+      const { token } = this.$route.query;
 
       this.$store.dispatch('user/resetByToken', {
         token,
-        password: this.password
-      })
+        password: this.password,
+      });
 
-      this.done = true
-    }
-  }
-}
+      this.done = true;
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

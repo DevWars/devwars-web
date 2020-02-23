@@ -9,13 +9,13 @@
 </template>
 
 <script>
-import ModSidebar from '@/components/mod/ModSidebar'
+import ModSidebar from '@/components/mod/ModSidebar';
 
 export default {
   name: 'Mod',
   layout: 'header',
-  components: { ModSidebar }
-}
+  components: { ModSidebar },
+};
 </script>
 
 <style lang="scss" scoped>

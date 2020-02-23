@@ -30,20 +30,20 @@
 </template>
 
 <script>
-import { names } from '../utils/auth'
-import Tabs from '@/components/Tabs'
-import Card from '@/components/Card'
-import PageBanner from '@/components/layout/PageBanner'
+import { names } from '../utils/auth';
+import Tabs from '@/components/Tabs';
+import Card from '@/components/Card';
+import PageBanner from '@/components/layout/PageBanner';
 
 export default {
   name: 'SettingsPage',
 
   meta: {
-    auth: names.USER
+    auth: names.USER,
   },
 
-  components: { Tabs, Card, PageBanner }
-}
+  components: { Tabs, Card, PageBanner },
+};
 </script>
 
 <style lang="scss" scoped>

@@ -53,7 +53,7 @@
         <div class="home-display__content">
           <h3 class="home-display__title">
             Think you
-            <br>got what <br>it takes?
+            <br />got what <br />it takes?
           </h3>
           <Button to="/competitor/register" class="outline lg">
             Become a competitor
@@ -73,7 +73,7 @@
         <div class="home-display__content">
           <h3 class="home-display__title">
             Get familiar
-            <br>with DevWars <br>knowledge base.
+            <br />with DevWars <br />knowledge base.
           </h3>
           <Button to="/docs" class="outline lg">
             View Documentation
@@ -98,7 +98,7 @@
               <img
                 class="quote-card__avatar"
                 src="~assets/img/companies/scotchio-square.jpg"
-              >
+              />
               <p class="quote-card__desc">
                 Need something to watch on a Saturday? Watch 2 teams of 3 battle
                 it out in DevWars!
@@ -122,7 +122,7 @@
               <img
                 class="quote-card__avatar"
                 src="~assets/img/companies/devtips-square.png"
-              >
+              />
               <p class="quote-card__desc">
                 Have you guys seen @devwarstv ? Pretty novel stuff happening
                 over there: devwars.tv
@@ -162,7 +162,7 @@
             <img
               class="supporter-logos__logo"
               src="~assets/img/companies/twitch-white.png"
-            >
+            />
           </a>
           <a
             href="https://www.discord.gg/"
@@ -173,7 +173,7 @@
             <img
               class="supporter-logos__logo"
               src="~assets/img/companies/discord-white.png"
-            >
+            />
           </a>
           <a
             href="https://www.microsoft.com/"
@@ -184,7 +184,7 @@
             <img
               class="supporter-logos__logo"
               src="~assets/img/companies/microsoft-white.png"
-            >
+            />
           </a>
           <a
             href="https://hiringsolved.com/blog/game-recruiting-game-gameshow/"
@@ -195,7 +195,7 @@
             <img
               class="supporter-logos__logo"
               src="~assets/img/companies/hiringsolved-white.png"
-            >
+            />
           </a>
         </div>
       </Container>
@@ -204,24 +204,24 @@
 </template>
 
 <script>
-import Http from '../services/Http'
-import Card from '@/components/Card'
-import Highlights from '@/components/game/Highlights'
-import ScheduleBlock from '@/components/game/ScheduleBlock'
+import Http from '../services/Http';
+import Card from '@/components/Card';
+import Highlights from '@/components/game/Highlights';
+import ScheduleBlock from '@/components/game/ScheduleBlock';
 
 export default {
   name: 'Index',
   components: {
     Card,
     Highlights,
-    ScheduleBlock
+    ScheduleBlock,
   },
   async asyncData() {
     return {
-      latest: await Http.for('games').get('latest')
-    }
-  }
-}
+      latest: await Http.for('games').get('latest'),
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>

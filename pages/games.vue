@@ -42,10 +42,10 @@
 </template>
 
 <script>
-import Http from '../services/Http'
-import Tabs from '../components/Tabs'
-import Tag from '../components/Tag'
-import LargeGameDetail from '../components/game/LargeGameDetail'
+import Http from '../services/Http';
+import Tabs from '../components/Tabs';
+import Tag from '../components/Tag';
+import LargeGameDetail from '../components/game/LargeGameDetail';
 
 export default {
   name: 'Games',
@@ -58,24 +58,24 @@ export default {
       season: 3,
       games: [],
       viewing: null,
-      includePlayers: true
-    }
+      includePlayers: true,
+    };
   },
 
   watch: {
     '$route.query.season': {
       immediate: true,
       async handler(newSeason) {
-        this.season = Number(newSeason) || 3
+        this.season = Number(newSeason) || 3;
 
-        this.games = await Http.for('games/season').get(this.season)
+        this.games = await Http.for('games/season').get(this.season);
 
         if (!this.$route.query.game) {
           this.viewing = await Http.for('games').get(
             `${this.games[0].id}?players=${this.includePlayers}`
-          )
+          );
         }
-      }
+      },
     },
 
     '$route.query.game': {
@@ -84,21 +84,21 @@ export default {
         if (newGame) {
           this.viewing = await Http.for('games').get(
             `${newGame}?players=${this.includePlayers}`
-          )
+          );
         }
-      }
-    }
+      },
+    },
   },
 
   methods: {
     view(game) {
       this.$router.push({
         path: '/games',
-        query: { game: game.id, season: game.season }
-      })
-    }
-  }
-}
+        query: { game: game.id, season: game.season },
+      });
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

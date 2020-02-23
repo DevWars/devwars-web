@@ -15,15 +15,15 @@ export default {
     name: {
       type: String,
       required: false,
-      default: undefined
+      default: undefined,
     },
     active: {
       type: Boolean,
       required: true,
-      default: false
-    }
-  }
-}
+      default: false,
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

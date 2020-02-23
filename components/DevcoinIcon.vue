@@ -26,8 +26,8 @@
 
 <script>
 export default {
-  name: 'DevcoinIcon'
-}
+  name: 'DevcoinIcon',
+};
 </script>
 
 <style lang="scss" scoped>

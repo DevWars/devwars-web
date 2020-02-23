@@ -10,11 +10,11 @@
 </template>
 
 <script>
-import Header from '@/components/layout/Header'
-import Toasts from '@/components/toast/Toasts'
+import Header from '@/components/layout/Header';
+import Toasts from '@/components/toast/Toasts';
 
 export default {
   name: 'HeaderLayout',
-  components: { DevWarsHeader: Header, Toasts }
-}
+  components: { DevWarsHeader: Header, Toasts },
+};
 </script>

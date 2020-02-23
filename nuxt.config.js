@@ -1,13 +1,13 @@
 /* eslint-disable nuxt/no-cjs-in-config */
 
-require('dotenv').config()
-const path = require('path')
-const webpack = require('webpack')
+require('dotenv').config();
+const path = require('path');
+const webpack = require('webpack');
 
-const baseUrl = process.env.BASE_URL || 'http://localhost:3000'
-const apiUrl = process.env.API_URL || 'http://localhost:8080'
-const discordClient = process.env.DISCORD_CLIENT || ''
-const twitchClient = process.env.TWITCH_CLIENT || ''
+const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
+const apiUrl = process.env.API_URL || 'http://localhost:8080';
+const discordClient = process.env.DISCORD_CLIENT || '';
+const twitchClient = process.env.TWITCH_CLIENT || '';
 
 export default {
   mode: 'universal',
@@ -16,7 +16,7 @@ export default {
     apiUrl,
     discordClient,
     twitchClient,
-    version: process.env.npm_package_version
+    version: process.env.npm_package_version,
   },
   /*
    ** Headers of the page
@@ -27,7 +27,7 @@ export default {
       { charset: 'utf-8' },
       {
         name: 'viewport',
-        content: 'width=device-width, initial-scale=1'
+        content: 'width=device-width, initial-scale=1',
       },
       {
         hid: 'description',
@@ -35,11 +35,11 @@ export default {
         content:
           'DevWars is a live game show where web developers compete against each other in 60  ' +
           'minute coding challenges. Join our educational and entertaining platform of experienced ' +
-          'and aspiring members.'
+          'and aspiring members.',
       },
       {
         name: 'google-site-verification',
-        content: 'RLFyk9dzTQTWw10KYT1_-C3uMy4Itz26Har6xRbv_Co'
+        content: 'RLFyk9dzTQTWw10KYT1_-C3uMy4Itz26Har6xRbv_Co',
       },
       { name: 'og:title', content: 'Esports for Developers - DevWars' },
       { name: 'og:image', content: 'https://devwars.tv/og/logo.jpeg' },
@@ -48,24 +48,24 @@ export default {
         content:
           'DevWars is a live game show where web developers compete against each other in 60 ' +
           'minute coding challenges. Join our educational and entertaining platform of experienced' +
-          ' and aspiring members.'
-      }
+          ' and aspiring members.',
+      },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'stylesheet',
         href:
-          'https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:300,400,500,700'
+          'https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:300,400,500,700',
       },
       {
         rel: 'stylesheet',
         href: 'https://pro.fontawesome.com/releases/v5.0.8/css/all.css',
         integrity:
           'sha384-OGsxOZf8qnUumoWWSmTqXMPSNI9URpNYN35fXDb5Cv5jT6OR673ah1e5q+9xKTq6',
-        crossorigin: 'anonymous'
-      }
-    ]
+        crossorigin: 'anonymous',
+      },
+    ],
   },
   /*
    ** Customize the progress-bar color
@@ -86,14 +86,14 @@ export default {
     '@/plugins/axios',
     '@/plugins/filters',
     '@/plugins/mixins',
-    '@/plugins/modal'
+    '@/plugins/modal',
   ],
   /*
    ** Nuxt.js dev-modules
    */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
   ],
   /*
    ** Nuxt.js modules
@@ -102,12 +102,12 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
   ],
 
   router: {
     linkExactActiveClass: 'active',
-    middleware: ['update-latest-route', 'auth']
+    middleware: ['update-latest-route', 'auth'],
   },
 
   debug: process.env.NODE_ENV === 'development',
@@ -119,7 +119,7 @@ export default {
   axios: {
     baseURL: apiUrl,
     browserBaseURL: apiUrl,
-    credentials: true
+    credentials: true,
   },
 
   /*
@@ -133,11 +133,11 @@ export default {
           [
             '@nuxt/babel-preset-app',
             {
-              useBuiltIns: 'entry'
-            }
-          ]
-        ]
-      }
+              useBuiltIns: 'entry',
+            },
+          ],
+        ];
+      },
     },
     extend(config, ctx) {
       // Run ESLint on save
@@ -146,20 +146,20 @@ export default {
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
+          exclude: /(node_modules)/,
+        });
       }
 
       config.resolve.alias['utils.scss$'] = path.resolve(
-        'assets/styles/utils.scss'
-      )
-    }
+        'assets/styles/utils.scss',
+      );
+    },
   },
   watchers: {
     webpack: {
       aggregateTimeout: 300,
-      poll: 1000
+      poll: 1000,
     },
-    ignored: /node_modules/
-  }
-}
+    ignored: /node_modules/,
+  },
+};

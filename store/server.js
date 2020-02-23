@@ -1,27 +1,27 @@
-import Http from '../services/Http'
+import Http from '../services/Http';
 
 export const state = () => ({
-  server: {}
-})
+  server: {},
+});
 
 export const getters = {
   version(state) {
-    return state.server.version
+    return state.server.version;
   },
   status(state) {
-    return state.server.status
-  }
-}
+    return state.server.status;
+  },
+};
 
 export const mutations = {
   badges(state, server) {
-    state.server = server
-  }
-}
+    state.server = server;
+  },
+};
 
 export const actions = {
   async health({ commit }) {
-    const server = await Http.for('health').get()
-    commit('badges', server)
-  }
-}
+    const server = await Http.for('health').get();
+    commit('badges', server);
+  },
+};

@@ -23,47 +23,47 @@ export default {
   components: {
     VNode: {
       functional: true,
-      render: (h, ctx) => ctx.props.vnodes
-    }
+      render: (h, ctx) => ctx.props.vnodes,
+    },
   },
 
   data: () => ({
-    activeTab: 0
+    activeTab: 0,
   }),
 
   computed: {
     tabs() {
       const defaultSlots = this.$slots.default
         .filter((slot) => {
-          return slot.tag !== undefined
+          return slot.tag !== undefined;
         })
         .map((slot, index) => {
           if (!slot.key) {
-            slot.key = index + 1
+            slot.key = index + 1;
           }
 
-          return slot
-        })
+          return slot;
+        });
 
-      return defaultSlots || []
-    }
+      return defaultSlots || [];
+    },
   },
 
   mounted() {
-    this.setActiveTab()
+    this.setActiveTab();
   },
 
   methods: {
     setActiveTab(tabKey) {
-      this.activeTab = tabKey || this.tabs[0].data.key || 1
+      this.activeTab = tabKey || this.tabs[0].data.key || 1;
     },
 
     tabIsLink(tab) {
-      const tag = tab.componentOptions.tag
-      return tag === 'a' || tag === 'nuxt-link'
-    }
-  }
-}
+      const tag = tab.componentOptions.tag;
+      return tag === 'a' || tag === 'nuxt-link';
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

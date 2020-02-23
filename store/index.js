@@ -1,6 +1,6 @@
-export const state = () => ({})
+export const state = () => ({});
 
-export const mutations = {}
+export const mutations = {};
 
 export const actions = {
   async nuxtServerInit({ dispatch }) {
@@ -14,14 +14,14 @@ export const actions = {
       dispatch('game/active'),
 
       // Needs to only dispatch when User is logged in
-      dispatch('game/applications')
-    ])
+      dispatch('game/applications'),
+    ]);
   },
 
   navigate(_, route) {
-    this.app.router.push(route)
-  }
-}
+    this.app.router.push(route);
+  },
+};
 
 // export const strict = process.env.NODE_ENV = "development";
-export const strict = false
+export const strict = false;

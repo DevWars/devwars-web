@@ -40,39 +40,39 @@
 </template>
 
 <script>
-import DevwarsCard from '@/components/DevwarsCard'
-import Input from '@/components/form/Input'
+import DevwarsCard from '@/components/DevwarsCard';
+import Input from '@/components/form/Input';
 
 export default {
   name: 'Login',
   components: { DevwarsCard, Input },
   layout: 'header',
   meta: {
-    noAuth: true
+    noAuth: true,
   },
   data: () => {
     return {
       username: '',
       password: '',
-      authenticating: false
-    }
+      authenticating: false,
+    };
   },
   methods: {
     async login() {
       try {
-        this.authenticating = true
+        this.authenticating = true;
 
         await this.$store.dispatch('user/login', {
           username: this.username,
-          password: this.password
-        })
+          password: this.password,
+        });
       } finally {
-        this.authenticating = false
-        this.password = ''
+        this.authenticating = false;
+        this.password = '';
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

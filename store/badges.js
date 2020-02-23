@@ -1,25 +1,25 @@
-import Http from '../services/Http'
+import Http from '../services/Http';
 
 export const state = () => ({
-  badges: []
-})
+  badges: [],
+});
 
 export const getters = {
   badges(state) {
-    return state.badges
-  }
-}
+    return state.badges;
+  },
+};
 
 export const mutations = {
   badges(state, badges) {
-    state.badges = badges
-  }
-}
+    state.badges = badges;
+  },
+};
 
 export const actions = {
   async refresh({ commit }) {
-    const badges = await Http.for('badge').get()
+    const badges = await Http.for('badge').get();
 
-    commit('badges', badges)
-  }
-}
+    commit('badges', badges);
+  },
+};

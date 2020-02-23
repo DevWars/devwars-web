@@ -19,15 +19,15 @@ export default {
   name: 'Popup',
 
   data: () => ({
-    showPopUp: false
+    showPopUp: false,
   }),
 
   methods: {
     close() {
-      this.showPopUp = !this.showPopUp
-    }
-  }
-}
+      this.showPopUp = !this.showPopUp;
+    },
+  },
+};
 </script>
 
 <style lang="scss">

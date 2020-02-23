@@ -67,18 +67,18 @@ export default {
   props: {
     error: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   layout: 'header',
   mounted() {
-    const { description, statusCode, message } = this.error
+    const { description, statusCode, message } = this.error;
 
-    if (description) this.error.description = description
-    if (statusCode) this.error.statusCode = statusCode
-    if (message) this.error.message = message
-  }
-}
+    if (description) this.error.description = description;
+    if (statusCode) this.error.statusCode = statusCode;
+    if (message) this.error.message = message;
+  },
+};
 </script>
 
 <style lang="scss" scoped>

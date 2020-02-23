@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import DevcoinIcon from '@/components/DevcoinIcon'
+import DevcoinIcon from '@/components/DevcoinIcon';
 
 export default {
   components: { DevcoinIcon },
@@ -16,10 +16,10 @@ export default {
   props: {
     amount: {
       type: Number,
-      default: 0
-    }
-  }
-}
+      default: 0,
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

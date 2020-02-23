@@ -13,8 +13,8 @@
 
 <script>
 export default {
-  name: 'Table'
-}
+  name: 'Table',
+};
 </script>
 
 <style lang="scss" scoped>

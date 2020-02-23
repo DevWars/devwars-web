@@ -23,14 +23,14 @@ export default {
   props: {
     title: {
       type: String,
-      default: ''
+      default: '',
     },
     desc: {
       type: String,
-      default: ''
-    }
-  }
-}
+      default: '',
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

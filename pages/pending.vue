@@ -23,31 +23,31 @@
 </template>
 
 <script>
-import Http from '../services/Http'
-import { names } from '../utils/auth'
-import Card from '@/components/Card'
-import PageBanner from '@/components/layout/PageBanner'
+import Http from '../services/Http';
+import { names } from '../utils/auth';
+import Card from '@/components/Card';
+import PageBanner from '@/components/layout/PageBanner';
 
 export default {
   name: 'Pending',
 
   meta: {
     auth: names.PENDING,
-    limit: true
+    limit: true,
   },
 
   components: { Card, PageBanner },
 
   methods: {
     async resend() {
-      await Http.for('auth/reverify').save()
+      await Http.for('auth/reverify').save();
       return this.$store.dispatch(
         'toast/success',
         'We have sent off another email, please wait patiently.'
-      )
-    }
-  }
-}
+      );
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

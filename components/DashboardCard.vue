@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import Card from './Card'
+import Card from './Card';
 
 export default {
   name: 'DashboardCard',
@@ -20,14 +20,14 @@ export default {
   props: {
     title: {
       type: String,
-      default: ''
+      default: '',
     },
     icon: {
       type: String,
-      default: ''
-    }
-  }
-}
+      default: '',
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

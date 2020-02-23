@@ -39,8 +39,8 @@
 </template>
 
 <script>
-import DevwarsCard from '@/components/DevwarsCard'
-import Input from '@/components/form/Input'
+import DevwarsCard from '@/components/DevwarsCard';
+import Input from '@/components/form/Input';
 
 export default {
   name: 'ResetPassword',
@@ -48,17 +48,17 @@ export default {
   data() {
     return {
       done: false,
-      email: ''
-    }
+      email: '',
+    };
   },
   methods: {
     async forgot() {
-      const done = await this.$store.dispatch('user/forgot', this.email)
+      const done = await this.$store.dispatch('user/forgot', this.email);
 
-      this.done = done
-    }
-  }
-}
+      this.done = done;
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

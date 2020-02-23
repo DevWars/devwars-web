@@ -25,24 +25,24 @@ export default {
   props: {
     page: {
       type: Number,
-      default: 0
+      default: 0,
     },
     perPage: {
       type: Number,
-      default: 0
+      default: 0,
     },
     canNext: {
       type: Boolean,
-      default: false
+      default: false,
     },
     canPrevious: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
 
-  computed: {}
-}
+  computed: {},
+};
 </script>
 
 <style lang="scss" scoped>

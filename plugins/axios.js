@@ -1,6 +1,6 @@
-import Http from '../services/Http'
+import Http from '../services/Http';
 
 export default function(ctx) {
-  const { $axios } = ctx.app
-  Http.axios = $axios
+  const { $axios } = ctx.app;
+  Http.axios = $axios;
 }

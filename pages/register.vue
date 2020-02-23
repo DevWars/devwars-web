@@ -37,33 +37,33 @@
 </template>
 
 <script>
-import DevwarsCard from '@/components/DevwarsCard'
-import Input from '@/components/form/Input'
+import DevwarsCard from '@/components/DevwarsCard';
+import Input from '@/components/form/Input';
 
 export default {
   name: 'Register',
   components: { DevwarsCard, Input },
   layout: 'header',
   meta: {
-    noAuth: true
+    noAuth: true,
   },
   data: () => {
     return {
       username: '',
       email: '',
-      password: ''
-    }
+      password: '',
+    };
   },
   methods: {
     async submit() {
       await this.$store.dispatch('user/register', {
         username: this.username,
         email: this.email,
-        password: this.password
-      })
-    }
-  }
-}
+        password: this.password,
+      });
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

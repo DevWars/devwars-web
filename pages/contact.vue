@@ -50,11 +50,11 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-import PageBanner from '@/components/layout/PageBanner'
-import Card from '@/components/Card'
-import Input from '@/components/form/Input'
-import Textarea from '@/components/form/Textarea'
+import { mapActions } from 'vuex';
+import PageBanner from '@/components/layout/PageBanner';
+import Card from '@/components/Card';
+import Input from '@/components/form/Input';
+import Textarea from '@/components/form/Textarea';
 
 export default {
   name: 'Contact',
@@ -62,42 +62,42 @@ export default {
     PageBanner,
     Card,
     Input,
-    Textarea
+    Textarea,
   },
   data: () => {
     return {
       name: '',
       email: '',
       message: '',
-      submitted: false
-    }
+      submitted: false,
+    };
   },
   methods: {
     async sendEmail() {
       try {
-        const { name, email, message } = this
+        const { name, email, message } = this;
 
         await this.$axios.$post('/contact', {
           name,
           email,
-          message
-        })
+          message,
+        });
 
-        this.toastSuccess('Contact-us sent successfully.')
-        this.submitted = true
+        this.toastSuccess('Contact-us sent successfully.');
+        this.submitted = true;
       } catch (e) {
         const message = e.response
           ? e.response.data
-          : 'failed to send contact-us'
-        this.toastError(message)
+          : 'failed to send contact-us';
+        this.toastError(message);
       }
     },
     ...mapActions({
       toastError: 'toast/error',
-      toastSuccess: 'toast/success'
-    })
-  }
-}
+      toastSuccess: 'toast/success',
+    }),
+  },
+};
 </script>
 
 <style lang="scss" scoped>

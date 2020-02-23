@@ -52,11 +52,11 @@
 </template>
 
 <script>
-import Http from '../services/Http'
-import PageBanner from '@/components/layout/PageBanner'
-import Table from '@/components/Table'
-import User from '@/components/user/User'
-import Pagination from '@/components/Pagination'
+import Http from '../services/Http';
+import PageBanner from '@/components/layout/PageBanner';
+import Table from '@/components/Table';
+import User from '@/components/user/User';
+import Pagination from '@/components/Pagination';
 
 export default {
   name: 'Leaderboards',
@@ -64,7 +64,9 @@ export default {
   components: { PageBanner, Table, User, Pagination },
 
   async asyncData() {
-    return { leaderboards: await Http.for('users/leaderboards?first=10').get() }
+    return {
+      leaderboards: await Http.for('users/leaderboards?first=10').get(),
+    };
   },
 
   data: () => {
@@ -72,32 +74,32 @@ export default {
       page: 0,
       pagination: {
         after: null,
-        before: null
+        before: null,
       },
-      data: []
-    }
+      data: [],
+    };
   },
 
   mounted() {},
 
   methods: {
     async previous() {
-      this.page -= 1
+      this.page -= 1;
 
-      const { pagination } = this.leaderboards
-      const before = pagination.before.split('users/leaderboards')[1]
-      this.leaderboards = await Http.for(`users/leaderboards${before}`).get()
+      const { pagination } = this.leaderboards;
+      const before = pagination.before.split('users/leaderboards')[1];
+      this.leaderboards = await Http.for(`users/leaderboards${before}`).get();
     },
 
     async next() {
-      this.page += 1
+      this.page += 1;
 
-      const { pagination } = this.leaderboards
-      const after = pagination.after.split('users/leaderboards')[1]
-      this.leaderboards = await Http.for(`users/leaderboards${after}`).get()
-    }
-  }
-}
+      const { pagination } = this.leaderboards;
+      const after = pagination.after.split('users/leaderboards')[1];
+      this.leaderboards = await Http.for(`users/leaderboards${after}`).get();
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

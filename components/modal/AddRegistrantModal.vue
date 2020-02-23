@@ -37,8 +37,8 @@
 </template>
 
 <script>
-import Input from '../form/Input'
-import User from '@/components/user/User'
+import Input from '../form/Input';
+import User from '@/components/user/User';
 
 export default {
   name: 'AddRegistrantModal',
@@ -48,50 +48,50 @@ export default {
   props: {
     game: {
       type: Object,
-      required: true
+      required: true,
     },
     resolve: {
       type: Function,
-      required: true
+      required: true,
     },
     reject: {
       type: Function,
-      default: () => {}
-    }
+      default: () => {},
+    },
   },
 
   data: () => ({
     username: '',
     result: { data: [] },
-    searchVisible: false
+    searchVisible: false,
   }),
 
   methods: {
     userSelected(username) {
-      this.username = username
-      this.searchVisible = false
+      this.username = username;
+      this.searchVisible = false;
     },
 
     async searchByUsername(username) {
-      if (username.trim() === '') return (this.result.data = [])
-      this.searchVisible = true
+      if (username.trim() === '') return (this.result.data = []);
+      this.searchVisible = true;
 
-      const url = `/users/lookup?username=${username}`
-      this.result = await this.$axios.get(url)
+      const url = `/users/lookup?username=${username}`;
+      this.result = await this.$axios.get(url);
     },
 
     async addRegistrant() {
       try {
-        const url = `/applications/game/${this.game.id}/username/${this.username}`
-        await this.$axios.$post(url)
-        this.close(true)
+        const url = `/applications/game/${this.game.id}/username/${this.username}`;
+        await this.$axios.$post(url);
+        this.close(true);
       } catch (e) {
-        this.$store.dispatch('toast/error', e.response.data)
-        this.close(false)
+        this.$store.dispatch('toast/error', e.response.data);
+        this.close(false);
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="scss">
