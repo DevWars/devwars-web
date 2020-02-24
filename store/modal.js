@@ -1,11 +1,11 @@
 export const state = () => ({
-  name: '',
-  data: {},
+    name: '',
+    data: {},
 });
 
 export const mutations = {
-  modal(state, { name, data }) {
-    state.name = name;
-    state.data = data;
-  },
+    modal(state, { name, data }) {
+        state.name = name;
+        state.data = data;
+    },
 };

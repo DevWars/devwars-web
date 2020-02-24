@@ -1,42 +1,45 @@
 <template>
-  <div class="Login header-offset">
-    <Container>
-      <form @submit.prevent="login">
-        <DevwarsCard title="Login">
-          <Input
-            v-model="username"
-            label="Email or Username"
-            class="group"
-            required
-          />
+    <div class="Login header-offset">
+        <Container>
+            <form @submit.prevent="login">
+                <DevwarsCard title="Login">
+                    <Input
+                        v-model="username"
+                        label="Email or Username"
+                        class="group"
+                        required
+                    />
 
-          <Input
-            v-model="password"
-            label="Password"
-            class="group"
-            type="password"
-            required
-          />
+                    <Input
+                        v-model="password"
+                        label="Password"
+                        class="group"
+                        type="password"
+                        required
+                    />
 
-          <div slot="actions">
-            <Button
-              type="submit"
-              :disabled="authenticating"
-              class="outline block"
-            >
-              Login
-            </Button>
-            <Button href="/register" class="outline muted block">
-              Register
-            </Button>
-            <Button href="/forgot-password" class="link muted block">
-              Forgot your password?
-            </Button>
-          </div>
-        </DevwarsCard>
-      </form>
-    </Container>
-  </div>
+                    <div slot="actions">
+                        <Button
+                            type="submit"
+                            :disabled="authenticating"
+                            class="outline block"
+                        >
+                            Login
+                        </Button>
+                        <Button href="/register" class="outline muted block">
+                            Register
+                        </Button>
+                        <Button
+                            href="/forgot-password"
+                            class="link muted block"
+                        >
+                            Forgot your password?
+                        </Button>
+                    </div>
+                </DevwarsCard>
+            </form>
+        </Container>
+    </div>
 </template>
 
 <script>
@@ -44,34 +47,34 @@ import DevwarsCard from '@/components/DevwarsCard';
 import Input from '@/components/form/Input';
 
 export default {
-  name: 'Login',
-  components: { DevwarsCard, Input },
-  layout: 'header',
-  meta: {
-    noAuth: true,
-  },
-  data: () => {
-    return {
-      username: '',
-      password: '',
-      authenticating: false,
-    };
-  },
-  methods: {
-    async login() {
-      try {
-        this.authenticating = true;
-
-        await this.$store.dispatch('user/login', {
-          username: this.username,
-          password: this.password,
-        });
-      } finally {
-        this.authenticating = false;
-        this.password = '';
-      }
+    name: 'Login',
+    components: { DevwarsCard, Input },
+    layout: 'header',
+    meta: {
+        noAuth: true,
     },
-  },
+    data: () => {
+        return {
+            username: '',
+            password: '',
+            authenticating: false,
+        };
+    },
+    methods: {
+        async login() {
+            try {
+                this.authenticating = true;
+
+                await this.$store.dispatch('user/login', {
+                    username: this.username,
+                    password: this.password,
+                });
+            } finally {
+                this.authenticating = false;
+                this.password = '';
+            }
+        },
+    },
 };
 </script>
 
@@ -79,9 +82,9 @@ export default {
 @import 'utils.scss';
 
 .Login {
-  padding-top: $l-space;
+    padding-top: $l-space;
 
-  /* .forgot {
+    /* .forgot {
         display: block;
         margin-top: $s-space;
         color: $text-color-muted;

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <!--
+    <div>
+        <!--
         <PageBanner title="Badges"/>
         <div class="footer-offset">
             <Container>
@@ -28,8 +28,8 @@
             </Container>
         </div>
         -->
-    <h1>badges</h1>
-  </div>
+        <h1>badges</h1>
+    </div>
 </template>
 
 <script>
@@ -40,50 +40,50 @@
 import { names } from '../utils/auth';
 
 export default {
-  // name: 'Badges',
-  // components: {
-  //     PageBanner,
-  //     Devcoins,
-  // },
-  meta: {
-    auth: names.USER,
-  },
-  // computed: {
-  //     ...mapGetters({
-  //         badges: 'badges/badges',
-  //         userCount: 'user/userCount',
-  //     }),
-  // },
-  // async asyncData({ store }) {
-  //     const mine = await Http.for(`user/${store.state.user.user.id}`).get(
-  //         'badges'
-  //     );
-  //     return {
-  //         mine,
-  //     };
-  // },
-  // methods: {
-  //     completed(badge) {
-  //         return this.mine.some((it) => it.id === badge.id);
-  //     },
-  //     style(badge) {
-  //         return {
-  //             width: `${(badge.userCount / this.userCount) * 100}%`,
-  //         };
-  //     },
-  //     image(badge) {
-  //         /* eslint-disable */
-  //         const url = `@/assets/img/badges/${badge.name
-  //             .split(' ')
-  //             .join('-')
-  //             .toLowerCase()}.png`;
-  //         try {
-  //             return require(url);
-  //         } catch (e) {
-  //             console.error(`Couldn't load image for badge ${badge.name}`);
-  //         }
-  //     },
-  // },
+    // name: 'Badges',
+    // components: {
+    //     PageBanner,
+    //     Devcoins,
+    // },
+    meta: {
+        auth: names.USER,
+    },
+    // computed: {
+    //     ...mapGetters({
+    //         badges: 'badges/badges',
+    //         userCount: 'user/userCount',
+    //     }),
+    // },
+    // async asyncData({ store }) {
+    //     const mine = await Http.for(`user/${store.state.user.user.id}`).get(
+    //         'badges'
+    //     );
+    //     return {
+    //         mine,
+    //     };
+    // },
+    // methods: {
+    //     completed(badge) {
+    //         return this.mine.some((it) => it.id === badge.id);
+    //     },
+    //     style(badge) {
+    //         return {
+    //             width: `${(badge.userCount / this.userCount) * 100}%`,
+    //         };
+    //     },
+    //     image(badge) {
+    //         /* eslint-disable */
+    //         const url = `@/assets/img/badges/${badge.name
+    //             .split(' ')
+    //             .join('-')
+    //             .toLowerCase()}.png`;
+    //         try {
+    //             return require(url);
+    //         } catch (e) {
+    //             console.error(`Couldn't load image for badge ${badge.name}`);
+    //         }
+    //     },
+    // },
 };
 </script>
 
@@ -91,71 +91,71 @@ export default {
 @import 'utils.scss';
 
 .badge-card {
-  border-top: $border-size solid $divider-color;
-  padding: $xs-space $grid-gutter-width $grid-gutter-width;
-  margin-bottom: 30px;
-  background-color: $bg-color-3;
-  text-align: center;
-  opacity: 0.5;
+    border-top: $border-size solid $divider-color;
+    padding: $xs-space $grid-gutter-width $grid-gutter-width;
+    margin-bottom: 30px;
+    background-color: $bg-color-3;
+    text-align: center;
+    opacity: 0.5;
 
-  &__img {
-    display: block;
-    height: 100%;
-    width: auto;
-    max-height: 140px;
-    margin: 0 auto;
-  }
-
-  &__name {
-    padding: $s-space 0 $s-space;
-    font-size: $h4-font-size;
-  }
-
-  &__meta {
-    @extend %flex-justify;
-    margin-bottom: $xs-space;
-  }
-
-  &__global {
-    color: $text-color-muted;
-    .fa {
-      padding-right: 5px;
+    &__img {
+        display: block;
+        height: 100%;
+        width: auto;
+        max-height: 140px;
+        margin: 0 auto;
     }
-  }
 
-  &__tier {
-    border: 1px solid;
-    padding: 0 $xxs-space;
-    font-size: $font-size-xs;
-  }
-
-  .progress {
-    max-width: 80%;
-    margin: 0 auto $xs-space;
-
-    &__bar {
-      background-color: $brand-secondary;
+    &__name {
+        padding: $s-space 0 $s-space;
+        font-size: $h4-font-size;
     }
-  }
 
-  &.complete {
-    background-color: $bg-color-2;
-    opacity: 1;
-  }
-
-  @mixin badge-variant($rank, $color) {
-    &.#{$rank} {
-      border-color: $color;
+    &__meta {
+        @extend %flex-justify;
+        margin-bottom: $xs-space;
     }
-    &.#{$rank} &__tier {
-      color: $color;
-    }
-    //&.#{$rank} .progress__bar { background-color: $color; }
-  }
 
-  @include badge-variant(bronze, $bronze-color);
-  @include badge-variant(silver, $silver-color);
-  @include badge-variant(gold, $gold-color);
-  @include badge-variant(diamond, $diamond-color);
+    &__global {
+        color: $text-color-muted;
+        .fa {
+            padding-right: 5px;
+        }
+    }
+
+    &__tier {
+        border: 1px solid;
+        padding: 0 $xxs-space;
+        font-size: $font-size-xs;
+    }
+
+    .progress {
+        max-width: 80%;
+        margin: 0 auto $xs-space;
+
+        &__bar {
+            background-color: $brand-secondary;
+        }
+    }
+
+    &.complete {
+        background-color: $bg-color-2;
+        opacity: 1;
+    }
+
+    @mixin badge-variant($rank, $color) {
+        &.#{$rank} {
+            border-color: $color;
+        }
+        &.#{$rank} &__tier {
+            color: $color;
+        }
+        //&.#{$rank} .progress__bar { background-color: $color; }
+    }
+
+    @include badge-variant(bronze, $bronze-color);
+    @include badge-variant(silver, $silver-color);
+    @include badge-variant(gold, $gold-color);
+    @include badge-variant(diamond, $diamond-color);
 }
 </style>
