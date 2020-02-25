@@ -64,7 +64,7 @@ export default {
         game() {
             const games = this.$store.state.game.game;
             return Array(games).find(
-                (game) => game.id === Number(this.$route.query.game)
+                (game) => game.id === Number(this.$route.query.game),
             );
         },
     },
@@ -96,7 +96,7 @@ export default {
                 `/games/${this.game.id}/player`,
                 {
                     data: { player },
-                }
+                },
             );
 
             this.$store.commit('game/game', res.data);

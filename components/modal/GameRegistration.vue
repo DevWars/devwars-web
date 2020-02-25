@@ -40,12 +40,8 @@
         </p>
 
         <ButtonGroup class="modal__actions">
-            <Button class="outline muted" @click="close">
-                Nevermind
-            </Button>
-            <Button class="primary" @click="enter(schedule)">
-                Enter
-            </Button>
+            <Button class="outline muted" @click="close">Nevermind</Button>
+            <Button class="primary" @click="enter(schedule)">Enter</Button>
         </ButtonGroup>
     </div>
 </template>

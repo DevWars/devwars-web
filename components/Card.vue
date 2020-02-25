@@ -1,8 +1,6 @@
 <template>
     <div class="Card">
-        <h2 v-if="title" class="title">
-            {{ title }}
-        </h2>
+        <h2 v-if="title" class="title">{{ title }}</h2>
         <slot />
     </div>
 </template>

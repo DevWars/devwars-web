@@ -7,6 +7,7 @@ import { names } from '../../utils/auth';
 
 export default {
     name: 'ModDashboard',
+
     meta: {
         auth: names.MODERATOR,
     },

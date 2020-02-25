@@ -27,9 +27,7 @@
                             class="reward"
                             :class="[activity.xp > 0 ? 'win' : 'lose']"
                         >
-                            <div class="xp">
-                                XP
-                            </div>
+                            <div class="xp">XP</div>
                             <span>{{ activity.xp | number }}</span>
                         </div>
                     </div>

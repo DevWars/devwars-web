@@ -9,9 +9,7 @@
                     Submit 5 Objectives
                 </Column>
             </div>
-            <Button class="outline sm">
-                Claim
-            </Button>
+            <Button class="outline sm">Claim</Button>
         </div>
 
         <div class="item">
@@ -23,9 +21,7 @@
                     Comment on a User Submission
                 </Column>
             </div>
-            <Button class="outline sm" disabled>
-                Claim
-            </Button>
+            <Button class="outline sm" disabled>Claim</Button>
         </div>
     </DashboardCard>
 </template>

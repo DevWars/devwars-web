@@ -1,11 +1,7 @@
 <template>
     <div class="DevwarsCard">
-        <h1 v-if="title" class="title">
-            {{ title }}
-        </h1>
-        <p v-if="desc" class="desc">
-            {{ desc }}
-        </p>
+        <h1 v-if="title" class="title">{{ title }}</h1>
+        <p v-if="desc" class="desc">{{ desc }}</p>
 
         <div class="main">
             <slot />

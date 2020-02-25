@@ -10,15 +10,9 @@
                 </nuxt-link>
             </div>
 
-            <Button to="/" class="link block" @click="toggleMobileMenu">
-                Home
-            </Button>
-            <Button to="/games" class="link block" @click="toggleMobileMenu">
-                Games
-            </Button>
-            <Button to="/schedule" class="link block" @click="toggleMobileMenu">
-                Schedule
-            </Button>
+            <Button to="/" class="link block" @click="toggleMobileMenu">Home</Button>
+            <Button to="/games" class="link block" @click="toggleMobileMenu">Games</Button>
+            <Button to="/schedule" class="link block" @click="toggleMobileMenu">Schedule</Button>
             <Button
                 to="/leaderboards"
                 class="link block"
@@ -27,12 +21,8 @@
                 Leaders
             </Button>
             <div v-if="!user" class="actions">
-                <Button to="/register" class="primary block">
-                    Register
-                </Button>
-                <Button to="/login" class="link block">
-                    Log In
-                </Button>
+                <Button to="/register" class="primary block">Register</Button>
+                <Button to="/login" class="link block">Log In</Button>
             </div>
 
             <Popup v-if="user" class="nav-link">
@@ -40,23 +30,13 @@
                     <User size="sm" :user="user" />
                 </template>
                 <template #menu>
-                    <Button v-if="isAdmin" to="/mod/dashboard" @click="close">
-                        Modpanel
-                    </Button>
+                    <Button v-if="isAdmin" to="/mod/dashboard" @click="close">Modpanel</Button>
                     <div v-if="isAdmin" class="menu-divider" />
-                    <Button to="/dashboard" @click="close">
-                        Dashboard
-                    </Button>
-                    <Button to="/badges" @click="close">
-                        Badges
-                    </Button>
-                    <Button to="/settings/profile" @click="close">
-                        Settings
-                    </Button>
+                    <Button to="/dashboard" @click="close">Dashboard</Button>
+                    <Button to="/badges" @click="close">Badges</Button>
+                    <Button to="/settings/profile" @click="close">Settings</Button>
                     <div class="menu-divider" />
-                    <Button @click="logout">
-                        Logout
-                    </Button>
+                    <Button @click="logout">Logout</Button>
                 </template>
             </Popup>
         </div>

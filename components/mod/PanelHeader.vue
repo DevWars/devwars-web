@@ -1,12 +1,8 @@
 <template>
     <div class="PanelHeader">
         <div class="main">
-            <h1 v-if="title" class="title">
-                {{ title }}
-            </h1>
-            <h2 v-if="subtitle" class="subtitle">
-                {{ subtitle }}
-            </h2>
+            <h1 v-if="title" class="title">{{ title }}</h1>
+            <h2 v-if="subtitle" class="subtitle">{{ subtitle }}</h2>
         </div>
         <div class="actions">
             <div v-if="showSearch" class="search">

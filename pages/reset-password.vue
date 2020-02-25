@@ -40,9 +40,7 @@
                     desc="Your password has successfully been updated."
                 >
                     <div slot="actions">
-                        <Button to="/login" class="outline block">
-                            Login
-                        </Button>
+                        <Button to="/login" class="outline block">Login</Button>
                     </div>
                 </DevwarsCard>
             </div>
@@ -56,10 +54,13 @@ import Input from '@/components/form/Input';
 
 export default {
     name: 'ResetPassword',
+
     components: { DevwarsCard, Input },
+
     asyncData({ params }) {
         return { token: params.token };
     },
+
     data: () => {
         return {
             done: false,
@@ -67,6 +68,7 @@ export default {
             confirmed: '',
         };
     },
+
     methods: {
         reset() {
             const { token } = this.$route.query;

@@ -1,43 +1,25 @@
 <template>
     <HomeCard v-if="latestSchedule" title="Next Showing">
         <div v-if="updateTimeInterval === null" class="now-showing">
-            <div class="next-showing__time">
-                Any Minute Now!
-            </div>
+            <div class="next-showing__time">Any Minute Now!</div>
         </div>
 
         <ul id="countdown" class="countdown">
             <li id="days" class="countdown__item">
-                <div class="countdown__number">
-                    {{ timeDifference.days }}
-                </div>
-                <div class="countdown__label">
-                    Days
-                </div>
+                <div class="countdown__number">{{ timeDifference.days }}</div>
+                <div class="countdown__label">Days</div>
             </li>
             <li id="hours" class="countdown__item">
-                <div class="countdown__number">
-                    {{ timeDifference.hours }}
-                </div>
-                <div class="countdown__label">
-                    Hours
-                </div>
+                <div class="countdown__number">{{ timeDifference.hours }}</div>
+                <div class="countdown__label">Hours</div>
             </li>
             <li id="minutes" class="countdown__item">
-                <div class="countdown__number">
-                    {{ timeDifference.minutes }}
-                </div>
-                <div class="countdown__label">
-                    Minutes
-                </div>
+                <div class="countdown__number">{{ timeDifference.minutes }}</div>
+                <div class="countdown__label">Minutes</div>
             </li>
             <li id="seconds" class="countdown__item">
-                <div class="countdown__number">
-                    {{ timeDifference.seconds }}
-                </div>
-                <div class="countdown__label">
-                    Seconds
-                </div>
+                <div class="countdown__number">{{ timeDifference.seconds }}</div>
+                <div class="countdown__label">Seconds</div>
             </li>
         </ul>
         <div class="next-showing">
@@ -81,7 +63,7 @@ export default {
             }
 
             return first(
-                sortBy(this.upcoming, (schedule) => schedule.startTime)
+                sortBy(this.upcoming, (schedule) => schedule.startTime),
             );
         },
     },

@@ -2,9 +2,7 @@
     <div class="Applications">
         <div v-if="game" class="controls">
             <h4>({{ applications.length }}) Applicants</h4>
-            <Button class="outline primary" @click="addRegistrant">
-                Add Registrant
-            </Button>
+            <Button class="outline primary" @click="addRegistrant">Add Registrant</Button>
         </div>
 
         <Table>
@@ -105,7 +103,7 @@ export default {
                 : `game/${this.game.id}?stats=true&profile=true`;
 
             const response = await this.$axios.get(
-                `/applications/${scheduleOrGame}`
+                `/applications/${scheduleOrGame}`,
             );
             const applications = response.data;
 

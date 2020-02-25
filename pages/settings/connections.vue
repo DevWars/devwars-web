@@ -18,6 +18,7 @@ import ConnectToTwitch from '../../components/user/ConnectToTwitch';
 
 export default {
     name: 'ConnectionsPage',
+
     components: { ConnectToDiscord, ConnectToTwitch },
 };
 </script>

@@ -1,6 +1,5 @@
 <template>
     <div class="Input" :class="{ label }">
-        <!-- eslint-disable-next-line -->
         <input
             :id="fieldId || labelName"
             ref="input"

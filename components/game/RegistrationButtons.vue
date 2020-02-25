@@ -8,9 +8,7 @@
             >
                 Register
             </Button>
-            <Button v-else class="outline danger" @click="cancel(schedule)">
-                Resign
-            </Button>
+            <Button v-else class="outline danger" @click="cancel(schedule)">Resign</Button>
         </ButtonGroup>
     </div>
 </template>

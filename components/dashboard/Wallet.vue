@@ -4,9 +4,7 @@
             <Devcoins :amount="stats.coins" />
 
             <div class="devcoins-wallet__actions">
-                <Button class="outline sm" disabled>
-                    Shop
-                </Button>
+                <Button class="outline sm" disabled>Shop</Button>
             </div>
         </div>
 

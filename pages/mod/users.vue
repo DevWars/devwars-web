@@ -6,9 +6,7 @@
                 label="Search Users"
                 @keyup.enter.native="performSearch"
             />
-            <Button :disabled="!searched" @click="clearSearch">
-                Clear
-            </Button>
+            <Button :disabled="!searched" @click="clearSearch">Clear</Button>
             <Button
                 :disabled="searching || search == null"
                 @click="performSearch"
@@ -36,9 +34,7 @@
                     <ConnectionsSmall :connections="user.connections" />
                 </td>
                 <td>
-                    <Button :to="`/dashboard/${user.id}`" class="link">
-                        View
-                    </Button>
+                    <Button :to="`/dashboard/${user.id}`" class="link">View</Button>
                 </td>
             </tr>
 
@@ -113,7 +109,7 @@ export default {
             if (this.search == null || this.search.trim() === '') return;
 
             const users = await Http.for('users/lookup').get(
-                `?username=${this.search}&full=true`
+                `?username=${this.search}&full=true`,
             );
 
             this.users = { data: users, pagination: {} };

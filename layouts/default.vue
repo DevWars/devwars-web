@@ -18,6 +18,7 @@ import Toasts from '@/components/toast/Toasts';
 
 export default {
     name: 'Default',
+
     components: {
         DevWarsHeader: Header,
         DevWarsFooter: () => import('@/components/layout/Footer'),

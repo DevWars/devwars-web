@@ -3,12 +3,9 @@
         <div class="hero">
             <div class="hero__inner">
                 <h1 class="hero__title">
-                    A live
-                    <strong>game show</strong> for developers
+                    A live <strong>game show</strong> for developers
                 </h1>
-                <h2 class="hero__subtitle">
-                    Every other Saturday @ 5:00 PM (UTC)
-                </h2>
+                <h2 class="hero__subtitle">Every other Saturday @ 5:00 PM (UTC)</h2>
 
                 <ButtonGroup>
                     <Button
@@ -29,15 +26,11 @@
 
         <div class="home-shows home-section">
             <Container>
-                <h2 class="home-section__title">
-                    Upcoming Shows
-                </h2>
+                <h2 class="home-section__title">Upcoming Shows</h2>
                 <ScheduleBlock :count="2" />
 
                 <div class="home-section__actions">
-                    <Button to="/schedule" class="outline white">
-                        View Full Schedule
-                    </Button>
+                    <Button to="/schedule" class="outline white">View Full Schedule</Button>
                 </div>
             </Container>
         </div>
@@ -54,12 +47,9 @@
             <Container>
                 <div class="home-display__content">
                     <h3 class="home-display__title">
-                        Think you
-                        <br />got what <br />it takes?
+                        Think you <br />got what <br />it takes?
                     </h3>
-                    <Button to="/competitor/register" class="outline lg">
-                        Become a competitor
-                    </Button>
+                    <Button to="/competitor/register" class="outline lg">Become a competitor</Button>
                 </div>
             </Container>
         </div>
@@ -74,21 +64,16 @@
             <Container>
                 <div class="home-display__content">
                     <h3 class="home-display__title">
-                        Get familiar
-                        <br />with DevWars <br />knowledge base.
+                        Get familiar <br />with DevWars <br />knowledge base.
                     </h3>
-                    <Button to="/docs" class="outline lg">
-                        View Documentation
-                    </Button>
+                    <Button to="/docs" class="outline lg">View Documentation</Button>
                 </div>
             </Container>
         </div>
 
         <div class="home-section">
             <Container>
-                <h2 class="home-section__title">
-                    Honorable Mentions
-                </h2>
+                <h2 class="home-section__title">Honorable Mentions</h2>
                 <p class="home-section__desc">
                     We are peaking the interests of well-known developers and
                     organizations
@@ -105,9 +90,7 @@
                                 Need something to watch on a Saturday? Watch 2
                                 teams of 3 battle it out in DevWars!
                             </p>
-                            <h6 class="quote-card__name">
-                                Scotch.io
-                            </h6>
+                            <h6 class="quote-card__name">Scotch.io</h6>
                             <a
                                 href="https://twitter.com/scotch_io/"
                                 class="quote-card__username"
@@ -129,9 +112,7 @@
                                 Have you guys seen @devwarstv ? Pretty novel
                                 stuff happening over there: devwars.tv
                             </p>
-                            <h6 class="quote-card__name">
-                                DevTips
-                            </h6>
+                            <h6 class="quote-card__name">DevTips</h6>
                             <a
                                 href="https://twitter.com/DevTipsShow/"
                                 class="quote-card__username"
@@ -148,9 +129,7 @@
 
         <div class="home-section">
             <Container>
-                <h2 class="home-section__title">
-                    Our Supporters
-                </h2>
+                <h2 class="home-section__title">Our Supporters</h2>
                 <p class="home-section__desc">
                     A list of our awesome partners, supporters and past
                     sponsors.
@@ -214,11 +193,13 @@ import ScheduleBlock from '@/components/game/ScheduleBlock';
 
 export default {
     name: 'Index',
+
     components: {
         Card,
         Highlights,
         ScheduleBlock,
     },
+
     async asyncData() {
         return {
             latest: await Http.for('games').get('latest'),

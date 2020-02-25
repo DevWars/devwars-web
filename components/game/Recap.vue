@@ -6,9 +6,7 @@
                     <div class="team-logo blue" />
                 </div>
                 <div class="score">
-                    <div class="gamemode">
-                        {{ game.mode }}
-                    </div>
+                    <div class="gamemode">{{ game.mode }}</div>
                     <div
                         v-for="team in game.teams"
                         :key="team.id"
@@ -36,28 +34,18 @@
                         v-for="player in getPlayersByGameTeam(game, team)"
                         :key="player.id"
                     >
-                        <nuxt-link :to="`/dashboard/${player.id}`">
-                            {{ player.username }}
-                        </nuxt-link>
+                        <nuxt-link :to="`/dashboard/${player.id}`">{{ player.username }}</nuxt-link>
                     </li>
                 </ul>
                 <ul class="pos">
-                    <li class="html">
-                        HTML
-                    </li>
-                    <li class="css">
-                        CSS
-                    </li>
-                    <li class="js">
-                        JS
-                    </li>
+                    <li class="html">HTML</li>
+                    <li class="css">CSS</li>
+                    <li class="js">JS</li>
                 </ul>
             </div>
 
             <ButtonGroup>
-                <Button to="/games" class="outline primary">
-                    View Full Game
-                </Button>
+                <Button to="/games" class="outline primary">View Full Game</Button>
             </ButtonGroup>
         </HomeCard>
         <HomeCard v-else title="Last Game Recap">

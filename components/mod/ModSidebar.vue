@@ -9,8 +9,7 @@
             </li>
             <li>
                 <nuxt-link to="/mod/users">
-                    <i class="fa fa-user" />
-                    Users
+                    <i class="fa fa-user" />Users
                 </nuxt-link>
             </li>
             <li>

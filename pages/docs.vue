@@ -2,9 +2,7 @@
     <Container class="docs">
         <Column :sm="3" class="sidebar">
             <div class="nav">
-                <ButtonIcon href="#devwars" icon="fa fa-home" class="link">
-                    DevWars
-                </ButtonIcon>
+                <ButtonIcon href="#devwars" icon="fa fa-home" class="link">DevWars</ButtonIcon>
                 <ul>
                     <li>
                         <a href="#about">About</a>
@@ -29,9 +27,7 @@
                     </li>
                 </ul>
 
-                <ButtonIcon href="#watching" icon="fa fa-eye" class="link">
-                    Watching
-                </ButtonIcon>
+                <ButtonIcon href="#watching" icon="fa fa-eye" class="link">Watching</ButtonIcon>
                 <ul>
                     <li>
                         <a href="#tools">Tools</a>
@@ -44,9 +40,7 @@
                     </li>
                 </ul>
 
-                <ButtonIcon href="#competing" icon="fa fa-gamepad" class="link">
-                    Competing
-                </ButtonIcon>
+                <ButtonIcon href="#competing" icon="fa fa-gamepad" class="link">Competing</ButtonIcon>
                 <ul>
                     <li>
                         <a href="#requirements">Requirements</a>
@@ -56,9 +50,7 @@
                     </li>
                 </ul>
 
-                <ButtonIcon href="#earning" icon="fa fa-trophy" class="link">
-                    Earning
-                </ButtonIcon>
+                <ButtonIcon href="#earning" icon="fa fa-trophy" class="link">Earning</ButtonIcon>
                 <ul>
                     <li>
                         <a href="#xp" class="disabled">XP</a>
@@ -122,9 +114,7 @@
                                 </div>
                             </div>
                             <h5>HTML</h5>
-                            <div class="role">
-                                Templating
-                            </div>
+                            <div class="role">Templating</div>
                         </Column>
                         <Column :sm="4" class="css">
                             <div class="circle">
@@ -136,9 +126,7 @@
                                 </div>
                             </div>
                             <h5>CSS</h5>
-                            <div class="role">
-                                Styling
-                            </div>
+                            <div class="role">Styling</div>
                         </Column>
                         <Column :sm="4" class="js">
                             <div class="circle">
@@ -150,9 +138,7 @@
                                 </div>
                             </div>
                             <h5>JAVASCRIPT</h5>
-                            <div class="role">
-                                Functionality
-                            </div>
+                            <div class="role">Functionality</div>
                         </Column>
                     </Row>
                     <p>
@@ -171,18 +157,10 @@
 
                     <section>
                         <h3>Classic</h3>
-                        <Tag class="outline sm">
-                            3 VS 3
-                        </Tag>
-                        <Tag class="outline html sm">
-                            HTML
-                        </Tag>
-                        <Tag class="outline css sm">
-                            CSS
-                        </Tag>
-                        <Tag class="outline js sm">
-                            JAVASCRIPT
-                        </Tag>
+                        <Tag class="outline sm">3 VS 3</Tag>
+                        <Tag class="outline html sm">HTML</Tag>
+                        <Tag class="outline css sm">CSS</Tag>
+                        <Tag class="outline js sm">JAVASCRIPT</Tag>
                         <p>Time: 60:00</p>
                         <p>
                             This action-packed game mode is the only one that
@@ -194,12 +172,8 @@
 
                     <section>
                         <h3>Zen Garden</h3>
-                        <Tag class="outline sm">
-                            1 VS 1
-                        </Tag>
-                        <Tag class="outline css sm">
-                            CSS
-                        </Tag>
+                        <Tag class="outline sm">1 VS 1</Tag>
+                        <Tag class="outline css sm">CSS</Tag>
                         <p>Time: 60:00</p>
                         <p>
                             This 1 vs 1 game mode provides both teams the same
@@ -211,12 +185,8 @@
 
                     <section class="coming-soon">
                         <h3>Coffee Run</h3>
-                        <Tag class="outline sm">
-                            1 VS 1
-                        </Tag>
-                        <Tag class="outline js sm">
-                            JAVASCRIPT
-                        </Tag>
+                        <Tag class="outline sm">1 VS 1</Tag>
+                        <Tag class="outline js sm">JAVASCRIPT</Tag>
                         <p>Coming soon!</p>
                     </section>
                 </section>
@@ -723,17 +693,14 @@
                             game. Contestants must be able to read, write and
                             speak English.
                         </p>
-                        <div class="disclaimer">
-                            Communication is not required on Zen Garden games.
-                        </div>
+                        <div class="disclaimer">Communication is not required on Zen Garden games.</div>
 
                         <p>
                             All voice communications are hosting on our
                             <a
                                 href="https://www.discord.gg/devwars"
                                 target="_blank"
-                                >Official Discord </a
-                            >.
+                            >Official Discord </a>.
                         </p>
                     </section>
                 </section>
@@ -801,9 +768,9 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="keybinding"
-                                            >Ctrl+Space</span
-                                        >
+                                        <span
+                                            class="keybinding"
+                                        >Ctrl+Space</span>
                                     </td>
                                     <td>Trigger auto complete</td>
                                 </tr>
@@ -914,8 +881,7 @@
                                         <strong>Competing</strong>
                                     </td>
                                     <td>
-                                        <a href="#competing">Compete</a> in a
-                                        DevWars game
+                                        <a href="#competing">Compete</a> in a DevWars game
                                     </td>
                                     <td>
                                         <span class="keybinding">Variable</span>
@@ -936,8 +902,11 @@ import Tag from '@/components/Tag';
 
 export default {
     name: 'Docs',
+
     components: { Devcoins, Tag },
+
     layout: 'header',
+
     mounted() {
         if (!this.$route.hash) {
             return;
@@ -953,10 +922,10 @@ export default {
 
         scrollable.addEventListener('scroll', () => {
             const sections = Array.prototype.slice.apply(
-                document.querySelectorAll('section')
+                document.querySelectorAll('section'),
             );
             const links = Array.prototype.slice.apply(
-                document.querySelectorAll('.nav__link')
+                document.querySelectorAll('.nav__link'),
             );
 
             links.forEach((it) => it.classList.remove('active'));
@@ -977,7 +946,7 @@ export default {
                 })[0];
 
             const link = document.querySelector(
-                `.nav__link[href='#${active.id}']`
+                `.nav__link[href='#${active.id}']`,
             );
 
             if (link) {

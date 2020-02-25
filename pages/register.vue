@@ -28,12 +28,8 @@
                     />
 
                     <div slot="actions">
-                        <Button type="submit" class="outline block">
-                            Register
-                        </Button>
-                        <Button href="/login" class="link muted">
-                            Already have an account?
-                        </Button>
+                        <Button type="submit" class="outline block">Register</Button>
+                        <Button href="/login" class="link muted">Already have an account?</Button>
                     </div>
                 </DevwarsCard>
             </form>
@@ -47,11 +43,15 @@ import Input from '@/components/form/Input';
 
 export default {
     name: 'Register',
+
     components: { DevwarsCard, Input },
+
     layout: 'header',
+
     meta: {
         noAuth: true,
     },
+
     data: () => {
         return {
             username: '',
@@ -59,6 +59,7 @@ export default {
             password: '',
         };
     },
+
     methods: {
         async submit() {
             await this.$store.dispatch('user/register', {

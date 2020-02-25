@@ -112,7 +112,7 @@ export default class Http {
         return this.urlFromParts(
             this.subsUrl(),
             this.resource() || this.staticResource,
-            rest
+            rest,
         );
     }
 }

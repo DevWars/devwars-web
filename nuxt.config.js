@@ -151,7 +151,7 @@ export default {
             }
 
             config.resolve.alias['utils.scss$'] = path.resolve(
-                'assets/styles/utils.scss'
+                'assets/styles/utils.scss',
             );
         },
     },

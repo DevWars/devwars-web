@@ -9,15 +9,10 @@
             <div class="team team-blue" :class="{ win: analysis.blue.win }">
                 <div class="meta">
                     <div class="placeholder" />
-                    <div class="percent">
-                        {{ analysis.blue.percent }}
-                    </div>
+                    <div class="percent">{{ analysis.blue.percent }}</div>
                 </div>
                 <div class="progress">
-                    <div
-                        class="bar"
-                        :style="{ width: analysis.blue.percent }"
-                    />
+                    <div class="bar" :style="{ width: analysis.blue.percent }" />
                 </div>
             </div>
             <div class="team team-red" :class="{ win: analysis.red.win }">
@@ -26,9 +21,7 @@
                 </div>
                 <div class="meta">
                     <div class="placeholder" />
-                    <div class="percent">
-                        {{ analysis.red.percent }}
-                    </div>
+                    <div class="percent">{{ analysis.red.percent }}</div>
                 </div>
             </div>
         </div>
@@ -44,7 +37,9 @@ import SubScore from '@/components/game/SubScore';
 
 export default {
     name: 'VoteBox',
+
     components: { SubScore },
+
     props: {
         game: {
             type: Object,
@@ -59,17 +54,18 @@ export default {
             default: false,
         },
     },
+
     computed: {
         analysis() {
             const analysis = {};
 
             analysis.blue = this.analysisForTeam(
                 this.team('blue'),
-                this.team('red')
+                this.team('red'),
             );
             analysis.red = this.analysisForTeam(
                 this.team('red'),
-                this.team('blue')
+                this.team('blue'),
             );
 
             return analysis;
@@ -91,6 +87,7 @@ export default {
             return totalScore;
         },
     },
+
     methods: {
         team(team) {
             if (isNil(this.game.teams)) {

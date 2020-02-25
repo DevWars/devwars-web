@@ -24,9 +24,7 @@
                                 }"
                                 @click="toggleObjectiveState(0, objective)"
                             />
-                            <span class="objectives__obj">{{
-                                objective.description
-                            }}</span>
+                            <span class="objectives__obj">{{ objective.description }}</span>
                             <div
                                 class="objectives__square team-red"
                                 :class="{
@@ -197,7 +195,7 @@ export default {
             this.game.teams[team].votes[type] = _.defaultTo(Number(score), 0);
             this.game.meta.teamScores[team][type] = _.defaultTo(
                 Number(score),
-                0
+                0,
             );
         },
 

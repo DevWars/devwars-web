@@ -6,18 +6,10 @@
             <Container>
                 <Row>
                     <Tabs>
-                        <nuxt-link to="profile">
-                            Profile
-                        </nuxt-link>
-                        <nuxt-link to="account">
-                            Account
-                        </nuxt-link>
-                        <nuxt-link to="connections">
-                            Connections
-                        </nuxt-link>
-                        <nuxt-link to="notifications">
-                            Notifications
-                        </nuxt-link>
+                        <nuxt-link to="profile">Profile</nuxt-link>
+                        <nuxt-link to="account">Account</nuxt-link>
+                        <nuxt-link to="connections">Connections</nuxt-link>
+                        <nuxt-link to="notifications">Notifications</nuxt-link>
                     </Tabs>
 
                     <Card class="plain dark">

@@ -59,18 +59,23 @@ import nameFromStatus from '@/utils/gameStatus';
 
 export default {
     name: 'ModSchedules',
+
     meta: {
         auth: names.MODERATOR,
     },
+
     components: { PanelHeader, ListingFilters, Table },
+
     async fetch({ store }) {
         await store.dispatch('game/schedules');
     },
+
     computed: {
         schedules() {
             return this.$store.state.game.schedules;
         },
     },
+
     methods: {
         nameFromStatus,
         async createSchedule() {

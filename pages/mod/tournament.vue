@@ -10,16 +10,12 @@
                     &nbsp;&nbsp;/&nbsp;&nbsp;
                     {{ tournament.name }}
                     &nbsp;&nbsp;/&nbsp;&nbsp;
-                    <span class="mod-status preparing">{{
-                        tournament.active ? 'Active' : 'Preparing'
-                    }}</span>
+                    <span class="mod-status preparing">{{ tournament.active ? 'Active' : 'Preparing' }}</span>
                 </h2>
             </div>
 
             <ButtonGroup>
-                <Button href="/mod/tournaments" class="outline muted">
-                    Back
-                </Button>
+                <Button href="/mod/tournaments" class="outline muted">Back</Button>
                 <Button
                     v-if="tournament.active && !tournament.done"
                     class="danger"
@@ -34,21 +30,13 @@
                 >
                     Activate
                 </Button>
-                <Button class="primary" :async-click="save">
-                    Save
-                </Button>
-                <Button class="danger" :async-click="remove">
-                    Delete
-                </Button>
+                <Button class="primary" :async-click="save">Save</Button>
+                <Button class="danger" :async-click="remove">Delete</Button>
             </ButtonGroup>
         </div>
 
         <Tabs>
-            <nuxt-link
-                :to="'/mod/tournament/details?tournament=' + tournament.id"
-            >
-                Details
-            </nuxt-link>
+            <nuxt-link :to="'/mod/tournament/details?tournament=' + tournament.id">Details</nuxt-link>
         </Tabs>
 
         <nuxt />
@@ -105,7 +93,7 @@ export default {
 
             // Save the objectives
             await Http.for(`/game/${this.tournament.id}/objective`).save(
-                transformed
+                transformed,
             );
 
             // Go ahead and save each team
@@ -142,7 +130,7 @@ export default {
             } catch (e) {
                 this.$store.dispatch(
                     'toast/error',
-                    'Tournament could not be deleted.'
+                    'Tournament could not be deleted.',
                 );
             }
         },

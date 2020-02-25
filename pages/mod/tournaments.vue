@@ -1,9 +1,7 @@
 <template>
     <div>
         <PanelHeader title="Tournament">
-            <ButtonIcon icon="fa fa-plus" class="primary sm">
-                Add Tournament
-            </ButtonIcon>
+            <ButtonIcon icon="fa fa-plus" class="primary sm">Add Tournament</ButtonIcon>
         </PanelHeader>
 
         <ListingFilters />
@@ -17,17 +15,13 @@
             </tr>
 
             <tr>
-                <td data-type="Date">
-                    11/04/2018
-                </td>
+                <td data-type="Date">11/04/2018</td>
                 <td>
                     <strong class="mod-status preparing">PREPARING</strong>
                 </td>
                 <td>DigitalOcean Tournament</td>
                 <td>
-                    <Button class="link">
-                        Edit
-                    </Button>
+                    <Button class="link">Edit</Button>
                 </td>
             </tr>
         </Table>
@@ -45,9 +39,11 @@ import Pagination from '@/components/Pagination';
 
 export default {
     name: 'ModTournaments',
+
     meta: {
         auth: names.MODERATOR,
     },
+
     components: { PanelHeader, ListingFilters, Table, Pagination },
 };
 </script>

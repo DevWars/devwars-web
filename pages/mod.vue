@@ -13,7 +13,9 @@ import ModSidebar from '@/components/mod/ModSidebar';
 
 export default {
     name: 'Mod',
+
     layout: 'header',
+
     components: { ModSidebar },
 };
 </script>

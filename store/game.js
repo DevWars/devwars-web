@@ -31,7 +31,7 @@ export const mutations = {
     },
     forfeit(state, game) {
         state.applications = state.applications.filter(
-            (t) => t.schedule.id !== game.id
+            (t) => t.schedule.id !== game.id,
         );
     },
 
@@ -153,7 +153,7 @@ export const actions = {
     async apply({ commit, dispatch }, schedule) {
         try {
             const app = await this.$axios.post(
-                `applications/schedule/${schedule.id}`
+                `applications/schedule/${schedule.id}`,
             );
             commit('apply', app.data);
 

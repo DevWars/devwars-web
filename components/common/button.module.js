@@ -26,7 +26,7 @@ export default {
                         href: this.$attrs.href,
                     },
                 },
-                this.$slots.default
+                this.$slots.default,
             );
         }
 
@@ -43,7 +43,7 @@ export default {
                     type: 'button',
                 },
             },
-            this.$slots.default
+            this.$slots.default,
         );
     },
 };

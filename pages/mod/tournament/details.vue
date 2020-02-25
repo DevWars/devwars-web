@@ -24,36 +24,45 @@ import Input from '@/components/form/Input';
 
 export default {
     name: 'DashboardTournamentDetails',
+
     meta: {
         auth: names.MODERATOR,
     },
+
     components: { Card, Input },
+
     data: () => ({
         date: '',
         time: '',
     }),
+
     computed: {
         tournament() {
             return this.$store.state.tournament.tournament;
         },
     },
+
     watch: {
         date() {
             this.timestampChanged();
         },
+
         time() {
             this.timestampChanged();
         },
+
         tournament() {
             this.tournamentChanged();
         },
     },
+
     mounted() {
         this.tournamentChanged();
 
         this.date = moment.utc(this.tournament.timestamp).format('DD/MM/YYYY');
         this.time = moment.utc(this.tournament.timestamp).format('HH:mm');
     },
+
     methods: {
         timestampChanged() {
             const timestamp =
@@ -63,12 +72,13 @@ export default {
 
             this.tournament.timestamp = timestamp;
         },
+
         tournamentChanged() {
             const list = [];
 
             for (let i = 0; i < 5; i += 1) {
                 let item = this.tournament.objectives.find(
-                    (it) => it.number === i
+                    (it) => it.number === i,
                 );
 
                 if (!item) {

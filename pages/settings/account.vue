@@ -44,8 +44,7 @@
                 v-model="currentPassword"
                 type="password"
                 input-id="current-password"
-                label="Current
-      Password"
+                label="Current Password"
                 class="group"
                 required
             />
@@ -89,7 +88,9 @@ import Input from '@/components/form/Input';
 
 export default {
     name: 'Accounts',
+
     components: { Input },
+
     data: () => {
         return {
             currentPassword: '',
@@ -99,11 +100,13 @@ export default {
             newEmail: '',
         };
     },
+
     computed: {
         user() {
             return this.$store.state.user.user;
         },
     },
+
     methods: {
         /**
          * Triggers a change email dispatch, with the new email and the currenet users password. If the

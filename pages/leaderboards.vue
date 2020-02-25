@@ -5,40 +5,24 @@
         <Container class="footer-offset">
             <Table>
                 <tr slot="head">
-                    <th width="10%">
-                        Rank
-                    </th>
-                    <th width="30%">
-                        Username
-                    </th>
-                    <th width="15%">
-                        Level
-                    </th>
-                    <th width="15%">
-                        Won
-                    </th>
-                    <th width="15%">
-                        Coins
-                    </th>
-                    <th width="15%">
-                        XP
-                    </th>
+                    <th width="10%">Rank</th>
+                    <th width="30%">Username</th>
+                    <th width="15%">Level</th>
+                    <th width="15%">Won</th>
+                    <th width="15%">Coins</th>
+                    <th width="15%">XP</th>
                 </tr>
 
                 <tr
                     v-for="(user, index) in leaderboards.data"
                     :key="user.userId"
                 >
-                    <td scope="row" class="rank">
-                        {{ page * 10 + index + 1 }}
-                    </td>
+                    <td scope="row" class="rank">{{ page * 10 + index + 1 }}</td>
                     <td><User :user="user" size="sm" /></td>
                     <td>{{ user.level }}</td>
                     <td>{{ user.wins }}</td>
                     <td>{{ user.coins }}</td>
-                    <td>
-                        {{ user.xp }}
-                    </td>
+                    <td>{{ user.xp }}</td>
                 </tr>
             </Table>
 
@@ -92,7 +76,7 @@ export default {
             const { pagination } = this.leaderboards;
             const before = pagination.before.split('users/leaderboards')[1];
             this.leaderboards = await Http.for(
-                `users/leaderboards${before}`
+                `users/leaderboards${before}`,
             ).get();
         },
 
@@ -102,7 +86,7 @@ export default {
             const { pagination } = this.leaderboards;
             const after = pagination.after.split('users/leaderboards')[1];
             this.leaderboards = await Http.for(
-                `users/leaderboards${after}`
+                `users/leaderboards${after}`,
             ).get();
         },
     },

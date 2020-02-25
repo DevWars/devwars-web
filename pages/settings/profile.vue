@@ -9,9 +9,7 @@
                             v-model="firstName"
                             label="First Name"
                             class="group"
-                            @input="
-                                updateForm({ values: $event, key: 'firstName' })
-                            "
+                            @input="updateForm({ values: $event, key: 'firstName' })"
                         />
                     </Column>
                     <Column :md="6">
@@ -19,9 +17,7 @@
                             v-model="lastName"
                             label="Last Name"
                             class="group"
-                            @input="
-                                updateForm({ values: $event, key: 'lastName' })
-                            "
+                            @input="updateForm({ values: $event, key: 'lastName' })"
                         />
                     </Column>
                 </Row>
@@ -54,9 +50,7 @@
                             v-model="state"
                             label="State"
                             class="group"
-                            @input="
-                                updateForm({ values: $event, key: 'state' })
-                            "
+                            @input="updateForm({ values: $event, key: 'state' })"
                         />
                     </Column>
                     <Column :md="2">
@@ -72,13 +66,9 @@
                             v-model="country"
                             label="Select Country"
                             class="group"
-                            @input="
-                                updateForm({ values: $event, key: 'country' })
-                            "
+                            @input="updateForm({ values: $event, key: 'country' })"
                         >
-                            <option v-for="country in countries" :key="country">
-                                {{ country }}
-                            </option>
+                            <option v-for="country in countries" :key="country">{{ country }}</option>
                         </Select>
                     </Column>
                 </Row>
@@ -168,9 +158,7 @@
             </Column>
         </Row>
 
-        <Button type="submit" class="primary">
-            Save
-        </Button>
+        <Button type="submit" class="primary">Save</Button>
     </form>
 </template>
 
@@ -203,7 +191,7 @@ export default {
     data: () => {
         return {
             countries: Object.keys(getNameList()).map(
-                (it) => it[0].toUpperCase() + it.slice(1)
+                (it) => it[0].toUpperCase() + it.slice(1),
             ),
             sexes: ['Male', 'Female', 'Other'],
         };

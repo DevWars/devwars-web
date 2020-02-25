@@ -42,9 +42,7 @@
                     DELETE
                 </Button>
             </div>
-            <Button class="outline" @click="objectiveAdd">
-                Add Objective
-            </Button>
+            <Button class="outline" @click="objectiveAdd">Add Objective</Button>
         </div>
     </Card>
 </template>
@@ -79,7 +77,7 @@ export default {
         schedule() {
             const schedules = this.$store.state.game.schedules;
             return schedules.find(
-                (schedule) => schedule.id === Number(this.$route.query.schedule)
+                (schedule) => schedule.id === Number(this.$route.query.schedule),
             );
         },
 

@@ -19,9 +19,7 @@
                         covering everything you need to know.
                     </p>
 
-                    <Button to="/docs" class="primary">
-                        View Documentation
-                    </Button>
+                    <Button to="/docs" class="primary">View Documentation</Button>
                     <p>
                         Have any questions?
                         <a href="/contact">Contact Us</a>
@@ -38,6 +36,7 @@ import PageBanner from '@/components/layout/PageBanner';
 
 export default {
     name: 'GameConfirmation',
+
     components: { Card, PageBanner },
 };
 </script>

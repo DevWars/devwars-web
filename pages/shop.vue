@@ -5,18 +5,10 @@
 
             <div slot="nav">
                 <div class="shop-nav">
-                    <div class="shop-nav__link active">
-                        All
-                    </div>
-                    <div class="shop-nav__link">
-                        Consumable
-                    </div>
-                    <div class="shop-nav__link">
-                        Wearable
-                    </div>
-                    <div class="shop-nav__link">
-                        Cosmetic
-                    </div>
+                    <div class="shop-nav__link active">All</div>
+                    <div class="shop-nav__link">Consumable</div>
+                    <div class="shop-nav__link">Wearable</div>
+                    <div class="shop-nav__link">Cosmetic</div>
                 </div>
             </div>
 
@@ -41,12 +33,9 @@
                             </div>
                             <div class="shop-card__main">
                                 <span class="shop-card__type">Consumable</span>
-                                <h2 class="shop-card__name">
-                                    Quiz Call
-                                </h2>
+                                <h2 class="shop-card__name">Quiz Call</h2>
                                 <p class="shop-card__desc">
-                                    Activate a quiz round during a live game
-                                    show.
+                                    Activate a quiz round during a live game show.
                                 </p>
                             </div>
                             <Devcoins :amount="232" class="sm" />
@@ -59,12 +48,8 @@
                             </div>
                             <div class="shop-card__main">
                                 <span class="shop-card__type">Wearable</span>
-                                <h2 class="shop-card__name">
-                                    Crown of Prosperity
-                                </h2>
-                                <p class="shop-card__desc">
-                                    +5 DevBit Earnings
-                                </p>
+                                <h2 class="shop-card__name">Crown of Prosperity</h2>
+                                <p class="shop-card__desc">+5 DevBit Earnings</p>
                             </div>
                             <Devcoins :amount="232" class="sm" />
                         </div>
@@ -76,12 +61,8 @@
                             </div>
                             <div class="shop-card__main">
                                 <span class="shop-card__type">Cosmetic</span>
-                                <h2 class="shop-card__name">
-                                    Upload Avatar
-                                </h2>
-                                <p class="shop-card__desc">
-                                    Allows upload of a custom avatar.
-                                </p>
+                                <h2 class="shop-card__name">Upload Avatar</h2>
+                                <p class="shop-card__desc">Allows upload of a custom avatar.</p>
                             </div>
                             <Devcoins :amount="232" class="sm" />
                         </div>
@@ -93,12 +74,9 @@
                             </div>
                             <div class="shop-card__main">
                                 <span class="shop-card__type">Consumable</span>
-                                <h2 class="shop-card__name">
-                                    Safety Shield
-                                </h2>
+                                <h2 class="shop-card__name">Safety Shield</h2>
                                 <p class="shop-card__desc">
-                                    Protects 5%-30% of your gambled assets on
-                                    your next bet.
+                                    Protects 5%-30% of your gambled assets on your next bet.
                                 </p>
                             </div>
                             <Devcoins :amount="232" class="sm" />
@@ -111,12 +89,8 @@
                             </div>
                             <div class="shop-card__main">
                                 <span class="shop-card__type">Consumable</span>
-                                <h2 class="shop-card__name">
-                                    Name Tag
-                                </h2>
-                                <p class="shop-card__desc">
-                                    Allows for 1 username change.
-                                </p>
+                                <h2 class="shop-card__name">Name Tag</h2>
+                                <p class="shop-card__desc">Allows for 1 username change.</p>
                             </div>
                             <Devcoins :amount="232" class="sm" />
                         </div>
@@ -128,12 +102,9 @@
                             </div>
                             <div class="shop-card__main">
                                 <span class="shop-card__type">Consumable</span>
-                                <h2 class="shop-card__name">
-                                    Jukebox
-                                </h2>
+                                <h2 class="shop-card__name">Jukebox</h2>
                                 <p class="shop-card__desc">
-                                    Place a song request to play on the live
-                                    stream.
+                                    Place a song request to play on the live stream.
                                 </p>
                             </div>
                             <Devcoins :amount="232" class="sm" />
@@ -146,12 +117,9 @@
                             </div>
                             <div class="shop-card__main">
                                 <span class="shop-card__type">Consumable</span>
-                                <h2 class="shop-card__name">
-                                    Lottery Ticket
-                                </h2>
+                                <h2 class="shop-card__name">Lottery Ticket</h2>
                                 <p class="shop-card__desc">
-                                    Enter for a chance to win the weekly DevWars
-                                    Jackpot.
+                                    Enter for a chance to win the weekly DevWars Jackpot.
                                 </p>
                             </div>
                             <Devcoins :amount="232" class="sm" />

@@ -11,7 +11,7 @@ export function getScoreByGameTeam(game, team) {
 
 export function getPlayersByGameTeam(game, team) {
     return Object.values(game.players).filter(
-        (player) => player.team === team.id
+        (player) => player.team === team.id,
     );
 }
 

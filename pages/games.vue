@@ -74,7 +74,7 @@ export default {
 
                 if (!this.$route.query.game) {
                     this.viewing = await Http.for('games').get(
-                        `${this.games[0].id}?players=${this.includePlayers}`
+                        `${this.games[0].id}?players=${this.includePlayers}`,
                     );
                 }
             },
@@ -85,7 +85,7 @@ export default {
             async handler(newGame) {
                 if (newGame) {
                     this.viewing = await Http.for('games').get(
-                        `${newGame}?players=${this.includePlayers}`
+                        `${newGame}?players=${this.includePlayers}`,
                     );
                 }
             },

@@ -1,9 +1,7 @@
 <template>
     <HomeCard title="Live Now">
         <div slot="heading" class="live-now">
-            <h2 class="live-now__title">
-                Live Now
-            </h2>
+            <h2 class="live-now__title">Live Now</h2>
         </div>
 
         <div class="now-showing">

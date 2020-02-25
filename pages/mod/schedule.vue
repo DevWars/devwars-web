@@ -2,9 +2,7 @@
     <div>
         <PanelHeader :title="startDate" :subtitle="`@ ${startTime} UTC`">
             <ButtonGroup>
-                <Button to="/mod/schedules" class="outline muted">
-                    Back
-                </Button>
+                <Button to="/mod/schedules" class="outline muted">Back</Button>
                 <Button
                     v-if="viewingSetupPage"
                     class="primary"
@@ -37,14 +35,8 @@
         </PanelHeader>
 
         <Tabs>
-            <nuxt-link :to="`/mod/schedule/setup?schedule=${schedule.id}`">
-                Setup
-            </nuxt-link>
-            <nuxt-link
-                :to="`/mod/schedule/applications?schedule=${schedule.id}`"
-            >
-                Applications
-            </nuxt-link>
+            <nuxt-link :to="`/mod/schedule/setup?schedule=${schedule.id}`">Setup</nuxt-link>
+            <nuxt-link :to="`/mod/schedule/applications?schedule=${schedule.id}`">Applications</nuxt-link>
         </Tabs>
 
         <nuxt />
@@ -74,7 +66,7 @@ export default {
         schedule() {
             const schedules = this.$store.state.game.schedules;
             return schedules.find(
-                (schedule) => schedule.id === Number(this.$route.query.schedule)
+                (schedule) => schedule.id === Number(this.$route.query.schedule),
             );
         },
 
@@ -100,7 +92,7 @@ export default {
         async save() {
             await this.$axios.patch(
                 `/schedules/${this.schedule.id}`,
-                this.schedule
+                this.schedule,
             );
         },
 
@@ -109,7 +101,7 @@ export default {
             schedule.season = 3;
             await this.$axios.post(
                 `/schedules/${this.schedule.id}/activate`,
-                schedule
+                schedule,
             );
         },
 

@@ -12,9 +12,7 @@
                         <u>check your spam folder</u>.
                     </p>
                     <div>
-                        <Button class="outline muted" @click="resend">
-                            Resend Email
-                        </Button>
+                        <Button class="outline muted" @click="resend">Resend Email</Button>
                     </div>
                 </Card>
             </Container>
@@ -43,7 +41,7 @@ export default {
             await Http.for('auth/reverify').save();
             return this.$store.dispatch(
                 'toast/success',
-                'We have sent off another email, please wait patiently.'
+                'We have sent off another email, please wait patiently.',
             );
         },
     },

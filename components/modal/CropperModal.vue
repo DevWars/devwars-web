@@ -5,9 +5,7 @@
         </div>
 
         <ButtonGroup class="modal__actions">
-            <Button class="primary" @click="submit">
-                Crop Image
-            </Button>
+            <Button class="primary" @click="submit">Crop Image</Button>
         </ButtonGroup>
     </div>
 </template>

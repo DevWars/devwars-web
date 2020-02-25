@@ -3,14 +3,10 @@
         <div class="dashboard-badges">
             <div class="overview">
                 <i class="icon fa fa-shield" />
-                <p class="total">
-                    {{ owned.length }}
-                </p>
+                <p class="total">{{ owned.length }}</p>
             </div>
 
-            <Button to="/badges" class="outline sm">
-                View Badges
-            </Button>
+            <Button to="/badges" class="outline sm">View Badges</Button>
 
             <Progress
                 title="Badges"

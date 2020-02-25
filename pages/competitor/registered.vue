@@ -8,12 +8,8 @@
                     <h3>You are already registered as a Competitor</h3>
                     <p>Want to compete in an upcoming game?</p>
                     <ButtonGroup class="mt-30">
-                        <Button href="/schedule" class="primary">
-                            View schedule
-                        </Button>
-                        <Button href="/" class="outline">
-                            Back to home
-                        </Button>
+                        <Button href="/schedule" class="primary">View schedule</Button>
+                        <Button href="/" class="outline">Back to home</Button>
                     </ButtonGroup>
                 </Card>
             </Container>

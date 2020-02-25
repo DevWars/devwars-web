@@ -2,9 +2,7 @@
     <div>
         <PageBanner title="Schedule">
             <Select v-model="filter" class="clear">
-                <option value selected="selected">
-                    Filter by
-                </option>
+                <option value selected="selected">Filter by</option>
                 <option>Classic</option>
                 <option>Zen Garden</option>
                 <option>Blitz</option>

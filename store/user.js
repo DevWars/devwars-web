@@ -30,7 +30,7 @@ export const getters = {
         }
 
         const discordAccount = linkedAccounts.find(
-            (account) => account.provider === 'discord'
+            (account) => account.provider === 'discord',
         );
         if (!discordAccount) {
             return false;
@@ -75,7 +75,7 @@ export const mutations = {
 
     removeLinkedAccount(state, provider) {
         state.linkedAccounts = state.linkedAccounts.filter(
-            (it) => it.provider !== provider
+            (it) => it.provider !== provider,
         );
     },
 
@@ -117,7 +117,7 @@ export const actions = {
     async profile({ commit, state, dispatch }) {
         try {
             const profile = await Http.for(
-                `/users/${state.user.id}/profile`
+                `/users/${state.user.id}/profile`,
             ).get();
             commit('profile', profile);
         } catch (e) {
@@ -192,7 +192,7 @@ export const actions = {
         try {
             const profile = await this.$axios.patch(
                 `users/${state.user.id}/profile`,
-                state.profile
+                state.profile,
             );
             commit('profile', profile.data);
         } catch (e) {
@@ -239,7 +239,7 @@ export const actions = {
     async getEmailPermissions({ dispatch, commit, state }) {
         try {
             const userPermission = await Http.for(
-                `/users/${state.user.id}/emails`
+                `/users/${state.user.id}/emails`,
             ).get('permissions');
 
             commit('emailPermissions', userPermission);
@@ -257,7 +257,7 @@ export const actions = {
 
             const response = await this.$axios.patch(
                 `users/${state.user.id}/emails/permissions`,
-                permissions
+                permissions,
             );
             commit('emailPermissions', response.data);
             dispatch('toast/success', "We've updated your email permissions!", {
@@ -280,7 +280,7 @@ export const actions = {
             dispatch(
                 'toast/success',
                 'Check your email for a guide to reset your password.',
-                { root: true }
+                { root: true },
             );
 
             return true;
@@ -299,7 +299,7 @@ export const actions = {
             "We've updated your password, give it a go!",
             {
                 root: true,
-            }
+            },
         );
     },
 
@@ -319,7 +319,7 @@ export const actions = {
 
     async linkedAccounts({ state, commit }) {
         const response = await this.$axios.get(
-            `/users/${state.user.id}/connections`
+            `/users/${state.user.id}/connections`,
         );
         commit('linkedAccounts', response.data);
     },

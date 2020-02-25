@@ -5,15 +5,9 @@
                 <h3>Game</h3>
 
                 <Select v-model="game.mode" label="Game mode" class="group">
-                    <option value="Classic">
-                        Classic
-                    </option>
-                    <option value="Zen Garden">
-                        Zen Garden
-                    </option>
-                    <option value="Blitz">
-                        Blitz
-                    </option>
+                    <option value="Classic">Classic</option>
+                    <option value="Zen Garden">Zen Garden</option>
+                    <option value="Blitz">Blitz</option>
                 </Select>
 
                 <Input v-model="game.title" label="Theme" class="group" />
@@ -88,7 +82,7 @@ export default {
         game() {
             const games = this.$store.state.game.game;
             return Array(games).find(
-                (game) => game.id === Number(this.$route.query.game)
+                (game) => game.id === Number(this.$route.query.game),
             );
         },
     },

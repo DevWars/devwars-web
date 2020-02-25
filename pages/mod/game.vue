@@ -2,9 +2,7 @@
     <div>
         <PanelHeader :title="startDate" :subtitle="`@ ${startTime} UTC`">
             <ButtonGroup>
-                <Button to="/mod/games" class="outline muted">
-                    Back
-                </Button>
+                <Button to="/mod/games" class="outline muted">Back</Button>
                 <Button
                     v-if="isActive && !isEnded && !isScheduled"
                     class="danger"
@@ -37,15 +35,9 @@
         </PanelHeader>
 
         <Tabs>
-            <nuxt-link :to="`/mod/game/brief?game=${game.id}`">
-                Brief
-            </nuxt-link>
-            <nuxt-link :to="`/mod/game/details?game=${game.id}`">
-                Details
-            </nuxt-link>
-            <nuxt-link :to="`/mod/game/edit?game=${game.id}`">
-                Edit
-            </nuxt-link>
+            <nuxt-link :to="`/mod/game/brief?game=${game.id}`">Brief</nuxt-link>
+            <nuxt-link :to="`/mod/game/details?game=${game.id}`">Details</nuxt-link>
+            <nuxt-link :to="`/mod/game/edit?game=${game.id}`">Edit</nuxt-link>
         </Tabs>
 
         <nuxt />
@@ -78,7 +70,7 @@ export default {
         game() {
             const games = this.$store.state.game.game;
             return Array(games).find(
-                (game) => game.id === Number(this.$route.query.game)
+                (game) => game.id === Number(this.$route.query.game),
             );
         },
 
@@ -151,7 +143,7 @@ export default {
             } catch (e) {
                 this.$store.dispatch(
                     'toast/error',
-                    'Game could not be deleted.'
+                    'Game could not be deleted.',
                 );
             }
         },

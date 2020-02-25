@@ -1,17 +1,11 @@
 <template>
     <div class="modal">
-        <h1 v-if="title">
-            {{ title }}
-        </h1>
+        <h1 v-if="title">{{ title }}</h1>
         <p>{{ description }}</p>
 
         <ButtonGroup class="modal__actions">
-            <Button class="link muted" @click="close">
-                {{ cancelText }}
-            </Button>
-            <Button class="primary" @click="close(true)">
-                {{ confirmText }}
-            </Button>
+            <Button class="link muted" @click="close">{{ cancelText }}</Button>
+            <Button class="primary" @click="close(true)">{{ confirmText }}</Button>
         </ButtonGroup>
     </div>
 </template>

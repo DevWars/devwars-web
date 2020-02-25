@@ -57,7 +57,7 @@ export default {
         try {
             const user = await await $axios.get(`/users/${params.dashboard}`);
             const stats = await await $axios.get(
-                `/users/${params.dashboard}/stats`
+                `/users/${params.dashboard}/stats`,
             );
 
             return {

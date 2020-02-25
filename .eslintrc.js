@@ -20,8 +20,10 @@ module.exports = {
         'space-before-function-paren': 'off',
         'arrow-parens': 'off',
         'vue/html-self-closing': 'off',
-        'comma-dangle': 'off',
-        semi: 'off',
-        indent: 'off',
+        'vue/singleline-html-element-content-newline': 'off',
+        'comma-dangle': ['error', 'always-multiline'],
+        semi: ['error', 'always'],
+        indent: ['error', 4],
+        'vue/html-indent': ['error', 4],
     },
 };

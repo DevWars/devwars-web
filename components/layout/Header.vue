@@ -23,43 +23,29 @@
 
                     <ul class="nav nav-main">
                         <li class="nav__item">
-                            <nuxt-link to="/" class="nav__link">
-                                Home
-                            </nuxt-link>
+                            <nuxt-link to="/" class="nav__link">Home</nuxt-link>
                         </li>
                         <li class="nav__item">
-                            <nuxt-link to="/games" class="nav__link">
-                                Games
-                            </nuxt-link>
+                            <nuxt-link to="/games" class="nav__link">Games</nuxt-link>
                         </li>
                         <li class="nav__item">
-                            <nuxt-link to="/schedule" class="nav__link">
-                                Schedule
-                            </nuxt-link>
+                            <nuxt-link to="/schedule" class="nav__link">Schedule</nuxt-link>
                         </li>
                         <li class="nav__item">
-                            <nuxt-link to="/leaderboards" class="nav__link">
-                                Leaders
-                            </nuxt-link>
+                            <nuxt-link to="/leaderboards" class="nav__link">Leaders</nuxt-link>
                         </li>
                         <li class="nav__item">
-                            <nuxt-link to="/docs" class="nav__link">
-                                About
-                            </nuxt-link>
+                            <nuxt-link to="/docs" class="nav__link">About</nuxt-link>
                         </li>
                     </ul>
                 </div>
 
                 <ul v-if="!user" class="nav nav-actions">
                     <li class="nav__item">
-                        <Button to="/register" class="primary">
-                            Register
-                        </Button>
+                        <Button to="/register" class="primary">Register</Button>
                     </li>
                     <li class="nav__item">
-                        <Button to="/login" class="link">
-                            Log In
-                        </Button>
+                        <Button to="/login" class="link">Log In</Button>
                     </li>
                 </ul>
 
@@ -68,23 +54,13 @@
                         <User size="sm" :user="user" />
                     </template>
                     <template #menu>
-                        <Button v-if="isStaff" to="/mod/dashboard">
-                            Modpanel
-                        </Button>
+                        <Button v-if="isStaff" to="/mod/dashboard">Modpanel</Button>
                         <div v-if="isStaff" class="divider" />
-                        <Button to="/dashboard">
-                            Dashboard
-                        </Button>
-                        <Button to="/badges">
-                            Badges
-                        </Button>
-                        <Button to="/settings/profile">
-                            Settings
-                        </Button>
+                        <Button to="/dashboard">Dashboard</Button>
+                        <Button to="/badges">Badges</Button>
+                        <Button to="/settings/profile">Settings</Button>
                         <div class="divider" />
-                        <Button @click="logout">
-                            Logout
-                        </Button>
+                        <Button @click="logout">Logout</Button>
                     </template>
                 </Popup>
             </Container>

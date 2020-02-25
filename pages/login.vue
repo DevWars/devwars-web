@@ -26,9 +26,7 @@
                         >
                             Login
                         </Button>
-                        <Button href="/register" class="outline muted block">
-                            Register
-                        </Button>
+                        <Button href="/register" class="outline muted block">Register</Button>
                         <Button
                             href="/forgot-password"
                             class="link muted block"
@@ -48,11 +46,15 @@ import Input from '@/components/form/Input';
 
 export default {
     name: 'Login',
+
     components: { DevwarsCard, Input },
+
     layout: 'header',
+
     meta: {
         noAuth: true,
     },
+
     data: () => {
         return {
             username: '',
@@ -60,6 +62,7 @@ export default {
             authenticating: false,
         };
     },
+
     methods: {
         async login() {
             try {

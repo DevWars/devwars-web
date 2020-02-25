@@ -87,7 +87,7 @@ export default {
                 const data = { player, team };
                 const res = await this.$axios.post(
                     `/games/${this.game.id}/player`,
-                    data
+                    data,
                 );
 
                 this.$store.commit('game/game', res.data);

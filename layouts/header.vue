@@ -15,6 +15,7 @@ import Toasts from '@/components/toast/Toasts';
 
 export default {
     name: 'HeaderLayout',
+
     components: { DevWarsHeader: Header, Toasts },
 };
 </script>

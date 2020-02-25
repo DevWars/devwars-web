@@ -1,47 +1,27 @@
 <template>
     <Table>
         <tr slot="head">
-            <th @click="time = !time">
-                Date
-            </th>
-            <th @click="time = !time">
-                Time
-            </th>
-            <th @click="duration = !duration">
-                Duration
-            </th>
-            <th @click="duration = !duration">
-                Showing
-            </th>
+            <th @click="time = !time">Date</th>
+            <th @click="time = !time">Time</th>
+            <th @click="duration = !duration">Duration</th>
+            <th @click="duration = !duration">Showing</th>
             <th />
         </tr>
 
         <tr v-for="schedule in schedules" :key="schedule.id">
             <td>
-                <div class="dow">
-                    {{ schedule.startTime | moment('dddd') }}
-                </div>
-                <h4 class="date">
-                    {{ schedule.startTime | moment('MMMM D') }}
-                </h4>
+                <div class="dow">{{ schedule.startTime | moment('dddd') }}</div>
+                <h4 class="date">{{ schedule.startTime | moment('MMMM D') }}</h4>
             </td>
             <td>
-                <h4 class="time">
-                    {{ schedule.startTime | moment('H:mm') }} UTC
-                </h4>
+                <h4 class="time">{{ schedule.startTime | moment('H:mm') }} UTC</h4>
             </td>
             <td>
-                <h4 class="duration">
-                    {{ durations[schedule.mode] || '30' }}
-                </h4>
+                <h4 class="duration">{{ durations[schedule.mode] || '30' }}</h4>
             </td>
             <td>
-                <div class="show">
-                    DevWars Live
-                </div>
-                <div class="title">
-                    {{ description(schedule) }}
-                </div>
+                <div class="show">DevWars Live</div>
+                <div class="title">{{ description(schedule) }}</div>
             </td>
             <td>
                 <RegistrationButtons :schedule="schedule" />

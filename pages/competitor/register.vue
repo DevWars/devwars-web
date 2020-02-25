@@ -137,9 +137,7 @@
                 </Card>
 
                 <div class="actions">
-                    <Button class="primary lg" @click="submit">
-                        Register to Compete
-                    </Button>
+                    <Button class="primary lg" @click="submit">Register to Compete</Button>
                 </div>
             </Container>
         </div>
@@ -185,7 +183,7 @@ export default {
                 skills: {},
             },
             countries: Object.keys(getNameList()).map(
-                (it) => it[0].toUpperCase() + it.slice(1)
+                (it) => it[0].toUpperCase() + it.slice(1),
             ),
             sexes: ['Male', 'Female', 'Other'],
         };
@@ -260,14 +258,14 @@ export default {
             if (!this.discord) {
                 return this.$store.dispatch(
                     'toast/error',
-                    'You must connect your Discord account'
+                    'You must connect your Discord account',
                 );
             }
 
             if (!this.hasMic) {
                 return this.$store.dispatch(
                     'toast/error',
-                    'Microphone required to compete'
+                    'Microphone required to compete',
                 );
             }
 
@@ -296,7 +294,7 @@ export default {
                 };
                 await this.$axios.patch(
                     `/user/${this.user.id}/profile`,
-                    userProfile
+                    userProfile,
                 );
 
                 if (this.schedule) {
@@ -305,7 +303,7 @@ export default {
 
                 this.$store.dispatch(
                     'toast/success',
-                    'Congratulations! You are now a competitor!'
+                    'Congratulations! You are now a competitor!',
                 );
             } catch (e) {
                 this.$store.dispatch('toast/error', e.response.data);

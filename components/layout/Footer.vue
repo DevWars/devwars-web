@@ -2,9 +2,7 @@
     <div class="footer">
         <div class="newsletter">
             <Container>
-                <h2>
-                    Receive our weekly challenge, and other DevWars updates!
-                </h2>
+                <h2>Receive our weekly challenge, and other DevWars updates!</h2>
                 <Button
                     href="http://eepurl.com/bffR51"
                     target="_blank"
@@ -20,19 +18,13 @@
                 <ul>
                     <li>DEVWARS</li>
                     <li>
-                        <nuxt-link to="/">
-                            Home
-                        </nuxt-link>
+                        <nuxt-link to="/">Home</nuxt-link>
                     </li>
                     <li>
-                        <nuxt-link to="/schedule">
-                            Schedule
-                        </nuxt-link>
+                        <nuxt-link to="/schedule">Schedule</nuxt-link>
                     </li>
                     <li>
-                        <nuxt-link to="/games">
-                            Games
-                        </nuxt-link>
+                        <nuxt-link to="/games">Games</nuxt-link>
                     </li>
                     <!-- <li>
                         <nuxt-link to="/leaderboards">Leaderboards</nuxt-link>
@@ -41,9 +33,7 @@
                 <ul>
                     <li>RESOURCES</li>
                     <li>
-                        <nuxt-link to="/docs">
-                            Documentation
-                        </nuxt-link>
+                        <nuxt-link to="/docs">Documentation</nuxt-link>
                     </li>
                     <li>
                         <a
@@ -57,9 +47,7 @@
                 <ul>
                     <li>COMPANY</li>
                     <li>
-                        <nuxt-link to="/contact">
-                            Contact
-                        </nuxt-link>
+                        <nuxt-link to="/contact">Contact</nuxt-link>
                     </li>
                 </ul>
                 <ul>

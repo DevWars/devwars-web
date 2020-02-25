@@ -86,7 +86,7 @@ export const usersFromGame = {
             };
 
             const standardUsers = await Promise.all(
-                standardPlayers.map((player) => fetchUser(player.id))
+                standardPlayers.map((player) => fetchUser(player.id)),
             );
 
             this.users = standardUsers

@@ -39,18 +39,13 @@
                     <Card v-show="submitted" class="dark plain">
                         <h1>Thank you!</h1>
                         <div class="mt-xs mb-md">
-                            <h4>
-                                We received your email, you will hear back from
-                                us soon.
-                            </h4>
+                            <h4>We received your email, you will hear back from us soon.</h4>
                         </div>
                     </Card>
                 </Column>
 
                 <Column :md="4">
-                    <Card class="dark plain">
-                        contact@devwars.tv
-                    </Card>
+                    <Card class="dark plain">contact@devwars.tv</Card>
                 </Column>
             </Row>
         </Container>
@@ -66,12 +61,14 @@ import Textarea from '@/components/form/Textarea';
 
 export default {
     name: 'Contact',
+
     components: {
         PageBanner,
         Card,
         Input,
         Textarea,
     },
+
     data: () => {
         return {
             name: '',
@@ -80,6 +77,7 @@ export default {
             submitted: false,
         };
     },
+
     methods: {
         async sendEmail() {
             try {
@@ -100,6 +98,7 @@ export default {
                 this.toastError(message);
             }
         },
+
         ...mapActions({
             toastError: 'toast/error',
             toastSuccess: 'toast/success',

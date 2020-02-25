@@ -1,9 +1,7 @@
 <template>
     <div class="Devcoins">
         <DevcoinIcon />
-        <div class="amount">
-            {{ amount | number }}
-        </div>
+        <div class="amount">{{ amount | number }}</div>
     </div>
 </template>
 

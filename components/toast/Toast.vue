@@ -1,9 +1,7 @@
 <template>
     <div class="Toast" :class="[toast.type]">
         <i class="icon" />
-        <p class="message">
-            {{ toast.message }}
-        </p>
+        <p class="message">{{ toast.message }}</p>
         <button class="close" />
     </div>
 </template>
