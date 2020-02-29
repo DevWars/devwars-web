@@ -1,20 +1,21 @@
 <template>
-  <div>
-    <modals-container />
-    <Toasts />
+    <div>
+        <modals-container />
+        <Toasts />
 
-    <DevWarsHeader />
+        <DevWarsHeader />
 
-    <nuxt />
-  </div>
+        <nuxt />
+    </div>
 </template>
 
 <script>
-import Header from '@/components/layout/Header'
-import Toasts from '@/components/toast/Toasts'
+import Header from '@/components/layout/Header';
+import Toasts from '@/components/toast/Toasts';
 
 export default {
-  name: 'HeaderLayout',
-  components: { DevWarsHeader: Header, Toasts }
-}
+    name: 'HeaderLayout',
+
+    components: { DevWarsHeader: Header, Toasts },
+};
 </script>

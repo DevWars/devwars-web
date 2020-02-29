@@ -1,85 +1,138 @@
 <template>
-  <form @submit.prevent="addRegistrant">
-    <div class="search">
-      <Input v-model="username" placeholder="Username" />
-    </div>
+    <div class="AddRegistrantModal modal">
+        <h1>Add registrant</h1>
+        <form @submit.prevent="addRegistrant">
+            <div class="search">
+                <i class="fa fa-search"></i>
+                <Input
+                    v-model="username"
+                    placeholder="Username"
+                    @input="searchByUsername"
+                />
 
-    <ButtonGroup class="modal__actions">
-      <Button class="muted link" @click="close">
-        Cancel
-      </Button>
-      <Button type="submit" class="primary">
-        Add
-      </Button>
-    </ButtonGroup>
-  </form>
+                <div v-show="searchVisible" class="search__list">
+                    <div
+                        v-for="user in result.data"
+                        :key="user.id"
+                        class="search__item"
+                        @click="() => userSelected(user.username)"
+                    >
+                        <div>
+                            <User :user="user" size="sm" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ButtonGroup class="modal__actions">
+                <Button class="muted link" @click="close">Cancel</Button>
+                <Button type="submit" class="primary">Add</Button>
+            </ButtonGroup>
+        </form>
+    </div>
 </template>
 
 <script>
-import Input from '../form/Input'
+import Input from '../form/Input';
+import User from '@/components/user/User';
 
 export default {
-  name: 'AddRegistrantModal',
-  components: { Input },
-  props: {
-    game: {
-      type: Object,
-      required: true
+    name: 'AddRegistrantModal',
+
+    components: { Input, User },
+
+    props: {
+        game: {
+            type: Object,
+            required: true,
+        },
+        resolve: {
+            type: Function,
+            required: true,
+        },
+        reject: {
+            type: Function,
+            default: () => {},
+        },
     },
-    resolve: {
-      type: Function,
-      required: true
+
+    data: () => ({
+        username: '',
+        result: { data: [] },
+        searchVisible: false,
+    }),
+
+    methods: {
+        userSelected(username) {
+            this.username = username;
+            this.searchVisible = false;
+        },
+
+        async searchByUsername(username) {
+            if (username.trim() === '') return (this.result.data = []);
+            this.searchVisible = true;
+
+            const url = `/users/lookup?username=${username}`;
+            this.result = await this.$axios.get(url);
+        },
+
+        async addRegistrant() {
+            try {
+                const url = `/applications/game/${this.game.id}/username/${this.username}`;
+                await this.$axios.$post(url);
+                this.close(true);
+            } catch (e) {
+                this.$store.dispatch('toast/error', e.response.data);
+                this.close(false);
+            }
+        },
     },
-    reject: {
-      type: Function,
-      required: true
-    }
-  },
-  data: () => {
-    return {
-      username: ''
-    }
-  },
-  methods: {
-    async addRegistrant() {
-      try {
-        await this.$axios.$post(
-          `/applications/game/${this.game.id}/username/${this.username}`
-        )
-      } finally {
-        this.close(true)
-      }
-    }
-  }
-}
+};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import 'utils.scss';
 
-.search {
-  /* position: relative;
+.v--modal-box {
+    overflow: visible !important;
+}
 
-    &__list {
-        @extend %material;
-        width: 100%;
-        max-height: 150px;
-        border: 1px solid $divider-color;
-        position: absolute;
-        top: calc(100% - 1px);
-        z-index: $zindex-popover;
-        overflow-y: auto;
+.AddRegistrantModal {
+    .result {
+        margin-top: 25px;
     }
 
-    &__item {
-        padding: $xxs-space $xs-space;
-        background-color: #fff;
-        cursor: pointer;
+    .search {
+        display: flex;
+        align-items: center;
+        position: relative;
 
-        &:hover {
-            background-color: $link-color;
-            color: #fff;
+        .fa {
+            margin-right: $grid-gutter-width;
+            color: $text-color-secondary;
         }
-    } */
+
+        &__list {
+            @extend %material;
+            width: 100%;
+            max-height: 250px;
+            position: absolute;
+            top: calc(100% - 1px);
+            z-index: $zindex-popover;
+            overflow-y: auto;
+        }
+
+        &__item {
+            @extend %flex-justify;
+            padding: $xxs-space $xs-space;
+            background-color: $bg-color-1;
+            cursor: pointer;
+
+            &:hover {
+                background-color: lighten($bg-color-1, 10%);
+                color: #fff;
+            }
+        }
+    }
 }
 </style>

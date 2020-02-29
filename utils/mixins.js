@@ -1,96 +1,100 @@
+import * as _ from 'lodash';
+
 export const teams = {
-  computed: {
-    teams() {
-      if (!this.game.teams) { return null }
-
-      return Object.values(this.game.teams).reduce((teams, team) => {
-        const players = Object.values(this.game.players).reduce(
-          (players, player) => {
-            if (player.team === team.id) {
-              players[player.id] = player
+    computed: {
+        teams() {
+            if (_.isNil(this.game.teams)) {
+                return;
             }
-            return players
-          },
-          {}
-        )
 
-        let scores = {}
-        let isWinner
-        if (this.game.meta && this.game.meta.teamScores) {
-          scores = {
-            total: Math.floor(Math.random() * 10),
-            objectives: this.game.meta.teamScores[team.id].objectives
-          }
+            return Object.values(this.game.teams).reduce((teams, team) => {
+                const players = {};
 
-          isWinner = this.game.meta.winningTeam === team.id
-        }
+                _.forEach(this.game.players, (player, key) => {
+                    if (player.team === team.id) players[key] = player;
+                    player.originalId = Number(key);
+                });
 
-        teams[team.id] = {
-          ...team,
-          players,
-          numPlayers: Object.values(players).length,
-          scores,
-          isWinner
-        }
+                teams[team.id] = {
+                    ...team,
+                    players,
+                    scores: { total: 0, objectives: 0 },
+                    winner: false,
+                    size: _.size(players),
+                };
 
-        return teams
-      }, {})
-    }
-  }
-}
+                if (this.game.meta && this.game.meta.teamScores) {
+                    const t = teams[team.id];
+
+                    t.scores.objectives = this.game.meta.teamScores[
+                        team.id
+                    ].objectives;
+                    t.scores.tie = this.game.meta.teamScores[team.id].tie;
+                    t.winner = this.game.meta.winningTeam === team.id;
+                    t.scores.total = t.scores.objectives;
+                }
+
+                return teams;
+            }, {});
+        },
+    },
+};
 
 export const usersFromGame = {
-  data: () => ({
-    users: {}
-  }),
+    data: () => ({
+        users: {},
+    }),
 
-  watch: {
-    game() {
-      this.getUsersFromGame()
-    }
-  },
-
-  mounted() {
-    this.getUsersFromGame()
-  },
-  methods: {
-    playersWithUser(players) {
-      const result = []
-
-      for (const player of Object.values(players)) {
-        const user = this.users[player.id]
-        if (user) { result.push({ ...user, ...player }) }
-      }
-
-      return result
+    watch: {
+        game() {
+            this.getUsersFromGame();
+        },
     },
 
-    async getUsersFromGame() {
-      this.users = this.includePlayers ? this.game.players : this.users
-      if (Object.keys(this.users).length >= 1) { return }
+    async mounted() {
+        await this.getUsersFromGame();
+    },
+    methods: {
+        playersWithUser(players) {
+            const result = [];
 
-      const standardPlayers = Object.values(this.game.players).filter(
-        (e) => e.id !== 0
-      )
-      const competitorPlayers = Object.values(this.game.players).filter(
-        (e) => e.id === 0
-      )
+            for (const player of Object.values(players)) {
+                const user = this.users[player.originalId];
+                if (!_.isNil(user)) result.push({ ...user, ...player });
+            }
 
-      const fetchUser = async (id) => {
-        const res = await this.$axios.get(`/users/${id}`)
-        return res.data
-      }
+            return result;
+        },
 
-      const standardUsers = await Promise.all(
-        standardPlayers.map((player) => fetchUser(player.id))
-      )
+        async getUsersFromGame() {
+            this.users =
+                (this.includePlayers ? this.game.players : this.users) || [];
 
-      this.users = standardUsers
-        .concat(competitorPlayers)
-        .reduce((acc, user) => {
-          acc[user.id] = user
-          return acc
-        }, {})
-    }
-  }
-}
+            if (Object.keys(this.users).length >= 1) return;
+
+            const standardPlayers = _.filter(this.users, (value, key) => {
+                return value.id !== 0;
+            });
+
+            const competitorPlayers = _.filter(this.users, (value, key) => {
+                return value.id === 0;
+            });
+
+            const fetchUser = async (id) => {
+                const res = await this.$axios.get(`/users/${id}`);
+                return Object.assign({ originalId: id }, res.data);
+            };
+
+            const standardUsers = await Promise.all(
+                standardPlayers.map((player) => fetchUser(player.id)),
+            );
+
+            this.users = standardUsers
+                .concat(competitorPlayers)
+                .reduce((acc, user) => {
+                    acc[user.originalId] = user;
+                    return acc;
+                }, {});
+        },
+    },
+};

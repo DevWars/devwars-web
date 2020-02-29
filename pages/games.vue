@@ -1,104 +1,106 @@
 <template>
-  <Container class="fluid">
-    <Column :sm="3" class="sidebar no-gutter">
-      <Tabs class="fluid invert">
-        <nuxt-link
-          v-for="current in seasons"
-          :key="current"
-          :to="'/games?season=' + current"
-        >
-          Season {{ current }}
-        </nuxt-link>
-      </Tabs>
+    <Container class="fluid">
+        <Column :sm="3" class="sidebar no-gutter">
+            <Tabs class="fluid invert">
+                <nuxt-link
+                    v-for="current in seasons"
+                    :key="current"
+                    :to="'/games?season=' + current"
+                >
+                    Season {{ current }}
+                </nuxt-link>
+            </Tabs>
 
-      <div
-        v-for="game in games"
-        :key="game.id"
-        class="game"
-        :class="{ active: viewing && viewing.id === game.id }"
-        @click="view(game)"
-      >
-        <div class="meta">
-          <Tag :class="[game.mode.toLowerCase()]" class="sm">
-            {{ game.mode }}
-          </Tag>
-          <span class="date">{{ game.startTime | moment('M/DD/YYYY') }}</span>
-          <span class="theme">{{ game.title }}</span>
-        </div>
-        <div class="icons">
-          <i v-show="game.videoUrl" class="youtube fab fa-youtube" />
-        </div>
-      </div>
-    </Column>
+            <div
+                v-for="game in games"
+                :key="game.id"
+                class="game"
+                :class="{ active: viewing && viewing.id === game.id }"
+                @click="view(game)"
+            >
+                <div class="meta">
+                    <Tag :class="[game.mode.toLowerCase()]" class="sm">
+                        {{ game.mode }}
+                    </Tag>
+                    <span class="date">{{
+                        game.startTime | moment('M/DD/YYYY')
+                    }}</span>
+                    <span class="theme">{{ game.title }}</span>
+                </div>
+                <div class="icons">
+                    <i v-show="game.videoUrl" class="youtube fab fa-youtube" />
+                </div>
+            </div>
+        </Column>
 
-    <Column :sm="9" class="view">
-      <LargeGameDetail
-        v-if="viewing"
-        :game="viewing"
-        :include-players="includePlayers"
-      />
-    </Column>
-  </Container>
+        <Column :sm="9" class="view">
+            <LargeGameDetail
+                v-if="viewing"
+                :game="viewing"
+                :include-players="includePlayers"
+            />
+        </Column>
+    </Container>
 </template>
 
 <script>
-import Http from '../services/Http'
-import Tabs from '../components/Tabs'
-import Tag from '../components/Tag'
-import LargeGameDetail from '../components/game/LargeGameDetail'
+import Http from '../services/Http';
+import Tabs from '../components/Tabs';
+import Tag from '../components/Tag';
+import LargeGameDetail from '../components/game/LargeGameDetail';
 
 export default {
-  name: 'Games',
+    name: 'Games',
 
-  components: { Tabs, Tag, LargeGameDetail },
+    components: { Tabs, Tag, LargeGameDetail },
 
-  data() {
-    return {
-      seasons: [3, 2, 1],
-      season: 3,
-      games: [],
-      viewing: null,
-      includePlayers: true
-    }
-  },
-
-  watch: {
-    '$route.query.season': {
-      immediate: true,
-      async handler(newSeason) {
-        this.season = Number(newSeason) || 3
-
-        this.games = await Http.for('games/season').get(this.season)
-
-        if (!this.$route.query.game) {
-          this.viewing = await Http.for('games').get(
-            `${this.games[0].id}?players=${this.includePlayers}`
-          )
-        }
-      }
+    data() {
+        return {
+            seasons: [3, 2, 1],
+            season: 3,
+            games: [],
+            viewing: null,
+            includePlayers: true,
+        };
     },
 
-    '$route.query.game': {
-      immediate: true,
-      async handler(newGame) {
-        if (newGame) {
-          this.viewing = await Http.for('games').get(
-            `${newGame}?players=${this.includePlayers}`
-          )
-        }
-      }
-    }
-  },
+    watch: {
+        '$route.query.season': {
+            immediate: true,
+            async handler(newSeason) {
+                this.season = Number(newSeason) || 3;
 
-  methods: {
-    view(game) {
-      this.$router.push({
-        path: '/games',
-        query: { game: game.id, season: game.season }
-      })
-    }
-  }
-}
+                this.games = await Http.for('games/season').get(this.season);
+
+                if (!this.$route.query.game) {
+                    this.viewing = await Http.for('games').get(
+                        `${this.games[0].id}?players=${this.includePlayers}`,
+                    );
+                }
+            },
+        },
+
+        '$route.query.game': {
+            immediate: true,
+            async handler(newGame) {
+                if (newGame) {
+                    this.viewing = await Http.for('games').get(
+                        `${newGame}?players=${this.includePlayers}`,
+                    );
+                }
+            },
+        },
+    },
+
+    methods: {
+        view(game) {
+            this.$router.push({
+                path: '/games',
+                query: { game: game.id, season: game.season },
+            });
+        },
+    },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -106,77 +108,77 @@ export default {
 
 .sidebar,
 .view {
-  min-height: calc(100vh - #{$header-height});
-  height: calc(100vh - #{$header-height});
-  position: fixed;
-  overflow-y: auto;
+    min-height: calc(100vh - #{$header-height});
+    height: calc(100vh - #{$header-height});
+    position: fixed;
+    overflow-y: auto;
 }
 
 .sidebar {
-  left: 0;
-  background-color: $bg-color-3;
+    left: 0;
+    background-color: $bg-color-3;
 }
 
 .view {
-  padding-bottom: $l-space;
-  background-color: $bg-color-4;
-  right: 0;
+    padding-bottom: $l-space;
+    background-color: $bg-color-4;
+    right: 0;
 }
 
 .game {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: $grid-gutter-width;
-  border-bottom: 1px solid $divider-color;
-  background-color: $bg-color-3;
-  cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $grid-gutter-width;
+    border-bottom: 1px solid $divider-color;
+    background-color: $bg-color-3;
+    cursor: pointer;
 
-  &:hover {
-    background-color: $bg-color-2;
-  }
-
-  &.active {
-    background-color: $bg-color-1;
-  }
-
-  .date,
-  .mode {
-    display: inline-block;
-    vertical-align: bottom;
-  }
-
-  .date {
-    font-size: $font-size-sm;
-    color: lightgray;
-  }
-
-  .theme {
-    display: block;
-    margin-top: $xxs-space;
-    font-size: 20px;
-  }
-
-  .youtube {
-    color: $youtube-color;
-    font-size: 24px;
-  }
-
-  .Tag {
-    margin-right: 5px;
-
-    &.zen {
-      color: $green-color;
-      border-color: $green-color;
+    &:hover {
+        background-color: $bg-color-2;
     }
-    &.classic {
-      color: $brand-primary;
-      border-color: $brand-primary;
+
+    &.active {
+        background-color: $bg-color-1;
     }
-    &.blitz {
-      color: $yellow-color;
-      border-color: $yellow-color;
+
+    .date,
+    .mode {
+        display: inline-block;
+        vertical-align: bottom;
     }
-  }
+
+    .date {
+        font-size: $font-size-sm;
+        color: lightgray;
+    }
+
+    .theme {
+        display: block;
+        margin-top: $xxs-space;
+        font-size: 20px;
+    }
+
+    .youtube {
+        color: $youtube-color;
+        font-size: 24px;
+    }
+
+    .Tag {
+        margin-right: 5px;
+
+        &.zen {
+            color: $green-color;
+            border-color: $green-color;
+        }
+        &.classic {
+            color: $brand-primary;
+            border-color: $brand-primary;
+        }
+        &.blitz {
+            color: $yellow-color;
+            border-color: $yellow-color;
+        }
+    }
 }
 </style>
