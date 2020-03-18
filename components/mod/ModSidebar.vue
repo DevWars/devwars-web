@@ -4,7 +4,7 @@
         <ul>
             <li>
                 <nuxt-link to="/mod/dashboard">
-                    <i class="fa fa-tachometer" />Dashboard
+                    <i class="fa fa-tachometer-alt" />Dashboard
                 </nuxt-link>
             </li>
             <li>
