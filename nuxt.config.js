@@ -55,14 +55,12 @@ export default {
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
             {
                 rel: 'stylesheet',
-                href:
-                    'https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:300,400,500,700',
+                href: 'https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:300,400,500,700',
             },
             {
                 rel: 'stylesheet',
-                href: 'https://pro.fontawesome.com/releases/v5.0.8/css/all.css',
-                integrity:
-                    'sha384-OGsxOZf8qnUumoWWSmTqXMPSNI9URpNYN35fXDb5Cv5jT6OR673ah1e5q+9xKTq6',
+                href: 'https://use.fontawesome.com/releases/v5.12.1/css/all.css',
+                integrity: 'sha384-v8BU367qNbs/aIZIxuivaU55N5GPF89WBerHoGA4QTcbUjYiLQtKdrfXnqAcXyTv',
                 crossorigin: 'anonymous',
             },
         ],
