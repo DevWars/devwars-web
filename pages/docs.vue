@@ -669,7 +669,7 @@
 
                     <section>
                         <h3>Communication</h3>
-                        <div class="communications row row-normaled section">
+                        <Row class="communications normalize section">
                             <Column :sm="3">
                                 <i class="fa fa-microphone" />
                                 <p>Microphone</p>
@@ -685,7 +685,7 @@
                                 />
                                 <p>English</p>
                             </Column>
-                        </div>
+                        </Row>
 
                         <p>
                             It is required that you have a microphone so that
