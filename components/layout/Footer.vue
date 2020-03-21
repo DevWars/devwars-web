@@ -110,7 +110,7 @@
                 </ul>
 
                 <div class="legal">
-                    <span>Copyright &copy; 2018 DevWars, LLC</span>
+                    <span>Copyright &copy; 2020 DevWars, LLC</span>
                     <span>All rights reserved</span>
                 </div>
             </div>
