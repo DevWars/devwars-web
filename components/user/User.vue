@@ -4,8 +4,8 @@
         <strong
             :class="{
                 username: true,
-                'assigned-red': team == 0,
-                'assigned-blue': team == 1,
+                'assigned-red': team == 1,
+                'assigned-blue': team == 0,
             }"
         >
             {{ user.username }}
