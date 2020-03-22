@@ -57,13 +57,11 @@ export default {
         },
     },
 
-    async asyncData({ params, query, $axios }) {
-        const { data } = await $axios.get(`games/${query.game}?players=true`);
-        return { game: data };
-    },
-
-    data() {
-        return {};
+    computed: {
+        game() {
+            const { game: id } = this.$route.query;
+            return this.$store.getters['game/gameById'](id);
+        },
     },
 
     methods: {

@@ -36,7 +36,9 @@
 
         <Tabs>
             <nuxt-link :to="`/mod/game/brief?game=${game.id}`">Brief</nuxt-link>
-            <nuxt-link :to="`/mod/game/details?game=${game.id}`">Details</nuxt-link>
+            <nuxt-link :to="`/mod/game/details?game=${game.id}`">
+                Details
+            </nuxt-link>
             <nuxt-link :to="`/mod/game/edit?game=${game.id}`">Edit</nuxt-link>
         </Tabs>
 
@@ -68,10 +70,8 @@ export default {
 
     computed: {
         game() {
-            const games = this.$store.state.game.game;
-            return Array(games).find(
-                (game) => game.id === Number(this.$route.query.game),
-            );
+            const { game: id } = this.$route.query;
+            return this.$store.getters['game/gameById'](id);
         },
 
         startDate() {

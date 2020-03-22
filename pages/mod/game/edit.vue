@@ -122,10 +122,8 @@ export default {
 
     computed: {
         game() {
-            const query = Number(this.$route.query.game);
-            const games = this.$store.state.game.game;
-
-            return Array(games).find((game) => game.id === query);
+            const { game: id } = this.$route.query;
+            return this.$store.getters['game/gameById'](id);
         },
     },
 
