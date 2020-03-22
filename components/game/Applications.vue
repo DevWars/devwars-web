@@ -74,19 +74,6 @@ export default {
     props: {
         schedule: { type: Object, default: undefined },
         game: { type: Object, default: undefined },
-
-        /**
-         * A object containing a key-value pair of the assignments if any.
-         * Allowing the understanding of who has been asigned to what team.
-         *
-         * "1": 0
-         * "2": 1
-         * "3": 0
-         */
-        assignments: {
-            type: Object,
-            default: Object,
-        },
     },
 
     data() {
