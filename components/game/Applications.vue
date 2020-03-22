@@ -24,13 +24,11 @@
                 :key="applicant.id + index + applicant.id"
                 @click="addPlayer(applicant)"
             >
-                <td
-                    :class="{
-                        'assigned-red': assignments[applicant.id] === 1,
-                        'assigned-blue': assignments[applicant.id] === 0,
-                    }"
-                >
-                    <User :user="applicant" />
+                <td>
+                    <User
+                        :user="applicant"
+                        :team="getPlayerTeamById(applicant.id)"
+                    />
                 </td>
                 <td>
                     {{ applicant.gameStats.wins + applicant.gameStats.loses }}
@@ -138,6 +136,15 @@ export default {
             await this.$open(AddRegistrantModal, { game: this.game });
             this.loadApplications();
         },
+
+        /**
+         * Get the team that the given user is assigned too.
+         * Used for assigning + coloring of the users on the applications screen.
+         */
+        getPlayerTeamById(id) {
+            if (isNil(this.game) || isNil(this.game.players[id])) return;
+            return this.game.players[id].team;
+        },
     },
 };
 </script>
@@ -160,13 +167,5 @@ export default {
 
 .no-players {
     text-align: center;
-}
-
-.assigned-blue {
-    color: $blue-color;
-}
-
-.assigned-red {
-    color: $red-color;
 }
 </style>

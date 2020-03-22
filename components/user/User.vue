@@ -1,7 +1,15 @@
 <template>
     <div class="User">
         <Avatar :user="user" :class="size" />
-        <strong class="username">{{ user.username }}</strong>
+        <strong
+            :class="{
+                username: true,
+                'assigned-red': team == 0,
+                'assigned-blue': team == 1,
+            }"
+        >
+            {{ user.username }}
+        </strong>
         <ConnectionsSmall :connections="user.connections" />
     </div>
 </template>
@@ -14,6 +22,11 @@ export default {
     name: 'User',
     components: { Avatar, ConnectionsSmall },
     props: {
+        team: {
+            type: Number,
+            required: false,
+            default: null,
+        },
         user: {
             type: Object,
             required: true,
@@ -39,5 +52,13 @@ export default {
         margin-left: 10px;
         margin-right: 10px;
     }
+}
+
+.assigned-blue {
+    color: $blue-color;
+}
+
+.assigned-red {
+    color: $red-color;
 }
 </style>
