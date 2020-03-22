@@ -19,18 +19,20 @@
                                 :class="{
                                     active: teamCompletedObjective(
                                         0,
-                                        objective
+                                        objective,
                                     ),
                                 }"
                                 @click="toggleObjectiveState(0, objective)"
                             />
-                            <span class="objectives__obj">{{ objective.description }}</span>
+                            <span class="objectives__obj">{{
+                                objective.description
+                            }}</span>
                             <div
                                 class="objectives__square team-red"
                                 :class="{
                                     active: teamCompletedObjective(
                                         1,
-                                        objective
+                                        objective,
                                     ),
                                 }"
                                 @click="toggleObjectiveState(1, objective)"
@@ -39,46 +41,43 @@
                     </ul>
                 </SubScore>
             </Card>
+            <Card
+                v-for="(scores, index) in game.meta ? game.meta.teamScores : []"
+                :key="index"
+                class="plain dark teamScores"
+            >
+                <div class="container">
+                    <h3>Team {{ teamName(index) }}</h3>
+
+                    <Input
+                        v-model.number="scores.ui"
+                        label="UI Score"
+                        type="number"
+                        required
+                        @input="(e) => updateTeamVoteScore(index, 'ui', e)"
+                    />
+                    <Input
+                        v-model.number="scores.ux"
+                        label="UX Score"
+                        type="number"
+                        required
+                        @input="(e) => updateTeamVoteScore(index, 'ux', e)"
+                    />
+                    <Checkbox
+                        :checked="scores.tie"
+                        :label="`Team ${teamName(index)} Tied`"
+                        @input="(e) => toggleTeamTied(index, e)"
+                    />
+
+                    <Checkbox
+                        :checked="isWinner(index)"
+                        :label="`Team ${teamName(index)} Winner`"
+                        @input="(e) => toggleTeamWinner(index, e)"
+                    />
+                </div>
+            </Card>
         </div>
-        <div v-else>
-            <h1>Game Not Ended</h1>
-        </div>
-
-        <Card
-            v-for="(scores, index) in game.meta ? game.meta.teamScores : []"
-            :key="index"
-            class="plain dark teamScores"
-        >
-            <div class="container">
-                <h3>Team {{ teamName(index) }}</h3>
-
-                <Input
-                    v-model.number="scores.ui"
-                    label="UI Score"
-                    type="number"
-                    required
-                    @input="(e) => updateTeamVoteScore(index, 'ui', e)"
-                />
-                <Input
-                    v-model.number="scores.ux"
-                    label="UX Score"
-                    type="number"
-                    required
-                    @input="(e) => updateTeamVoteScore(index, 'ux', e)"
-                />
-                <Checkbox
-                    :checked="scores.tie"
-                    :label="`Team ${teamName(index)} Tied`"
-                    @input="(e) => toggleTeamTied(index, e)"
-                />
-
-                <Checkbox
-                    :checked="isWinner(index)"
-                    :label="`Team ${teamName(index)} Winner`"
-                    @input="(e) => toggleTeamWinner(index, e)"
-                />
-            </div>
-        </Card>
+        <div v-else><h1>Game Not Ended</h1></div>
     </div>
 </template>
 
