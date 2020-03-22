@@ -23,7 +23,7 @@
             <h4>No players</h4>
         </Card>
 
-        <Applications :game="game" />
+        <Applications :game="game" :assignments="assignments" />
     </div>
 </template>
 
@@ -44,12 +44,9 @@ import {
 export default {
     name: 'GameBrief',
 
-    meta: {
-        auth: names.MODERATOR,
-    },
+    meta: { auth: names.MODERATOR },
 
     components: { Card, GameTeam, Player, Applications },
-
     mixins: [teams, usersFromGame],
 
     props: {
@@ -60,13 +57,21 @@ export default {
         },
     },
 
-    computed: {
-        game() {
-            const games = this.$store.state.game.game;
-            return Array(games).find(
-                (game) => game.id === Number(this.$route.query.game),
-            );
-        },
+    async asyncData({ params, query, $axios }) {
+        const { data } = await $axios.get(`games/${query.game}?players=true`);
+        const assignments = {};
+
+        for (const player of Object.values(data.players)) {
+            assignments[player.id] = player.team;
+        }
+
+        return { game: data, assignments };
+    },
+
+    data() {
+        return {
+            assignments: {},
+        };
     },
 
     methods: {
@@ -86,6 +91,9 @@ export default {
             // Reset the id of the player back to its org for the delete. Since the server will not handle
             // the case for 0 since the root directory would still be the org id.
             player.id = player.originalId || player.id;
+
+            // ensure to remove the players from the assignment list.
+            delete this.assignments[player.id];
 
             // Add languages to each player for Database
             for (const player of Object.values(this.game.players)) {

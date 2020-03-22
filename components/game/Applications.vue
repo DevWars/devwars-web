@@ -2,12 +2,14 @@
     <div class="Applications">
         <div v-if="game" class="controls">
             <h4>({{ applications.length }}) Applicants</h4>
-            <Button class="outline primary" @click="addRegistrant">Add Registrant</Button>
+            <Button class="outline primary" @click="addRegistrant">
+                Add Registrant
+            </Button>
         </div>
 
         <Table>
             <tr slot="head">
-                <th>Username</th>
+                <th>Username1</th>
                 <th>Games</th>
                 <th>Won</th>
                 <th>Lost</th>
@@ -22,7 +24,12 @@
                 :key="applicant.id + index + applicant.id"
                 @click="addPlayer(applicant)"
             >
-                <td>
+                <td
+                    :class="{
+                        'assigned-red': assignments[applicant.id] === 1,
+                        'assigned-blue': assignments[applicant.id] === 0,
+                    }"
+                >
                     <User :user="applicant" />
                 </td>
                 <td>
@@ -31,25 +38,13 @@
                 <td>{{ applicant.gameStats.wins }}</td>
                 <td>{{ applicant.gameStats.loses }}</td>
                 <td>
-                    {{
-                        applicant.profile.skills
-                            ? applicant.profile.skills.html
-                            : 0
-                    }}
+                    {{ defaultSkillValue(applicant.profile.skills, 'html', 0) }}
                 </td>
                 <td>
-                    {{
-                        applicant.profile.skills
-                            ? applicant.profile.skills.css
-                            : 0
-                    }}
+                    {{ defaultSkillValue(applicant.profile.skills, 'css', 0) }}
                 </td>
                 <td>
-                    {{
-                        applicant.profile.skills
-                            ? applicant.profile.skills.js
-                            : 0
-                    }}
+                    {{ defaultSkillValue(applicant.profile.skills, 'js', 0) }}
                 </td>
                 <td>
                     <Devcoins :amount="applicant.stats.coins" class="xs" />
@@ -64,7 +59,7 @@
 </template>
 
 <script>
-import { isNil } from 'lodash';
+import { isNil, defaultTo } from 'lodash';
 
 import Table from '@/components/Table';
 import User from '@/components/user/User';
@@ -81,6 +76,19 @@ export default {
     props: {
         schedule: { type: Object, default: undefined },
         game: { type: Object, default: undefined },
+
+        /**
+         * A object containing a key-value pair of the assignments if any.
+         * Allowing the understanding of who has been asigned to what team.
+         *
+         * "1": 0
+         * "2": 1
+         * "3": 0
+         */
+        assignments: {
+            type: Object,
+            default: Object,
+        },
     },
 
     data() {
@@ -105,14 +113,25 @@ export default {
             const response = await this.$axios.get(
                 `/applications/${scheduleOrGame}`,
             );
-            const applications = response.data;
 
+            const applications = response.data;
             this.applications = applications;
         },
 
         addPlayer(user) {
             if (isNil(this.game)) return;
             this.$open(AddPlayerModal, { user, game: this.game });
+        },
+
+        /**
+         * Default the given value to the def valud if the given value is not assigned
+         * @param {any} value The value being assigned.
+         * @param {string} name The name of the key to be returned.
+         * @param {any} def The default of the value if null or undefined.
+         */
+        defaultSkillValue(value, name, def) {
+            if (isNil(value)) return def;
+            return defaultTo(value[name], def);
         },
 
         async addRegistrant() {
@@ -124,6 +143,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import 'utils.scss';
+
 .Applications {
     .Table tbody td:last-of-type {
         text-align: left;
@@ -139,5 +160,13 @@ export default {
 
 .no-players {
     text-align: center;
+}
+
+.assigned-blue {
+    color: $blue-color;
+}
+
+.assigned-red {
+    color: $red-color;
 }
 </style>
