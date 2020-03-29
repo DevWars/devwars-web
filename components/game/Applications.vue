@@ -9,7 +9,7 @@
 
         <Table>
             <tr slot="head">
-                <th>Username1</th>
+                <th>Username</th>
                 <th>Games</th>
                 <th>Won</th>
                 <th>Lost</th>
