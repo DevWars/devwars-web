@@ -2,9 +2,18 @@
     <div class="Applications">
         <div v-if="game" class="controls">
             <h4>({{ applications.length }}) Applicants</h4>
-            <Button class="outline primary" @click="addRegistrant">
-                Add Registrant
-            </Button>
+            <div>
+                <Button class="outline primary" @click="addRegistrant">
+                    Add Registrant
+                </Button>
+                <Button
+                    class="outline secondary"
+                    :disabled="gameHasPlayers || !canAutoAssign"
+                    @click="generateAutoAssignmentProperties"
+                >
+                    Auto Assign
+                </Button>
+            </div>
         </div>
 
         <Table>
@@ -31,10 +40,14 @@
                     />
                 </td>
                 <td>
-                    {{ applicant.gameStats.wins + applicant.gameStats.loses }}
+                    {{ totalGamesForApplication(applicant) }}
                 </td>
-                <td>{{ applicant.gameStats.wins }}</td>
-                <td>{{ applicant.gameStats.loses }}</td>
+                <td>
+                    {{ applicant.gameStats ? applicant.gameStats.wins : 0 }}
+                </td>
+                <td>
+                    {{ applicant.gameStats ? applicant.gameStats.loses : 0 }}
+                </td>
                 <td>
                     {{ defaultSkillValue(applicant.profile.skills, 'html', 0) }}
                 </td>
@@ -57,7 +70,7 @@
 </template>
 
 <script>
-import { isNil, defaultTo } from 'lodash';
+import { isNil, defaultTo, mean, sample, size } from 'lodash';
 
 import Table from '@/components/Table';
 import User from '@/components/user/User';
@@ -80,6 +93,19 @@ export default {
         return {
             applications: [],
         };
+    },
+
+    computed: {
+        // Returns true if we have already assigned players to roles.
+        gameHasPlayers() {
+            return size(this.game?.players) > 0;
+        },
+
+        // Returns true if and only if the current game mode is supported for
+        // auto assignment.
+        canAutoAssign() {
+            return ['Classic'].includes(this.game?.mode);
+        },
     },
 
     mounted() {
@@ -119,9 +145,100 @@ export default {
             return defaultTo(value[name], def);
         },
 
+        /**
+         * Returns the total wins and loses (games) for given application.
+         * @param {Application} Application The application who is getting the total games.
+         */
+        totalGamesForApplication(application) {
+            if (isNil(application) || isNil(application.gameStats)) return 0;
+            return application.gameStats.wins + application.gameStats.loses;
+        },
+
         async addRegistrant() {
             await this.$open(AddRegistrantModal, { game: this.game });
             this.loadApplications();
+        },
+
+        async generateAutoAssignmentProperties() {
+            if (this.game.mode === 'Classic')
+                await this.generateClassicAssignmentsForApplications();
+        },
+
+        async generateClassicAssignmentsForApplications() {
+            const playersAssignments = [];
+
+            for (const player of this.applications) {
+                const totalGames =
+                    player.gameStats?.wins + player.gameStats?.loses || 0;
+
+                playersAssignments.push({
+                    preferredRole: sample(['js', 'html', 'css']),
+                    meanScore: mean(Object.values(player.profile.skills)),
+                    totalGames,
+                    player,
+                });
+            }
+
+            playersAssignments.sort(
+                (a, b) =>
+                    a.meanScore - b.meanScore && a.totalGames - b.totalGames,
+            );
+
+            await this.assignApplicationsToRoles(playersAssignments);
+            await this.loadApplications();
+        },
+
+        /**
+         * Assigns the auto generated roles and players to the given roles in order.
+         * @param {object[]}  assingments The players being assigned, including the roles and users.
+         */
+        async assignApplicationsToRoles(assignments) {
+            let lastResponse = null;
+            const usedRoles = [];
+
+            let currentTeam = 0;
+            let altTeam = 1;
+
+            for (const assignment of assignments) {
+                const teamName = this.getTeamNameById(currentTeam);
+                const altTeamName = this.getTeamNameById(altTeam);
+
+                const team = { id: currentTeam, name: teamName };
+                const player = {
+                    id: assignment.player.id,
+                    username: assignment.player.username,
+                    language: assignment.preferredRole,
+                    team: currentTeam,
+                };
+
+                const usedId = `${teamName}-${player.language}`;
+                const usedAltId = `${altTeamName}-${player.language}`;
+                let currentUsedId = usedId;
+
+                if (usedRoles.includes(usedId) && usedRoles.includes(usedAltId))
+                    continue;
+
+                if (
+                    usedRoles.includes(usedId) &&
+                    !usedRoles.includes(usedAltId)
+                ) {
+                    currentUsedId = usedAltId;
+                    team.name = altTeamName;
+                    player.team = altTeam;
+                    team.id = altTeam;
+                }
+
+                lastResponse = await this.$axios.post(
+                    `/games/${this.game.id}/player`,
+                    { team, player },
+                );
+
+                altTeam = currentTeam;
+                currentTeam = currentTeam === 0 ? 1 : 0;
+                usedRoles.push(currentUsedId);
+            }
+
+            this.$store.commit('game/game', lastResponse.data);
         },
 
         /**
@@ -129,8 +246,14 @@ export default {
          * Used for assigning + coloring of the users on the applications screen.
          */
         getPlayerTeamById(id) {
-            if (isNil(this.game) || isNil(this.game.players[id])) return;
+            if (isNil(this.game?.players) || isNil(this.game.players[id]))
+                return;
+
             return this.game.players[id].team;
+        },
+
+        getTeamNameById(id) {
+            return id === 0 ? 'blue' : 'red';
         },
     },
 };

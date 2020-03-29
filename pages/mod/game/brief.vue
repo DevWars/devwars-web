@@ -23,7 +23,7 @@
             <h4>No players</h4>
         </Card>
 
-        <Applications :game="game" :assignments="assignments" />
+        <Applications :game="game" />
     </div>
 </template>
 
