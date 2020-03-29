@@ -2,7 +2,9 @@
     <div class="footer">
         <div class="newsletter">
             <Container>
-                <h2>Receive our weekly challenge, and other DevWars updates!</h2>
+                <h2>
+                    Receive our weekly challenge, and other DevWars updates!
+                </h2>
                 <Button
                     href="http://eepurl.com/bffR51"
                     target="_blank"
@@ -110,7 +112,9 @@
                 </ul>
 
                 <div class="legal">
-                    <span>Copyright &copy; 2020 DevWars, LLC</span>
+                    <span>
+                        Copyright &copy; 2018-{{ currentYear }} DevWars, LLC
+                    </span>
                     <span>All rights reserved</span>
                 </div>
             </div>
@@ -121,6 +125,9 @@
 <script>
 export default {
     name: 'ComponentFooter',
+    computed: {
+        currentYear: () => new Date().getFullYear(),
+    },
 };
 </script>
 
