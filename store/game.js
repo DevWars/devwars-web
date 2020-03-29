@@ -189,3 +189,12 @@ export const actions = {
         }
     },
 };
+
+export const getters = {
+    /**
+     * Returns a given game by id if found in the current games cache.
+     * @param id {string} The id of the given game.
+     */
+    gameById: (state) => (id) =>
+        Array(state.game).find((e) => e.id === Number(id)),
+};

@@ -23,7 +23,7 @@
             <h4>No players</h4>
         </Card>
 
-        <Applications :game="game" />
+        <Applications :game="game" :assignments="assignments" />
     </div>
 </template>
 
@@ -44,12 +44,9 @@ import {
 export default {
     name: 'GameBrief',
 
-    meta: {
-        auth: names.MODERATOR,
-    },
+    meta: { auth: names.MODERATOR },
 
     components: { Card, GameTeam, Player, Applications },
-
     mixins: [teams, usersFromGame],
 
     props: {
@@ -62,10 +59,8 @@ export default {
 
     computed: {
         game() {
-            const games = this.$store.state.game.game;
-            return Array(games).find(
-                (game) => game.id === Number(this.$route.query.game),
-            );
+            const { game: id } = this.$route.query;
+            return this.$store.getters['game/gameById'](id);
         },
     },
 

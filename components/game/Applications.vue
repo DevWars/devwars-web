@@ -2,12 +2,14 @@
     <div class="Applications">
         <div v-if="game" class="controls">
             <h4>({{ applications.length }}) Applicants</h4>
-            <Button class="outline primary" @click="addRegistrant">Add Registrant</Button>
+            <Button class="outline primary" @click="addRegistrant">
+                Add Registrant
+            </Button>
         </div>
 
         <Table>
             <tr slot="head">
-                <th>Username</th>
+                <th>Username1</th>
                 <th>Games</th>
                 <th>Won</th>
                 <th>Lost</th>
@@ -23,7 +25,10 @@
                 @click="addPlayer(applicant)"
             >
                 <td>
-                    <User :user="applicant" />
+                    <User
+                        :user="applicant"
+                        :team="getPlayerTeamById(applicant.id)"
+                    />
                 </td>
                 <td>
                     {{ applicant.gameStats.wins + applicant.gameStats.loses }}
@@ -31,25 +36,13 @@
                 <td>{{ applicant.gameStats.wins }}</td>
                 <td>{{ applicant.gameStats.loses }}</td>
                 <td>
-                    {{
-                        applicant.profile.skills
-                            ? applicant.profile.skills.html
-                            : 0
-                    }}
+                    {{ defaultSkillValue(applicant.profile.skills, 'html', 0) }}
                 </td>
                 <td>
-                    {{
-                        applicant.profile.skills
-                            ? applicant.profile.skills.css
-                            : 0
-                    }}
+                    {{ defaultSkillValue(applicant.profile.skills, 'css', 0) }}
                 </td>
                 <td>
-                    {{
-                        applicant.profile.skills
-                            ? applicant.profile.skills.js
-                            : 0
-                    }}
+                    {{ defaultSkillValue(applicant.profile.skills, 'js', 0) }}
                 </td>
                 <td>
                     <Devcoins :amount="applicant.stats.coins" class="xs" />
@@ -64,7 +57,7 @@
 </template>
 
 <script>
-import { isNil } from 'lodash';
+import { isNil, defaultTo } from 'lodash';
 
 import Table from '@/components/Table';
 import User from '@/components/user/User';
@@ -105,8 +98,8 @@ export default {
             const response = await this.$axios.get(
                 `/applications/${scheduleOrGame}`,
             );
-            const applications = response.data;
 
+            const applications = response.data;
             this.applications = applications;
         },
 
@@ -115,15 +108,37 @@ export default {
             this.$open(AddPlayerModal, { user, game: this.game });
         },
 
+        /**
+         * Default the given value to the def valud if the given value is not assigned
+         * @param {any} value The value being assigned.
+         * @param {string} name The name of the key to be returned.
+         * @param {any} def The default of the value if null or undefined.
+         */
+        defaultSkillValue(value, name, def) {
+            if (isNil(value)) return def;
+            return defaultTo(value[name], def);
+        },
+
         async addRegistrant() {
             await this.$open(AddRegistrantModal, { game: this.game });
             this.loadApplications();
+        },
+
+        /**
+         * Get the team that the given user is assigned too.
+         * Used for assigning + coloring of the users on the applications screen.
+         */
+        getPlayerTeamById(id) {
+            if (isNil(this.game) || isNil(this.game.players[id])) return;
+            return this.game.players[id].team;
         },
     },
 };
 </script>
 
 <style lang="scss" scoped>
+@import 'utils.scss';
+
 .Applications {
     .Table tbody td:last-of-type {
         text-align: left;

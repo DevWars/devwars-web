@@ -80,10 +80,8 @@ export default {
 
     computed: {
         game() {
-            const games = this.$store.state.game.game;
-            return Array(games).find(
-                (game) => game.id === Number(this.$route.query.game),
-            );
+            const { game: id } = this.$route.query;
+            return this.$store.getters['game/gameById'](id);
         },
     },
 
