@@ -47,6 +47,15 @@ export const mutations = {
         state.active = game;
     },
 
+    /**
+     *  Updates the is bonus state for the current game objective.
+     */
+    updateObjectIsBonusState(state, { objectiveId, isBonus }) {
+        if (state.game != null && state.game.objectives[objectiveId] != null) {
+            state.game.objectives[objectiveId].isBonus = isBonus;
+        }
+    },
+
     updateScheduleObjective(state, { value, objectiveId, scheduleId }) {
         let tmp = null;
 

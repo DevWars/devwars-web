@@ -28,7 +28,7 @@
                     <SquareToggle
                         :active="objective.isBonus"
                         name="bonus"
-                        @change="objectiveUpdate($event, objective.id)"
+                        @change="objectiveIsBonusUpdate($event, objective.id)"
                     />
                     <Button
                         class="link muted"
@@ -86,11 +86,18 @@ export default {
     },
 
     methods: {
+        objectiveIsBonusUpdate(isBonus, objectiveId) {
+            this.$store.commit('game/updateObjectIsBonusState', {
+                isBonus,
+                objectiveId,
+            });
+        },
+
         objectiveUpdate(value, objectiveId) {
             this.$store.commit('game/updateScheduleObjective', {
-                value,
+                scheduleId: this.game.schedule,
                 objectiveId,
-                scheduleId: this.schedule.id,
+                value,
             });
         },
 
