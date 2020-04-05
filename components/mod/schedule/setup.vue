@@ -66,14 +66,15 @@
                 <Input
                     v-model="schedule.templates.html"
                     label="Template HTML"
+                    :is-area="true"
                 />
                 <Input
-                    v-model="schedule.templates.html"
+                    v-model="schedule.templates.css"
                     :is-area="true"
                     label="Template CSS"
                 />
                 <Input
-                    v-model="schedule.templates.html"
+                    v-model="schedule.templates.js"
                     :is-area="true"
                     label="Template JS"
                 />
@@ -142,7 +143,7 @@ export default {
         },
 
         objectiveUpdate(value, objectiveId) {
-            this.schedule.objective[objectiveId] = value;
+            this.schedule.objectives[objectiveId].isBonus = value;
             this.triggerScheduleRefresh();
         },
 

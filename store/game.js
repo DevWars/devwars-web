@@ -190,7 +190,7 @@ export const getters = {
      * @param id {string} the id of the given game.
      */
     gameById: (state) => (id) =>
-        find(state.game, (game) => game.id === Number(id)),
+        Array(state.game).find((game) => game.id === Number(id)),
 
     /**
      * returns a given schedule by id if found in the current cache.

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="schedule != null">
         <PanelHeader :title="startDate" :subtitle="`@ ${startTime} UTC`">
             <ButtonGroup>
                 <Button to="/mod/schedules" class="outline muted">Back</Button>
@@ -49,6 +49,8 @@
 
 <script>
 import moment from 'moment';
+import { isNil } from 'lodash';
+
 import { names } from '../../utils/auth';
 import Tabs from '@/components/Tabs';
 import Tab from '@/components/Tab';
@@ -67,7 +69,8 @@ export default {
     },
 
     async asyncData({ query, error, $axios }) {
-        if (query.schedule == null || query.schedule.trim() === '') return {};
+        if (query.schedule == null || query.schedule.trim() === '')
+            return { schedule: null };
 
         try {
             const response = await $axios.get(`/schedules/${query.schedule}`);
@@ -83,11 +86,11 @@ export default {
 
     computed: {
         startDate() {
-            return moment(this.schedule.startTime).format('MM/DD/YYYY');
+            return moment(this.schedule?.startTime).format('MM/DD/YYYY');
         },
 
         startTime() {
-            return moment(this.schedule.startTime).format('HH:mm');
+            return moment(this.schedule?.startTime).format('HH:mm');
         },
 
         viewingSetupPage() {
@@ -98,6 +101,15 @@ export default {
         user() {
             return this.$store.state.user.user;
         },
+    },
+
+    // If we did not get the related schedule from the server, just redirect the
+    // user to the home page. And let the user know why it happened.
+    created() {
+        if (isNil(this.schedule)) {
+            this.$store.dispatch('toast/error', 'Schedule could not be loaded');
+            return this.$router.push('/');
+        }
     },
 
     methods: {
