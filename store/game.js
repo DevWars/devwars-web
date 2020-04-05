@@ -1,3 +1,4 @@
+import { find, isNil } from 'lodash';
 import Http from '../services/Http';
 
 export const state = () => ({
@@ -54,6 +55,23 @@ export const mutations = {
         if (state.game != null && state.game.objectives[objectiveId] != null) {
             state.game.objectives[objectiveId].isBonus = isBonus;
         }
+    },
+
+    /**
+     * Updates the schedules templates to
+     */
+    updateScheduleTemplate(state, { language, template, scheduleId }) {
+        const schedule = find(state.schedules, function (o) {
+            return o.id === scheduleId;
+        });
+
+        // eslint-disable-next-line no-debugger
+        debugger;
+
+        if (!isNil(schedule)) return;
+        if (isNil(schedule.templates)) schedule.templates = {};
+
+        schedule.templates[language] = template;
     },
 
     updateScheduleObjective(state, { value, objectiveId, scheduleId }) {

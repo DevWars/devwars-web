@@ -29,6 +29,7 @@ export default {
 
 <style lang="scss" scoped>
 @import 'utils.scss';
+
 $toast-margin-x: 10px;
 $toast-margin-y: 10px;
 
@@ -69,18 +70,18 @@ $toast-margin-y: 10px;
             color: #fff;
         }
     }
+}
 
-    &.success {
-        border-color: $success-color;
-    }
+&.success {
+    border-color: $success-color;
+}
 
-    &.error {
-        border-color: $danger-color;
-    }
+&.error {
+    border-color: $danger-color;
+}
 
-    &.warning {
-        border-color: $warning-color;
-    }
+&.warning {
+    border-color: $warning-color;
 }
 
 toast {

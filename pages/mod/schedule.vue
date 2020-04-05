@@ -13,7 +13,7 @@
                 <Button
                     v-if="schedule.status !== 1"
                     class="success"
-                    :async-click="activate"
+                    :async-click="activateAndCreateGame"
                 >
                     Activate
                 </Button>
@@ -35,8 +35,14 @@
         </PanelHeader>
 
         <Tabs>
-            <nuxt-link :to="`/mod/schedule/setup?schedule=${schedule.id}`">Setup</nuxt-link>
-            <nuxt-link :to="`/mod/schedule/applications?schedule=${schedule.id}`">Applications</nuxt-link>
+            <nuxt-link :to="`/mod/schedule/setup?schedule=${schedule.id}`">
+                Setup
+            </nuxt-link>
+            <nuxt-link
+                :to="`/mod/schedule/applications?schedule=${schedule.id}`"
+            >
+                Applications
+            </nuxt-link>
         </Tabs>
 
         <nuxt />
@@ -58,6 +64,10 @@ export default {
         auth: names.MODERATOR,
     },
 
+    data() {
+        return {};
+    },
+
     async fetch({ store, query }) {
         await store.dispatch('game/schedules', query.schedule);
     },
@@ -66,7 +76,8 @@ export default {
         schedule() {
             const schedules = this.$store.state.game.schedules;
             return schedules.find(
-                (schedule) => schedule.id === Number(this.$route.query.schedule),
+                (schedule) =>
+                    schedule.id === Number(this.$route.query.schedule),
             );
         },
 
@@ -90,19 +101,39 @@ export default {
 
     methods: {
         async save() {
-            await this.$axios.patch(
-                `/schedules/${this.schedule.id}`,
-                this.schedule,
-            );
+            try {
+                await this.$axios.patch(
+                    `/schedules/${this.schedule.id}`,
+                    this.schedule,
+                );
+            } catch (e) {
+                this.$store.dispatch('toast/error', e.response.data);
+            }
         },
 
-        async activate() {
-            const schedule = this.schedule;
-            schedule.season = 3;
-            await this.$axios.post(
-                `/schedules/${this.schedule.id}/activate`,
-                schedule,
-            );
+        async activateAndCreateGame() {
+            try {
+                const schedule = this.schedule;
+
+                await this.$axios.post(`/schedules/${schedule.id}/activate`);
+
+                await this.$axios.post('/games', {
+                    schedule: schedule.id,
+                    season: 3,
+                    mode: schedule.mode,
+                    title: schedule.title,
+                    status: schedule.status,
+                    storage: {
+                        templates: schedule.templates,
+                        startTime: schedule.startTime,
+                        mode: schedule.mode,
+                        title: schedule.title,
+                        objectives: schedule.objectives,
+                    },
+                });
+            } catch (e) {
+                this.$store.dispatch('toast/error', e.response.data);
+            }
         },
 
         async end() {

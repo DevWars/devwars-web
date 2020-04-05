@@ -20,15 +20,24 @@ export const actions = {
     add({ commit }, toast) {
         commit('push', toast);
 
-        setTimeout(() => {
-            commit('remove', toast);
-        }, 3000);
+        // for longer messages, give the user more time to read it, otherwise it
+        // can disappear too soon.
+        let timeOutAmount = (toast.message.split(' ').length / 6) * 3000;
+        if (timeOutAmount < 3000) timeOutAmount = 3000;
+
+        // ensure all messages end with a full stop.
+        toast.message =
+            toast.message[toast.message.length - 1] === '.'
+                ? toast.message
+                : (toast.message += '.');
+
+        setTimeout(() => commit('remove', toast), timeOutAmount);
     },
 
     async error({ dispatch }, message) {
         // since in most cases and future bases we want to look to include a error message with
         // error responses from the server. If the message contains an error object or message
-        // object then use this before falling back on itsself.
+        // object then use this before falling back on its self.
         if (message.error != null) {
             message = message.error;
         } else if (message.message != null) {

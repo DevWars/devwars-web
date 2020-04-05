@@ -1,48 +1,64 @@
 <template>
-    <Card class="plain dark">
+    <Card class="dark">
         <div class="container">
-            <h3>Schedule</h3>
-            <Input v-model="date" label="Date" class="group" />
-            <Input v-model="time" label="Time" class="group" />
+            <Card class="plain dark">
+                <h3>Schedule</h3>
+                <Input v-model="date" label="Date" class="group" />
+                <Input v-model="time" label="Time" class="group" />
 
-            <h3>Game</h3>
-            <Select v-model="schedule.mode" label="Game mode" class="group">
-                <option value="Classic">
-                    Classic
-                </option>
-                <option value="Zen Garden">
-                    Zen Garden
-                </option>
-                <option value="Blitz">
-                    Blitz
-                </option>
-            </Select>
-            <Input v-model="schedule.title" label="Theme" class="group" />
+                <h3>Game</h3>
+                <Select v-model="schedule.mode" label="Game mode" class="group">
+                    <option value="Classic">
+                        Classic
+                    </option>
+                    <option value="Zen Garden">
+                        Zen Garden
+                    </option>
+                    <option value="Blitz">
+                        Blitz
+                    </option>
+                </Select>
+                <Input v-model="schedule.title" label="Theme" class="group" />
+            </Card>
 
-            <h3>Objectives</h3>
-            <div
-                v-for="objective in schedule.objectives"
-                :key="objective.id"
-                class="objective"
-            >
-                <Input
-                    v-model="objective.description"
-                    :label="`Objective ${objective.id}`"
-                    maxlength="110"
-                />
-                <SquareToggle
-                    :active="objective.isBonus"
-                    name="bonus"
-                    @change="objectiveUpdate($event, objective.id)"
-                />
-                <Button
-                    class="link muted"
-                    @click.prevent="objectiveDelete(objective.id)"
+            <Card class="dark plain">
+                <h3>Objectives</h3>
+                <div
+                    v-for="objective in schedule.objectives"
+                    :key="objective.id"
+                    class="objective"
                 >
-                    DELETE
+                    <Input
+                        v-model="objective.description"
+                        :label="`Objective ${objective.id}`"
+                        maxlength="110"
+                    />
+                    <SquareToggle
+                        :active="objective.isBonus"
+                        name="bonus"
+                        @change="objectiveUpdate($event, objective.id)"
+                    />
+                    <Button
+                        class="link muted"
+                        @click.prevent="objectiveDelete(objective.id)"
+                    >
+                        DELETE
+                    </Button>
+                </div>
+                <Button class="outline" @click="objectiveAdd">
+                    Add Objective
                 </Button>
-            </div>
-            <Button class="outline" @click="objectiveAdd">Add Objective</Button>
+            </Card>
+
+            <Card class="dark plain">
+                <h3>Templates</h3>
+                <Input
+                    label="Template HTML"
+                    @change="updateScheduleTemplate($event, 'html')"
+                />
+                <Input label="Template CSS" />
+                <Input label="Template JS" />
+            </Card>
         </div>
     </Card>
 </template>
@@ -77,7 +93,8 @@ export default {
         schedule() {
             const schedules = this.$store.state.game.schedules;
             return schedules.find(
-                (schedule) => schedule.id === Number(this.$route.query.schedule),
+                (schedule) =>
+                    schedule.id === Number(this.$route.query.schedule),
             );
         },
 
@@ -99,6 +116,16 @@ export default {
     },
 
     methods: {
+        updateScheduleTemplate(value, langauge) {
+            // eslint-disable-next-line no-debugger
+            debugger;
+            this.$store.commit('game/updateScheduleTemplate', {
+                scheduleId: this.schedule.id,
+                tempalte: value,
+                langauge,
+            });
+        },
+
         objectiveUpdate(value, objectiveId) {
             this.$store.commit('game/updateScheduleObjective', {
                 value,
@@ -136,7 +163,17 @@ export default {
 @import 'utils.scss';
 
 .container {
-    max-width: 500px;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 10px;
+
+    .Card {
+        margin: 5px;
+        max-width: 500px;
+        min-width: 300px;
+        min-height: 450px;
+    }
 }
 
 .objective {
