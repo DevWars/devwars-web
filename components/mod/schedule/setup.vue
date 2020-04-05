@@ -3,9 +3,20 @@
         <div class="container">
             <Card class="plain dark">
                 <h3>Schedule</h3>
-                <Input v-model="date" label="Date" class="group" />
-                <Input v-model="time" label="Time" class="group" />
-
+                <div class="input-container">
+                    <Input
+                        v-model="date"
+                        type="date"
+                        label="Date"
+                        class="group"
+                    />
+                    <Input
+                        v-model="time"
+                        type="time"
+                        label="Time"
+                        class="group"
+                    />
+                </div>
                 <h3>Game</h3>
                 <Select v-model="schedule.mode" label="Game mode" class="group">
                     <option value="Classic">
@@ -56,8 +67,16 @@
                     v-model="schedule.templates.html"
                     label="Template HTML"
                 />
-                <Input v-model="schedule.templates.html" label="Template CSS" />
-                <Input v-model="schedule.templates.html" label="Template JS" />
+                <Input
+                    v-model="schedule.templates.html"
+                    :is-area="true"
+                    label="Template CSS"
+                />
+                <Input
+                    v-model="schedule.templates.html"
+                    :is-area="true"
+                    label="Template JS"
+                />
             </Card>
         </div>
     </Card>
@@ -91,7 +110,7 @@ export default {
     },
 
     // date and time are setup before mount.
-    data: () => ({ activeSchedule: null }),
+    data: () => ({ time: '', date: '', activeSschedule: null }),
 
     computed: {
         startTime() {
@@ -112,8 +131,8 @@ export default {
     },
 
     beforeMount() {
-        this.date = moment(this.schedule.startTime).format('MM/DD/YYYY');
-        this.time = moment(this.schedule.startTime).format('HH:mm');
+        this.date = moment(this.schedule.startTime).utc().format('YYYY-MM-DD');
+        this.time = moment(this.schedule.startTime).utc().format('HH:mm');
     },
 
     methods: {
@@ -154,6 +173,14 @@ export default {
 
 <style lang="scss" scoped>
 @import 'utils.scss';
+
+h3 {
+    margin-bottom: 20px;
+}
+
+.input-container {
+    display: flex;
+}
 
 .container {
     display: flex;

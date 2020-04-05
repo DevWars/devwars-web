@@ -1,6 +1,21 @@
 <template>
     <div class="Input" :class="{ label }">
         <input
+            v-if="!isArea"
+            :id="fieldId || labelName"
+            ref="input"
+            :type="type"
+            :class="[{ empty: !valid }, { valid }]"
+            v-bind="$attrs"
+            @input="
+                (e) => [
+                    $emit('input', e.target.value),
+                    inputChange(e.target.value),
+                ]
+            "
+        />
+        <textarea
+            v-if="isArea"
             :id="fieldId || labelName"
             ref="input"
             :type="type"
@@ -33,6 +48,10 @@ export default {
         inputId: {
             type: String,
             default: '',
+        },
+        isArea: {
+            type: Boolean,
+            default: false,
         },
     },
 
@@ -67,7 +86,8 @@ export default {
 .Input {
     width: 100%;
 
-    input {
+    input,
+    textarea {
         @extend %form-control;
     }
 
@@ -79,7 +99,7 @@ export default {
         @extend %form-group;
     }
 
-    input[type='email']:disabled,
+    [type='email']:disabled,
     [type='text']:disabled {
         color: #484b5b;
     }

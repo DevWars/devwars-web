@@ -82,11 +82,6 @@ export default {
     },
 
     computed: {
-        schedule() {
-            const { schedule: id } = this.$route.query;
-            return this.$store.getters['game/scheduleById'](id);
-        },
-
         startDate() {
             return moment(this.schedule.startTime).format('MM/DD/YYYY');
         },
