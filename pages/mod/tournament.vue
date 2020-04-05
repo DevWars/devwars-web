@@ -10,12 +10,16 @@
                     &nbsp;&nbsp;/&nbsp;&nbsp;
                     {{ tournament.name }}
                     &nbsp;&nbsp;/&nbsp;&nbsp;
-                    <span class="mod-status preparing">{{ tournament.active ? 'Active' : 'Preparing' }}</span>
+                    <span class="mod-status preparing">{{
+                        tournament.active ? 'Active' : 'Preparing'
+                    }}</span>
                 </h2>
             </div>
 
             <ButtonGroup>
-                <Button href="/mod/tournaments" class="outline muted">Back</Button>
+                <Button href="/mod/tournaments" class="outline muted">
+                    Back
+                </Button>
                 <Button
                     v-if="tournament.active && !tournament.done"
                     class="danger"
@@ -35,9 +39,13 @@
             </ButtonGroup>
         </div>
 
-        <Tabs>
-            <nuxt-link :to="'/mod/tournament/details?tournament=' + tournament.id">Details</nuxt-link>
-        </Tabs>
+        <LinkTabs>
+            <nuxt-link
+                :to="'/mod/tournament/details?tournament=' + tournament.id"
+            >
+                Details
+            </nuxt-link>
+        </LinkTabs>
 
         <nuxt />
     </div>
@@ -46,7 +54,7 @@
 <script>
 import Http from '../../services/Http';
 import { names } from '../../utils/auth';
-import Tabs from '@/components/Tabs';
+import LinkTabs from '@/components/LinkTabs';
 import DeleteModal from '@/components/modal/DeleteModal';
 
 export default {
@@ -56,7 +64,7 @@ export default {
         auth: names.MODERATOR,
     },
 
-    components: { Tabs },
+    components: { LinkTabs },
 
     async fetch({ store, query }) {
         await store.dispatch('tournament/tournament', query.tournament);

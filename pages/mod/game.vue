@@ -34,13 +34,13 @@
             </ButtonGroup>
         </PanelHeader>
 
-        <Tabs>
+        <LinkTabs>
             <nuxt-link :to="`/mod/game/brief?game=${game.id}`">Brief</nuxt-link>
             <nuxt-link :to="`/mod/game/details?game=${game.id}`">
                 Details
             </nuxt-link>
             <nuxt-link :to="`/mod/game/edit?game=${game.id}`">Edit</nuxt-link>
-        </Tabs>
+        </LinkTabs>
 
         <nuxt />
     </div>
@@ -49,7 +49,7 @@
 <script>
 import moment from 'moment';
 import { names } from '../../utils/auth';
-import Tabs from '@/components/Tabs';
+import LinkTabs from '@/components/LinkTabs';
 import PanelHeader from '@/components/mod/PanelHeader';
 import DeleteModal from '@/components/modal/DeleteModal';
 
@@ -62,7 +62,7 @@ export default {
         auth: names.MODERATOR,
     },
 
-    components: { Tabs, PanelHeader },
+    components: { LinkTabs, PanelHeader },
 
     async fetch({ store, query }) {
         await store.dispatch('game/game', { id: query.game, players: true });

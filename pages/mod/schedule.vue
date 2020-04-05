@@ -3,11 +3,7 @@
         <PanelHeader :title="startDate" :subtitle="`@ ${startTime} UTC`">
             <ButtonGroup>
                 <Button to="/mod/schedules" class="outline muted">Back</Button>
-                <Button
-                    v-if="viewingSetupPage"
-                    class="primary"
-                    :async-click="save"
-                >
+                <Button class="primary" :async-click="save">
                     Save
                 </Button>
                 <Button
@@ -35,17 +31,19 @@
         </PanelHeader>
 
         <Tabs>
-            <nuxt-link :to="`/mod/schedule/setup?schedule=${schedule.id}`">
-                Setup
-            </nuxt-link>
-            <nuxt-link
-                :to="`/mod/schedule/applications?schedule=${schedule.id}`"
-            >
-                Applications
-            </nuxt-link>
+            <Tab name="Setup" :selected="true">
+                <Setup
+                    :schedule="schedule"
+                    @update-schedule="triggerScheduleRefresh"
+                />
+            </Tab>
+            <Tab name="Applications">
+                <Applications
+                    :schedule="schedule"
+                    @update-schedule="triggerScheduleRefresh"
+                />
+            </Tab>
         </Tabs>
-
-        <nuxt />
     </div>
 </template>
 
@@ -53,32 +51,40 @@
 import moment from 'moment';
 import { names } from '../../utils/auth';
 import Tabs from '@/components/Tabs';
+import Tab from '@/components/Tab';
+
 import PanelHeader from '@/components/mod/PanelHeader';
+import Setup from '@/components/mod/schedule/setup';
+import Applications from '@/components/mod/schedule/Applications';
 
 export default {
     name: 'DashboardSchedule',
 
-    components: { Tabs, PanelHeader },
+    components: { Tabs, Tab, PanelHeader, Setup, Applications },
 
     meta: {
         auth: names.MODERATOR,
     },
 
-    data() {
-        return {};
-    },
+    async asyncData({ query, error, $axios }) {
+        if (query.schedule == null || query.schedule.trim() === '') return {};
 
-    async fetch({ store, query }) {
-        await store.dispatch('game/schedules', query.schedule);
+        try {
+            const response = await $axios.get(`/schedules/${query.schedule}`);
+            return { schedule: response.data };
+        } catch (e) {
+            error({
+                statusCode: e.response.status,
+                description: e.response.data.error,
+                message: e.response.statusText,
+            });
+        }
     },
 
     computed: {
         schedule() {
-            const schedules = this.$store.state.game.schedules;
-            return schedules.find(
-                (schedule) =>
-                    schedule.id === Number(this.$route.query.schedule),
-            );
+            const { schedule: id } = this.$route.query;
+            return this.$store.getters['game/scheduleById'](id);
         },
 
         startDate() {
@@ -138,6 +144,10 @@ export default {
 
         async end() {
             await this.$axios.post(`/schedules/${this.schedule.id}/end`);
+        },
+
+        triggerScheduleRefresh(updatedSchedule) {
+            this.schedule = Object.assign({}, updatedSchedule);
         },
     },
 };

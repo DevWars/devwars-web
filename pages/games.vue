@@ -1,7 +1,7 @@
 <template>
     <Container class="fluid">
         <Column :sm="3" class="sidebar no-gutter">
-            <Tabs class="fluid invert">
+            <LinkTabs class="fluid invert">
                 <nuxt-link
                     v-for="current in seasons"
                     :key="current"
@@ -9,7 +9,7 @@
                 >
                     Season {{ current }}
                 </nuxt-link>
-            </Tabs>
+            </LinkTabs>
 
             <div
                 v-for="game in games"
@@ -28,7 +28,11 @@
                     <span class="theme">{{ game.title }}</span>
                 </div>
                 <div class="icons">
-                    <Icon v-show="game.videoUrl" name="brands/youtube" class="youtube" />
+                    <Icon
+                        v-show="game.videoUrl"
+                        name="brands/youtube"
+                        class="youtube"
+                    />
                 </div>
             </div>
         </Column>
@@ -44,14 +48,14 @@
 </template>
 
 <script>
-import Tabs from '../components/Tabs';
+import LinkTabs from '../components/LinkTabs';
 import Tag from '../components/Tag';
 import LargeGameDetail from '../components/game/LargeGameDetail';
 import nameFromStatus from '../utils/gameStatus';
 export default {
     name: 'Games',
 
-    components: { Tabs, Tag, LargeGameDetail },
+    components: { LinkTabs, Tag, LargeGameDetail },
 
     data() {
         return {

@@ -40,7 +40,7 @@
                     />
                     <Button
                         class="link muted"
-                        @click.prevent="objectiveDelete(objective.id)"
+                        @click="objectiveDelete(objective.id)"
                     >
                         DELETE
                     </Button>
@@ -53,11 +53,11 @@
             <Card class="dark plain">
                 <h3>Templates</h3>
                 <Input
+                    v-model="schedule.templates.html"
                     label="Template HTML"
-                    @change="updateScheduleTemplate($event, 'html')"
                 />
-                <Input label="Template CSS" />
-                <Input label="Template JS" />
+                <Input v-model="schedule.templates.html" label="Template CSS" />
+                <Input v-model="schedule.templates.html" label="Template JS" />
             </Card>
         </div>
     </Card>
@@ -65,7 +65,10 @@
 
 <script>
 import moment from 'moment';
+import { max } from 'lodash';
+
 import { names } from '../../../utils/auth';
+
 import Card from '@/components/Card';
 import Input from '@/components/form/Input';
 import Select from '@/components/form/Select';
@@ -80,24 +83,17 @@ export default {
 
     components: { Card, Input, Select, SquareToggle },
 
-    async fetch({ store }) {
-        await store.dispatch('game/schedules');
+    props: {
+        schedule: {
+            type: Object,
+            required: true,
+        },
     },
 
-    data: () => ({
-        date: '',
-        time: '',
-    }),
+    // date and time are setup before mount.
+    data: () => ({ activeSchedule: null }),
 
     computed: {
-        schedule() {
-            const schedules = this.$store.state.game.schedules;
-            return schedules.find(
-                (schedule) =>
-                    schedule.id === Number(this.$route.query.schedule),
-            );
-        },
-
         startTime() {
             const timestamp = `${this.date} ${this.time}`;
             return moment.utc(timestamp);
@@ -110,50 +106,47 @@ export default {
         },
     },
 
+    mounted() {
+        // update the internal property so we don't get bi-directional issues.
+        this.activeSchedule = this.schedule;
+    },
+
     beforeMount() {
         this.date = moment(this.schedule.startTime).format('MM/DD/YYYY');
         this.time = moment(this.schedule.startTime).format('HH:mm');
     },
 
     methods: {
-        updateScheduleTemplate(value, langauge) {
-            // eslint-disable-next-line no-debugger
-            debugger;
-            this.$store.commit('game/updateScheduleTemplate', {
-                scheduleId: this.schedule.id,
-                tempalte: value,
-                langauge,
-            });
+        updateScheduleTemplate(value, language) {
+            this.schedule.templates[language] = value;
+            this.triggerScheduleRefresh();
         },
 
         objectiveUpdate(value, objectiveId) {
-            this.$store.commit('game/updateScheduleObjective', {
-                value,
-                objectiveId,
-                scheduleId: this.schedule.id,
-            });
+            this.schedule.objective[objectiveId] = value;
+            this.triggerScheduleRefresh();
         },
 
         objectiveAdd() {
-            let id = 1;
-            Object.keys(this.schedule.objectives).map((obj) => {
-                id = this.schedule.objectives[obj].id;
-            });
-            this.$store.commit('game/addScheduleObjective', {
-                scheduleId: this.schedule.id,
-                objective: {
-                    id: id + 1,
-                    description: '',
-                    isBonus: false,
-                },
-            });
+            let currentMax = max(Object.keys(this.schedule.objectives)) || 0;
+            currentMax = Number(currentMax) + 1;
+
+            this.schedule.objectives[currentMax] = {
+                id: currentMax,
+                description: '',
+                isBonus: false,
+            };
+
+            this.triggerScheduleRefresh();
         },
 
         objectiveDelete(objectiveId) {
-            this.$store.commit('game/deleteScheduleObjective', {
-                scheduleId: this.schedule.id,
-                objectiveId,
-            });
+            delete this.schedule.objectives[objectiveId];
+            this.triggerScheduleRefresh();
+        },
+
+        triggerScheduleRefresh() {
+            this.$emit('update-schedule', this.schedule);
         },
     },
 };
