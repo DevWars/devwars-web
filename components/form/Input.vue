@@ -5,7 +5,7 @@
             :id="fieldId || labelName"
             ref="input"
             :type="type"
-            :class="[{ empty: !valid }, { valid }]"
+            :class="[inputClass, { empty: !valid }, { valid }]"
             v-bind="$attrs"
             @input="
                 (e) => [
@@ -19,8 +19,8 @@
             :id="fieldId || labelName"
             ref="input"
             :type="type"
-            :class="[{ empty: !valid }, { valid }]"
             v-bind="$attrs"
+            :class="[inputClass, { empty: !valid }, { valid }]"
             @input="
                 (e) => [
                     $emit('input', e.target.value),
@@ -42,6 +42,10 @@ export default {
             default: 'text',
         },
         label: {
+            type: String,
+            default: '',
+        },
+        inputClass: {
             type: String,
             default: '',
         },

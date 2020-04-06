@@ -60,7 +60,7 @@ export default {
             });
 
             this.$router.push({
-                path: '/mod/schedule/setup',
+                path: '/mod/schedule',
                 query: { schedule: res.data.id },
             });
 

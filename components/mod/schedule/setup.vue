@@ -1,5 +1,5 @@
 <template>
-    <Card class="dark">
+    <Card v-if="currentSchedule != null" class="dark">
         <div class="container">
             <Card class="plain dark">
                 <h3>Schedule</h3>
@@ -18,7 +18,11 @@
                     />
                 </div>
                 <h3>Game</h3>
-                <Select v-model="schedule.mode" label="Game mode" class="group">
+                <Select
+                    v-model="currentSchedule.mode"
+                    label="Game mode"
+                    class="group"
+                >
                     <option value="Classic">
                         Classic
                     </option>
@@ -29,13 +33,17 @@
                         Blitz
                     </option>
                 </Select>
-                <Input v-model="schedule.title" label="Theme" class="group" />
+                <Input
+                    v-model="currentSchedule.title"
+                    label="Theme"
+                    class="group"
+                />
             </Card>
 
             <Card class="dark plain">
                 <h3>Objectives</h3>
                 <div
-                    v-for="objective in schedule.objectives"
+                    v-for="objective in currentSchedule.objectives"
                     :key="objective.id"
                     class="objective"
                 >
@@ -63,21 +71,29 @@
 
             <Card class="dark plain">
                 <h3>Templates</h3>
-                <Input
-                    v-model="schedule.templates.html"
-                    label="Template HTML"
-                    :is-area="true"
-                />
-                <Input
-                    v-model="schedule.templates.css"
-                    :is-area="true"
-                    label="Template CSS"
-                />
-                <Input
-                    v-model="schedule.templates.js"
-                    :is-area="true"
-                    label="Template JS"
-                />
+                <div class="template-container">
+                    <Input
+                        v-model="currentSchedule.templates.html"
+                        label="Template HTML"
+                        input-class="language"
+                        input-id="lang-html"
+                        :is-area="true"
+                    />
+                    <Input
+                        v-model="currentSchedule.templates.css"
+                        :is-area="true"
+                        input-class="language"
+                        input-id="lang-css"
+                        label="Template CSS"
+                    />
+                    <Input
+                        v-model="currentSchedule.templates.js"
+                        :is-area="true"
+                        input-class="language"
+                        input-id="lang-js"
+                        label="Template JS"
+                    />
+                </div>
             </Card>
         </div>
     </Card>
@@ -85,7 +101,7 @@
 
 <script>
 import moment from 'moment';
-import { max } from 'lodash';
+import { max, defaults } from 'lodash';
 
 import { names } from '../../../utils/auth';
 
@@ -111,7 +127,12 @@ export default {
     },
 
     // date and time are setup before mount.
-    data: () => ({ time: '', date: '', activeSschedule: null }),
+    data: () => ({
+        time: '',
+        date: '',
+        currentSchedule: { objectives: {}, templates: {} },
+        defaultSchedule: { objectives: {}, templates: {} },
+    }),
 
     computed: {
         startTime() {
@@ -122,36 +143,47 @@ export default {
 
     watch: {
         startTime() {
-            this.schedule.startTime = this.startTime;
+            this.currentSchedule.startTime = this.startTime;
+        },
+        schedule() {
+            this.currentSchedule = defaults(
+                this.schedule,
+                this.defaultSchedule,
+            );
         },
     },
 
-    mounted() {
-        // update the internal property so we don't get bi-directional issues.
-        this.activeSchedule = this.schedule;
-    },
-
     beforeMount() {
-        this.date = moment(this.schedule.startTime).utc().format('YYYY-MM-DD');
-        this.time = moment(this.schedule.startTime).utc().format('HH:mm');
+        this.currentSchedule = defaults(this.schedule, this.defaultSchedule);
+        const { startTime } = this.currentSchedule;
+
+        this.date = moment(startTime)
+            .utc()
+            .format('YYYY-MM-DD');
+
+        this.time = moment(startTime)
+            .utc()
+            .format('HH:mm');
     },
 
     methods: {
         updateScheduleTemplate(value, language) {
-            this.schedule.templates[language] = value;
+            this.currentSchedule.templates[language] = value;
             this.triggerScheduleRefresh();
         },
 
         objectiveUpdate(value, objectiveId) {
-            this.schedule.objectives[objectiveId].isBonus = value;
+            this.currentSchedule.objectives[objectiveId].isBonus = value;
             this.triggerScheduleRefresh();
         },
 
         objectiveAdd() {
-            let currentMax = max(Object.keys(this.schedule.objectives)) || 0;
+            const { objectives } = this.currentSchedule;
+
+            let currentMax = max(Object.keys(objectives)) || 0;
             currentMax = Number(currentMax) + 1;
 
-            this.schedule.objectives[currentMax] = {
+            this.currentSchedule.objectives[currentMax] = {
                 id: currentMax,
                 description: '',
                 isBonus: false,
@@ -161,22 +193,38 @@ export default {
         },
 
         objectiveDelete(objectiveId) {
-            delete this.schedule.objectives[objectiveId];
+            delete this.currentSchedule.objectives[objectiveId];
             this.triggerScheduleRefresh();
         },
 
         triggerScheduleRefresh() {
-            this.$emit('update-schedule', this.schedule);
+            this.$emit('update-schedule', this.currentSchedule);
         },
     },
 };
 </script>
+
+<style lang="scss">
+.language {
+    max-width: 260px;
+    min-height: 90px;
+    resize: none;
+}
+</style>
 
 <style lang="scss" scoped>
 @import 'utils.scss';
 
 h3 {
     margin-bottom: 20px;
+}
+
+.template-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 20px;
 }
 
 .input-container {
