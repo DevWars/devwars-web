@@ -44,7 +44,6 @@
 </template>
 
 <script>
-import Http from '../services/Http';
 import Tabs from '../components/Tabs';
 import Tag from '../components/Tag';
 import LargeGameDetail from '../components/game/LargeGameDetail';
@@ -70,17 +69,21 @@ export default {
             async handler(newSeason) {
                 this.season = Number(newSeason) || 3;
 
-                const games = await Http.for('games/season').get(this.season);
+                const { data } = await this.$axios.get(
+                    `/games/season/${this.season}`,
+                );
 
-                if (games.length > 0) {
-                    this.games = games.filter(
+                if (data.length > 0) {
+                    this.games = data.filter(
                         (game) => nameFromStatus(game.status) !== 'ACTIVE',
                     );
                 }
                 if (!this.$route.query.game) {
-                    this.viewing = await Http.for('games').get(
-                        `${this.games[0].id}?players=${this.includePlayers}`,
+                    const { data } = await this.$axios.get(
+                        `/games/${this.games[0]}?players=${this.includePlayers}`,
                     );
+
+                    this.viewing = data;
                 }
             },
         },
@@ -89,9 +92,11 @@ export default {
             immediate: true,
             async handler(newGame) {
                 if (newGame) {
-                    this.viewing = await Http.for('games').get(
-                        `${newGame}?players=${this.includePlayers}`,
+                    const { data } = await this.$axios.get(
+                        `/games/${newGame}?players=${this.includePlayers}`,
                     );
+
+                    this.viewing = data;
                 }
             },
         },
