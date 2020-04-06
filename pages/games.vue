@@ -67,7 +67,8 @@ export default {
         '$route.query.season': {
             immediate: true,
             async handler(newSeason) {
-                this.season = Number(newSeason) || 3;
+                const season = Number(newSeason) || 3;
+                this.season = season;
 
                 const { data } = await this.$axios.get(
                     `/games/season/${this.season}`,
