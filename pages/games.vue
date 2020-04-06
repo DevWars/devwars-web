@@ -44,11 +44,10 @@
 </template>
 
 <script>
-import Http from '../services/Http';
 import Tabs from '../components/Tabs';
 import Tag from '../components/Tag';
 import LargeGameDetail from '../components/game/LargeGameDetail';
-
+import nameFromStatus from '../utils/gameStatus';
 export default {
     name: 'Games',
 
@@ -68,14 +67,22 @@ export default {
         '$route.query.season': {
             immediate: true,
             async handler(newSeason) {
-                this.season = Number(newSeason) || 3;
+                const season = Number(newSeason) || 3;
+                this.season = season;
 
-                this.games = await Http.for('games/season').get(this.season);
+                const games = await Http.for('games/season').get(this.season);
 
-                if (!this.$route.query.game) {
-                    this.viewing = await Http.for('games').get(
-                        `${this.games[0].id}?players=${this.includePlayers}`,
+                if (games.length > 0) {
+                    this.games = games.filter(
+                        (game) => nameFromStatus(game.status) !== 'ACTIVE',
                     );
+                }
+                if (!this.$route.query.game) {
+                    const { data } = await this.$axios.get(
+                        `/games/${this.games[0]}?players=${this.includePlayers}`,
+                    );
+
+                    this.viewing = data;
                 }
             },
         },
@@ -84,9 +91,11 @@ export default {
             immediate: true,
             async handler(newGame) {
                 if (newGame) {
-                    this.viewing = await Http.for('games').get(
-                        `${newGame}?players=${this.includePlayers}`,
+                    const { data } = await this.$axios.get(
+                        `/games/${newGame}?players=${this.includePlayers}`,
                     );
+
+                    this.viewing = data;
                 }
             },
         },
