@@ -1,9 +1,5 @@
 <template>
-    <DashboardCard
-        title="Upcoming Games"
-        icon="fa fa-calendar"
-        class="scrollable"
-    >
+    <DashboardCard title="Upcoming Games" icon="calendar" class="scrollable">
         <div
             v-for="schedule in upcoming"
             :key="schedule.id"

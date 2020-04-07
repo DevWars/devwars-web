@@ -4,37 +4,37 @@
         <ul>
             <li>
                 <nuxt-link to="/mod/dashboard">
-                    <i class="fa fa-tachometer-alt" />Dashboard
+                    <Icon name="tachometer-alt" />Dashboard
                 </nuxt-link>
             </li>
             <li>
                 <nuxt-link to="/mod/users">
-                    <i class="fa fa-user" />Users
+                    <Icon name="user" />Users
                 </nuxt-link>
             </li>
             <li>
                 <nuxt-link to="/mod/teams" class="disabled">
-                    <i class="fa fa-users" />Teams
+                    <Icon name="users" />Teams
                 </nuxt-link>
             </li>
             <li>
                 <nuxt-link to="/mod/schedules">
-                    <i class="fa fa-calendar" />Schedules
+                    <Icon name="calendar" />Schedules
                 </nuxt-link>
             </li>
             <li>
                 <nuxt-link to="/mod/games">
-                    <i class="fa fa-gamepad" />Games
+                    <Icon name="gamepad" />Games
                 </nuxt-link>
             </li>
             <li>
                 <nuxt-link to="/mod/tournaments" class="disabled">
-                    <i class="fa fa-trophy" />Tournaments
+                    <Icon name="trophy" />Tournaments
                 </nuxt-link>
             </li>
             <li>
                 <nuxt-link to="/mod/blogs" class="disabled">
-                    <i class="fa fa-newspaper" />Blog
+                    <Icon name="newspaper" />Blog
                 </nuxt-link>
             </li>
         </ul>
@@ -43,7 +43,7 @@
         <ul>
             <li>
                 <nuxt-link to="#" class="disabled">
-                    <i class="fa fa-file-alt" />Mod Doc
+                    <Icon name="file-alt" />Mod Doc
                 </nuxt-link>
             </li>
         </ul>
@@ -163,7 +163,7 @@ export default {
             opacity: 0.3;
         }
 
-        > .fa {
+        .Icon {
             width: 20px;
             margin-right: 20px;
             text-align: center;

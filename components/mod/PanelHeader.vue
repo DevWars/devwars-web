@@ -6,6 +6,7 @@
         </div>
         <div class="actions">
             <div v-if="showSearch" class="search">
+                <Icon name="search" />
                 <Input
                     class="labeless"
                     :placeholder="'Search for ' + title"
@@ -73,9 +74,7 @@ export default {
         display: flex;
         align-items: center;
 
-        &:before {
-            @extend .fa;
-            content: $fa-search;
+        .Icon {
             padding-right: 10px;
             color: $text-color-muted;
         }

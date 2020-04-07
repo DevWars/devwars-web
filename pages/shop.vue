@@ -27,9 +27,7 @@
                     <Column :lg="3" :md="4" :sm="6">
                         <div class="shop-card consumable">
                             <div class="shop-card__cover">
-                                <i
-                                    class="fa fa-question-circle shop-card__img"
-                                />
+                                <Icon name="question-circle" />
                             </div>
                             <div class="shop-card__main">
                                 <span class="shop-card__type">Consumable</span>
@@ -44,7 +42,7 @@
                     <Column :lg="3" :md="4" :sm="6">
                         <div class="shop-card wearable">
                             <div class="shop-card__cover">
-                                <i class="fa fa-chess-queen shop-card__img" />
+                                <Icon name="chess-queen" />
                             </div>
                             <div class="shop-card__main">
                                 <span class="shop-card__type">Wearable</span>
@@ -57,7 +55,7 @@
                     <Column :lg="3" :md="4" :sm="6">
                         <div class="shop-card cosmetic">
                             <div class="shop-card__cover">
-                                <i class="fa fa-camera-retro shop-card__img" />
+                                <Icon name="camera-retro" />
                             </div>
                             <div class="shop-card__main">
                                 <span class="shop-card__type">Cosmetic</span>
@@ -70,7 +68,7 @@
                     <Column :lg="3" :md="4" :sm="6">
                         <div class="shop-card consumable">
                             <div class="shop-card__cover">
-                                <i class="fa fa-shield-alt shop-card__img" />
+                                <Icon name="shield-alt" />
                             </div>
                             <div class="shop-card__main">
                                 <span class="shop-card__type">Consumable</span>
@@ -85,7 +83,7 @@
                     <Column :lg="3" :md="4" :sm="6">
                         <div class="shop-card consumable">
                             <div class="shop-card__cover">
-                                <i class="fa fa-tag shop-card__img" />
+                                <Icon name="tag" />
                             </div>
                             <div class="shop-card__main">
                                 <span class="shop-card__type">Consumable</span>
@@ -98,7 +96,7 @@
                     <Column :lg="3" :md="4" :sm="6">
                         <div class="shop-card consumable">
                             <div class="shop-card__cover">
-                                <i class="fa fa-music shop-card__img" />
+                                <Icon name="music" />
                             </div>
                             <div class="shop-card__main">
                                 <span class="shop-card__type">Consumable</span>
@@ -113,7 +111,7 @@
                     <Column :lg="3" :md="4" :sm="6">
                         <div class="shop-card consumable">
                             <div class="shop-card__cover">
-                                <i class="fa fa-ticket-alt shop-card__img" />
+                                <Icon name="ticket-alt" />
                             </div>
                             <div class="shop-card__main">
                                 <span class="shop-card__type">Consumable</span>
@@ -159,17 +157,14 @@ export default {
         background-color: $bg-color-2;
     }
 
-    &__img {
+    .Icon {
         @extend %absolute-center;
         width: 60%;
         max-width: 180px;
         margin: 0 auto;
         text-align: center;
-
-        &.fa:before {
-            font-size: $display3-size;
-            color: #fff;
-        }
+        font-size: $display3-size;
+        color: #fff;
     }
 
     &__main {

@@ -1,5 +1,5 @@
 <template>
-    <DashboardCard title="Daily Tasks" icon="fa fa-gift" class="scrollable">
+    <DashboardCard title="Daily Tasks" icon="gift" class="scrollable">
         <div class="item">
             <div class="main">
                 <Column :xs="2" class="no-gutter">

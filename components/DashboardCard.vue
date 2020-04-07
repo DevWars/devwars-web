@@ -1,7 +1,7 @@
 <template>
     <Card class="DashboardCard bezeless dark">
         <div v-if="title" class="header">
-            <i :class="icon" />
+            <Icon :name="icon" />
             <h5>{{ title }}</h5>
         </div>
 
@@ -35,21 +35,15 @@ export default {
 
 .DashboardCard {
     .header {
+        display: flex;
+        align-items: center;
         background-color: lighten($bg-color-2, 4%);
         padding: $xs-space $grid-gutter-width;
         font-size: 0;
 
-        i,
-        h5 {
-            @extend %align-middle;
-        }
-
-        i {
+        .Icon {
             padding-right: $xs-space;
-
-            &:before {
-                font-size: $p-font-size;
-            }
+            font-size: $p-font-size;
         }
 
         h5 {

@@ -8,7 +8,7 @@
         />
         <label :for="labelName">
             <div class="box">
-                <i class="fa fa-check" />
+                <Icon name="check" />
             </div>
             <span v-if="label">{{ label }}</span>
         </label>
@@ -59,7 +59,7 @@ $checkbox-size: 35px;
                 background: $success-color;
             }
 
-            .fa {
+            .Icon {
                 color: #fff;
             }
         }
@@ -73,7 +73,7 @@ $checkbox-size: 35px;
             background: #ddd;
         }
 
-        &:checked + label .fa {
+        &:checked + label .Icon {
             display: block;
         }
     }
@@ -87,7 +87,7 @@ $checkbox-size: 35px;
         border-radius: $border-radius;
     }
 
-    .fa {
+    .Icon {
         display: none;
         position: absolute;
         top: 50%;
@@ -118,7 +118,7 @@ $checkbox-size: 35px;
             height: $checkbox-size * 0.6;
         }
 
-        .fa {
+        .Icon {
             left: ($checkbox-size * 0.6) / 2;
             font-size: $font-size-sm;
         }

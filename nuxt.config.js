@@ -124,6 +124,7 @@ export default {
      ** Build configuration
      */
     build: {
+        transpile: [/^vue-awesome/],
         plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
         babel: {
             presets() {

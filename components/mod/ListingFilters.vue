@@ -7,7 +7,7 @@
         </div>
 
         <div class="actions">
-            <Button class="link fal fa-cog" />
+            <Icon name="cog" />
         </div>
     </div>
 </template>
@@ -39,10 +39,10 @@ export default {
     }
 
     .actions {
-        font-size: $h4-font-size;
+        line-height: 1;
 
-        button {
-            padding: 10px;
+        .Icon {
+            font-size: $h4-font-size;
         }
     }
 }
