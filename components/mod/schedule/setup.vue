@@ -131,7 +131,10 @@ export default {
         time: '',
         date: '',
         currentSchedule: { objectives: {}, templates: {} },
-        defaultSchedule: { objectives: {}, templates: {} },
+        defaultSchedule: {
+            objectives: {},
+            templates: { html: '', css: '', js: '' },
+        },
     }),
 
     computed: {
