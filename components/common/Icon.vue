@@ -20,9 +20,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import 'utils.scss';
+
 .Icon {
     width: auto;
     height: 1em;
+    font-size: $font-size-base;
 
     // Font scaling for Safari
     max-width: 100%;

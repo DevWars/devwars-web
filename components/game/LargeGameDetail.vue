@@ -163,7 +163,7 @@ export default {
     }
 
     &__versus {
-        font-size: $h4-font-size;
+        font-size: $font-size-lg;
     }
 }
 

@@ -185,7 +185,7 @@ export default {
         }
 
         .Icon {
-            font-size: $h4-font-size;
+            font-size: $font-size-lg;
             color: $text-color-muted;
             transition: color 0.2s ease-in-out;
 

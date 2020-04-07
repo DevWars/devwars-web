@@ -1073,13 +1073,13 @@ article {
     }
 
     h2 {
-        font-size: $h3-font-size;
+        font-size: 24px;
         color: $text-color-primary;
     }
 
     h3 {
         font-weight: $font-weight-regular;
-        font-size: $h4-font-size;
+        font-size: $font-size-lg;
         color: $text-color-primary;
     }
 
@@ -1317,7 +1317,7 @@ code {
         font-family: $alt-font-face;
         margin-bottom: $xxxs-space;
         font-weight: $font-weight-bold !important;
-        font-size: $h5-font-size !important;
+        font-size: $font-size-base !important;
         color: $brand-primary !important;
     }
 

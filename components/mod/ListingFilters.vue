@@ -42,7 +42,7 @@ export default {
         line-height: 1;
 
         .Icon {
-            font-size: $h4-font-size;
+            font-size: $font-size-lg;
         }
     }
 }

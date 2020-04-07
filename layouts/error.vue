@@ -95,7 +95,7 @@ h2 {
 
 p {
     margin-bottom: $ms-space;
-    font-size: $p-lead-font-size;
+    font-size: $font-size-xl;
     color: $text-color-secondary;
 }
 

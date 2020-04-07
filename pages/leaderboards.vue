@@ -105,7 +105,7 @@ export default {
             color: $success-color;
         }
         &.neutral {
-            color: $blue-color;
+            color: $info-color;
             font-size: 12px;
         }
         &.decrease {

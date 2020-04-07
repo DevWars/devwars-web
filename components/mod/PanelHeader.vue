@@ -53,13 +53,12 @@ export default {
     padding: 30px;
 
     .title {
-        font-size: $h2-font-size;
+        font-size: 30px;
         color: #fff;
     }
 
     .subtitle {
         margin-top: 5px;
-        font-size: $h5-font-size;
     }
 
     .actions {

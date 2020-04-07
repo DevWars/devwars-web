@@ -1,19 +1,5 @@
 /*  ========================================================================
-New Variables List
-----------------------------------------------------------------------------
-The variables below this section are messy, so we need to start reducing
-the list by moving the variables we use directly below:
-*/
-
-/* ==========================================================================
-01. Main
-========================================================================== */
-$brand-primary: #00c9ff;
-$brand-secondary: #ff007d;
-
-
-/* ==========================================================================
-01. Grid
+Grid
 ========================================================================== */
 $grid-breakpoints: (
     xs: 576px,
@@ -33,221 +19,133 @@ $grid-columns: 12;
 $grid-gutter-width: 15px;
 
 
-
-
 /*  ========================================================================
-Old Variables List
-----------------------------------------------------------------------------
-We need to move variables we need to the New Variables List above.
-*/
-/*  ========================================================================
-01.1 DevWars Colors
-======================================================================== */
-$bg-color-1                                         : #383b48;
-$bg-color-2                                         : #1e202c;
-$bg-color-3                                         : #14161f;
-$bg-color-4                                         : #0b0c11;
+Main Colors
+========================================================================== */
+$brand-primary: #00c9ff;
+$brand-secondary: #ff007d;
 
-$text-color-primary                                 : #cdd3e9;
-$text-color-secondary                               : #a2a2a9;
-$text-color-muted                                   : #484b5b;
-$text-color-disabled                                : rgba($text-color-primary, 0.22);
-$divider-color                                      : rgba($text-color-primary, 0.12);
+$bg-color-1: #383b48;
+$bg-color-2: #1e202c;
+$bg-color-3: #14161f;
+$bg-color-4: #0b0c11;
 
-$devcoin-color                                      : #f8bf3f;
-$bonus-color                                        : #ffb04a;
+$text-color-primary: #cdd3e9;
+$text-color-secondary: #a2a2a9;
+$text-color-muted: #484b5b;
+$text-color-disabled: rgba($text-color-primary, 0.22);
+$divider-color: rgba($text-color-primary, 0.12);
 
-/*  ========================================================================
-01.2 Standard Colors
-======================================================================== */
-$red-color                                          : #e74c3c;
-$yellow-color                                       : #f1c40f;
-$purple-color                                       : #8e44ad;
-$green-color                                        : #2ecc71;
-$blue-color                                         : #3498db;
-$orange-color                                       : #e67e22;
-$black-color                                        : #0A0B10;
-
-$success-color                                      : $green-color;
-$warning-color                                      : $yellow-color;
-$danger-color                                       : $red-color;
-$info-color                                         : $blue-color;
-
-$base-font-color                                    : rgba(#fff, 0.9);
-$body-bg                                            : $bg-color-4;
-
-
-/*  ========================================================================
-01.3 Technology Colors
-======================================================================== */
-$angular-color                                      : #e03237;
-$bower-color                                        : #ef5734;
-$css-color                                          : #0ebeff;
-$grunt-color                                        : #e48632;
-$gulp-color                                         : #cf4646;
-$html-color                                         : #ff7200;
-$java-color                                         : #bf8520;
-$js-color                                           : #F8DC3D;
-$jquery-color                                       : #0769ad;
-$node-color                                         : #8CC84b;
-$php-color                                          : #6172a6;
-$react-color                                        : #00d8ff;
-$ruby-color                                         : #85211c;
-$ruby-on-rails-color                                : #c00;
-$sublime-color                                      : #ff8100;
-$typescript-color                                   : #35879b;
-
-
-/*  ========================================================================
-01.4 Rank Colors
-======================================================================== */
-$bronze-color                                       : #a57e12;
-$bronze-bg                                          : desaturate(darken($bronze-color, 50%), 30%);
-
-$silver-color                                       : #e0e5e8;
-$silver-bg                                          : desaturate(darken($silver-color, 50%), 30%);;
-
-$gold-color                                         : #f9d369;
-$gold-bg                                            : desaturate(darken($gold-color, 50%), 30%);
-
-$platinum-color                                     : #e5e4e2;
-$platinum-bg                                        : desaturate(darken($platinum-color, 50%), 30%);
-
-$diamond-color                                      : #69cbf9;
-$diamond-bg                                         : desaturate(darken($diamond-color, 50%), 30%);
-
-
-/*  ========================================================================
-01.4 Brand Colors
-======================================================================== */
-$facebook-color                                     : #0b5998;
-$twitter-color                                      : #4099ff;
-$google-color                                       : #da4835;
-$youtube-color                                      : #e52d27;
-$reddit-color                                       : #ff4500;
-$twitch-color                                       : #6441a5;
-$discord-color                                      : #7289DA;
-$slack-color                                        : #e9a820;
-$cloud9-color                                       : #1aa6da;
-$github-color                                       : #4183c4;
-$linkedin-color                                     : #0077b5;
-$codepen-color                                      : #fff;
-$website-color                                      : #fff;
-$email-color                                        : #fff;
-
-
-/* ========================================================================
-03. Spacing
-======================================================================== */
-$base-space                                         : 40px;
-
-$xxxs-space                                         : $base-space / 16;
-$xxs-space                                          : $base-space / 8;
-$xs-space                                           : $base-space / 4;
-$s-space                                            : $base-space / 2;
-$m-space                                            : $base-space;
-$l-space                                            : $base-space * 2;
-$xl-space                                           : $base-space * 4;
-$xxl-space                                          : $base-space * 8;
-$xxxl-space                                         : $base-space * 16;
-
-$sm-space                                           : $base-space - $xs-space;
-$ms-space                                           : $base-space + $s-space;
-$ml-space                                           : $base-space + $l-space;
-$sxs-space                                          : $s-space - $xxs-space;
-
-
-/*  ========================================================================
-04. Type
-======================================================================== */
-$base-font-face                                     : 'Roboto', sans-serif;
-$alt-font-face                                      : 'Montserrat', sans-serif;
-$code-font-face                                     : monospace;
-
-$font-weight-book                                   : 300;
-$font-weight-regular                                : 400;
-$font-weight-semibold                               : 500;
-$font-weight-bold                                   : 700;
-$font-weight-heavy                                  : 800;
-
-$headings--color                                    : $base-font-color;
-
-$h1-transform                                       : uppercase;
-$h1-font-weight                                     : 500;
-$h1-font-family                                     : $alt-font-face;
-$h1-font-size                                       : 36px;
-
-$h2-transform                                       : none;
-$h2-font-weight                                     : 500;
-$h2-font-family                                     : $alt-font-face;
-$h2-font-size                                       : 30px;
-
-$h3-font-weight                                     : 500;
-$h3-font-size                                       : 24px;
-
-$h4-font-weight                                     : 500;
-$h4-font-size                                       : 18px;
-
-$h5-font-weight                                     : 500;
-$h5-font-size                                       : 14px;
-
-$h6-font-weight                                     : 500;
-$h6-font-size                                       : 12px;
-
-$p-line-height                                      : 1.5;
-
-$p-color                                            : #fff;
-$p-font-size                                        : 16px;
-
-$p-lead-font-size                                   : 20px;
-
-$link-color                                         : $brand-primary;
-$link-color-hover                                     : lighten($brand-primary, 10%);
-
-$display1-size                                      : 6rem;
-$display2-size                                      : 5.5rem;
-$display3-size                                      : 4.5rem;
-$display4-size                                      : 3.5rem;
-$display5-size                                      : 2.5rem;
-$display6-size                                      : 2rem;
-
-$border-radius                                      : 5px;
-$border-radius-sm                                   : 3px;
-
-
-/*  ========================================================================
-05. Globals
-======================================================================== */
-$header-height                                      : 70px;
-$header-offset                                      : 40px;
-
-$border-size                                        : 2px;
-$border-size-sm                                     : 1px;
-$border-size-lg                                     : 3px;
-
-$user-avatar-offset                                 : 40px;
+$base-font-color: rgba(#fff, 0.9);
 
 
 /* ==========================================================================
-06. Typography
+Miscellaneous Colors
 ========================================================================== */
-$font-size-base                                     : 14px;
-$font-size-xl                                       : $font-size-base * 1.4;
-$font-size-lg                                       : $font-size-base * 1.25;
-$font-size-sm                                       : $font-size-base * 0.875;
-$font-size-xs                                       : $font-size-base * 0.75;
+$black-color: #0A0B10;
+
+$success-color: #2ecc71;
+$warning-color: #f1c40f;
+$danger-color: #e74c3c;
+$info-color: #3498db;
+
+$coins-color: #f8bf3f;
+$bonus-color: #ffb04a;
+
+$css-color: #0ebeff;
+$html-color: #ff7200;
+$js-color: #F8DC3D;
+
+$bronze-color: #a57e12;
+$silver-color: #e0e5e8;
+$gold-color: #f9d369;
+$platinum-color: #e5e4e2;
+$diamond-color: #69cbf9;
+
+$facebook-color: #0b5998;
+$twitter-color: #4099ff;
+$youtube-color: #e52d27;
+$reddit-color: #ff4500;
+$twitch-color: #6441a5;
+$discord-color: #7289DA;
 
 
 /* ==========================================================================
-06. Z-index
+Spacing
 ========================================================================== */
-$zindex-max                                         : 2147483647;
-$zindex-dropdown-backdrop                           : 990;
-$zindex-navbar                                      : 1000;
-$zindex-dropdown                                    : 1000;
-$zindex-popover                                     : 1060;
-$zindex-tooltip                                     : 1070;
-$zindex-navbar-fixed                                : 1030;
-$zindex-navbar-sticky                               : 1030;
-$zindex-modal-bg                                    : 1040;
-$zindex-modal                                       : 1050;
+$base-space: 40px;
+
+$xxxs-space: $base-space / 16;
+$xxs-space: $base-space / 8;
+$xs-space: $base-space / 4;
+$s-space: $base-space / 2;
+$m-space: $base-space;
+$l-space: $base-space * 2;
+$xl-space: $base-space * 4;
+$xxl-space: $base-space * 8;
+$xxxl-space: $base-space * 16;
+
+$sm-space: $base-space - $xs-space;
+$ms-space: $base-space + $s-space;
+$ml-space: $base-space + $l-space;
+$sxs-space: $s-space - $xxs-space;
+
+
+/* ==========================================================================
+Typography
+========================================================================== */
+$base-font-face: 'Roboto', sans-serif;
+$alt-font-face: 'Montserrat', sans-serif;
+$code-font-face: monospace;
+
+$font-weight-book: 300;
+$font-weight-regular: 400;
+$font-weight-semibold: 500;
+$font-weight-bold: 700;
+$font-weight-heavy: 800;
+
+$link-color: $brand-primary;
+
+$display1-size: 6rem;
+$display2-size: 5.5rem;
+$display3-size: 4.5rem;
+$display4-size: 3.5rem;
+$display5-size: 2.5rem;
+$display6-size: 2rem;
+
+$border-radius: 5px;
+$border-radius-sm: 3px;
+
+$font-size-base: 14px;
+$font-size-xl: $font-size-base * 1.4;
+$font-size-lg: $font-size-base * 1.25;
+$font-size-sm: $font-size-base * 0.875;
+$font-size-xs: $font-size-base * 0.75;
+
+
+/* ==========================================================================
+Z-index
+========================================================================== */
+$zindex-max: 2147483647;
+$zindex-dropdown-backdrop: 990;
+$zindex-navbar: 1000;
+$zindex-dropdown: 1000;
+$zindex-popover: 1060;
+$zindex-tooltip: 1070;
+$zindex-navbar-fixed: 1030;
+$zindex-navbar-sticky: 1030;
+$zindex-modal-bg: 1040;
+$zindex-modal: 1050;
+
+
+/* ==========================================================================
+Globals
+========================================================================== */
+$header-height: 70px;
+$header-offset: 40px;
+
+$border-size: 2px;
+$border-size-sm: 1px;
+$border-size-lg: 3px;
+
+$user-avatar-offset: 40px;

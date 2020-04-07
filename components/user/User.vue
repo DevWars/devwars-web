@@ -55,10 +55,10 @@ export default {
 }
 
 .assigned-blue {
-    color: $blue-color;
+    color: $brand-primary;
 }
 
 .assigned-red {
-    color: $red-color;
+    color: $brand-secondary;
 }
 </style>

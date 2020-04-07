@@ -137,7 +137,7 @@ export default {
         font-size: 24px;
     }
     @include breakpoint(xs) {
-        font-size: $h1-font-size;
+        font-size: 36px;
     }
 }
 

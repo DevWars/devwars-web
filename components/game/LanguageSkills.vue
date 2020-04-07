@@ -168,7 +168,7 @@ export default {
 
         .Icon {
             margin: 30px;
-            font-size: $h3-font-size;
+            font-size: 24px;
             cursor: pointer;
 
             &.disabled {

@@ -181,7 +181,7 @@ export default {
     &__name {
         margin-bottom: $xxs-space;
         font-weight: $font-weight-bold;
-        font-size: $h4-font-size;
+        font-size: $font-size-lg;
         color: #fff;
     }
 
@@ -204,7 +204,7 @@ export default {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: $h4-font-size;
+            font-size: $font-size-lg;
             font-weight: $font-weight-bold;
             background-color: $bg-color-2;
             opacity: 0;
@@ -236,7 +236,7 @@ export default {
     &__link {
         text-transform: uppercase;
         font-weight: $font-weight-bold;
-        font-size: $h4-font-size;
+        font-size: $font-size-lg;
         color: $text-color-secondary;
         position: relative;
 

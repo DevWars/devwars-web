@@ -168,16 +168,16 @@ export default {
         margin-right: 5px;
 
         &.zen {
-            color: $green-color;
-            border-color: $green-color;
+            color: $success-color;
+            border-color: $success-color;
         }
         &.classic {
             color: $brand-primary;
             border-color: $brand-primary;
         }
         &.blitz {
-            color: $yellow-color;
-            border-color: $yellow-color;
+            color: #f1c40f;
+            border-color: #f1c40f;
         }
     }
 }

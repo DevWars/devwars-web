@@ -49,7 +49,7 @@ $toast-margin-y: 10px;
     .Icon {
         margin-top: 3px;
         margin-right: 20px;
-        font-size: $h4-font-size;
+        font-size: $font-size-lg;
     }
 
     .message {

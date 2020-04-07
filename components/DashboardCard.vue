@@ -43,7 +43,6 @@ export default {
 
         .Icon {
             padding-right: $xs-space;
-            font-size: $p-font-size;
         }
 
         h5 {

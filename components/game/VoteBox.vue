@@ -182,7 +182,7 @@ $voting-bar-height: 20px;
 .placeholder,
 .percent {
     padding: 0 $xs-space;
-    font-size: $h4-font-size;
+    font-size: $font-size-lg;
     font-weight: $font-weight-bold;
     color: $text-color-secondary;
 }

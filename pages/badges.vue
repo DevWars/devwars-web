@@ -108,7 +108,7 @@ export default {
 
     &__name {
         padding: $s-space 0 $s-space;
-        font-size: $h4-font-size;
+        font-size: $font-size-lg;
     }
 
     &__meta {

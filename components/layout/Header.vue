@@ -171,7 +171,7 @@ export default {
 
         .Icon {
             margin-right: $xs-space;
-            font-size: $h3-font-size;
+            font-size: 24px;
         }
 
         &:hover,

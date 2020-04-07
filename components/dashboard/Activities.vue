@@ -98,7 +98,7 @@ export default {
 
     .xp {
         font-size: 15px;
-        color: $blue-color;
+        color: $info-color;
     }
 }
 </style>

@@ -39,7 +39,7 @@ export default {
 
     .title {
         padding: 0 0 15px;
-        font-size: $h4-font-size;
+        font-size: $font-size-lg;
         text-transform: uppercase;
         font-weight: $font-weight-bold;
     }
