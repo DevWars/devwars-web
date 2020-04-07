@@ -4,7 +4,7 @@
             <div v-if="image" class="image">
                 <slot name="image" />
             </div>
-            <i v-if="icon" class="icon" :class="icon" />
+            <Icon v-if="icon" :name="icon" />
             <slot />
         </div>
     </Button>
@@ -36,8 +36,8 @@ export default {
         align-items: center;
     }
 
-    .icon {
-        padding-right: 10px;
+    .Icon {
+        margin-right: 10px;
         line-height: 1;
         font-size: 16px;
     }
@@ -50,9 +50,9 @@ export default {
     &.reverse {
         flex-direction: row-reverse;
 
-        .icon {
-            padding-right: 0;
-            padding-left: 10px;
+        .Icon {
+            margin-right: 0;
+            margin-left: 10px;
         }
     }
 }

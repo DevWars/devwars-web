@@ -17,7 +17,7 @@
                     v-show="game.videoUrl"
                     :href="game.videoUrl"
                     target="_blank"
-                    icon="fab fa-youtube"
+                    icon="brands/youtube"
                     class="youtube"
                 >
                     Watch on YouTube

@@ -2,7 +2,7 @@
     <Container class="docs">
         <Column :sm="3" class="sidebar">
             <div class="nav">
-                <ButtonIcon href="#devwars" icon="fa fa-home" class="link">DevWars</ButtonIcon>
+                <ButtonIcon href="#devwars" icon="home" class="link">DevWars</ButtonIcon>
                 <ul>
                     <li>
                         <a href="#about">About</a>
@@ -27,7 +27,7 @@
                     </li>
                 </ul>
 
-                <ButtonIcon href="#watching" icon="fa fa-eye" class="link">Watching</ButtonIcon>
+                <ButtonIcon href="#watching" icon="eye" class="link">Watching</ButtonIcon>
                 <ul>
                     <li>
                         <a href="#tools">Tools</a>
@@ -40,7 +40,7 @@
                     </li>
                 </ul>
 
-                <ButtonIcon href="#competing" icon="fa fa-gamepad" class="link">Competing</ButtonIcon>
+                <ButtonIcon href="#competing" icon="gamepad" class="link">Competing</ButtonIcon>
                 <ul>
                     <li>
                         <a href="#requirements">Requirements</a>
@@ -50,7 +50,7 @@
                     </li>
                 </ul>
 
-                <ButtonIcon href="#earning" icon="fa fa-trophy" class="link">Earning</ButtonIcon>
+                <ButtonIcon href="#earning" icon="trophy" class="link">Earning</ButtonIcon>
                 <ul>
                     <li>
                         <a href="#xp" class="disabled">XP</a>
@@ -1020,6 +1020,10 @@ $ol-bullet-size: 20px;
             opacity: 0.3;
             pointer-events: none;
         }
+    }
+
+    .ButtonIcon /deep/ .inner {
+        line-height: 1;
     }
 }
 
