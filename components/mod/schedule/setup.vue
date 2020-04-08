@@ -1,7 +1,7 @@
 <template>
-    <Card v-if="currentSchedule != null" class="dark">
+    <Card v-if="currentSchedule != null" class="dark plain">
         <div class="container">
-            <Card class="plain dark">
+            <Card class="dark">
                 <h3>Schedule</h3>
                 <div class="input-container">
                     <Input
@@ -35,12 +35,13 @@
                 </Select>
                 <Input
                     v-model="currentSchedule.title"
+                    placeholder="The title of the name, e.g Battleships!"
                     label="Theme"
                     class="group"
                 />
             </Card>
 
-            <Card class="dark plain">
+            <Card class="dark">
                 <h3>Objectives</h3>
                 <div
                     v-for="objective in currentSchedule.objectives"
@@ -69,11 +70,12 @@
                 </Button>
             </Card>
 
-            <Card class="dark plain">
+            <Card class="dark">
                 <h3>Templates</h3>
                 <div class="template-container">
                     <Input
                         v-model="currentSchedule.templates.html"
+                        placeholder="<html>Hi!</html>"
                         label="Template HTML"
                         input-class="language"
                         input-id="lang-html"
@@ -81,6 +83,7 @@
                     />
                     <Input
                         v-model="currentSchedule.templates.css"
+                        placeholder="body { background: white; }"
                         :is-area="true"
                         input-class="language"
                         input-id="lang-css"
@@ -88,6 +91,7 @@
                     />
                     <Input
                         v-model="currentSchedule.templates.js"
+                        placeholder="console.log('hi!')"
                         :is-area="true"
                         input-class="language"
                         input-id="lang-js"
