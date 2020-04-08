@@ -1,27 +1,23 @@
 <template>
     <DashboardCard title="Daily Tasks" icon="gift" class="scrollable">
-        <div class="item">
+        <div v-for="task in tasks" :key="task.id" class="item">
             <div class="main">
                 <Column :xs="2" class="no-gutter">
-                    <Devcoins :amount="500" class="xs" />
+                    <Devcoins :amount="task.amount" class="xs" />
                 </Column>
                 <Column :xs="10" class="no-gutter">
-                    Submit 5 Objectives
+                    {{ task.message }}
                 </Column>
             </div>
-            <Button class="outline sm">Claim</Button>
+            <Button class="outline sm">{{ task.action }}</Button>
         </div>
 
-        <div class="item">
-            <div class="main">
-                <Column :xs="2" class="no-gutter">
-                    <Devcoins :amount="500" class="xs" />
-                </Column>
-                <Column :xs="10" class="no-gutter">
-                    Comment on a User Submission
+        <div v-if="tasks.length === 0" class="item">
+            <div class="main no-tasks">
+                <Column :xs="15" class="no-gutter">
+                    Currently no active daily tasks 😟
                 </Column>
             </div>
-            <Button class="outline sm" disabled>Claim</Button>
         </div>
     </DashboardCard>
 </template>
@@ -33,6 +29,10 @@ import Devcoins from '@/components/Devcoins';
 export default {
     name: 'DailyPrizes',
     components: { DashboardCard, Devcoins },
+
+    data: () => ({
+        tasks: [],
+    }),
 };
 </script>
 
@@ -47,5 +47,9 @@ export default {
 
 .main {
     width: 100%;
+}
+
+.no-tasks {
+    text-align: center;
 }
 </style>
