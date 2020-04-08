@@ -7,7 +7,7 @@
                     Save
                 </Button>
                 <Button
-                    v-if="schedule.status !== 1"
+                    v-if="schedule.status === 0"
                     class="success"
                     :async-click="activateAndCreateGame"
                 >
@@ -21,9 +21,9 @@
                     End
                 </Button>
                 <Button
-                    v-if="user.role === 'ADMIN'"
-                    class="outline danger"
-                    disabled
+                    v-if="schedule.status !== 1"
+                    class="danger"
+                    :async-click="deleteScheduleById"
                 >
                     Delete
                 </Button>
@@ -128,6 +128,11 @@ export default {
             try {
                 const schedule = this.schedule;
 
+                await this.$axios.patch(
+                    `/schedules/${this.schedule.id}`,
+                    this.schedule,
+                );
+
                 await this.$axios.post(`/schedules/${schedule.id}/activate`);
 
                 await this.$axios.post('/games', {
@@ -144,13 +149,41 @@ export default {
                         objectives: schedule.objectives,
                     },
                 });
+
+                this.schedule.status = 1;
             } catch (e) {
                 this.$store.dispatch('toast/error', e.response.data);
             }
         },
 
+        /**
+         * Attempt to end the given schedule
+         */
         async end() {
-            await this.$axios.post(`/schedules/${this.schedule.id}/end`);
+            try {
+                await this.$axios.post(`/schedules/${this.schedule.id}/end`);
+                this.schedule.status = 2;
+            } catch (e) {
+                this.$store.dispatch('toast/error', e.response.data);
+            }
+        },
+
+        /**
+         * Deletes the given schedule by the id, letting the user know that it
+         * was deleted and redirecting them to the schedules page. If a error is
+         * triggered, the user will still be redirected.
+         */
+        async deleteScheduleById() {
+            try {
+                await this.$axios.delete(`/schedules/${this.schedule.id}`);
+                this.$store.dispatch(
+                    'toast/success',
+                    `Deleted schedule ${this.schedule.id}`,
+                );
+                this.$router.push({ path: '/mod/schedules' });
+            } catch (e) {
+                this.$store.dispatch('toast/error', e.response.data);
+            }
         },
 
         triggerScheduleRefresh(updatedSchedule) {
