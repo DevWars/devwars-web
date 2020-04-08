@@ -9,7 +9,9 @@
                             v-model="firstName"
                             label="First Name"
                             class="group"
-                            @input="updateForm({ values: $event, key: 'firstName' })"
+                            @input="
+                                updateForm({ values: $event, key: 'firstName' })
+                            "
                         />
                     </Column>
                     <Column :md="6">
@@ -17,7 +19,9 @@
                             v-model="lastName"
                             label="Last Name"
                             class="group"
-                            @input="updateForm({ values: $event, key: 'lastName' })"
+                            @input="
+                                updateForm({ values: $event, key: 'lastName' })
+                            "
                         />
                     </Column>
                 </Row>
@@ -50,7 +54,9 @@
                             v-model="state"
                             label="State"
                             class="group"
-                            @input="updateForm({ values: $event, key: 'state' })"
+                            @input="
+                                updateForm({ values: $event, key: 'state' })
+                            "
                         />
                     </Column>
                     <Column :md="2">
@@ -66,9 +72,13 @@
                             v-model="country"
                             label="Select Country"
                             class="group"
-                            @input="updateForm({ values: $event, key: 'country' })"
+                            @input="
+                                updateForm({ values: $event, key: 'country' })
+                            "
                         >
-                            <option v-for="country in countries" :key="country">{{ country }}</option>
+                            <option v-for="country in countries" :key="country">
+                                {{ country }}
+                            </option>
                         </Select>
                     </Column>
                 </Row>
@@ -79,6 +89,7 @@
                             v-model="dob"
                             label="Date of Birth"
                             class="group"
+                            type="date"
                             @input="updateForm({ values: $event, key: 'dob' })"
                         />
                     </Column>
@@ -165,6 +176,7 @@
 <script>
 import { getNameList } from 'country-list';
 import { mapState } from 'vuex';
+import moment from 'moment';
 
 import Avatar from '@/components/user/Avatar';
 import FileChooser from '@/components/FileChooser';
@@ -207,7 +219,7 @@ export default {
             state: (state) => state.user.profile.state,
             zip: (state) => state.user.profile.zip,
             country: (state) => state.user.profile.country,
-            dob: (state) => state.user.profile.dob,
+            dob: (state) => moment(state.user.profile.dob).format('YYYY-MM-DD'),
             sex: (state) => state.user.profile.sex,
             about: (state) => state.user.profile.about,
             websiteUrl: (state) => state.user.profile.websiteUrl,
