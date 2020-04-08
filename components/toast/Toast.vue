@@ -2,7 +2,7 @@
     <div class="Toast" :class="[toast.type]">
         <Icon :name="icons[toast.type]" />
         <p class="message">{{ toast.message }}</p>
-        <Icon name="times" class="close" />
+        <Icon name="times" class="close" @click="remove" />
     </div>
 </template>
 
@@ -24,6 +24,12 @@ export default {
             error: 'times-circle',
         },
     }),
+
+    methods: {
+        remove() {
+            this.$store.dispatch('toast/remove', this.toast);
+        },
+    },
 };
 </script>
 

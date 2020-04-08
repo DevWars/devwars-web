@@ -1,3 +1,5 @@
+import { filter } from 'lodash';
+
 export const state = () => ({
     id: 0,
     toasts: [],
@@ -12,7 +14,7 @@ export const mutations = {
     },
 
     remove(state, toast) {
-        state.toasts.splice(state.toasts.indexOf(toast), 1);
+        state.toasts = filter(state.toasts, (t) => t.id !== toast.id);
     },
 };
 
@@ -32,6 +34,10 @@ export const actions = {
                 : (toast.message += '.');
 
         setTimeout(() => commit('remove', toast), timeOutAmount);
+    },
+
+    remove({ commit }, toast) {
+        commit('remove', toast);
     },
 
     async error({ dispatch }, message) {
