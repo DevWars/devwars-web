@@ -11,6 +11,7 @@
 <script>
 export default {
     name: 'SquareToggle',
+
     props: {
         name: {
             type: String,
@@ -42,11 +43,11 @@ export default {
 
     &.blue.active,
     &.blue:hover {
-        background-color: $blue-color;
+        background-color: $brand-primary;
     }
     &.red.active,
     &.red:hover {
-        background-color: $red-color;
+        background-color: $brand-secondary;
     }
     &.bonus.active,
     &.bonus:hover {

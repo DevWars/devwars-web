@@ -15,16 +15,16 @@
                         {{ language.name | uppercase }}
                     </div>
                     <div class="reel">
-                        <div
-                            class="arrow fa fa-chevron-left"
+                        <Icon
+                            name="chevron-left"
                             :class="{ disabled: language.skill <= 1 }"
                             @click="language.skill--"
                         />
                         <div class="score">
                             {{ language.skill }}
                         </div>
-                        <div
-                            class="arrow fa fa-chevron-right"
+                        <Icon
+                            name="chevron-right"
                             :class="{ disabled: language.skill > 4 }"
                             @click="language.skill++"
                         />
@@ -166,9 +166,9 @@ export default {
             font-weight: $font-weight-heavy;
         }
 
-        .arrow {
-            padding: 30px;
-            font-size: $h3-font-size;
+        .Icon {
+            margin: 30px;
+            font-size: 24px;
             cursor: pointer;
 
             &.disabled {

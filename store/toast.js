@@ -38,6 +38,10 @@ export const actions = {
         await dispatch('add', { type: 'error', message });
     },
 
+    async warning({ dispatch }, message) {
+        await dispatch('add', { type: 'warning', message });
+    },
+
     async success({ dispatch }, message) {
         await dispatch('add', { type: 'success', message });
     },

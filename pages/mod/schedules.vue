@@ -1,11 +1,7 @@
 <template>
     <div>
         <PanelHeader title="Schedules" show-search>
-            <ButtonIcon
-                icon="fa fa-plus"
-                class="primary sm"
-                @click="createSchedule"
-            >
+            <ButtonIcon icon="plus" class="primary sm" @click="createSchedule">
                 Add Schedule
             </ButtonIcon>
         </PanelHeader>

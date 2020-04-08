@@ -1,17 +1,15 @@
 <template>
-    <DashboardCard title="Moderation" icon="fas fa-gavel" class="scrollable">
-        <div class="schedule">
-            <div class="main">
-                <Column :xs="2" class="no-gutter status">
-                    <Button
-                        :disabled="!isAdmin"
-                        class="danger"
-                        @click="deleteUser"
-                    >
-                        Delete
-                    </Button>
-                </Column>
-            </div>
+    <DashboardCard class="Moderation scrollable" title="Moderation" icon="gavel">
+        <div class="main">
+            <Column :xs="2" class="no-gutter status">
+                <Button
+                    :disabled="!isAdmin"
+                    class="danger"
+                    @click="deleteUser"
+                >
+                    Delete
+                </Button>
+            </Column>
         </div>
     </DashboardCard>
 </template>
@@ -65,27 +63,18 @@ export default {
 <style lang="scss" scoped>
 @import 'utils.scss';
 
-.schedule {
-    @extend %flex-justify;
-    padding: $grid-gutter-width;
-    border-bottom: 1px solid $divider-color;
+.Moderation {
+    /deep/ {
+        .main {
+            @extend %flex-justify;
+            width: 100%;
+            padding: $grid-gutter-width;
+            border-bottom: 1px solid $divider-color;
+        }
 
-    .status {
-        color: $text-color-muted;
-    }
-
-    &.entered .status {
-        color: $warning-color;
-    }
-}
-
-/deep/ {
-    .main {
-        width: 100%;
-    }
-
-    .actions {
-        width: 100px;
+        .actions {
+            width: 100px;
+        }
     }
 }
 </style>

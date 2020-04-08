@@ -3,7 +3,7 @@
         <ButtonIcon
             v-if="!hasDiscord"
             :href="discordUrl"
-            icon="fab fa-discord"
+            icon="brands/discord"
             class="discord"
         >
             Connect Discord
@@ -11,7 +11,7 @@
         <ButtonIcon
             v-else
             class="outline danger"
-            icon="fab fa-discord"
+            icon="brands/discord"
             @click="removeProvider('discord')"
         >
             Disconnect Discord

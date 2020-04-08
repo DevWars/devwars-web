@@ -6,6 +6,7 @@
         </div>
         <div class="actions">
             <div v-if="showSearch" class="search">
+                <Icon name="search" />
                 <Input
                     class="labeless"
                     :placeholder="'Search for ' + title"
@@ -52,13 +53,12 @@ export default {
     padding: 30px;
 
     .title {
-        font-size: $h2-font-size;
+        font-size: 30px;
         color: #fff;
     }
 
     .subtitle {
         margin-top: 5px;
-        font-size: $h5-font-size;
     }
 
     .actions {
@@ -73,9 +73,7 @@ export default {
         display: flex;
         align-items: center;
 
-        &:before {
-            @extend .fa;
-            content: $fa-search;
+        .Icon {
             padding-right: 10px;
             color: $text-color-muted;
         }

@@ -121,7 +121,7 @@ export default {
         display: inline-block;
         width: 25%;
         padding: 0;
-        font-size: $h1-font-size;
+        font-size: 36px;
         text-align: center;
     }
 
@@ -146,7 +146,7 @@ export default {
     line-height: 1.4;
 
     &__time {
-        font-size: $h3-font-size;
+        font-size: 24px;
     }
 }
 </style>

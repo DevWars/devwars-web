@@ -66,50 +66,11 @@
             </div>
 
             <div class="bottom">
-                <ul class="socials">
-                    <li>
-                        <a href="http://www.twitch.tv/devwars" target="_blank">
-                            <i class="fab fa-twitch" />
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="https://www.discord.gg/devwars"
-                            target="_blank"
-                        >
-                            <i class="fab fa-discord" />
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="https://www.youtube.com/c/DevWars"
-                            target="_blank"
-                        >
-                            <i class="fab fa-youtube" />
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="http://www.reddit.com/r/devwars"
-                            target="_blank"
-                        >
-                            <i class="fab fa-reddit" />
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="https://www.facebook.com/DevWars"
-                            target="_blank"
-                        >
-                            <i class="fab fa-facebook" />
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://twitter.com/devwarstv" target="_blank">
-                            <i class="fab fa-twitter" />
-                        </a>
-                    </li>
-                </ul>
+                <div class="socials">
+                    <a v-for="(link, icon) in socials" :key="icon" :href="link" target="_blank">
+                        <Icon :name="`brands/${icon}`" :class="icon" />
+                    </a>
+                </div>
 
                 <div class="legal">
                     <span>
@@ -125,6 +86,18 @@
 <script>
 export default {
     name: 'ComponentFooter',
+
+    data: () => ({
+        socials: {
+            twitch: 'http://www.twitch.tv/devwars',
+            discord: 'https://www.discord.gg/devwars',
+            youtube: 'https://www.youtube.com/c/DevWars',
+            reddit: 'http://www.reddit.com/r/devwars',
+            facebook: 'https://www.facebook.com/DevWars',
+            twitter: 'https://twitter.com/devwarstv',
+        },
+    }),
+
     computed: {
         currentYear: () => new Date().getFullYear(),
     },
@@ -200,38 +173,29 @@ export default {
 }
 
 .socials {
-    @extend %list-unstyled;
+    /* display: flex; */
     text-align: center;
-    font-size: 0;
-
-    li {
-        display: inline-block;
-    }
 
     a {
         display: inline-block;
         padding: $grid-gutter-width;
-        font-size: $h4-font-size;
-        color: $text-color-muted;
-        transition: color 0.2s ease-in-out;
 
         @include breakpoint(xs) {
             padding: $xs-space;
         }
 
-        // Variations
-        @mixin social($icon, $color) {
-            &:hover .fa-#{$icon} {
-                color: $color;
-            }
-        }
+        .Icon {
+            font-size: $font-size-lg;
+            color: $text-color-muted;
+            transition: color 0.2s ease-in-out;
 
-        @include social(facebook, $facebook-color);
-        @include social(twitter, $twitter-color);
-        @include social(reddit, $reddit-color);
-        @include social(twitch, $twitch-color);
-        @include social(discord, $discord-color);
-        @include social(youtube, $youtube-color);
+            &.facebook:hover { color: $facebook-color }
+            &.twitter:hover { color: $twitter-color }
+            &.reddit:hover { color: $reddit-color }
+            &.twitch:hover { color: $twitch-color }
+            &.discord:hover { color: $discord-color }
+            &.youtube:hover { color: $youtube-color }
+        }
     }
 }
 

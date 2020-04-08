@@ -6,7 +6,9 @@
                     <Button
                         class="link burger-menu"
                         @click="toggleMobileMenu"
-                    />
+                    >
+                        <Icon name="bars" />
+                    </Button>
 
                     <nuxt-link to="/" class="logo">
                         <img
@@ -159,17 +161,17 @@ export default {
 
     .burger-menu.Button {
         display: none;
-        padding: $xs-space $xs-space $xs-space 0;
+        padding: 0;
+        line-height: 1;
         margin-right: $xs-space;
 
         @include breakpoint(md) {
             display: inline-block;
         }
 
-        &:before {
-            @extend .fa;
-            content: $fa-bars;
-            font-size: $h3-font-size;
+        .Icon {
+            margin-right: $xs-space;
+            font-size: 24px;
         }
 
         &:hover,

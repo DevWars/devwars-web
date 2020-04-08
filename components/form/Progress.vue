@@ -56,7 +56,7 @@ export default {
         background-color: $brand-secondary;
     }
     &.yellow {
-        background-color: $yellow-color;
+        background-color: $bonus-color;
     }
 }
 

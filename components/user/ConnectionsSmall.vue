@@ -1,25 +1,24 @@
 <template>
-    <div>
-        <span
+    <div class="ConnectionsSmall">
+        <Icon
             v-for="connection in connections"
             :key="connection.provider"
-            class="connection"
-        >
-            <i
-                :title="connection.username"
-                :class="`fab fa-${connection.provider.toLowerCase()}`"
-            />
-        </span>
+            :name="`brands/${connection.provider.toLowerCase()}`"
+            :title="connection.username"
+        />
     </div>
 </template>
 
 <script>
 export default {
+    name: 'ConnectionsSmall',
+
     props: {
         connections: {
             type: Array,
             default: () => [],
         },
+
         size: {
             type: String,
             required: false,
@@ -30,7 +29,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.connection {
-    padding: 5px;
+.ConnectionsSmall {
+    .Icon {
+        margin: 5px;
+    }
 }
 </style>

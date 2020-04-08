@@ -1,20 +1,29 @@
 <template>
     <div class="Toast" :class="[toast.type]">
-        <i class="icon" />
+        <Icon :name="icons[toast.type]" />
         <p class="message">{{ toast.message }}</p>
-        <button class="close" />
+        <Icon name="times" class="close" />
     </div>
 </template>
 
 <script>
 export default {
     name: 'Toast',
+
     props: {
         toast: {
             type: Object,
             required: true,
         },
     },
+
+    data: () => ({
+        icons: {
+            success: 'check',
+            warning: 'exclamation-triangle',
+            error: 'times-circle',
+        },
+    }),
 };
 </script>
 
@@ -37,14 +46,10 @@ $toast-margin-y: 10px;
     color: #fff;
     position: relative;
 
-    .icon {
+    .Icon {
         margin-top: 3px;
         margin-right: 20px;
-        &:before {
-            @extend .fa;
-            content: $fa-info-circle;
-            font-size: $h4-font-size;
-        }
+        font-size: $font-size-lg;
     }
 
     .message {
@@ -52,35 +57,30 @@ $toast-margin-y: 10px;
         color: $text-color-primary;
     }
 
-    .close {
-        &:before {
-            @extend .fa;
-            content: $fa-times;
-            position: absolute;
-            top: 0;
-            right: 0;
-            padding: $toast-margin-x;
-            color: $text-color-muted;
-        }
+    .Icon.close {
+        position: absolute;
+        top: $toast-margin-y;
+        right: 0;
+        font-size: 14px;
+        color: $text-color-muted;
+        cursor: pointer;
 
-        &:hover:before {
+        &:hover {
             color: #fff;
         }
     }
 
-    @mixin toast-type($name, $color, $icon) {
-        .#{$name} {
-            border-color: $color;
-
-            .icon:before {
-                content: $icon;
-            }
-        }
+    &.success {
+        border-color: $success-color;
     }
 
-    @include toast-type(success, $success-color, $fa-check);
-    @include toast-type(error, $danger-color, $fa-times-circle);
-    @include toast-type(warning, $warning-color, $fa-exclamation-triangle);
+    &.error {
+        border-color: $danger-color;
+    }
+
+    &.warning {
+        border-color: $warning-color;
+    }
 }
 
 toast {

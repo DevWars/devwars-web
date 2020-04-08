@@ -81,7 +81,7 @@ export default {
 .points {
     display: flex;
     align-items: center;
-    font-size: $h1-font-size;
+    font-size: 36px;
     font-weight: $font-weight-bold;
 
     &.aced:after {

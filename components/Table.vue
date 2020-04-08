@@ -49,14 +49,6 @@ export default {
         text-align: left;
         color: $text-color-secondary;
         cursor: pointer;
-
-        &:not(:last-of-type):after {
-            @extend .fa;
-            content: $fa-caret-down;
-            display: inline-block;
-            margin-left: 20px;
-            vertical-align: middle;
-        }
     }
 
     td {

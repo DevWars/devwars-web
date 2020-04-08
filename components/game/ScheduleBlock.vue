@@ -20,7 +20,10 @@
                 <h4 class="duration">{{ durations[schedule.mode] || '30' }}</h4>
             </td>
             <td>
-                <div class="show">DevWars Live</div>
+                <div class="show">
+                    <Icon name="trophy" />
+                    <span>DevWars Live</span>
+                </div>
                 <div class="title">{{ description(schedule) }}</div>
             </td>
             <td>
@@ -117,11 +120,11 @@ export default {
 }
 
 .tournament .show {
+    display: flex;
+    align-items: Center;
     color: $bonus-color;
 
-    &:before {
-        @extend .far;
-        content: $fa-trophy;
+    .Icon {
         margin-right: $xs-space;
     }
 }

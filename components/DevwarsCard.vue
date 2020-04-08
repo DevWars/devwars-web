@@ -52,7 +52,7 @@ export default {
 
     .title {
         margin-bottom: $m-space;
-        font-size: $h2-font-size;
+        font-size: 30px;
     }
 
     .desc {

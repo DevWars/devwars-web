@@ -16,6 +16,8 @@
             <slot />
         </select>
         <label v-if="label" :for="labelName">{{ label }}</label>
+
+        <Icon name="caret-down" />
     </div>
 </template>
 
@@ -75,9 +77,7 @@ export default {
         }
     }
 
-    &:after {
-        @extend .fa;
-        content: $fa-caret-down;
+    .Icon {
         color: $text-color-secondary;
         position: absolute;
         right: 0;

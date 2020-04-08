@@ -1,8 +1,8 @@
 <template>
-    <DashboardCard title="Badges" icon="fa fa-shield">
+    <DashboardCard title="Badges" icon="shield">
         <div class="dashboard-badges">
             <div class="overview">
-                <i class="icon fa fa-shield" />
+                <Icon name="shield" />
                 <p class="total">{{ owned.length }}</p>
             </div>
 
@@ -23,13 +23,16 @@ import Progress from '@/components/form/Progress';
 
 export default {
     name: 'DashboardBadges',
+
     components: { DashboardCard, Progress },
+
     props: {
         owned: {
             type: Object,
             required: true,
         },
     },
+
     computed: {
         badges() {
             return this.$store.state.badges.badges;
@@ -49,24 +52,18 @@ export default {
 }
 
 .overview {
+    display: flex;
+    align-items: center;
     padding-bottom: $xs-space;
-}
 
-.icon,
-.total {
-    @extend %align-middle;
-}
+    .total {
+        line-height: 50px;
+        font-size: 48px;
+        font-weight: 400;
+    }
 
-.total {
-    line-height: 50px;
-    font-size: 48px;
-    font-weight: 400;
-}
-
-.icon {
-    padding-right: 10px;
-
-    &:before {
+    .Icon {
+        padding-right: 10px;
         font-size: 38px;
     }
 }

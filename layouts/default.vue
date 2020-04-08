@@ -57,7 +57,7 @@ html {
 body {
     height: 100%;
     color: $base-font-color;
-    background: $body-bg;
+    background: $bg-color-4;
     -webkit-font-smoothing: antialiased;
     transition: transform 300ms ease-in-out; // mobile-nav
 
@@ -110,46 +110,40 @@ h6 {
     margin: 0;
     line-height: normal;
     word-wrap: break-word;
+    font-weight: $font-weight-semibold;
 }
 
 h1 {
-    text-transform: $h1-transform;
-    font-weight: $h1-font-weight;
-    font-family: $h1-font-family;
-    font-size: $h1-font-size;
+    text-transform: uppercase;
+    font-family: $alt-font-face;
+    font-size: 36px;
 }
 
 h2 {
-    text-transform: $h2-transform;
-    font-weight: $h2-font-weight;
-    font-family: $h2-font-family;
-    font-size: $h2-font-size;
+    font-family: $alt-font-face;
+    font-size: 30px;
 }
 
 h3 {
-    font-weight: $h3-font-weight;
-    font-size: $h3-font-size;
+    font-size: 24px;
 }
 
 h4 {
-    font-weight: $h4-font-weight;
-    font-size: $h4-font-size;
+    font-size: 18px;
 }
 
 h5 {
-    font-weight: $h5-font-weight;
-    font-size: $h5-font-size;
+    font-size: 14px;
 }
 
 h6 {
-    font-weight: $h6-font-weight;
-    font-size: $h6-font-size;
+    font-size: 12px;
 }
 
 p {
-    color: $p-color;
-    line-height: $p-line-height;
-    font-size: $p-font-size;
+    color: #fff;
+    line-height: 1.5;
+    font-size: 16px;
     word-wrap: break-word;
 }
 

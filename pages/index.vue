@@ -256,7 +256,7 @@ $home-card-margin: 80px;
         margin-bottom: 10px;
 
         @include breakpoint(sm) {
-            font-size: $h1-font-size;
+            font-size: 36px;
         }
     }
 
@@ -375,7 +375,6 @@ $home-card-margin: 80px;
 
     &__name {
         margin-top: $grid-gutter-width;
-        font-size: $h5-font-size;
     }
 }
 </style>

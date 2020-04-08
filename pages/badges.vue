@@ -13,7 +13,7 @@
                         >
                             <div class="badge-card__meta">
                                 <span class="badge-card__global">
-                                    <i class="fa fa-group"></i>
+                                    <Icon name="group" />
                                 </span>
                             </div>
                             <img class="badge-card__img" :src="image(badge)">
@@ -108,7 +108,7 @@ export default {
 
     &__name {
         padding: $s-space 0 $s-space;
-        font-size: $h4-font-size;
+        font-size: $font-size-lg;
     }
 
     &__meta {
@@ -118,8 +118,9 @@ export default {
 
     &__global {
         color: $text-color-muted;
-        .fa {
-            padding-right: 5px;
+
+        .Icon {
+            margin-right: 5px;
         }
     }
 

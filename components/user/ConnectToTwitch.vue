@@ -3,7 +3,7 @@
         <ButtonIcon
             v-if="!hasTwitch"
             :href="twitchUrl"
-            icon="fab fa-twitch"
+            icon="brands/twitch"
             class="twitch"
         >
             Connect Twitch
@@ -11,7 +11,7 @@
         <ButtonIcon
             v-else
             class="outline danger"
-            icon="fab fa-twitch"
+            icon="brands/twitch"
             @click="removeProvider('twitch')"
         >
             Disconnect Twitch

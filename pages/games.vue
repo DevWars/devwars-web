@@ -28,7 +28,7 @@
                     <span class="theme">{{ game.title }}</span>
                 </div>
                 <div class="icons">
-                    <i v-show="game.videoUrl" class="youtube fab fa-youtube" />
+                    <Icon v-show="game.videoUrl" name="brands/youtube" class="youtube" />
                 </div>
             </div>
         </Column>
@@ -159,7 +159,7 @@ export default {
         font-size: 20px;
     }
 
-    .youtube {
+    .Icon.youtube {
         color: $youtube-color;
         font-size: 24px;
     }
@@ -168,16 +168,16 @@ export default {
         margin-right: 5px;
 
         &.zen {
-            color: $green-color;
-            border-color: $green-color;
+            color: $success-color;
+            border-color: $success-color;
         }
         &.classic {
             color: $brand-primary;
             border-color: $brand-primary;
         }
         &.blitz {
-            color: $yellow-color;
-            border-color: $yellow-color;
+            color: #f1c40f;
+            border-color: #f1c40f;
         }
     }
 }

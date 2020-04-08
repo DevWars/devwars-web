@@ -1,7 +1,7 @@
 <template>
     <div>
         <PanelHeader title="Tournament">
-            <ButtonIcon icon="fa fa-plus" class="primary sm">Add Tournament</ButtonIcon>
+            <ButtonIcon icon="plus" class="primary sm">Add Tournament</ButtonIcon>
         </PanelHeader>
 
         <ListingFilters />

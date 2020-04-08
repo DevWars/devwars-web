@@ -91,7 +91,7 @@ export default {
 
     .name {
         padding: 0 $xs-space;
-        font-size: $h4-font-size;
+        font-size: $font-size-lg;
     }
 
     .languages > strong {

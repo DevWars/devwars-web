@@ -1,11 +1,7 @@
 <template>
     <div>
         <PanelHeader title="Games" show-search>
-            <ButtonIcon
-                icon="fa fa-plus"
-                class="primary sm"
-                @click="createGame"
-            >
+            <ButtonIcon icon="plus" class="primary sm" @click="createGame">
                 Add Game
             </ButtonIcon>
         </PanelHeader>

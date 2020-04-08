@@ -3,7 +3,7 @@
         <h1>Add registrant</h1>
         <form @submit.prevent="addRegistrant">
             <div class="search">
-                <i class="fa fa-search"></i>
+                <Icon name="search" />
                 <Input
                     v-model="username"
                     placeholder="Username"
@@ -107,7 +107,7 @@ export default {
         align-items: center;
         position: relative;
 
-        .fa {
+        .Icon {
             margin-right: $grid-gutter-width;
             color: $text-color-secondary;
         }

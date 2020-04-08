@@ -2,7 +2,7 @@
     <Container class="docs">
         <Column :sm="3" class="sidebar">
             <div class="nav">
-                <ButtonIcon href="#devwars" icon="fa fa-home" class="link">DevWars</ButtonIcon>
+                <ButtonIcon href="#devwars" icon="home" class="link">DevWars</ButtonIcon>
                 <ul>
                     <li>
                         <a href="#about">About</a>
@@ -27,7 +27,7 @@
                     </li>
                 </ul>
 
-                <ButtonIcon href="#watching" icon="fa fa-eye" class="link">Watching</ButtonIcon>
+                <ButtonIcon href="#watching" icon="eye" class="link">Watching</ButtonIcon>
                 <ul>
                     <li>
                         <a href="#tools">Tools</a>
@@ -40,7 +40,7 @@
                     </li>
                 </ul>
 
-                <ButtonIcon href="#competing" icon="fa fa-gamepad" class="link">Competing</ButtonIcon>
+                <ButtonIcon href="#competing" icon="gamepad" class="link">Competing</ButtonIcon>
                 <ul>
                     <li>
                         <a href="#requirements">Requirements</a>
@@ -50,7 +50,7 @@
                     </li>
                 </ul>
 
-                <ButtonIcon href="#earning" icon="fa fa-trophy" class="link">Earning</ButtonIcon>
+                <ButtonIcon href="#earning" icon="trophy" class="link">Earning</ButtonIcon>
                 <ul>
                     <li>
                         <a href="#xp" class="disabled">XP</a>
@@ -342,7 +342,7 @@
                                     target="_blank"
                                 >
                                     <div class="tools__circle">
-                                        <i class="fa fa-code" />
+                                        <Icon name="code" />
                                     </div>
                                     <div class="tools__main">
                                         <h3>Live Code</h3>
@@ -359,7 +359,7 @@
                                     target="_blank"
                                 >
                                     <div class="tools__circle">
-                                        <i class="fa fa-headphones" />
+                                        <Icon name="headphones" />
                                     </div>
                                     <div class="tools__main">
                                         <h3>Eavesdrop</h3>
@@ -671,18 +671,15 @@
                         <h3>Communication</h3>
                         <Row class="communications normalize section">
                             <Column :sm="3">
-                                <i class="fa fa-microphone" />
+                                <Icon name="microphone" />
                                 <p>Microphone</p>
                             </Column>
                             <Column :sm="3">
-                                <i class="fab fa-discord" />
+                                <Icon name="brands/discord" />
                                 <p>Discord</p>
                             </Column>
                             <Column :sm="3">
-                                <img
-                                    src="~assets/img/docs/en-lang.png"
-                                    title="Speak English"
-                                />
+                                <img src="@/assets/img/docs/en-lang.png" title="Speak English" />
                                 <p>English</p>
                             </Column>
                         </Row>
@@ -1024,6 +1021,10 @@ $ol-bullet-size: 20px;
             pointer-events: none;
         }
     }
+
+    .ButtonIcon /deep/ .inner {
+        line-height: 1;
+    }
 }
 
 article {
@@ -1072,13 +1073,13 @@ article {
     }
 
     h2 {
-        font-size: $h3-font-size;
+        font-size: 24px;
         color: $text-color-primary;
     }
 
     h3 {
         font-weight: $font-weight-regular;
-        font-size: $h4-font-size;
+        font-size: $font-size-lg;
         color: $text-color-primary;
     }
 
@@ -1249,25 +1250,12 @@ code {
 .communications {
     text-align: center;
 
-    .fa,
-    .fab,
-    .far,
-    .fal,
-    img {
-        opacity: 0.88;
-    }
-
-    .fa,
-    .fab,
-    .far,
-    .fal {
-        font-size: 48px;
-    }
-
-    img {
+    img,
+    .Icon {
         display: block;
         height: 48px;
         margin: 0 auto;
+        opacity: 0.88;
     }
 }
 
@@ -1313,7 +1301,7 @@ code {
         overflow: hidden;
         position: relative;
 
-        .fa {
+        .Icon {
             @extend %absolute-center;
             font-size: 50px * 0.4;
             color: $text-color-secondary;
@@ -1329,7 +1317,7 @@ code {
         font-family: $alt-font-face;
         margin-bottom: $xxxs-space;
         font-weight: $font-weight-bold !important;
-        font-size: $h5-font-size !important;
+        font-size: $font-size-base !important;
         color: $brand-primary !important;
     }
 

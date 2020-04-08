@@ -34,6 +34,6 @@ export default {
 @import 'utils.scss';
 
 .DevcoinIcon {
-    fill: $devcoin-color;
+    fill: $coins-color;
 }
 </style>
