@@ -277,5 +277,10 @@ export default {
 
 .no-players {
     text-align: center;
+    margin-top: 25px;
+    p {
+        color: $brand-secondary;
+        font-weight: normal;
+    }
 }
 </style>

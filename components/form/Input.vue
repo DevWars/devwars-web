@@ -1,12 +1,14 @@
 <template>
     <div class="Input" :class="{ label }">
         <input
-            v-if="!isArea"
-            :id="fieldId || labelName"
+            v-if="!textarea"
+            :id="id"
             ref="input"
             :type="type"
             :class="[inputClass, { empty: !valid }, { valid }]"
             v-bind="$attrs"
+            :value="value"
+            :placeholder="placeholder"
             @input="
                 (e) => [
                     $emit('input', e.target.value),
@@ -15,16 +17,18 @@
             "
         />
         <textarea
-            v-if="isArea"
-            :id="fieldId || labelName"
+            v-if="textarea"
+            :id="id"
             ref="input"
             :type="type"
             v-bind="$attrs"
+            :value="value"
+            :placeholder="placeholder"
             :class="[inputClass, { empty: !valid }, { valid }]"
             @input="
                 (e) => [
-                    $emit('input', e.target.value),
                     inputChange(e.target.value),
+                    $emit('input', e.target.value),
                 ]
             "
         />
@@ -37,23 +41,36 @@ export default {
     name: 'Input',
 
     props: {
-        type: {
+        id: {
             type: String,
-            default: 'text',
+            default: '',
+        },
+        required: {
+            type: Boolean,
+            default: false,
+        },
+        value: {
+            type: String,
+            required: false,
+            default: undefined,
         },
         label: {
             type: String,
             default: '',
         },
+        type: {
+            type: String,
+            default: 'text',
+        },
         inputClass: {
             type: String,
             default: '',
         },
-        inputId: {
+        placeholder: {
             type: String,
             default: '',
         },
-        isArea: {
+        textarea: {
             type: Boolean,
             default: false,
         },
@@ -67,8 +84,11 @@ export default {
         labelName() {
             return this.label.toLowerCase().replace(/\s/g, '-');
         },
-        fieldId() {
-            return this.inputId.toLowerCase().replace(/\s/g, '-');
+    },
+
+    watch: {
+        value(value) {
+            this.inputChange(value);
         },
     },
 

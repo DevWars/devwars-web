@@ -71,7 +71,15 @@
             </Card>
 
             <Card class="dark">
-                <h3>Templates</h3>
+                <h3>
+                    Templates
+                    <Button
+                        class="muted sm link"
+                        @click="insertCommonTemplatesIntoTemplateFields"
+                    >
+                        Common
+                    </Button>
+                </h3>
                 <div class="template-container">
                     <Input
                         v-model="currentSchedule.templates.html"
@@ -79,23 +87,23 @@
                         label="Template HTML"
                         input-class="language"
                         input-id="lang-html"
-                        :is-area="true"
+                        textarea
                     />
                     <Input
                         v-model="currentSchedule.templates.css"
                         placeholder="body { background: white; }"
-                        :is-area="true"
                         input-class="language"
                         input-id="lang-css"
                         label="Template CSS"
+                        textarea
                     />
                     <Input
                         v-model="currentSchedule.templates.js"
                         placeholder="console.log('hi!')"
-                        :is-area="true"
                         input-class="language"
                         input-id="lang-js"
                         label="Template JS"
+                        textarea
                     />
                 </div>
             </Card>
@@ -174,16 +182,30 @@ export default {
     },
 
     methods: {
+        /**
+         * Updates the given language template with the updated template value.
+         * @param {string} value The updated template value for the given language
+         * @param {string} language The language being assigned the given template.
+         */
         updateScheduleTemplate(value, language) {
             this.currentSchedule.templates[language] = value;
             this.triggerScheduleRefresh();
         },
 
+        /**
+         * Updates the given objectives bonus state by setting the given value.
+         * @param {string} value The updated bonus state value for the given objective.
+         * @param {string} objectiveId The id of the objective being updated.
+         */
         objectiveUpdate(value, objectiveId) {
             this.currentSchedule.objectives[objectiveId].isBonus = value;
             this.triggerScheduleRefresh();
         },
 
+        /**
+         * Creates a new objective for the current schedule, applying the next
+         * id with no description and no bonus state.
+         */
         objectiveAdd() {
             const { objectives } = this.currentSchedule;
 
@@ -199,11 +221,43 @@ export default {
             this.triggerScheduleRefresh();
         },
 
+        /**
+         * Removes a given objective by the given id from the schedule.
+         * @param {string} objectiveId The id of the objective being removed.
+         */
         objectiveDelete(objectiveId) {
             delete this.currentSchedule.objectives[objectiveId];
             this.triggerScheduleRefresh();
         },
 
+        /**
+         * Inserts some common default templates into the schedule for a common
+         * game setup.
+         * @html => Core html to load the css styles and main js script
+         * @css => Simple css to remove 'DevWars' style background from the
+         * preview.
+         * @js => Working sample js to perform action on page load.
+         *
+         * The html has to be escaped otherwise it closes off the actual VueJS
+         * template and thus would not build. I know its ugly.
+         */
+        insertCommonTemplatesIntoTemplateFields() {
+            this.schedule.templates = {
+                html:
+                    '<!doctype html>\r\n<html lang="en">\r\n    <head>\r\n        <meta charset="utf-8">\r\n        <meta name="viewport" content="width=device-width, initial-scale=1">\r\n' +
+                    '        <link rel="stylesheet" href="game.css">\r\n    <\/head>\r\n\r\n    <body>\r\n        <script src="game.js"><\/script>\r\n    <\/body>\r\n<\/html>',
+                css: 'body { background: white; }',
+                js: 'window.addEventListener("load", () => { /** Loaded */ });',
+            };
+
+            this.triggerScheduleRefresh();
+        },
+
+        /**
+         * Emits a event to the parent control to update the current schedule with
+         * the newly updated schedule. This ensures that the parent passes down the
+         * updated schedule to update the UI.
+         */
         triggerScheduleRefresh() {
             this.$emit('update-schedule', this.currentSchedule);
         },
