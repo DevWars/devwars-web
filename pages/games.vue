@@ -70,10 +70,12 @@ export default {
                 const season = Number(newSeason) || 3;
                 this.season = season;
 
-                const games = await Http.for('games/season').get(this.season);
+                const { data } = await this.$axios.get(
+                    `/games/season/${this.season}`,
+                );
 
-                if (games.length > 0) {
-                    this.games = games.filter(
+                if (data.length > 0) {
+                    this.games = data.filter(
                         (game) => nameFromStatus(game.status) !== 'ACTIVE',
                     );
                 }
