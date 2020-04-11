@@ -57,7 +57,7 @@ import Tab from '@/components/Tab';
 
 import PanelHeader from '@/components/mod/PanelHeader';
 import Setup from '@/components/mod/schedule/setup';
-import Applications from '@/components/mod/schedule/Applications';
+import Applications from '@/components/mod/schedule/applications';
 
 export default {
     name: 'DashboardSchedule',

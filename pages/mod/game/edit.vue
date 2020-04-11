@@ -1,6 +1,9 @@
 <template>
     <div>
-        <div v-if="nameFromStatus(game.status) === 'ENDED'" class="plain dark">
+        <div
+            v-if="nameFromStatus(game.status) === 'ENDED' && teams != null"
+            class="plain dark"
+        >
             <Card class="plain dark">
                 <SubScore
                     title="Objectives"
@@ -77,7 +80,14 @@
                 </div>
             </Card>
         </div>
-        <div v-else><h1>Game Not Ended</h1></div>
+        <div v-else-if="nameFromStatus(game.status) !== 'ENDED'">
+            <h1>Game Not Ended</h1>
+        </div>
+        <div
+            v-else-if="nameFromStatus(game.status) === 'ENDED' && teams == null"
+        >
+            <h1>No Teams Played</h1>
+        </div>
     </div>
 </template>
 
