@@ -43,14 +43,14 @@ export default {
     props: {
         id: {
             type: String,
-            default: '',
+            default: undefined,
         },
         required: {
             type: Boolean,
             default: false,
         },
         value: {
-            type: String,
+            type: [String, Number],
             required: false,
             default: undefined,
         },

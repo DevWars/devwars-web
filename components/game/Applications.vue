@@ -30,7 +30,7 @@
 
             <tr
                 v-for="(applicant, index) in applications"
-                :key="applicant.id + index + applicant.id"
+                :key="index"
                 @click="addPlayer(applicant)"
             >
                 <td>
@@ -129,9 +129,16 @@ export default {
             this.applications = applications;
         },
 
-        addPlayer(user) {
+        async addPlayer(user) {
             if (isNil(this.game)) return;
-            this.$open(AddPlayerModal, { user, game: this.game });
+            const result = await this.$open(AddPlayerModal, {
+                user,
+                game: this.game,
+            });
+
+            if (!isNil(result)) {
+                this.$emit('assigned-player', { user, ...result });
+            }
         },
 
         /**
@@ -203,7 +210,6 @@ export default {
                 const teamName = this.getTeamNameById(currentTeam);
                 const altTeamName = this.getTeamNameById(altTeam);
 
-                const team = { id: currentTeam, name: teamName };
                 const player = {
                     id: assignment.player.id,
                     username: assignment.player.username,
@@ -223,14 +229,12 @@ export default {
                     !usedRoles.includes(usedAltId)
                 ) {
                     currentUsedId = usedAltId;
-                    team.name = altTeamName;
                     player.team = altTeam;
-                    team.id = altTeam;
                 }
 
                 lastResponse = await this.$axios.post(
                     `/games/${this.game.id}/player`,
-                    { team, player },
+                    { player },
                 );
 
                 altTeam = currentTeam;

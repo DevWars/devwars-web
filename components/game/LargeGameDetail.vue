@@ -10,7 +10,8 @@
                         {{ game.mode }}
                     </h2>
                     <div class="banner__versus">
-                        {{ teams[0].size }} VS {{ teams[1].size }}
+                        {{ currentTeams[0].size }} VS
+                        {{ currentTeams[1].size }}
                     </div>
                 </div>
                 <ButtonIcon
@@ -27,7 +28,7 @@
 
         <Row class="roster">
             <GameTeam
-                v-for="team in teams"
+                v-for="team in currentTeams"
                 :key="team.id"
                 :team="team"
                 :points="team.scores.total"
@@ -43,14 +44,14 @@
             </GameTeam>
         </Row>
 
-        <SubScore v-if="game.title" title="Theme">
+        <SubScore v-if="game.title" title="Theme" no-score>
             <h3>{{ game.title }}</h3>
         </SubScore>
 
         <SubScore
             title="Objectives"
-            :blue-score="teams[0].scores.objectives"
-            :red-score="teams[1].scores.objectives"
+            :blue-score="currentTeams[0].scores.objectives"
+            :red-score="currentTeams[1].scores.objectives"
         >
             <ul class="objectives">
                 <li
@@ -106,6 +107,13 @@ export default {
             default: true,
         },
     },
+
+    computed: {
+        currentTeams() {
+            return this.teams(this.game);
+        },
+    },
+
     methods: {
         getLanguageByGamePlayer,
         teamCompletedObjective,

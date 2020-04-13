@@ -27,6 +27,24 @@ export default {
     created() {
         this.tabs = this.$children;
     },
+
+    mounted() {
+        const hash = this.$route.hash;
+        let defaultTab = null;
+
+        this.tabs.forEach((tab) => {
+            if (hash.substring(1) === tab.name.toLowerCase()) {
+                tab.selected = true;
+                this.selectTab(tab);
+            }
+
+            if (tab.default) defaultTab = tab;
+            if (tab.selected) defaultTab = null;
+        });
+
+        if (defaultTab) this.selectTab(defaultTab);
+    },
+
     methods: {
         selectTab(selectedTab) {
             this.tabs.forEach((tab) => {

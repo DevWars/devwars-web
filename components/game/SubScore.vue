@@ -1,6 +1,11 @@
 <template>
     <div class="section">
-        <div class="header" :class="{ noScore: !blueScore && !redScore }">
+        <div
+            class="header"
+            :class="{
+                noScore: (blueScore == null && redScore == null) || noScore,
+            }"
+        >
             <span class="points team-blue">{{ blueScore }}</span>
             <h3 v-if="title">{{ title }}</h3>
             <span class="points team-red">{{ redScore }}</span>
@@ -16,6 +21,11 @@
 export default {
     name: 'SubScore',
     props: {
+        noScore: {
+            type: Boolean,
+            required: false,
+            default: false,
+        },
         title: {
             type: String,
             default: '',

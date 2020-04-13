@@ -77,26 +77,18 @@ export default {
                 team: teamId,
             };
 
-            const team = {
-                id: teamId,
-                name: teamId === 0 ? 'blue' : 'red',
-                players: this.game.players,
-            };
-
             try {
-                const data = { player, team };
-                const res = await this.$axios.post(
-                    `/games/${this.game.id}/player`,
-                    data,
-                );
+                const data = { player };
+                await this.$axios.post(`/games/${this.game.id}/player`, data);
 
-                this.$store.commit('game/game', res.data);
+                this.close({ player });
             } catch (e) {
                 if (e.response && e.response.data) {
                     this.$store.dispatch('toast/error', e.response.data);
+                } else {
+                    this.$store.dispatch('toast/error', e.message);
                 }
-            } finally {
-                this.close(true);
+                this.close();
             }
         },
     },

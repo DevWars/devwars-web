@@ -34,10 +34,7 @@
                 <td>{{ game.title }}</td>
                 <td>{{ game.mode }}</td>
                 <td>
-                    <Button
-                        :to="'/mod/game/brief?game=' + game.id"
-                        class="link"
-                    >
+                    <Button :to="'/mod/game?game=' + game.id" class="link">
                         Edit
                     </Button>
                 </td>
