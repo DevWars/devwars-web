@@ -17,12 +17,10 @@ export default {
 
     components: { Applications },
 
-    computed: {
-        schedule() {
-            const schedules = this.$store.state.game.schedules;
-            return schedules.find(
-                (schedule) => schedule.id === Number(this.$route.query.schedule),
-            );
+    props: {
+        schedule: {
+            type: Object,
+            required: true,
         },
     },
 };

@@ -33,7 +33,7 @@
                 <td>{{ schedule.mode }}</td>
                 <td>
                     <Button
-                        :to="`/mod/schedule/setup?schedule=${schedule.id}`"
+                        :to="`/mod/schedule?schedule=${schedule.id}`"
                         class="link"
                     >
                         Edit

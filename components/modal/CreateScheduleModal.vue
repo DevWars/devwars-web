@@ -8,12 +8,10 @@
             <option value="Blitz">Blitz</option>
         </Select>
 
-        <Input v-model="date" label="Date" class="group" required />
-
-        <Input v-model="time" label="Time" class="group" required />
+        <Input v-model="date" type="date" label="Date" class="group" required />
+        <Input v-model="time" type="time" label="Time" class="group" required />
 
         <ButtonGroup class="modal__actions">
-            <!-- <Button type="button" class="muted link" @click.prevent="close(false)">Cancel</Button> -->
             <Button type="submit" class="primary">Create Schedule</Button>
         </ButtonGroup>
     </form>
@@ -41,8 +39,10 @@ export default {
         date: moment
             .utc(new Date())
             .add(2, 'weeks')
-            .format('MM/DD/YYYY'),
-        time: '17:00',
+            .format('YYYY-MM-DD'),
+        time: moment(new Date())
+            .utc()
+            .format('HH:mm'),
     }),
 
     computed: {
@@ -60,8 +60,8 @@ export default {
             });
 
             this.$router.push({
-                path: '/mod/schedule/setup',
-                query: { schedule: res.data.id },
+                path: '/mod/schedule',
+                query: { schedule: `${res.data.id}` },
             });
 
             this.close(true);

@@ -22,6 +22,7 @@ module.exports = {
         'vue/html-self-closing': 'off',
         'vue/singleline-html-element-content-newline': 'off',
         'comma-dangle': ['error', 'always-multiline'],
+        'no-useless-escape': 'off',
         semi: ['error', 'always'],
         indent: ['error', 4],
         'vue/html-indent': ['error', 4],

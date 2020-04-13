@@ -1,15 +1,34 @@
 <template>
     <div class="Input" :class="{ label }">
         <input
-            :id="fieldId || labelName"
+            v-if="!textarea"
+            :id="id"
             ref="input"
             :type="type"
-            :class="[{ empty: !valid }, { valid }]"
+            :class="[inputClass, { empty: !valid }, { valid }]"
             v-bind="$attrs"
+            :value="value"
+            :placeholder="placeholder"
             @input="
                 (e) => [
                     $emit('input', e.target.value),
                     inputChange(e.target.value),
+                ]
+            "
+        />
+        <textarea
+            v-if="textarea"
+            :id="id"
+            ref="input"
+            :type="type"
+            v-bind="$attrs"
+            :value="value"
+            :placeholder="placeholder"
+            :class="[inputClass, { empty: !valid }, { valid }]"
+            @input="
+                (e) => [
+                    inputChange(e.target.value),
+                    $emit('input', e.target.value),
                 ]
             "
         />
@@ -22,17 +41,38 @@ export default {
     name: 'Input',
 
     props: {
-        type: {
+        id: {
             type: String,
-            default: 'text',
+            default: undefined,
+        },
+        required: {
+            type: Boolean,
+            default: false,
+        },
+        value: {
+            type: [String, Number],
+            required: false,
+            default: undefined,
         },
         label: {
             type: String,
             default: '',
         },
-        inputId: {
+        type: {
+            type: String,
+            default: 'text',
+        },
+        inputClass: {
             type: String,
             default: '',
+        },
+        placeholder: {
+            type: String,
+            default: '',
+        },
+        textarea: {
+            type: Boolean,
+            default: false,
         },
     },
 
@@ -44,8 +84,11 @@ export default {
         labelName() {
             return this.label.toLowerCase().replace(/\s/g, '-');
         },
-        fieldId() {
-            return this.inputId.toLowerCase().replace(/\s/g, '-');
+    },
+
+    watch: {
+        value(value) {
+            this.inputChange(value);
         },
     },
 
@@ -67,7 +110,8 @@ export default {
 .Input {
     width: 100%;
 
-    input {
+    input,
+    textarea {
         @extend %form-control;
     }
 
@@ -79,7 +123,7 @@ export default {
         @extend %form-group;
     }
 
-    input[type='email']:disabled,
+    [type='email']:disabled,
     [type='text']:disabled {
         color: #484b5b;
     }

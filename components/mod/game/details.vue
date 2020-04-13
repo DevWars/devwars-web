@@ -1,22 +1,29 @@
 <template>
     <Card class="plain dark">
-        <div class="container">
-            <div class="game">
+        <div v-if="currentGame != null" class="container">
+            <Card class="dark">
                 <h3>Game</h3>
-
-                <Select v-model="game.mode" label="Game mode" class="group">
+                <Select
+                    v-model="currentGame.mode"
+                    label="Game mode"
+                    class="group"
+                >
                     <option value="Classic">Classic</option>
                     <option value="Zen Garden">Zen Garden</option>
                     <option value="Blitz">Blitz</option>
                 </Select>
+                <Input
+                    v-model="currentGame.title"
+                    placeholder="The title of the name, e.g Battleships!"
+                    label="Theme"
+                    class="group"
+                />
+            </Card>
 
-                <Input v-model="game.title" label="Theme" class="group" />
-            </div>
-
-            <div class="objectives">
+            <Card class="dark">
                 <h3>Objectives</h3>
                 <div
-                    v-for="objective in game.objectives"
+                    v-for="objective in currentGame.objectives"
                     :key="objective.id"
                     class="objective"
                 >
@@ -32,7 +39,7 @@
                     />
                     <Button
                         class="link muted"
-                        @click.prevent="objectiveDelete(objective.id)"
+                        @click="objectiveDelete(objective.id)"
                     >
                         DELETE
                     </Button>
@@ -40,21 +47,23 @@
                 <Button class="outline" @click="objectiveAdd">
                     Add Objective
                 </Button>
-            </div>
+            </Card>
 
-            <div class="media">
+            <Card class="dark media">
                 <h3>Media</h3>
                 <Input
-                    v-model="game.videoUrl"
+                    v-model="currentGame.videoUrl"
                     label="YouTube URL"
                     class="group"
                 />
-            </div>
+            </Card>
         </div>
     </Card>
 </template>
 
 <script>
+import { defaults } from 'lodash';
+
 import SquareToggle from '../../../components/SquareToggle';
 import { names } from '../../../utils/auth';
 import Card from '@/components/Card';
@@ -73,54 +82,59 @@ export default {
 
     mixins: [teams],
 
+    props: {
+        game: {
+            type: Object,
+            required: true,
+        },
+    },
+
     data: () => ({
         date: '',
         time: '',
+        currentGame: {},
+        defaultGame: {},
     }),
 
-    computed: {
+    watch: {
         game() {
-            const { game: id } = this.$route.query;
-            return this.$store.getters['game/gameById'](id);
+            this.currentGame = defaults(this.game, this.defaultGame);
         },
+    },
+
+    beforeMount() {
+        this.currentGame = defaults(this.game, this.defaultGame);
     },
 
     methods: {
         objectiveIsBonusUpdate(isBonus, objectiveId) {
-            this.$store.commit('game/updateObjectIsBonusState', {
-                isBonus,
-                objectiveId,
-            });
-        },
-
-        objectiveUpdate(value, objectiveId) {
-            this.$store.commit('game/updateScheduleObjective', {
-                scheduleId: this.game.schedule,
-                objectiveId,
-                value,
-            });
+            if (
+                this.currentGame != null &&
+                this.currentGame.objectives[objectiveId] != null
+            ) {
+                this.currentGame.objectives[objectiveId].isBonus = isBonus;
+                this.$emit('update-game', this.currentGame);
+            }
         },
 
         objectiveAdd() {
             let id = 1;
-            Object.keys(this.schedule.objectives).map((obj) => {
-                id = this.schedule.objectives[obj].id;
+            Object.keys(this.currentGame.objectives).map((obj) => {
+                id = this.currentGame.objectives[obj].id;
             });
-            this.$store.commit('game/addScheduleObjective', {
-                scheduleId: this.schedule.id,
-                objective: {
-                    id: id + 1,
-                    description: '',
-                    isBonus: false,
-                },
-            });
+
+            this.currentGame.objectives[id + 1] = {
+                id: id + 1,
+                description: '',
+                isBonus: false,
+            };
+
+            this.$emit('update-game', this.currentGame);
         },
 
         objectiveDelete(objectiveId) {
-            this.$store.commit('game/deleteScheduleObjective', {
-                scheduleId: this.schedule.id,
-                objectiveId,
-            });
+            delete this.currentGame.objectives[objectiveId];
+            this.$emit('update-game', this.currentGame);
         },
     },
 };
@@ -129,21 +143,39 @@ export default {
 <style lang="scss" scoped>
 @import 'utils.scss';
 
+h3 {
+    margin-bottom: 20px;
+}
+
+.template-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 20px;
+}
+
+.input-container {
+    display: flex;
+}
+
 .container {
-    max-width: 650px;
-}
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 10px;
 
-.media {
-    margin-top: 25px;
-}
-
-.game h3 {
-    padding-bottom: 10px;
+    .Card {
+        margin: 5px;
+        max-width: 500px;
+        min-width: 300px;
+        min-height: 450px;
+    }
 }
 
 .objective {
     display: flex;
-    margin: 15px 0 15px 0;
+    margin-bottom: 15px;
 
     & > :not(.Input) {
         @extend %align-baseline-to-input-with-labels;

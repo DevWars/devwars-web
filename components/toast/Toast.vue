@@ -2,7 +2,7 @@
     <div class="Toast" :class="[toast.type]">
         <Icon :name="icons[toast.type]" />
         <p class="message">{{ toast.message }}</p>
-        <Icon name="times" class="close" />
+        <Icon name="times" class="close" @click="remove" />
     </div>
 </template>
 
@@ -24,6 +24,12 @@ export default {
             error: 'times-circle',
         },
     }),
+
+    methods: {
+        remove() {
+            this.$store.dispatch('toast/remove', this.toast);
+        },
+    },
 };
 </script>
 
@@ -31,7 +37,6 @@ export default {
 @import 'utils.scss';
 $toast-margin-x: 10px;
 $toast-margin-y: 10px;
-
 .Toast {
     @extend %material;
     display: flex;
@@ -45,18 +50,15 @@ $toast-margin-y: 10px;
     background-color: $bg-color-2;
     color: #fff;
     position: relative;
-
     .Icon {
         margin-top: 3px;
         margin-right: 20px;
         font-size: $font-size-lg;
     }
-
     .message {
         font-size: $font-size-base;
         color: $text-color-primary;
     }
-
     .Icon.close {
         position: absolute;
         top: $toast-margin-y;
@@ -64,20 +66,16 @@ $toast-margin-y: 10px;
         font-size: 14px;
         color: $text-color-muted;
         cursor: pointer;
-
         &:hover {
             color: #fff;
         }
     }
-
     &.success {
         border-color: $success-color;
     }
-
     &.error {
         border-color: $danger-color;
     }
-
     &.warning {
         border-color: $warning-color;
     }

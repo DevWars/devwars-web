@@ -17,41 +17,43 @@
                 >
                     Activate
                 </Button>
-                <Button
-                    v-if="viewingDetailsPage || viewingEditPage"
-                    class="primary"
-                    :async-click="save"
-                >
+                <Button class="primary" :async-click="save">
                     Save
                 </Button>
-                <Button
-                    v-if="user.role === 'ADMIN'"
-                    class="danger"
-                    :async-click="remove"
-                >
+                <Button class="danger" :async-click="remove">
                     Delete
                 </Button>
             </ButtonGroup>
         </PanelHeader>
 
         <Tabs>
-            <nuxt-link :to="`/mod/game/brief?game=${game.id}`">Brief</nuxt-link>
-            <nuxt-link :to="`/mod/game/details?game=${game.id}`">
-                Details
-            </nuxt-link>
-            <nuxt-link :to="`/mod/game/edit?game=${game.id}`">Edit</nuxt-link>
+            <Tab name="Brief" default>
+                <Brief :game="game" @update-game="triggerGameUpdate" />
+            </Tab>
+            <Tab name="Details">
+                <Details :game="game" @update-game="triggerGameUpdate" />
+            </Tab>
+            <Tab name="Edit">
+                <Edit :game="game" @update-game="triggerGameUpdate" />
+            </Tab>
         </Tabs>
-
-        <nuxt />
     </div>
 </template>
 
 <script>
 import moment from 'moment';
+
 import { names } from '../../utils/auth';
+
 import Tabs from '@/components/Tabs';
+import Tab from '@/components/Tab';
+
 import PanelHeader from '@/components/mod/PanelHeader';
 import DeleteModal from '@/components/modal/DeleteModal';
+
+import Brief from '@/components/mod/game/brief';
+import Details from '@/components/mod/game/details';
+import Edit from '@/components/mod/game/edit';
 
 import nameFromStatus from '@/utils/gameStatus';
 
@@ -62,18 +64,27 @@ export default {
         auth: names.MODERATOR,
     },
 
-    components: { Tabs, PanelHeader },
+    components: { PanelHeader, Tabs, Tab, Brief, Details, Edit },
 
-    async fetch({ store, query }) {
-        await store.dispatch('game/game', { id: query.game, players: true });
+    async asyncData({ query, error, $axios }) {
+        if (query.game == null || query.game.trim() === '')
+            return { game: null };
+
+        try {
+            const response = await $axios.get(
+                `/games/${query.game}?players=true`,
+            );
+            return { game: response.data };
+        } catch (e) {
+            error({
+                statusCode: e.response.status,
+                description: e.response.data.error,
+                message: e.response.statusText,
+            });
+        }
     },
 
     computed: {
-        game() {
-            const { game: id } = this.$route.query;
-            return this.$store.getters['game/gameById'](id);
-        },
-
         startDate() {
             return moment(this.game.startTime).format('MM/DD/YYYY');
         },
@@ -112,14 +123,23 @@ export default {
     methods: {
         nameFromStatus,
 
+        triggerGameUpdate(updatedGame) {
+            this.game = Object.assign({}, updatedGame);
+        },
+
+        async gatherGame(id) {
+            const { data } = await this.$axios.get(`/games/${id}?players=true`);
+            return data;
+        },
+
         async activate() {
             await this.$axios.post(`/games/${this.game.id}/activate`);
-            await this.$store.dispatch('game/game', { id: this.game.id });
+            this.game = await this.gatherGame(this.game.id);
         },
 
         async endGame() {
             await this.$axios.post(`/games/${this.game.id}/end`);
-            await this.$store.dispatch('game/game', { id: this.game.id });
+            this.game = await this.gatherGame(this.game.id);
         },
 
         async save() {

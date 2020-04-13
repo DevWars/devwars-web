@@ -56,8 +56,7 @@ $colors: (
     white: #fff,
     black: $black-color,
     muted: $text-color-muted,
-    // Brand
-        youtube: $youtube-color,
+    youtube: $youtube-color,
     discord: $discord-color,
     twitch: $twitch-color,
 );

@@ -1,16 +1,16 @@
 import * as _ from 'lodash';
 
 export const teams = {
-    computed: {
-        teams() {
-            if (_.isNil(this.game.teams)) {
+    methods: {
+        teams(game) {
+            if (_.isNil(game.teams)) {
                 return;
             }
 
-            return Object.values(this.game.teams).reduce((teams, team) => {
+            return Object.values(game.teams).reduce((teams, team) => {
                 const players = {};
 
-                _.forEach(this.game.players, (player, key) => {
+                _.forEach(game.players, (player, key) => {
                     if (player.team === team.id) players[key] = player;
                     player.originalId = Number(key);
                 });
@@ -23,14 +23,13 @@ export const teams = {
                     size: _.size(players),
                 };
 
-                if (this.game.meta && this.game.meta.teamScores) {
+                if (game.meta && game.meta.teamScores) {
                     const t = teams[team.id];
 
-                    t.scores.objectives = this.game.meta.teamScores[
-                        team.id
-                    ].objectives;
-                    t.scores.tie = this.game.meta.teamScores[team.id].tie;
-                    t.winner = this.game.meta.winningTeam === team.id;
+                    t.scores.objectives =
+                        game.meta.teamScores[team.id].objectives;
+                    t.scores.tie = game.meta.teamScores[team.id].tie;
+                    t.winner = game.meta.winningTeam === team.id;
                     t.scores.total = t.scores.objectives;
                 }
 

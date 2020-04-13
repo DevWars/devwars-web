@@ -1,19 +1,15 @@
 <template>
-    <div>
+    <div v-if="schedule != null">
         <PanelHeader :title="startDate" :subtitle="`@ ${startTime} UTC`">
             <ButtonGroup>
                 <Button to="/mod/schedules" class="outline muted">Back</Button>
-                <Button
-                    v-if="viewingSetupPage"
-                    class="primary"
-                    :async-click="save"
-                >
+                <Button class="primary" :async-click="save">
                     Save
                 </Button>
                 <Button
-                    v-if="schedule.status !== 1"
+                    v-if="schedule.status === 0"
                     class="success"
-                    :async-click="activate"
+                    :async-click="activateAndCreateGame"
                 >
                     Activate
                 </Button>
@@ -25,9 +21,9 @@
                     End
                 </Button>
                 <Button
-                    v-if="user.role === 'ADMIN'"
-                    class="outline danger"
-                    disabled
+                    v-if="schedule.status !== 1"
+                    class="danger"
+                    :async-click="deleteScheduleById"
                 >
                     Delete
                 </Button>
@@ -35,47 +31,66 @@
         </PanelHeader>
 
         <Tabs>
-            <nuxt-link :to="`/mod/schedule/setup?schedule=${schedule.id}`">Setup</nuxt-link>
-            <nuxt-link :to="`/mod/schedule/applications?schedule=${schedule.id}`">Applications</nuxt-link>
+            <Tab name="Setup" :selected="true">
+                <Setup
+                    :schedule="schedule"
+                    @update-schedule="triggerScheduleRefresh"
+                />
+            </Tab>
+            <Tab name="Applications">
+                <Applications
+                    :schedule="schedule"
+                    @update-schedule="triggerScheduleRefresh"
+                />
+            </Tab>
         </Tabs>
-
-        <nuxt />
     </div>
 </template>
 
 <script>
 import moment from 'moment';
+import { isNil } from 'lodash';
+
 import { names } from '../../utils/auth';
 import Tabs from '@/components/Tabs';
+import Tab from '@/components/Tab';
+
 import PanelHeader from '@/components/mod/PanelHeader';
+import Setup from '@/components/mod/schedule/setup';
+import Applications from '@/components/mod/schedule/applications';
 
 export default {
     name: 'DashboardSchedule',
 
-    components: { Tabs, PanelHeader },
+    components: { Tabs, Tab, PanelHeader, Setup, Applications },
 
     meta: {
         auth: names.MODERATOR,
     },
 
-    async fetch({ store, query }) {
-        await store.dispatch('game/schedules', query.schedule);
+    async asyncData({ query, error, $axios }) {
+        if (query.schedule == null || query.schedule.trim() === '')
+            return { schedule: null };
+
+        try {
+            const response = await $axios.get(`/schedules/${query.schedule}`);
+            return { schedule: response.data };
+        } catch (e) {
+            error({
+                statusCode: e.response.status,
+                description: e.response.data.error,
+                message: e.response.statusText,
+            });
+        }
     },
 
     computed: {
-        schedule() {
-            const schedules = this.$store.state.game.schedules;
-            return schedules.find(
-                (schedule) => schedule.id === Number(this.$route.query.schedule),
-            );
-        },
-
         startDate() {
-            return moment(this.schedule.startTime).format('MM/DD/YYYY');
+            return moment(this.schedule?.startTime).format('MM/DD/YYYY');
         },
 
         startTime() {
-            return moment(this.schedule.startTime).format('HH:mm');
+            return moment(this.schedule?.startTime).format('HH:mm');
         },
 
         viewingSetupPage() {
@@ -88,25 +103,91 @@ export default {
         },
     },
 
+    // If we did not get the related schedule from the server, just redirect the
+    // user to the home page. And let the user know why it happened.
+    created() {
+        if (isNil(this.schedule)) {
+            this.$store.dispatch('toast/error', 'Schedule could not be loaded');
+            return this.$router.push('/');
+        }
+    },
+
     methods: {
         async save() {
-            await this.$axios.patch(
-                `/schedules/${this.schedule.id}`,
-                this.schedule,
-            );
+            try {
+                await this.$axios.patch(
+                    `/schedules/${this.schedule.id}`,
+                    this.schedule,
+                );
+            } catch (e) {
+                this.$store.dispatch('toast/error', e.response.data);
+            }
         },
 
-        async activate() {
-            const schedule = this.schedule;
-            schedule.season = 3;
-            await this.$axios.post(
-                `/schedules/${this.schedule.id}/activate`,
-                schedule,
-            );
+        async activateAndCreateGame() {
+            try {
+                const schedule = this.schedule;
+
+                await this.$axios.patch(
+                    `/schedules/${this.schedule.id}`,
+                    this.schedule,
+                );
+
+                await this.$axios.post(`/schedules/${schedule.id}/activate`);
+
+                await this.$axios.post('/games', {
+                    schedule: schedule.id,
+                    season: 3,
+                    mode: schedule.mode,
+                    title: schedule.title,
+                    status: schedule.status,
+                    storage: {
+                        templates: schedule.templates,
+                        startTime: schedule.startTime,
+                        mode: schedule.mode,
+                        title: schedule.title,
+                        objectives: schedule.objectives,
+                    },
+                });
+
+                this.schedule.status = 1;
+            } catch (e) {
+                this.$store.dispatch('toast/error', e.response.data);
+            }
         },
 
+        /**
+         * Attempt to end the given schedule
+         */
         async end() {
-            await this.$axios.post(`/schedules/${this.schedule.id}/end`);
+            try {
+                await this.$axios.post(`/schedules/${this.schedule.id}/end`);
+                this.schedule.status = 2;
+            } catch (e) {
+                this.$store.dispatch('toast/error', e.response.data);
+            }
+        },
+
+        /**
+         * Deletes the given schedule by the id, letting the user know that it
+         * was deleted and redirecting them to the schedules page. If a error is
+         * triggered, the user will still be redirected.
+         */
+        async deleteScheduleById() {
+            try {
+                await this.$axios.delete(`/schedules/${this.schedule.id}`);
+                this.$store.dispatch(
+                    'toast/success',
+                    `Deleted schedule ${this.schedule.id}`,
+                );
+                this.$router.push({ path: '/mod/schedules' });
+            } catch (e) {
+                this.$store.dispatch('toast/error', e.response.data);
+            }
+        },
+
+        triggerScheduleRefresh(updatedSchedule) {
+            this.schedule = Object.assign({}, updatedSchedule);
         },
     },
 };

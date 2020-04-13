@@ -1,3 +1,4 @@
+import { find, isNil } from 'lodash';
 import Http from '../services/Http';
 
 export const state = () => ({
@@ -48,6 +49,19 @@ export const mutations = {
     },
 
     /**
+     * Updates the schedules templates by language with the updated template
+     * value. e.g updating the given schedules html template.
+     */
+    updateScheduleTemplate(state, { language, template, scheduleId }) {
+        const schedule = getters.scheduleById(scheduleId);
+
+        if (isNil(schedule)) return;
+        if (isNil(schedule.templates)) schedule.templates = {};
+
+        schedule.templates[language] = template;
+    },
+
+    /**
      *  Updates the is bonus state for the current game objective.
      */
     updateObjectIsBonusState(state, { objectiveId, isBonus }) {
@@ -57,51 +71,22 @@ export const mutations = {
     },
 
     updateScheduleObjective(state, { value, objectiveId, scheduleId }) {
-        let tmp = null;
-
-        const schedules = state.schedules.map((schedule) => {
-            if (schedule.id === scheduleId) {
-                schedule.objectives[objectiveId].isBonus = value;
-                tmp = schedule;
-            }
-            return schedule;
-        });
-
-        if (tmp != null) {
-            state.schedules = schedules;
-        }
+        const schedule = getters.scheduleById(scheduleId);
+        schedule.objectives[objectiveId].isBonus = value;
     },
 
     addScheduleObjective(state, { scheduleId, objective }) {
-        let objectives = null;
+        const schedule = find(state.schedules, (o) => o.id === scheduleId);
+        schedule.objectives[objective.id] = objective;
 
-        const schedules = state.schedules.map((schedule) => {
-            if (schedule.id === scheduleId) {
-                schedule.objectives[objective.id] = objective;
-                objectives = schedule.objectives;
-            }
-            return schedule;
-        });
-
-        if (objectives != null) {
-            state.schedules = schedules;
-        }
+        state.schedules = state.schedules.slice(0, state.schedules.length);
     },
 
     deleteScheduleObjective(state, { scheduleId, objectiveId }) {
-        let objectives = null;
+        const schedule = getters.scheduleById(scheduleId);
+        delete schedule.objectives[objectiveId];
 
-        const schedules = state.schedules.map((schedule) => {
-            if (schedule.id === scheduleId) {
-                delete schedule.objectives[objectiveId];
-                objectives = schedule.objectives;
-            }
-            return schedule;
-        });
-
-        if (objectives != null) {
-            state.schedules = schedules;
-        }
+        state.schedules = state.schedules.slice(0, state.schedules.length);
     },
 };
 
@@ -201,9 +186,16 @@ export const actions = {
 
 export const getters = {
     /**
-     * Returns a given game by id if found in the current games cache.
-     * @param id {string} The id of the given game.
+     * returns a given game by id if found in the current games cache.
+     * @param id {string} the id of the given game.
      */
     gameById: (state) => (id) =>
-        Array(state.game).find((e) => e.id === Number(id)),
+        Array(state.game).find((game) => game.id === Number(id)),
+
+    /**
+     * returns a given schedule by id if found in the current cache.
+     * @param id {string} the id of the given schedule.
+     */
+    scheduleById: (state) => (id) =>
+        find(state.schedules, (schedule) => schedule.id === Number(id)),
 };

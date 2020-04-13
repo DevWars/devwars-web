@@ -34,7 +34,9 @@
                     <ConnectionsSmall :connections="user.connections" />
                 </td>
                 <td>
-                    <Button :to="`/dashboard/${user.id}`" class="link">View</Button>
+                    <Button :to="`/dashboard/${user.id}`" class="link">
+                        View
+                    </Button>
                 </td>
             </tr>
 
@@ -108,8 +110,8 @@ export default {
         async performSearch() {
             if (this.search == null || this.search.trim() === '') return;
 
-            const users = await Http.for('users/lookup').get(
-                `?username=${this.search}&full=true`,
+            const users = await Http.for('search/users').get(
+                `?username=${this.search}&email=${this.search}&full=true`,
             );
 
             this.users = { data: users, pagination: {} };

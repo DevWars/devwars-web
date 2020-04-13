@@ -55,12 +55,15 @@ export default {
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
             {
                 rel: 'stylesheet',
-                href: 'https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:300,400,500,700',
+                href:
+                    'https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:300,400,500,700',
             },
             {
                 rel: 'stylesheet',
-                href: 'https://use.fontawesome.com/releases/v5.12.1/css/all.css',
-                integrity: 'sha384-v8BU367qNbs/aIZIxuivaU55N5GPF89WBerHoGA4QTcbUjYiLQtKdrfXnqAcXyTv',
+                href:
+                    'https://use.fontawesome.com/releases/v5.12.1/css/all.css',
+                integrity:
+                    'sha384-v8BU367qNbs/aIZIxuivaU55N5GPF89WBerHoGA4QTcbUjYiLQtKdrfXnqAcXyTv',
                 crossorigin: 'anonymous',
             },
         ],
@@ -147,6 +150,8 @@ export default {
                     loader: 'eslint-loader',
                     exclude: /(node_modules)/,
                 });
+
+                config.devtool = 'source-map';
             }
 
             config.resolve.alias['utils.scss$'] = path.resolve(

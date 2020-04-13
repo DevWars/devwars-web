@@ -1,66 +1,55 @@
 <template>
-    <div class="Tabs">
-        <div
-            v-for="tab in tabs"
-            :key="tab.key"
-            class="tab"
-            :class="[
-                { active: activeTab === tab.key },
-                { link: tabIsLink(tab) },
-                tab.data.class,
-            ]"
-            @click="setActiveTab(tab.key)"
-        >
-            <VNode :vnodes="tab" />
+    <div>
+        <div class="tabs">
+            <div
+                v-for="tab in tabs"
+                :key="tab.key"
+                :class="{ tab: true, active: tab.isActive }"
+            >
+                <a class="link" :href="tab.href" @click="selectTab(tab)">{{
+                    tab.name
+                }}</a>
+            </div>
+        </div>
+
+        <div class="tabs-details">
+            <slot class="tab"></slot>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'Tabs',
-
-    components: {
-        VNode: {
-            functional: true,
-            render: (h, ctx) => ctx.props.vnodes,
-        },
+    data() {
+        return { tabs: [] };
     },
 
-    data: () => ({
-        activeTab: 0,
-    }),
-
-    computed: {
-        tabs() {
-            const defaultSlots = this.$slots.default
-                .filter((slot) => {
-                    return slot.tag !== undefined;
-                })
-                .map((slot, index) => {
-                    if (!slot.key) {
-                        slot.key = index + 1;
-                    }
-
-                    return slot;
-                });
-
-            return defaultSlots || [];
-        },
+    created() {
+        this.tabs = this.$children;
     },
 
     mounted() {
-        this.setActiveTab();
+        const hash = this.$route.hash;
+        let defaultTab = null;
+
+        this.tabs.forEach((tab) => {
+            if (hash.substring(1) === tab.name.toLowerCase()) {
+                tab.selected = true;
+                this.selectTab(tab);
+            }
+
+            if (tab.default) defaultTab = tab;
+            if (tab.selected) defaultTab = null;
+        });
+
+        if (defaultTab) this.selectTab(defaultTab);
     },
 
     methods: {
-        setActiveTab(tabKey) {
-            this.activeTab = tabKey || this.tabs[0].data.key || 1;
-        },
-
-        tabIsLink(tab) {
-            const tag = tab.componentOptions.tag;
-            return tag === 'a' || tag === 'nuxt-link';
+        selectTab(selectedTab) {
+            this.tabs.forEach((tab) => {
+                tab.isActive = tab.name === selectedTab.name;
+            });
         },
     },
 };
@@ -71,7 +60,7 @@ export default {
 
 $tab-padding: 10px 20px;
 
-.Tabs {
+.tabs {
     display: flex;
     align-items: flex-end;
 

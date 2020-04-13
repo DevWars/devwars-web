@@ -1,15 +1,20 @@
 <template>
-    <div>
-        <div v-if="nameFromStatus(game.status) === 'ENDED'" class="plain dark">
-            <Card class="plain dark">
+    <Card v-if="currentGame != null" class="dark plain">
+        <div
+            v-if="
+                nameFromStatus(currentGame.status) === 'ENDED' && teams != null
+            "
+            class="container"
+        >
+            <Card class="dark">
                 <SubScore
                     title="Objectives"
-                    :blue-score="teams[0].scores.objectives"
-                    :red-score="teams[1].scores.objectives"
+                    :blue-score="currentTeams[0].scores.objectives"
+                    :red-score="currentTeams[1].scores.objectives"
                 >
                     <ul class="objectives">
                         <li
-                            v-for="objective in game.objectives"
+                            v-for="objective in currentGame.objectives"
                             :key="objective.id"
                             class="objectives__item"
                             :class="{ bonus: objective.isBonus }"
@@ -42,43 +47,50 @@
                 </SubScore>
             </Card>
             <Card
-                v-for="(scores, index) in game.meta ? game.meta.teamScores : []"
+                v-for="(scores, index) in currentGame.meta
+                    ? currentGame.meta.teamScores
+                    : []"
                 :key="index"
-                class="plain dark teamScores"
+                class=" dark teamScores"
             >
-                <div class="container">
-                    <h3>Team {{ teamName(index) }}</h3>
+                <h3>Team {{ teamName(index) }}</h3>
 
-                    <Input
-                        v-model.number="scores.ui"
-                        label="UI Score"
-                        type="number"
-                        required
-                        @input="(e) => updateTeamVoteScore(index, 'ui', e)"
-                    />
-                    <Input
-                        v-model.number="scores.ux"
-                        label="UX Score"
-                        type="number"
-                        required
-                        @input="(e) => updateTeamVoteScore(index, 'ux', e)"
-                    />
-                    <Checkbox
-                        :checked="scores.tie"
-                        :label="`Team ${teamName(index)} Tied`"
-                        @input="(e) => toggleTeamTied(index, e)"
-                    />
+                <Input
+                    v-model.number="scores.ui"
+                    label="UI Score"
+                    type="number"
+                    required
+                    @input="(e) => updateTeamVoteScore(index, 'ui', e)"
+                />
+                <Input
+                    v-model.number="scores.ux"
+                    label="UX Score"
+                    type="number"
+                    required
+                    @input="(e) => updateTeamVoteScore(index, 'ux', e)"
+                />
+                <Checkbox
+                    :checked="scores.tie"
+                    :label="`Team ${teamName(index)} Tied`"
+                    @input="(e) => toggleTeamTied(index, e)"
+                />
 
-                    <Checkbox
-                        :checked="isWinner(index)"
-                        :label="`Team ${teamName(index)} Winner`"
-                        @input="(e) => toggleTeamWinner(index, e)"
-                    />
-                </div>
+                <Checkbox
+                    :checked="isWinner(index)"
+                    :label="`Team ${teamName(index)} Winner`"
+                    @input="(e) => toggleTeamWinner(index, e)"
+                />
             </Card>
         </div>
-        <div v-else><h1>Game Not Ended</h1></div>
-    </div>
+        <div v-else-if="nameFromStatus(currentGame.status) !== 'ENDED'">
+            <h1>Game Not Ended</h1>
+        </div>
+        <div
+            v-else-if="nameFromStatus(game.status) === 'ENDED' && teams == null"
+        >
+            <h1>No Teams Played</h1>
+        </div>
+    </Card>
 </template>
 
 <script>
@@ -113,39 +125,53 @@ export default {
     mixins: [teams],
 
     props: {
-        includePlayers: {
-            type: Boolean,
-            required: false,
-            default: true,
+        game: {
+            type: Object,
+            required: true,
         },
     },
 
+    data: () => ({
+        currentGame: {},
+    }),
+
     computed: {
-        game() {
-            const { game: id } = this.$route.query;
-            return this.$store.getters['game/gameById'](id);
+        currentTeams() {
+            return this.teams(this.currentGame);
+        },
+    },
+
+    watch: {
+        game(newGame, oldGame) {
+            this.currentGame = newGame;
         },
     },
 
     beforeMount() {
-        if (_.isNil(this.game.meta)) {
-            this.game.meta = {
+        this.currentGame = this.game;
+
+        if (_.isNil(this.currentGame.meta)) {
+            this.currentGame.meta = {
                 winningTeam: null,
-                teamScores: _.fill(Array(2), {
+                teamScores: [],
+            };
+
+            const teamsAmount = _.size(this.currentGame.teams);
+
+            for (let index = 0; index < teamsAmount; index++) {
+                this.currentGame.meta.teamScores.push({
                     objectives: 0,
                     ui: 0,
                     ux: 0,
                     tie: false,
-                }),
-            };
+                });
+            }
         }
 
-        _.forEach(this.game.teams, (team) => {
+        _.forEach(this.currentGame.teams, (team) => {
             if (_.isNil(team.votes)) team.votes = { ui: 0, ux: 0, tie: false };
             if (_.isNil(team.objectives)) team.objectives = {};
         });
-
-        this.$store.commit('game/game', Object.assign({}, this.game));
     },
 
     methods: {
@@ -156,7 +182,7 @@ export default {
         nameFromStatus,
 
         toggleObjectiveState(team, objective) {
-            const specTeam = this.game.teams[team];
+            const specTeam = this.currentGame.teams[team];
 
             if (_.isNil(specTeam.objectives)) specTeam.objectives = {};
 
@@ -174,13 +200,14 @@ export default {
                 if (obj === 'complete') total += 1;
             });
 
-            this.game.meta.teamScores[team].objectives = total;
+            this.currentGame.meta.teamScores[team].objectives = total;
+            this.$emit('update-game', this.currentGame);
         },
 
         isWinner(team) {
             return (
-                this.game.meta.winningTeam != null &&
-                Number(team) === this.game.meta.winningTeam
+                this.currentGame.meta.winningTeam != null &&
+                Number(team) === this.currentGame.meta.winningTeam
             );
         },
 
@@ -189,29 +216,36 @@ export default {
         },
 
         updateTeamVoteScore(team, type, score) {
-            this.game.teams[team].votes[type] = _.defaultTo(Number(score), 0);
-            this.game.meta.teamScores[team][type] = _.defaultTo(
+            this.currentGame.teams[team].votes[type] = _.defaultTo(
                 Number(score),
                 0,
             );
+            this.currentGame.meta.teamScores[team][type] = _.defaultTo(
+                Number(score),
+                0,
+            );
+
+            this.$emit('update-game', this.currentGame);
         },
 
         toggleTeamTied(team, tied) {
-            this.game.teams[team].votes.tie = Boolean(tied);
-            this.game.meta.teamScores[team].tie = Boolean(tied);
+            this.currentGame.teams[team].votes.tie = Boolean(tied);
+            this.currentGame.meta.teamScores[team].tie = Boolean(tied);
 
             const otherTeam = Number(team) === 0 ? 1 : 0;
-            this.game.teams[otherTeam].votes.tie = Boolean(tied);
-            this.game.meta.teamScores[otherTeam].tie = Boolean(tied);
+            this.currentGame.teams[otherTeam].votes.tie = Boolean(tied);
+            this.currentGame.meta.teamScores[otherTeam].tie = Boolean(tied);
+            this.$emit('update-game', this.currentGame);
         },
 
         toggleTeamWinner(team, winner) {
             if (winner) {
-                this.game.meta.winningTeam = Number(team);
+                this.currentGame.meta.winningTeam = Number(team);
             } else {
-                team = Number(team) === 1 ? 0 : 1;
-                this.game.meta.winningTeam = team;
+                this.currentGame.meta.winningTeam = null;
             }
+
+            this.$emit('update-game', this.currentGame);
         },
     },
 };
@@ -231,8 +265,30 @@ h3 {
     margin-bottom: 25px;
 }
 
+.template-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 20px;
+}
+
+.input-container {
+    display: flex;
+}
+
 .container {
-    max-width: 650px;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 10px;
+
+    .Card {
+        margin: 5px;
+        max-width: 500px;
+        min-width: 300px;
+        min-height: 450px;
+    }
 }
 
 .teamScores {
@@ -253,6 +309,10 @@ h3 {
         &.bonus {
             color: $bonus-color;
         }
+    }
+
+    &__obj {
+        margin: 0 10px 0 10px;
     }
 
     &__square {
