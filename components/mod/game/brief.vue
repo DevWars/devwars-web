@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { defaults, size } from 'lodash';
+import { defaults, size, isNil } from 'lodash';
 
 import { names } from '../../../utils/auth';
 import Card from '@/components/Card';
@@ -90,6 +90,9 @@ export default {
         getLanguageByGamePlayer,
 
         playerAssigned({ player, user }) {
+            if (isNil(this.currentGame.players)) this.currentGame.players = {};
+            if (isNil(this.currentGame.editors)) this.currentGame.editors = {};
+
             this.currentGame.players[player.id] = {
                 id: player.id,
                 team: player.team,

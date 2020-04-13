@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import { debounce } from 'lodash';
 import Input from '../form/Input';
 import User from '@/components/user/User';
 
@@ -60,7 +61,15 @@ export default {
         username: '',
         result: { data: [] },
         searchVisible: false,
+        debounceSearch: null,
     }),
+
+    mounted() {
+        this.debounceSearch = debounce(async () => {
+            const url = `/search/users?username=${this.username}&email=${this.username}`;
+            this.result = await this.$axios.get(url);
+        }, 600);
+    },
 
     methods: {
         userSelected(username) {
@@ -68,12 +77,11 @@ export default {
             this.searchVisible = false;
         },
 
-        async searchByUsername(username) {
+        searchByUsername(username) {
             if (username.trim() === '') return (this.result.data = []);
             this.searchVisible = true;
 
-            const url = `/users/lookup?username=${username}`;
-            this.result = await this.$axios.get(url);
+            this.debounceSearch();
         },
 
         async addRegistrant() {

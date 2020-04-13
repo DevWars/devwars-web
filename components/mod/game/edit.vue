@@ -6,7 +6,7 @@
             "
             class="container"
         >
-            <Card class="plain dark">
+            <Card class="dark">
                 <SubScore
                     title="Objectives"
                     :blue-score="currentTeams[0].scores.objectives"
@@ -51,7 +51,7 @@
                     ? currentGame.meta.teamScores
                     : []"
                 :key="index"
-                class="plain dark teamScores"
+                class=" dark teamScores"
             >
                 <h3>Team {{ teamName(index) }}</h3>
 

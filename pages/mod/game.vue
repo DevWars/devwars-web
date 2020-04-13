@@ -127,16 +127,19 @@ export default {
             this.game = Object.assign({}, updatedGame);
         },
 
+        async gatherGame(id) {
+            const { data } = await this.$axios.get(`/games/${id}?players=true`);
+            return data;
+        },
+
         async activate() {
             await this.$axios.post(`/games/${this.game.id}/activate`);
-            await this.$store.dispatch('game/game', { id: this.game.id });
-            this.game.status = 1;
+            this.game = await this.gatherGame(this.game.id);
         },
 
         async endGame() {
             await this.$axios.post(`/games/${this.game.id}/end`);
-            await this.$store.dispatch('game/game', { id: this.game.id });
-            this.game.status = 2;
+            this.game = await this.gatherGame(this.game.id);
         },
 
         async save() {
