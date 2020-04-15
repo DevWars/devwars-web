@@ -27,6 +27,13 @@ export default {
         },
     },
 
+    props: {
+        selected: {
+            type: Number,
+            default: 0,
+        },
+    },
+
     data: () => ({
         activeTab: 0,
     }),
@@ -49,8 +56,14 @@ export default {
         },
     },
 
+    watch: {
+        selected(newValue) {
+            this.selected = newValue;
+        },
+    },
+
     mounted() {
-        this.setActiveTab();
+        this.setActiveTab(this.selected);
     },
 
     methods: {

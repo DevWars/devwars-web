@@ -1,7 +1,7 @@
 <template>
     <Container>
         <Column :sm="3" class="sidebar no-gutter">
-            <LinkTabs class="fluid invert">
+            <LinkTabs class="fluid invert" :selected="season">
                 <nuxt-link
                     v-for="current in seasons"
                     :key="current"
@@ -12,7 +12,7 @@
             </LinkTabs>
 
             <div
-                v-for="game in games"
+                v-for="game in games.data"
                 :key="game.id"
                 class="game"
                 :class="{ active: viewing && viewing.id === game.id }"
@@ -35,6 +35,16 @@
                     />
                 </div>
             </div>
+
+            <Pagination
+                v-if="canPageNextGames || canPagePreviousGames"
+                :page="page"
+                :per-page="10"
+                :can-next="canPageNextGames"
+                :can-previous="canPagePreviousGames"
+                @next="next"
+                @previous="previous"
+            />
         </Column>
 
         <Column :sm="9" class="view">
@@ -48,61 +58,141 @@
 </template>
 
 <script>
-import LinkTabs from '../components/LinkTabs';
-import Tag from '../components/Tag';
-import LargeGameDetail from '../components/game/LargeGameDetail';
-import nameFromStatus from '../utils/gameStatus';
+import { isNil } from 'lodash';
+
+import Tag from '@/components/Tag';
+import LinkTabs from '@/components/LinkTabs';
+import LargeGameDetail from '@/components/game/LargeGameDetail';
+import Pagination from '@/components/Pagination';
 
 export default {
     name: 'Games',
 
-    components: { LinkTabs, Tag, LargeGameDetail },
+    components: { LinkTabs, Tag, LargeGameDetail, Pagination },
+
+    /**
+     * On the server, process loading the games, this will be based on the query
+     * for the season and the game. If no season is provided, then it will
+     * default to season 3, otherwise if no game is provided, the first game is
+     * selected.
+     */
+    async asyncData({ query, error, $axios }) {
+        if (query.season == null || isNaN(Number(query.season)))
+            query.season = 3;
+
+        if (query.game == null || isNaN(Number(query.game)))
+            query.game = undefined;
+
+        try {
+            const { data } = await $axios.get(
+                `/games/season/${query.season}?first=10`,
+            );
+
+            const games = data.data;
+            let viewing = null;
+
+            if (query.game != null && games != null) {
+                const view = games.filter((g) => g.id === Number(query.game));
+                viewing = view[0];
+
+                // If the given game that the user was sent too is not on the
+                // first page of the season, load that game directly and shift
+                // it to the top of the games list, making it shown in the
+                // sidebar and highlighted (regardless of this the game would
+                // still be shown in the large game overview)
+                if (viewing == null) {
+                    viewing = (await $axios.get(`/games/${query.game}`)).data;
+                    games.unshift(viewing);
+                }
+            }
+
+            return {
+                games: data || {},
+                viewing: viewing || data.data[0],
+                season: Number(query.season),
+            };
+        } catch (e) {
+            error({
+                statusCode: e.response.status,
+                description: e.response.data.error,
+                message: e.response.statusText,
+            });
+        }
+    },
 
     data() {
         return {
             seasons: [3, 2, 1],
             season: 3,
-            games: [],
+            games: {},
             viewing: null,
             includePlayers: true,
+            page: 0,
         };
+    },
+
+    computed: {
+        /**
+         * Returns true if any games have been loaded or not.
+         */
+        hasGames() {
+            if (isNil(this.games?.data)) return false;
+            return this.games.data.length > 0;
+        },
+
+        /**
+         * Returns true if we can page forward in the games list, this ensures we have
+         * the next page link and the next page will not be empty.
+         */
+        canPageNextGames() {
+            if (isNil(this.games?.pagination?.after)) return false;
+            return (
+                this.games?.pagination?.after != null &&
+                this.games?.data?.length >= 10
+            );
+        },
+
+        /**
+         * Returns true if we can page backward, ensuring that we are not the first
+         * page.
+         */
+        canPagePreviousGames() {
+            if (isNil(this.games?.pagination?.before)) return false;
+            return this.games?.pagination?.before != null;
+        },
     },
 
     watch: {
         '$route.query.season': {
-            immediate: true,
             async handler(newSeason) {
-                const season = Number(newSeason) || 3;
-                this.season = season;
+                if (this.season === newSeason) return;
+
+                const season = newSeason || 3;
+                this.season = Number(season);
 
                 const { data } = await this.$axios.get(
-                    `/games/season/${this.season}`,
+                    `/games/season/${this.season}?first=10`,
                 );
 
-                if (data.data.length > 0) {
-                    this.games = data.data.filter(
-                        (game) => nameFromStatus(game.status) !== 'ACTIVE',
-                    );
-                }
-                if (!this.$route.query.game) {
-                    const { data } = await this.$axios.get(
-                        `/games/${this.games[0].id}?players=${this.includePlayers}`,
-                    );
+                // if a route update is triggered, requiring the regathering of
+                // the games, ensure to reset the page number. Otherwise paging
+                // will be performed correctly but the indicated page number
+                // will not be correct.
+                this.games = data;
+                this.page = 0;
 
-                    this.viewing = data;
+                if (!this.$route.query.game) {
+                    this.viewing = this.games.data[0];
                 }
             },
         },
 
         '$route.query.game': {
-            immediate: true,
-            async handler(newGame) {
-                if (newGame) {
-                    const { data } = await this.$axios.get(
-                        `/games/${newGame}?players=${this.includePlayers}`,
-                    );
-
-                    this.viewing = data;
+            handler(newGame) {
+                if (newGame && this.games && this.games.data) {
+                    this.viewing = this.games.data.filter(
+                        (game) => game.id === newGame,
+                    )[0];
                 }
             },
         },
@@ -114,6 +204,30 @@ export default {
                 path: '/games',
                 query: { game: game.id, season: game.season },
             });
+        },
+
+        /**
+         * Execute a page backward.
+         */
+        async previous() {
+            this.page -= 1;
+            const { pagination } = this.games;
+            const before = pagination.before.split('games')[1];
+
+            const response = await this.$axios.get(`games${before}`);
+            this.games = response.data;
+        },
+
+        /**
+         * Execute a page forward.
+         */
+        async next() {
+            this.page += 1;
+            const { pagination } = this.games;
+            const after = pagination.after.split('games')[1];
+
+            const response = await this.$axios.get(`games${after}`);
+            this.games = response.data;
         },
     },
 };
