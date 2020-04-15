@@ -61,10 +61,6 @@ body {
     -webkit-font-smoothing: antialiased;
     transition: transform 300ms ease-in-out; // mobile-nav
 
-    ::-webkit-scrollbar {
-        width: 5px;
-    }
-
     ::-webkit-scrollbar-track-piece {
         background-color: $bg-color-3;
     }
@@ -116,34 +112,15 @@ h6 {
 h1 {
     text-transform: uppercase;
     font-family: $alt-font-face;
-    font-size: 36px;
 }
 
 h2 {
     font-family: $alt-font-face;
-    font-size: 30px;
-}
-
-h3 {
-    font-size: 24px;
-}
-
-h4 {
-    font-size: 18px;
-}
-
-h5 {
-    font-size: 14px;
-}
-
-h6 {
-    font-size: 12px;
 }
 
 p {
     color: #fff;
     line-height: 1.5;
-    font-size: 16px;
     word-wrap: break-word;
 }
 
