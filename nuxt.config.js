@@ -128,7 +128,6 @@ export default {
      */
     build: {
         transpile: [/^vue-awesome/],
-        extractCSS: true,
         plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
         loaders: {
             loaders: {

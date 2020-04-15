@@ -21,8 +21,12 @@ export default {
 @import 'utils.scss';
 
 .Table {
-    width: 100%;
+    overflow: auto;
     background-color: $bg-color-2;
+
+    table {
+        min-width: 700px;
+    }
 
     tbody {
         border-top: 1px solid $divider-color;
@@ -53,7 +57,7 @@ export default {
 
     td {
         border-bottom: 1px solid $divider-color;
-        max-width: 40px;
+        min-width: 40px;
         padding: 20px 0;
         text-align: left;
         text-overflow: ellipsis;

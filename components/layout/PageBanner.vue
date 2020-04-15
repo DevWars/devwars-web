@@ -74,7 +74,6 @@ $banner-bg: #0c0a27;
     margin-top: -($banner-height / 1.3);
 
     h1 {
-        font-size: 42px;
         text-transform: uppercase;
         font-weight: $font-weight-bold;
     }

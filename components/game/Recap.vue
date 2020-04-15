@@ -1,56 +1,57 @@
 <template>
     <div>
         <HomeCard v-if="game" title="Last Game Recap">
-            <div class="header">
-                <div class="team">
-                    <div class="team-logo blue" />
-                </div>
-                <div class="score">
-                    <div class="gamemode">{{ game.mode }}</div>
-                    <div
-                        v-for="team in game.teams"
-                        :key="team.id"
-                        class="points"
-                    >
-                        {{ getScoreByGameTeam(game, team) }}
+            <div class="content-container">
+                <div class="header">
+                    <div class="team">
+                        <div class="team-logo blue" />
+                    </div>
+                    <div class="score">
+                        <div class="gamemode">{{ game.mode }}</div>
+                        <div
+                            v-for="team in game.teams"
+                            :key="team.id"
+                            class="points"
+                        >
+                            {{ getScoreByGameTeam(game, team) }}
+                        </div>
+                    </div>
+                    <div class="team">
+                        <div class="team-logo red" />
                     </div>
                 </div>
-                <div class="team">
-                    <div class="team-logo red" />
-                </div>
-            </div>
 
-            <div class="matchup">
-                <ul
-                    v-for="team in game.teams"
-                    :key="team.id"
-                    class="players"
-                    :class="{
-                        blue: team.name === 'blue',
-                        red: team.name === 'red',
-                    }"
-                >
-                    <li
-                        v-for="player in getPlayersByGameTeam(game, team)"
-                        :key="player.id"
+                <div class="matchup">
+                    <ul
+                        v-for="team in game.teams"
+                        :key="team.id"
+                        class="players"
+                        :class="{
+                            blue: team.name === 'blue',
+                            red: team.name === 'red',
+                        }"
                     >
-                        <nuxt-link :to="`/dashboard/${player.id}`">
-                            {{ player.username }}
-                        </nuxt-link>
-                    </li>
-                </ul>
-                <ul class="pos">
-                    <li class="html">HTML</li>
-                    <li class="css">CSS</li>
-                    <li class="js">JS</li>
-                </ul>
+                        <li
+                            v-for="player in getPlayersByGameTeam(game, team)"
+                            :key="player.id"
+                        >
+                            <nuxt-link :to="`/dashboard/${player.id}`">
+                                {{ player.username }}
+                            </nuxt-link>
+                        </li>
+                    </ul>
+                    <ul class="pos">
+                        <li class="html">HTML</li>
+                        <li class="css">CSS</li>
+                        <li class="js">JS</li>
+                    </ul>
+                </div>
+                <ButtonGroup class="buttons">
+                    <Button to="/games" class="outline primary">
+                        View Full Game
+                    </Button>
+                </ButtonGroup>
             </div>
-
-            <ButtonGroup>
-                <Button to="/games" class="outline primary">
-                    View Full Game
-                </Button>
-            </ButtonGroup>
         </HomeCard>
         <HomeCard v-else title="Last Game Recap">
             <p>Please check back at a later time</p>
@@ -81,20 +82,28 @@ export default {
 <style lang="scss" scoped>
 @import 'utils.scss';
 
+.content-container {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(3, auto);
+    row-gap: 5px;
+    margin-bottom: 10px;
+}
+
 .header {
     display: grid;
     grid-template-columns: 0.5fr 1fr 0.5fr;
     grid-template-rows: 1fr;
     justify-items: center;
+    width: 100%;
+
+    @include breakpoint(xs) {
+        grid-template-columns: 1fr;
+    }
 }
 
 .team {
     flex: 1 1 100%;
-
-    @include breakpoint(md) {
-        width: 60px;
-        height: 60px;
-    }
 
     @include breakpoint(xs) {
         display: none;
@@ -141,7 +150,7 @@ export default {
     }
 
     @include breakpoint(md) {
-        font-size: 24px;
+        // font-size: 24px;
     }
     @include breakpoint(xs) {
         font-size: 36px;
@@ -153,7 +162,7 @@ export default {
     padding: 0 30px;
     display: flex;
     justify-content: space-between;
-    margin: $s-space auto 0;
+    margin: auto auto 0;
     font-weight: $font-weight-semibold;
 
     @include breakpoint(sm) {
@@ -200,5 +209,9 @@ export default {
     &.js {
         color: $js-color;
     }
+}
+
+.buttons {
+    margin-top: 10px;
 }
 </style>
