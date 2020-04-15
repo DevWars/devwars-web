@@ -72,6 +72,7 @@ $colors: (
     background-color: rgba(#fff, 0.85);
     font-family: $alt-font-face;
     font-weight: $font-weight-bold;
+    font-size: $font-size-sm;
     color: $black-color;
     text-transform: uppercase;
     text-align: center;

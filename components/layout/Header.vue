@@ -3,10 +3,7 @@
         <div class="header">
             <Container class="fluid">
                 <div class="header-main">
-                    <Button
-                        class="link burger-menu"
-                        @click="toggleMobileMenu"
-                    >
+                    <Button class="link burger-menu" @click="toggleMobileMenu">
                         <Icon name="bars" />
                     </Button>
 
@@ -28,16 +25,24 @@
                             <nuxt-link to="/" class="nav__link">Home</nuxt-link>
                         </li>
                         <li class="nav__item">
-                            <nuxt-link to="/games" class="nav__link">Games</nuxt-link>
+                            <nuxt-link to="/games" class="nav__link">
+                                Games
+                            </nuxt-link>
                         </li>
                         <li class="nav__item">
-                            <nuxt-link to="/schedule" class="nav__link">Schedule</nuxt-link>
+                            <nuxt-link to="/schedule" class="nav__link">
+                                Schedule
+                            </nuxt-link>
                         </li>
                         <li class="nav__item">
-                            <nuxt-link to="/leaderboards" class="nav__link">Leaders</nuxt-link>
+                            <nuxt-link to="/leaderboards" class="nav__link">
+                                Leaders
+                            </nuxt-link>
                         </li>
                         <li class="nav__item">
-                            <nuxt-link to="/docs" class="nav__link">About</nuxt-link>
+                            <nuxt-link to="/docs" class="nav__link">
+                                About
+                            </nuxt-link>
                         </li>
                     </ul>
                 </div>
@@ -56,7 +61,9 @@
                         <User size="sm" :user="user" />
                     </template>
                     <template #menu>
-                        <Button v-if="isStaff" to="/mod/dashboard">Modpanel</Button>
+                        <Button v-if="isStaff" to="/mod/dashboard">
+                            Modpanel
+                        </Button>
                         <div v-if="isStaff" class="divider" />
                         <Button to="/dashboard">Dashboard</Button>
                         <Button to="/badges">Badges</Button>
@@ -198,7 +205,7 @@ export default {
             display: inline-block;
             padding: 10px;
             margin: $xxs-space 0;
-            font-weight: bold;
+            font-weight: 700;
             text-transform: uppercase;
             font-size: $font-size-base;
             color: $text-color-secondary;

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Row class="banner">
+        <div class="banner">
             <div class="banner__inner">
                 <div class="banner__meta">
                     <span class="banner__date">{{
@@ -24,9 +24,9 @@
                     Watch on YouTube
                 </ButtonIcon>
             </div>
-        </Row>
+        </div>
 
-        <Row class="roster">
+        <div class="roster">
             <GameTeam
                 v-for="team in currentTeams"
                 :key="team.id"
@@ -42,7 +42,7 @@
                     :languages="getLanguageByGamePlayer(game, player)"
                 />
             </GameTeam>
-        </Row>
+        </div>
 
         <SubScore v-if="game.title" title="Theme" no-score>
             <h3>{{ game.title }}</h3>
@@ -126,6 +126,10 @@ export default {
 
 .roster {
     display: flex;
+
+    @include breakpoint(md) {
+        display: inherit;
+    }
 
     .GameTeam {
         flex: 1 1 100%;

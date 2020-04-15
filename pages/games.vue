@@ -1,5 +1,5 @@
 <template>
-    <Container class="fluid">
+    <Container>
         <Column :sm="3" class="sidebar no-gutter">
             <LinkTabs class="fluid invert">
                 <nuxt-link
@@ -52,6 +52,7 @@ import LinkTabs from '../components/LinkTabs';
 import Tag from '../components/Tag';
 import LargeGameDetail from '../components/game/LargeGameDetail';
 import nameFromStatus from '../utils/gameStatus';
+
 export default {
     name: 'Games',
 
@@ -78,8 +79,8 @@ export default {
                     `/games/season/${this.season}`,
                 );
 
-                if (data.length > 0) {
-                    this.games = data.filter(
+                if (data.data.length > 0) {
+                    this.games = data.data.filter(
                         (game) => nameFromStatus(game.status) !== 'ACTIVE',
                     );
                 }

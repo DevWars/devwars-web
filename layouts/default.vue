@@ -61,6 +61,10 @@ body {
     -webkit-font-smoothing: antialiased;
     transition: transform 300ms ease-in-out; // mobile-nav
 
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
     ::-webkit-scrollbar-track-piece {
         background-color: $bg-color-3;
     }

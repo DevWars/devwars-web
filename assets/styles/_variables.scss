@@ -2,6 +2,7 @@
 Grid
 ========================================================================== */
 $grid-breakpoints: (
+    ss: 500px,
     xs: 576px,
     sm: 768px,
     md: 992px,
@@ -112,7 +113,7 @@ $display6-size: 2rem;
 $border-radius: 5px;
 $border-radius-sm: 3px;
 
-$font-size-base: 1em;
+$font-size-base: 0.95rem;
 $font-size-xl: $font-size-base * 1.4;
 $font-size-lg: $font-size-base * 1.25;
 $font-size-sm: $font-size-base * 0.875;
