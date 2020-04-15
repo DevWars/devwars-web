@@ -85,7 +85,7 @@ export default {
                 }
                 if (!this.$route.query.game) {
                     const { data } = await this.$axios.get(
-                        `/games/${this.games[0]}?players=${this.includePlayers}`,
+                        `/games/${this.games[0].id}?players=${this.includePlayers}`,
                     );
 
                     this.viewing = data;

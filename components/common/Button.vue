@@ -72,7 +72,6 @@ $colors: (
     background-color: rgba(#fff, 0.85);
     font-family: $alt-font-face;
     font-weight: $font-weight-bold;
-    font-size: 12px;
     color: $black-color;
     text-transform: uppercase;
     text-align: center;
@@ -161,6 +160,13 @@ $colors: (
                 }
             }
         }
+    }
+
+    @include breakpoint(sm) {
+        height: 26px;
+        line-height: 26px;
+        padding: 0 12px;
+        font-size: $font-size-sm;
     }
 
     &.sm {

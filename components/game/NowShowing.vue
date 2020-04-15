@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <ButtonGroup>
+        <ButtonGroup class="buttons">
             <Button
                 href="https://www.twitch.tv/devwars"
                 target="_blank"
@@ -63,7 +63,8 @@ export default {
     margin: 0 auto;
 
     @include breakpoint(xs) {
-        max-width: none;
+        width: 95%;
+        max-width: inherit;
     }
 
     iframe {
@@ -91,5 +92,9 @@ export default {
         margin-right: $xs-space;
         background-color: red;
     }
+}
+
+.buttons {
+    margin-top: 10px;
 }
 </style>

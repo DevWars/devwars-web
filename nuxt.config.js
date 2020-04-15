@@ -132,7 +132,6 @@ export default {
         loaders: {
             loaders: {
                 scss: { sourceMap: false },
-                vue: { cacheBusting: false },
             },
         },
         babel: {
