@@ -34,7 +34,9 @@
                         v-for="player in getPlayersByGameTeam(game, team)"
                         :key="player.id"
                     >
-                        <nuxt-link :to="`/dashboard/${player.id}`">{{ player.username }}</nuxt-link>
+                        <nuxt-link :to="`/dashboard/${player.id}`">
+                            {{ player.username }}
+                        </nuxt-link>
                     </li>
                 </ul>
                 <ul class="pos">
@@ -45,7 +47,9 @@
             </div>
 
             <ButtonGroup>
-                <Button to="/games" class="outline primary">View Full Game</Button>
+                <Button to="/games" class="outline primary">
+                    View Full Game
+                </Button>
             </ButtonGroup>
         </HomeCard>
         <HomeCard v-else title="Last Game Recap">
@@ -78,7 +82,10 @@ export default {
 @import 'utils.scss';
 
 .header {
-    display: flex;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 0.5fr;
+    grid-template-rows: 1fr;
+    justify-items: center;
 }
 
 .team {
