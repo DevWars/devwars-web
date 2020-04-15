@@ -18,7 +18,6 @@ $container-max-widths: (
 $grid-columns: 12;
 $grid-gutter-width: 15px;
 
-
 /*  ========================================================================
 Main Colors
 ========================================================================== */
@@ -38,11 +37,10 @@ $divider-color: rgba($text-color-primary, 0.12);
 
 $base-font-color: rgba(#fff, 0.9);
 
-
 /* ==========================================================================
 Miscellaneous Colors
 ========================================================================== */
-$black-color: #0A0B10;
+$black-color: #0a0b10;
 
 $success-color: #2ecc71;
 $warning-color: #f1c40f;
@@ -54,7 +52,7 @@ $bonus-color: #ffb04a;
 
 $css-color: #0ebeff;
 $html-color: #ff7200;
-$js-color: #F8DC3D;
+$js-color: #f8dc3d;
 
 $bronze-color: #a57e12;
 $silver-color: #e0e5e8;
@@ -67,8 +65,7 @@ $twitter-color: #4099ff;
 $youtube-color: #e52d27;
 $reddit-color: #ff4500;
 $twitch-color: #6441a5;
-$discord-color: #7289DA;
-
+$discord-color: #7289da;
 
 /* ==========================================================================
 Spacing
@@ -89,7 +86,6 @@ $sm-space: $base-space - $xs-space;
 $ms-space: $base-space + $s-space;
 $ml-space: $base-space + $l-space;
 $sxs-space: $s-space - $xxs-space;
-
 
 /* ==========================================================================
 Typography
@@ -116,12 +112,11 @@ $display6-size: 2rem;
 $border-radius: 5px;
 $border-radius-sm: 3px;
 
-$font-size-base: 14px;
+$font-size-base: 1em;
 $font-size-xl: $font-size-base * 1.4;
 $font-size-lg: $font-size-base * 1.25;
 $font-size-sm: $font-size-base * 0.875;
 $font-size-xs: $font-size-base * 0.75;
-
 
 /* ==========================================================================
 Z-index
@@ -136,7 +131,6 @@ $zindex-navbar-fixed: 1030;
 $zindex-navbar-sticky: 1030;
 $zindex-modal-bg: 1040;
 $zindex-modal: 1050;
-
 
 /* ==========================================================================
 Globals
