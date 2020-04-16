@@ -85,7 +85,7 @@ export default {
 
         try {
             const { data } = await $axios.get(
-                `/games/season/${query.season}?first=10`,
+                `/games/season/${query.season}?first=10&status=ended`,
             );
 
             const games = data.data;
@@ -171,7 +171,7 @@ export default {
                 this.season = Number(season);
 
                 const { data } = await this.$axios.get(
-                    `/games/season/${this.season}?first=10`,
+                    `/games/season/${this.season}?first=10&status=ended`,
                 );
 
                 // if a route update is triggered, requiring the regathering of
