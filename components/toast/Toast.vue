@@ -54,6 +54,7 @@ $toast-margin-y: 10px;
         margin-top: 3px;
         margin-right: 20px;
         font-size: $font-size-lg;
+        font-weight: 900;
     }
     .message {
         font-size: $font-size-base;
