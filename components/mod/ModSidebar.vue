@@ -46,6 +46,11 @@
                     <Icon name="file-alt" />Mod Doc
                 </nuxt-link>
             </li>
+            <li>
+                <nuxt-link to="/mod/logs/">
+                    <Icon name="sticky-note" />Logs
+                </nuxt-link>
+            </li>
         </ul>
 
         <h6>Stats</h6>
