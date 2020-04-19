@@ -51,10 +51,11 @@
         </Table>
 
         <Pagination
+            v-if="!searched"
             :page="page"
             :per-page="10"
-            :can-next="users.pagination.after != null"
-            :can-previous="users.pagination.before != null"
+            :can-next="users.pagination.next != null"
+            :can-previous="users.pagination.previous != null"
             @next="next"
             @previous="previous"
         />
@@ -63,7 +64,6 @@
 
 <script>
 import { names } from '../../utils/auth';
-import Http from '../../services/Http';
 
 import Input from '@/components/form/Input';
 import Avatar from '@/components/user/Avatar';
@@ -87,8 +87,8 @@ export default {
         ConnectionsSmall,
     },
 
-    async asyncData({ parmas }) {
-        const users = await Http.for('users').get('?after=0&first=10');
+    async asyncData({ parmas, $axios }) {
+        const { data: users } = await $axios.get('users?first=5');
         return { users };
     },
 
@@ -110,8 +110,8 @@ export default {
         async performSearch() {
             if (this.search == null || this.search.trim() === '') return;
 
-            const users = await Http.for('search/users').get(
-                `?username=${this.search}&email=${this.search}&full=true`,
+            const { data: users } = await this.$axios.get(
+                `search/users?username=${this.search}&email=${this.search}&full=true`,
             );
 
             this.users = { data: users, pagination: {} };
@@ -119,7 +119,8 @@ export default {
         },
 
         async clearSearch() {
-            this.users = await Http.for('users').get('?after=0&first=10');
+            const { data: users } = await this.$axios.get('users?first=5');
+            this.users = users;
             this.searched = false;
             this.search = null;
             this.page = 0;
@@ -128,14 +129,25 @@ export default {
         async previous() {
             this.page -= 1;
             const { pagination } = this.users;
-            const before = pagination.before.split('users')[1];
-            this.users = await Http.for(`users${before}`).get();
+            const before = pagination.previous;
+
+            const { data: users } = await this.$axios.get(
+                `users?first=5&before=${before}`,
+            );
+
+            this.users = users;
         },
+
         async next() {
             this.page += 1;
             const { pagination } = this.users;
-            const after = pagination.after.split('users')[1];
-            this.users = await Http.for(`users${after}`).get();
+            const after = pagination.next;
+
+            const { data: users } = await this.$axios.get(
+                `users?first=5&after=${after}`,
+            );
+
+            this.users = users;
         },
     },
 };
