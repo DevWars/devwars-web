@@ -14,7 +14,7 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "@nuxtjs/axios": "^5.9.7",
+    "@nuxtjs/axios": "^5.10.1",
     "@nuxtjs/dotenv": "^1.4.0",
     "country-list": "^2.2.0",
     "cropperjs": "^1.5.6",
