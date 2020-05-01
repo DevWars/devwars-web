@@ -128,7 +128,12 @@ export default {
      */
     build: {
         transpile: [/^vue-awesome/],
-        plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
+        plugins: [
+            new webpack.IgnorePlugin({
+                resourceRegExp: /^\.\/locale$/,
+                contextRegExp: /moment$/,
+            }),
+        ],
         loaders: {
             loaders: {
                 scss: { sourceMap: false },
