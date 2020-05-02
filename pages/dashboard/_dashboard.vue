@@ -96,8 +96,14 @@ export default {
         },
 
         isModerator() {
-            const { role } = this.$store.state.user.user;
-            return role === 'MODERATOR' || role === 'ADMIN';
+            const { user } = this.$store.state.user;
+
+            if (user != null && user.user != null) {
+                const { role } = this.$store.state.user.user;
+                return role === 'MODERATOR' || role === 'ADMIN';
+            }
+
+            return false;
         },
     },
 };
