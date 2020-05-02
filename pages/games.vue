@@ -93,6 +93,7 @@ export default {
 
             if (query.game != null && games != null) {
                 const view = games.filter((g) => g.id === Number(query.game));
+
                 viewing = view[0];
 
                 // If the given game that the user was sent too is not on the
@@ -108,7 +109,7 @@ export default {
 
             return {
                 games: data || {},
-                viewing: viewing || data.data[0],
+                viewing: viewing || games[0],
                 season: Number(query.season),
             };
         } catch (e) {
@@ -145,9 +146,9 @@ export default {
          * the next page link and the next page will not be empty.
          */
         canPageNextGames() {
-            if (isNil(this.games?.pagination?.after)) return false;
+            if (isNil(this.games?.pagination?.next)) return false;
             return (
-                this.games?.pagination?.after != null &&
+                this.games?.pagination?.next != null &&
                 this.games?.data?.length >= 10
             );
         },
@@ -157,8 +158,8 @@ export default {
          * page.
          */
         canPagePreviousGames() {
-            if (isNil(this.games?.pagination?.before)) return false;
-            return this.games?.pagination?.before != null;
+            if (isNil(this.games?.pagination?.previous)) return false;
+            return this.games?.pagination?.previous != null;
         },
     },
 
@@ -212,10 +213,13 @@ export default {
         async previous() {
             this.page -= 1;
             const { pagination } = this.games;
-            const before = pagination.before.split('games')[1];
+            const before = pagination.previous;
 
-            const response = await this.$axios.get(`games${before}`);
-            this.games = response.data;
+            const { data } = await this.$axios.get(
+                `games/season/${this.season}?first=10&before=${before}&status=ended`,
+            );
+
+            this.games = data;
         },
 
         /**
@@ -224,10 +228,13 @@ export default {
         async next() {
             this.page += 1;
             const { pagination } = this.games;
-            const after = pagination.after.split('games')[1];
+            const after = pagination.next;
 
-            const response = await this.$axios.get(`games${after}`);
-            this.games = response.data;
+            const { data } = await this.$axios.get(
+                `games/season/${this.season}?first=10&after=${after}&status=ended`,
+            );
+
+            this.games = data;
         },
     },
 };
