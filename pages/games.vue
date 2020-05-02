@@ -85,13 +85,13 @@ export default {
 
         try {
             const { data } = await $axios.get(
-                `/games/season/${query.season}?first=10&status=ended`,
+                `/games?season=${query.season}&first=10&status=ended`,
             );
 
             const games = data.data;
             let viewing = null;
 
-            // If the given game that the user was sent too is not on the
+            // If the given game that the ser was sent too is not on the
             // first page of the season, load that game directly and shift
             // it to the top of the games list, making it shown in the
             // sidebar and highlighted (regardless of this the game would
@@ -178,7 +178,7 @@ export default {
                 this.season = Number(season);
 
                 const { data } = await this.$axios.get(
-                    `/games/season/${this.season}?first=10&status=ended`,
+                    `/games?season=${this.season}&first=10&status=ended`,
                 );
 
                 // if a route update is triggered, requiring the regathering of
@@ -244,9 +244,8 @@ export default {
             const { pagination } = this.games;
             const before = pagination.previous;
 
-            const { data } = await this.$axios.get(
-                `games/season/${this.season}?first=10&before=${before}&status=ended`,
-            );
+            const url = `games?season=${this.season}&first=10&before=${before}&status=ended`;
+            const { data } = await this.$axios.get(url);
 
             this.games = data;
         },
@@ -260,7 +259,7 @@ export default {
             const after = pagination.next;
 
             const { data } = await this.$axios.get(
-                `games/season/${this.season}?first=10&after=${after}&status=ended`,
+                `games?season=${this.season}?first=10&after=${after}&status=ended`,
             );
 
             this.games = data;
