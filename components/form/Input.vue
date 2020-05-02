@@ -1,34 +1,16 @@
 <template>
     <div class="Input" :class="{ label }">
         <input
-            v-if="!textarea"
-            :id="id"
+            :id="labelName"
             ref="input"
             :type="type"
-            :class="[inputClass, { empty: !valid }, { valid }]"
+            :class="[{ empty: !valid }, { valid }]"
             v-bind="$attrs"
             :value="value"
-            :placeholder="placeholder"
             @input="
                 (e) => [
                     $emit('input', e.target.value),
                     inputChange(e.target.value),
-                ]
-            "
-        />
-        <textarea
-            v-if="textarea"
-            :id="id"
-            ref="input"
-            :type="type"
-            v-bind="$attrs"
-            :value="value"
-            :placeholder="placeholder"
-            :class="[inputClass, { empty: !valid }, { valid }]"
-            @input="
-                (e) => [
-                    inputChange(e.target.value),
-                    $emit('input', e.target.value),
                 ]
             "
         />
@@ -41,17 +23,8 @@ export default {
     name: 'Input',
 
     props: {
-        id: {
-            type: String,
-            default: undefined,
-        },
-        required: {
-            type: Boolean,
-            default: false,
-        },
         value: {
             type: [String, Number],
-            required: false,
             default: undefined,
         },
         label: {
@@ -62,18 +35,7 @@ export default {
             type: String,
             default: 'text',
         },
-        inputClass: {
-            type: String,
-            default: '',
-        },
-        placeholder: {
-            type: String,
-            default: '',
-        },
-        textarea: {
-            type: Boolean,
-            default: false,
-        },
+
     },
 
     data: () => ({
@@ -110,8 +72,7 @@ export default {
 .Input {
     width: 100%;
 
-    input,
-    textarea {
+    input {
         @extend %form-control;
     }
 
@@ -121,11 +82,6 @@ export default {
 
     &.group {
         @extend %form-group;
-    }
-
-    [type='email']:disabled,
-    [type='text']:disabled {
-        color: #484b5b;
     }
 }
 </style>

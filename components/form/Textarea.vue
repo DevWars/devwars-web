@@ -4,6 +4,7 @@
             :id="labelName"
             ref="input"
             :class="[{ empty: !valid }, { valid }]"
+            :value="value"
             v-bind="$attrs"
             @input="
                 (e) => [
@@ -25,6 +26,10 @@ export default {
             type: String,
             default: '',
         },
+        value: {
+            type: String,
+            default: undefined,
+        },
     },
 
     data: () => ({
@@ -34,6 +39,12 @@ export default {
     computed: {
         labelName() {
             return this.label.toLowerCase().replace(/\s/g, '-');
+        },
+    },
+
+    watch: {
+        value(value) {
+            this.inputChange(value);
         },
     },
 

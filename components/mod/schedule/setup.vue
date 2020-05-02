@@ -81,29 +81,20 @@
                     </Button>
                 </h3>
                 <div class="template-container">
-                    <Input
+                    <Textarea
                         v-model="currentSchedule.templates.html"
                         placeholder="<html>Hi!</html>"
                         label="Template HTML"
-                        input-class="language"
-                        input-id="lang-html"
-                        textarea
                     />
-                    <Input
+                    <Textarea
                         v-model="currentSchedule.templates.css"
                         placeholder="body { background: white; }"
-                        input-class="language"
-                        input-id="lang-css"
                         label="Template CSS"
-                        textarea
                     />
-                    <Input
+                    <Textarea
                         v-model="currentSchedule.templates.js"
                         placeholder="console.log('hi!')"
-                        input-class="language"
-                        input-id="lang-js"
                         label="Template JS"
-                        textarea
                     />
                 </div>
             </Card>
@@ -119,6 +110,7 @@ import { names } from '../../../utils/auth';
 
 import Card from '@/components/Card';
 import Input from '@/components/form/Input';
+import Textarea from '@/components/form/Textarea';
 import Select from '@/components/form/Select';
 import SquareToggle from '@/components/SquareToggle';
 
@@ -129,7 +121,7 @@ export default {
         auth: names.MODERATOR,
     },
 
-    components: { Card, Input, Select, SquareToggle },
+    components: { Card, Input, Textarea, Select, SquareToggle },
 
     props: {
         schedule: {
@@ -264,14 +256,6 @@ export default {
     },
 };
 </script>
-
-<style lang="scss">
-.language {
-    max-width: 260px;
-    min-height: 90px;
-    resize: none;
-}
-</style>
 
 <style lang="scss" scoped>
 @import 'utils.scss';
