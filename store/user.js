@@ -103,9 +103,12 @@ export const actions = {
         }
     },
 
-    async activities({ commit, dispatch }) {
+    async activities({ commit, state, dispatch }) {
         try {
-            const activities = await Http.for('activities/mine').get();
+            if (state.user == null) return;
+            const activities = await Http.for(
+                `users/${state.user.id}/activities`,
+            ).get();
 
             commit('activities', activities);
         } catch (e) {
