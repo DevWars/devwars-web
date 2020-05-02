@@ -91,20 +91,26 @@ export default {
             const games = data.data;
             let viewing = null;
 
-            if (query.game != null && games != null) {
+            // If the given game that the user was sent too is not on the
+            // first page of the season, load that game directly and shift
+            // it to the top of the games list, making it shown in the
+            // sidebar and highlighted (regardless of this the game would
+            // still be shown in the large game overview)
+            if (!isNil(query.game)) {
                 const view = games.filter((g) => g.id === Number(query.game));
+                const gameId = view[0] == null ? query.game : view[0].id;
 
-                viewing = view[0];
+                viewing = (await $axios.get(`/games/${gameId}?players=true`))
+                    .data;
 
-                // If the given game that the user was sent too is not on the
-                // first page of the season, load that game directly and shift
-                // it to the top of the games list, making it shown in the
-                // sidebar and highlighted (regardless of this the game would
-                // still be shown in the large game overview)
-                if (viewing == null) {
-                    viewing = (await $axios.get(`/games/${query.game}`)).data;
-                    games.unshift(viewing);
-                }
+                // if we did not find the game in our current list (wrong page)
+                // shift it to the front of our list so the linked players get
+                // to see the game.
+                if (view[0] == null) games.unshift(viewing);
+            } else if (!isNil(games[0])) {
+                viewing = (
+                    await $axios.get(`/games/${games[0].id}?players=true`)
+                ).data;
             }
 
             return {
@@ -182,18 +188,41 @@ export default {
                 this.games = data;
                 this.page = 0;
 
-                if (!this.$route.query.game) {
-                    this.viewing = this.games.data[0];
+                if (isNil(this.$route.query.game)) {
+                    this.$router.push({
+                        path: '/games',
+                        query: {
+                            game: this.$route.query.game,
+                            season: this.season,
+                        },
+                    });
                 }
             },
         },
 
         '$route.query.game': {
-            handler(newGame) {
-                if (newGame && this.games && this.games.data) {
-                    this.viewing = this.games.data.filter(
-                        (game) => game.id === newGame,
-                    )[0];
+            async handler(newGame) {
+                if (
+                    isNil(newGame) ||
+                    isNil(this.games) ||
+                    isNil(this.games.data)
+                )
+                    return;
+
+                // Due to a limitation of the database, its not easily or best
+                // to perform cross joins on tables based on the jsonb data for
+                // a game to join players. Even more so when its a object vs a
+                // array, and thus to include actual avatar and user related
+                // information, we must regather the game directly to ensure
+                // players are loaded.
+                // this.viewing = this.games.data.filter((game) => game.id === newGame)[0];
+
+                try {
+                    this.viewing = (
+                        await this.$axios.get(`/games/${newGame}?players=true`)
+                    ).data;
+                } catch (e) {
+                    this.$store.dispatch('toast/error', e.response.data);
                 }
             },
         },
