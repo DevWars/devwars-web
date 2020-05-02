@@ -1,8 +1,10 @@
 <template>
     <div class="ListingFilters">
         <div class="main">
-            <Select>
-                <option value="Infinity" selected>Show All</option>
+            <Select @change="(e) => $emit('change', e)">
+                <option v-for="x in options" :key="x.value" :value="x.value">
+                    {{ x.name }}
+                </option>
             </Select>
         </div>
 
@@ -18,6 +20,18 @@ import Select from '@/components/form/Select';
 export default {
     name: 'ListingFilters',
     components: { Select },
+
+    props: {
+        options: {
+            type: Array,
+            required: false,
+            default: () => [{ name: 'Show All', value: 1 }],
+        },
+    },
+
+    data() {
+        return {};
+    },
 };
 </script>
 
