@@ -27,4 +27,6 @@ module.exports = {
         indent: ['error', 4],
         'vue/html-indent': ['error', 4],
     },
+
+    ignorePatterns: ['/client/*'],
 };

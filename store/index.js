@@ -6,15 +6,14 @@ export const actions = {
     async nuxtServerInit({ dispatch }) {
         await Promise.all([
             dispatch('server/health'),
+            // dispatch('user/refresh'),
 
-            dispatch('user/refresh'),
-
-            dispatch('game/schedules'),
-            dispatch('game/upcoming'),
-            dispatch('game/active'),
+            // dispatch('game/schedules'),
+            // dispatch('game/upcoming'),
+            // dispatch('game/active'),
 
             // Needs to only dispatch when User is logged in
-            dispatch('game/applications'),
+            // dispatch('game/applications'),
         ]);
     },
 

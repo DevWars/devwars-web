@@ -17,7 +17,9 @@
                     v-for="(user, index) in leaderboards.data"
                     :key="user.userId"
                 >
-                    <td scope="row" class="rank">{{ page * 10 + index + 1 }}</td>
+                    <td scope="row" class="rank">
+                        {{ page * 10 + index + 1 }}
+                    </td>
                     <td><User :user="user" size="sm" /></td>
                     <td>{{ user.level }}</td>
                     <td>{{ user.wins }}</td>
@@ -39,7 +41,6 @@
 </template>
 
 <script>
-import Http from '../services/Http';
 import PageBanner from '@/components/layout/PageBanner';
 import Table from '@/components/Table';
 import User from '@/components/user/User';
@@ -50,9 +51,12 @@ export default {
 
     components: { PageBanner, Table, User, Pagination },
 
-    async asyncData() {
+    async asyncData({ app: { $api } }) {
         return {
-            leaderboards: await Http.for('users/leaderboards?first=10').get(),
+            leaderboards: await $api.leaderboards.leaderboardsOfUsers({
+                first: 10,
+                after: 0,
+            }),
         };
     },
 
@@ -74,20 +78,32 @@ export default {
             this.page -= 1;
 
             const { pagination } = this.leaderboards;
-            const before = pagination.before.split('users/leaderboards')[1];
-            this.leaderboards = await Http.for(
-                `users/leaderboards${before}`,
-            ).get();
+
+            const first = pagination.before.split('?first=')[1].split('&')[0];
+            const after = pagination.before.split('&after=')[1];
+
+            this.leaderboards = await this.$api.leaderboards.leaderboardsOfUsers(
+                {
+                    first,
+                    after,
+                },
+            );
         },
 
         async next() {
             this.page += 1;
 
             const { pagination } = this.leaderboards;
-            const after = pagination.after.split('users/leaderboards')[1];
-            this.leaderboards = await Http.for(
-                `users/leaderboards${after}`,
-            ).get();
+
+            const first = pagination.after.split('?first=')[1].split('&')[0];
+            const after = pagination.after.split('&after=')[1];
+
+            this.leaderboards = await this.$api.leaderboards.leaderboardsOfUsers(
+                {
+                    first,
+                    after,
+                },
+            );
         },
     },
 };
