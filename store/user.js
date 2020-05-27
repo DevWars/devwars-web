@@ -1,5 +1,3 @@
-import Http from '../services/Http';
-
 export const state = () => ({
     user: null,
     profile: null,
@@ -91,7 +89,7 @@ export const mutations = {
 export const actions = {
     async refresh({ commit, dispatch }) {
         try {
-            const user = await Http.for('auth/user').get();
+            const user = await this.$api.authentication.getCurrentUser();
             commit('user', user);
 
             await dispatch('profile');
@@ -103,52 +101,45 @@ export const actions = {
         }
     },
 
-    async activities({ commit, dispatch }) {
+    async activities({ state, commit, dispatch }) {
         try {
-            const activities = await Http.for('activities/mine').get();
+            const activities = await this.$api.users.getUserActivities(
+                state.user.id,
+            );
 
             commit('activities', activities);
         } catch (e) {
-            dispatch('toast/error', e.response.data, { root: true });
+            dispatch('toast/error', e, { root: true });
             commit('user', null);
         }
     },
 
     async profile({ commit, state, dispatch }) {
         try {
-            const profile = await Http.for(
-                `/users/${state.user.id}/profile`,
-            ).get();
+            const profile = await this.$api.users.getUserProfile(state.user.id);
             commit('profile', profile);
         } catch (e) {
-            dispatch('toast/error', e.response.data, { root: true });
+            dispatch('toast/error', e, { root: true });
             commit('user', null);
         }
     },
 
     async stats({ commit, state, dispatch }) {
         try {
-            const stats = await Http.for(`/users/${state.user.id}/stats`).get();
+            const statistics = await this.$api.users.getUserStatistics(
+                state.user.id,
+            );
 
-            commit('stats', stats);
+            commit('stats', statistics);
         } catch (e) {
-            dispatch('toast/error', e.response.data, { root: true });
+            dispatch('toast/error', e, { root: true });
             commit('user', null);
         }
     },
 
-    async refreshUserCount({ commit }) {
-        const data = await Http.for('leaderboards').get('users');
-
-        commit('count', data.count);
-    },
-
     async login({ commit, dispatch }, { username, password }) {
         try {
-            await Http.for('auth').post('login', {
-                identifier: username,
-                password,
-            });
+            await this.$api.authentication.login(username, password);
 
             await dispatch('refresh');
 
@@ -159,7 +150,7 @@ export const actions = {
 
             dispatch('navigate', '/dashboard', { root: true });
         } catch (e) {
-            dispatch('toast/error', e.response.data, { root: true });
+            dispatch('toast/error', e, { root: true });
             commit('user', null);
         }
     },
@@ -176,13 +167,12 @@ export const actions = {
 
             dispatch('navigate', '/dashboard', { root: true });
         } catch (e) {
-            dispatch('toast/error', e.response.data, { root: true });
+            dispatch('toast/error', e, { root: true });
         }
     },
 
     async logout({ commit, dispatch }) {
-        await Http.for('auth').post('logout');
-
+        await this.$api.authentication.logout();
         dispatch('navigate', '/', { root: true });
 
         commit('user', null);
@@ -190,25 +180,29 @@ export const actions = {
 
     async settings({ commit, dispatch, state }) {
         try {
-            const profile = await this.$axios.patch(
-                `users/${state.user.id}/profile`,
+            const updatedProfile = await this.$api.users.updateUsersProfile(
+                state.user.id,
                 state.profile,
             );
-            commit('profile', profile.data);
+
+            commit('profile', updatedProfile);
         } catch (e) {
-            dispatch('toast/error', e.response.data, { root: true });
+            dispatch('toast/error', e, { root: true });
         }
     },
 
-    async updatePassword({ dispatch }, data) {
+    async updatePassword({ dispatch }, { oldPassword, password }) {
         try {
-            await Http.for('auth/reset/password').put(data);
+            await this.$api.authentication.updatePassword(
+                oldPassword,
+                password,
+            );
 
             dispatch('toast/success', "We've updated your password!", {
                 root: true,
             });
         } catch (e) {
-            dispatch('toast/error', e.response.data, { root: true });
+            dispatch('toast/error', e, { root: true });
         }
     },
 
@@ -221,19 +215,19 @@ export const actions = {
      */
     async updateUsername({ dispatch, commit, state }, { username }) {
         try {
-            await this.$axios.put(`users/${state.user.id}`, { username });
+            await this.$api.users.updateUser(state.user.id, { username });
             commit('user', Object.assign(state.user, { username }));
         } catch (e) {
-            dispatch('toast/error', e.response.data, { root: true });
+            dispatch('toast/error', e, { root: true });
         }
     },
 
     async updateEmail({ dispatch, commit, state }, { password, email }) {
         try {
-            const data = await Http.for('auth/reset').post('email', {
-                password,
+            const data = await this.$api.authentication.initiateEmailReset(
                 email,
-            });
+                password,
+            );
 
             dispatch('toast/success', "We've updated your email!.", {
                 root: true,
@@ -248,21 +242,20 @@ export const actions = {
                 commit('user', Object.assign(state.user, { email }));
             }
         } catch (e) {
-            dispatch('toast/error', e.response.data, { root: true });
+            dispatch('toast/error', e, { root: true });
         }
     },
 
     async getEmailPermissions({ dispatch, commit, state }) {
         try {
-            const userPermission = await Http.for(
-                `/users/${state.user.id}/emails`,
-            ).get('permissions');
+            const { id } = state.user;
+            const userPermission = await this.$api.users.getUsersEmailPermissions(
+                id,
+            );
 
             commit('emailPermissions', userPermission);
         } catch (e) {
-            dispatch('toast/error', e.response ? e.response.data : e, {
-                root: true,
-            });
+            dispatch('toast/error', e, { root: true });
             commit('emailPermissions', null);
         }
     },
@@ -271,27 +264,25 @@ export const actions = {
         try {
             const permissions = state.emailPermissions;
 
-            const response = await this.$axios.patch(
-                `users/${state.user.id}/emails/permissions`,
+            const { id } = state.user;
+            const response = await this.$api.users.updateUsersEmailPermissions(
+                id,
                 permissions,
             );
-            commit('emailPermissions', response.data);
+
+            commit('emailPermissions', response);
             dispatch('toast/success', "We've updated your email permissions!", {
                 root: true,
             });
         } catch (e) {
-            dispatch('toast/error', e.response ? e.response.data : e, {
-                root: true,
-            });
+            dispatch('toast/error', e, { root: true });
             commit('emailPermissions', null);
         }
     },
 
     async forgot({ dispatch }, email) {
         try {
-            await Http.for('auth/forgot/password').save({
-                username_or_email: email,
-            });
+            await this.$api.authentication.initiatePasswordReset(email);
 
             dispatch(
                 'toast/success',
@@ -301,14 +292,14 @@ export const actions = {
 
             return true;
         } catch (e) {
-            dispatch('toast/error', e.response.data, { root: true });
+            dispatch('toast/error', e, { root: true });
 
             return false;
         }
     },
 
-    async resetByToken({ dispatch }, data) {
-        await Http.for('auth/reset/password').post({}, data);
+    async resetByToken({ dispatch }, { token, password }) {
+        await this.$api.authentication.processPasswordReset(token, password);
 
         dispatch(
             'toast/success',
@@ -323,7 +314,7 @@ export const actions = {
         const formData = new FormData();
         formData.append('avatar', data, 'avatar.jpg');
 
-        await Http.axios({
+        await this.$axios({
             url: `/users/${state.user.id}/avatar`,
             method: 'PUT',
             data: formData,
@@ -334,10 +325,9 @@ export const actions = {
     },
 
     async linkedAccounts({ state, commit }) {
-        const response = await this.$axios.get(
-            `/users/${state.user.id}/connections`,
-        );
-        commit('linkedAccounts', response.data);
+        const { id } = state.user;
+        const response = await this.$api.users.getUserConnections(id);
+        commit('linkedAccounts', response);
     },
 
     async connectLinkedAccount({ dispatch, commit }, provider) {
@@ -349,8 +339,7 @@ export const actions = {
     },
 
     async disconnectLinkedAccount({ dispatch, commit }, provider) {
-        await this.$axios.delete(`/oauth/${provider}`);
-
+        await this.$api.linkedAccounts.disconnectLinkedAccount(provider);
         commit('removeLinkedAccount', provider);
 
         await dispatch('refresh');

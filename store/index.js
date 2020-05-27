@@ -6,7 +6,7 @@ export const actions = {
     async nuxtServerInit({ dispatch }) {
         await Promise.all([
             dispatch('server/health'),
-            // dispatch('user/refresh'),
+            dispatch('user/refresh'),
 
             // dispatch('game/schedules'),
             // dispatch('game/upcoming'),
