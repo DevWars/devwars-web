@@ -17,7 +17,7 @@
         "@nuxtjs/axios": "^5.10.3",
         "@nuxtjs/dotenv": "^1.4.0",
         "country-list": "^2.2.0",
-        "cropperjs": "^1.5.6",
+        "cropperjs": "^1.5.7",
         "lodash": "^4.17.15",
         "moment": "2.25.3",
         "nuxt": "^2.12",
