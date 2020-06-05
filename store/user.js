@@ -200,7 +200,7 @@ export const actions = {
         }
     },
 
-    async password({ dispatch }, data) {
+    async updatePassword({ dispatch }, data) {
         try {
             await Http.for('auth/reset/password').put(data);
 
@@ -212,7 +212,23 @@ export const actions = {
         }
     },
 
-    async email({ dispatch, commit, state }, { password, email }) {
+    /**
+     * Requests to update the given users username on the server, if all goes
+     * well, the username will be updated within the store and reflected around
+     * the site. Otherwise the toast will show the related server error.
+     *
+     * @param username The new users username that is being updated.
+     */
+    async updateUsername({ dispatch, commit, state }, { username }) {
+        try {
+            await this.$axios.put(`users/${state.user.id}`, { username });
+            commit('user', Object.assign(state.user, { username }));
+        } catch (e) {
+            dispatch('toast/error', e.response.data, { root: true });
+        }
+    },
+
+    async updateEmail({ dispatch, commit, state }, { password, email }) {
         try {
             const data = await Http.for('auth/reset').post('email', {
                 password,

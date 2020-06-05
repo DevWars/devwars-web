@@ -128,8 +128,8 @@ export const actions = {
 
     async active({ commit }) {
         try {
-            const [active] = await Http.for('schedules/status/active').get();
-            commit('active', active);
+            const { data } = await Http.for('schedules?status=active').get();
+            commit('active', data[0]);
         } catch (e) {
             commit('active', null);
         }
@@ -137,8 +137,8 @@ export const actions = {
 
     async upcoming({ commit, dispatch }) {
         try {
-            const upcoming = await Http.for('schedules/status/scheduled').get();
-            commit('upcoming', upcoming);
+            const { data } = await Http.for('schedules?status=scheduled').get();
+            commit('upcoming', data);
         } catch (e) {
             dispatch('toast/error', e.response.data, { root: true });
         }

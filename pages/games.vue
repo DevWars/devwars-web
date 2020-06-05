@@ -85,30 +85,37 @@ export default {
 
         try {
             const { data } = await $axios.get(
-                `/games/season/${query.season}?first=10&status=ended`,
+                `/games?season=${query.season}&first=10&status=ended`,
             );
 
             const games = data.data;
             let viewing = null;
 
-            if (query.game != null && games != null) {
+            // If the given game that the ser was sent too is not on the
+            // first page of the season, load that game directly and shift
+            // it to the top of the games list, making it shown in the
+            // sidebar and highlighted (regardless of this the game would
+            // still be shown in the large game overview)
+            if (!isNil(query.game)) {
                 const view = games.filter((g) => g.id === Number(query.game));
-                viewing = view[0];
+                const gameId = view[0] == null ? query.game : view[0].id;
 
-                // If the given game that the user was sent too is not on the
-                // first page of the season, load that game directly and shift
-                // it to the top of the games list, making it shown in the
-                // sidebar and highlighted (regardless of this the game would
-                // still be shown in the large game overview)
-                if (viewing == null) {
-                    viewing = (await $axios.get(`/games/${query.game}`)).data;
-                    games.unshift(viewing);
-                }
+                viewing = (await $axios.get(`/games/${gameId}?players=true`))
+                    .data;
+
+                // if we did not find the game in our current list (wrong page)
+                // shift it to the front of our list so the linked players get
+                // to see the game.
+                if (view[0] == null) games.unshift(viewing);
+            } else if (!isNil(games[0])) {
+                viewing = (
+                    await $axios.get(`/games/${games[0].id}?players=true`)
+                ).data;
             }
 
             return {
                 games: data || {},
-                viewing: viewing || data.data[0],
+                viewing: viewing || games[0],
                 season: Number(query.season),
             };
         } catch (e) {
@@ -145,9 +152,9 @@ export default {
          * the next page link and the next page will not be empty.
          */
         canPageNextGames() {
-            if (isNil(this.games?.pagination?.after)) return false;
+            if (isNil(this.games?.pagination?.next)) return false;
             return (
-                this.games?.pagination?.after != null &&
+                this.games?.pagination?.next != null &&
                 this.games?.data?.length >= 10
             );
         },
@@ -157,8 +164,8 @@ export default {
          * page.
          */
         canPagePreviousGames() {
-            if (isNil(this.games?.pagination?.before)) return false;
-            return this.games?.pagination?.before != null;
+            if (isNil(this.games?.pagination?.previous)) return false;
+            return this.games?.pagination?.previous != null;
         },
     },
 
@@ -171,7 +178,7 @@ export default {
                 this.season = Number(season);
 
                 const { data } = await this.$axios.get(
-                    `/games/season/${this.season}?first=10&status=ended`,
+                    `/games?season=${this.season}&first=10&status=ended`,
                 );
 
                 // if a route update is triggered, requiring the regathering of
@@ -181,18 +188,41 @@ export default {
                 this.games = data;
                 this.page = 0;
 
-                if (!this.$route.query.game) {
-                    this.viewing = this.games.data[0];
+                if (isNil(this.$route.query.game)) {
+                    this.$router.push({
+                        path: '/games',
+                        query: {
+                            game: this.$route.query.game,
+                            season: this.season,
+                        },
+                    });
                 }
             },
         },
 
         '$route.query.game': {
-            handler(newGame) {
-                if (newGame && this.games && this.games.data) {
-                    this.viewing = this.games.data.filter(
-                        (game) => game.id === newGame,
-                    )[0];
+            async handler(newGame) {
+                if (
+                    isNil(newGame) ||
+                    isNil(this.games) ||
+                    isNil(this.games.data)
+                )
+                    return;
+
+                // Due to a limitation of the database, its not easily or best
+                // to perform cross joins on tables based on the jsonb data for
+                // a game to join players. Even more so when its a object vs a
+                // array, and thus to include actual avatar and user related
+                // information, we must regather the game directly to ensure
+                // players are loaded.
+                // this.viewing = this.games.data.filter((game) => game.id === newGame)[0];
+
+                try {
+                    this.viewing = (
+                        await this.$axios.get(`/games/${newGame}?players=true`)
+                    ).data;
+                } catch (e) {
+                    this.$store.dispatch('toast/error', e.response.data);
                 }
             },
         },
@@ -212,10 +242,12 @@ export default {
         async previous() {
             this.page -= 1;
             const { pagination } = this.games;
-            const before = pagination.before.split('games')[1];
+            const before = pagination.previous;
 
-            const response = await this.$axios.get(`games${before}`);
-            this.games = response.data;
+            const url = `games?season=${this.season}&first=10&before=${before}&status=ended`;
+            const { data } = await this.$axios.get(url);
+
+            this.games = data;
         },
 
         /**
@@ -224,10 +256,13 @@ export default {
         async next() {
             this.page += 1;
             const { pagination } = this.games;
-            const after = pagination.after.split('games')[1];
+            const after = pagination.next;
 
-            const response = await this.$axios.get(`games${after}`);
-            this.games = response.data;
+            const { data } = await this.$axios.get(
+                `games?season=${this.season}?first=10&after=${after}&status=ended`,
+            );
+
+            this.games = data;
         },
     },
 };
