@@ -16,7 +16,7 @@
                             :class="[activity.coins > 0 ? 'win' : 'lose']"
                         >
                             <DevcoinIcon />
-                            <span>{{ activity.coins | number }}</span>
+                            <span>{{ activity.coins | formatNumber }}</span>
                         </div>
                         <div
                             v-if="activity.xp"
@@ -24,7 +24,7 @@
                             :class="[activity.xp > 0 ? 'win' : 'lose']"
                         >
                             <div class="xp">XP</div>
-                            <span>{{ activity.xp | number }}</span>
+                            <span>{{ activity.xp | formatNumber }}</span>
                         </div>
                     </div>
                 </Column>
