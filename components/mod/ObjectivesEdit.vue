@@ -1,37 +1,39 @@
 <template>
-    <Card class="ObjectivesEdit dark plain">
-        <h3>Objectives</h3>
+    <div class="ObjectivesEdit">
+        <Card class="dark plain">
+            <h3>Objectives</h3>
 
-        <div
-            v-for="objective in objectives"
-            :key="objective.id"
-            class="objective"
-        >
-            <Input
-                v-model="objective.description"
-                :label="`Objective ${objective.id}`"
-                maxlength="110"
-            />
-            <SquareToggle
-                :active="objective.isBonus"
-                name="bonus"
-                @change="objectiveIsBonusUpdate($event, objective.id)"
-            />
-            <Button
-                class="link muted"
-                @click="objectiveDelete(objective.id)"
+            <div
+                v-for="objective in newObjectives"
+                :key="objective.id"
+                class="objective"
             >
-                DELETE
+                <Input
+                    v-model="objective.description"
+                    :label="`Objective ${objective.id}`"
+                    maxlength="110"
+                />
+                <SquareToggle
+                    :active="objective.isBonus"
+                    name="bonus"
+                    @change="objectiveIsBonusUpdate($event, objective.id)"
+                />
+                <Button
+                    class="link muted"
+                    @click="objectiveDelete(objective.id)"
+                >
+                    DELETE
+                </Button>
+            </div>
+            <Button class="outline" @click="objectiveAdd">
+                Add Objective
             </Button>
-        </div>
-        <Button class="outline" @click="objectiveAdd">
-            Add Objective
-        </Button>
-    </Card>
+        </Card>
+    </div>
 </template>
 
 <script>
-import { max } from 'lodash';
+import { clone, max } from 'lodash';
 import Card from '@/components/Card';
 import Input from '@/components/form/Input';
 import SquareToggle from '@/components/SquareToggle';
@@ -45,13 +47,22 @@ export default {
         objectives: {
             type: Object,
             required: true,
+            default: () => ({}),
         },
     },
 
+    data: () => ({
+        newObjectives: {},
+    }),
+
     watch: {
-        objectives(newObjectives) {
-            this.objectives = newObjectives;
+        objectives(newValue) {
+            this.newObjectives = newValue;
         },
+    },
+
+    beforeMount() {
+        this.newObjectives = clone(this.objectives);
     },
 
     methods: {
@@ -61,7 +72,7 @@ export default {
          * @param {string} objectiveId The id of the objective being updated.
          */
         objectiveIsBonusUpdate(value, objectiveId) {
-            this.objectives[objectiveId].isBonus = value;
+            this.newObjectives[objectiveId].isBonus = value;
             this.refresh();
         },
 
@@ -70,10 +81,10 @@ export default {
          * id with no description and no bonus state.
          */
         objectiveAdd() {
-            let currentMax = max(Object.keys(this.objectives)) || 0;
+            let currentMax = max(Object.keys(this.newObjectives)) || 0;
             currentMax = Number(currentMax) + 1;
 
-            this.objectives[currentMax] = {
+            this.newObjectives[currentMax] = {
                 id: currentMax,
                 description: '',
                 isBonus: false,
@@ -87,7 +98,7 @@ export default {
          * @param {string} objectiveId The id of the objective being removed.
          */
         objectiveDelete(objectiveId) {
-            delete this.objectives[objectiveId];
+            delete this.newObjectives[objectiveId];
             this.refresh();
         },
 
@@ -97,7 +108,7 @@ export default {
          * the updated schedule/game to update the UI.
          */
         refresh() {
-            this.$emit('updateObjectives', this.objectives);
+            this.$emit('updateObjectives', this.newObjectives);
         },
     },
 };
@@ -126,6 +137,10 @@ export default {
         .Button:hover {
             color: $danger-color !important;
         }
+    }
+
+    .Card {
+        box-shadow: none;
     }
 }
 </style>
