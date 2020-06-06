@@ -44,34 +44,10 @@
             </Column>
 
             <Column :lg="4" :md="6">
-                <Card class="dark plain">
-                    <h3>Objectives</h3>
-                    <div
-                        v-for="objective in currentSchedule.objectives"
-                        :key="objective.id"
-                        class="objective"
-                    >
-                        <Input
-                            v-model="objective.description"
-                            :label="`Objective ${objective.id}`"
-                            maxlength="110"
-                        />
-                        <SquareToggle
-                            :active="objective.isBonus"
-                            name="bonus"
-                            @change="objectiveUpdate($event, objective.id)"
-                        />
-                        <Button
-                            class="link muted"
-                            @click="objectiveDelete(objective.id)"
-                        >
-                            DELETE
-                        </Button>
-                    </div>
-                    <Button class="outline" @click="objectiveAdd">
-                        Add Objective
-                    </Button>
-                </Card>
+                <ObjectivesEdit
+                    :objectives="currentSchedule.objectives"
+                    @updateObjectives="triggerUpdateObjectives"
+                />
             </Column>
 
             <Column :lg="4" :md="6">
@@ -110,15 +86,13 @@
 
 <script>
 import moment from 'moment';
-import { max, defaults } from 'lodash';
-
+import { defaults } from 'lodash';
 import { names } from '../../../utils/auth';
-
 import Card from '@/components/Card';
 import Input from '@/components/form/Input';
 import Textarea from '@/components/form/Textarea';
 import Select from '@/components/form/Select';
-import SquareToggle from '@/components/SquareToggle';
+import ObjectivesEdit from '@/components/mod/ObjectivesEdit';
 
 export default {
     name: 'DashboardScheduleSetup',
@@ -127,7 +101,7 @@ export default {
         auth: names.MODERATOR,
     },
 
-    components: { Card, Input, Textarea, Select, SquareToggle },
+    components: { Card, Input, Textarea, Select, ObjectivesEdit },
 
     props: {
         schedule: {
@@ -191,44 +165,6 @@ export default {
         },
 
         /**
-         * Updates the given objectives bonus state by setting the given value.
-         * @param {string} value The updated bonus state value for the given objective.
-         * @param {string} objectiveId The id of the objective being updated.
-         */
-        objectiveUpdate(value, objectiveId) {
-            this.currentSchedule.objectives[objectiveId].isBonus = value;
-            this.triggerScheduleRefresh();
-        },
-
-        /**
-         * Creates a new objective for the current schedule, applying the next
-         * id with no description and no bonus state.
-         */
-        objectiveAdd() {
-            const { objectives } = this.currentSchedule;
-
-            let currentMax = max(Object.keys(objectives)) || 0;
-            currentMax = Number(currentMax) + 1;
-
-            this.currentSchedule.objectives[currentMax] = {
-                id: currentMax,
-                description: '',
-                isBonus: false,
-            };
-
-            this.triggerScheduleRefresh();
-        },
-
-        /**
-         * Removes a given objective by the given id from the schedule.
-         * @param {string} objectiveId The id of the objective being removed.
-         */
-        objectiveDelete(objectiveId) {
-            delete this.currentSchedule.objectives[objectiveId];
-            this.triggerScheduleRefresh();
-        },
-
-        /**
          * Inserts some common default templates into the schedule for a common
          * game setup.
          * @html => Core html to load the css styles and main js script
@@ -248,6 +184,11 @@ export default {
                 js: 'window.addEventListener("load", () => { /** Loaded */ });',
             };
 
+            this.triggerScheduleRefresh();
+        },
+
+        triggerUpdateObjectives(objectives) {
+            this.currentSchedule.objectives = Object.assign({}, objectives);
             this.triggerScheduleRefresh();
         },
 

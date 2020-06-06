@@ -15,7 +15,7 @@
                     </Select>
                     <Input
                         v-model="currentGame.title"
-                        placeholder="The title of the name, e.g Battleships!"
+                        placeholder="Game title (e.g Battleships)"
                         label="Theme"
                         class="group"
                     />
@@ -23,34 +23,10 @@
             </Column>
 
             <Column :lg="4" :md="6">
-                <Card class="dark plain">
-                    <h3>Objectives</h3>
-                    <div
-                        v-for="objective in currentGame.objectives"
-                        :key="objective.id"
-                        class="objective"
-                    >
-                        <Input
-                            v-model="objective.description"
-                            :label="`Objective ${objective.id}`"
-                            maxlength="110"
-                        />
-                        <SquareToggle
-                            :active="objective.isBonus"
-                            name="bonus"
-                            @change="objectiveIsBonusUpdate($event, objective.id)"
-                        />
-                        <Button
-                            class="link muted"
-                            @click="objectiveDelete(objective.id)"
-                        >
-                            DELETE
-                        </Button>
-                    </div>
-                    <Button class="outline" @click="objectiveAdd">
-                        Add Objective
-                    </Button>
-                </Card>
+                <ObjectivesEdit
+                    :objectives="currentGame.objectives"
+                    @updateObjectives="triggerUpdateObjectives"
+                />
             </Column>
 
             <Column :lg="4" :md="6">
@@ -69,12 +45,11 @@
 
 <script>
 import { defaults } from 'lodash';
-
-import SquareToggle from '../../../components/SquareToggle';
 import { names } from '../../../utils/auth';
 import Card from '@/components/Card';
 import Input from '@/components/form/Input';
 import Select from '@/components/form/Select';
+import ObjectivesEdit from '@/components/mod/ObjectivesEdit';
 import { teams } from '@/utils/mixins';
 
 export default {
@@ -84,7 +59,7 @@ export default {
         auth: names.MODERATOR,
     },
 
-    components: { Card, SquareToggle, Input, Select },
+    components: { Card, Input, Select, ObjectivesEdit },
 
     mixins: [teams],
 
@@ -113,33 +88,8 @@ export default {
     },
 
     methods: {
-        objectiveIsBonusUpdate(isBonus, objectiveId) {
-            if (
-                this.currentGame != null &&
-                this.currentGame.objectives[objectiveId] != null
-            ) {
-                this.currentGame.objectives[objectiveId].isBonus = isBonus;
-                this.$emit('update-game', this.currentGame);
-            }
-        },
-
-        objectiveAdd() {
-            let id = 1;
-            Object.keys(this.currentGame.objectives).map((obj) => {
-                id = this.currentGame.objectives[obj].id;
-            });
-
-            this.currentGame.objectives[id + 1] = {
-                id: id + 1,
-                description: '',
-                isBonus: false,
-            };
-
-            this.$emit('update-game', this.currentGame);
-        },
-
-        objectiveDelete(objectiveId) {
-            delete this.currentGame.objectives[objectiveId];
+        triggerUpdateObjectives(objectives) {
+            this.currentGame.objectives = Object.assign({}, objectives);
             this.$emit('update-game', this.currentGame);
         },
     },
@@ -163,23 +113,6 @@ h3 {
 
     .Card {
         box-shadow: none;
-    }
-}
-
-.objective {
-    display: flex;
-    margin-bottom: 15px;
-
-    & > :not(.Input) {
-        @extend %align-baseline-to-input-with-labels;
-    }
-
-    .Input {
-        margin-right: 15px;
-    }
-
-    .Button:hover {
-        color: $danger-color !important;
     }
 }
 </style>
