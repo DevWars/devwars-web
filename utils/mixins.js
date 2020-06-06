@@ -2,39 +2,41 @@ import * as _ from 'lodash';
 
 export const teams = {
     methods: {
-        teams(game) {
-            if (_.isNil(game.teams)) {
-                return;
-            }
+        teams(game, players) {
+            const teams = {};
 
-            return Object.values(game.teams).reduce((teams, team) => {
-                const players = {};
-
-                _.forEach(game.players, (player, key) => {
-                    if (player.team === team.id) players[key] = player;
-                    player.originalId = Number(key);
-                });
-
-                teams[team.id] = {
-                    ...team,
-                    players,
-                    scores: { total: 0, objectives: 0 },
-                    winner: false,
-                    size: _.size(players),
-                };
-
-                if (game.meta && game.meta.teamScores) {
-                    const t = teams[team.id];
-
-                    t.scores.objectives =
-                        game.meta.teamScores[team.id].objectives;
-                    t.scores.tie = game.meta.teamScores[team.id].tie;
-                    t.winner = game.meta.winningTeam === team.id;
-                    t.scores.total = t.scores.objectives;
+            for (const player of players) {
+                if (_.isNil(teams[player.team])) {
+                    teams[player.team] = {
+                        team: player.team,
+                        players: [],
+                    };
                 }
 
-                return teams;
-            }, {});
+                teams[player.team].players.push(player);
+            }
+
+            if (game.meta && game.meta.teamScores) {
+                for (const teamScoreId in game.meta.teamScores) {
+                    const { objectives, bets, ui, ux } = game.meta.teamScores[
+                        teamScoreId
+                    ];
+
+                    const team = Object.assign(teams[teamScoreId], {
+                        objectives,
+                        bets,
+                        ui,
+                        ux,
+                    });
+
+                    team.completedObjectives = () => {
+                        return _.filter(objectives, (e) => e === 'complete')
+                            .length;
+                    };
+                }
+            }
+
+            return teams;
         },
     },
 };

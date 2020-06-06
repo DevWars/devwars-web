@@ -9,9 +9,9 @@
                     <h2 class="banner__gamemode">
                         {{ game.mode }}
                     </h2>
-                    <div class="banner__versus">
-                        {{ currentTeams[0].size }} VS
-                        {{ currentTeams[1].size }}
+                    <div v-if="currentTeams != null" class="banner__versus">
+                        {{ currentTeams[0].players.length }} VS
+                        {{ currentTeams[1].players.length }}
                     </div>
                 </div>
                 <ButtonIcon
@@ -25,33 +25,32 @@
                 </ButtonIcon>
             </div>
         </div>
-
-        <div class="roster">
+        <div v-if="currentTeams != null" class="roster">
             <GameTeam
                 v-for="team in currentTeams"
                 :key="team.id"
                 :team="team"
-                :points="team.scores.total"
-                :winner="teams.winner"
+                :points="team.completedObjectives()"
+                :winner="game.meta.winningTeam === team.id"
             >
                 <Player
-                    v-for="player in playersWithUser(team.players)"
+                    v-for="player in team.players"
                     :key="player.originalId || player.id"
-                    :user="player"
+                    :player="player"
                     :team="team"
-                    :languages="getLanguageByGamePlayer(game, player)"
+                    :languages="[player.assignedLanguage]"
                 />
             </GameTeam>
         </div>
-
         <SubScore v-if="game.title" title="Theme" no-score>
             <h3>{{ game.title }}</h3>
         </SubScore>
 
         <SubScore
+            v-if="currentTeams != null"
             title="Objectives"
-            :blue-score="currentTeams[0].scores.objectives"
-            :red-score="currentTeams[1].scores.objectives"
+            :blue-score="currentTeams[0].completedObjectives()"
+            :red-score="currentTeams[1].completedObjectives()"
         >
             <ul class="objectives">
                 <li
@@ -63,7 +62,9 @@
                     <div
                         class="objectives__square team-blue"
                         :class="{
-                            active: teamCompletedObjective(0, objective),
+                            active:
+                                currentTeams[0].objectives[objective.id] ===
+                                'complete',
                         }"
                     />
                     <span class="objectives__obj">{{
@@ -72,30 +73,32 @@
                     <div
                         class="objectives__square team-red"
                         :class="{
-                            active: teamCompletedObjective(1, objective),
+                            active:
+                                currentTeams[1].objectives[objective.id] ===
+                                'complete',
                         }"
                     />
                 </li>
             </ul>
         </SubScore>
 
-        <VoteBox :game="game" category="ui" />
-        <VoteBox :game="game" category="ux" />
+        <!-- <VoteBox :game="game" category="ui" />
+        <VoteBox :game="game" category="ux" /> -->
     </div>
 </template>
 
 <script>
-import VoteBox from '@/components/game/VoteBox';
+// import VoteBox from '@/components/game/VoteBox';
 import SubScore from '@/components/game/SubScore';
 import GameTeam from '@/components/game/GameTeam';
 import Player from '@/components/game/Player';
-import { teams, usersFromGame } from '@/utils/mixins';
 import { getLanguageByGamePlayer, teamCompletedObjective } from '@/utils';
+import { teams } from '@/utils/mixins';
 
 export default {
     name: 'LargeGameDetail',
-    components: { GameTeam, Player, SubScore, VoteBox },
-    mixins: [teams, usersFromGame],
+    components: { GameTeam, Player, SubScore },
+    mixins: [teams],
     props: {
         game: {
             type: Object,
@@ -108,11 +111,29 @@ export default {
         },
     },
 
-    computed: {
-        currentTeams() {
-            return this.teams(this.game);
+    data: () => ({
+        players: [],
+        currentTeams: null,
+    }),
+
+    computed: {},
+
+    watch: {
+        game: {
+            async handler(newVal, oldVal) {
+                if (this.includePlayers) {
+                    this.players = await this.$api.games.getAllAssignedPlayersToGame(
+                        this.game.id,
+                    );
+                }
+
+                this.currentTeams = this.teams(this.game, this.players);
+            },
+            immediate: true,
         },
     },
+
+    async mounted() {},
 
     methods: {
         getLanguageByGamePlayer,

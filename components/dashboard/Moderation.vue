@@ -61,7 +61,7 @@ export default {
             });
 
             if (result) {
-                await this.$axios.delete(`/users/${id}`);
+                await this.$api.users.deleteUser(id);
                 this.$router.push('/dashboard');
             }
         },
@@ -77,7 +77,7 @@ export default {
 
             if (result) {
                 const body = { role: 'BANNED' };
-                await this.$axios.put(`/users/${id}`, body);
+                await this.$api.users.updateUser(id, body);
                 this.user.role = body.role;
             }
         },
@@ -93,7 +93,7 @@ export default {
 
             if (result) {
                 const body = { role: 'USER' };
-                await this.$axios.put(`/users/${id}`, body);
+                await this.$api.users.updateUser(id, body);
                 this.user.role = body.role;
             }
         },
