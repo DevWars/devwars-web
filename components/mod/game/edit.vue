@@ -1,93 +1,91 @@
 <template>
     <Card v-if="currentGame != null" class="dark plain">
-        <div
-            v-if="
-                nameFromStatus(currentGame.status) === 'ENDED' && teams != null
-            "
-            class="container"
-        >
-            <Card class="dark">
-                <SubScore
-                    title="Objectives"
-                    :blue-score="currentTeams[0].scores.objectives"
-                    :red-score="currentTeams[1].scores.objectives"
-                >
-                    <ul class="objectives">
-                        <li
-                            v-for="objective in currentGame.objectives"
-                            :key="objective.id"
-                            class="objectives__item"
-                            :class="{ bonus: objective.isBonus }"
-                        >
-                            <div
-                                class="objectives__square team-blue"
-                                :class="{
-                                    active: teamCompletedObjective(
-                                        0,
-                                        objective,
-                                    ),
-                                }"
-                                @click="toggleObjectiveState(0, objective)"
-                            />
-                            <span class="objectives__obj">{{
-                                objective.description
-                            }}</span>
-                            <div
-                                class="objectives__square team-red"
-                                :class="{
-                                    active: teamCompletedObjective(
-                                        1,
-                                        objective,
-                                    ),
-                                }"
-                                @click="toggleObjectiveState(1, objective)"
-                            />
-                        </li>
-                    </ul>
-                </SubScore>
-            </Card>
-            <Card
-                v-for="(scores, index) in currentGame.meta
-                    ? currentGame.meta.teamScores
-                    : []"
+        <Row v-if="nameFromStatus(currentGame.status) === 'ENDED' && teams != null">
+            <Column :md="6">
+                <Card class="dark plain">
+                    <SubScore
+                        title="Objectives"
+                        :blue-score="currentTeams[0].scores.objectives"
+                        :red-score="currentTeams[1].scores.objectives"
+                    >
+                        <ul class="objectives">
+                            <li
+                                v-for="objective in currentGame.objectives"
+                                :key="objective.id"
+                                class="objectives__item"
+                                :class="{ bonus: objective.isBonus }"
+                            >
+                                <div
+                                    class="objectives__square team-blue"
+                                    :class="{
+                                        active: teamCompletedObjective(
+                                            0,
+                                            objective,
+                                        ),
+                                    }"
+                                    @click="toggleObjectiveState(0, objective)"
+                                />
+                                <span class="objectives__obj">{{
+                                    objective.description
+                                }}</span>
+                                <div
+                                    class="objectives__square team-red"
+                                    :class="{
+                                        active: teamCompletedObjective(
+                                            1,
+                                            objective,
+                                        ),
+                                    }"
+                                    @click="toggleObjectiveState(1, objective)"
+                                />
+                            </li>
+                        </ul>
+                    </SubScore>
+                </Card>
+            </Column>
+
+            <Column
+                v-for="(scores, index) in currentGame.meta ? currentGame.meta.teamScores : []"
                 :key="index"
-                class=" dark teamScores"
+                :lg="3"
+                :md="6"
             >
-                <h3>Team {{ teamName(index) }}</h3>
+                <Card class="dark plain teamScores">
+                    <h3>Team {{ teamName(index) }}</h3>
 
-                <Input
-                    v-model.number="scores.ui"
-                    label="UI Score"
-                    type="number"
-                    required
-                    @input="(e) => updateTeamVoteScore(index, 'ui', e)"
-                />
-                <Input
-                    v-model.number="scores.ux"
-                    label="UX Score"
-                    type="number"
-                    required
-                    @input="(e) => updateTeamVoteScore(index, 'ux', e)"
-                />
-                <Checkbox
-                    :checked="scores.tie"
-                    :label="`Team ${teamName(index)} Tied`"
-                    @input="(e) => toggleTeamTied(index, e)"
-                />
+                    <Input
+                        v-model.number="scores.ui"
+                        label="UI Score"
+                        type="number"
+                        required
+                        @input="(e) => updateTeamVoteScore(index, 'ui', e)"
+                    />
+                    <Input
+                        v-model.number="scores.ux"
+                        label="UX Score"
+                        type="number"
+                        required
+                        @input="(e) => updateTeamVoteScore(index, 'ux', e)"
+                    />
+                    <Checkbox
+                        :checked="scores.tie"
+                        label="Tied"
+                        @input="(e) => toggleTeamTied(index, e)"
+                    />
 
-                <Checkbox
-                    :checked="isWinner(index)"
-                    :label="`Team ${teamName(index)} Winner`"
-                    @input="(e) => toggleTeamWinner(index, e)"
-                />
-            </Card>
-        </div>
+                    <Checkbox
+                        :checked="isWinner(index)"
+                        label="Winner"
+                        @input="(e) => toggleTeamWinner(index, e)"
+                    />
+                </Card>
+            </Column>
+        </Row>
+
         <div v-else-if="nameFromStatus(currentGame.status) !== 'ENDED'">
             <h1>Game Not Ended</h1>
         </div>
-        <div
-            v-else-if="nameFromStatus(game.status) === 'ENDED' && teams == null"
-        >
+        <div v-else-if="nameFromStatus(game.status) === 'ENDED' && teams == null">
             <h1>No Teams Played</h1>
         </div>
     </Card>
@@ -277,17 +275,16 @@ h3 {
     display: flex;
 }
 
-.container {
-    display: flex;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    padding: 10px;
+.Row {
+    .Column {
+        &:not(:last-child) {
+            padding: 0 $grid-gutter-width;
+            border-right: 1px solid $divider-color;
+        }
+    }
 
     .Card {
-        margin: 5px;
-        max-width: 500px;
-        min-width: 300px;
-        min-height: 450px;
+        box-shadow: none;
     }
 }
 

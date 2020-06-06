@@ -1,63 +1,69 @@
 <template>
     <Card class="plain dark">
-        <div v-if="currentGame != null" class="container">
-            <Card class="dark">
-                <h3>Game</h3>
-                <Select
-                    v-model="currentGame.mode"
-                    label="Game mode"
-                    class="group"
-                >
-                    <option value="Classic">Classic</option>
-                    <option value="Zen Garden">Zen Garden</option>
-                    <option value="Blitz">Blitz</option>
-                </Select>
-                <Input
-                    v-model="currentGame.title"
-                    placeholder="The title of the name, e.g Battleships!"
-                    label="Theme"
-                    class="group"
-                />
-            </Card>
-
-            <Card class="dark">
-                <h3>Objectives</h3>
-                <div
-                    v-for="objective in currentGame.objectives"
-                    :key="objective.id"
-                    class="objective"
-                >
-                    <Input
-                        v-model="objective.description"
-                        :label="`Objective ${objective.id}`"
-                        maxlength="110"
-                    />
-                    <SquareToggle
-                        :active="objective.isBonus"
-                        name="bonus"
-                        @change="objectiveIsBonusUpdate($event, objective.id)"
-                    />
-                    <Button
-                        class="link muted"
-                        @click="objectiveDelete(objective.id)"
+        <Row v-if="currentGame != null">
+            <Column :lg="4" :md="6">
+                <Card class="dark plain">
+                    <h3>Game</h3>
+                    <Select
+                        v-model="currentGame.mode"
+                        label="Game mode"
+                        class="group"
                     >
-                        DELETE
-                    </Button>
-                </div>
-                <Button class="outline" @click="objectiveAdd">
-                    Add Objective
-                </Button>
-            </Card>
+                        <option value="Classic">Classic</option>
+                        <option value="Zen Garden">Zen Garden</option>
+                        <option value="Blitz">Blitz</option>
+                    </Select>
+                    <Input
+                        v-model="currentGame.title"
+                        placeholder="The title of the name, e.g Battleships!"
+                        label="Theme"
+                        class="group"
+                    />
+                </Card>
+            </Column>
 
-            <Card class="dark media">
-                <h3>Media</h3>
-                <Input
-                    v-model="currentGame.videoUrl"
-                    label="YouTube URL"
-                    class="group"
-                />
-            </Card>
-        </div>
+            <Column :lg="4" :md="6">
+                <Card class="dark plain">
+                    <h3>Objectives</h3>
+                    <div
+                        v-for="objective in currentGame.objectives"
+                        :key="objective.id"
+                        class="objective"
+                    >
+                        <Input
+                            v-model="objective.description"
+                            :label="`Objective ${objective.id}`"
+                            maxlength="110"
+                        />
+                        <SquareToggle
+                            :active="objective.isBonus"
+                            name="bonus"
+                            @change="objectiveIsBonusUpdate($event, objective.id)"
+                        />
+                        <Button
+                            class="link muted"
+                            @click="objectiveDelete(objective.id)"
+                        >
+                            DELETE
+                        </Button>
+                    </div>
+                    <Button class="outline" @click="objectiveAdd">
+                        Add Objective
+                    </Button>
+                </Card>
+            </Column>
+
+            <Column :lg="4" :md="6">
+                <Card class="dark plain media">
+                    <h3>Media</h3>
+                    <Input
+                        v-model="currentGame.videoUrl"
+                        label="YouTube URL"
+                        class="group"
+                    />
+                </Card>
+            </Column>
+        </Row>
     </Card>
 </template>
 
@@ -147,29 +153,16 @@ h3 {
     margin-bottom: 20px;
 }
 
-.template-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(3, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 20px;
-}
-
-.input-container {
-    display: flex;
-}
-
-.container {
-    display: flex;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    padding: 10px;
+.Row {
+    .Column {
+        &:not(:last-child) {
+            padding: 0 $grid-gutter-width;
+            border-right: 1px solid $divider-color;
+        }
+    }
 
     .Card {
-        margin: 5px;
-        max-width: 500px;
-        min-width: 300px;
-        min-height: 450px;
+        box-shadow: none;
     }
 }
 
@@ -185,10 +178,8 @@ h3 {
         margin-right: 15px;
     }
 
-    .Button {
-        &:hover {
-            color: $danger-color;
-        }
+    .Button:hover {
+        color: $danger-color !important;
     }
 }
 </style>

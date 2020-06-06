@@ -1,104 +1,110 @@
 <template>
     <Card v-if="currentSchedule != null" class="dark plain">
-        <div class="container">
-            <Card class="dark">
-                <h3>Schedule</h3>
-                <div class="input-container">
+        <Row>
+            <Column :lg="4" :md="6">
+                <Card class="dark plain">
+                    <h3>Schedule</h3>
+                    <div class="input-container">
+                        <Input
+                            v-model="date"
+                            type="date"
+                            label="Date"
+                            class="group"
+                        />
+                        <Input
+                            v-model="time"
+                            type="time"
+                            label="Time"
+                            class="group"
+                        />
+                    </div>
+                    <h3>Game</h3>
+                    <Select
+                        v-model="currentSchedule.mode"
+                        label="Game mode"
+                        class="group"
+                    >
+                        <option value="Classic">
+                            Classic
+                        </option>
+                        <option value="Zen Garden">
+                            Zen Garden
+                        </option>
+                        <option value="Blitz">
+                            Blitz
+                        </option>
+                    </Select>
                     <Input
-                        v-model="date"
-                        type="date"
-                        label="Date"
+                        v-model="currentSchedule.title"
+                        placeholder="Game title (e.g Battleships)"
+                        label="Theme"
                         class="group"
                     />
-                    <Input
-                        v-model="time"
-                        type="time"
-                        label="Time"
-                        class="group"
-                    />
-                </div>
-                <h3>Game</h3>
-                <Select
-                    v-model="currentSchedule.mode"
-                    label="Game mode"
-                    class="group"
-                >
-                    <option value="Classic">
-                        Classic
-                    </option>
-                    <option value="Zen Garden">
-                        Zen Garden
-                    </option>
-                    <option value="Blitz">
-                        Blitz
-                    </option>
-                </Select>
-                <Input
-                    v-model="currentSchedule.title"
-                    placeholder="The title of the name, e.g Battleships!"
-                    label="Theme"
-                    class="group"
-                />
-            </Card>
+                </Card>
+            </Column>
 
-            <Card class="dark">
-                <h3>Objectives</h3>
-                <div
-                    v-for="objective in currentSchedule.objectives"
-                    :key="objective.id"
-                    class="objective"
-                >
-                    <Input
-                        v-model="objective.description"
-                        :label="`Objective ${objective.id}`"
-                        maxlength="110"
-                    />
-                    <SquareToggle
-                        :active="objective.isBonus"
-                        name="bonus"
-                        @change="objectiveUpdate($event, objective.id)"
-                    />
-                    <Button
-                        class="link muted"
-                        @click="objectiveDelete(objective.id)"
+            <Column :lg="4" :md="6">
+                <Card class="dark plain">
+                    <h3>Objectives</h3>
+                    <div
+                        v-for="objective in currentSchedule.objectives"
+                        :key="objective.id"
+                        class="objective"
                     >
-                        DELETE
+                        <Input
+                            v-model="objective.description"
+                            :label="`Objective ${objective.id}`"
+                            maxlength="110"
+                        />
+                        <SquareToggle
+                            :active="objective.isBonus"
+                            name="bonus"
+                            @change="objectiveUpdate($event, objective.id)"
+                        />
+                        <Button
+                            class="link muted"
+                            @click="objectiveDelete(objective.id)"
+                        >
+                            DELETE
+                        </Button>
+                    </div>
+                    <Button class="outline" @click="objectiveAdd">
+                        Add Objective
                     </Button>
-                </div>
-                <Button class="outline" @click="objectiveAdd">
-                    Add Objective
-                </Button>
-            </Card>
+                </Card>
+            </Column>
 
-            <Card class="dark">
-                <h3>
-                    Templates
-                    <Button
-                        class="muted sm link"
-                        @click="insertCommonTemplatesIntoTemplateFields"
-                    >
-                        Common
-                    </Button>
-                </h3>
-                <div class="template-container">
-                    <Textarea
-                        v-model="currentSchedule.templates.html"
-                        placeholder="<html>Hi!</html>"
-                        label="Template HTML"
-                    />
-                    <Textarea
-                        v-model="currentSchedule.templates.css"
-                        placeholder="body { background: white; }"
-                        label="Template CSS"
-                    />
-                    <Textarea
-                        v-model="currentSchedule.templates.js"
-                        placeholder="console.log('hi!')"
-                        label="Template JS"
-                    />
-                </div>
-            </Card>
-        </div>
+            <Column :lg="4" :md="6">
+                <Card class="dark plain">
+                    <h3>
+                        Templates
+                        <Button
+                            class="muted sm link"
+                            @click="insertCommonTemplatesIntoTemplateFields"
+                        >
+                            Common
+                        </Button>
+                    </h3>
+                    <div class="template-container">
+                        <Textarea
+                            v-model="currentSchedule.templates.html"
+                            placeholder="<html>Hi!</html>"
+                            label="Template HTML"
+                        />
+                        <Textarea
+                            v-model="currentSchedule.templates.css"
+                            placeholder="body { background: white; }"
+                            label="Template CSS"
+                        />
+                        <Textarea
+                            v-model="currentSchedule.templates.js"
+                            placeholder="console.log('hi!')"
+                            label="Template JS"
+                        />
+                    </div>
+                </Card>
+            </Column>
+        </Row>
     </Card>
 </template>
 
@@ -276,17 +282,16 @@ h3 {
     display: flex;
 }
 
-.container {
-    display: flex;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    padding: 10px;
+.Row {
+    .Column {
+        &:not(:last-child) {
+            padding: 0 $grid-gutter-width;
+            border-right: 1px solid $divider-color;
+        }
+    }
 
     .Card {
-        margin: 5px;
-        max-width: 500px;
-        min-width: 300px;
-        min-height: 450px;
+        box-shadow: none;
     }
 }
 
@@ -302,10 +307,8 @@ h3 {
         margin-right: 15px;
     }
 
-    .Button {
-        &:hover {
-            color: $danger-color;
-        }
+    .Button:hover {
+        color: $danger-color !important;
     }
 }
 </style>

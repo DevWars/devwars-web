@@ -209,4 +209,9 @@ export default {
         background-color: $bonus-color;
     }
 }
+
+.SubScore {
+    border-top: 1px solid $divider-color;
+    margin-top: 30px;
+}
 </style>
