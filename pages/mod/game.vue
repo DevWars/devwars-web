@@ -26,17 +26,17 @@
             </ButtonGroup>
         </PanelHeader>
 
-        <Tabs>
-            <Tab name="Brief" default>
+        <Tabbed>
+            <TabbedItem name="Brief" default>
                 <Brief :game="game" @update-game="triggerGameUpdate" />
-            </Tab>
-            <Tab name="Details">
+            </TabbedItem>
+            <TabbedItem name="Details">
                 <Details :game="game" @update-game="triggerGameUpdate" />
-            </Tab>
-            <Tab name="Edit">
+            </TabbedItem>
+            <TabbedItem name="Edit">
                 <Edit :game="game" @update-game="triggerGameUpdate" />
-            </Tab>
-        </Tabs>
+            </TabbedItem>
+        </Tabbed>
     </div>
 </template>
 
@@ -45,8 +45,8 @@ import moment from 'moment';
 
 import { names } from '../../utils/auth';
 
-import Tabs from '@/components/Tabs';
-import Tab from '@/components/Tab';
+import Tabbed from '@/components/Tabbed';
+import TabbedItem from '@/components/TabbedItem';
 
 import PanelHeader from '@/components/mod/PanelHeader';
 import DeleteModal from '@/components/modal/DeleteModal';
@@ -64,7 +64,7 @@ export default {
         auth: names.MODERATOR,
     },
 
-    components: { PanelHeader, Tabs, Tab, Brief, Details, Edit },
+    components: { PanelHeader, Tabbed, TabbedItem, Brief, Details, Edit },
 
     async asyncData({ query, error, $axios }) {
         if (query.game == null || query.game.trim() === '')
