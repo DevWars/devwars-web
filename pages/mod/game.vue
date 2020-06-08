@@ -28,13 +28,13 @@
 
         <Tabbed>
             <TabbedItem name="Brief" default>
-                <Brief :game="game" @update-game="triggerGameUpdate" />
+                <GameBrief :game="game" @update-game="triggerGameUpdate" />
             </TabbedItem>
             <TabbedItem name="Details">
-                <Details :game="game" @update-game="triggerGameUpdate" />
+                <GameDetails :game="game" @update-game="triggerGameUpdate" />
             </TabbedItem>
             <TabbedItem name="Edit">
-                <Edit :game="game" @update-game="triggerGameUpdate" />
+                <GameEdit :game="game" @update-game="triggerGameUpdate" />
             </TabbedItem>
         </Tabbed>
     </div>
@@ -51,9 +51,9 @@ import TabbedItem from '@/components/TabbedItem';
 import PanelHeader from '@/components/mod/PanelHeader';
 import DeleteModal from '@/components/modal/DeleteModal';
 
-import Brief from '@/components/mod/game/brief';
-import Details from '@/components/mod/game/details';
-import Edit from '@/components/mod/game/edit';
+import GameBrief from '@/components/mod/game/GameBrief';
+import GameDetails from '@/components/mod/game/GameDetails';
+import GameEdit from '@/components/mod/game/GameEdit';
 
 import nameFromStatus from '@/utils/gameStatus';
 
@@ -64,7 +64,7 @@ export default {
         auth: names.MODERATOR,
     },
 
-    components: { PanelHeader, Tabbed, TabbedItem, Brief, Details, Edit },
+    components: { PanelHeader, Tabbed, TabbedItem, GameBrief, GameDetails, GameEdit },
 
     async asyncData({ query, error, $axios }) {
         if (query.game == null || query.game.trim() === '')

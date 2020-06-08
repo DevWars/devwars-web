@@ -1,87 +1,89 @@
 <template>
-    <Card v-if="currentSchedule != null" class="dark plain">
-        <Row>
-            <Column :lg="4" :md="6">
-                <Card class="dark plain">
-                    <h3>Schedule</h3>
-                    <div class="input-container">
-                        <Input
-                            v-model="date"
-                            type="date"
-                            label="Date"
+    <div v-if="currentSchedule != null" class="ScheduleSetup">
+        <Card class="dark plain">
+            <Row>
+                <Column :lg="4" :md="6">
+                    <Card class="dark plain">
+                        <h3>Schedule</h3>
+                        <div class="input-container">
+                            <Input
+                                v-model="date"
+                                type="date"
+                                label="Date"
+                                class="group"
+                            />
+                            <Input
+                                v-model="time"
+                                type="time"
+                                label="Time"
+                                class="group"
+                            />
+                        </div>
+                        <h3>Game</h3>
+                        <Select
+                            v-model="currentSchedule.mode"
+                            label="Game mode"
                             class="group"
-                        />
-                        <Input
-                            v-model="time"
-                            type="time"
-                            label="Time"
-                            class="group"
-                        />
-                    </div>
-                    <h3>Game</h3>
-                    <Select
-                        v-model="currentSchedule.mode"
-                        label="Game mode"
-                        class="group"
-                    >
-                        <option value="Classic">
-                            Classic
-                        </option>
-                        <option value="Zen Garden">
-                            Zen Garden
-                        </option>
-                        <option value="Blitz">
-                            Blitz
-                        </option>
-                    </Select>
-                    <Input
-                        v-model="currentSchedule.title"
-                        placeholder="Game title (e.g Battleships)"
-                        label="Theme"
-                        class="group"
-                    />
-                </Card>
-            </Column>
-
-            <Column :lg="4" :md="6">
-                <ObjectivesEdit
-                    :objectives="currentSchedule.objectives"
-                    @updateObjectives="triggerUpdateObjectives"
-                />
-            </Column>
-
-            <Column :lg="4" :md="6">
-                <Card class="dark plain">
-                    <h3>
-                        Templates
-                        <Button
-                            class="muted sm link"
-                            @click="insertCommonTemplatesIntoTemplateFields"
                         >
-                            Common
-                        </Button>
-                    </h3>
-                    <div class="template-container">
-                        <Textarea
-                            v-model="currentSchedule.templates.html"
-                            placeholder="<html>Hi!</html>"
-                            label="Template HTML"
+                            <option value="Classic">
+                                Classic
+                            </option>
+                            <option value="Zen Garden">
+                                Zen Garden
+                            </option>
+                            <option value="Blitz">
+                                Blitz
+                            </option>
+                        </Select>
+                        <Input
+                            v-model="currentSchedule.title"
+                            placeholder="Game title (e.g Battleships)"
+                            label="Theme"
+                            class="group"
                         />
-                        <Textarea
-                            v-model="currentSchedule.templates.css"
-                            placeholder="body { background: white; }"
-                            label="Template CSS"
-                        />
-                        <Textarea
-                            v-model="currentSchedule.templates.js"
-                            placeholder="console.log('hi!')"
-                            label="Template JS"
-                        />
-                    </div>
-                </Card>
-            </Column>
-        </Row>
-    </Card>
+                    </Card>
+                </Column>
+
+                <Column :lg="4" :md="6">
+                    <ObjectivesEdit
+                        :objectives="currentSchedule.objectives"
+                        @updateObjectives="triggerUpdateObjectives"
+                    />
+                </Column>
+
+                <Column :lg="4" :md="6">
+                    <Card class="dark plain">
+                        <h3>
+                            Templates
+                            <Button
+                                class="muted sm link"
+                                @click="insertCommonTemplatesIntoTemplateFields"
+                            >
+                                Common
+                            </Button>
+                        </h3>
+                        <div class="template-container">
+                            <Textarea
+                                v-model="currentSchedule.templates.html"
+                                placeholder="<html>Hi!</html>"
+                                label="Template HTML"
+                            />
+                            <Textarea
+                                v-model="currentSchedule.templates.css"
+                                placeholder="body { background: white; }"
+                                label="Template CSS"
+                            />
+                            <Textarea
+                                v-model="currentSchedule.templates.js"
+                                placeholder="console.log('hi!')"
+                                label="Template JS"
+                            />
+                        </div>
+                    </Card>
+                </Column>
+            </Row>
+        </Card>
+    </div>
 </template>
 
 <script>
@@ -95,7 +97,7 @@ import Select from '@/components/form/Select';
 import ObjectivesEdit from '@/components/mod/ObjectivesEdit';
 
 export default {
-    name: 'DashboardScheduleSetup',
+    name: 'ScheduleSetup',
 
     meta: {
         auth: names.MODERATOR,
@@ -207,49 +209,34 @@ export default {
 <style lang="scss" scoped>
 @import 'utils.scss';
 
-h3 {
-    margin-bottom: 20px;
-}
+.ScheduleSetup {
+    h3 {
+        margin-bottom: 20px;
+    }
 
-.template-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(3, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 20px;
-}
+    .template-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 20px;
+    }
 
-.input-container {
-    display: flex;
-}
+    .input-container {
+        display: flex;
+    }
 
-.Row {
-    .Column {
-        &:not(:last-child) {
-            padding: 0 $grid-gutter-width;
-            border-right: 1px solid $divider-color;
+    .Row {
+        .Column {
+            &:not(:last-child) {
+                padding: 0 $grid-gutter-width;
+                border-right: 1px solid $divider-color;
+            }
         }
-    }
 
-    .Card {
-        box-shadow: none;
-    }
-}
-
-.objective {
-    display: flex;
-    margin-bottom: 15px;
-
-    & > :not(.Input) {
-        @extend %align-baseline-to-input-with-labels;
-    }
-
-    .Input {
-        margin-right: 15px;
-    }
-
-    .Button:hover {
-        color: $danger-color !important;
+        .Card {
+            box-shadow: none;
+        }
     }
 }
 </style>

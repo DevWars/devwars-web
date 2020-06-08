@@ -32,7 +32,7 @@
 
         <Tabbed>
             <TabbedItem name="Setup" :selected="true">
-                <Setup
+                <ScheduleSetup
                     :schedule="schedule"
                     @update-schedule="triggerScheduleRefresh"
                 />
@@ -56,13 +56,13 @@ import Tabbed from '@/components/Tabbed';
 import TabbedItem from '@/components/TabbedItem';
 
 import PanelHeader from '@/components/mod/PanelHeader';
-import Setup from '@/components/mod/schedule/setup';
-import Applications from '@/components/mod/schedule/applications';
+import ScheduleSetup from '@/components/mod/schedule/ScheduleSetup';
+import Applications from '@/components/game/Applications';
 
 export default {
     name: 'DashboardSchedule',
 
-    components: { Tabbed, TabbedItem, PanelHeader, Setup, Applications },
+    components: { Tabbed, TabbedItem, PanelHeader, ScheduleSetup, Applications },
 
     meta: {
         auth: names.MODERATOR,
