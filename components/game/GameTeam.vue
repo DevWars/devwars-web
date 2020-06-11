@@ -1,8 +1,8 @@
 <template>
-    <div class="GameTeam" :class="team.team === 1 ? 'red' : 'blue'">
+    <div class="GameTeam" :class="team.name">
         <div class="header">
             <h3 v-if="team" class="team">
-                {{ team.team === 1 ? 'Red' : 'Blue' }}
+                {{ team.name }}
             </h3>
             <span v-if="winner" class="winner">Win</span>
             <span v-if="points != null" class="points">{{ points }}</span>

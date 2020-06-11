@@ -8,7 +8,8 @@ export const teams = {
             for (const player of players) {
                 if (_.isNil(teams[player.team])) {
                     teams[player.team] = {
-                        team: player.team,
+                        id: player.team,
+                        name: player.team === 1 ? 'red' : 'blue',
                         players: [],
                     };
                 }

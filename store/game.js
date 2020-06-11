@@ -1,10 +1,8 @@
 import { find, isNil } from 'lodash';
-import Http from '../services/Http';
 
 export const state = () => ({
     applications: [],
     upcoming: [],
-    schedules: [],
     all: [],
     game: {},
     active: null,
@@ -92,63 +90,72 @@ export const mutations = {
 
 export const actions = {
     async all({ commit }) {
-        const games = await Http.for('games').get('?players=true');
+        const { data: games } = await this.$api.games.gamesWithPaging({
+            first: 10,
+        });
+
         commit('all', games);
     },
 
     async game({ commit }, { id, players }) {
-        const game = await this.$axios.get(`games/${id}?players=${players}`);
-        commit('game', game.data);
+        const game = await this.$api.games.getGame(id);
+        let gamePlayers = {};
+
+        if (players) {
+            gamePlayers = await this.$api.games.getAllAssignedPlayersToGame(id);
+        }
+
+        commit('game', { game, players: gamePlayers });
     },
 
     async create({ commit }, data) {
-        const game = await Http.for('games').save(data);
+        const game = await this.$api.games.createGame(data);
         commit('add', game);
     },
 
     async applications({ commit, dispatch, state }) {
         try {
-            const applications = await Http.for('applications').get('mine');
+            const applications = await this.$api.users.getUserGameApplications(
+                this.$store.user.user.id,
+            );
+
             commit('applications', applications);
         } catch (e) {
-            if (e.response.status !== 401) {
-                dispatch('toast/error', e.response.data, { root: true });
-            }
-        }
-    },
-
-    async schedules({ commit }) {
-        try {
-            const schedules = await Http.for('schedules').get();
-            commit('schedules', schedules);
-        } catch (e) {
-            commit('schedules', null);
+            dispatch('toast/error', e, { root: true });
         }
     },
 
     async active({ commit }) {
-        try {
-            const { data } = await Http.for('schedules?status=active').get();
-            commit('active', data[0]);
-        } catch (e) {
-            commit('active', null);
-        }
+        const games = await this.$api.games.gamesWithPaging({
+            first: 1,
+            status: 'active',
+        });
+
+        const [data] = games.data;
+
+        commit('active', data);
     },
 
     async upcoming({ commit, dispatch }) {
         try {
-            const { data } = await Http.for('schedules?status=scheduled').get();
+            const { data } = await this.$api.games.gamesWithPaging({
+                first: 10,
+                status: 'scheduled',
+            });
+
             commit('upcoming', data);
         } catch (e) {
-            dispatch('toast/error', e.response.data, { root: true });
+            dispatch('toast/error', e, { root: true });
         }
     },
 
-    async apply({ commit, dispatch }, schedule) {
+    async apply({ commit, dispatch }, { id }) {
         try {
-            const app = await this.$axios.post(
-                `applications/schedule/${schedule.id}`,
+            const app = await this.$api.games.applyToGameAsPlayer(
+                id,
+                this.$store.user.user.id,
             );
+
             commit('apply', app.data);
 
             dispatch('toast/success', 'Thanks for signing up! See ya soon', {
@@ -157,29 +164,31 @@ export const actions = {
 
             dispatch('navigate', '/game/confirmation', { root: true });
         } catch (e) {
-            dispatch('toast/error', e.response.data, { root: true });
+            dispatch('toast/error', e, { root: true });
         }
     },
 
-    async forfeit({ commit, dispatch }, schedule) {
+    async forfeit({ commit, dispatch }, { id }) {
         try {
-            await this.$axios.delete(`applications/schedule/${schedule.id}`);
-            commit('forfeit', schedule);
+            await this.$api.games.removeUserApplicationForGame(
+                id,
+                this.$store.user.user.id,
+            );
 
             dispatch('toast/success', 'Sorry to see you go.', { root: true });
         } catch (e) {
-            dispatch('toast/error', e.response.data, { root: true });
+            dispatch('toast/error', e, { root: true });
         }
     },
 
     async sendPatch({ commit, dispatch }, game) {
         try {
-            await this.$axios.patch(`/games/${game.id}`, game);
+            await this.$api.games.updateGame(game.id, game);
             commit('game', game);
 
             dispatch('toast/success', 'Game updated!', { root: true });
         } catch (e) {
-            dispatch('toast/error', e.response.data, { root: true });
+            dispatch('toast/error', e, { root: true });
         }
     },
 };

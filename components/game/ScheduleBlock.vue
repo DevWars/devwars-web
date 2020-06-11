@@ -8,33 +8,35 @@
             <th />
         </tr>
 
-        <tr v-for="schedule in schedules" :key="schedule.id">
+        <tr v-for="game in games" :key="game.id">
             <td>
-                <div class="dow">{{ schedule.startTime | moment('dddd') }}</div>
-                <h4 class="date">{{ schedule.startTime | moment('MMMM D') }}</h4>
+                <div class="dow">{{ game.startTime | moment('dddd') }}</div>
+                <h4 class="date">
+                    {{ game.startTime | moment('MMMM D') }}
+                </h4>
             </td>
             <td>
-                <h4 class="time">{{ schedule.startTime | moment('H:mm') }} UTC</h4>
+                <h4 class="time">{{ game.startTime | moment('H:mm') }} UTC</h4>
             </td>
             <td>
-                <h4 class="duration">{{ durations[schedule.mode] || '30' }}</h4>
+                <h4 class="duration">{{ durations[game.mode] || '30' }}</h4>
             </td>
             <td>
                 <div class="show">
                     <Icon name="trophy" />
                     <span>DevWars Live</span>
                 </div>
-                <div class="title">{{ description(schedule) }}</div>
+                <div class="title">{{ description(game) }}</div>
             </td>
             <td>
-                <RegistrationButtons :schedule="schedule" />
+                <RegistrationButtons :game="game" />
             </td>
         </tr>
     </Table>
 </template>
 
 <script>
-import { sortBy } from 'lodash';
+import { sortBy, take } from 'lodash';
 import GameDurations from '../../utils/gameDurations';
 import Table from '@/components/Table';
 import RegistrationButtons from '@/components/game/RegistrationButtons';
@@ -52,7 +54,7 @@ export default {
 
         count: {
             type: Number,
-            default: 0,
+            default: 10,
         },
     },
 
@@ -65,26 +67,25 @@ export default {
     },
 
     computed: {
-        schedules() {
-            const ret = [];
-            this.$store.state.game.upcoming.map((e) => {
-                if (this.filter === '') {
-                    ret.push(e);
+        games() {
+            const results = [];
+
+            const { upcoming } = this.$store.state.game;
+
+            for (const game of take(upcoming, this.count)) {
+                if (game.mode === this.filter || this.filter === '') {
+                    results.push(game);
                 }
-                if (e.mode === this.filter) {
-                    ret.push(e);
-                }
-            });
+            }
 
             const subFilters = [];
-            if (this.time) {
-                subFilters.push('startTime');
-            }
-            if (this.duration) {
-                subFilters.push('mode');
-            }
 
-            return sortBy(ret, subFilters);
+            if (this.time) subFilters.push('startTime');
+            if (this.duration) subFilters.push('mode');
+
+            console.log(results);
+
+            return sortBy(results, subFilters);
         },
     },
 
