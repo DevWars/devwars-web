@@ -1,10 +1,8 @@
 <template>
-    <div class="section">
+    <div class="SubScore">
         <div
             class="header"
-            :class="{
-                noScore: (blueScore == null && redScore == null) || noScore,
-            }"
+            :class="{ noScore: (blueScore == null && redScore == null) || noScore }"
         >
             <span class="points team-blue">{{ blueScore }}</span>
             <h3 v-if="title">{{ title }}</h3>
@@ -47,16 +45,15 @@ export default {
 <style lang="scss" scoped>
 @import 'utils.scss';
 
-.section {
+.SubScore {
     padding: 0 $s-space;
     text-align: center;
 }
 
 .header {
     @extend %flex-justify;
-    border-top: 1px solid $divider-color;
     padding: $xs-space;
-    margin: 30px auto $s-space;
+    margin: 0 auto $s-space;
     position: relative;
 
     h3 {

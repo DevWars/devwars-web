@@ -13,7 +13,6 @@
                     placeholder="Username"
                     :label="usernameLabel"
                     class="group"
-                    input-id="user-username"
                     @input="onUsernameInput"
                 />
 
@@ -33,7 +32,6 @@
                 <Input
                     v-model="emailCurrentPassword"
                     type="password"
-                    input-id="email-current-password"
                     label="Current Password"
                     class="group"
                     required
@@ -67,7 +65,6 @@
                 <Input
                     v-model="currentPassword"
                     type="password"
-                    input-id="current-password"
                     label="Current Password"
                     class="group"
                     required
@@ -75,7 +72,6 @@
                 <Input
                     v-model="newPassword"
                     type="password"
-                    input-id="new-password"
                     label="New Password"
                     class="group"
                     required
@@ -83,7 +79,6 @@
                 <Input
                     v-model="newPasswordConfirmed"
                     type="password"
-                    input-id="confirm-new-password"
                     label="Confirm New Password"
                     class="group"
                     required

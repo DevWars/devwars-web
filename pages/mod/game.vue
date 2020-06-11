@@ -26,17 +26,17 @@
             </ButtonGroup>
         </PanelHeader>
 
-        <Tabs>
-            <Tab name="Brief" default>
-                <Brief :game="game" @update-game="triggerGameUpdate" />
-            </Tab>
-            <Tab name="Details">
-                <Details :game="game" @update-game="triggerGameUpdate" />
-            </Tab>
-            <Tab name="Edit">
-                <Edit :game="game" @update-game="triggerGameUpdate" />
-            </Tab>
-        </Tabs>
+        <Tabbed>
+            <TabbedItem name="Brief" default>
+                <GameBrief :game="game" @update-game="triggerGameUpdate" />
+            </TabbedItem>
+            <TabbedItem name="Details">
+                <GameDetails :game="game" @update-game="triggerGameUpdate" />
+            </TabbedItem>
+            <TabbedItem name="Edit">
+                <GameEdit :game="game" @update-game="triggerGameUpdate" />
+            </TabbedItem>
+        </Tabbed>
     </div>
 </template>
 
@@ -45,15 +45,15 @@ import moment from 'moment';
 
 import { names } from '../../utils/auth';
 
-import Tabs from '@/components/Tabs';
-import Tab from '@/components/Tab';
+import Tabbed from '@/components/Tabbed';
+import TabbedItem from '@/components/TabbedItem';
 
 import PanelHeader from '@/components/mod/PanelHeader';
 import DeleteModal from '@/components/modal/DeleteModal';
 
-import Brief from '@/components/mod/game/brief';
-import Details from '@/components/mod/game/details';
-import Edit from '@/components/mod/game/edit';
+import GameBrief from '@/components/mod/game/GameBrief';
+import GameDetails from '@/components/mod/game/GameDetails';
+import GameEdit from '@/components/mod/game/GameEdit';
 
 import nameFromStatus from '@/utils/gameStatus';
 
@@ -64,7 +64,7 @@ export default {
         auth: names.MODERATOR,
     },
 
-    components: { PanelHeader, Tabs, Tab, Brief, Details, Edit },
+    components: { PanelHeader, Tabbed, TabbedItem, GameBrief, GameDetails, GameEdit },
 
     async asyncData({ query, error, $axios }) {
         if (query.game == null || query.game.trim() === '')

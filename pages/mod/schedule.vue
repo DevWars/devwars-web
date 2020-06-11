@@ -30,20 +30,20 @@
             </ButtonGroup>
         </PanelHeader>
 
-        <Tabs>
-            <Tab name="Setup" :selected="true">
-                <Setup
+        <Tabbed>
+            <TabbedItem name="Setup" :selected="true">
+                <ScheduleSetup
                     :schedule="schedule"
                     @update-schedule="triggerScheduleRefresh"
                 />
-            </Tab>
-            <Tab name="Applications">
+            </TabbedItem>
+            <TabbedItem name="Applications">
                 <Applications
                     :schedule="schedule"
                     @update-schedule="triggerScheduleRefresh"
                 />
-            </Tab>
-        </Tabs>
+            </TabbedItem>
+        </Tabbed>
     </div>
 </template>
 
@@ -52,17 +52,17 @@ import moment from 'moment';
 import { isNil } from 'lodash';
 
 import { names } from '../../utils/auth';
-import Tabs from '@/components/Tabs';
-import Tab from '@/components/Tab';
+import Tabbed from '@/components/Tabbed';
+import TabbedItem from '@/components/TabbedItem';
 
 import PanelHeader from '@/components/mod/PanelHeader';
-import Setup from '@/components/mod/schedule/setup';
-import Applications from '@/components/mod/schedule/applications';
+import ScheduleSetup from '@/components/mod/schedule/ScheduleSetup';
+import Applications from '@/components/game/Applications';
 
 export default {
     name: 'DashboardSchedule',
 
-    components: { Tabs, Tab, PanelHeader, Setup, Applications },
+    components: { Tabbed, TabbedItem, PanelHeader, ScheduleSetup, Applications },
 
     meta: {
         auth: names.MODERATOR,

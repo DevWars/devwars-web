@@ -48,7 +48,7 @@ export default {
     computed: {
         startTime() {
             const timestamp = `${this.date} ${this.time}`;
-            return moment.utc(timestamp);
+            return moment.utc(timestamp, 'YYYY-MM-DD HH:mm');
         },
     },
 

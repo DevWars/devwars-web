@@ -1,5 +1,5 @@
 <template>
-    <div v-if="currentGame != null">
+    <div v-if="currentGame != null" class="GameBrief">
         <Card v-if="currentTeams" class="roster plain dark bezeless">
             <GameTeam
                 v-for="team in currentTeams"
@@ -147,11 +147,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.roster {
-    display: flex;
+.GameBrief {
+    .roster {
+        display: flex;
 
-    .GameTeam {
-        flex: 1 1 100%;
+        .GameTeam {
+            flex: 1 1 100%;
+        }
     }
 }
 </style>

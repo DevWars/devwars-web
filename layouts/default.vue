@@ -40,22 +40,16 @@ export default {
 
 html {
     font-family: $base-font-face;
-    font-size: $font-size-base;
+    font-size: 62.5%;
     line-height: 1.5;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-
-    @include breakpoint(sm) {
-        font-size: $font-size-sm;
-    }
-    @include breakpoint(xs) {
-        font-size: $font-size-xs;
-    }
 }
 
 body {
     height: 100%;
+    font-size: $font-size-base;
     color: $base-font-color;
     background: $bg-color-4;
     -webkit-font-smoothing: antialiased;
@@ -116,15 +110,34 @@ h6 {
 h1 {
     text-transform: uppercase;
     font-family: $alt-font-face;
+    font-size: 3.6rem;
 }
 
 h2 {
     font-family: $alt-font-face;
+    font-size: 3rem;
+}
+
+h3 {
+    font-size: 2.4rem;
+}
+
+h4 {
+    font-size: 1.8rem
+}
+
+h5 {
+    font-size: $font-size-base;
+}
+
+h6 {
+    font-size: 1.2rem;
 }
 
 p {
     color: #fff;
     line-height: 1.5;
+    font-size: 1.6rem;
     word-wrap: break-word;
 }
 
