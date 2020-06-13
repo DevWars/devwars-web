@@ -50,21 +50,19 @@ export default {
         DailyPrizes,
     },
 
-    async asyncData({ params, error, $axios, store }) {
+    async asyncData({ params, error, store, app: { $api } }) {
         if (params.dashboard == null || params.dashboard.trim() === '')
             return {};
 
         try {
-            const user = await await $axios.get(`/users/${params.dashboard}`);
-            const stats = await await $axios.get(
-                `/users/${params.dashboard}/stats`,
-            );
+            const user = await $api.users.getUser(params.dashboard);
+            const stats = await $api.users.getUserStatistics(params.dashboard);
 
             return {
                 me: false,
                 user: {
-                    user: user.data,
-                    stats: stats.data,
+                    user,
+                    stats,
                 },
             };
         } catch (e) {

@@ -35,15 +35,15 @@ export default {
 
     components: { PanelHeader, Textarea },
 
-    async asyncData({ query, error, $axios }) {
+    async asyncData({ query, error, app: { $api } }) {
         try {
-            const { data } = await $axios.get('/health/logs/error');
+            const data = await $api.health.errorLogs();
             return { logs: data.logs.reverse() };
         } catch (e) {
             error({
-                statusCode: e.response.status,
-                description: e.response.data.error,
-                message: e.response.statusText,
+                statusCode: e.status,
+                description: e.error,
+                message: e.message,
             });
         }
     },
@@ -55,7 +55,7 @@ export default {
     methods: {
         async loadAllLogs() {
             try {
-                const { data } = await this.$axios.get('/health/logs');
+                const data = await this.$api.health.logs();
                 this.logs = data.logs.reverse();
             } catch (e) {
                 this.$store.dispatch('toast/error', e.response.data);
@@ -64,7 +64,7 @@ export default {
 
         async loadErrorLogs() {
             try {
-                const { data } = await this.$axios.get('/health/logs/error');
+                const data = await this.$api.health.errorLogs();
                 this.logs = data.logs.reverse();
             } catch (e) {
                 this.$store.dispatch('toast/error', e.response.data);

@@ -53,48 +53,60 @@ export default {
 
     methods: {
         async deleteUser() {
-            const { username, id } = this.user;
+            try {
+                const { username, id } = this.user;
 
-            const result = await this.$open(DeleteModal, {
-                title: `Delete User ${username}?`,
-                description: `Are you sure you want delete the user ${username}? Doing so will remove all related information and data.`,
-            });
+                const result = await this.$open(DeleteModal, {
+                    title: `Delete User ${username}?`,
+                    description: `Are you sure you want delete the user ${username}? Doing so will remove all related information and data.`,
+                });
 
-            if (result) {
-                await this.$api.users.deleteUser(id);
-                this.$router.push('/dashboard');
+                if (result) {
+                    await this.$api.users.deleteUser(id);
+                    this.$router.push('/dashboard');
+                }
+            } catch (e) {
+                this.$store.dispatch('toast/error', e);
             }
         },
 
         async banUser() {
-            const { username, id } = this.user;
+            try {
+                const { username, id } = this.user;
 
-            const result = await this.$open(DeleteModal, {
-                title: `Ban User ${username}?`,
-                confirm: 'Ban User',
-                description: `Are you sure you want ban the user ${username}? Doing so will kick them out there current season.`,
-            });
+                const result = await this.$open(DeleteModal, {
+                    title: `Ban User ${username}?`,
+                    confirm: 'Ban User',
+                    description: `Are you sure you want ban the user ${username}? Doing so will kick them out there current season.`,
+                });
 
-            if (result) {
-                const body = { role: 'BANNED' };
-                await this.$api.users.updateUser(id, body);
-                this.user.role = body.role;
+                if (result) {
+                    const body = { role: 'BANNED' };
+                    await this.$api.users.updateUser(id, body);
+                    this.user.role = body.role;
+                }
+            } catch (e) {
+                this.$store.dispatch('toast/error', e);
             }
         },
 
         async removeUserBan() {
-            const { username, id } = this.user;
+            try {
+                const { username, id } = this.user;
 
-            const result = await this.$open(DeleteModal, {
-                title: `Remove Ban From User ${username}?`,
-                confirm: 'Remove Ban',
-                description: `Are you sure you want remove the ban from the user ${username}? This will allow them to login again.`,
-            });
+                const result = await this.$open(DeleteModal, {
+                    title: `Remove Ban From User ${username}?`,
+                    confirm: 'Remove Ban',
+                    description: `Are you sure you want remove the ban from the user ${username}? This will allow them to login again.`,
+                });
 
-            if (result) {
-                const body = { role: 'USER' };
-                await this.$api.users.updateUser(id, body);
-                this.user.role = body.role;
+                if (result) {
+                    const body = { role: 'USER' };
+                    await this.$api.users.updateUser(id, body);
+                    this.user.role = body.role;
+                }
+            } catch (e) {
+                this.$store.dispatch('toast/error', e);
             }
         },
     },

@@ -83,8 +83,6 @@ export default {
             if (this.time) subFilters.push('startTime');
             if (this.duration) subFilters.push('mode');
 
-            console.log(results);
-
             return sortBy(results, subFilters);
         },
     },

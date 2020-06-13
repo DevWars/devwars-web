@@ -113,10 +113,14 @@ export const actions = {
         commit('add', game);
     },
 
-    async applications({ commit, dispatch, state }) {
+    async applications({ commit, dispatch, rootState }) {
         try {
+            if (rootState.user == null || rootState.user.user == null) {
+                return;
+            }
+
             const applications = await this.$api.users.getUserGameApplications(
-                this.$store.user.user.id,
+                rootState.user.user.id,
             );
 
             commit('applications', applications);
@@ -149,13 +153,9 @@ export const actions = {
         }
     },
 
-    async apply({ commit, dispatch }, { id }) {
+    async apply({ commit, dispatch }, { game, user }) {
         try {
-            const app = await this.$api.games.applyToGameAsPlayer(
-                id,
-                this.$store.user.user.id,
-            );
-
+            const app = await this.$api.games.applyToGameAsPlayer(game, user);
             commit('apply', app.data);
 
             dispatch('toast/success', 'Thanks for signing up! See ya soon', {
@@ -168,13 +168,9 @@ export const actions = {
         }
     },
 
-    async forfeit({ commit, dispatch }, { id }) {
+    async forfeit({ commit, dispatch }, { game, user }) {
         try {
-            await this.$api.games.removeUserApplicationForGame(
-                id,
-                this.$store.user.user.id,
-            );
-
+            await this.$api.games.removeUserApplicationForGame(game, user);
             dispatch('toast/success', 'Sorry to see you go.', { root: true });
         } catch (e) {
             dispatch('toast/error', e, { root: true });

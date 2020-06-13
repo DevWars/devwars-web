@@ -2,13 +2,15 @@
     <div class="RegistrationButtons">
         <ButtonGroup>
             <Button
-                v-if="!isApplied(schedule)"
+                v-if="!isApplied(game)"
                 class="primary"
-                @click="enter(schedule)"
+                @click="enter(game)"
             >
                 Register
             </Button>
-            <Button v-else class="outline danger" @click="cancel(schedule)">Resign</Button>
+            <Button v-else class="outline danger" @click="cancel(game)">
+                Resign
+            </Button>
         </ButtonGroup>
     </div>
 </template>
@@ -22,7 +24,7 @@ export default {
     name: 'RegistrationButtons',
 
     props: {
-        schedule: {
+        game: {
             type: Object,
             required: true,
         },
@@ -57,12 +59,9 @@ export default {
             await this.$open(GameResignModal, { schedule });
         },
 
-        isApplied(schedule) {
+        isApplied(game) {
             return this.applications.some((application) => {
-                return (
-                    application.schedule &&
-                    application.schedule.id === schedule.id
-                );
+                return application.gameId && application.gameId === game.id;
             });
         },
     },

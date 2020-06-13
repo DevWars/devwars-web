@@ -13,39 +13,14 @@
                 </nuxt-link>
             </li>
             <li>
-                <nuxt-link to="/mod/teams" class="disabled">
-                    <Icon name="users" />Teams
-                </nuxt-link>
-            </li>
-            <li>
-                <nuxt-link to="/mod/schedules">
-                    <Icon name="calendar" />Schedules
-                </nuxt-link>
-            </li>
-            <li>
                 <nuxt-link to="/mod/games">
                     <Icon name="gamepad" />Games
-                </nuxt-link>
-            </li>
-            <li>
-                <nuxt-link to="/mod/tournaments" class="disabled">
-                    <Icon name="trophy" />Tournaments
-                </nuxt-link>
-            </li>
-            <li>
-                <nuxt-link to="/mod/blogs" class="disabled">
-                    <Icon name="newspaper" />Blog
                 </nuxt-link>
             </li>
         </ul>
 
         <h6>More</h6>
         <ul>
-            <li>
-                <nuxt-link to="#" class="disabled">
-                    <Icon name="file-alt" />Mod Doc
-                </nuxt-link>
-            </li>
             <li>
                 <nuxt-link to="/mod/logs/">
                     <Icon name="sticky-note" />Logs

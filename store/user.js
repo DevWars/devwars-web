@@ -146,8 +146,8 @@ export const actions = {
             dispatch('toast/success', 'Welcome back to DevWars!', {
                 root: true,
             });
-            await dispatch('nuxtServerInit', null, { root: true });
 
+            await dispatch('nuxtServerInit', null, { root: true });
             dispatch('navigate', '/dashboard', { root: true });
         } catch (e) {
             dispatch('toast/error', e, { root: true });
@@ -157,7 +157,8 @@ export const actions = {
 
     async register({ dispatch }, registration) {
         try {
-            await this.$axios.post('/auth/register', registration);
+            const { email, username, password } = registration;
+            await this.$api.authentication.register(email, username, password);
 
             await dispatch('refresh');
 
