@@ -3,7 +3,20 @@ import * as _ from 'lodash';
 export const teams = {
     methods: {
         teams(game, players) {
-            const teams = {};
+            const teams = {
+                0: {
+                    id: 0,
+                    name: 'blue',
+                    players: [],
+                },
+                1: {
+                    id: 1,
+                    name: 'red',
+                    players: [],
+                    objectives: {},
+                    completedObjectives: () => 0,
+                },
+            };
 
             for (const player of players) {
                 if (_.isNil(teams[player.team])) {
@@ -83,7 +96,7 @@ export const usersFromGame = {
             });
 
             const fetchUser = async (id) => {
-                const res = await this.$axios.get(`/users/${id}`);
+                const res = await this.$api.users.getUser(id);
                 return Object.assign({ originalId: id }, res.data);
             };
 

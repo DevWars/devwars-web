@@ -332,8 +332,7 @@ export const actions = {
     },
 
     async connectLinkedAccount({ dispatch, commit }, provider) {
-        await this.$axios.get(`/oauth/${provider}`);
-
+        await this.$api.linkedAccounts.connectLinkedAccount(provider);
         commit('connectLinkedAccount', provider);
 
         await dispatch('refresh');

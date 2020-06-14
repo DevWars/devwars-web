@@ -40,6 +40,7 @@ import User from '@/components/user/User';
 export default {
     name: 'Player',
     components: { User },
+
     props: {
         player: {
             type: Object,

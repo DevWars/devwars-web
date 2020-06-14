@@ -52,8 +52,8 @@ import PanelHeader from '@/components/mod/PanelHeader';
 import DeleteModal from '@/components/modal/DeleteModal';
 
 import GameBrief from '@/components/mod/game/GameBrief';
-import GameDetails from '@/components/mod/game/GameDetails';
-import GameEdit from '@/components/mod/game/GameEdit';
+// import GameDetails from '@/components/mod/game/GameDetails';
+// import GameEdit from '@/components/mod/game/GameEdit';
 
 import nameFromStatus from '@/utils/gameStatus';
 
@@ -69,19 +69,20 @@ export default {
         Tabbed,
         TabbedItem,
         GameBrief,
-        GameDetails,
-        GameEdit,
+        // GameDetails,
+        // GameEdit,
     },
 
     async asyncData({ query, error, app: { $api } }) {
         if (query.game == null || query.game.trim() === '')
-            return { game: null };
+            return { game: null, players: [] };
 
         try {
-            const game = $api.games.getGame(query.game);
+            const game = await $api.games.getGame(query.game);
             const players = await $api.games.getAllAssignedPlayersToGame(
                 query.game,
             );
+
             return { game, players };
         } catch (e) {
             error({
@@ -131,27 +132,28 @@ export default {
     methods: {
         nameFromStatus,
 
-        triggerGameUpdate(updatedGame) {
-            this.game = Object.assign({}, updatedGame);
+        async triggerGameUpdate(updatedGame) {
+            await this.gatherGame(this.game.id);
         },
 
         async gatherGame(id) {
-            const game = await this.$api.games.gatGame(id);
+            const game = await this.$api.games.getGame(id);
             const players = await this.$api.games.getAllAssignedPlayersToGame(
                 id,
             );
 
-            return { game, players };
+            this.game = game;
+            this.players = players;
         },
 
         async activate() {
             await this.$api.games.activateGame(this.game.id);
-            this.game = await this.gatherGame(this.game.id);
+            await this.gatherGame(this.game.id);
         },
 
         async endGame() {
             await this.$api.games.endGame(this.game.id);
-            this.game = await this.gatherGame(this.game.id);
+            await this.gatherGame(this.game.id);
         },
 
         async save() {

@@ -1,89 +1,16 @@
 <template>
     <div>
-        <!--
-        <PageBanner title="Badges"/>
-        <div class="footer-offset">
-            <Container>
-                <Row
-                    <Column v-for="badge in badges" :key="badge.id" :lg="3" :md="4" :sm="6">
-                        <div
-                            class="badge-card bronze"
-                            :class="{complete: completed(badge)}"
-                            :title="badge.description"
-                        >
-                            <div class="badge-card__meta">
-                                <span class="badge-card__global">
-                                    <Icon name="group" />
-                                </span>
-                            </div>
-                            <img class="badge-card__img" :src="image(badge)">
-                            <h2 class="badge-card__name">{{ badge.name }}</h2>
-                            <div class="progress">
-                                <div class="progress__bar" :style="[style(badge)]"></div>
-                            </div>
-                            <Devcoins :amount="badge.coins"/>
-                        </div>
-                    </Column>
-                </Row>
-            </Container>
-        </div>
-        -->
         <h1>badges</h1>
     </div>
 </template>
 
 <script>
-// import { mapGetters } from 'vuex';
-// import Http from '../services/Http';
-// import PageBanner from '@/components/layout/PageBanner';
-// import Devcoins from '@/components/Devcoins';
 import { names } from '../utils/auth';
 
 export default {
-    // name: 'Badges',
-    // components: {
-    //     PageBanner,
-    //     Devcoins,
-    // },
     meta: {
         auth: names.USER,
     },
-    // computed: {
-    //     ...mapGetters({
-    //         badges: 'badges/badges',
-    //         userCount: 'user/userCount',
-    //     }),
-    // },
-    // async asyncData({ store }) {
-    //     const mine = await Http.for(`user/${store.state.user.user.id}`).get(
-    //         'badges'
-    //     );
-    //     return {
-    //         mine,
-    //     };
-    // },
-    // methods: {
-    //     completed(badge) {
-    //         return this.mine.some((it) => it.id === badge.id);
-    //     },
-    //     style(badge) {
-    //         return {
-    //             width: `${(badge.userCount / this.userCount) * 100}%`,
-    //         };
-    //     },
-    //     image(badge) {
-    //         /* eslint-disable */
-    //         const url = `@/assets/img/badges/${badge.name
-    //             .split(' ')
-    //             .join('-')
-    //             .toLowerCase()}.png`;
-    //         try {
-    //             return require(url);
-    //         } catch (e) {
-    //             console.error(`Couldn't load image for badge ${badge.name}`);
-    //         }
-    //     },
-    // },
 };
 </script>
 

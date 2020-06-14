@@ -15,7 +15,7 @@
                         v-for="user in result.data"
                         :key="user.id"
                         class="search__item"
-                        @click="() => userSelected(user.username)"
+                        @click="() => userSelected(user)"
                     >
                         <div>
                             <User :user="user" size="sm" />
@@ -58,6 +58,7 @@ export default {
     },
 
     data: () => ({
+        userId: null,
         username: '',
         result: { data: [] },
         searchVisible: false,
@@ -66,14 +67,17 @@ export default {
 
     mounted() {
         this.debounceSearch = debounce(async () => {
-            const url = `/search/users?username=${this.username}&email=${this.username}`;
-            this.result = await this.$axios.get(url);
+            this.result = await this.$api.search.searchForUsers({
+                username: this.username,
+                email: this.username,
+            });
         }, 600);
     },
 
     methods: {
-        userSelected(username) {
-            this.username = username;
+        userSelected(user) {
+            this.username = user.username;
+            this.userId = user.id;
             this.searchVisible = false;
         },
 
@@ -86,11 +90,13 @@ export default {
 
         async addRegistrant() {
             try {
-                const url = `/applications/game/${this.game.id}/username/${this.username}`;
-                await this.$axios.$post(url);
+                await this.$api.games.applyToGameAsPlayer(
+                    this.game.id,
+                    this.userId,
+                );
                 this.close(true);
             } catch (e) {
-                this.$store.dispatch('toast/error', e.response.data);
+                this.$store.dispatch('toast/error', e);
                 this.close(false);
             }
         },
