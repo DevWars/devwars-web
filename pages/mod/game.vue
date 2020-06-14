@@ -28,7 +28,11 @@
 
         <Tabbed>
             <TabbedItem name="Brief" default>
-                <GameBrief :game="game.game" @update-game="triggerGameUpdate" />
+                <GameBrief
+                    :game="game"
+                    :players="players"
+                    @update-game="triggerGameUpdate"
+                />
             </TabbedItem>
             <!-- <TabbedItem name="Details">
                 <GameDetails :game="game.game" @update-game="triggerGameUpdate" />

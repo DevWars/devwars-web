@@ -67,9 +67,9 @@ export default {
             };
         } catch (e) {
             error({
-                statusCode: e.response.status,
-                description: e.response.data.error,
-                message: e.response.statusText,
+                statusCode: e.code,
+                description: e.message,
+                message: e.message,
             });
         }
     },

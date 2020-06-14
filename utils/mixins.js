@@ -50,6 +50,7 @@ export const teams = {
                 }
             }
 
+            console.log(teams);
             return teams;
         },
     },

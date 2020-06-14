@@ -2,7 +2,7 @@
     <nuxt-link
         v-if="player.id !== 0 && navigate"
         class="Player hover"
-        :to="`/dashboard/${player.id}`"
+        :to="`/dashboard/${player.user.id}`"
     >
         <User
             :user="player.user"

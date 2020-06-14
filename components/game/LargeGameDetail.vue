@@ -35,7 +35,7 @@
             >
                 <Player
                     v-for="player in team.players"
-                    :key="player.originalId || player.id"
+                    :key="player.id"
                     :player="player"
                     :team="team"
                     :languages="[player.assignedLanguage]"
