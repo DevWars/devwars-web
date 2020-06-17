@@ -15,7 +15,7 @@
                             :key="team.id"
                             class="points"
                         >
-                            {{ team.ui + team.ux + team.completedObjectives() }}
+                            {{ team.score }}
                         </div>
                     </div>
                     <div class="team">

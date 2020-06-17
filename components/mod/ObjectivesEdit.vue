@@ -16,7 +16,7 @@
                 <SquareToggle
                     :active="objective.isBonus"
                     name="bonus"
-                    @change="objectiveIsBonusUpdate($event, objective.id)"
+                    @change="objectiveIsBonusUpdate($event, objective)"
                 />
                 <Button
                     class="link muted"
@@ -71,8 +71,8 @@ export default {
          * @param {string} value The updated bonus state value for the given objective.
          * @param {string} objectiveId The id of the objective being updated.
          */
-        objectiveIsBonusUpdate(value, objectiveId) {
-            this.newObjectives[objectiveId].isBonus = value;
+        objectiveIsBonusUpdate(value, objective) {
+            objective.isBonus = value;
             this.refresh();
         },
 

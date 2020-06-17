@@ -2,19 +2,29 @@ import * as _ from 'lodash';
 
 export const teams = {
     methods: {
-        teams(game, players) {
+        teams(game, players = []) {
             const teams = {
                 0: {
                     id: 0,
                     name: 'blue',
                     players: [],
+                    objectives: {},
+                    completedObjectives: 0,
+                    score: 0,
+                    bets: 0,
+                    ui: 0,
+                    ux: 0,
                 },
                 1: {
                     id: 1,
                     name: 'red',
                     players: [],
                     objectives: {},
-                    completedObjectives: () => 0,
+                    completedObjectives: 0,
+                    score: 0,
+                    bets: 0,
+                    ui: 0,
+                    ux: 0,
                 },
             };
 
@@ -41,16 +51,18 @@ export const teams = {
                         bets,
                         ui,
                         ux,
+                        score: 0,
                     });
 
-                    team.completedObjectives = () => {
-                        return _.filter(objectives, (e) => e === 'complete')
-                            .length;
-                    };
+                    team.completedObjectives = _.filter(
+                        objectives,
+                        (e) => e === 'complete',
+                    ).length;
+
+                    team.score = team.ui + team.ux + team.completedObjectives;
                 }
             }
 
-            console.log(teams);
             return teams;
         },
     },

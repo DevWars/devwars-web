@@ -12,7 +12,7 @@
 
                 <div v-show="searchVisible" class="search__list">
                     <div
-                        v-for="user in result.data"
+                        v-for="user in result"
                         :key="user.id"
                         class="search__item"
                         @click="() => userSelected(user)"

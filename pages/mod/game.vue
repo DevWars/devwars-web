@@ -31,15 +31,19 @@
                 <GameBrief
                     :game="game"
                     :players="players"
+                    @update-game="() => gatherGame(game.id)"
+                />
+            </TabbedItem>
+            <TabbedItem name="Details">
+                <GameDetails
+                    :game="game"
+                    :players="players"
                     @update-game="triggerGameUpdate"
                 />
             </TabbedItem>
-            <!-- <TabbedItem name="Details">
-                <GameDetails :game="game.game" @update-game="triggerGameUpdate" />
-            </TabbedItem>
             <TabbedItem name="Edit">
-                <GameEdit :game="game.game" @update-game="triggerGameUpdate" />
-            </TabbedItem> -->
+                <GameEdit :game="game" @update-game="triggerGameUpdate" />
+            </TabbedItem>
         </Tabbed>
     </div>
 </template>
@@ -56,8 +60,8 @@ import PanelHeader from '@/components/mod/PanelHeader';
 import DeleteModal from '@/components/modal/DeleteModal';
 
 import GameBrief from '@/components/mod/game/GameBrief';
-// import GameDetails from '@/components/mod/game/GameDetails';
-// import GameEdit from '@/components/mod/game/GameEdit';
+import GameDetails from '@/components/mod/game/GameDetails';
+import GameEdit from '@/components/mod/game/GameEdit';
 
 import nameFromStatus from '@/utils/gameStatus';
 
@@ -73,8 +77,8 @@ export default {
         Tabbed,
         TabbedItem,
         GameBrief,
-        // GameDetails,
-        // GameEdit,
+        GameDetails,
+        GameEdit,
     },
 
     async asyncData({ query, error, app: { $api } }) {
@@ -136,7 +140,11 @@ export default {
     methods: {
         nameFromStatus,
 
-        async triggerGameUpdate(updatedGame) {
+        triggerGameUpdate(updatedGame) {
+            this.game = updatedGame;
+        },
+
+        async triggerGameReload() {
             await this.gatherGame(this.game.id);
         },
 

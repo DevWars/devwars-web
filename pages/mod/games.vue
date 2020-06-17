@@ -183,16 +183,10 @@ export default {
         },
 
         async createGame() {
-            const [game] = await this.$open(CreateGameModal, {});
+            const game = await this.$open(CreateGameModal, {});
+            if (!game) return;
 
-            if (!game) {
-                return;
-            }
-
-            this.$router.push({
-                path: '/mod/game/details',
-                params: { game: game.id },
-            });
+            this.$router.push({ path: `/mod/game?game=${game.id}` });
         },
 
         /**

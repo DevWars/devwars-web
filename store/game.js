@@ -1,5 +1,3 @@
-import { find, isNil } from 'lodash';
-
 export const state = () => ({
     applications: [],
     upcoming: [],
@@ -45,47 +43,6 @@ export const mutations = {
     active(state, game) {
         state.active = game;
     },
-
-    /**
-     * Updates the schedules templates by language with the updated template
-     * value. e.g updating the given schedules html template.
-     */
-    updateScheduleTemplate(state, { language, template, scheduleId }) {
-        const schedule = getters.scheduleById(scheduleId);
-
-        if (isNil(schedule)) return;
-        if (isNil(schedule.templates)) schedule.templates = {};
-
-        schedule.templates[language] = template;
-    },
-
-    /**
-     *  Updates the is bonus state for the current game objective.
-     */
-    updateObjectIsBonusState(state, { objectiveId, isBonus }) {
-        if (state.game != null && state.game.objectives[objectiveId] != null) {
-            state.game.objectives[objectiveId].isBonus = isBonus;
-        }
-    },
-
-    updateScheduleObjective(state, { value, objectiveId, scheduleId }) {
-        const schedule = getters.scheduleById(scheduleId);
-        schedule.objectives[objectiveId].isBonus = value;
-    },
-
-    addScheduleObjective(state, { scheduleId, objective }) {
-        const schedule = find(state.schedules, (o) => o.id === scheduleId);
-        schedule.objectives[objective.id] = objective;
-
-        state.schedules = state.schedules.slice(0, state.schedules.length);
-    },
-
-    deleteScheduleObjective(state, { scheduleId, objectiveId }) {
-        const schedule = getters.scheduleById(scheduleId);
-        delete schedule.objectives[objectiveId];
-
-        state.schedules = state.schedules.slice(0, state.schedules.length);
-    },
 };
 
 export const actions = {
@@ -108,9 +65,15 @@ export const actions = {
         commit('game', { game, players: gamePlayers });
     },
 
-    async create({ commit }, data) {
-        const game = await this.$api.games.createGame(data);
-        commit('add', game);
+    async create({ commit, dispatch }, data) {
+        try {
+            const game = await this.$api.games.createGame(data);
+            commit('add', game);
+
+            return game;
+        } catch (e) {
+            dispatch('toast/error', e, { root: true });
+        }
     },
 
     async applications({ commit, dispatch, rootState }) {

@@ -30,7 +30,7 @@
                 v-for="team in currentTeams"
                 :key="team.id"
                 :team="team"
-                :points="team.completedObjectives()"
+                :points="team.completedObjectives"
                 :winner="game.meta.winningTeam === team.id"
             >
                 <Player
@@ -49,8 +49,8 @@
         <SubScore
             v-if="currentTeams != null"
             title="Objectives"
-            :blue-score="currentTeams[0].completedObjectives()"
-            :red-score="currentTeams[1].completedObjectives()"
+            :blue-score="currentTeams[0].completedObjectives"
+            :red-score="currentTeams[1].completedObjectives"
         >
             <ul class="objectives">
                 <li
@@ -92,7 +92,7 @@
 import SubScore from '@/components/game/SubScore';
 import GameTeam from '@/components/game/GameTeam';
 import Player from '@/components/game/Player';
-import { getLanguageByGamePlayer, teamCompletedObjective } from '@/utils';
+import { getLanguageByGamePlayer } from '@/utils';
 import { teams } from '@/utils/mixins';
 
 export default {
@@ -137,7 +137,6 @@ export default {
 
     methods: {
         getLanguageByGamePlayer,
-        teamCompletedObjective,
     },
 };
 </script>

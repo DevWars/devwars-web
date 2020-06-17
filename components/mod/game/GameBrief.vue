@@ -5,7 +5,7 @@
                 v-for="team in currentTeams"
                 :key="team.id"
                 :team="team"
-                :points="team.ux + team.ui + team.completedObjectives()"
+                :points="team.score"
                 :winner="team.winner"
             >
                 <Player
@@ -74,6 +74,7 @@ export default {
             return this.teams(this.game, this.players);
         },
     },
+
     methods: {
         getScoreByGameTeam,
         getPlayersByGameTeam,
