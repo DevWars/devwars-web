@@ -4,11 +4,11 @@
             <Button
                 v-if="!isApplied(game)"
                 class="primary"
-                @click="enter(game)"
+                @click="enter(game, user)"
             >
                 Register
             </Button>
-            <Button v-else class="outline danger" @click="cancel(game)">
+            <Button v-else class="outline danger" @click="cancel(game, user)">
                 Resign
             </Button>
         </ButtonGroup>
@@ -41,22 +41,15 @@ export default {
     },
 
     methods: {
-        async enter(schedule) {
-            if (!this.user) {
-                this.$router.push('/login');
-                return;
-            }
-
-            await this.$open(GameRegistration, { schedule });
+        async enter(game, user) {
+            if (!this.user) return this.$router.push('/login');
+            await this.$open(GameRegistration, { game, user: user.user });
         },
 
-        async cancel(schedule) {
-            if (!this.user) {
-                this.$router.push('/login');
-                return;
-            }
+        async cancel(game, user) {
+            if (!this.user) this.$router.push('/login');
 
-            await this.$open(GameResignModal, { schedule });
+            await this.$open(GameResignModal, { game, user: user.user });
         },
 
         isApplied(game) {

@@ -8,31 +8,25 @@
                     <Row>
                         <Column :sm="6">
                             <Input
-                                v-model="profile.firstName"
+                                v-model="tmp.profile.firstName"
                                 label="First Name"
                                 class="group"
                                 required
-                                @input="(e) => change('profile.firstName', e)"
                             />
                         </Column>
                         <Column :sm="6">
                             <Input
-                                v-model="profile.lastName"
+                                v-model="tmp.profile.lastName"
                                 label="Last Name"
                                 class="group"
                                 required
-                                @input="(e) => change('profile.lastName', e)"
                             />
                         </Column>
                     </Row>
 
                     <Row>
                         <Column :md="3">
-                            <Select
-                                v-model="sex"
-                                label="Sex"
-                                @change="(e) => change('profile.sex', e)"
-                            >
+                            <Select v-model="tmp.profile.sex" label="Sex">
                                 <option
                                     v-for="(sex, index) in sexes"
                                     :key="sex"
@@ -44,11 +38,10 @@
                         </Column>
                         <Column :sm="3">
                             <Select
-                                v-model="profile.country"
+                                v-model="tmp.profile.country"
                                 label="Select Country"
                                 class="group"
                                 required
-                                @change="(e) => change('profile.country', e)"
                             >
                                 <option
                                     v-for="country in countries"
@@ -63,10 +56,9 @@
                     <Row>
                         <Column :sm="6">
                             <Input
-                                v-model="profile.company"
+                                v-model="tmp.profile.company"
                                 label="Company"
                                 class="group"
-                                @input="(e) => change('profile.company', e)"
                             />
                         </Column>
                     </Row>
@@ -74,7 +66,7 @@
 
                 <Card class="plain dark" title="Skill Assessment">
                     <LanguageSkills
-                        :profile="profile"
+                        :profile="tmp.profile"
                         @change="(e) => change('profile.skills', e.values)"
                     />
                 </Card>
@@ -167,6 +159,10 @@ export default {
         ...mapActions({
             error: 'toast/error',
         }),
+    },
+
+    mounted() {
+        this.tmp.profile = this.profile;
     },
 
     methods: {

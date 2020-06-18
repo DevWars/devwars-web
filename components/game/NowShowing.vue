@@ -40,6 +40,11 @@ export default {
     components: { HomeCard, RegistrationButtons },
 
     computed: {
+        twitchUrl() {
+            return `https://player.twitch.tv/?channel=devwars&parent=${this.extractHostname(
+                process.env.baseUrl,
+            )}`;
+        },
         game() {
             return this.$store.state.game.active;
         },

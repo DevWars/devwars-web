@@ -89,7 +89,7 @@ export default {
 
     async asyncData({ app: { $api } }) {
         const users = await $api.users.usersWithPaging({
-            first: 10,
+            first: 25,
         });
 
         return { users };
@@ -124,7 +124,7 @@ export default {
         },
 
         async clearSearch() {
-            const users = await this.$api.users.usersWithPaging({ first: 10 });
+            const users = await this.$api.users.usersWithPaging({ first: 25 });
             this.users = users;
             this.searched = false;
             this.search = null;
@@ -137,7 +137,7 @@ export default {
             const before = pagination.previous;
 
             const users = await this.$api.users.usersWithPaging({
-                first: 10,
+                first: 25,
                 before,
             });
 
@@ -150,7 +150,7 @@ export default {
             const after = pagination.next;
 
             const users = await this.$api.users.usersWithPaging({
-                first: 10,
+                first: 25,
                 after,
             });
 

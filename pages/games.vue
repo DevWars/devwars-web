@@ -85,7 +85,7 @@ export default {
 
         try {
             const { data, pagination } = await $api.games.gamesWithPaging({
-                first: 10,
+                first: 25,
                 status: 'ended',
                 season: query.season,
             });
@@ -177,7 +177,7 @@ export default {
                 this.season = Number(season);
 
                 const data = await this.$api.games.gamesWithPaging({
-                    first: 10,
+                    first: 25,
                     status: 'ended',
                     season: this.season,
                 });
@@ -244,7 +244,7 @@ export default {
             const before = pagination.previous;
 
             const data = await this.$api.games.gamesWithPaging({
-                first: 10,
+                first: 25,
                 status: 'ended',
                 season: this.season,
                 before,
@@ -262,7 +262,7 @@ export default {
             const after = pagination.next;
 
             const data = await this.$api.games.gamesWithPaging({
-                first: 10,
+                first: 25,
                 status: 'ended',
                 season: this.season,
                 after,

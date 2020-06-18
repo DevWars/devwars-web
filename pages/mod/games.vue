@@ -89,7 +89,7 @@ export default {
 
     async asyncData({ query, error, app: { $api } }) {
         try {
-            const games = await $api.games.gamesWithPaging({ first: 10 });
+            const games = await $api.games.gamesWithPaging({ first: 25 });
             return { games, page: 0 };
         } catch (e) {
             error({
@@ -147,7 +147,7 @@ export default {
 
                 const status = e !== 'all' ? this.gameFilter : null;
                 const games = await this.$api.games.gamesWithPaging({
-                    first: 10,
+                    first: 25,
                     status,
                 });
                 this.games = games;
@@ -175,7 +175,7 @@ export default {
         },
 
         async clearSearch() {
-            const games = await this.$api.games.gamesWithPaging({ first: 10 });
+            const games = await this.$api.games.gamesWithPaging({ first: 25 });
             this.games = games;
             this.searched = false;
             this.search = null;
@@ -199,7 +199,7 @@ export default {
 
             const status = this.gameFilter !== 'all' ? this.gameFilter : null;
             this.games = await this.$api.games.gamesWithPaging({
-                first: 10,
+                first: 25,
                 before,
                 status,
             });
@@ -215,7 +215,7 @@ export default {
 
             const status = this.gameFilter !== 'all' ? this.gameFilter : null;
             this.games = await this.$api.games.gamesWithPaging({
-                first: 10,
+                first: 25,
                 after,
                 status,
             });

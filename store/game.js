@@ -26,9 +26,9 @@ export const mutations = {
     apply(state, applications) {
         state.applications.push(applications);
     },
-    forfeit(state, game) {
+    forfeit(state, gameId) {
         state.applications = state.applications.filter(
-            (t) => t.schedule.id !== game.id,
+            (t) => t.gameId !== gameId,
         );
     },
 
@@ -48,7 +48,7 @@ export const mutations = {
 export const actions = {
     async all({ commit }) {
         const { data: games } = await this.$api.games.gamesWithPaging({
-            first: 10,
+            first: 25,
         });
 
         commit('all', games);
@@ -106,7 +106,7 @@ export const actions = {
     async upcoming({ commit, dispatch }) {
         try {
             const { data } = await this.$api.games.gamesWithPaging({
-                first: 10,
+                first: 25,
                 status: 'scheduled',
             });
 
@@ -116,10 +116,13 @@ export const actions = {
         }
     },
 
-    async apply({ commit, dispatch }, { game, user }) {
+    async apply({ commit, dispatch }, { game: gameId, user: userId }) {
         try {
-            const app = await this.$api.games.applyToGameAsPlayer(game, user);
-            commit('apply', app.data);
+            const app = await this.$api.games.applyToGameAsPlayer(
+                gameId,
+                userId,
+            );
+            commit('apply', app);
 
             dispatch('toast/success', 'Thanks for signing up! See ya soon', {
                 root: true,
@@ -131,9 +134,11 @@ export const actions = {
         }
     },
 
-    async forfeit({ commit, dispatch }, { game, user }) {
+    async forfeit({ commit, dispatch }, { game: gameId, user: userId }) {
         try {
-            await this.$api.games.removeUserApplicationForGame(game, user);
+            await this.$api.games.removeUserApplicationForGame(gameId, userId);
+            commit('forfeit', gameId);
+
             dispatch('toast/success', 'Sorry to see you go.', { root: true });
         } catch (e) {
             dispatch('toast/error', e, { root: true });

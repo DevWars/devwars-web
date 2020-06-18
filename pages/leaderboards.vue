@@ -54,7 +54,7 @@ export default {
     async asyncData({ app: { $api } }) {
         return {
             leaderboards: await $api.leaderboards.leaderboardsOfUsers({
-                first: 10,
+                first: 25,
                 after: 0,
             }),
         };
