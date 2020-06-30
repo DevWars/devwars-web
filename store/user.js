@@ -187,6 +187,7 @@ export const actions = {
             );
 
             commit('profile', updatedProfile);
+            dispatch('toast/success', 'Profile Updated', { root: true });
         } catch (e) {
             dispatch('toast/error', e, { root: true });
         }
@@ -218,6 +219,7 @@ export const actions = {
         try {
             await this.$api.users.updateUser(state.user.id, { username });
             commit('user', Object.assign(state.user, { username }));
+            dispatch('toast/success', 'Updated username', { root: true });
         } catch (e) {
             dispatch('toast/error', e, { root: true });
         }

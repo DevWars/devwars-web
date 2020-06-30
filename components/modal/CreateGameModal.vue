@@ -97,7 +97,7 @@ export default {
                 startTime,
             });
 
-            this.close(game);
+            if (game != null) this.close(game);
         },
     },
 };

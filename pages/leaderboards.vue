@@ -13,28 +13,25 @@
                     <th width="15%">XP</th>
                 </tr>
 
-                <tr
-                    v-for="(user, index) in leaderboards.data"
-                    :key="user.userId"
-                >
+                <tr v-for="(user, index) in leaderboards.data" :key="user.id">
                     <td scope="row" class="rank">
                         {{ page * 10 + index + 1 }}
                     </td>
                     <td><User :user="user" size="sm" /></td>
-                    <td>{{ user.level }}</td>
-                    <td>{{ user.wins }}</td>
-                    <td>{{ user.coins }}</td>
-                    <td>{{ user.xp }}</td>
+                    <td>{{ user.stats.level }}</td>
+                    <td>{{ user.gameStats.wins }}</td>
+                    <td>{{ user.stats.coins }}</td>
+                    <td>{{ user.stats.xp }}</td>
                 </tr>
             </Table>
 
             <Pagination
                 :page="page"
                 :per-page="10"
-                :can-next="leaderboards.pagination.after !== null"
-                :can-previous="leaderboards.pagination.before !== null"
-                @previous="previous"
-                @next="next"
+                :can-next="false"
+                :can-previous="false"
+                @previous="() => {}"
+                @next="() => {}"
             />
         </Container>
     </div>
@@ -53,58 +50,14 @@ export default {
 
     async asyncData({ app: { $api } }) {
         return {
-            leaderboards: await $api.leaderboards.leaderboardsOfUsers({
-                first: 25,
-                after: 0,
-            }),
+            leaderboards: await $api.leaderboards.leaderboardsOfUsers({}),
         };
     },
 
     data: () => {
         return {
             page: 0,
-            pagination: {
-                after: null,
-                before: null,
-            },
-            data: [],
         };
-    },
-
-    mounted() {},
-
-    methods: {
-        async previous() {
-            this.page -= 1;
-
-            const { pagination } = this.leaderboards;
-
-            const first = pagination.before.split('?first=')[1].split('&')[0];
-            const after = pagination.before.split('&after=')[1];
-
-            this.leaderboards = await this.$api.leaderboards.leaderboardsOfUsers(
-                {
-                    first,
-                    after,
-                },
-            );
-        },
-
-        async next() {
-            this.page += 1;
-
-            const { pagination } = this.leaderboards;
-
-            const first = pagination.after.split('?first=')[1].split('&')[0];
-            const after = pagination.after.split('&after=')[1];
-
-            this.leaderboards = await this.$api.leaderboards.leaderboardsOfUsers(
-                {
-                    first,
-                    after,
-                },
-            );
-        },
     },
 };
 </script>

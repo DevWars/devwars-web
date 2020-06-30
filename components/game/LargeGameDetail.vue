@@ -82,13 +82,13 @@
             </ul>
         </SubScore>
 
-        <!-- <VoteBox :game="game" category="ui" />
-        <VoteBox :game="game" category="ux" /> -->
+        <VoteBox :game="game" category="ui" />
+        <VoteBox :game="game" category="ux" />
     </div>
 </template>
 
 <script>
-// import VoteBox from '@/components/game/VoteBox';
+import VoteBox from '@/components/game/VoteBox';
 import SubScore from '@/components/game/SubScore';
 import GameTeam from '@/components/game/GameTeam';
 import Player from '@/components/game/Player';
@@ -97,7 +97,7 @@ import { teams } from '@/utils/mixins';
 
 export default {
     name: 'LargeGameDetail',
-    components: { GameTeam, Player, SubScore },
+    components: { GameTeam, Player, SubScore, VoteBox },
     mixins: [teams],
     props: {
         game: {

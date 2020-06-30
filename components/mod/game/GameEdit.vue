@@ -85,7 +85,7 @@
                         />
                         <Checkbox
                             :label="`Winner-${index}`"
-                            :checked="true"
+                            :checked="isWinner(index)"
                             @input="(e) => toggleTeamWinner(index, e)"
                         />
                     </Card>
