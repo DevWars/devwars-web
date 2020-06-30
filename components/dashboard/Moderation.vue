@@ -1,19 +1,38 @@
 <template>
     <DashboardCard
         class="Moderation scrollable"
-        title="Moderation"
+        :title="`Moderation - user - ${user.role}`"
         icon="gavel"
     >
         <div class="main">
-            <Button :disabled="!isAdmin" class="danger" @click="deleteUser">
+            <Button
+                :disabled="isAdmin || isModerator"
+                class="danger"
+                @click="deleteUser"
+            >
                 Delete
             </Button>
 
-            <Button v-if="!currentUserBanned" class="danger" @click="banUser">
+            <Button v-if="!isBanned" class="danger" @click="banUser">
                 Ban
             </Button>
             <Button v-else class="danger" @click="removeUserBan">
                 Remove Ban
+            </Button>
+
+            <Button
+                :disabled="isUser || isBanned"
+                class="danger"
+                @click="demoteUser"
+            >
+                Demote
+            </Button>
+            <Button
+                :disabled="isAdmin || isBanned"
+                class="danger"
+                @click="promoteUser"
+            >
+                Promote
             </Button>
         </div>
     </DashboardCard>
@@ -37,16 +56,21 @@ export default {
 
     computed: {
         isAdmin() {
-            const { role } = this.$store.state.user.user;
+            const { role } = this.user;
             return role === 'ADMIN';
         },
 
         isModerator() {
-            const { role } = this.$store.state.user.user;
+            const { role } = this.user;
             return role === 'MODERATOR';
         },
 
-        currentUserBanned() {
+        isUser() {
+            const { role } = this.user;
+            return role === 'USER';
+        },
+
+        isBanned() {
             return this.user.role === 'BANNED';
         },
     },
@@ -104,6 +128,63 @@ export default {
                     const body = { role: 'USER' };
                     await this.$api.users.updateUser(id, body);
                     this.user.role = body.role;
+                }
+            } catch (e) {
+                this.$store.dispatch('toast/error', e);
+            }
+        },
+
+        async promoteUser() {
+            try {
+                const { id, username, role } = this.user;
+                const position = role.toLowerCase();
+
+                const nextRole =
+                    position === 'moderator' ? 'Admin' : 'Moderator';
+
+                const result = await this.$open(DeleteModal, {
+                    title: 'Promoting User',
+                    confirm: 'Promote',
+                    description: `Are you sure you want promote ${username} to ${nextRole}?`,
+                });
+
+                if (result) {
+                    const body = { role: nextRole.toUpperCase(0) };
+                    await this.$api.users.updateUser(id, body);
+                    this.user.role = body.role;
+
+                    this.$store.dispatch(
+                        'toast/success',
+                        `The user ${username} is now a ${nextRole}`,
+                    );
+                }
+            } catch (e) {
+                this.$store.dispatch('toast/error', e);
+            }
+        },
+
+        async demoteUser() {
+            try {
+                const { id, username, role } = this.user;
+                const position = role.toLowerCase();
+
+                const nextRole = position === 'admin' ? 'Moderator' : 'User';
+
+                const result = await this.$open(DeleteModal, {
+                    title: 'Demoting User',
+                    confirm: 'Demote',
+                    description: `Are you sure you want demote ${username} to ${nextRole}?`,
+                });
+
+                if (result) {
+                    const body = { role: nextRole.toUpperCase(0) };
+                    await this.$api.users.updateUser(id, body);
+                    this.user.role = body.role;
+
+                    this.$store.dispatch(
+                        'toast/success',
+                        `The user ${username} is now a ${nextRole}`,
+                    );
                 }
             } catch (e) {
                 this.$store.dispatch('toast/error', e);
