@@ -14,7 +14,7 @@
                     :player="player.user"
                     :team="team"
                     :navigate="false"
-                    :languages="[player.assignedLanguage]"
+                    :languages="player.assignedLanguages"
                     @click="removePlayer(player)"
                 />
             </GameTeam>

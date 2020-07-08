@@ -38,7 +38,7 @@
                     :key="player.id"
                     :player="player"
                     :team="team"
-                    :languages="[player.assignedLanguage]"
+                    :languages="player.assignedLanguages"
                 />
             </GameTeam>
         </div>
