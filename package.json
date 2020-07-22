@@ -1,6 +1,6 @@
 {
     "name": "devwars.tv",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "description": "Front-end website for DevWars",
     "author": "DevWars, LLC",
     "license": "MIT",
@@ -11,7 +11,8 @@
         "generate": "nuxt generate",
         "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
         "lintfix": "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
-        "precommit": "npm run lint"
+        "precommit": "npm run lint",
+        "release": "standard-version"
     },
     "dependencies": {
         "@nuxtjs/axios": "^5.11.0",
@@ -33,6 +34,7 @@
         "eslint": "^6.1.0",
         "eslint-plugin-nuxt": ">=1.0.0",
         "node-sass": "^4.14.1",
-        "sass-loader": "^9.0.2"
+        "sass-loader": "^9.0.2",
+        "standard-version": "^8.0.2"
     }
 }

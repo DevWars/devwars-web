@@ -1,3 +1,26 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.2.1](https://github.com/devwars/devwars.tv/compare/v0.2.0...v0.2.1) (2020-07-22)
+
+
+### Features
+
+* games and schedules now use paging implementation ([d61ba48](https://github.com/devwars/devwars.tv/commit/d61ba48c358a5b8a6fcc4fc980848e44d355cd04))
+* logs are now viewable from the mods panel ([1b617c8](https://github.com/devwars/devwars.tv/commit/1b617c8612fe641c157e815d42fe2cb041c6c4c2))
+* moderation now supports user promotion and demoting ([fc0b389](https://github.com/devwars/devwars.tv/commit/fc0b3898b576d47f36ae1713aa599aac8fbc3a80))
+* support for banning and unbanning a user in the moderation panel ([5d5638a](https://github.com/devwars/devwars.tv/commit/5d5638ac68c3c5582892e5d29f9dd17285715ee3))
+* support for updating and changing usernames ([f452231](https://github.com/devwars/devwars.tv/commit/f452231fd94c68bd70210bda070df0a6ca312b2b))
+
+
+### Bug Fixes
+
+* Font-sizes now use rem. Add font-sizes to headings ([577d96a](https://github.com/devwars/devwars.tv/commit/577d96ad8215eba738286df1c54f7bc955a36248))
+* reverted the version bump of moment ([15ff417](https://github.com/devwars/devwars.tv/commit/15ff41724c9e3cb187c2b8c13b3d4bc05ccefca0))
+* twitch iframe now contains parent (hostname) as required ([fc61840](https://github.com/devwars/devwars.tv/commit/fc618408e694f71970cc78760886dd86800efb78))
+* use assigned languages not language ([477deb7](https://github.com/devwars/devwars.tv/commit/477deb74cef3d7c483af5f9a17780769ccc8117a))
+
 # 0.2.0 (2020-04-16)
 
 ### Bug Fixes
