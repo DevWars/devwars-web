@@ -15,7 +15,7 @@
         "release": "standard-version"
     },
     "dependencies": {
-        "DevwarsClient": "git://github.com/DevWars/DevWars-API-Client#f671868b53e92ce7be63a9424b67ac3ce72da6a2",
+        "DevwarsClient": "git://github.com/DevWars/DevWars-API-Client#a69748b9f4d57f7e63d1913759ace345fa61805e",
         "@nuxtjs/axios": "^5.12.1",
         "@nuxtjs/dotenv": "^1.4.0",
         "country-list": "^2.2.0",

@@ -18,8 +18,8 @@
                     />
 
                     <Activities
-                        v-if="activities.length > 0"
-                        :paged="activities"
+                        v-if="user.activities.length > 0"
+                        :paged="user.activities"
                     />
                 </Column>
             </Row>
@@ -55,14 +55,19 @@ export default {
             return {};
 
         try {
-            const user = await $api.users.getUser(params.dashboard);
-            const stats = await $api.users.getUserStatistics(params.dashboard);
+            const { dashboard: userId } = params;
+
+            const user = await $api.users.getUser(userId);
+            const stats = await $api.users.getUserStatistics(userId);
+            const activities = await $api.users.getUserActivities(userId);
 
             return {
                 me: false,
+
                 user: {
                     user,
                     stats,
+                    activities,
                 },
             };
         } catch (e) {
@@ -83,16 +88,9 @@ export default {
     },
 
     computed: {
-        stats() {
-            return this.$store.state.stats;
-        },
         upcomingGames() {
             return this.$store.state.game.upcoming;
         },
-        activities() {
-            return this.$store.state.user.activities;
-        },
-
         isModerator() {
             const { user } = this.$store.state.user;
 
