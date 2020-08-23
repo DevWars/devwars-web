@@ -70,15 +70,19 @@ export default {
     },
 
     methods: {
-        reset() {
-            const { token } = this.$route.query;
+        async reset() {
+            try {
+                const { token } = this.$route.query;
 
-            this.$store.dispatch('user/resetByToken', {
-                token,
-                password: this.password,
-            });
+                await this.$store.dispatch('user/resetByToken', {
+                    token,
+                    password: this.password,
+                });
 
-            this.done = true;
+                this.done = true;
+            } catch (error) {
+                this.$store('toast/error', error);
+            }
         },
     },
 };
