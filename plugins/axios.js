@@ -1,6 +1,6 @@
-import Http from '../services/Http';
+import Api from 'DevwarsClient';
 
-export default function(ctx) {
-    const { $axios } = ctx.app;
-    Http.axios = $axios;
+export default function({ $axios }, inject) {
+    const api = new Api($axios);
+    return inject('api', api);
 }

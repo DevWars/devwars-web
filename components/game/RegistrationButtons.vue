@@ -2,13 +2,15 @@
     <div class="RegistrationButtons">
         <ButtonGroup>
             <Button
-                v-if="!isApplied(schedule)"
+                v-if="!isApplied(game)"
                 class="primary"
-                @click="enter(schedule)"
+                @click="enter(game, user)"
             >
                 Register
             </Button>
-            <Button v-else class="outline danger" @click="cancel(schedule)">Resign</Button>
+            <Button v-else class="outline danger" @click="cancel(game, user)">
+                Resign
+            </Button>
         </ButtonGroup>
     </div>
 </template>
@@ -22,7 +24,7 @@ export default {
     name: 'RegistrationButtons',
 
     props: {
-        schedule: {
+        game: {
             type: Object,
             required: true,
         },
@@ -39,30 +41,20 @@ export default {
     },
 
     methods: {
-        async enter(schedule) {
-            if (!this.user) {
-                this.$router.push('/login');
-                return;
-            }
-
-            await this.$open(GameRegistration, { schedule });
+        async enter(game, user) {
+            if (!this.user) return this.$router.push('/login');
+            await this.$open(GameRegistration, { game, user: user.user });
         },
 
-        async cancel(schedule) {
-            if (!this.user) {
-                this.$router.push('/login');
-                return;
-            }
+        async cancel(game, user) {
+            if (!this.user) this.$router.push('/login');
 
-            await this.$open(GameResignModal, { schedule });
+            await this.$open(GameResignModal, { game, user: user.user });
         },
 
-        isApplied(schedule) {
+        isApplied(game) {
             return this.applications.some((application) => {
-                return (
-                    application.schedule &&
-                    application.schedule.id === schedule.id
-                );
+                return application.gameId && application.gameId === game.id;
             });
         },
     },

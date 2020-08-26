@@ -12,7 +12,10 @@
                     <div class="percent">{{ analysis.blue.percent }}</div>
                 </div>
                 <div class="progress">
-                    <div class="bar" :style="{ width: analysis.blue.percent }" />
+                    <div
+                        class="bar"
+                        :style="{ width: analysis.blue.percent }"
+                    />
                 </div>
             </div>
             <div class="team team-red" :class="{ win: analysis.red.win }">
@@ -57,29 +60,25 @@ export default {
 
     computed: {
         analysis() {
-            const analysis = {};
+            const analysis = { blue: {}, red: {} };
 
-            analysis.blue = this.analysisForTeam(
-                this.team('blue'),
-                this.team('red'),
-            );
-            analysis.red = this.analysisForTeam(
-                this.team('red'),
-                this.team('blue'),
-            );
+            const scores = this.game.meta.teamScores;
+
+            analysis.blue = this.analysisForTeam(scores[0], scores[1]);
+            analysis.red = this.analysisForTeam(scores[1], scores[0]);
 
             return analysis;
         },
 
         total() {
-            const teams = this.game.teams;
+            const teams = this.game.meta.teamScores;
             let totalScore = 0;
             if (teams) {
                 for (const team of Object.values(teams)) {
-                    if (!team.votes) {
+                    if (!team[this.category]) {
                         continue;
                     }
-                    const vote = team.votes[this.category];
+                    const vote = team[this.category];
                     totalScore += vote;
                 }
             }
@@ -89,15 +88,6 @@ export default {
     },
 
     methods: {
-        team(team) {
-            if (isNil(this.game.teams)) {
-                return;
-            }
-
-            const teamIndex = team === 'blue' ? 0 : 1;
-            return this.game.teams[teamIndex];
-        },
-
         teamScore(team) {
             if (isNil(this.game.meta) || isNil(this.game.meta.teamScores)) {
                 return 0;

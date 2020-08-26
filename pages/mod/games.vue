@@ -1,9 +1,21 @@
 <template>
     <div>
-        <PanelHeader title="Games" show-search>
-            <ButtonIcon icon="plus" class="primary sm" @click="createGame">
-                Add Game
-            </ButtonIcon>
+        <PanelHeader :model="search" title="Games" @input="input">
+            <Input
+                v-model="search"
+                label="Search Users"
+                @keyup.enter.native="performSearch"
+            />
+            <Button :disabled="!searched" @click="clearSearch">Clear</Button>
+            <Button
+                :disabled="searching || search == null"
+                @click="performSearch"
+            >
+                Search
+            </Button>
+            <Button icon="plus" class="primary" @click="createGame">
+                Add
+            </Button>
         </PanelHeader>
 
         <ListingFilters
@@ -59,6 +71,7 @@
 import { isNil } from 'lodash';
 import { names } from '../../utils/auth';
 
+import Input from '@/components/form/Input';
 import CreateGameModal from '@/components/modal/CreateGameModal';
 import PanelHeader from '@/components/mod/PanelHeader';
 import ListingFilters from '@/components/mod/ListingFilters';
@@ -72,12 +85,12 @@ export default {
     meta: {
         auth: names.MODERATOR,
     },
-    components: { PanelHeader, ListingFilters, Table, Pagination },
+    components: { PanelHeader, ListingFilters, Table, Pagination, Input },
 
-    async asyncData({ query, error, $axios }) {
+    async asyncData({ query, error, app: { $api } }) {
         try {
-            const { data } = await $axios.get('/games?first=10');
-            return { games: data, page: 0 };
+            const games = await $api.games.gamesWithPaging({ first: 25 });
+            return { games, page: 0 };
         } catch (e) {
             error({
                 statusCode: e.response.status,
@@ -89,6 +102,10 @@ export default {
 
     data() {
         return {
+            search: null,
+            searched: false,
+            searching: false,
+
             gameFilter: 'all',
 
             gamesFilterOptions: [
@@ -123,34 +140,53 @@ export default {
         },
     },
     methods: {
+        nameFromStatus,
         async onGameFilterChange(e) {
             try {
                 this.gameFilter = e;
-                let url = '/games?first=10';
 
-                if (this.gameFilter !== 'all')
-                    url += `&status=${this.gameFilter}`;
-
-                this.games = (await this.$axios.get(url)).data;
-
+                const status = e !== 'all' ? this.gameFilter : null;
+                const games = await this.$api.games.gamesWithPaging({
+                    first: 25,
+                    status,
+                });
+                this.games = games;
                 this.page = 0;
             } catch (error) {
-                this.$store.dispatch('toast/error', e.response.data);
+                this.$store.dispatch('toast/error', e);
             }
         },
 
-        nameFromStatus,
-        async createGame() {
-            const [game] = await this.$open(CreateGameModal, {});
+        input(searchText) {
+            this.search = searchText;
+        },
 
-            if (!game) {
-                return;
-            }
+        async performSearch() {
+            if (this.search == null || this.search.trim() === '') return;
+            this.gameFilter = 'all';
 
-            this.$router.push({
-                path: '/mod/game/details',
-                params: { game: game.id },
+            const games = await this.$api.search.searchForGames({
+                title: this.search,
+                full: true,
             });
+
+            this.games = { data: games, pagination: {} };
+            this.searched = true;
+        },
+
+        async clearSearch() {
+            const games = await this.$api.games.gamesWithPaging({ first: 25 });
+            this.games = games;
+            this.searched = false;
+            this.search = null;
+            this.page = 0;
+        },
+
+        async createGame() {
+            const game = await this.$open(CreateGameModal, {});
+            if (!game) return;
+
+            this.$router.push({ path: `/mod/game?game=${game.id}` });
         },
 
         /**
@@ -161,12 +197,12 @@ export default {
             const { pagination } = this.games;
             const before = pagination.previous;
 
-            let url = `games?first=10&before=${before}`;
-            if (this.gameFilter !== 'all') url += `&status=${this.gameFilter}`;
-
-            const { data } = await this.$axios.get(url);
-
-            this.games = data;
+            const status = this.gameFilter !== 'all' ? this.gameFilter : null;
+            this.games = await this.$api.games.gamesWithPaging({
+                first: 25,
+                before,
+                status,
+            });
         },
 
         /**
@@ -177,12 +213,12 @@ export default {
             const { pagination } = this.games;
             const after = pagination.next;
 
-            let url = `games?first=10&after=${after}`;
-            if (this.gameFilter !== 'all') url += `&status=${this.gameFilter}`;
-
-            const { data } = await this.$axios.get(url);
-
-            this.games = data;
+            const status = this.gameFilter !== 'all' ? this.gameFilter : null;
+            this.games = await this.$api.games.gamesWithPaging({
+                first: 25,
+                after,
+                status,
+            });
         },
     },
 };

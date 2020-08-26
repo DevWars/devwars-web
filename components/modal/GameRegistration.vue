@@ -12,7 +12,7 @@
                 Nevermind
             </Button>
             <Button
-                :href="'/competitor/register?schedule=' + schedule.id"
+                :href="'/competitor/register?game=' + game.id"
                 class="primary"
                 @click="close"
             >
@@ -26,9 +26,8 @@
         <h1>Entry confirmation</h1>
         <p>
             You are entering to play on
-            <b>{{ schedule.startTime | moment('fullDate') }}</b> at
-            <b> {{ schedule.startTime | moment('HH:mm') }} (UTC) </b>. Are you
-            sure?
+            <b>{{ game.startTime | moment('fullDate') }}</b> at
+            <b> {{ game.startTime | moment('HH:mm') }} (UTC) </b>. Are you sure?
         </p>
 
         <p class="font-size-sm">
@@ -41,7 +40,7 @@
 
         <ButtonGroup class="modal__actions">
             <Button class="outline muted" @click="close">Nevermind</Button>
-            <Button class="primary" @click="enter(schedule)">Enter</Button>
+            <Button class="primary" @click="enter(game, user)">Enter</Button>
         </ButtonGroup>
     </div>
 </template>
@@ -55,12 +54,15 @@ export default {
             type: Function,
             required: true,
         },
-        schedule: {
+        game: {
+            type: Object,
+            required: true,
+        },
+        user: {
             type: Object,
             required: true,
         },
     },
-
     computed: {
         isCompetitor() {
             return this.$store.getters['user/isCompetitor'];
@@ -68,8 +70,11 @@ export default {
     },
 
     methods: {
-        async enter(schedule) {
-            await this.$store.dispatch('game/apply', schedule);
+        async enter(game, user) {
+            await this.$store.dispatch('game/apply', {
+                game: game.id,
+                user: user.id,
+            });
 
             this.close(true);
         },

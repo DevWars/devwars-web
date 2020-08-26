@@ -16,7 +16,9 @@
                         :checked="news"
                         @input="updateForm({ values: $event, key: 'news' })"
                     />
-                    <span>Learn about new DevWars features or announcements.</span>
+                    <span>
+                        Learn about new DevWars features or announcements.
+                    </span>
                 </div>
 
                 <div class="group">
@@ -61,7 +63,10 @@
                             })
                         "
                     />
-                    <span>Get notified about changes or updates to your linked accounts.</span>
+                    <span>
+                        Get notified about changes or updates to your linked
+                        accounts.
+                    </span>
                 </div>
             </Column>
         </Row>

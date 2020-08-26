@@ -28,10 +28,18 @@
 
         <Tabbed>
             <TabbedItem name="Brief" default>
-                <GameBrief :game="game" @update-game="triggerGameUpdate" />
+                <GameBrief
+                    :game="game"
+                    :players="players"
+                    @update-game="() => gatherGame(game.id)"
+                />
             </TabbedItem>
             <TabbedItem name="Details">
-                <GameDetails :game="game" @update-game="triggerGameUpdate" />
+                <GameDetails
+                    :game="game"
+                    :players="players"
+                    @update-game="triggerGameUpdate"
+                />
             </TabbedItem>
             <TabbedItem name="Edit">
                 <GameEdit :game="game" @update-game="triggerGameUpdate" />
@@ -64,22 +72,31 @@ export default {
         auth: names.MODERATOR,
     },
 
-    components: { PanelHeader, Tabbed, TabbedItem, GameBrief, GameDetails, GameEdit },
+    components: {
+        PanelHeader,
+        Tabbed,
+        TabbedItem,
+        GameBrief,
+        GameDetails,
+        GameEdit,
+    },
 
-    async asyncData({ query, error, $axios }) {
+    async asyncData({ query, error, app: { $api } }) {
         if (query.game == null || query.game.trim() === '')
-            return { game: null };
+            return { game: null, players: [] };
 
         try {
-            const response = await $axios.get(
-                `/games/${query.game}?players=true`,
+            const game = await $api.games.getGame(query.game);
+            const players = await $api.games.getAllAssignedPlayersToGame(
+                query.game,
             );
-            return { game: response.data };
+
+            return { game, players };
         } catch (e) {
             error({
-                statusCode: e.response.status,
-                description: e.response.data.error,
-                message: e.response.statusText,
+                statusCode: e.status,
+                description: e.error,
+                message: e.message,
             });
         }
     },
@@ -124,22 +141,31 @@ export default {
         nameFromStatus,
 
         triggerGameUpdate(updatedGame) {
-            this.game = Object.assign({}, updatedGame);
+            this.game = updatedGame;
+        },
+
+        async triggerGameReload() {
+            await this.gatherGame(this.game.id);
         },
 
         async gatherGame(id) {
-            const { data } = await this.$axios.get(`/games/${id}?players=true`);
-            return data;
+            const game = await this.$api.games.getGame(id);
+            const players = await this.$api.games.getAllAssignedPlayersToGame(
+                id,
+            );
+
+            this.game = game;
+            this.players = players;
         },
 
         async activate() {
-            await this.$axios.post(`/games/${this.game.id}/activate`);
-            this.game = await this.gatherGame(this.game.id);
+            await this.$api.games.activateGame(this.game.id);
+            await this.gatherGame(this.game.id);
         },
 
         async endGame() {
-            await this.$axios.post(`/games/${this.game.id}/end`);
-            this.game = await this.gatherGame(this.game.id);
+            await this.$api.games.endGame(this.game.id);
+            await this.gatherGame(this.game.id);
         },
 
         async save() {
@@ -155,16 +181,12 @@ export default {
             if (!confirmed) return;
 
             try {
-                await this.$axios.delete(`/games/${this.game.id}`);
+                await this.$api.games.deleteGame(this.game.id);
 
                 this.$store.dispatch('toast/success', 'Game deleted.');
-
                 this.$router.push({ path: '/mod/games' });
             } catch (e) {
-                this.$store.dispatch(
-                    'toast/error',
-                    'Game could not be deleted.',
-                );
+                this.$store.dispatch('toast/error', e);
             }
         },
     },

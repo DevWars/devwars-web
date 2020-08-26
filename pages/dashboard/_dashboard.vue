@@ -18,8 +18,8 @@
                     />
 
                     <Activities
-                        v-if="activities.length > 0"
-                        :paged="activities"
+                        v-if="user.activities.length > 0"
+                        :paged="user.activities"
                     />
                 </Column>
             </Row>
@@ -50,28 +50,31 @@ export default {
         DailyPrizes,
     },
 
-    async asyncData({ params, error, $axios, store }) {
+    async asyncData({ params, error, store, app: { $api } }) {
         if (params.dashboard == null || params.dashboard.trim() === '')
             return {};
 
         try {
-            const user = await await $axios.get(`/users/${params.dashboard}`);
-            const stats = await await $axios.get(
-                `/users/${params.dashboard}/stats`,
-            );
+            const { dashboard: userId } = params;
+
+            const user = await $api.users.getUser(userId);
+            const stats = await $api.users.getUserStatistics(userId);
+            const activities = await $api.users.getUserActivities(userId);
 
             return {
                 me: false,
+
                 user: {
-                    user: user.data,
-                    stats: stats.data,
+                    user,
+                    stats,
+                    activities,
                 },
             };
         } catch (e) {
             error({
-                statusCode: e.response.status,
-                description: e.response.data.error,
-                message: e.response.statusText,
+                statusCode: e.code,
+                description: e.message,
+                message: e.message,
             });
         }
     },
@@ -85,16 +88,9 @@ export default {
     },
 
     computed: {
-        stats() {
-            return this.$store.state.stats;
-        },
         upcomingGames() {
             return this.$store.state.game.upcoming;
         },
-        activities() {
-            return this.$store.state.user.activities;
-        },
-
         isModerator() {
             const { user } = this.$store.state.user;
 

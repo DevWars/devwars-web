@@ -19,7 +19,9 @@
                         covering everything you need to know.
                     </p>
 
-                    <Button to="/docs" class="primary">View Documentation</Button>
+                    <Button to="/docs" class="primary">
+                        View Documentation
+                    </Button>
                     <p>
                         Have any questions?
                         <a href="/contact">Contact Us</a>
@@ -40,3 +42,11 @@ export default {
     components: { Card, PageBanner },
 };
 </script>
+
+<style lang="scss" scoped>
+h2,
+p {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+</style>

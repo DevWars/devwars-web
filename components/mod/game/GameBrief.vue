@@ -1,20 +1,20 @@
 <template>
-    <div v-if="currentGame != null" class="GameBrief">
+    <div v-if="game != null">
         <Card v-if="currentTeams" class="roster plain dark bezeless">
             <GameTeam
                 v-for="team in currentTeams"
                 :key="team.id"
                 :team="team"
-                :points="team.scores.total"
+                :points="team.score"
                 :winner="team.winner"
             >
                 <Player
-                    v-for="player in playersWithUser(team.players)"
-                    :key="player.id"
-                    :user="player"
+                    v-for="player in team.players"
+                    :key="player.user.id"
+                    :player="player.user"
                     :team="team"
                     :navigate="false"
-                    :languages="getLanguageByGamePlayer(game, player)"
+                    :languages="player.assignedLanguages"
                     @click="removePlayer(player)"
                 />
             </GameTeam>
@@ -23,12 +23,16 @@
             <h4>No players</h4>
         </Card>
 
-        <Applications :game="game" @assigned-player="playerAssigned" />
+        <Applications
+            :game="game"
+            :players="players"
+            @assigned-player="playerAssigned"
+        />
     </div>
 </template>
 
 <script>
-import { defaults, size, isNil } from 'lodash';
+import { size, isNil } from 'lodash';
 
 import { names } from '../../../utils/auth';
 import Card from '@/components/Card';
@@ -52,10 +56,10 @@ export default {
     mixins: [teams, usersFromGame],
 
     props: {
-        includePlayers: {
-            type: Boolean,
+        players: {
+            type: Array,
             required: false,
-            default: true,
+            default: () => [],
         },
         game: {
             type: Object,
@@ -63,25 +67,12 @@ export default {
         },
     },
 
-    data: () => ({
-        currentGame: {},
-        defaultGame: {},
-    }),
+    data: () => ({}),
 
     computed: {
         currentTeams() {
-            return this.teams(this.currentGame);
+            return this.teams(this.game, this.players);
         },
-    },
-
-    watch: {
-        game(newGame, oldGame) {
-            this.currentGame = defaults(newGame, this.defaultGame);
-        },
-    },
-
-    beforeMount() {
-        this.currentGame = defaults(this.game, this.defaultGame);
     },
 
     methods: {
@@ -90,10 +81,10 @@ export default {
         getLanguageByGamePlayer,
 
         playerAssigned({ player, user }) {
-            if (isNil(this.currentGame.players)) this.currentGame.players = {};
-            if (isNil(this.currentGame.editors)) this.currentGame.editors = {};
+            if (isNil(this.game.players)) this.game.players = {};
+            if (isNil(this.game.editors)) this.game.editors = {};
 
-            this.currentGame.players[player.id] = {
+            this.game.players[player.id] = {
                 id: player.id,
                 team: player.team,
                 username: player.username,
@@ -101,14 +92,14 @@ export default {
                 connections: user.connections,
             };
 
-            this.currentGame.editors[size(this.currentGame.editors)] = {
-                id: size(this.currentGame.editors),
+            this.game.editors[size(this.game.editors)] = {
+                id: size(this.game.editors),
                 language: player.language,
                 player: player.id,
                 team: player.team,
             };
 
-            this.$emit('update-game', this.currentGame);
+            this.$emit('update-game', this.game);
         },
 
         async removePlayer(player) {
@@ -120,27 +111,12 @@ export default {
 
             if (!confirmed) return;
 
-            // Reset the id of the player back to its org for the delete. Since
-            // the server will not handle the case for 0 since the root
-            // directory would still be the org id.
-            player.id = player.originalId || player.id;
-
-            // Add languages to each player for Database
-            for (const player of Object.values(this.currentGame.players)) {
-                player.language = getLanguageByGamePlayer(
-                    this.currentGame,
-                    player,
-                );
-            }
-
-            const res = await this.$axios.delete(
-                `/games/${this.currentGame.id}/player`,
-                {
-                    data: { player },
-                },
+            const res = await this.$api.games.removePlayerFromGame(
+                this.game.id,
+                player.user.id,
             );
 
-            this.$emit('update-game', res.data);
+            this.$emit('update-game', res);
         },
     },
 };

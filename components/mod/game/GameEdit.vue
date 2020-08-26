@@ -1,13 +1,18 @@
 <template>
     <div v-if="currentGame != null" class="GameEdit">
         <Card class="dark plain">
-            <Row v-if="nameFromStatus(currentGame.status) === 'ENDED' && teams != null">
+            <Row
+                v-if="
+                    nameFromStatus(currentGame.status) === 'ENDED' &&
+                        teams != null
+                "
+            >
                 <Column :md="6">
                     <Card class="dark plain">
                         <SubScore
                             title="Objectives"
-                            :blue-score="currentTeams[0].scores.objectives"
-                            :red-score="currentTeams[1].scores.objectives"
+                            :blue-score="currentTeams[0].completedObjectives"
+                            :red-score="currentTeams[1].completedObjectives"
                         >
                             <ul class="objectives">
                                 <li
@@ -24,7 +29,9 @@
                                                 objective,
                                             ),
                                         }"
-                                        @click="toggleObjectiveState(0, objective)"
+                                        @click="
+                                            toggleObjectiveState(0, objective)
+                                        "
                                     />
                                     <span class="objectives__obj">{{
                                         objective.description
@@ -37,7 +44,9 @@
                                                 objective,
                                             ),
                                         }"
-                                        @click="toggleObjectiveState(1, objective)"
+                                        @click="
+                                            toggleObjectiveState(1, objective)
+                                        "
                                     />
                                 </li>
                             </ul>
@@ -46,14 +55,15 @@
                 </Column>
 
                 <Column
-                    v-for="(scores, index) in currentGame.meta ? currentGame.meta.teamScores : []"
+                    v-for="(scores, index) in currentGame.meta
+                        ? currentGame.meta.teamScores
+                        : []"
                     :key="index"
                     :lg="3"
                     :md="6"
                 >
                     <Card class="dark plain teamScores">
                         <h3>Team {{ teamName(index) }}</h3>
-
                         <Input
                             v-model.number="scores.ui"
                             label="UI Score"
@@ -69,14 +79,13 @@
                             @input="(e) => updateTeamVoteScore(index, 'ux', e)"
                         />
                         <Checkbox
-                            :checked="scores.tie"
+                            :checked="currentGame.meta.tie"
                             label="Tied"
-                            @input="(e) => toggleTeamTied(index, e)"
+                            @input="(e) => toggleTeamTied(e)"
                         />
-
                         <Checkbox
+                            :label="`Winner-${index}`"
                             :checked="isWinner(index)"
-                            label="Winner"
                             @input="(e) => toggleTeamWinner(index, e)"
                         />
                     </Card>
@@ -86,7 +95,11 @@
             <div v-else-if="nameFromStatus(currentGame.status) !== 'ENDED'">
                 <h1>Game Not Ended</h1>
             </div>
-            <div v-else-if="nameFromStatus(game.status) === 'ENDED' && teams == null">
+            <div
+                v-else-if="
+                    nameFromStatus(game.status) === 'ENDED' && teams == null
+                "
+            >
                 <h1>No Teams Played</h1>
             </div>
         </Card>
@@ -104,7 +117,6 @@ import {
     getScoreByGameTeam,
     getPlayersByGameTeam,
     getLanguageByGamePlayer,
-    teamCompletedObjective,
 } from '@/utils';
 
 import Checkbox from '@/components/form/Checkbox';
@@ -125,6 +137,11 @@ export default {
     mixins: [teams],
 
     props: {
+        players: {
+            type: Array,
+            required: false,
+            default: () => [],
+        },
         game: {
             type: Object,
             required: true,
@@ -137,7 +154,7 @@ export default {
 
     computed: {
         currentTeams() {
-            return this.teams(this.currentGame);
+            return this.teams(this.game, this.players);
         },
     },
 
@@ -178,29 +195,25 @@ export default {
         getScoreByGameTeam,
         getPlayersByGameTeam,
         getLanguageByGamePlayer,
-        teamCompletedObjective,
         nameFromStatus,
 
-        toggleObjectiveState(team, objective) {
-            const specTeam = this.currentGame.teams[team];
+        toggleObjectiveState(teamId, objective) {
+            const specTeam = this.currentTeams[teamId];
 
-            if (_.isNil(specTeam.objectives)) specTeam.objectives = {};
+            if (_.isNil(specTeam.objectives))
+                specTeam.objectives = { [objective.id]: 'incomplete' };
 
-            if (
+            const state =
                 _.isNil(specTeam.objectives[objective.id]) ||
                 specTeam.objectives[objective.id] === 'incomplete'
-            ) {
-                specTeam.objectives[objective.id] = 'complete';
-            } else if (specTeam.objectives[objective.id] === 'complete') {
-                specTeam.objectives[objective.id] = 'incomplete';
-            }
+                    ? 'complete'
+                    : 'incomplete';
 
-            let total = 0;
-            _.forEach(specTeam.objectives, (obj) => {
-                if (obj === 'complete') total += 1;
-            });
+            specTeam.objectives[objective.id] = state;
+            this.currentGame.meta.teamScores[specTeam.id].objectives[
+                objective.id
+            ] = state;
 
-            this.currentGame.meta.teamScores[team].objectives = total;
             this.$emit('update-game', this.currentGame);
         },
 
@@ -216,10 +229,7 @@ export default {
         },
 
         updateTeamVoteScore(team, type, score) {
-            this.currentGame.teams[team].votes[type] = _.defaultTo(
-                Number(score),
-                0,
-            );
+            this.currentTeams[team][type] = _.defaultTo(Number(score), 0);
             this.currentGame.meta.teamScores[team][type] = _.defaultTo(
                 Number(score),
                 0,
@@ -228,24 +238,32 @@ export default {
             this.$emit('update-game', this.currentGame);
         },
 
-        toggleTeamTied(team, tied) {
-            this.currentGame.teams[team].votes.tie = Boolean(tied);
-            this.currentGame.meta.teamScores[team].tie = Boolean(tied);
+        toggleTeamTied(tied) {
+            this.currentGame.meta.tie = Boolean(tied);
 
-            const otherTeam = Number(team) === 0 ? 1 : 0;
-            this.currentGame.teams[otherTeam].votes.tie = Boolean(tied);
-            this.currentGame.meta.teamScores[otherTeam].tie = Boolean(tied);
+            if (this.currentGame.meta.tie)
+                this.currentGame.meta.winningTeam = null;
+
             this.$emit('update-game', this.currentGame);
         },
 
         toggleTeamWinner(team, winner) {
-            if (winner) {
-                this.currentGame.meta.winningTeam = Number(team);
-            } else {
-                this.currentGame.meta.winningTeam = null;
-            }
+            this.currentGame.meta.winningTeam = winner ? Number(team) : null;
+            this.currentGame.meta.tie = false;
 
             this.$emit('update-game', this.currentGame);
+        },
+
+        teamCompletedObjective(teamId, objective) {
+            if (!this.currentTeams[teamId].objectives) return;
+
+            for (const [key, value] of Object.entries(
+                this.currentTeams[teamId].objectives,
+            )) {
+                if (objective.id === Number(key) && value === 'complete') {
+                    return value;
+                }
+            }
         },
     },
 };

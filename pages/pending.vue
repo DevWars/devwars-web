@@ -12,7 +12,9 @@
                         <u>check your spam folder</u>.
                     </p>
                     <div>
-                        <Button class="outline muted" @click="resend">Resend Email</Button>
+                        <Button class="outline muted" @click="resend">
+                            Resend Email
+                        </Button>
                     </div>
                 </Card>
             </Container>
@@ -21,7 +23,6 @@
 </template>
 
 <script>
-import Http from '../services/Http';
 import { names } from '../utils/auth';
 import Card from '@/components/Card';
 import PageBanner from '@/components/layout/PageBanner';
@@ -38,7 +39,8 @@ export default {
 
     methods: {
         async resend() {
-            await Http.for('auth/reverify').save();
+            await this.$api.authentication.reverify();
+
             return this.$store.dispatch(
                 'toast/success',
                 'We have sent off another email, please wait patiently.',

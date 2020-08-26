@@ -1,10 +1,13 @@
 <template>
     <nuxt-link
-        v-if="user.id !== 0 && navigate"
+        v-if="player.id !== 0 && navigate"
         class="Player hover"
-        :to="`/dashboard/${user.id}`"
+        :to="`/dashboard/${player.user.id}`"
     >
-        <User :user="user" :class="team.name" />
+        <User
+            :user="player.user"
+            :class="team.name || team.id == 0 ? 'red' : 'blue'"
+        />
 
         <div class="languages">
             <strong
@@ -17,7 +20,7 @@
         </div>
     </nuxt-link>
     <div v-else class="Player" @click="$emit('click')">
-        <User :user="user" :class="team.name" />
+        <User :user="player" :class="team.name" />
 
         <div class="languages">
             <strong
@@ -37,8 +40,9 @@ import User from '@/components/user/User';
 export default {
     name: 'Player',
     components: { User },
+
     props: {
-        user: {
+        player: {
             type: Object,
             required: true,
         },

@@ -7,13 +7,15 @@
                         <div class="team-logo blue" />
                     </div>
                     <div class="score">
-                        <div class="gamemode">{{ game.mode }}</div>
+                        <div class="gamemode">
+                            {{ game.mode }}
+                        </div>
                         <div
-                            v-for="team in game.teams"
+                            v-for="team in currentTeams"
                             :key="team.id"
                             class="points"
                         >
-                            {{ getScoreByGameTeam(game, team) }}
+                            {{ team.score }}
                         </div>
                     </div>
                     <div class="team">
@@ -23,7 +25,7 @@
 
                 <div class="matchup">
                     <ul
-                        v-for="team in game.teams"
+                        v-for="team in currentTeams"
                         :key="team.id"
                         class="players"
                         :class="{
@@ -32,11 +34,11 @@
                         }"
                     >
                         <li
-                            v-for="player in getPlayersByGameTeam(game, team)"
-                            :key="player.id"
+                            v-for="player in team.players"
+                            :key="player.user.id"
                         >
-                            <nuxt-link :to="`/dashboard/${player.id}`">
-                                {{ player.username }}
+                            <nuxt-link :to="`/dashboard/${player.user.id}`">
+                                {{ player.user.username }}
                             </nuxt-link>
                         </li>
                     </ul>
@@ -60,18 +62,31 @@
 </template>
 
 <script>
+import { teams } from '@/utils/mixins';
+
 import { getScoreByGameTeam, getPlayersByGameTeam } from '@/utils';
 import HomeCard from '@/components/HomeCard';
 
 export default {
     name: 'Recap',
     components: { HomeCard },
+    mixins: [teams],
     props: {
         game: {
             type: Object,
             required: true,
         },
     },
+
+    data: () => ({
+        currentTeams: null,
+    }),
+
+    mounted() {
+        const { game, players } = this.game;
+        this.currentTeams = this.teams(game, players);
+    },
+
     methods: {
         getScoreByGameTeam,
         getPlayersByGameTeam,

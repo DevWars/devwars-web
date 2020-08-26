@@ -26,7 +26,7 @@
             >
                 Watch on Twitch
             </Button>
-            <RegistrationButtons :schedule="schedule" />
+            <RegistrationButtons :game="game" />
         </ButtonGroup>
     </HomeCard>
 </template>
@@ -45,7 +45,7 @@ export default {
                 process.env.baseUrl,
             )}`;
         },
-        schedule() {
+        game() {
             return this.$store.state.game.active;
         },
     },

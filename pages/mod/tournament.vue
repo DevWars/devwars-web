@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div>
+        <!-- <div>
             <div>
                 <h1>{{ tournament.timestamp | moment('mediumDate') }}</h1>
                 <h2>
@@ -47,15 +47,14 @@
             </nuxt-link>
         </LinkTabs>
 
-        <nuxt />
+        <nuxt /> -->
     </div>
 </template>
 
 <script>
-import Http from '../../services/Http';
 import { names } from '../../utils/auth';
-import LinkTabs from '@/components/LinkTabs';
-import DeleteModal from '@/components/modal/DeleteModal';
+// import LinkTabs from '@/components/LinkTabs';
+// import DeleteModal from '@/components/modal/DeleteModal';
 
 export default {
     name: 'DashboardTournament',
@@ -64,7 +63,7 @@ export default {
         auth: names.MODERATOR,
     },
 
-    components: { LinkTabs },
+    components: {},
 
     async fetch({ store, query }) {
         await store.dispatch('tournament/tournament', query.tournament);
@@ -77,71 +76,56 @@ export default {
     },
 
     methods: {
-        async activate() {
-            this.tournament.active = true;
-
-            await this.save();
-        },
-
-        async endGame() {
-            await Http.for(`/tournament/${this.tournament.id}/ended`).save();
-        },
-
-        async save() {
-            const cloned = { ...this.tournament };
-
-            delete cloned.objectives;
-            delete cloned.teams;
-
-            // Make sure the list doesn't include objectives with games
-            const transformed = this.tournament.objectives.map((it) => ({
-                ...it,
-                tournament: null,
-            }));
-
-            // Save the objectives
-            await Http.for(`/game/${this.tournament.id}/objective`).save(
-                transformed,
-            );
-
-            // Go ahead and save each team
-            Object.values(this.tournament.teams).forEach(async (team) => {
-                const cloned = { ...team };
-                delete cloned.players;
-
-                await Http.for('tournament/team').save(cloned);
-            });
-
-            // Last but not least, save the game
-            // const game = await Http.for('tournament').save(cloned);
-
-            // Can't forget to update our state with the new game
-            this.$store.commit('tournament/tournament', this.tournament);
-        },
-
-        async remove() {
-            const [confirmed] = await this.$open(DeleteModal, {
-                title: 'Delete Tournament?',
-                description: 'Are you sure you want to delete this tournament?',
-            });
-
-            if (!confirmed) {
-                return;
-            }
-
-            try {
-                await Http.for('tournament').delete(this.tournament);
-
-                this.$store.dispatch('toast/success', 'Tournament deleted.');
-
-                this.$router.push({ path: '/mod/tournaments' });
-            } catch (e) {
-                this.$store.dispatch(
-                    'toast/error',
-                    'Tournament could not be deleted.',
-                );
-            }
-        },
+        // async activate() {
+        //     this.tournament.active = true;
+        //     await this.save();
+        // },
+        // async endGame() {
+        //     await Http.for(`/tournament/${this.tournament.id}/ended`).save();
+        // },
+        // async save() {
+        //     const cloned = { ...this.tournament };
+        //     delete cloned.objectives;
+        //     delete cloned.teams;
+        //     // Make sure the list doesn't include objectives with games
+        //     const transformed = this.tournament.objectives.map((it) => ({
+        //         ...it,
+        //         tournament: null,
+        //     }));
+        //     // Save the objectives
+        //     await Http.for(`/game/${this.tournament.id}/objective`).save(
+        //         transformed,
+        //     );
+        //     // Go ahead and save each team
+        //     Object.values(this.tournament.teams).forEach(async (team) => {
+        //         const cloned = { ...team };
+        //         delete cloned.players;
+        //         await Http.for('tournament/team').save(cloned);
+        //     });
+        //     // Last but not least, save the game
+        //     // const game = await Http.for('tournament').save(cloned);
+        //     // Can't forget to update our state with the new game
+        //     this.$store.commit('tournament/tournament', this.tournament);
+        // },
+        // async remove() {
+        //     const [confirmed] = await this.$open(DeleteModal, {
+        //         title: 'Delete Tournament?',
+        //         description: 'Are you sure you want to delete this tournament?',
+        //     });
+        //     if (!confirmed) {
+        //         return;
+        //     }
+        //     try {
+        //         await Http.for('tournament').delete(this.tournament);
+        //         this.$store.dispatch('toast/success', 'Tournament deleted.');
+        //         this.$router.push({ path: '/mod/tournaments' });
+        //     } catch (e) {
+        //         this.$store.dispatch(
+        //             'toast/error',
+        //             'Tournament could not be deleted.',
+        //         );
+        //     }
+        // },
     },
 };
 </script>

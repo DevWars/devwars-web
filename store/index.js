@@ -5,16 +5,14 @@ export const mutations = {};
 export const actions = {
     async nuxtServerInit({ dispatch }) {
         await Promise.all([
-            dispatch('server/health'),
+            await dispatch('server/health'),
+            await dispatch('user/refresh'),
 
-            dispatch('user/refresh'),
-
-            dispatch('game/schedules'),
-            dispatch('game/upcoming'),
-            dispatch('game/active'),
+            await dispatch('game/upcoming'),
+            await dispatch('game/active'),
 
             // Needs to only dispatch when User is logged in
-            dispatch('game/applications'),
+            await dispatch('game/applications'),
         ]);
     },
 

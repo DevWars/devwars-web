@@ -27,16 +27,3 @@ export function getLanguageByGamePlayer(game, player) {
 
     return languages;
 }
-
-export function teamCompletedObjective(teamIndex, objective) {
-    const objectives = this.game.teams[teamIndex].objectives;
-    if (!objectives) {
-        return;
-    }
-
-    for (const [key, value] of Object.entries(objectives)) {
-        if (objective.id === Number(key) && value === 'complete') {
-            return value;
-        }
-    }
-}

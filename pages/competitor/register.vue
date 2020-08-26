@@ -8,70 +8,25 @@
                     <Row>
                         <Column :sm="6">
                             <Input
-                                v-model="profile.firstName"
+                                v-model="tmp.profile.firstName"
                                 label="First Name"
                                 class="group"
                                 required
-                                @input="(e) => change('profile.firstName', e)"
                             />
                         </Column>
                         <Column :sm="6">
                             <Input
-                                v-model="profile.lastName"
+                                v-model="tmp.profile.lastName"
                                 label="Last Name"
                                 class="group"
                                 required
-                                @input="(e) => change('profile.lastName', e)"
                             />
                         </Column>
                     </Row>
 
                     <Row>
-                        <Column :sm="6">
-                            <!-- <Row class="dob">
-                                <Column :sm="4">
-                                    <label>Date of birth</label>
-                                </Column>
-                                <Column :sm="2">
-                                    <Input
-                                        v-model="day"
-                                        label="DD"
-                                        class="group"
-                                        maxlength="2"
-                                        required
-                                        @input="e => day = e"
-                                    />
-                                </Column>
-                                <Column :sm="2">
-                                    <Input
-                                        v-model="month"
-                                        label="MM"
-                                        class="group"
-                                        maxlength="2"
-                                        min="01"
-                                        max="12"
-                                        required
-                                        @input="e => month = e"
-                                    />
-                                </Column>
-                                <Column :sm="4">
-                                    <Input
-                                        v-model="year"
-                                        label="YYYY"
-                                        class="group"
-                                        maxlength="4"
-                                        required
-                                        @input="e => year = e"
-                                    />
-                                </Column>
-                            </Row>-->
-                        </Column>
                         <Column :md="3">
-                            <Select
-                                v-model="sex"
-                                label="Sex"
-                                @change="(e) => change('profile.sex', e)"
-                            >
+                            <Select v-model="tmp.profile.sex" label="Sex">
                                 <option
                                     v-for="(sex, index) in sexes"
                                     :key="sex"
@@ -83,11 +38,10 @@
                         </Column>
                         <Column :sm="3">
                             <Select
-                                v-model="profile.country"
+                                v-model="tmp.profile.country"
                                 label="Select Country"
                                 class="group"
                                 required
-                                @change="(e) => change('profile.country', e)"
                             >
                                 <option
                                     v-for="country in countries"
@@ -102,10 +56,9 @@
                     <Row>
                         <Column :sm="6">
                             <Input
-                                v-model="profile.company"
+                                v-model="tmp.profile.company"
                                 label="Company"
                                 class="group"
-                                @input="(e) => change('profile.company', e)"
                             />
                         </Column>
                     </Row>
@@ -113,7 +66,7 @@
 
                 <Card class="plain dark" title="Skill Assessment">
                     <LanguageSkills
-                        :profile="profile"
+                        :profile="tmp.profile"
                         @change="(e) => change('profile.skills', e.values)"
                     />
                 </Card>
@@ -137,7 +90,9 @@
                 </Card>
 
                 <div class="actions">
-                    <Button class="primary lg" @click="submit">Register to Compete</Button>
+                    <Button class="primary lg" @click="submit">
+                        Register to Compete
+                    </Button>
                 </div>
             </Container>
         </div>
@@ -197,46 +152,6 @@ export default {
         links() {
             return this.$store.state.user.linkedAccounts;
         },
-
-        // day: {
-        //     get() {
-        //         return new Date(this.profile.dob).getUTCDate();
-        //     },
-        //     set(val) {
-        //         this.tmp.dob = {
-        //             day: val,
-        //             month: this.month,
-        //             year: this.year,
-        //         };
-        //     },
-        // },
-
-        // month: {
-        //     get() {
-        //         return new Date(this.profile.dob).getUTCMonth();
-        //     },
-        //     set(val) {
-        //         this.tmp.dob = {
-        //             day: this.day,
-        //             month: val,
-        //             year: this.year,
-        //         };
-        //     },
-        // },
-
-        // year: {
-        //     get() {
-        //         return new Date(this.profile.dob).getUTCFullYear();
-        //     },
-        //     set(val) {
-        //         this.tmp.dob = {
-        //             day: this.day,
-        //             month: this.month,
-        //             year: val,
-        //         };
-        //     },
-        // },
-
         profile() {
             return this.$store.state.user.profile;
         },
@@ -246,12 +161,9 @@ export default {
         }),
     },
 
-    // async asyncData({ query, $axios }) {
-    //     if (!query.schedule) return;
-    //     const res = await $axios.get(`/schedules/${query.schedule}`);
-
-    //     return { schedule: res.data };
-    // },
+    mounted() {
+        this.tmp.profile = this.profile;
+    },
 
     methods: {
         async submit() {
@@ -269,31 +181,14 @@ export default {
                 );
             }
 
-            const finalProfile = {
-                ...this.profile,
-                ...this.tmp.profile,
-            };
-            const finalSkills = {
-                ...this.profile.skills,
-                ...this.tmp.skills,
-            };
-            // let date = this.profile.dob;
-            // if (this.tmp.dob) {
-            //     const { year, month, day } = this.tmp.dob;
-            //     // const finalDob = new Date(Date.UTC(year, month - 1, day));
-            //     // TODO: we should discuss about it here i am not sure i format well the date
-            //     date = moment.utc(`${month} ${day} ${year}`, 'MM DD YYYY');
-            //     // date = date.unit() * 1000;
-            // }
+            const finalProfile = { ...this.profile, ...this.tmp.profile };
+            const finalSkills = { ...this.profile.skills, ...this.tmp.skills };
 
             try {
-                const userProfile = {
-                    ...finalProfile,
-                    skills: finalSkills,
-                    // dob: date,
-                };
-                await this.$axios.patch(
-                    `/user/${this.user.id}/profile`,
+                const userProfile = { ...finalProfile, skills: finalSkills };
+
+                await this.$api.users.updateUsersProfile(
+                    this.user.id,
                     userProfile,
                 );
 

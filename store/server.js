@@ -1,5 +1,3 @@
-import Http from '../services/Http';
-
 export const state = () => ({
     server: {},
 });
@@ -14,14 +12,14 @@ export const getters = {
 };
 
 export const mutations = {
-    badges(state, server) {
+    server(state, server) {
         state.server = server;
     },
 };
 
 export const actions = {
     async health({ commit }) {
-        const server = await Http.for('health').get();
-        commit('badges', server);
+        const server = await this.$api.health.info();
+        commit('server', server);
     },
 };
