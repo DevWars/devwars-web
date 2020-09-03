@@ -15,11 +15,12 @@
         "release": "standard-version"
     },
     "dependencies": {
-        "DevwarsClient": "git://github.com/DevWars/DevWars-API-Client#a69748b9f4d57f7e63d1913759ace345fa61805e",
         "@nuxtjs/axios": "^5.12.1",
         "@nuxtjs/dotenv": "^1.4.0",
+        "DevwarsClient": "git://github.com/DevWars/DevWars-API-Client#a69748b9f4d57f7e63d1913759ace345fa61805e",
         "country-list": "^2.2.0",
         "cropperjs": "^1.5.7",
+        "highlight.js": "^10.1.2",
         "lodash": "^4.17.19",
         "moment": "2.25.3",
         "nuxt": "^2.14",

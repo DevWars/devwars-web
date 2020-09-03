@@ -88,6 +88,7 @@ export default {
         '@/plugins/filters',
         '@/plugins/mixins',
         '@/plugins/modal',
+        '@/plugins/highlight',
     ],
     /*
      ** Nuxt.js dev-modules
