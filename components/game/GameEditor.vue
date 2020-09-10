@@ -6,8 +6,15 @@
         </div>
 
         <div class="main">
-            <pre class="lineNumbers"><code v-html="lineNumbers" /></pre>
-            <pre><code :class="language" v-html="code" /></pre>
+            <div class="mainInner">
+                <div class="gutter">
+                    <pre><code v-html="lineNumbers" /></pre>
+                </div>
+
+                <div class="code">
+                    <pre><code :class="language" v-html="code" /></pre>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -63,21 +70,34 @@ export default {
     }
 
     .main {
-        height: 100%;
         display: flex;
+        flex: 1;
+        position: relative;
+    }
+
+    .mainInner {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
         overflow: auto;
         scrollbar-color: rgba(#fff, 0.6) $bg-color-4;
         scrollbar-width: thin;
     }
 
-    pre.lineNumbers {
-        padding-left: $grid-gutter-width;
-        padding-right: $grid-gutter-width;
+    .gutter {
+        padding: 0 $grid-gutter-width;
         text-align: right;
         opacity: 0.3;
+        user-select: none;
     }
 
-    pre:last-child {
+    .code {
+        width: 100%;
         padding-right: 30px;
     }
 
