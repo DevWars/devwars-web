@@ -72,7 +72,6 @@ import Table from '@/components/Table';
 import User from '@/components/user/User';
 import AddPlayerModal from '@/components/modal/AddPlayerModal';
 import AddRegistrantModal from '@/components/modal/AddRegistrantModal';
-import { getLanguageByGamePlayer } from '@/utils';
 
 export default {
     name: 'Applications',
@@ -109,8 +108,6 @@ export default {
     },
 
     methods: {
-        getLanguageByGamePlayer,
-
         async loadApplications() {
             const applications = await this.$api.games.getGameApplications(
                 this.game.id,

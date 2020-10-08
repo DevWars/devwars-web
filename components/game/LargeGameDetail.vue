@@ -70,7 +70,6 @@ import SubScore from '@/components/game/SubScore';
 import GameTeam from '@/components/game/GameTeam';
 import Player from '@/components/game/Player';
 import ObjectivesList from '@/components/game/ObjectivesList';
-import { getLanguageByGamePlayer } from '@/utils';
 import { teams } from '@/utils/mixins';
 
 export default {
@@ -109,12 +108,6 @@ export default {
             },
             immediate: true,
         },
-    },
-
-    async mounted() {},
-
-    methods: {
-        getLanguageByGamePlayer,
     },
 };
 </script>

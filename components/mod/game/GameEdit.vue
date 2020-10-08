@@ -77,11 +77,7 @@ import * as _ from 'lodash';
 import { names } from '../../../utils/auth';
 import { teams } from '@/utils/mixins';
 
-import {
-    getScoreByGameTeam,
-    getPlayersByGameTeam,
-    getLanguageByGamePlayer,
-} from '@/utils';
+import { getScoreByGameTeam } from '@/utils';
 
 import Checkbox from '@/components/form/Checkbox';
 import Input from '@/components/form/Input';
@@ -157,8 +153,6 @@ export default {
 
     methods: {
         getScoreByGameTeam,
-        getPlayersByGameTeam,
-        getLanguageByGamePlayer,
         nameFromStatus,
 
         toggleObjectiveState(teamId, objective) {

@@ -64,7 +64,7 @@
 <script>
 import { teams } from '@/utils/mixins';
 
-import { getScoreByGameTeam, getPlayersByGameTeam } from '@/utils';
+import { getScoreByGameTeam } from '@/utils';
 import HomeCard from '@/components/HomeCard';
 
 export default {
@@ -89,7 +89,6 @@ export default {
 
     methods: {
         getScoreByGameTeam,
-        getPlayersByGameTeam,
     },
 };
 </script>

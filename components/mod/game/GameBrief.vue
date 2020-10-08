@@ -40,11 +40,7 @@ import GameTeam from '@/components/game/GameTeam';
 import Player from '@/components/game/Player';
 import Applications from '@/components/game/Applications';
 import DeleteModal from '@/components/modal/DeleteModal';
-import {
-    getScoreByGameTeam,
-    getPlayersByGameTeam,
-    getLanguageByGamePlayer,
-} from '@/utils';
+import { getScoreByGameTeam } from '@/utils';
 import { teams, usersFromGame } from '@/utils/mixins';
 
 export default {
@@ -77,8 +73,6 @@ export default {
 
     methods: {
         getScoreByGameTeam,
-        getPlayersByGameTeam,
-        getLanguageByGamePlayer,
 
         playerAssigned({ player, user }) {
             if (isNil(this.game.players)) this.game.players = {};
