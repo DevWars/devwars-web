@@ -90,10 +90,19 @@ export default {
     }
 
     .gutter {
-        padding: 0 $grid-gutter-width;
         text-align: right;
-        opacity: 0.3;
         user-select: none;
+        position: sticky;
+        left: 0;
+
+        pre {
+            padding: 0 $grid-gutter-width;
+            background-color: $bg-color-4;
+
+            code {
+                opacity: 0.2;
+            }
+        }
     }
 
     .code {

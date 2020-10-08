@@ -21,60 +21,39 @@
         </div>
 
         <div class="main">
-            <div class="team blue">
-                <div class="teamActions">
-                    <div>
-                        <Icon name="code" />
-                        <Icon name="window-maximize" class="dimmed" />
-                    </div>
-                    <Icon name="expand-alt" />
-                </div>
-                <div class="teamEditors">
-                    <GameEditor
-                        v-for="(template, language) in game.templates"
-                        :key="language"
-                        :template="template"
-                        :language="language"
-                        :player="findPlayerByLanguage(language)"
-                    />
-                </div>
-            </div>
-            <div class="team red">
-                <div class="teamActions">
-                    <div>
-                        <Icon name="code" />
-                        <Icon name="window-maximize" class="dimmed" />
-                    </div>
-                    <Icon name="expand-alt" />
-                </div>
-                <div class="teamEditors">
-                    <GameEditor
-                        v-for="(template, language) in game.templates"
-                        :key="language"
-                        :template="template"
-                        :language="language"
-                        :player="findPlayerByLanguage(language)"
-                    />
-                </div>
-            </div>
+            <GameProjectTeam
+                v-for="(players, teamId) in teams"
+                :key="teamId"
+                :game="game"
+                :players="players"
+                :class="[teamClassMap[teamId], expandedClass(teamId)]"
+                :team-id="Number(teamId)"
+                :sources="sources"
+                :expanded="expandedTeamId === Number(teamId)"
+                @expandTeam="(teamId) => expandedTeamId = teamId"
+            />
         </div>
     </div>
 </template>
 
 <script>
-import GameEditor from '@/components/game/GameEditor';
+import axios from 'axios';
+import _ from 'lodash';
+import GameProjectTeam from '@/components/game/GameProjectTeam';
 
 export default {
     name: 'GamesViewPage',
 
-    components: { GameEditor },
+    components: { GameProjectTeam },
 
     async asyncData({ params, error, app: { $api } }) {
         try {
             const game = await $api.games.getGame(params.id);
             const players = await $api.games.getAllAssignedPlayersToGame(params.id);
+            const teams = _.groupBy(players, (p) => p.team);
+            const sourcesRes = await axios.get(`${process.env.apiUrl}/games/${params.id}/source`);
 
-            return { game, players };
+            return { game, players, teams, sources: sourcesRes.data };
         } catch (e) {
             error({
                 statusCode: e.status,
@@ -84,9 +63,17 @@ export default {
         }
     },
 
+    data: () => ({
+        viewSite: false,
+        expandedTeamId: null,
+        teamClassMap: { 0: 'blue', 1: 'red' },
+    }),
+
     methods: {
-        findPlayerByLanguage(language) {
-            return this.players.find(p => p.assignedLanguages[0] === language);
+        expandedClass(teamId) {
+            if (!this.teamClassMap[this.expandedTeamId]) return;
+
+            return this.expandedTeamId === Number(teamId) ? 'expanded' : 'collapsed';
         },
     },
 };
@@ -155,58 +142,10 @@ export default {
         flex: 1;
     }
 
-    .team {
-        display: flex;
-        flex: 1;
-
-        &.blue .GameEditor /deep/ .header,
-        &.blue .teamActions .Icon {
-            color: $brand-primary;
+    .GameProjectTeam {
+        &.collapsed {
+            display: none;
         }
-
-        &.red .GameEditor /deep/ .header,
-        &.red .teamActions .Icon {
-            color: $brand-secondary;
-        }
-
-        &:last-child {
-            border-top: 3px solid $bg-color-3;
-        }
-    }
-
-    .teamActions {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding: $grid-gutter-width;
-
-        & > div {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .Icon {
-            font-size: 18px;
-            color: #fff;
-            cursor: pointer;
-
-            &.dimmed {
-                opacity: 0.25;
-            }
-        }
-
-        .Icon + .Icon {
-            margin-top: 30px;
-        }
-    }
-
-    .teamEditors {
-        display: flex;
-        flex: 1;
-    }
-
-    .GameEditor {
-        border-left: 3px solid $bg-color-3;
     }
 }
 </style>
