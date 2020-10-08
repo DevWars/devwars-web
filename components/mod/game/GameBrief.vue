@@ -11,9 +11,8 @@
                 <Player
                     v-for="player in team.players"
                     :key="player.user.id"
-                    :player="player.user"
+                    :player="player"
                     :team="team"
-                    :navigate="false"
                     :languages="player.assignedLanguages"
                     @click="removePlayer(player)"
                 />

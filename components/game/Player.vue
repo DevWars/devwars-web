@@ -1,12 +1,13 @@
 <template>
-    <nuxt-link
-        v-if="player.id !== 0 && navigate"
+    <component
+        :is="navigateToProfile ? 'nuxt-link' : 'div'"
         class="Player hover"
-        :to="`/dashboard/${player.user.id}`"
+        :to="navigateToProfile ? `/dashboard/${player.user.id}` : ''"
+        @click="!navigateToProfile ? $emit('click') : () => {}"
     >
         <User
             :user="player.user"
-            :class="team.name || team.id == 0 ? 'red' : 'blue'"
+            :class="team.name"
         />
 
         <div class="languages">
@@ -18,20 +19,7 @@
                 {{ language }}
             </strong>
         </div>
-    </nuxt-link>
-    <div v-else class="Player" @click="$emit('click')">
-        <User :user="player" :class="team.name" />
-
-        <div class="languages">
-            <strong
-                v-for="language in languages"
-                :key="language"
-                :class="language"
-            >
-                {{ language }}
-            </strong>
-        </div>
-    </div>
+    </component>
 </template>
 
 <script>
@@ -39,6 +27,7 @@ import User from '@/components/user/User';
 
 export default {
     name: 'Player',
+
     components: { User },
 
     props: {
@@ -54,12 +43,9 @@ export default {
             type: Array,
             required: true,
         },
-        // If navigation should be setup to allow clicking on the player directly to navigate to the
-        // players profile page. If true, any action or wrapper placed around the player will not work.
-        // Handling custom click events will require this to be false.
-        navigate: {
+        navigateToProfile: {
             type: Boolean,
-            default: true,
+            default: false,
         },
     },
 };

@@ -49,6 +49,7 @@
                     :player="player"
                     :team="team"
                     :languages="player.assignedLanguages"
+                    :navigate-to-profile="true"
                 />
             </GameTeam>
         </div>
