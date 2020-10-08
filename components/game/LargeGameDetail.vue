@@ -52,45 +52,12 @@
                 />
             </GameTeam>
         </div>
+
         <SubScore v-if="game.title" title="Theme" no-score>
             <h3>{{ game.title }}</h3>
         </SubScore>
 
-        <SubScore
-            v-if="currentTeams != null"
-            title="Objectives"
-            :blue-score="currentTeams[0].completedObjectives"
-            :red-score="currentTeams[1].completedObjectives"
-        >
-            <ul class="objectives">
-                <li
-                    v-for="objective in game.objectives"
-                    :key="objective.id"
-                    class="objectives__item"
-                    :class="{ bonus: objective.isBonus }"
-                >
-                    <div
-                        class="objectives__square team-blue"
-                        :class="{
-                            active:
-                                currentTeams[0].objectives[objective.id] ===
-                                'complete',
-                        }"
-                    />
-                    <span class="objectives__obj">{{
-                        objective.description
-                    }}</span>
-                    <div
-                        class="objectives__square team-red"
-                        :class="{
-                            active:
-                                currentTeams[1].objectives[objective.id] ===
-                                'complete',
-                        }"
-                    />
-                </li>
-            </ul>
-        </SubScore>
+        <ObjectivesList :game="game" :players="players" />
 
         <VoteBox :game="game" category="ui" />
         <VoteBox :game="game" category="ux" />
@@ -102,12 +69,13 @@ import VoteBox from '@/components/game/VoteBox';
 import SubScore from '@/components/game/SubScore';
 import GameTeam from '@/components/game/GameTeam';
 import Player from '@/components/game/Player';
+import ObjectivesList from '@/components/game/ObjectivesList';
 import { getLanguageByGamePlayer } from '@/utils';
 import { teams } from '@/utils/mixins';
 
 export default {
     name: 'LargeGameDetail',
-    components: { GameTeam, Player, SubScore, VoteBox },
+    components: { GameTeam, Player, SubScore, VoteBox, ObjectivesList },
     mixins: [teams],
     props: {
         game: {
@@ -221,37 +189,6 @@ export default {
 
     &__versus {
         font-size: $font-size-lg;
-    }
-}
-
-.objectives {
-    &__item {
-        @extend %flex-justify;
-        width: 100%;
-        padding-bottom: $s-space;
-        text-align: center;
-
-        &.bonus {
-            color: $bonus-color;
-        }
-    }
-
-    &__square {
-        width: 30px;
-        height: 30px;
-        border: 5px solid #23252c;
-
-        &.team-blue.active {
-            background-color: $brand-primary;
-        }
-
-        &.team-red.active {
-            background-color: $brand-secondary;
-        }
-    }
-
-    &__item.bonus &__square.active {
-        background-color: $bonus-color;
     }
 }
 

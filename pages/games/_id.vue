@@ -16,7 +16,7 @@
             </div>
 
             <div class="headerActions">
-                <Button class="link white">Objectives</Button>
+                <Button class="link white" @click="handleViewObjectives">Objectives</Button>
             </div>
         </div>
 
@@ -39,6 +39,7 @@
 <script>
 import _ from 'lodash';
 import GameProjectTeam from '@/components/game/GameProjectTeam';
+import ViewObjectivesModal from '@/components/modal/ViewObjectivesModal';
 
 export default {
     name: 'GamesViewPage',
@@ -73,6 +74,10 @@ export default {
             if (!this.teamClassMap[this.expandedTeamId]) return;
 
             return this.expandedTeamId === Number(teamId) ? 'expanded' : 'collapsed';
+        },
+
+        handleViewObjectives() {
+            this.$open(ViewObjectivesModal, { game: this.game, players: this.players });
         },
     },
 };

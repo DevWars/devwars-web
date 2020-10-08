@@ -9,48 +9,12 @@
             >
                 <Column :md="6">
                     <Card class="dark plain">
-                        <SubScore
-                            title="Objectives"
-                            :blue-score="currentTeams[0].completedObjectives"
-                            :red-score="currentTeams[1].completedObjectives"
-                        >
-                            <ul class="objectives">
-                                <li
-                                    v-for="objective in currentGame.objectives"
-                                    :key="objective.id"
-                                    class="objectives__item"
-                                    :class="{ bonus: objective.isBonus }"
-                                >
-                                    <div
-                                        class="objectives__square team-blue"
-                                        :class="{
-                                            active: teamCompletedObjective(
-                                                0,
-                                                objective,
-                                            ),
-                                        }"
-                                        @click="
-                                            toggleObjectiveState(0, objective)
-                                        "
-                                    />
-                                    <span class="objectives__obj">{{
-                                        objective.description
-                                    }}</span>
-                                    <div
-                                        class="objectives__square team-red"
-                                        :class="{
-                                            active: teamCompletedObjective(
-                                                1,
-                                                objective,
-                                            ),
-                                        }"
-                                        @click="
-                                            toggleObjectiveState(1, objective)
-                                        "
-                                    />
-                                </li>
-                            </ul>
-                        </SubScore>
+                        <ObjectivesList
+                            :game="game"
+                            :players="players"
+                            @blueObjective="(objective) => toggleObjectiveState(0, objective)"
+                            @redObjective="(objective) => toggleObjectiveState(1, objective)"
+                        />
                     </Card>
                 </Column>
 
@@ -121,7 +85,7 @@ import {
 
 import Checkbox from '@/components/form/Checkbox';
 import Input from '@/components/form/Input';
-import SubScore from '@/components/game/SubScore';
+import ObjectivesList from '@/components/game/ObjectivesList';
 import nameFromStatus from '@/utils/gameStatus';
 import Card from '@/components/Card';
 
@@ -132,7 +96,7 @@ export default {
         auth: names.MODERATOR,
     },
 
-    components: { SubScore, Card, Input, Checkbox },
+    components: { Card, Input, Checkbox, ObjectivesList },
 
     mixins: [teams],
 
