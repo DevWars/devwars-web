@@ -37,7 +37,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import _ from 'lodash';
 import GameProjectTeam from '@/components/game/GameProjectTeam';
 
@@ -49,11 +48,11 @@ export default {
     async asyncData({ params, error, app: { $api } }) {
         try {
             const game = await $api.games.getGame(params.id);
+            const sources = await $api.games.getSourcesForGame(params.id);
             const players = await $api.games.getAllAssignedPlayersToGame(params.id);
             const teams = _.groupBy(players, (p) => p.team);
-            const sourcesRes = await axios.get(`${process.env.apiUrl}/games/${params.id}/source`);
 
-            return { game, players, teams, sources: sourcesRes.data };
+            return { game, players, teams, sources };
         } catch (e) {
             error({
                 statusCode: e.status,
