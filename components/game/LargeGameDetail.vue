@@ -9,9 +9,9 @@
                     <h2 class="banner__gamemode">
                         {{ game.mode }}
                     </h2>
-                    <div v-if="currentTeams != null" class="banner__versus">
-                        {{ currentTeams[0].players.length }} VS
-                        {{ currentTeams[1].players.length }}
+                    <div v-if="teamReport != null" class="banner__versus">
+                        {{ teamReport[0].players.length }} VS
+                        {{ teamReport[1].players.length }}
                     </div>
                 </div>
 
@@ -35,12 +35,12 @@
                 </div>
             </div>
         </div>
-        <div v-if="currentTeams != null" class="roster">
+        <div v-if="teamReport != null" class="roster">
             <GameTeam
-                v-for="team in currentTeams"
+                v-for="team in teamReport"
                 :key="team.id"
                 :team="team"
-                :points="team.completedObjectives"
+                :points="team.score"
                 :winner="game.meta.winningTeam === team.id"
             >
                 <Player
@@ -70,12 +70,15 @@ import SubScore from '@/components/game/SubScore';
 import GameTeam from '@/components/game/GameTeam';
 import Player from '@/components/game/Player';
 import ObjectivesList from '@/components/game/ObjectivesList';
-import { teams } from '@/utils/mixins';
+import { createTeamReport } from '@/utils/mixins';
 
 export default {
     name: 'LargeGameDetail',
+
     components: { GameTeam, Player, SubScore, VoteBox, ObjectivesList },
-    mixins: [teams],
+
+    mixins: [createTeamReport],
+
     props: {
         game: {
             type: Object,
@@ -90,10 +93,8 @@ export default {
 
     data: () => ({
         players: [],
-        currentTeams: null,
+        teamReport: null,
     }),
-
-    computed: {},
 
     watch: {
         game: {
@@ -104,7 +105,7 @@ export default {
                     );
                 }
 
-                this.currentTeams = this.teams(this.game, this.players);
+                this.teamReport = this.createTeamReport(this.game, this.players);
             },
             immediate: true,
         },

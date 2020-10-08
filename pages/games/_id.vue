@@ -10,9 +10,9 @@
             </ButtonIcon>
 
             <div class="score">
-                <span class="blue">0</span>
+                <span class="blue">{{ teamReport[0].score }}</span>
                 <span class="vs">VS</span>
-                <span class="red">0</span>
+                <span class="red">{{ teamReport[1].score }}</span>
             </div>
 
             <div class="headerActions">
@@ -38,6 +38,7 @@
 
 <script>
 import _ from 'lodash';
+import { createTeamReport } from '@/utils/mixins';
 import GameProjectTeam from '@/components/game/GameProjectTeam';
 import ViewObjectivesModal from '@/components/modal/ViewObjectivesModal';
 
@@ -45,6 +46,8 @@ export default {
     name: 'GamesViewPage',
 
     components: { GameProjectTeam },
+
+    mixins: [createTeamReport],
 
     async asyncData({ params, error, app: { $api } }) {
         try {
@@ -68,6 +71,12 @@ export default {
         expandedTeamId: null,
         teamClassMap: { 0: 'blue', 1: 'red' },
     }),
+
+    computed: {
+        teamReport() {
+            return this.createTeamReport(this.game, this.players);
+        },
+    },
 
     methods: {
         expandedClass(teamId) {

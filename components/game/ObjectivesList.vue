@@ -1,10 +1,10 @@
 <template>
     <SubScore
-        v-if="currentTeams != null"
+        v-if="teamReport != null"
         class="ObjectivesList"
         title="Objectives"
-        :blue-score="currentTeams[0].completedObjectives"
-        :red-score="currentTeams[1].completedObjectives"
+        :blue-score="teamReport[0].completedObjectives"
+        :red-score="teamReport[1].completedObjectives"
     >
         <ul class="objectives">
             <li
@@ -15,13 +15,13 @@
             >
                 <div
                     class="box blue"
-                    :class="{ active: currentTeams[0].objectives[objective.id] === 'complete' }"
+                    :class="{ active: teamReport[0].objectives[objective.id] === 'complete' }"
                     @click="$emit('blueObjective', objective)"
                 />
                 <span>{{ objective.description }}</span>
                 <div
                     class="box red"
-                    :class="{ active: currentTeams[1].objectives[objective.id] === 'complete' }"
+                    :class="{ active: teamReport[1].objectives[objective.id] === 'complete' }"
                     @click="$emit('redObjective', objective)"
                 />
             </li>
@@ -31,14 +31,14 @@
 
 <script>
 import SubScore from '@/components/game/SubScore';
-import { teams } from '@/utils/mixins';
+import { createTeamReport } from '@/utils/mixins';
 
 export default {
     name: 'ObjectivesList',
 
     components: { SubScore },
 
-    mixins: [teams],
+    mixins: [createTeamReport],
 
     props: {
         game: { type: Object, required: true },
@@ -46,8 +46,8 @@ export default {
     },
 
     computed: {
-        currentTeams() {
-            return this.teams(this.game, this.players);
+        teamReport() {
+            return this.createTeamReport(this.game, this.players);
         },
     },
 };

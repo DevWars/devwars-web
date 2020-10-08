@@ -1,8 +1,8 @@
 <template>
     <div v-if="game != null">
-        <Card v-if="currentTeams" class="roster plain dark bezeless">
+        <Card v-if="teamReport" class="roster plain dark bezeless">
             <GameTeam
-                v-for="team in currentTeams"
+                v-for="team in teamReport"
                 :key="team.id"
                 :team="team"
                 :points="team.score"
@@ -33,15 +33,13 @@
 
 <script>
 import { size, isNil } from 'lodash';
-
-import { names } from '../../../utils/auth';
+import { createTeamReport, usersFromGame } from '@/utils/mixins';
+import { names } from '@/utils/auth';
 import Card from '@/components/Card';
 import GameTeam from '@/components/game/GameTeam';
 import Player from '@/components/game/Player';
 import Applications from '@/components/game/Applications';
 import DeleteModal from '@/components/modal/DeleteModal';
-import { getScoreByGameTeam } from '@/utils';
-import { teams, usersFromGame } from '@/utils/mixins';
 
 export default {
     name: 'GameBrief',
@@ -49,7 +47,8 @@ export default {
     meta: { auth: names.MODERATOR },
 
     components: { Card, GameTeam, Player, Applications },
-    mixins: [teams, usersFromGame],
+
+    mixins: [createTeamReport, usersFromGame],
 
     props: {
         players: {
@@ -66,14 +65,12 @@ export default {
     data: () => ({}),
 
     computed: {
-        currentTeams() {
-            return this.teams(this.game, this.players);
+        teamReport() {
+            return this.createTeamReport(this.game, this.players);
         },
     },
 
     methods: {
-        getScoreByGameTeam,
-
         playerAssigned({ player, user }) {
             if (isNil(this.game.players)) this.game.players = {};
             if (isNil(this.game.editors)) this.game.editors = {};
