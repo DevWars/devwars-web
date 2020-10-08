@@ -14,15 +14,25 @@
                         {{ currentTeams[1].players.length }}
                     </div>
                 </div>
-                <ButtonIcon
-                    v-show="game.videoUrl"
-                    :href="game.videoUrl"
-                    target="_blank"
-                    icon="brands/youtube"
-                    class="youtube"
-                >
-                    Watch on YouTube
-                </ButtonIcon>
+
+                <div class="banner__actions">
+                    <ButtonIcon
+                        v-show="game.videoUrl"
+                        :href="game.videoUrl"
+                        target="_blank"
+                        icon="brands/youtube"
+                        class="youtube"
+                    >
+                        Watch Game
+                    </ButtonIcon>
+                    <ButtonIcon
+                        :to="`/games/${game.id}`"
+                        icon="code"
+                        class="outline"
+                    >
+                        View Code
+                    </ButtonIcon>
+                </div>
             </div>
         </div>
         <div v-if="currentTeams != null" class="roster">
@@ -164,10 +174,25 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        @include breakpoint(sm) {
+            flex-direction: column;
+            text-align: center;
+        }
     }
 
     &__meta {
         line-height: 1;
+
+        @include breakpoint(sm) {
+            margin-bottom: $grid-gutter-width;
+        }
+    }
+
+    &__actions {
+        .ButtonIcon + .ButtonIcon {
+            margin-left: 10px;
+        }
     }
 
     &__date {
