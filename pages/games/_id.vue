@@ -45,6 +45,8 @@ import ViewObjectivesModal from '@/components/modal/ViewObjectivesModal';
 export default {
     name: 'GamesViewPage',
 
+    layout: 'header',
+
     components: { GameProjectTeam },
 
     mixins: [createTeamReport],
@@ -92,24 +94,11 @@ export default {
 };
 </script>
 
-<style lang="scss">
-    #__layout > div {
-        position: relative;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-    }
-
-    .footer {
-        display: none;
-    }
-</style>
-
 <style lang="scss" scoped>
 @import 'utils.scss';
 
 .GamesViewPage {
+    height: calc(100vh - #{$header-height});
     background-color: $bg-color-4;
     display: flex;
     flex-flow: column nowrap;
