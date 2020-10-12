@@ -7,8 +7,8 @@
                 <tr slot="head">
                     <th width="10%">Rank</th>
                     <th width="30%">Username</th>
-                    <th width="15%">Level</th>
                     <th width="15%">Won</th>
+                    <th width="15%">Level</th>
                     <th width="15%">Coins</th>
                     <th width="15%">XP</th>
                 </tr>
@@ -18,8 +18,8 @@
                         {{ page * 10 + index + 1 }}
                     </td>
                     <td><User :user="user" size="sm" /></td>
-                    <td>{{ user.stats.level }}</td>
                     <td>{{ user.gameStats.wins }}</td>
+                    <td>{{ user.rank.name }}</td>
                     <td>{{ user.stats.coins }}</td>
                     <td>{{ user.stats.xp }}</td>
                 </tr>
