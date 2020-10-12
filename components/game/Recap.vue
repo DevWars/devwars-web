@@ -11,7 +11,7 @@
                             {{ game.mode }}
                         </div>
                         <div
-                            v-for="team in currentTeams"
+                            v-for="team in teamReport"
                             :key="team.id"
                             class="points"
                         >
@@ -25,7 +25,7 @@
 
                 <div class="matchup">
                     <ul
-                        v-for="team in currentTeams"
+                        v-for="team in teamReport"
                         :key="team.id"
                         class="players"
                         :class="{
@@ -62,34 +62,27 @@
 </template>
 
 <script>
-import { teams } from '@/utils/mixins';
-
-import { getScoreByGameTeam, getPlayersByGameTeam } from '@/utils';
+import { createTeamReport } from '@/utils/mixins';
 import HomeCard from '@/components/HomeCard';
 
 export default {
     name: 'Recap',
+
     components: { HomeCard },
-    mixins: [teams],
+
+    mixins: [createTeamReport],
+
     props: {
-        game: {
-            type: Object,
-            required: true,
-        },
+        game: { type: Object, required: true },
     },
 
     data: () => ({
-        currentTeams: null,
+        teamReport: null,
     }),
 
     mounted() {
         const { game, players } = this.game;
-        this.currentTeams = this.teams(game, players);
-    },
-
-    methods: {
-        getScoreByGameTeam,
-        getPlayersByGameTeam,
+        this.teamReport = this.createTeamReport(game, players);
     },
 };
 </script>

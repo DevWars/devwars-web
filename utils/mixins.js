@@ -1,8 +1,8 @@
 import * as _ from 'lodash';
 
-export const teams = {
+export const createTeamReport = {
     methods: {
-        teams(game, players = []) {
+        createTeamReport(game, players = []) {
             const teams = {
                 0: {
                     id: 0,

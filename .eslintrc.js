@@ -17,6 +17,7 @@ module.exports = {
     rules: {
         curly: 'off',
         'vue/html-self-closing': 'off',
+        'vue/no-v-html': 'off',
         'space-before-function-paren': 'off',
         'arrow-parens': 'off',
         'vue/html-self-closing': 'off',
