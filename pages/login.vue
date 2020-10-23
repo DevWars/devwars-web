@@ -26,7 +26,9 @@
                         >
                             Login
                         </Button>
-                        <Button href="/register" class="outline muted block">Register</Button>
+                        <Button href="/register" class="outline muted block">
+                            Register
+                        </Button>
                         <Button
                             href="/forgot-password"
                             class="link muted block"
@@ -62,7 +64,6 @@ export default {
             authenticating: false,
         };
     },
-
     methods: {
         async login() {
             try {

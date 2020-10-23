@@ -1,5 +1,3 @@
-import Http from '../services/Http';
-
 export const state = () => ({
     badges: [],
 });
@@ -17,9 +15,5 @@ export const mutations = {
 };
 
 export const actions = {
-    async refresh({ commit }) {
-        const badges = await Http.for('badge').get();
-
-        commit('badges', badges);
-    },
+    refresh({ commit }) {},
 };

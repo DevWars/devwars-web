@@ -5,7 +5,9 @@
                 <h1 class="hero__title">
                     A live <strong>game show</strong> for developers
                 </h1>
-                <h2 class="hero__subtitle">Every other Saturday @ 5:00 PM (UTC)</h2>
+                <h2 class="hero__subtitle">
+                    Every other Saturday @ 5:00 PM (UTC)
+                </h2>
 
                 <ButtonGroup>
                     <Button
@@ -27,10 +29,12 @@
         <div class="home-shows home-section">
             <Container>
                 <h2 class="home-section__title">Upcoming Shows</h2>
-                <ScheduleBlock :count="2" />
+                <ScheduleBlock :count="5" />
 
                 <div class="home-section__actions">
-                    <Button to="/schedule" class="outline white">View Full Schedule</Button>
+                    <Button to="/schedule" class="outline white">
+                        View Full Schedule
+                    </Button>
                 </div>
             </Container>
         </div>
@@ -49,7 +53,9 @@
                     <h3 class="home-display__title">
                         Think you <br />got what <br />it takes?
                     </h3>
-                    <Button to="/competitor/register" class="outline lg">Become a competitor</Button>
+                    <Button to="/competitor/register" class="outline lg">
+                        Become a competitor
+                    </Button>
                 </div>
             </Container>
         </div>
@@ -66,7 +72,9 @@
                     <h3 class="home-display__title">
                         Get familiar <br />with DevWars <br />knowledge base.
                     </h3>
-                    <Button to="/docs" class="outline lg">View Documentation</Button>
+                    <Button to="/docs" class="outline lg">
+                        View Documentation
+                    </Button>
                 </div>
             </Container>
         </div>
@@ -186,7 +194,7 @@
 </template>
 
 <script>
-import Http from '../services/Http';
+import { isNil } from 'lodash';
 import Card from '@/components/Card';
 import Highlights from '@/components/game/Highlights';
 import ScheduleBlock from '@/components/game/ScheduleBlock';
@@ -200,9 +208,21 @@ export default {
         ScheduleBlock,
     },
 
-    async asyncData() {
+    async asyncData({ app: { $api } }) {
+        const { data } = await $api.games.gamesWithPaging({
+            first: 1,
+            season: 3,
+            status: 'ended',
+        });
+
+        const [game] = data;
+
+        if (isNil(game)) return { latest: game };
+
+        const players = await $api.games.getAllAssignedPlayersToGame(game.id);
+
         return {
-            latest: await Http.for('games').get('latest'),
+            latest: { game, players },
         };
     },
 };

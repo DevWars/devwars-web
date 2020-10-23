@@ -1,5 +1,5 @@
 <template>
-    <HomeCard v-if="latestSchedule" title="Next Showing">
+    <HomeCard v-if="latestGame" title="Next Showing">
         <div v-if="updateTimeInterval === null" class="now-showing">
             <div class="next-showing__time">Any Minute Now!</div>
         </div>
@@ -14,25 +14,29 @@
                 <div class="countdown__label">Hours</div>
             </li>
             <li id="minutes" class="countdown__item">
-                <div class="countdown__number">{{ timeDifference.minutes }}</div>
+                <div class="countdown__number">
+                    {{ timeDifference.minutes }}
+                </div>
                 <div class="countdown__label">Minutes</div>
             </li>
             <li id="seconds" class="countdown__item">
-                <div class="countdown__number">{{ timeDifference.seconds }}</div>
+                <div class="countdown__number">
+                    {{ timeDifference.seconds }}
+                </div>
                 <div class="countdown__label">Seconds</div>
             </li>
         </ul>
         <div class="next-showing">
             <div class="next-showing__date">
-                {{ latestSchedule.startTime | moment('dddd, MMMM DD') }}
+                {{ latestGame.startTime | moment('dddd, MMMM DD') }}
             </div>
             <div class="next-showing__time">
-                {{ latestSchedule.startTime | moment('H:mm') }} (UTC)
+                {{ latestGame.startTime | moment('H:mm') }} (UTC)
             </div>
         </div>
 
         <div slot="actions">
-            <RegistrationButtons :schedule="latestSchedule" />
+            <RegistrationButtons :game="latestGame" />
         </div>
     </HomeCard>
 </template>
@@ -57,7 +61,7 @@ export default {
         upcoming() {
             return this.$store.state.game.upcoming;
         },
-        latestSchedule() {
+        latestGame() {
             if (this.upcoming.length === 0) {
                 return false;
             }
@@ -85,9 +89,7 @@ export default {
         },
 
         updateTime() {
-            const delta = moment
-                .utc(this.latestSchedule.startTime)
-                .diff(moment());
+            const delta = moment.utc(this.latestGame.startTime).diff(moment());
             if (delta <= 0) {
                 return this.resetTime();
             }

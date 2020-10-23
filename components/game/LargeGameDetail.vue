@@ -9,37 +9,47 @@
                     <h2 class="banner__gamemode">
                         {{ game.mode }}
                     </h2>
-                    <div class="banner__versus">
-                        {{ currentTeams[0].size }} VS
-                        {{ currentTeams[1].size }}
+                    <div v-if="teamReport != null" class="banner__versus">
+                        {{ teamReport[0].players.length }} VS
+                        {{ teamReport[1].players.length }}
                     </div>
                 </div>
-                <ButtonIcon
-                    v-show="game.videoUrl"
-                    :href="game.videoUrl"
-                    target="_blank"
-                    icon="brands/youtube"
-                    class="youtube"
-                >
-                    Watch on YouTube
-                </ButtonIcon>
+
+                <div class="banner__actions">
+                    <ButtonIcon
+                        v-show="game.videoUrl"
+                        :href="game.videoUrl"
+                        target="_blank"
+                        icon="brands/youtube"
+                        class="youtube"
+                    >
+                        Watch Game
+                    </ButtonIcon>
+                    <ButtonIcon
+                        :to="`/games/${game.id}`"
+                        icon="code"
+                        class="outline"
+                    >
+                        View Code
+                    </ButtonIcon>
+                </div>
             </div>
         </div>
-
-        <div class="roster">
+        <div v-if="teamReport != null" class="roster">
             <GameTeam
-                v-for="team in currentTeams"
+                v-for="team in teamReport"
                 :key="team.id"
                 :team="team"
-                :points="team.scores.total"
-                :winner="teams.winner"
+                :points="team.score"
+                :winner="game.meta.winningTeam === team.id"
             >
                 <Player
-                    v-for="player in playersWithUser(team.players)"
-                    :key="player.originalId || player.id"
-                    :user="player"
+                    v-for="player in team.players"
+                    :key="player.id"
+                    :player="player"
                     :team="team"
-                    :languages="getLanguageByGamePlayer(game, player)"
+                    :languages="player.assignedLanguages"
+                    :navigate-to-profile="true"
                 />
             </GameTeam>
         </div>
@@ -48,36 +58,7 @@
             <h3>{{ game.title }}</h3>
         </SubScore>
 
-        <SubScore
-            title="Objectives"
-            :blue-score="currentTeams[0].scores.objectives"
-            :red-score="currentTeams[1].scores.objectives"
-        >
-            <ul class="objectives">
-                <li
-                    v-for="objective in game.objectives"
-                    :key="objective.id"
-                    class="objectives__item"
-                    :class="{ bonus: objective.isBonus }"
-                >
-                    <div
-                        class="objectives__square team-blue"
-                        :class="{
-                            active: teamCompletedObjective(0, objective),
-                        }"
-                    />
-                    <span class="objectives__obj">{{
-                        objective.description
-                    }}</span>
-                    <div
-                        class="objectives__square team-red"
-                        :class="{
-                            active: teamCompletedObjective(1, objective),
-                        }"
-                    />
-                </li>
-            </ul>
-        </SubScore>
+        <ObjectivesList :game="game" :players="players" />
 
         <VoteBox :game="game" category="ui" />
         <VoteBox :game="game" category="ux" />
@@ -89,13 +70,16 @@ import VoteBox from '@/components/game/VoteBox';
 import SubScore from '@/components/game/SubScore';
 import GameTeam from '@/components/game/GameTeam';
 import Player from '@/components/game/Player';
-import { teams, usersFromGame } from '@/utils/mixins';
-import { getLanguageByGamePlayer, teamCompletedObjective } from '@/utils';
+import ObjectivesList from '@/components/game/ObjectivesList';
+import { createTeamReport } from '@/utils/mixins';
 
 export default {
     name: 'LargeGameDetail',
-    components: { GameTeam, Player, SubScore, VoteBox },
-    mixins: [teams, usersFromGame],
+
+    components: { GameTeam, Player, SubScore, VoteBox, ObjectivesList },
+
+    mixins: [createTeamReport],
+
     props: {
         game: {
             type: Object,
@@ -108,15 +92,24 @@ export default {
         },
     },
 
-    computed: {
-        currentTeams() {
-            return this.teams(this.game);
-        },
-    },
+    data: () => ({
+        players: [],
+        teamReport: null,
+    }),
 
-    methods: {
-        getLanguageByGamePlayer,
-        teamCompletedObjective,
+    watch: {
+        game: {
+            async handler(newVal, oldVal) {
+                if (this.includePlayers) {
+                    this.players = await this.$api.games.getAllAssignedPlayersToGame(
+                        this.game.id,
+                    );
+                }
+
+                this.teamReport = this.createTeamReport(this.game, this.players);
+            },
+            immediate: true,
+        },
     },
 };
 </script>
@@ -144,10 +137,25 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        @include breakpoint(sm) {
+            flex-direction: column;
+            text-align: center;
+        }
     }
 
     &__meta {
         line-height: 1;
+
+        @include breakpoint(sm) {
+            margin-bottom: $grid-gutter-width;
+        }
+    }
+
+    &__actions {
+        .ButtonIcon + .ButtonIcon {
+            margin-left: 10px;
+        }
     }
 
     &__date {
@@ -179,34 +187,8 @@ export default {
     }
 }
 
-.objectives {
-    &__item {
-        @extend %flex-justify;
-        width: 100%;
-        padding-bottom: $s-space;
-        text-align: center;
-
-        &.bonus {
-            color: $bonus-color;
-        }
-    }
-
-    &__square {
-        width: 30px;
-        height: 30px;
-        border: 5px solid #23252c;
-
-        &.team-blue.active {
-            background-color: $brand-primary;
-        }
-
-        &.team-red.active {
-            background-color: $brand-secondary;
-        }
-    }
-
-    &__item.bonus &__square.active {
-        background-color: $bonus-color;
-    }
+.SubScore {
+    border-top: 1px solid $divider-color;
+    margin-top: 30px;
 }
 </style>

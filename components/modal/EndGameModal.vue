@@ -26,8 +26,7 @@ export default {
     },
     methods: {
         async end(team) {
-            await this.$axios.post(`/games/${this.game.id}/end`);
-
+            await this.$api.games.endGame(this.game.id);
             this.close(team);
         },
     },

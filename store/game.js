@@ -1,10 +1,6 @@
-import { find, isNil } from 'lodash';
-import Http from '../services/Http';
-
 export const state = () => ({
     applications: [],
     upcoming: [],
-    schedules: [],
     all: [],
     game: {},
     active: null,
@@ -30,9 +26,9 @@ export const mutations = {
     apply(state, applications) {
         state.applications.push(applications);
     },
-    forfeit(state, game) {
+    forfeit(state, gameId) {
         state.applications = state.applications.filter(
-            (t) => t.schedule.id !== game.id,
+            (t) => t.gameId !== gameId,
         );
     },
 
@@ -47,109 +43,86 @@ export const mutations = {
     active(state, game) {
         state.active = game;
     },
-
-    /**
-     * Updates the schedules templates by language with the updated template
-     * value. e.g updating the given schedules html template.
-     */
-    updateScheduleTemplate(state, { language, template, scheduleId }) {
-        const schedule = getters.scheduleById(scheduleId);
-
-        if (isNil(schedule)) return;
-        if (isNil(schedule.templates)) schedule.templates = {};
-
-        schedule.templates[language] = template;
-    },
-
-    /**
-     *  Updates the is bonus state for the current game objective.
-     */
-    updateObjectIsBonusState(state, { objectiveId, isBonus }) {
-        if (state.game != null && state.game.objectives[objectiveId] != null) {
-            state.game.objectives[objectiveId].isBonus = isBonus;
-        }
-    },
-
-    updateScheduleObjective(state, { value, objectiveId, scheduleId }) {
-        const schedule = getters.scheduleById(scheduleId);
-        schedule.objectives[objectiveId].isBonus = value;
-    },
-
-    addScheduleObjective(state, { scheduleId, objective }) {
-        const schedule = find(state.schedules, (o) => o.id === scheduleId);
-        schedule.objectives[objective.id] = objective;
-
-        state.schedules = state.schedules.slice(0, state.schedules.length);
-    },
-
-    deleteScheduleObjective(state, { scheduleId, objectiveId }) {
-        const schedule = getters.scheduleById(scheduleId);
-        delete schedule.objectives[objectiveId];
-
-        state.schedules = state.schedules.slice(0, state.schedules.length);
-    },
 };
 
 export const actions = {
     async all({ commit }) {
-        const games = await Http.for('games').get('?players=true');
+        const { data: games } = await this.$api.games.gamesWithPaging({
+            first: 25,
+        });
+
         commit('all', games);
     },
 
     async game({ commit }, { id, players }) {
-        const game = await this.$axios.get(`games/${id}?players=${players}`);
-        commit('game', game.data);
+        const game = await this.$api.games.getGame(id);
+        let gamePlayers = {};
+
+        if (players) {
+            gamePlayers = await this.$api.games.getAllAssignedPlayersToGame(id);
+        }
+
+        commit('game', { game, players: gamePlayers });
     },
 
-    async create({ commit }, data) {
-        const game = await Http.for('games').save(data);
-        commit('add', game);
-    },
-
-    async applications({ commit, dispatch, state }) {
+    async create({ commit, dispatch }, data) {
         try {
-            const applications = await Http.for('applications').get('mine');
-            commit('applications', applications);
+            const game = await this.$api.games.createGame(data);
+            commit('add', game);
+
+            return game;
         } catch (e) {
-            if (e.response.status !== 401) {
-                dispatch('toast/error', e.response.data, { root: true });
-            }
+            dispatch('toast/error', e, { root: true });
         }
     },
 
-    async schedules({ commit }) {
+    async applications({ commit, dispatch, rootState }) {
         try {
-            const schedules = await Http.for('schedules').get();
-            commit('schedules', schedules);
+            if (rootState.user == null || rootState.user.user == null) {
+                return;
+            }
+
+            const applications = await this.$api.users.getUserGameApplications(
+                rootState.user.user.id,
+            );
+
+            commit('applications', applications);
         } catch (e) {
-            commit('schedules', null);
+            dispatch('toast/error', e, { root: true });
         }
     },
 
     async active({ commit }) {
-        try {
-            const { data } = await Http.for('schedules?status=active').get();
-            commit('active', data[0]);
-        } catch (e) {
-            commit('active', null);
-        }
+        const games = await this.$api.games.gamesWithPaging({
+            first: 1,
+            status: 'active',
+        });
+
+        const [data] = games.data;
+
+        commit('active', data);
     },
 
     async upcoming({ commit, dispatch }) {
         try {
-            const { data } = await Http.for('schedules?status=scheduled').get();
+            const { data } = await this.$api.games.gamesWithPaging({
+                first: 25,
+                status: 'scheduled',
+            });
+
             commit('upcoming', data);
         } catch (e) {
-            dispatch('toast/error', e.response.data, { root: true });
+            dispatch('toast/error', e, { root: true });
         }
     },
 
-    async apply({ commit, dispatch }, schedule) {
+    async apply({ commit, dispatch }, { game: gameId, user: userId }) {
         try {
-            const app = await this.$axios.post(
-                `applications/schedule/${schedule.id}`,
+            const app = await this.$api.games.applyToGameAsPlayer(
+                gameId,
+                userId,
             );
-            commit('apply', app.data);
+            commit('apply', app);
 
             dispatch('toast/success', 'Thanks for signing up! See ya soon', {
                 root: true,
@@ -157,29 +130,29 @@ export const actions = {
 
             dispatch('navigate', '/game/confirmation', { root: true });
         } catch (e) {
-            dispatch('toast/error', e.response.data, { root: true });
+            dispatch('toast/error', e, { root: true });
         }
     },
 
-    async forfeit({ commit, dispatch }, schedule) {
+    async forfeit({ commit, dispatch }, { game: gameId, user: userId }) {
         try {
-            await this.$axios.delete(`applications/schedule/${schedule.id}`);
-            commit('forfeit', schedule);
+            await this.$api.games.removeUserApplicationForGame(gameId, userId);
+            commit('forfeit', gameId);
 
             dispatch('toast/success', 'Sorry to see you go.', { root: true });
         } catch (e) {
-            dispatch('toast/error', e.response.data, { root: true });
+            dispatch('toast/error', e, { root: true });
         }
     },
 
     async sendPatch({ commit, dispatch }, game) {
         try {
-            await this.$axios.patch(`/games/${game.id}`, game);
+            await this.$api.games.updateGame(game.id, game);
             commit('game', game);
 
             dispatch('toast/success', 'Game updated!', { root: true });
         } catch (e) {
-            dispatch('toast/error', e.response.data, { root: true });
+            dispatch('toast/error', e, { root: true });
         }
     },
 };

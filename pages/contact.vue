@@ -39,7 +39,10 @@
                     <Card v-show="submitted" class="dark plain">
                         <h1>Thank you!</h1>
                         <div class="mt-xs mb-md">
-                            <h4>We received your email, you will hear back from us soon.</h4>
+                            <h4>
+                                We received your email, you will hear back from
+                                us soon.
+                            </h4>
                         </div>
                     </Card>
                 </Column>
@@ -83,7 +86,7 @@ export default {
             try {
                 const { name, email, message } = this;
 
-                await this.$axios.$post('/contact', {
+                await this.$api.contact.makeContactRequest({
                     name,
                     email,
                     message,
@@ -92,10 +95,7 @@ export default {
                 this.toastSuccess('Contact-us sent successfully.');
                 this.submitted = true;
             } catch (e) {
-                const message = e.response
-                    ? e.response.data
-                    : 'failed to send contact-us';
-                this.toastError(message);
+                this.toastError(e);
             }
         },
 

@@ -7,39 +7,37 @@
                 <tr slot="head">
                     <th width="10%">Rank</th>
                     <th width="30%">Username</th>
-                    <th width="15%">Level</th>
                     <th width="15%">Won</th>
+                    <th width="15%">Level</th>
                     <th width="15%">Coins</th>
                     <th width="15%">XP</th>
                 </tr>
 
-                <tr
-                    v-for="(user, index) in leaderboards.data"
-                    :key="user.userId"
-                >
-                    <td scope="row" class="rank">{{ page * 10 + index + 1 }}</td>
+                <tr v-for="(user, index) in leaderboards.data" :key="user.id">
+                    <td scope="row" class="rank">
+                        {{ page * 10 + index + 1 }}
+                    </td>
                     <td><User :user="user" size="sm" /></td>
-                    <td>{{ user.level }}</td>
-                    <td>{{ user.wins }}</td>
-                    <td>{{ user.coins }}</td>
-                    <td>{{ user.xp }}</td>
+                    <td>{{ user.gameStats.wins }}</td>
+                    <td>{{ user.rank.name }}</td>
+                    <td>{{ user.stats.coins }}</td>
+                    <td>{{ user.stats.xp }}</td>
                 </tr>
             </Table>
 
             <Pagination
                 :page="page"
                 :per-page="10"
-                :can-next="leaderboards.pagination.after !== null"
-                :can-previous="leaderboards.pagination.before !== null"
-                @previous="previous"
-                @next="next"
+                :can-next="false"
+                :can-previous="false"
+                @previous="() => {}"
+                @next="() => {}"
             />
         </Container>
     </div>
 </template>
 
 <script>
-import Http from '../services/Http';
 import PageBanner from '@/components/layout/PageBanner';
 import Table from '@/components/Table';
 import User from '@/components/user/User';
@@ -50,45 +48,16 @@ export default {
 
     components: { PageBanner, Table, User, Pagination },
 
-    async asyncData() {
+    async asyncData({ app: { $api } }) {
         return {
-            leaderboards: await Http.for('users/leaderboards?first=10').get(),
+            leaderboards: await $api.leaderboards.leaderboardsOfUsers({}),
         };
     },
 
     data: () => {
         return {
             page: 0,
-            pagination: {
-                after: null,
-                before: null,
-            },
-            data: [],
         };
-    },
-
-    mounted() {},
-
-    methods: {
-        async previous() {
-            this.page -= 1;
-
-            const { pagination } = this.leaderboards;
-            const before = pagination.before.split('users/leaderboards')[1];
-            this.leaderboards = await Http.for(
-                `users/leaderboards${before}`,
-            ).get();
-        },
-
-        async next() {
-            this.page += 1;
-
-            const { pagination } = this.leaderboards;
-            const after = pagination.after.split('users/leaderboards')[1];
-            this.leaderboards = await Http.for(
-                `users/leaderboards${after}`,
-            ).get();
-        },
     },
 };
 </script>

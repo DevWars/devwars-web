@@ -1,22 +1,22 @@
 <template>
     <DashboardCard title="Upcoming Games" icon="calendar" class="scrollable">
         <div
-            v-for="schedule in upcoming"
-            :key="schedule.id"
+            v-for="game in upcoming"
+            :key="game.id"
             class="schedule"
-            :class="{ entered: isApplied(schedule) }"
+            :class="{ entered: isApplied(game) }"
         >
             <div class="main">
                 <Column :xs="2" class="no-gutter status">
-                    {{ isApplied(schedule) ? 'Entered' : 'Not Entered' }}
+                    {{ isApplied(game) ? 'Entered' : 'Not Entered' }}
                 </Column>
                 <Column :xs="10" class="no-gutter">
-                    {{ schedule.startTime | moment('longDate') }}
-                    @ {{ schedule.startTime | moment('HH:mm') }} (UTC)
+                    {{ game.startTime | moment('longDate') }}
+                    @ {{ game.startTime | moment('HH:mm') }} (UTC)
                 </Column>
             </div>
 
-            <RegistrationButtons :schedule="schedule" />
+            <RegistrationButtons :game="game" />
         </div>
     </DashboardCard>
 </template>
@@ -44,12 +44,9 @@ export default {
     },
 
     methods: {
-        isApplied(schedule) {
+        isApplied(game) {
             return this.applications.some((application) => {
-                return (
-                    application.schedule &&
-                    application.schedule.id === schedule.id
-                );
+                return application.gameId && application.gameId === game.id;
             });
         },
     },

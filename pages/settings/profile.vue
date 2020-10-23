@@ -150,10 +150,11 @@
 
                 <LanguageSkills :profile="profile" @change="updateForm" />
             </Column>
-            <Column :md="4">
+            <Column :md="4" class="avatar-container">
                 <h3>Avatar</h3>
-
-                <Avatar v-if="user" :user="user" class="xl" />
+                <div class="avatar">
+                    <Avatar v-if="user" :user="user" class="xl" />
+                </div>
 
                 <FileChooser @change="crop">
                     <template #default="{update}">
@@ -252,3 +253,14 @@ export default {
     },
 };
 </script>
+
+<style lang="scss" scoped>
+.avatar-container {
+    text-align: center;
+    margin: auto;
+}
+
+.avatar {
+    margin: 15px;
+}
+</style>

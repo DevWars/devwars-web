@@ -76,7 +76,7 @@ export default {
      * default to season 3, otherwise if no game is provided, the first game is
      * selected.
      */
-    async asyncData({ query, error, $axios }) {
+    async asyncData({ query, error, app: { $api } }) {
         if (query.season == null || isNaN(Number(query.season)))
             query.season = 3;
 
@@ -84,11 +84,13 @@ export default {
             query.game = undefined;
 
         try {
-            const { data } = await $axios.get(
-                `/games?season=${query.season}&first=10&status=ended`,
-            );
+            const { data, pagination } = await $api.games.gamesWithPaging({
+                first: 25,
+                status: 'ended',
+                season: query.season,
+            });
 
-            const games = data.data;
+            const games = data;
             let viewing = null;
 
             // If the given game that the ser was sent too is not on the
@@ -100,29 +102,26 @@ export default {
                 const view = games.filter((g) => g.id === Number(query.game));
                 const gameId = view[0] == null ? query.game : view[0].id;
 
-                viewing = (await $axios.get(`/games/${gameId}?players=true`))
-                    .data;
+                viewing = await $api.games.getGame(gameId);
 
                 // if we did not find the game in our current list (wrong page)
                 // shift it to the front of our list so the linked players get
                 // to see the game.
-                if (view[0] == null) games.unshift(viewing);
+                if (view[0] == null) data.unshift(viewing);
             } else if (!isNil(games[0])) {
-                viewing = (
-                    await $axios.get(`/games/${games[0].id}?players=true`)
-                ).data;
+                viewing = await $api.games.getGame(games[0].id);
             }
 
             return {
-                games: data || {},
+                games: { data, pagination } || {},
                 viewing: viewing || games[0],
                 season: Number(query.season),
             };
         } catch (e) {
             error({
-                statusCode: e.response.status,
-                description: e.response.data.error,
-                message: e.response.statusText,
+                statusCode: e.status,
+                description: e.error,
+                message: e.message,
             });
         }
     },
@@ -177,9 +176,11 @@ export default {
                 const season = newSeason || 3;
                 this.season = Number(season);
 
-                const { data } = await this.$axios.get(
-                    `/games?season=${this.season}&first=10&status=ended`,
-                );
+                const data = await this.$api.games.gamesWithPaging({
+                    first: 25,
+                    status: 'ended',
+                    season: this.season,
+                });
 
                 // if a route update is triggered, requiring the regathering of
                 // the games, ensure to reset the page number. Otherwise paging
@@ -218,11 +219,9 @@ export default {
                 // this.viewing = this.games.data.filter((game) => game.id === newGame)[0];
 
                 try {
-                    this.viewing = (
-                        await this.$axios.get(`/games/${newGame}?players=true`)
-                    ).data;
+                    this.viewing = await this.$api.games.getGame(newGame);
                 } catch (e) {
-                    this.$store.dispatch('toast/error', e.response.data);
+                    this.$store.dispatch('toast/error', e);
                 }
             },
         },
@@ -244,8 +243,12 @@ export default {
             const { pagination } = this.games;
             const before = pagination.previous;
 
-            const url = `games?season=${this.season}&first=10&before=${before}&status=ended`;
-            const { data } = await this.$axios.get(url);
+            const data = await this.$api.games.gamesWithPaging({
+                first: 25,
+                status: 'ended',
+                season: this.season,
+                before,
+            });
 
             this.games = data;
         },
@@ -258,9 +261,12 @@ export default {
             const { pagination } = this.games;
             const after = pagination.next;
 
-            const { data } = await this.$axios.get(
-                `games?season=${this.season}?first=10&after=${after}&status=ended`,
-            );
+            const data = await this.$api.games.gamesWithPaging({
+                first: 25,
+                status: 'ended',
+                season: this.season,
+                after,
+            });
 
             this.games = data;
         },

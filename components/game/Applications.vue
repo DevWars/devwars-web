@@ -25,7 +25,6 @@
                 <th>HTML</th>
                 <th>CSS</th>
                 <th>JS</th>
-                <th>Devcoins</th>
             </tr>
 
             <tr
@@ -35,7 +34,7 @@
             >
                 <td>
                     <User
-                        :user="applicant"
+                        :user="applicant.user"
                         :team="getPlayerTeamById(applicant.id)"
                     />
                 </td>
@@ -43,22 +42,19 @@
                     {{ totalGamesForApplication(applicant) }}
                 </td>
                 <td>
-                    {{ applicant.gameStats ? applicant.gameStats.wins : 0 }}
+                    {{ applicant.statistics ? applicant.statistics.wins : 0 }}
                 </td>
                 <td>
-                    {{ applicant.gameStats ? applicant.gameStats.loses : 0 }}
+                    {{ applicant.statistics ? applicant.statistics.loses : 0 }}
                 </td>
                 <td>
-                    {{ defaultSkillValue(applicant.profile.skills, 'html', 0) }}
+                    {{ defaultSkillValue(applicant.skills, 'html', 0) }}
                 </td>
                 <td>
-                    {{ defaultSkillValue(applicant.profile.skills, 'css', 0) }}
+                    {{ defaultSkillValue(applicant.skills, 'css', 0) }}
                 </td>
                 <td>
-                    {{ defaultSkillValue(applicant.profile.skills, 'js', 0) }}
-                </td>
-                <td>
-                    <Devcoins :amount="applicant.stats.coins" class="xs" />
+                    {{ defaultSkillValue(applicant.skills, 'js', 0) }}
                 </td>
             </tr>
         </Table>
@@ -74,19 +70,17 @@ import { isNil, defaultTo, mean, sample, size } from 'lodash';
 
 import Table from '@/components/Table';
 import User from '@/components/user/User';
-import Devcoins from '@/components/Devcoins';
 import AddPlayerModal from '@/components/modal/AddPlayerModal';
 import AddRegistrantModal from '@/components/modal/AddRegistrantModal';
-import { getLanguageByGamePlayer } from '@/utils';
 
 export default {
     name: 'Applications',
 
-    components: { Table, User, Devcoins },
+    components: { Table, User },
 
     props: {
-        schedule: { type: Object, default: undefined },
         game: { type: Object, default: undefined },
+        players: { type: Array, default: () => [] },
     },
 
     data() {
@@ -109,35 +103,31 @@ export default {
     },
 
     mounted() {
-        if (!this.schedule && !this.game) return;
+        if (!this.game) return;
         this.loadApplications();
     },
 
     methods: {
-        getLanguageByGamePlayer,
-
         async loadApplications() {
-            const scheduleOrGame = this.schedule
-                ? `schedule/${this.schedule.id}?stats=true&profile=true`
-                : `game/${this.game.id}?stats=true&profile=true`;
-
-            const response = await this.$axios.get(
-                `/applications/${scheduleOrGame}`,
+            const applications = await this.$api.games.getGameApplications(
+                this.game.id,
             );
 
-            const applications = response.data;
             this.applications = applications;
         },
 
-        async addPlayer(user) {
+        async addPlayer(application) {
             if (isNil(this.game)) return;
             const result = await this.$open(AddPlayerModal, {
-                user,
+                user: application.user,
                 game: this.game,
             });
 
             if (!isNil(result)) {
-                this.$emit('assigned-player', { user, ...result });
+                this.$emit('assigned-player', {
+                    user: application.user,
+                    ...result,
+                });
             }
         },
 
@@ -157,8 +147,8 @@ export default {
          * @param {Application} Application The application who is getting the total games.
          */
         totalGamesForApplication(application) {
-            if (isNil(application) || isNil(application.gameStats)) return 0;
-            return application.gameStats.wins + application.gameStats.loses;
+            if (isNil(application) || isNil(application.statistics)) return 0;
+            return application.statistics.wins + application.statistics.loses;
         },
 
         async addRegistrant() {
@@ -232,9 +222,9 @@ export default {
                     player.team = altTeam;
                 }
 
-                lastResponse = await this.$axios.post(
-                    `/games/${this.game.id}/player`,
-                    { player },
+                lastResponse = await this.$api.games.addPlayerToGame(
+                    this.game.id,
+                    player,
                 );
 
                 altTeam = currentTeam;
@@ -250,10 +240,11 @@ export default {
          * Used for assigning + coloring of the users on the applications screen.
          */
         getPlayerTeamById(id) {
-            if (isNil(this.game?.players) || isNil(this.game.players[id]))
-                return;
+            for (const player of this.players) {
+                if (player.id === id) return player.team;
+            }
 
-            return this.game.players[id].team;
+            return null;
         },
 
         getTeamNameById(id) {

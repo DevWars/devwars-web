@@ -87,8 +87,11 @@ export default {
         ConnectionsSmall,
     },
 
-    async asyncData({ parmas, $axios }) {
-        const { data: users } = await $axios.get('users?first=5');
+    async asyncData({ app: { $api } }) {
+        const users = await $api.users.usersWithPaging({
+            first: 25,
+        });
+
         return { users };
     },
 
@@ -110,16 +113,18 @@ export default {
         async performSearch() {
             if (this.search == null || this.search.trim() === '') return;
 
-            const { data: users } = await this.$axios.get(
-                `search/users?username=${this.search}&email=${this.search}&full=true`,
-            );
+            const users = await this.$api.search.searchForUsers({
+                full: true,
+                username: this.search,
+                email: this.search,
+            });
 
             this.users = { data: users, pagination: {} };
             this.searched = true;
         },
 
         async clearSearch() {
-            const { data: users } = await this.$axios.get('users?first=5');
+            const users = await this.$api.users.usersWithPaging({ first: 25 });
             this.users = users;
             this.searched = false;
             this.search = null;
@@ -131,9 +136,10 @@ export default {
             const { pagination } = this.users;
             const before = pagination.previous;
 
-            const { data: users } = await this.$axios.get(
-                `users?first=5&before=${before}`,
-            );
+            const users = await this.$api.users.usersWithPaging({
+                first: 25,
+                before,
+            });
 
             this.users = users;
         },
@@ -143,9 +149,10 @@ export default {
             const { pagination } = this.users;
             const after = pagination.next;
 
-            const { data: users } = await this.$axios.get(
-                `users?first=5&after=${after}`,
-            );
+            const users = await this.$api.users.usersWithPaging({
+                first: 25,
+                after,
+            });
 
             this.users = users;
         },

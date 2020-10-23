@@ -38,6 +38,9 @@
                     <li>
                         <a href="#betting">Betting</a>
                     </li>
+                    <li>
+                        <a href="#bot-commands">Bot Commands</a>
+                    </li>
                 </ul>
 
                 <ButtonIcon href="#competing" icon="gamepad" class="link">Competing</ButtonIcon>
@@ -73,7 +76,7 @@
                         sections will be added over time, please check back
                         frequently for updates.
                     </p>
-                    <em>Last Modified: June 30, 2018</em>
+                    <em>Last Modified: June 5, 2020</em>
                 </div>
             </div>
         </Column>
@@ -171,15 +174,26 @@
                     </section>
 
                     <section>
+                        <h3>Blitz</h3>
+                        <Tag class="outline sm">1 VS 1</Tag>
+                        <Tag class="outline html sm">HTML</Tag>
+                        <Tag class="outline css sm">CSS</Tag>
+                        <Tag class="outline js sm">JAVASCRIPT</Tag>
+                        <p>Time: 30:00</p>
+                        <p>
+                            A fast-paced of Classic where both competing players have access to all 3 languages.
+                        </p>
+                    </section>
+
+                    <section>
                         <h3>Zen Garden</h3>
                         <Tag class="outline sm">1 VS 1</Tag>
                         <Tag class="outline css sm">CSS</Tag>
-                        <p>Time: 60:00</p>
+                        <p>Time: 30:00 - 60:00</p>
                         <p>
                             This 1 vs 1 game mode provides both teams the same
                             pre-made HTML document. Both teams can only use CSS
-                            to style their website. Objectives are not available
-                            in Zen Garden games.
+                            to style their website.
                         </p>
                     </section>
 
@@ -306,7 +320,7 @@
                             and URLs from teammates is acceptable.
                         </li>
                         <li>
-                            After the 60 minute timer has run out, your code can
+                            After the timer has run out, your code can
                             no longer be modified.
                         </li>
                         <li>
@@ -317,6 +331,9 @@
                             Player must code in the
                             <a href="#editor">DevWars Editor</a>, coding in any
                             other editor/IDE is strictly prohibitted.
+                        </li>
+                        <li>
+                            Players must code in the language they are assigned to. For example, if you are assigned HTML, you cannot open a &lt;style&gt; tag to code CSS properties. Javascript may add HTML so long as it was copied from their HTML player and is used for dynamic purposes (i.e. templates).
                         </li>
                     </ol>
                 </section>
@@ -619,6 +636,48 @@
                         </table>
                     </section>
                 </section>
+
+                <section id="bot-commands">
+                    <h2>Bot Commands</h2>
+                    <p>
+                        A list of commands you can use on the <a href="https://twitch.tv/devwars" target="_blank">DevWars Twitch channel</a>
+                    </p>
+
+                    <section>
+                        <p>
+                            <code>!watch</code>
+                            <br />Outputs links for red and blue team's code editors and websites for live games.
+                        </p>
+                    </section>
+
+                    <section>
+                        <p>
+                            <code>!discord</code>
+                            <br />Get link for <a href="https://discord.gg/devwars" target="_blank">DevWars Discord</a>
+                        </p>
+                    </section>
+
+                    <section>
+                        <p>
+                            <code>!coins</code>
+                            <br />See how many Devcoins you have.
+                        </p>
+                    </section>
+
+                    <section>
+                        <p>
+                            <code>!hype</code>
+                            <br />Aboard the Hypetrain when it comes around to earn more coins.
+                        </p>
+                    </section>
+
+                    <section>
+                        <p>
+                            <code>!vote [letter]</code>
+                            <br />Place your vote when a live voting poll is active.
+                        </p>
+                    </section>
+                </section>
             </article>
 
             <article id="competing">
@@ -834,18 +893,36 @@
                                     <td>
                                         <strong>Twitch Chat (offline)</strong>
                                     </td>
-                                    <td>Awarded every 30 minutes</td>
+                                    <td>Awarded every 15 minutes</td>
                                     <td>
-                                        <Devcoins :amount="2" class="xs" />
+                                        <Devcoins :amount="10" class="xs" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <strong>Twitch Chat (live)</strong>
                                     </td>
-                                    <td>Awarded every 30 minutes</td>
+                                    <td>Awarded every 15 minutes</td>
                                     <td>
-                                        <Devcoins :amount="10" class="xs" />
+                                        <Devcoins :amount="20" class="xs" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Twitch Chat Bonus</strong>
+                                    </td>
+                                    <td>10% chance of randomly receiving bonus coins</td>
+                                    <td>
+                                        <span class="keybinding">0 - 999</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Hypetrain</strong>
+                                    </td>
+                                    <td>Earn coins with <code>!hype</code> when Hypetrain is active</td>
+                                    <td>
+                                        <span class="keybinding">Variable</span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -1033,18 +1110,19 @@ article {
     background-color: $bg-color-2;
     margin-top: 30px;
 
-    header,
-    section {
-        border-bottom: $border-size solid $divider-color;
-    }
-
     header {
         padding-top: $xs-space;
         padding-bottom: $m-space;
     }
 
+    & > header,
+    & > section {
+        border-bottom: $border-size solid $divider-color;
+        padding-bottom: 40px;
+    }
+
     section {
-        padding: $m-space 0;
+        padding-top: 30px;
 
         &:last-of-type {
             border-bottom: 0;
@@ -1216,7 +1294,7 @@ code {
         color: $text-color-secondary;
     }
 
-    li:hover {
+    .circle:hover {
         .lang {
             display: inline-block;
         }
@@ -1225,8 +1303,8 @@ code {
         }
     }
 
-    @mixin position($lang, $color) {
-        li.#{$lang} {
+    @each $lang, $color in (html: $html-color, css: $css-color, js: $js-color) {
+        .#{$lang} {
             .circle {
                 border-color: $color;
                 color: $color;
@@ -1237,10 +1315,6 @@ code {
             }
         }
     }
-
-    @include position(html, $html-color);
-    @include position(css, $css-color);
-    @include position(js, $js-color);
 }
 
 .browsers {

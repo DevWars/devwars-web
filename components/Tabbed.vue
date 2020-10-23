@@ -1,18 +1,18 @@
 <template>
-    <div>
+    <div class="Tabbed">
         <div class="tabs">
-            <div
+            <a
                 v-for="tab in tabs"
                 :key="tab.key"
                 :class="{ tab: true, active: tab.isActive }"
+                :href="tab.href"
+                @click="selectTab(tab)"
             >
-                <a class="link" :href="tab.href" @click="selectTab(tab)">{{
-                    tab.name
-                }}</a>
-            </div>
+                {{ tab.name }}
+            </a>
         </div>
 
-        <div class="tabs-details">
+        <div class="main">
             <slot class="tab"></slot>
         </div>
     </div>
@@ -20,6 +20,8 @@
 
 <script>
 export default {
+    name: 'Tabbed',
+
     data() {
         return { tabs: [] };
     },
@@ -60,39 +62,32 @@ export default {
 
 $tab-padding: 10px 20px;
 
-.tabs {
-    display: flex;
-    align-items: flex-end;
+.Tabbed {
+    .tabs {
+        display: flex;
+        align-items: flex-end;
 
-    .tab {
-        padding: $tab-padding;
-        border-width: $border-size-sm;
-        background-color: darken($bg-color-2, 7%);
-        font-size: $font-size-base;
-        color: $text-color-muted;
-        text-align: center;
+        .tab {
+            padding: $tab-padding;
+            border-width: $border-size-sm;
+            background-color: darken($bg-color-2, 7%);
+            font-size: $font-size-base;
+            color: $text-color-muted;
+            text-align: center;
 
-        &:not(:first-child) {
-            margin-left: 1px;
-        }
+            &:not(:first-child) {
+                margin-left: 1px;
+            }
 
-        &.active {
-            border-top-style: solid;
-            border-color: $brand-secondary;
-            background-color: $bg-color-2;
-            color: #fff;
-        }
+            &.active {
+                border-top-style: solid;
+                border-color: $brand-secondary;
+                background-color: $bg-color-2;
+                color: #fff;
+            }
 
-        /deep/ a {
-            display: block;
-            color: inherit;
-        }
-
-        &.link {
-            padding: 0;
-
-            /deep/ a {
-                padding: $tab-padding;
+            &:hover:not(.active) {
+                background-color: darken($bg-color-2, 8%);
             }
         }
     }
@@ -107,7 +102,7 @@ $tab-padding: 10px 20px;
 
     &.invert {
         .tab {
-            border-top: none;
+            border-top: none !important;
             border-bottom-style: solid;
         }
     }

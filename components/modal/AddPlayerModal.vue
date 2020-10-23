@@ -78,16 +78,11 @@ export default {
             };
 
             try {
-                const data = { player };
-                await this.$axios.post(`/games/${this.game.id}/player`, data);
+                await this.$api.games.addPlayerToGame(this.game.id, player);
 
                 this.close({ player });
             } catch (e) {
-                if (e.response && e.response.data) {
-                    this.$store.dispatch('toast/error', e.response.data);
-                } else {
-                    this.$store.dispatch('toast/error', e.message);
-                }
+                this.$store.dispatch('toast/error', e);
                 this.close();
             }
         },

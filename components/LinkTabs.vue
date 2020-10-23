@@ -1,5 +1,5 @@
 <template>
-    <div class="Tabs">
+    <div class="LinkTabs">
         <div
             v-for="tab in tabs"
             :key="tab.key"
@@ -85,7 +85,7 @@ export default {
 
 $tab-padding: 10px 20px;
 
-.Tabs {
+.LinkTabs {
     display: flex;
     align-items: flex-end;
 
@@ -106,6 +106,10 @@ $tab-padding: 10px 20px;
             border-color: $brand-secondary;
             background-color: $bg-color-2;
             color: #fff;
+        }
+
+        &:hover:not(.active) {
+            background-color: darken($bg-color-2, 8%);
         }
 
         /deep/ a {

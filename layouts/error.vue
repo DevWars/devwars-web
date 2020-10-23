@@ -10,7 +10,9 @@
                         <h1>{{ error.statusCode }}</h1>
                         <h2>{{ error.message }}</h2>
                         <p>{{ error.description }}</p>
-                        <Button to="/" class="outline primary lg">Go to home</Button>
+                        <Button to="/" class="outline primary lg">
+                            Go to home
+                        </Button>
                     </Column>
                 </div>
 
@@ -24,7 +26,9 @@
                         <p>
                             The page you are looking for does not exist. Sorry!
                         </p>
-                        <Button to="/" class="outline primary lg">Go to home</Button>
+                        <Button to="/" class="outline primary lg">
+                            Go to home
+                        </Button>
                     </Column>
                 </div>
 
@@ -36,7 +40,9 @@
                         <h1>500</h1>
                         <h2>It's not you, It's us.</h2>
                         <p>This page is experiencing internal server issues.</p>
-                        <Button to="/" class="outline primary lg">Go to home</Button>
+                        <Button to="/" class="outline primary lg">
+                            Go to home
+                        </Button>
                     </Column>
                 </div>
 
@@ -47,7 +53,9 @@
                     <Column :sm="8">
                         <h2>Oops!</h2>
                         <p>Looks like something went wrong.</p>
-                        <Button to="/" class="outline primary lg">Go to home</Button>
+                        <Button to="/" class="outline primary lg">
+                            Go to home
+                        </Button>
                     </Column>
                 </div>
             </Row>

@@ -5,7 +5,7 @@
 
         <ButtonGroup class="modal__actions">
             <Button class="outline muted" @click="close">Cancel</Button>
-            <Button class="danger" @click="resign(schedule)">Resign</Button>
+            <Button class="danger" @click="resign(game, user)">Resign</Button>
         </ButtonGroup>
     </div>
 </template>
@@ -15,15 +15,22 @@ export default {
     name: 'GameResignModal',
 
     props: {
-        schedule: {
+        game: {
+            type: Object,
+            required: true,
+        },
+        user: {
             type: Object,
             required: true,
         },
     },
 
     methods: {
-        async resign(schedule) {
-            await this.$store.dispatch('game/forfeit', schedule);
+        async resign(game, user) {
+            await this.$store.dispatch('game/forfeit', {
+                game: game.id,
+                user: user.id,
+            });
 
             this.close(true);
         },

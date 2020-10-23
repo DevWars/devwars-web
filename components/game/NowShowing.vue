@@ -7,7 +7,7 @@
         <div class="now-showing">
             <div class="embed-video">
                 <iframe
-                    src="https://player.twitch.tv/?channel=devwars"
+                    :src="twitchUrl"
                     frameborder="0"
                     allowfullscreen="true"
                     scrolling="no"
@@ -26,7 +26,7 @@
             >
                 Watch on Twitch
             </Button>
-            <RegistrationButtons :schedule="schedule" />
+            <RegistrationButtons :game="game" />
         </ButtonGroup>
     </HomeCard>
 </template>
@@ -38,9 +38,25 @@ import HomeCard from '@/components/HomeCard';
 export default {
     name: 'NowShowing',
     components: { HomeCard, RegistrationButtons },
+
     computed: {
-        schedule() {
+        twitchUrl() {
+            return `https://player.twitch.tv/?channel=devwars&parent=${this.extractHostname(
+                process.env.baseUrl,
+            )}`;
+        },
+        game() {
             return this.$store.state.game.active;
+        },
+    },
+
+    methods: {
+        extractHostname(url) {
+            const hostname = url.includes('//')
+                ? url.split('/')[2]
+                : url.split('/')[0];
+
+            return hostname.split(':')[0].split('?')[0];
         },
     },
 };

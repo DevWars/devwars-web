@@ -2,11 +2,11 @@ import Vue from 'vue';
 import Vue2Filters from 'vue2-filters';
 import moment from 'moment';
 
-Vue.filter('number', (input) => {
-    return input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+Vue.filter('formatNumber', (number) => {
+    return number.toLocaleString();
 });
 
-Vue.filter('moment', (input, format) => {
+Vue.filter('moment', (date, format) => {
     format =
         {
             mediumDate: 'MMM D, YYYY',
@@ -15,7 +15,7 @@ Vue.filter('moment', (input, format) => {
             fullDateWithTime: 'dddd, MMMM DD, YYYY @ HH:mm (UTC)',
         }[format] || format;
 
-    return moment.utc(input).format(format);
+    return moment.utc(date).format(format);
 });
 
 Vue.use(Vue2Filters);
