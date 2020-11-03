@@ -17,7 +17,7 @@
     "dependencies": {
         "@nuxtjs/axios": "^5.12.1",
         "@nuxtjs/dotenv": "^1.4.0",
-        "DevwarsClient": "git://github.com/DevWars/DevWars-API-Client#d7bee6845573a60552f58503ab198f54c9e41381",
+        "DevwarsClient": "git://github.com/DevWars/DevWars-API-Client#7bcd7bf261ff5f79117f3f2387382a2370acacff",
         "country-list": "^2.2.0",
         "cropperjs": "^1.5.7",
         "highlight.js": "^10.1.2",
