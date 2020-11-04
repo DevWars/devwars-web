@@ -48,13 +48,3 @@ export default {
     },
 };
 </script>
-
-<style lang="scss" scoped>
-@import 'utils.scss';
-
-.BadgePage {
-    .BadgeCard {
-        align-self: stretch;
-    }
-}
-</style>
