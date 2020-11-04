@@ -8,7 +8,7 @@
             <img :src="badgeImageUrl(badge)">
             <h2>{{ badge.name }}</h2>
 
-            <Devcoins :amount="badge.awarding_coins" />
+            <Devcoins :amount="badge.awardingCoins" />
             <span v-if="badgeIsEarned(badge)">Earned on {{ badge.createdAt | moment('M/DD/YYYY') }}</span>
             <span v-else>Not earned</span>
         </div>
@@ -30,11 +30,6 @@ export default {
 
     methods: {
         badgeImageUrl(badge) {
-            // Temporarily use Mystery badge for badges without artwork
-            if ([1, 21, 24, 26, 27, 28].includes(badge.id)) {
-                return require('~/assets/img/badges/mystery.png');
-            }
-
             const filename = badge.name.toLowerCase().replace(/ /g, '-');
             return require(`~/assets/img/badges/${filename}.png`);
         },
