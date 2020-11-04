@@ -1,15 +1,15 @@
 <template>
     <div
         class="BadgeCard"
-        :class="{complete: badgeIsEarned(badge)}"
+        :class="{complete: badgeIsEarned}"
         :title="badge.description"
     >
         <div class="badgeInner">
-            <img :src="badgeImageUrl(badge)">
+            <img :src="badgeImageUrl">
             <h2>{{ badge.name }}</h2>
 
             <Devcoins :amount="badge.awardingCoins" />
-            <span v-if="badgeIsEarned(badge)">Earned on {{ badge.createdAt | moment('M/DD/YYYY') }}</span>
+            <span v-if="badgeIsEarned">Earned on {{ badge.createdAt | moment('M/DD/YYYY') }}</span>
             <span v-else>Not earned</span>
         </div>
     </div>
@@ -28,14 +28,14 @@ export default {
         userBadges: { type: Array, required: true },
     },
 
-    methods: {
-        badgeImageUrl(badge) {
-            const filename = badge.name.toLowerCase().replace(/ /g, '-');
+    computed: {
+        badgeImageUrl() {
+            const filename = this.badge.name.toLowerCase().replace(/ /g, '-');
             return require(`~/assets/img/badges/${filename}.png`);
         },
 
-        badgeIsEarned(badge) {
-            return this.userBadges.find((b) => b.id === badge.id);
+        badgeIsEarned() {
+            return this.userBadges.find((b) => b.id === this.badge.id);
         },
     },
 };
