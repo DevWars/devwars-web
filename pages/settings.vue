@@ -2,22 +2,20 @@
     <div>
         <PageBanner title="Settings" />
 
-        <div class="footer-offset">
-            <Container>
-                <Row>
-                    <LinkTabs>
-                        <nuxt-link to="profile">Profile</nuxt-link>
-                        <nuxt-link to="account">Account</nuxt-link>
-                        <nuxt-link to="connections">Connections</nuxt-link>
-                        <nuxt-link to="notifications">Notifications</nuxt-link>
-                    </LinkTabs>
+        <Container class="footer-offset">
+            <Row>
+                <LinkTabs>
+                    <nuxt-link to="profile">Profile</nuxt-link>
+                    <nuxt-link to="account">Account</nuxt-link>
+                    <nuxt-link to="connections">Connections</nuxt-link>
+                    <nuxt-link to="notifications">Notifications</nuxt-link>
+                </LinkTabs>
 
-                    <Card class="plain dark">
-                        <nuxt />
-                    </Card>
-                </Row>
-            </Container>
-        </div>
+                <Card class="plain dark">
+                    <nuxt />
+                </Card>
+            </Row>
+        </Container>
     </div>
 </template>
 
