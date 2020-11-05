@@ -39,15 +39,7 @@
             </Container>
         </div>
 
-        <div
-            class="home-display"
-            :style="{
-                backgroundImage:
-                    'url(' +
-                    require('@/assets/img/become-contestant-bg.jpg') +
-                    ')',
-            }"
-        >
+        <div class="home-display">
             <Container>
                 <div class="home-display__content">
                     <h3 class="home-display__title">
@@ -60,13 +52,7 @@
             </Container>
         </div>
 
-        <div
-            class="home-display reverse"
-            :style="{
-                backgroundImage:
-                    'url(' + require('@/assets/img/devwars-docs-bg.jpg') + ')',
-            }"
-        >
+        <div class="home-display reverse">
             <Container>
                 <div class="home-display__content">
                     <h3 class="home-display__title">
@@ -92,7 +78,7 @@
                         <Card class="quote-card">
                             <img
                                 class="quote-card__avatar"
-                                src="~assets/img/companies/scotchio-square.jpg"
+                                src="/img/companies/scotchio-square.jpg"
                             />
                             <p class="quote-card__desc">
                                 Need something to watch on a Saturday? Watch 2
@@ -114,7 +100,7 @@
                         <Card class="quote-card">
                             <img
                                 class="quote-card__avatar"
-                                src="~assets/img/companies/devtips-square.png"
+                                src="/img/companies/devtips-square.png"
                             />
                             <p class="quote-card__desc">
                                 Have you guys seen @devwarstv ? Pretty novel
@@ -151,7 +137,7 @@
                     >
                         <img
                             class="supporter-logos__logo"
-                            src="~assets/img/companies/twitch-white.png"
+                            src="/img/companies/twitch-white.png"
                         />
                     </a>
                     <a
@@ -162,7 +148,7 @@
                     >
                         <img
                             class="supporter-logos__logo"
-                            src="~assets/img/companies/discord-white.png"
+                            src="/img/companies/discord-white.png"
                         />
                     </a>
                     <a
@@ -173,7 +159,7 @@
                     >
                         <img
                             class="supporter-logos__logo"
-                            src="~assets/img/companies/microsoft-white.png"
+                            src="/img/companies/microsoft-white.png"
                         />
                     </a>
                     <a
@@ -184,7 +170,7 @@
                     >
                         <img
                             class="supporter-logos__logo"
-                            src="~assets/img/companies/hiringsolved-white.png"
+                            src="/img/companies/hiringsolved-white.png"
                         />
                     </a>
                 </div>
@@ -235,7 +221,7 @@ $home-card-margin: 80px;
 
 .hero {
     height: 500px;
-    background-image: url('~assets/img/hero-bg.jpg');
+    background-image: url('/img/hero-bg.jpg');
     background-size: cover;
     text-align: center;
     position: relative;
@@ -321,6 +307,7 @@ $home-card-margin: 80px;
 .home-display {
     @extend %clear;
     padding: 60px 0;
+    background-image: url('/img/become-contestant-bg.jpg');
     background-size: cover;
     background-position: top;
 
@@ -330,6 +317,10 @@ $home-card-margin: 80px;
         font-weight: $font-weight-bold;
         font-size: $display4-size;
         line-height: 1.2;
+    }
+
+    &.reverse {
+        background-image: url('/img/devwars-docs-bg.jpg');
     }
 
     &.reverse &__content {

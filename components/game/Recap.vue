@@ -126,12 +126,12 @@ export default {
     background-color: $bg-color-2;
 
     &.blue {
-        background-image: url('~assets/img/team-blue.png');
+        background-image: url('/img/team-blue.png');
     }
 
     &.red {
         margin-left: auto;
-        background-image: url('~assets/img/team-red.png');
+        background-image: url('/img/team-red.png');
     }
 }
 

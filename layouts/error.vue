@@ -4,7 +4,7 @@
             <Row>
                 <div v-if="error.description">
                     <Column :sm="4">
-                        <img src="~assets/img/error-sad.png" alt="Error" />
+                        <img src="/img/error-sad.png" alt="Error" />
                     </Column>
                     <Column :sm="8">
                         <h1>{{ error.statusCode }}</h1>
@@ -18,7 +18,7 @@
 
                 <div v-else-if="error.statusCode === 404">
                     <Column :sm="4">
-                        <img src="~assets/img/error-sad.png" alt="Error" />
+                        <img src="/img/error-sad.png" alt="Error" />
                     </Column>
                     <Column :sm="8">
                         <h1>404</h1>
@@ -34,7 +34,7 @@
 
                 <div v-else-if="error.statusCode === 500">
                     <Column :sm="4">
-                        <img src="~assets/img/error-sad.png" alt="Error" />
+                        <img src="/img/error-sad.png" alt="Error" />
                     </Column>
                     <Column :sm="8">
                         <h1>500</h1>
@@ -48,7 +48,7 @@
 
                 <div v-else>
                     <Column :sm="4">
-                        <img src="~assets/img/error-sad.png" alt="Error" />
+                        <img src="/img/error-sad.png" alt="Error" />
                     </Column>
                     <Column :sm="8">
                         <h2>Oops!</h2>

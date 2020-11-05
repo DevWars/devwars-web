@@ -697,28 +697,28 @@
                         <Row class="browsers normalize section">
                             <Column :sm="3">
                                 <img
-                                    src="~assets/img/browsers/chrome_48x48.png"
+                                    src="/img/browsers/chrome_48x48.png"
                                     title="Chrome"
                                 />
                                 <p>v.61 +</p>
                             </Column>
                             <Column :sm="3">
                                 <img
-                                    src="~assets/img/browsers/firefox_48x48.png"
+                                    src="/img/browsers/firefox_48x48.png"
                                     title="Firefox"
                                 />
                                 <p>v.56 +</p>
                             </Column>
                             <Column :sm="3">
                                 <img
-                                    src="~assets/img/browsers/edge_48x48.png"
+                                    src="/img/browsers/edge_48x48.png"
                                     title="Edge"
                                 />
                                 <p>v.16 +</p>
                             </Column>
                             <Column :sm="3">
                                 <img
-                                    src="~assets/img/browsers/safari_48x48.png"
+                                    src="/img/browsers/safari_48x48.png"
                                     title="Safari"
                                 />
                                 <p>v.11 +</p>
@@ -738,7 +738,7 @@
                                 <p>Discord</p>
                             </Column>
                             <Column :sm="3">
-                                <img src="@/assets/img/docs/en-lang.png" title="Speak English" />
+                                <img src="/img/docs/en-lang.png" title="Speak English" />
                                 <p>English</p>
                             </Column>
                         </Row>
