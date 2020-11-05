@@ -5,8 +5,8 @@
     >
         <div id="MobileMenu" class="main">
             <div class="head">
-                <nuxt-link to="/" class="logo" @click.native="toggleMobileMenu">
-                    <img src="~assets/img/logo.png" alt="DevWars" />
+                <nuxt-link to="/" @click.native="toggleMobileMenu">
+                    <Logo />
                 </nuxt-link>
             </div>
 
@@ -46,13 +46,14 @@
 </template>
 
 <script>
+import Logo from '@/components/Logo';
 import Popup from '@/components/Popup';
 import User from '@/components/user/User';
 
 export default {
     name: 'HeaderMobile',
 
-    components: { Popup, User },
+    components: { Logo, Popup, User },
 
     props: {
         toggleMobileMenu: {
@@ -132,13 +133,9 @@ $mobile-nav-width: 300px;
         text-align: center;
     }
 
-    .logo {
-        display: block;
-
-        img {
-            display: inline-block;
-            width: 60%;
-        }
+    .Logo {
+        width: 60%;
+        margin: 0 auto;
     }
 }
 </style>

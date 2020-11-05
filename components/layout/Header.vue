@@ -7,17 +7,9 @@
                         <Icon name="bars" />
                     </Button>
 
-                    <nuxt-link to="/" class="logo">
-                        <img
-                            class="logo-full"
-                            src="~assets/img/logo.png"
-                            alt="DevWars"
-                        />
-                        <img
-                            class="logo-icon"
-                            src="~assets/img/logo-icon.png"
-                            alt="DevWars"
-                        />
+                    <nuxt-link to="/">
+                        <Logo class="full" />
+                        <Logo class="icon" icon />
                     </nuxt-link>
 
                     <ul class="nav nav-main">
@@ -85,13 +77,14 @@
 
 <script>
 import HeaderMobile from './HeaderMobile';
+import Logo from '@/components/Logo';
 import Popup from '@/components/Popup';
 import User from '@/components/user/User';
 
 export default {
     name: 'ComponentHeader',
 
-    components: { HeaderMobile, Popup, User },
+    components: { HeaderMobile, Logo, Popup, User },
 
     data: () => {
         return {
@@ -144,23 +137,22 @@ export default {
         line-height: 1;
     }
 
-    .logo {
-        display: inline-block;
+    .Logo {
         margin-right: $s-space;
 
-        &-full {
-            width: 160px;
+        &.full {
+            max-width: 160px;
 
-            @include breakpoint(sm) {
+            @include breakpoint(xs) {
                 display: none;
             }
         }
 
-        &-icon {
+        &.icon {
             display: none;
-            width: 40px;
+            max-width: 40px;
 
-            @include breakpoint(sm) {
+            @include breakpoint(xs) {
                 display: inline-block;
             }
         }
