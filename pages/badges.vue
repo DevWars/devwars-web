@@ -1,89 +1,50 @@
 <template>
-    <div>
-        <h1>badges</h1>
+    <div class="BadgePage">
+        <PageBanner title="Badges" />
+
+        <Container class="footer-offset">
+            <Row>
+                <Column v-for="badge in badges" :key="badge.id" :lg="3" :md="4" :sm="6">
+                    <BadgeCard :badge="badge" :user-badges="userBadges" />
+                </Column>
+            </Row>
+        </Container>
     </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import { names } from '../utils/auth';
+import PageBanner from '@/components/layout/PageBanner';
+import BadgeCard from '@/components/dashboard/BadgeCard';
 
 export default {
+    name: 'BadgePage',
+
     meta: {
         auth: names.USER,
     },
+
+    components: { PageBanner, BadgeCard },
+
+    data: () => ({
+        badges: [],
+        userBadges: [],
+    }),
+
+    computed: {
+        ...mapState('user', ['user']),
+    },
+
+    mounted() {
+        this.fetchAllBadges();
+    },
+
+    methods: {
+        async fetchAllBadges() {
+            this.badges = await this.$api.badges.currentBadges();
+            this.userBadges = await this.$api.users.getUserBadges(this.user.id);
+        },
+    },
 };
 </script>
-
-<style lang="scss" scoped>
-@import 'utils.scss';
-
-.badge-card {
-    border-top: $border-size solid $divider-color;
-    padding: $xs-space $grid-gutter-width $grid-gutter-width;
-    margin-bottom: 30px;
-    background-color: $bg-color-3;
-    text-align: center;
-    opacity: 0.5;
-
-    &__img {
-        display: block;
-        height: 100%;
-        width: auto;
-        max-height: 140px;
-        margin: 0 auto;
-    }
-
-    &__name {
-        padding: $s-space 0 $s-space;
-        font-size: $font-size-lg;
-    }
-
-    &__meta {
-        @extend %flex-justify;
-        margin-bottom: $xs-space;
-    }
-
-    &__global {
-        color: $text-color-muted;
-
-        .Icon {
-            margin-right: 5px;
-        }
-    }
-
-    &__tier {
-        border: 1px solid;
-        padding: 0 $xxs-space;
-        font-size: $font-size-xs;
-    }
-
-    .progress {
-        max-width: 80%;
-        margin: 0 auto $xs-space;
-
-        &__bar {
-            background-color: $brand-secondary;
-        }
-    }
-
-    &.complete {
-        background-color: $bg-color-2;
-        opacity: 1;
-    }
-
-    @mixin badge-variant($rank, $color) {
-        &.#{$rank} {
-            border-color: $color;
-        }
-        &.#{$rank} &__tier {
-            color: $color;
-        }
-        //&.#{$rank} .progress__bar { background-color: $color; }
-    }
-
-    @include badge-variant(bronze, $bronze-color);
-    @include badge-variant(silver, $silver-color);
-    @include badge-variant(gold, $gold-color);
-    @include badge-variant(diamond, $diamond-color);
-}
-</style>
