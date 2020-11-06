@@ -151,7 +151,7 @@ export default {
 
     &__cover {
         @include aspect-ratio(16, 9);
-        background-image: url('/assets/img/starburst.png');
+        background-image: url('/img/starburst.png');
         background-size: cover;
         background-position: center;
         background-color: $bg-color-2;

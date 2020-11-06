@@ -31,7 +31,7 @@ export default {
     computed: {
         badgeImageUrl() {
             const filename = this.badge.name.toLowerCase().replace(/ /g, '-');
-            return require(`~/assets/img/badges/${filename}.png`);
+            return `/img/badges/${filename}.png`;
         },
 
         badgeIsEarned() {

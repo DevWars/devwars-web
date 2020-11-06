@@ -16,8 +16,7 @@ export default {
     computed: {
         style() {
             return {
-                backgroundImage: `url(${this.user.avatarUrl ||
-                    require('@/assets/img/default-avatar.png')})`,
+                backgroundImage: `url(${this.user.avatarUrl || '/img/default-avatar.png'})`,
             };
         },
     },
@@ -30,6 +29,7 @@ export default {
 .Avatar {
     @extend %align-middle;
     width: 50px;
+
     &.xs {
         width: 25px;
     }
@@ -54,7 +54,6 @@ export default {
     background-size: cover;
     background-position: center;
     background-color: $bg-color-4;
-    background-image: url('~assets/img/default-avatar.png');
     position: relative;
     overflow: hidden;
     font-size: $font-size-base;
