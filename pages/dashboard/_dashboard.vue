@@ -4,13 +4,12 @@
             <Row>
                 <Column v-if="user" :md="4" class="aside">
                     <ProfileCard :user="user.user" />
-
                     <Wallet :stats="user.stats" />
                 </Column>
 
                 <Column :md="8" class="main">
                     <Moderation v-if="isModerator && !me" :user="user.user" />
-                    <DailyPrizes />
+                    <GamesPlayed :user="user.user" />
 
                     <UpcomingGames
                         v-if="upcomingGames.length > 0"
@@ -34,7 +33,7 @@ import Wallet from '@/components/dashboard/Wallet';
 import Activities from '@/components/dashboard/Activities';
 import UpcomingGames from '@/components/dashboard/UpcomingGames';
 import Moderation from '@/components/dashboard/Moderation';
-import DailyPrizes from '@/components/dashboard/DailyPrizes';
+import GamesPlayed from '@/components/dashboard/GamesPlayed';
 
 export default {
     name: 'Dashboard',
@@ -47,7 +46,7 @@ export default {
         Wallet,
         Activities,
         UpcomingGames,
-        DailyPrizes,
+        GamesPlayed,
     },
 
     async asyncData({ params, error, store, app: { $api } }) {

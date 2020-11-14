@@ -15,13 +15,21 @@
             >
                 <div
                     class="box blue"
-                    :class="{ active: teamReport[0].objectives[objective.id] === 'complete' }"
+                    :class="{
+                        active:
+                            teamReport[0].objectives[objective.id] ===
+                            'complete',
+                    }"
                     @click="$emit('blueObjective', objective)"
                 />
                 <span>{{ objective.description }}</span>
                 <div
                     class="box red"
-                    :class="{ active: teamReport[1].objectives[objective.id] === 'complete' }"
+                    :class="{
+                        active:
+                            teamReport[1].objectives[objective.id] ===
+                            'complete',
+                    }"
                     @click="$emit('redObjective', objective)"
                 />
             </li>

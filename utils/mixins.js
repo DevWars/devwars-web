@@ -47,10 +47,10 @@ export const createTeamReport = {
                     ];
 
                     const team = Object.assign(teams[teamScoreId], {
-                        objectives,
-                        bets,
-                        ui,
-                        ux,
+                        objectives: objectives || {},
+                        bets: bets || 0,
+                        ui: ui || 0,
+                        ux: ux || 0,
                         score: 0,
                     });
 
