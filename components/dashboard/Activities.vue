@@ -3,7 +3,7 @@
         <div class="activity-history">
             <div v-for="activity in paged" :key="activity.id" class="item">
                 <Column :xs="2" class="date no-gutter">
-                    {{ activity.created_at | moment('mediumDate') }}
+                    {{ activity.createdAt | moment('mediumDate') }}
                 </Column>
 
                 <Column :xs="9" class="no-gutter">
