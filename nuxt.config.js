@@ -10,7 +10,6 @@ const discordClient = process.env.DISCORD_CLIENT || '';
 const twitchClient = process.env.TWITCH_CLIENT || '';
 
 export default {
-    mode: 'universal',
     env: {
         baseUrl,
         apiUrl,
@@ -97,6 +96,7 @@ export default {
         // Doc: https://github.com/nuxt-community/eslint-module
         '@nuxtjs/eslint-module',
     ],
+
     /*
      ** Nuxt.js modules
      */

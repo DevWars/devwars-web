@@ -67,21 +67,13 @@
 export default {
     name: 'Error',
 
+    layout: 'header',
+
     props: {
         error: {
             type: Object,
             required: true,
         },
-    },
-
-    layout: 'header',
-
-    mounted() {
-        const { description, statusCode, message } = this.error;
-
-        if (description) this.error.description = description;
-        if (statusCode) this.error.statusCode = statusCode;
-        if (message) this.error.message = message;
     },
 };
 </script>

@@ -61,8 +61,6 @@ export default {
         },
     },
 
-    data: () => ({}),
-
     computed: {
         teamReport() {
             return this.createTeamReport(this.game, this.players);
