@@ -193,11 +193,11 @@ export const actions = {
         }
     },
 
-    async updatePassword({ dispatch }, { oldPassword, password }) {
+    async updatePassword({ dispatch }, { oldPassword, newPassword }) {
         try {
             await this.$api.authentication.updatePassword(
                 oldPassword,
-                password,
+                newPassword,
             );
 
             dispatch('toast/success', "We've updated your password!", {
