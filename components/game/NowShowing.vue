@@ -26,7 +26,14 @@
             >
                 Watch on Twitch
             </Button>
-            <RegistrationButtons :game="game" />
+            <Button
+                href="https://live.devwars.tv/play"
+                target="_blank"
+                class="outline"
+            >
+                Register to Play
+            </Button>
+            <!-- <RegistrationButtons :game="game" /> -->
         </ButtonGroup>
     </HomeCard>
 </template>

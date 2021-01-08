@@ -26,7 +26,7 @@
 
         <Highlights :game="latest" />
 
-        <div class="home-shows home-section">
+        <!-- <div class="home-shows home-section">
             <Container>
                 <h2 class="home-section__title">Upcoming Shows</h2>
                 <ScheduleBlock :count="5" />
@@ -37,7 +37,7 @@
                     </Button>
                 </div>
             </Container>
-        </div>
+        </div> -->
 
         <div class="home-display">
             <Container>
@@ -223,11 +223,20 @@ $home-card-margin: 80px;
     height: 500px;
     background-image: url('/img/hero-bg.jpg');
     background-size: cover;
+    background-attachment: fixed;
     text-align: center;
     position: relative;
 
     @include breakpoint(sm) {
         height: auto;
+    }
+
+    &:before {
+        @extend %absolute-overlay;
+        content: '';
+        display: block;
+        background-color: #090b19;
+        opacity: 0.65;
     }
 
     &__inner {
@@ -276,7 +285,6 @@ $home-card-margin: 80px;
 .home-highlights {
     padding-bottom: $m-space;
     margin-top: -$home-card-margin;
-    background-color: $bg-color-3;
 }
 
 .home-section {
@@ -310,6 +318,11 @@ $home-card-margin: 80px;
     background-image: url('/img/become-contestant-bg.jpg');
     background-size: cover;
     background-position: top;
+    position: relative;
+
+    &__content {
+        position: relative;
+    }
 
     &__title {
         max-width: 800px;
@@ -326,6 +339,14 @@ $home-card-margin: 80px;
     &.reverse &__content {
         float: right;
         text-align: right;
+    }
+
+    &:before {
+        @extend %absolute-overlay;
+        content: '';
+        display: block;
+        background: $bg-color-4;
+        opacity: 0.6;
     }
 }
 

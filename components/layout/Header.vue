@@ -22,11 +22,6 @@
                             </nuxt-link>
                         </li>
                         <li class="nav__item">
-                            <nuxt-link to="/schedule" class="nav__link">
-                                Schedule
-                            </nuxt-link>
-                        </li>
-                        <li class="nav__item">
                             <nuxt-link to="/leaderboards" class="nav__link">
                                 Leaders
                             </nuxt-link>

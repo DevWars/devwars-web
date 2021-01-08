@@ -69,7 +69,7 @@ $tab-padding: 10px 20px;
 
         .tab {
             padding: $tab-padding;
-            border-width: $border-size-sm;
+            border-width: $border-size;
             background-color: darken($bg-color-2, 7%);
             font-size: $font-size-base;
             color: $text-color-muted;

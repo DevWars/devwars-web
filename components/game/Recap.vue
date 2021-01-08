@@ -1,6 +1,6 @@
 <template>
     <div>
-        <HomeCard v-if="game" title="Last Game Recap">
+        <HomeCard v-if="game" title="Latest Game">
             <div class="content-container">
                 <div class="header">
                     <div class="team">
@@ -8,12 +8,16 @@
                     </div>
                     <div class="score">
                         <div class="gamemode">
-                            {{ game.mode }}
+                            {{ game.game.mode }}
                         </div>
                         <div
                             v-for="team in teamReport"
                             :key="team.id"
                             class="points"
+                            :class="{
+                                blue: team.name === 'blue',
+                                red: team.name === 'red',
+                            }"
                         >
                             {{ team.score }}
                         </div>
@@ -49,7 +53,7 @@
                     </ul>
                 </div>
                 <ButtonGroup class="buttons">
-                    <Button to="/games" class="outline primary">
+                    <Button to="/games" class="outline">
                         View Full Game
                     </Button>
                 </ButtonGroup>
@@ -155,11 +159,17 @@ export default {
     &:last-child:before {
         content: '-';
         padding: 0 0 0 10px;
+        color: #fff;
     }
 
-    @include breakpoint(md) {
-        // font-size: 24px;
+    &.blue {
+        color: $brand-primary;
     }
+
+    &.red {
+        color: $brand-secondary;
+    }
+
     @include breakpoint(xs) {
         font-size: 36px;
     }
@@ -167,10 +177,9 @@ export default {
 
 .matchup {
     width: 100%;
-    padding: 0 30px;
     display: flex;
     justify-content: space-between;
-    margin: auto auto 0;
+    margin: auto auto $grid-gutter-width;
     font-weight: $font-weight-semibold;
 
     @include breakpoint(sm) {
@@ -197,26 +206,19 @@ export default {
 
     &.blue {
         text-align: left;
+        color: $brand-primary;
     }
 
     &.red {
         order: 1;
         text-align: right;
+        color: $brand-secondary;
     }
 }
 
 .pos {
     text-align: center;
 
-    &.html {
-        color: $html-color;
-    }
-    &.css {
-        color: $css-color;
-    }
-    &.js {
-        color: $js-color;
-    }
 }
 
 .buttons {

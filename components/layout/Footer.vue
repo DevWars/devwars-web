@@ -23,9 +23,6 @@
                         <nuxt-link to="/">Home</nuxt-link>
                     </li>
                     <li>
-                        <nuxt-link to="/schedule">Schedule</nuxt-link>
-                    </li>
-                    <li>
                         <nuxt-link to="/games">Games</nuxt-link>
                     </li>
                     <!-- <li>
@@ -113,7 +110,7 @@ export default {
 
 .newsletter {
     padding: $m-space 0;
-    border-top: $border-size-sm solid $brand-secondary;
+    border-top: $border-size solid $brand-secondary;
     background-color: $bg-color-3;
     text-align: center;
 
@@ -146,7 +143,7 @@ export default {
         margin-bottom: $xxs-space;
 
         &:first-of-type {
-            border-bottom: 1px solid $brand-secondary;
+            border-bottom: $border-size solid $brand-secondary;
             padding-bottom: $xxs-space;
             margin-bottom: $xs-space;
             text-transform: uppercase;

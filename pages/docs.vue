@@ -1105,7 +1105,7 @@ $ol-bullet-size: 20px;
 }
 
 article {
-    border-top: $border-size-sm solid $brand-primary;
+    border-top: $border-size solid $brand-primary;
     padding: 30px;
     background-color: $bg-color-2;
     margin-top: 30px;
