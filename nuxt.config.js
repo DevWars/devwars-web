@@ -94,7 +94,6 @@ export default {
      */
     buildModules: [
         // Doc: https://github.com/nuxt-community/eslint-module
-        '@nuxtjs/eslint-module',
     ],
 
     /*
@@ -153,18 +152,6 @@ export default {
             },
         },
         extend(config, ctx) {
-            // Run ESLint on save
-            if (ctx.isDev && ctx.isClient) {
-                config.module.rules.push({
-                    enforce: 'pre',
-                    test: /\.(js|vue)$/,
-                    loader: 'eslint-loader',
-                    exclude: /(node_modules)/,
-                });
-
-                config.devtool = 'source-map';
-            }
-
             config.resolve.alias['utils.scss$'] = path.resolve(
                 'assets/styles/utils.scss',
             );

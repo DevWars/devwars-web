@@ -9,8 +9,6 @@
         "build": "nuxt build",
         "start": "nuxt start",
         "generate": "nuxt generate",
-        "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-        "lintfix": "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
         "precommit": "npm run lint",
         "release": "standard-version"
     },
@@ -29,12 +27,8 @@
         "vue2-filters": "^0.11.0"
     },
     "devDependencies": {
-        "@nuxtjs/eslint-config": "^2.0.2",
-        "@nuxtjs/eslint-module": "^2.0.0",
         "@vue/test-utils": "^1.0.2",
         "babel-eslint": "^10.1.0",
-        "eslint": "^6.1.0",
-        "eslint-plugin-nuxt": ">=2.0.0",
         "node-sass": "^4.14.1",
         "sass-loader": "^9.0.3",
         "standard-version": "^9.0.0"
