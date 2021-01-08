@@ -4,25 +4,25 @@
             <Row>
                 <Column :lg="6">
                     <NowShowing v-if="active" />
-                    <NextShowing v-else-if="!active && upcoming.length > 0" />
-                    <HomeCard v-else class="no-showing" title="Next Showing">
+                    <HomeCard v-else title="More Content" class="support-us">
                         <div>
-                            <h3>No upcoming games</h3>
+                            <h3>DevWars not live?</h3>
                             <p>
-                                Keep an eye on our schedule page or Discord for
-                                announcements.
+                                You can still watch recent recordings, check out past games, or hang out in our Discord community.
                             </p>
 
-                            <Button
-                                href="https://www.discord.gg/devwars"
-                                target="_blank"
-                                class="outline"
-                            >
-                                Discord
-                            </Button>
-                            <Button to="/schedule" class="primary">
-                                Full Schedule
-                            </Button>
+                            <div class="actions">
+                                <Button
+                                    href="https://www.discord.gg/devwars"
+                                    target="_blank"
+                                    class="outline"
+                                >
+                                    Join Discord
+                                </Button>
+                                <Button href="https://www.twitch.tv/devwars/videos" target="_blank" class="primary">
+                                    Past Recordings
+                                </Button>
+                            </div>
                         </div>
                     </HomeCard>
                 </Column>
@@ -66,6 +66,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.support-us {
+    h3 {
+        margin-bottom: 10px;
+    }
+
+    .actions {
+        margin-top: 30px;
+
+        .Button:last-of-type {
+            margin-left: 10px;
+        }
+    }
+
+    /deep/ .content {
+        padding-top: 15px;
+        align-items: center;
+    }
+}
 .no-showing {
     h3 {
         margin: 30px 0 10px;

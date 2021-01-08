@@ -26,8 +26,8 @@ export default {
     display: block;
     margin-bottom: 20px;
     padding: 15px 15px 30px;
-    border-top: $border-size-sm solid $brand-secondary;
-    background-color: $bg-color-1;
+    border-top: $border-size solid $brand-secondary;
+    background-color: $bg-color-2;
 
     @include breakpoint(xs) {
         padding-bottom: $s-space;
