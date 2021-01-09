@@ -26,6 +26,7 @@
                         Watch Game
                     </ButtonIcon>
                     <ButtonIcon
+                        v-if="codeAvailable"
                         :to="`/games/${game.id}`"
                         icon="code"
                         class="outline"
@@ -95,6 +96,7 @@ export default {
     data: () => ({
         players: [],
         teamReport: null,
+        codeAvailable: false,
     }),
 
     watch: {
@@ -110,6 +112,12 @@ export default {
             },
             immediate: true,
         },
+    },
+
+    mounted() {
+        this.$axios.get(`/games/${this.game.id}/source/0/index.html`)
+            .then((res) => this.codeAvailable = res.status === 200)
+            .catch((e) => this.codeAvailable = false);
     },
 };
 </script>

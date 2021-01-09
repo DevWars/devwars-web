@@ -1,7 +1,7 @@
 <template>
     <div class="GameEditor">
         <div class="header">
-            <div class="username">{{ player.user.username }}</div>
+            <div v-if="player" class="username">{{ player.user.username }}</div>
             <div class="language">{{ language }}</div>
         </div>
 
@@ -28,7 +28,7 @@ export default {
     props: {
         template: { type: String, default: '' },
         language: { type: String, default: 'html' },
-        player: { type: Object, required: true },
+        player: { type: Object },
     },
 
     computed: {

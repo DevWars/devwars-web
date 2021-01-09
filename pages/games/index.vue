@@ -52,6 +52,7 @@
                 v-if="viewing"
                 :game="viewing"
                 :include-players="includePlayers"
+                :key="viewing.id"
             />
         </Column>
     </Container>
