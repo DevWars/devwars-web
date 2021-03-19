@@ -8,6 +8,7 @@
         <User
             :user="player.user"
             :class="team.name"
+            :show-rank="showRank"
         />
 
         <div class="languages">
@@ -44,6 +45,10 @@ export default {
             required: true,
         },
         navigateToProfile: {
+            type: Boolean,
+            default: false,
+        },
+        showRank: {
             type: Boolean,
             default: false,
         },

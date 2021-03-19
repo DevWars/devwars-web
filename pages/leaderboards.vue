@@ -17,9 +17,14 @@
                     <td scope="row" class="rank">
                         {{ page * 10 + index + 1 }}
                     </td>
-                    <td><User :user="user" size="sm" /></td>
+                    <td><User :user="user" size="sm"/></td>
                     <td>{{ user.gameStats.wins }}</td>
-                    <td>{{ user.rank.name }}</td>
+                    <td>
+                        <div class="level">
+                            <img v-if="user.rank" :src="getRankSrc(user)" :alt="user.rank.name" />
+                            <span>{{ user.rank.name }}</span>
+                        </div>
+                    </td>
                     <td>{{ user.stats.coins }}</td>
                     <td>{{ user.stats.xp }}</td>
                 </tr>
@@ -59,6 +64,12 @@ export default {
             page: 0,
         };
     },
+
+    methods: {
+        getRankSrc(user) {
+            return `https://devwars-cdn.s3.amazonaws.com/ranks/${user.rank.level}.svg`;
+        },
+    },
 };
 </script>
 
@@ -79,6 +90,16 @@ export default {
         }
         &.decrease {
             color: $danger-color;
+        }
+    }
+
+    .level {
+        display: flex;
+        align-items: center;
+
+        img {
+            max-height: 30px;
+            margin-right: 10px;
         }
     }
 
