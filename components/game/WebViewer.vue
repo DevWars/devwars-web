@@ -7,13 +7,17 @@ export default {
     name: 'WebViewer',
 
     props: {
-        gameId: { type: Number, required: true },
+        game: { type: Object, required: true },
         teamId: { type: Number, required: true },
     },
 
     computed: {
         html() {
-            return `${process.env.apiUrl}/games/${this.gameId}/source/${this.teamId}/index.html`;
+            if (this.game.season === 4) {
+                return `${process.env.apiUrl}/games/new/${this.game.id}/source/${this.teamId + 1}/index.html`
+            }
+
+            return `${process.env.apiUrl}/games/${this.game.id}/source/${this.teamId}/index.html`;
         },
     },
 };

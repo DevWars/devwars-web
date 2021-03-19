@@ -51,8 +51,24 @@ export default {
 
     mixins: [createTeamReport],
 
-    async asyncData({ params, error, app: { $api } }) {
+    async asyncData({ query, params, error, app: { $api }, store }) {
         try {
+            if (Number(query.season) === 4) {
+                const game = await store.dispatch('game/getNewGame', params.id);
+                const players = await store.dispatch('game/getNewGamePlayers', params.id);
+                const teams = _.groupBy(players, (p) => p.team);
+                const sources = game.storage.raw.editors.map(editor => ({
+                    createdAt: game.createdAt,
+                    updatedAt: game.updatedAt,
+                    id: editor.id,
+                    file: editor.fileName,
+                    team: editor.teamId - 1,
+                    source: editor.fileText,
+                }));
+
+                return { game, players, teams, sources }
+            }
+
             const game = await $api.games.getGame(params.id);
             const sources = await $api.games.getSourcesForGame(params.id);
             const players = await $api.games.getAllAssignedPlayersToGame(params.id);

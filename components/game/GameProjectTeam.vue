@@ -29,7 +29,7 @@
             />
             <WebViewer
                 v-if="viewSite"
-                :game-id="game.id"
+                :game="game"
                 :team-id="teamId"
             />
         </div>

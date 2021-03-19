@@ -19,8 +19,8 @@
                 @click="view(game)"
             >
                 <div class="meta">
-                    <Tag :class="[game.mode.toLowerCase()]" class="sm">
-                        {{ game.mode }}
+                    <Tag :class="[game.mode.toLowerCase(), 'mode']" class="sm">
+                        {{ game.mode === 'zen' ? 'Zen Garden' : game.mode }}
                     </Tag>
                     <span class="date">{{
                         game.startTime | moment('M/DD/YYYY')
@@ -77,12 +77,22 @@ export default {
      * default to season 3, otherwise if no game is provided, the first game is
      * selected.
      */
-    async asyncData({ query, error, app: { $api } }) {
+
+    async asyncData({ query, error, app: { $api }, store }) {
         if (query.season == null || isNaN(Number(query.season)))
-            query.season = 3;
+            query.season = 4;
 
         if (query.game == null || isNaN(Number(query.game)))
             query.game = undefined;
+
+        if (query.season == '4') {
+            const data = await store.dispatch('game/getNewGames');
+            return {
+                games: { data } || {},
+                viewing: data[0],
+                season: Number(query.season),
+            };
+        }
 
         try {
             const { data, pagination } = await $api.games.gamesWithPaging({
@@ -129,8 +139,8 @@ export default {
 
     data() {
         return {
-            seasons: [3, 2, 1],
-            season: 3,
+            seasons: [4, 3, 2, 1],
+            season: 4,
             games: {},
             viewing: null,
             includePlayers: true,
@@ -174,14 +184,20 @@ export default {
             async handler(newSeason) {
                 if (this.season === newSeason) return;
 
-                const season = newSeason || 3;
+                const season = newSeason || 4;
                 this.season = Number(season);
 
-                const data = await this.$api.games.gamesWithPaging({
-                    first: 25,
-                    status: 'ended',
-                    season: this.season,
-                });
+                let data = null;
+                if (this.season === 4) {
+                    const games = await this.$store.dispatch('game/getNewGames');
+                    data = { data: games };
+                } else {
+                    data = await this.$api.games.gamesWithPaging({
+                        first: 25,
+                        status: 'ended',
+                        season: this.season,
+                    });
+                }
 
                 // if a route update is triggered, requiring the regathering of
                 // the games, ensure to reset the page number. Otherwise paging
@@ -203,9 +219,9 @@ export default {
         },
 
         '$route.query.game': {
-            async handler(newGame) {
+            async handler(newGameId) {
                 if (
-                    isNil(newGame) ||
+                    isNil(newGameId) ||
                     isNil(this.games) ||
                     isNil(this.games.data)
                 )
@@ -217,10 +233,14 @@ export default {
                 // array, and thus to include actual avatar and user related
                 // information, we must regather the game directly to ensure
                 // players are loaded.
-                // this.viewing = this.games.data.filter((game) => game.id === newGame)[0];
+                // this.viewing = this.games.data.filter((game) => game.id === newGameId)[0];
 
                 try {
-                    this.viewing = await this.$api.games.getGame(newGame);
+                    if (this.$route.query.season == '4') {
+                        this.viewing = await this.$store.dispatch('game/getNewGame', newGameId);
+                    } else {
+                        this.viewing = await this.$api.games.getGame(newGameId);
+                    }
                 } catch (e) {
                     this.$store.dispatch('toast/error', e);
                 }
@@ -320,6 +340,10 @@ export default {
         vertical-align: bottom;
     }
 
+    .mode {
+        text-transform: capitalize;
+    }
+
     .date {
         font-size: $font-size-sm;
         color: lightgray;
@@ -347,7 +371,7 @@ export default {
             color: $brand-primary;
             border-color: $brand-primary;
         }
-        &.blitz {
+        &.blitz, &.duel {
             color: #f1c40f;
             border-color: #f1c40f;
         }

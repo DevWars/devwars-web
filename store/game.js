@@ -155,6 +155,33 @@ export const actions = {
             dispatch('toast/error', e, { root: true });
         }
     },
+
+    async getNewGames() {
+        try {
+            const res = await this.$axios.get('http://localhost:8080/games/new');
+            return res.data;
+        } catch(e) {
+            console.log(e)
+        }
+    },
+
+    async getNewGame({ dispatch }, id) {
+        try {
+            const res = await this.$axios.get(`http://localhost:8080/games/new/${id}`);
+            return res.data;
+        } catch(e) {
+            console.log(e)
+        }
+    },
+
+    async getNewGamePlayers({ dispatch }, id) {
+        try {
+            const res = await this.$axios.get(`http://localhost:8080/games/new/${id}/players`);
+            return res.data;
+        } catch(e) {
+            console.log(e)
+        }
+    },
 };
 
 export const getters = {

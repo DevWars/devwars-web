@@ -7,7 +7,7 @@
                         game.startTime | moment('M/DD/YYYY')
                     }}</span>
                     <h2 class="banner__gamemode">
-                        {{ game.mode }}
+                        {{ game.mode === 'zen' ? 'Zen Garden' : game.mode }}
                     </h2>
                     <div v-if="teamReport != null" class="banner__versus">
                         {{ teamReport[0].players.length }} VS
@@ -27,7 +27,7 @@
                     </ButtonIcon>
                     <ButtonIcon
                         v-if="codeAvailable"
-                        :to="`/games/${game.id}`"
+                        :to="`/games/${game.id}?season=${game.season}`"
                         icon="code"
                         class="outline"
                     >
@@ -51,6 +51,7 @@
                     :team="team"
                     :languages="player.assignedLanguages"
                     :navigate-to-profile="true"
+                    :show-rank="true"
                 />
             </GameTeam>
         </div>
@@ -103,9 +104,13 @@ export default {
         game: {
             async handler(newVal, oldVal) {
                 if (this.includePlayers) {
-                    this.players = await this.$api.games.getAllAssignedPlayersToGame(
-                        this.game.id,
-                    );
+                    if (this.$route.query.season == '4') {
+                        this.players = await this.$store.dispatch('game/getNewGamePlayers', this.game.id);
+                    } else {
+                        this.players = await this.$api.games.getAllAssignedPlayersToGame(
+                            this.game.id,
+                        );
+                    }
                 }
 
                 this.teamReport = this.createTeamReport(this.game, this.players);
@@ -115,9 +120,14 @@ export default {
     },
 
     mounted() {
-        this.$axios.get(`/games/${this.game.id}/source/0/index.html`)
-            .then((res) => this.codeAvailable = res.status === 200)
-            .catch((e) => this.codeAvailable = false);
+        if (Number(this.$route.query.season) === 4) {
+            const htmlEditor = this.game.storage.raw.editors.find(e => e.id === 1);
+            this.codeAvailable = Boolean(htmlEditor.fileText);
+        } else {
+            this.$axios.get(`/games/${this.game.id}/source/0/index.html`)
+                .then((res) => this.codeAvailable = res.status === 200)
+                .catch((e) => this.codeAvailable = false);
+        }
     },
 };
 </script>
@@ -178,6 +188,7 @@ export default {
     }
 
     &__gamemode {
+        text-transform: capitalize;
         font-size: $display5-size;
 
         &:after {

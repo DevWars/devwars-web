@@ -2,8 +2,8 @@
     <SubScore
         v-show="total > 0 || showOverride"
         :title="category"
-        :blue-score="teamScore('blue')"
-        :red-score="teamScore('red')"
+        :blue-score="analysis.blue.points"
+        :red-score="analysis.red.points"
     >
         <div class="voting">
             <div class="team team-blue" :class="{ win: analysis.blue.win }">
@@ -64,8 +64,8 @@ export default {
 
             const scores = this.game.meta.teamScores;
 
-            analysis.blue = this.analysisForTeam(scores[0], scores[1]);
-            analysis.red = this.analysisForTeam(scores[1], scores[0]);
+            analysis.blue = this.analysisForTeam(scores[0], scores[1], this.category);
+            analysis.red = this.analysisForTeam(scores[1], scores[0], this.category);
 
             return analysis;
         },
@@ -103,7 +103,7 @@ export default {
         },
 
         analysisForTeam(team, otherTeam) {
-            return voteAnalysisForTeam(team, otherTeam, this.category);
+            return voteAnalysisForTeam(team, otherTeam, this.category, this.game);
         },
     },
 };

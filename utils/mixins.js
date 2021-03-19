@@ -1,4 +1,5 @@
 import * as _ from 'lodash';
+import { voteAnalysisForTeam } from './objectives';
 
 export const createTeamReport = {
     methods: {
@@ -40,6 +41,17 @@ export const createTeamReport = {
                 teams[player.team].players.push(player);
             }
 
+            const voteScores = {
+                0: {
+                    ui: voteAnalysisForTeam(game.meta.teamScores[0], game.meta.teamScores[1], 'ui', game),
+                    ux: voteAnalysisForTeam(game.meta.teamScores[0], game.meta.teamScores[1], 'ux', game),
+                },
+                1: {
+                    ui: voteAnalysisForTeam(game.meta.teamScores[1], game.meta.teamScores[0], 'ui', game),
+                    ux: voteAnalysisForTeam(game.meta.teamScores[1], game.meta.teamScores[0], 'ux', game),
+                },
+            };
+
             if (game.meta && game.meta.teamScores) {
                 for (const teamScoreId in game.meta.teamScores) {
                     const { objectives, bets, ui, ux } = game.meta.teamScores[
@@ -49,17 +61,24 @@ export const createTeamReport = {
                     const team = Object.assign(teams[teamScoreId], {
                         objectives: objectives || {},
                         bets: bets || 0,
-                        ui: ui || 0,
-                        ux: ux || 0,
+                        ui: voteScores[teamScoreId].ui || 0,
+                        ux: voteScores[teamScoreId].ux || 0,
                         score: 0,
                     });
 
-                    team.completedObjectives = _.filter(
-                        objectives,
-                        (e) => e === 'complete',
-                    ).length;
+                    team.completedObjectives = 0;
+                    for (const [id, status] of Object.entries(objectives)) {
+                        if (status === 'complete') {
+                            team.completedObjectives += 1;
 
-                    team.score = team.ui + team.ux + team.completedObjectives;
+                            const objective = _.find(game.objectives, o => o.id === Number(id));
+                            if (objective.isBonus) {
+                                team.completedObjectives += 1;
+                            }
+                        }
+                    }
+
+                    team.score = team.ui.points + team.ux.points + team.completedObjectives;
                 }
             }
 
