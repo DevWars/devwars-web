@@ -158,7 +158,7 @@ export const actions = {
 
     async getNewGames() {
         try {
-            const res = await this.$axios.get('http://localhost:8080/games/new');
+            const res = await this.$axios.get(`${process.env.API_URL}/games/new`);
             return res.data;
         } catch(e) {
             console.log(e)
@@ -167,7 +167,7 @@ export const actions = {
 
     async getNewGame({ dispatch }, id) {
         try {
-            const res = await this.$axios.get(`http://localhost:8080/games/new/${id}`);
+            const res = await this.$axios.get(`${process.env.API_URL}/games/new/${id}`);
             return res.data;
         } catch(e) {
             console.log(e)
@@ -176,7 +176,7 @@ export const actions = {
 
     async getNewGamePlayers({ dispatch }, id) {
         try {
-            const res = await this.$axios.get(`http://localhost:8080/games/new/${id}/players`);
+            const res = await this.$axios.get(`${process.env.API_URL}/games/new/${id}/players`);
             return res.data;
         } catch(e) {
             console.log(e)
