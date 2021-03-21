@@ -23,7 +23,7 @@
                         {{ game.mode === 'zen' ? 'Zen Garden' : game.mode }}
                     </Tag>
                     <span class="date">{{
-                        game.startTime | moment('M/DD/YYYY')
+                        game.season === 4 ? game.createdAt : game.startTime | moment('M/DD/YYYY')
                     }}</span>
                     <span class="theme">{{ game.title }}</span>
                 </div>
