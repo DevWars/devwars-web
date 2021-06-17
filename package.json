@@ -16,7 +16,7 @@
         "@nuxtjs/axios": "^5.12.3",
         "@nuxtjs/dotenv": "^1.4.0",
         "country-list": "^2.2.0",
-        "cropperjs": "^1.5.7",
+        "cropperjs": "^1.5.12",
         "devwars-api-client": "git+https://github.com/DevWars/devwars-api-client.git#1b9543d80ae7e482c9fe90993af5e1c894f9573d",
         "highlight.js": "^10.4.1",
         "lodash": "^4.17.19",
