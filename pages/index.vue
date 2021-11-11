@@ -6,7 +6,7 @@
                     A live <strong>game show</strong> for developers
                 </h1>
                 <h2 class="hero__subtitle">
-                    Every other Saturday @ 5:00 PM (UTC)
+                    Every other Saturday @ 6:00 PM (UTC)
                 </h2>
 
                 <ButtonGroup>
